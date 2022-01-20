@@ -1,0 +1,16 @@
+[
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/student-petra/pages/login.vue",
+    "chunkName": "pages/login",
+    "_name": "_d9dad882"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/student-petra/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_6d2a1eb0"
+  }
+]
