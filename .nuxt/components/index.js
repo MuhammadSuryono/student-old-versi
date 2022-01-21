@@ -1,4 +1,5 @@
-
+export { default as Navbar } from '../../components/Navbar.vue'
+export { default as Sidebar } from '../../components/Sidebar.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

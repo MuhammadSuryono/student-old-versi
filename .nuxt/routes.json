@@ -2,15 +2,15 @@
   {
     "name": "login",
     "path": "/login",
-    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/student-petra/pages/login.vue",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/login.vue",
     "chunkName": "pages/login",
-    "_name": "_d9dad882"
+    "_name": "_4bb5acc5"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/student-petra/pages/index.vue",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_6d2a1eb0"
+    "_name": "_fbe3eca4"
   }
 ]

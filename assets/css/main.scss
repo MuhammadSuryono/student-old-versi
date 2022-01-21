@@ -1,0 +1,44 @@
+@font-face {
+    font-family: "Roboto";
+    src: local("Roboto"),
+     url(~assets/font/Roboto.ttf) format("truetype");
+}
+@font-face {
+    font-family: "Barlow";
+    src: local("Barlow"),
+     url(~assets/font/Barlow.ttf) format("truetype");
+}
+@font-face {
+    font-family: "RedRose";
+    src: local("RedRose"),
+     url(~assets/font/RedRose.ttf) format("truetype");
+}
+
+
+$navbar-height: 4.25rem;
+$navbar-background-color: #0d47a1;
+$navbar-burger-color: white;
+$navbar-item-color:white;
+$menu-item-color: black;
+$menu-item-active-color: white;
+$menu-item-hover-background-color: none;
+$menu-item-active-background-color:transparent;
+$primary: black;
+$vs-dropdown-max-height:30px;
+$input-background-color: white;
+
+.navbar-burger.burger.is-active{
+    color:white;
+}
+.pagination {
+    .pagination-list {
+        margin-top:0px;
+        li {
+            margin-top:0px;
+        }
+    }
+}
+
+@import "~bulma/sass/utilities/_all";
+@import "~bulma";
+@import "~buefy/src/scss/buefy";

@@ -23,7 +23,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [],
+  plugins: ['~/plugins/repository.js', '~/plugins/buefy.js'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -70,7 +70,7 @@ export default {
   },
 
   axios: {
-    baseURL: 'https://api-petra.primeskills.id/api/v1'
+    baseURL: 'http://api-petra.primeskills.id/api/v1'
   },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
