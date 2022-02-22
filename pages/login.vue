@@ -6,7 +6,7 @@
         <img src="~/assets/images/logo_dashboard.png" class="img-logo">
         <div class="card">
           <div class="has-text-centered title">
-            Login to your Account
+            Login to your Accounts
           </div>
           <b-field class="mt-14" style="background-color: white">
             <b-input v-model="state.email" placeholder="Email" class="inputs" />
