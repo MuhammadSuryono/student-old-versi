@@ -1,7 +1,6 @@
 const resource = '/profile'
 export default $axios => ({
   get () {
-    console.log('get')
     return $axios.get(`${resource}`)
   },
   update (payload) {

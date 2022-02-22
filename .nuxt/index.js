@@ -22,6 +22,7 @@ import nuxt_plugin_iconplugin_1d1d15d3 from 'nuxt_plugin_iconplugin_1d1d15d3' //
 import nuxt_plugin_axios_7b5be7a0 from 'nuxt_plugin_axios_7b5be7a0' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_repository_2cb156b7 from 'nuxt_plugin_repository_2cb156b7' // Source: ../plugins/repository.js (mode: 'all')
 import nuxt_plugin_buefy_d29bd2f0 from 'nuxt_plugin_buefy_d29bd2f0' // Source: ../plugins/buefy.js (mode: 'all')
+import nuxt_plugin_vuevideobackground_24001f9d from 'nuxt_plugin_vuevideobackground_24001f9d' // Source: ../plugins/vue-video-background (mode: 'client')
 import nuxt_plugin_auth_2b075700 from 'nuxt_plugin_auth_2b075700' // Source: ./auth.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -87,7 +88,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"titleTemplate":"%s - student","title":"student","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[],"script":[]},
+    head: {"titleTemplate":"Petra LMS","title":"student","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""},{"hid":"charset","charset":"utf-8"},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"apple-mobile-web-app-title","name":"apple-mobile-web-app-title","content":"student"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:title","name":"og:title","property":"og:title","content":"student"},{"hid":"og:site_name","name":"og:site_name","property":"og:site_name","content":"student"},{"hid":"og:description","name":"og:description","property":"og:description","content":"## Build Setup"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"},{"hid":"shortcut-icon","rel":"shortcut icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_64x64.5f6a36.png"},{"hid":"apple-touch-icon","rel":"apple-touch-icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_512x512.5f6a36.png","sizes":"512x512"},{"rel":"manifest","href":"\u002F_nuxt\u002Fmanifest.ab1bdffc.json","hid":"manifest"}],"style":[],"script":[],"htmlAttrs":{"lang":"en"}},
 
     store,
     router,
@@ -250,6 +251,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_buefy_d29bd2f0 === 'function') {
     await nuxt_plugin_buefy_d29bd2f0(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_vuevideobackground_24001f9d === 'function') {
+    await nuxt_plugin_vuevideobackground_24001f9d(app.context, inject)
   }
 
   if (typeof nuxt_plugin_auth_2b075700 === 'function') {

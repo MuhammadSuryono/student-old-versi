@@ -1,14 +1,22 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      asd
-    </v-col>
-  </v-row>
+  <div>
+    <video-background
+      :src="require('@/assets/video/bg.mp4')"
+      style="height: 100vh"
+      :loop="false"
+      @ended="end()"
+    />
+  </div>
 </template>
 
 <script>
 export default {
   name: 'HomePage',
-  layout: 'default'
+  layout: 'login',
+  methods: {
+    end () {
+      this.$router.push({ path: '/home' })
+    }
+  }
 }
 </script>

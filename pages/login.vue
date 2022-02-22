@@ -1,12 +1,11 @@
 <template>
   <section class="hero is-link is-fullheight bg-images">
-    <!-- <vue-particles color="#dedede" /> -->
     <div class="hero-body">
       <div class="container has-text-centered">
         <img src="~/assets/images/logo_dashboard.png" class="img-logo">
         <div class="card">
           <div class="has-text-centered title">
-            Login to your Accounts
+            Login to your Account
           </div>
           <b-field class="mt-14" style="background-color: white">
             <b-input v-model="state.email" placeholder="Email" class="inputs" />
@@ -50,10 +49,19 @@ export default {
       this.$router.push({ path: 'dashboard' })
     },
     login () {
-      this.$store.dispatch('user/loginWithoutCaptcha', {
-        email: this.state.email,
-        password: this.state.password
-      })
+      this.$store
+        .dispatch('user/loginWithoutCaptcha', {
+          email: this.state.email,
+          password: this.state.password
+        })
+        .then((response) => {
+          this.$store.commit('user/SET_DATA', response.data.data)
+          this.$auth.strategy.token.set(response.data.data.access_token)
+          this.$router.push({ path: '/' })
+        })
+        .catch((error) => {
+          console.log('error2', error)
+        })
     }
   }
 }

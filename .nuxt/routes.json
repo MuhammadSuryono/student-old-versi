@@ -1,5 +1,12 @@
 [
   {
+    "name": "home",
+    "path": "/home",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/home.vue",
+    "chunkName": "pages/home",
+    "_name": "_75174033"
+  },
+  {
     "name": "login",
     "path": "/login",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/login.vue",

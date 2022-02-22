@@ -9,7 +9,7 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - student',
+    titleTemplate: 'Petra LMS',
     title: 'student',
     meta: [
       { charset: 'utf-8' },
@@ -23,7 +23,14 @@ export default {
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: ['~/plugins/repository.js', '~/plugins/buefy.js'],
+  plugins: [
+    '~/plugins/repository.js',
+    '~/plugins/buefy.js',
+    {
+      src: '~/plugins/vue-video-background',
+      ssr: false
+    }
+  ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -70,7 +77,7 @@ export default {
   },
 
   axios: {
-    baseURL: 'http://api-petra.primeskills.id/api/v1'
+    baseURL: 'https://api-petra.primeskills.id/api/v1'
   },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
@@ -93,5 +100,11 @@ export default {
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {}
+  build: {},
+
+  vue: {
+    config: {
+      ignoredElements: ['stream']
+    }
+  }
 }
