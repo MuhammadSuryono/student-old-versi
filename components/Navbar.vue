@@ -2,12 +2,13 @@
   <div>
     <b-navbar class="navbar">
       <template #brand>
-        <div class="logo">
+        <div class="logo" :style="styleObj">
           <img src="~/assets/images/logo_dashboard.png" class="img-logo">
         </div>
         <div id="triangle-bottomleft" />
       </template>
       <template #end>
+        <div id="triangle-bottomright2" />
         <div id="triangle-bottomright" />
         <b-navbar-item tag="div" class="right-side">
           <div class="buttons">
@@ -27,23 +28,32 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
       showSetting: false
     }
   },
+
+  computed: {
+    ...mapState({
+      sidebar: (state) => {
+        return state.user.sidebar
+      }
+    }),
+    styleObj () {
+      if (this.sidebar) {
+        return 'width:259px;'
+      } else {
+        return 'width:80px;'
+      }
+    }
+  },
   methods: {
     keluar () {
       this.$auth.logout()
       this.$router.push('/login')
-      // await this.$axios
-      //   .$post(this.$axios.defaults.baseURL + '/logout')
-      //   .then((res) => {
-      //     this.$auth.logout()
-      //     this.$router.push('/login')
-      //   })
-      //   .catch((err) => {})
     }
   }
 }
@@ -51,24 +61,22 @@ export default {
 <style lang="scss" scoped>
 .navbar {
   padding-right: 0px;
-  background-color: white;
+  background-image: url('~@/assets/images/top.png');
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   .logo {
     display: flex;
     align-items: center;
     width: 259px;
-    padding-left: 30px;
-    background-color: #2e3192;
+    padding-left: 10px;
+    background-color: #2c6bca;
+    transition: max-height 0.15s ease-out;
+    transition-property: width;
     .img-logo {
-      width: 50px;
+      width: 60px;
     }
   }
-  .search {
-    width: 250px;
-    background-color: #e0e0e0;
-  }
   .select-btn {
-    background: #5472d3;
+    background: #2c6bca;
     border: 0px;
   }
   .btn-setting {
@@ -88,19 +96,29 @@ export default {
     border: 0px;
   }
   .right-side {
-    background-color: #2e3192;
+    background-color: #2c6bca;
   }
   #triangle-bottomright {
     width: 0;
     height: 0;
-    border-bottom: 4.25rem solid #2e3192;
-    border-left: 80px solid transparent;
+    border-bottom: 4.25rem solid #2c6bca;
+    border-left: 30px solid transparent;
+  }
+  #triangle-bottomright2 {
+    width: 55px;
+    height: 0;
+    top: 0px;
+    right: -40px;
+    z-index: -10;
+    position: relative;
+    border-bottom: 58px solid #ebcc24;
+    border-left: 30px solid transparent;
   }
   #triangle-bottomleft {
     width: 0;
     height: 0;
-    border-top: 4.25rem solid #2e3192;
-    border-right: 80px solid transparent;
+    border-top: 4.25rem solid #2c6bca;
+    border-right: 50px solid transparent;
   }
 }
 

@@ -1,5 +1,8 @@
 <template>
-  <section class="hero is-link is-fullheight bg-images">
+  <section
+    class="hero is-link is-fullheight bg-images"
+    style="overflow: hidden"
+  >
     <div class="hero-body">
       <div class="container has-text-centered">
         <img src="~/assets/images/logo_dashboard.png" class="img-logo">

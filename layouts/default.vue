@@ -1,10 +1,10 @@
 <template>
   <div>
     <Navbar class="navbars" style="z-index: 999" />
-    <!-- <div class="columns is-gapless" style="padding-top: 4.25rem; z-index: -1"> -->
-    <!-- <Sidebar class="column is-narrow" /> -->
-    <Nuxt />
-    <!-- </div> -->
+    <div class="columns is-gapless" style="padding-top: 4.25rem">
+      <Sidebar class="column is-narrow" />
+      <Nuxt />
+    </div>
   </div>
 </template>
 

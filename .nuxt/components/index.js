@@ -1,3 +1,4 @@
+export { default as Avatar } from '../../components/Avatar.vue'
 export { default as Navbar } from '../../components/Navbar.vue'
 export { default as Sidebar } from '../../components/Sidebar.vue'
 

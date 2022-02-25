@@ -1,7 +1,8 @@
 export const state = () => ({
   isLoading: false,
   data: {},
-  users: []
+  users: [],
+  sidebar: true
 })
 
 export const getters = {
@@ -18,6 +19,9 @@ export const mutations = {
   },
   SET_USERS (state, users) {
     state.users = users
+  },
+  SET_SIDEBAR (state) {
+    state.sidebar = !state.sidebar
   }
 }
 

@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <!-- <Header /> -->
+  <div style="overflow: hidden">
     <Nuxt />
   </div>
 </template>
