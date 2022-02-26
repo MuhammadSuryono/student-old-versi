@@ -1,11 +1,13 @@
 <template>
   <div>
-    <span v-if="sidebar" class="avatar-container">
-      <div class="square-top" />
-      <div class="trapesium-1" />
-      <div class="square-center" />
-      <div class="trapesium-2" />
-      <div class="square-bottom" />
+    <span v-if="sidebar">
+      <div class="avatar-container">
+        <div class="square-top" />
+        <div class="trapesium-1" />
+        <div class="square-center" />
+        <div class="trapesium-2" />
+        <div class="square-bottom" />
+      </div>
     </span>
     <span v-else class="avatar-container2">
       <div class="square-top" />
@@ -62,6 +64,59 @@ export default {
     border-top: 20px solid rgba(152, 18, 18, 0.75);
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
+  }
+  .trapesium-2 {
+    height: 0px;
+    width: 240px;
+    border-bottom: 20px solid rgba(152, 18, 18, 0.75);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+}
+.avatar-name {
+  .square-top {
+    height: 30px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 240px;
+    background-color: transparent;
+    border-color: white;
+    border-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-left-style: solid;
+  }
+  .square-center {
+    height: 70px;
+    width: 220px;
+    margin-right: 10px;
+    margin-left: 10px;
+    background-color: transparent;
+    border-color: white;
+    border-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-left-style: solid;
+  }
+  .square-bottom {
+    height: 70px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 240px;
+    background-color: transparent;
+    border-color: white;
+    border-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-left-style: solid;
+  }
+  .trapesium-1 {
+    width: 170px;
+    height: 200px;
+    border: 2px solid red;
+    border-top-width: 4px;
+    border-bottom-width: 1px;
+    -webkit-transform: perspective(200px) rotateX(40deg);
   }
   .trapesium-2 {
     height: 0px;
