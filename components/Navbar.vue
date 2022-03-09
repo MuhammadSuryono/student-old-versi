@@ -44,7 +44,7 @@ export default {
     }),
     styleObj () {
       if (this.sidebar) {
-        return 'width:259px;'
+        return 'width:200px;'
       } else {
         return 'width:80px;'
       }
@@ -61,8 +61,9 @@ export default {
 <style lang="scss" scoped>
 .navbar {
   padding-right: 0px;
+  // background-color: red;
   background-image: url('~@/assets/images/top.png');
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  // filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   .logo {
     display: flex;
     align-items: center;

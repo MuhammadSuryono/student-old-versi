@@ -1,22 +1,18 @@
 <template>
-  <div>
-    <video-background
-      :src="require('@/assets/video/bg.mp4')"
-      style="height: 100vh"
-      :loop="false"
-      @ended="end()"
-    />
-  </div>
+  <div class="bg-img" />
 </template>
 
 <script>
 export default {
   name: 'HomePage',
-  layout: 'login',
-  methods: {
-    end () {
-      this.$router.push({ path: '/home' })
-    }
-  }
+  layout: 'default'
 }
 </script>
+<style lang="scss" scoped>
+.bg-img {
+  background-image: url('~@/assets/images/home/bg_home.png');
+  height: 90vh;
+  width: 100%;
+  background-size: cover;
+}
+</style>

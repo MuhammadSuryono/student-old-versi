@@ -1,11 +1,20 @@
 {
-  "Avatar": {
-    "description": "Auto imported from components/Avatar.vue"
-  },
   "Navbar": {
     "description": "Auto imported from components/Navbar.vue"
   },
-  "Sidebar": {
-    "description": "Auto imported from components/Sidebar.vue"
+  "PButton": {
+    "description": "Auto imported from components/PButton.vue"
+  },
+  "PNavigation": {
+    "description": "Auto imported from components/PNavigation.vue"
+  },
+  "SidebarAvatar": {
+    "description": "Auto imported from components/sidebar/Avatar.vue"
+  },
+  "SidebarCardName": {
+    "description": "Auto imported from components/sidebar/CardName.vue"
+  },
+  "SidebarMain": {
+    "description": "Auto imported from components/sidebar/Main.vue"
   }
 }

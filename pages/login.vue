@@ -60,7 +60,7 @@ export default {
         .then((response) => {
           this.$store.commit('user/SET_DATA', response.data.data)
           this.$auth.strategy.token.set(response.data.data.access_token)
-          this.$router.push({ path: '/' })
+          this.$router.push({ path: '/splash' })
         })
         .catch((error) => {
           console.log('error2', error)

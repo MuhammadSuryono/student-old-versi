@@ -6,6 +6,9 @@ You can directly use them in pages and other components without the need to impo
 
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
-- `<Avatar>` | `<avatar>` (components/Avatar.vue)
 - `<Navbar>` | `<navbar>` (components/Navbar.vue)
-- `<Sidebar>` | `<sidebar>` (components/Sidebar.vue)
+- `<PButton>` | `<p-button>` (components/PButton.vue)
+- `<PNavigation>` | `<p-navigation>` (components/PNavigation.vue)
+- `<SidebarAvatar>` | `<sidebar-avatar>` (components/sidebar/Avatar.vue)
+- `<SidebarCardName>` | `<sidebar-card-name>` (components/sidebar/CardName.vue)
+- `<SidebarMain>` | `<sidebar-main>` (components/sidebar/Main.vue)
