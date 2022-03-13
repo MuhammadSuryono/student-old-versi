@@ -230,21 +230,23 @@
     }
   }
   .img-logo {
+    position: fixed;
     width: 215px;
+    bottom: 0px;
   }
   .img2 {
     width: 145.58px;
-    left: 0px;
-    bottom: 4px;
+    left: 80px;
+    bottom: 0px;
     z-index: -1;
-    position: absolute;
+    position: fixed;
   }
   .img3 {
     width: 155px;
-    left: -25px;
-    bottom: -6px;
+    left: 55px;
+    bottom: -9px;
     z-index: -1;
-    position: absolute;
+    position: fixed;
   }
 }
 </style>

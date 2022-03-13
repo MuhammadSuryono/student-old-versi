@@ -5,6 +5,9 @@
   "PButton": {
     "description": "Auto imported from components/PButton.vue"
   },
+  "PLights": {
+    "description": "Auto imported from components/PLights.vue"
+  },
   "PNavigation": {
     "description": "Auto imported from components/PNavigation.vue"
   },

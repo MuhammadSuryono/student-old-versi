@@ -58,12 +58,29 @@ export default {
           password: this.state.password
         })
         .then((response) => {
-          this.$store.commit('user/SET_DATA', response.data.data)
-          this.$auth.strategy.token.set(response.data.data.access_token)
-          this.$router.push({ path: '/splash' })
+          if (response.status === 200) {
+            if (response.data.data.user.role_id === 4) {
+              this.$store.commit('user/SET_DATA', response.data.data)
+              this.$auth.strategy.token.set(response.data.data.access_token)
+              this.$router.push({ path: '/splash' })
+            } else {
+              this.$auth.logout()
+              this.$router.push('/login')
+              this.$toast.error('Please login with student account.', {
+                position: 'top-center',
+                duration: 5000
+              })
+            }
+          } else {
+            this.$toast.error(response.data.error.message, {
+              position: 'top-center',
+              duration: 5000
+            })
+          }
         })
         .catch((error) => {
-          console.log('error2', error)
+          console.log('error : ', error)
+          this.$toast.error(error.response.status)
         })
     }
   }

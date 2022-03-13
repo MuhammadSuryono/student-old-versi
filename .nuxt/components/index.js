@@ -1,5 +1,6 @@
 export { default as Navbar } from '../../components/Navbar.vue'
 export { default as PButton } from '../../components/PButton.vue'
+export { default as PLights } from '../../components/PLights.vue'
 export { default as PNavigation } from '../../components/PNavigation.vue'
 export { default as SidebarAvatar } from '../../components/sidebar/Avatar.vue'
 export { default as SidebarCardName } from '../../components/sidebar/CardName.vue'

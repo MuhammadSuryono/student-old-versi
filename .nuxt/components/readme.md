@@ -8,6 +8,7 @@ You can directly use them in pages and other components without the need to impo
 
 - `<Navbar>` | `<navbar>` (components/Navbar.vue)
 - `<PButton>` | `<p-button>` (components/PButton.vue)
+- `<PLights>` | `<p-lights>` (components/PLights.vue)
 - `<PNavigation>` | `<p-navigation>` (components/PNavigation.vue)
 - `<SidebarAvatar>` | `<sidebar-avatar>` (components/sidebar/Avatar.vue)
 - `<SidebarCardName>` | `<sidebar-card-name>` (components/sidebar/CardName.vue)

@@ -15,6 +15,7 @@ import { createStore } from './store.js'
 
 import nuxt_plugin_plugin_56b50a1a from 'nuxt_plugin_plugin_56b50a1a' // Source: ./components/plugin.js (mode: 'all')
 import nuxt_plugin_plugin_88abffd8 from 'nuxt_plugin_plugin_88abffd8' // Source: ./vuetify/plugin.js (mode: 'all')
+import nuxt_plugin_toast_e2fb4e42 from 'nuxt_plugin_toast_e2fb4e42' // Source: ./toast.js (mode: 'client')
 import nuxt_plugin_recaptcha_6f45fac2 from 'nuxt_plugin_recaptcha_6f45fac2' // Source: ./recaptcha.js (mode: 'all')
 import nuxt_plugin_workbox_105f9568 from 'nuxt_plugin_workbox_105f9568' // Source: ./workbox.js (mode: 'client')
 import nuxt_plugin_metaplugin_1875705f from 'nuxt_plugin_metaplugin_1875705f' // Source: ./pwa/meta.plugin.js (mode: 'all')
@@ -223,6 +224,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_plugin_88abffd8 === 'function') {
     await nuxt_plugin_plugin_88abffd8(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_toast_e2fb4e42 === 'function') {
+    await nuxt_plugin_toast_e2fb4e42(app.context, inject)
   }
 
   if (typeof nuxt_plugin_recaptcha_6f45fac2 === 'function') {
