@@ -70,7 +70,7 @@ export default {
     this.sidebar = true
   },
   methods: {
-    tes() {
+    tes () {
       console.log('close')
     }
   }

@@ -3,30 +3,35 @@
     "name": "home",
     "path": "/home",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/home.vue",
-    "chunkName": "pages/home"
+    "chunkName": "pages/home",
+    "_name": "_75174033"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/login.vue",
-    "chunkName": "pages/login"
+    "chunkName": "pages/login",
+    "_name": "_4bb5acc5"
   },
   {
     "name": "personality",
     "path": "/personality",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/personality.vue",
-    "chunkName": "pages/personality"
+    "chunkName": "pages/personality",
+    "_name": "_256c0b6c"
   },
   {
     "name": "splash",
     "path": "/splash",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/splash.vue",
-    "chunkName": "pages/splash"
+    "chunkName": "pages/splash",
+    "_name": "_4dd95a8a"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_fbe3eca4"
   }
 ]
