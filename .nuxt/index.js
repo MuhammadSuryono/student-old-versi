@@ -23,6 +23,7 @@ import nuxt_plugin_iconplugin_1d1d15d3 from 'nuxt_plugin_iconplugin_1d1d15d3' //
 import nuxt_plugin_axios_7b5be7a0 from 'nuxt_plugin_axios_7b5be7a0' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_repository_2cb156b7 from 'nuxt_plugin_repository_2cb156b7' // Source: ../plugins/repository.js (mode: 'all')
 import nuxt_plugin_buefy_d29bd2f0 from 'nuxt_plugin_buefy_d29bd2f0' // Source: ../plugins/buefy.js (mode: 'all')
+import nuxt_plugin_persistedStateclient_3b127e9c from 'nuxt_plugin_persistedStateclient_3b127e9c' // Source: ../plugins/persistedState.client.js (mode: 'client')
 import nuxt_plugin_vuevideobackground_24001f9d from 'nuxt_plugin_vuevideobackground_24001f9d' // Source: ../plugins/vue-video-background (mode: 'client')
 import nuxt_plugin_auth_2b075700 from 'nuxt_plugin_auth_2b075700' // Source: ./auth.js (mode: 'all')
 
@@ -256,6 +257,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_buefy_d29bd2f0 === 'function') {
     await nuxt_plugin_buefy_d29bd2f0(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_persistedStateclient_3b127e9c === 'function') {
+    await nuxt_plugin_persistedStateclient_3b127e9c(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_vuevideobackground_24001f9d === 'function') {

@@ -40,7 +40,7 @@ export default {
     ...mapState({
       sidebar: (state) => {
         return state.user.sidebar
-      }
+      },
     }),
     styleObj () {
       if (this.sidebar) {

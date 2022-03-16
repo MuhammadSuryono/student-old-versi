@@ -28,6 +28,13 @@
     "_name": "_4dd95a8a"
   },
   {
+    "name": "vueconnect_pc.loader",
+    "path": "/vueconnect_pc.loader",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/vueconnect_pc.loader.js",
+    "chunkName": "pages/vueconnect_pc.loader",
+    "_name": "_30323a70"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/index.vue",

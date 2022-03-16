@@ -60,9 +60,10 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             if (response.data.data.user.role_id === 4) {
-              this.$store.commit('user/SET_DATA', response.data.data)
+              console.log(response.data.data)
+              this.$store.commit('user/SET_USERS', response.data.data)
               this.$auth.strategy.token.set(response.data.data.access_token)
-              this.$router.push({ path: '/splash' })
+              this.$router.push({ path: '/' })
             } else {
               this.$auth.logout()
               this.$router.push('/login')

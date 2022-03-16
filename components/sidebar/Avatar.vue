@@ -10,7 +10,7 @@
         <div class="square-center" :style="btnStyles1" />
         <div class="trapesium-2" :style="btnStyles3" />
         <div class="square-bottom" :style="btnStyles1" />
-        <img src="~/assets/images/dummy/avatar.png" class="img-logo">
+        <img :src="avatarImg" class="img-logo">
       </div>
       <SidebarCardName class="name-card" :name="avatarName" />
       <div class="menu-b">
@@ -88,6 +88,9 @@ export default {
     ...mapState({
       sidebar: (state) => {
         return state.user.sidebar
+      },
+      users: (state) => {
+        return state.user.users
       }
     }),
     btnStyles1 () {
@@ -105,7 +108,10 @@ export default {
         'border-bottom-color': this.bgColor
       }
     }
-  }
+  },
+  mounted () {
+    console.log("users : ", this.users)
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -199,8 +205,8 @@ export default {
   position: absolute;
   top: 95px;
   z-index: 2;
-  width: 190px;
-  margin-left: -10px;
+  width: 170px;
+  margin-left:3px;
   margin-right: auto;
 }
 .name-card {

@@ -25,6 +25,7 @@ export default {
   plugins: [
     '~/plugins/repository.js',
     '~/plugins/buefy.js',
+    '~/plugins/persistedState.client.js',
     {
       src: '~/plugins/vue-video-background',
       ssr: false

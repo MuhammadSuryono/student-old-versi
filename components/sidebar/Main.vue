@@ -18,7 +18,7 @@
           <SidebarAvatar
             bg-color="rgba(152, 18, 18, 0.75"
             :avatar-img="image"
-            avatar-name="Valerie Mahrani"
+            :avatar-name="name"
           />
         </div>
       </b-sidebar>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -34,10 +35,16 @@ export default {
       expandWithDelay: false,
       mobile: 'reduce',
       reduce: false,
-      image: '~/assets/images/dummy/avatar.png'
+      image: '',
+      name: ''
     }
   },
   computed: {
+    ...mapState({
+      users: (state) => {
+        return state.user.users
+      }
+    }),
     styleObj () {
       if (this.reduce) {
         return 'padding: 20px 10px 0px 10px;'
@@ -48,6 +55,14 @@ export default {
   },
   created () {
     this.reduce = false
+  },
+  mounted () {
+    console.log("-------")
+    console.log(this.users)
+    this.name = this.users.first_name + " " + this.users.last_name
+    this.image = this.users.avatar.image
+    console.log(this.image)
+    console.log("-------")
   },
   methods: {
     sidebar () {
