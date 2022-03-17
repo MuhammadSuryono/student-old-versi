@@ -68,51 +68,6 @@
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex'
-export default {
-  data () {
-    return {
-      expandOnHover: false,
-      expandWithDelay: false,
-      mobile: 'reduce',
-      reduce: false,
-      data: {
-        image: '',
-        bg_images: '',
-        name: '',
-        courses: '',
-        achievements: '',
-        faction: '',
-        level: ''
-      }
-    }
-  },
-  mounted () {
-    this.getData()
-  },
-  methods: {
-    // getData () {
-    //   console.log('-------')
-    //   this.data.courses = this.users.courses
-    //   this.data.achievements = this.users.achievements
-    //   this.data.faction = this.users.faction
-    //   this.data.level = this.users.level
-    //   if (typeof this.users !== null || typeof this.users !== undefined) {
-    //     this.data.name = this.users.first_name + ' ' + this.users.last_name
-    //     this.data.image = this.users.avatar.image
-    //     this.data.bg_images = this.users.image_background
-    //   }
-    //   console.log(this.data)
-    //   console.log('-------')
-    // },
-    // sidebar () {
-    //   this.reduce = !this.reduce
-    //   this.$store.commit('user/SET_SIDEBAR')
-    // }
-  }
-}
-</script>
 <style lang="scss" scoped>
 .petra-navigation {
   z-index: 2;

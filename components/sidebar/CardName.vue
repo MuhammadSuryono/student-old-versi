@@ -13,10 +13,10 @@
     </div>
     <div class="modules">
       <div class="courses">
-        {{ courses }} COURSES
+        {{ courses2 }} COURSES
       </div>
       <div class="archievements">
-        {{ achievements }} ACHIEVEMENTS
+        {{ achievements2 }} ACHIEVEMENTS
       </div>
     </div>
   </div>
@@ -28,13 +28,13 @@ export default {
       type: String,
       default: ''
     },
-    courses: {
-      type: String,
-      default: ''
+    courses2: {
+      type: Number,
+      default: 0
     },
-    achievements: {
-      type: String,
-      default: ''
+    achievements2: {
+      type: Number,
+      default: 0
     }
   }
 }

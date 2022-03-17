@@ -44,8 +44,8 @@ export default {
         bg_images: '',
         name: '',
         courses: '',
-        achievements: '',
-        faction: '',
+        achievements: 0,
+        faction: 0,
         level: ''
       }
     }

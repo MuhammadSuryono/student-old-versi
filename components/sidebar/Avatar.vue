@@ -42,8 +42,8 @@
       <SidebarCardName
         class="name-card"
         :name="avatarName"
-        :courses="courses"
-        :achievements="achievements"
+        :courses2="courses"
+        :achievements2="achievements"
       />
       <div class="menu-b">
         <div class="setting" style="width: 50px">
@@ -121,12 +121,12 @@ export default {
       default: ''
     },
     courses: {
-      type: String,
-      default: ''
+      type: Number,
+      default: 0
     },
     achievements: {
-      type: String,
-      default: ''
+      type: Number,
+      default: 0
     }
   },
   data () {
