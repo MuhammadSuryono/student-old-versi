@@ -2,9 +2,36 @@
   <div>
     <span v-if="sidebar">
       <div class="avatar-container">
-        <img src="~/assets/images/component/rectangle.png" class="btn-top">
-        <img src="~/assets/images/component/rectangle.png" class="btn-center">
-        <img src="~/assets/images/component/rectangle.png" class="btn-bottom">
+        <!-- personality -->
+        <div class="petra-personality">
+          <img src="~/assets/images/component/rectangle.png" class="btn-top">
+          <img
+            src="~/assets/images/component/personality.png"
+            class="btn-top2"
+          >
+        </div>
+        <!-- faction -->
+        <div class="petra-faction">
+          <img
+            src="~/assets/images/component/rectangle.png"
+            class="btn-center"
+          >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3063/3063051.png"
+            class="btn-center2"
+          >
+        </div>
+        <!-- level -->
+        <div class="petra-level">
+          <img
+            src="~/assets/images/component/rectangle.png"
+            class="btn-bottom"
+          >
+          <div class="text-level">
+            {{ level }}
+          </div>
+          <img src="~/assets/images/component/level.png" class="btn-bottom2">
+        </div>
         <div class="square-top" :style="btnStyles1" />
         <div class="trapesium-1" :style="btnStyles2" />
         <div class="square-center" :style="btnStyles1" />
@@ -12,7 +39,12 @@
         <div class="square-bottom" :style="btnStyles1" />
         <img :src="avatarImg" class="img-logo">
       </div>
-      <SidebarCardName class="name-card" :name="avatarName" />
+      <SidebarCardName
+        class="name-card"
+        :name="avatarName"
+        :courses="courses"
+        :achievements="achievements"
+      />
       <div class="menu-b">
         <div class="setting" style="width: 50px">
           <img src="~/assets/images/component/btn.png" class="btn-s">
@@ -30,7 +62,7 @@
           <div
             style="
               position: absolute;
-              left: 55px;
+              left: 35px;
               top: 6px;
               text-align: center;
               font-size: 14px;
@@ -49,7 +81,7 @@
       <div class="square-center" />
       <div class="trapesium-2" />
       <div class="square-bottom" />
-      <img src="~/assets/images/dummy/avatar.png" class="img-logo2">
+      <img :src="avatarImg" class="img-logo2">
       <div class="menu-p" style="margin-top: 13px">
         <div class="cornered" />
         <div class="square" />
@@ -77,6 +109,22 @@ export default {
       default: ''
     },
     avatarName: {
+      type: String,
+      default: ''
+    },
+    level: {
+      type: String,
+      default: '0'
+    },
+    faction: {
+      type: String,
+      default: ''
+    },
+    courses: {
+      type: String,
+      default: ''
+    },
+    achievements: {
       type: String,
       default: ''
     }
@@ -110,8 +158,8 @@ export default {
     }
   },
   mounted () {
-    console.log("users : ", this.users)
-  },
+    console.log('users : ', this.users)
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -138,27 +186,75 @@ export default {
 }
 .avatar-container {
   z-index: 1;
-  .btn-top {
+  .petra-personality {
     top: 75px;
     left: 145px;
     position: absolute;
-    z-index: 1;
     width: 47.68px;
-    object-fit: cover;
+    .btn-top {
+      z-index: 1;
+      object-fit: cover;
+      position: relative;
+    }
+    .btn-top2 {
+      top: 0px;
+      left: 0px;
+      position: absolute;
+      padding: 5px;
+      z-index: 2;
+    }
   }
-  .btn-center {
+  .petra-faction {
     top: 128px;
     left: 163px;
     position: absolute;
-    z-index: 1;
     width: 27.68px;
+    .btn-center {
+      top: 0px;
+      position: relative;
+      width: 100%;
+      z-index: 1;
+    }
+    .btn-center2 {
+      top: 0px;
+      left: 0px;
+      position: absolute;
+      padding: 5px;
+      z-index: 2;
+    }
   }
-  .btn-bottom {
+  .petra-level {
     top: 162px;
     left: 163px;
     position: absolute;
     z-index: 1;
     width: 27.68px;
+    .btn-bottom {
+      top: 0px;
+      position: relative;
+      width: 100%;
+    }
+    .btn-bottom2 {
+      bottom: 1px;
+      right: -5px;
+      position: absolute;
+    }
+    .text-level {
+      color: white;
+      top: 14px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      font-family: 'Barlow';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      white-space: nowrap;
+      width: 27px;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
   .square-top {
     z-index: 1;
@@ -206,7 +302,7 @@ export default {
   top: 95px;
   z-index: 2;
   width: 170px;
-  margin-left:3px;
+  margin-left: 3px;
   margin-right: auto;
 }
 .name-card {

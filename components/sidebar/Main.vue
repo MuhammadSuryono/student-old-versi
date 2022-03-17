@@ -17,8 +17,12 @@
           <div v-else class="img-arrow-close" @click="sidebar()" />
           <SidebarAvatar
             bg-color="rgba(152, 18, 18, 0.75"
-            :avatar-img="image"
-            :avatar-name="name"
+            :avatar-img="data.image"
+            :avatar-name="data.name"
+            :level="data.level"
+            :faction="data.faction"
+            :courses="data.courses"
+            :achievements="data.achievements"
           />
         </div>
       </b-sidebar>
@@ -35,8 +39,15 @@ export default {
       expandWithDelay: false,
       mobile: 'reduce',
       reduce: false,
-      image: '',
-      name: ''
+      data: {
+        image: '',
+        bg_images: '',
+        name: '',
+        courses: '',
+        achievements: '',
+        faction: '',
+        level: ''
+      }
     }
   },
   computed: {
@@ -57,14 +68,23 @@ export default {
     this.reduce = false
   },
   mounted () {
-    console.log("-------")
-    console.log(this.users)
-    this.name = this.users.first_name + " " + this.users.last_name
-    this.image = this.users.avatar.image
-    console.log(this.image)
-    console.log("-------")
+    this.getData()
   },
   methods: {
+    getData () {
+      console.log('-------')
+      this.data.courses = this.users.courses
+      this.data.achievements = this.users.achievements
+      this.data.faction = this.users.faction
+      this.data.level = this.users.level
+      if (typeof this.users !== null || typeof this.users !== undefined) {
+        this.data.name = this.users.first_name + ' ' + this.users.last_name
+        this.data.image = this.users.avatar.image
+        this.data.bg_images = this.users.image_background
+      }
+      console.log(this.data)
+      console.log('-------')
+    },
     sidebar () {
       this.reduce = !this.reduce
       this.$store.commit('user/SET_SIDEBAR')

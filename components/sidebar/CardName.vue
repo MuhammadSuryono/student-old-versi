@@ -13,10 +13,10 @@
     </div>
     <div class="modules">
       <div class="courses">
-        120 COURSES
+        {{ courses }} COURSES
       </div>
       <div class="archievements">
-        41 ACHIEVEMENTS
+        {{ achievements }} ACHIEVEMENTS
       </div>
     </div>
   </div>
@@ -25,6 +25,14 @@
 export default {
   props: {
     name: {
+      type: String,
+      default: ''
+    },
+    courses: {
+      type: String,
+      default: ''
+    },
+    achievements: {
       type: String,
       default: ''
     }
