@@ -1,0 +1,79 @@
+<template>
+  <svg
+    width="48"
+    height="36"
+    viewBox="0 0 48 36"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g filter="url(#filter0_d_1_155)">
+      <path
+        d="M11.95 14.8608C11.95 13.3144 13.2036 12.0608 14.75 12.0608H32.28C33.8264 12.0608 35.08 13.3144 35.08 14.8608V24.6305C35.08 26.1769 33.8264 27.4305 32.28 27.4305H14.75C13.2036 27.4305 11.95 26.1769 11.95 24.6305V14.8608Z"
+        :stroke="bgColor"
+        stroke-width="2"
+      />
+      <rect
+        x="16.7918"
+        y="18.1347"
+        width="6.40344"
+        height="9.2965"
+        rx="2.8"
+        :stroke="bgColor"
+        stroke-width="2"
+      />
+      <path
+        d="M23.1845 2.05777C23.5296 1.87976 23.9396 1.87976 24.2847 2.05777L37.9453 9.1037C39.0635 9.68043 38.6533 11.3702 37.3952 11.3702H10.0741C8.81602 11.3702 8.40591 9.68043 9.52406 9.1037L23.1845 2.05777Z"
+        :stroke="bgColor"
+        stroke-width="2"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_d_1_155"
+        x="4.47041"
+        y="0.724274"
+        width="38.5285"
+        height="34.3069"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="3.2" />
+        <feGaussianBlur stdDeviation="1.6" />
+        <feComposite in2="hardAlpha" operator="out" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_1_155"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow_1_155"
+          result="shape"
+        />
+      </filter>
+    </defs>
+  </svg>
+</template>
+
+<script>
+export default {
+  props: {
+    bgColor: {
+      type: String,
+      default: 'white'
+    }
+  }
+}
+</script>

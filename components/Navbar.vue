@@ -3,7 +3,11 @@
     <b-navbar class="navbar">
       <template #brand>
         <div class="logo" :style="styleObj">
-          <img src="~/assets/images/logo_dashboard.png" class="img-logo">
+          <img
+            src="~/assets/images/logo_dashboard.png"
+            class="img-logo"
+            @click="home()"
+          >
         </div>
         <div id="triangle-bottomleft" />
       </template>
@@ -40,7 +44,7 @@ export default {
     ...mapState({
       sidebar: (state) => {
         return state.user.sidebar
-      },
+      }
     }),
     styleObj () {
       if (this.sidebar) {
@@ -51,6 +55,9 @@ export default {
     }
   },
   methods: {
+    home () {
+      this.$router.push('/')
+    },
     keluar () {
       this.$auth.logout()
       this.$router.push('/login')
@@ -73,6 +80,7 @@ export default {
     transition: max-height 0.15s ease-out;
     transition-property: width;
     .img-logo {
+      cursor: pointer;
       width: 60px;
     }
   }

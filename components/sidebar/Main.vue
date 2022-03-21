@@ -13,10 +13,10 @@
         style="width: 200px"
       >
         <div class="main-sidebar" :style="styleObj">
-          <div v-if="!reduce" class="img-arrow-open" @click="sidebar()" />
-          <div v-else class="img-arrow-close" @click="sidebar()" />
+          <div v-if="!reduce" class="img-arrow-open" @click="onSidebar()" />
+          <div v-else class="img-arrow-close" @click="onSidebar()" />
           <SidebarAvatar
-            bg-color="rgba(152, 18, 18, 0.75"
+            :bg-color="bg_images"
             :avatar-img="data.image"
             :avatar-name="data.name"
             :level="data.level"
@@ -54,20 +54,22 @@ export default {
     ...mapState({
       users: (state) => {
         return state.user.users
+      },
+      sidebar: (state) => {
+        return state.user.sidebar
       }
     }),
     styleObj () {
       if (this.reduce) {
-        return 'padding: 20px 10px 0px 10px;'
+        return 'padding: 20px 10px 0px 10px;width:80px;'
       } else {
-        return 'padding: 20px 15px 0px 12px;'
+        return 'padding: 20px 15px 0px 12px;width:200px;'
       }
     }
   },
-  created () {
-    this.reduce = false
-  },
   mounted () {
+    this.reduce = !this.sidebar
+    console.log(this.reduce)
     this.getData()
   },
   methods: {
@@ -77,16 +79,18 @@ export default {
       this.data.achievements = this.users.achievements
       this.data.faction = this.users.faction
       this.data.level = this.users.level
+      // eslint-disable-next-line valid-typeof
       if (typeof this.users !== null || typeof this.users !== undefined) {
         this.data.name = this.users.first_name + ' ' + this.users.last_name
         this.data.image = this.users.avatar.image
         this.data.bg_images = this.users.image_background
       }
-      console.log(this.data)
+      console.log('sidebar :', this.data)
       console.log('-------')
     },
-    sidebar () {
+    onSidebar () {
       this.reduce = !this.reduce
+      console.log(this.reduce)
       this.$store.commit('user/SET_SIDEBAR')
     }
   }
@@ -101,30 +105,42 @@ export default {
   width: none;
   z-index: 39;
 }
-// .b-sidebar .sidebar-content {
-//   width: 200px;
-// }
-.img-arrow-open {
-  background-image: url('~@/assets/images/component/toogle.png');
-  left: 175px;
-  position: absolute;
-  z-index: 5;
-  top: 47%;
-  height: 120px;
-  width: 50px;
-  cursor: pointer;
-}
 .main-sidebar {
   background-image: url('~@/assets/images/sidebar.png');
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   color: white;
-  height: 100%;
+  height: 93vh;
   padding: 20px 15px 0px 18px;
-  width: 100%;
+  width: 200px;
+  position: absolute;
+
+  // .img-arrow-open {
+  //   background-image: url('~@/assets/images/component/toogle.png');
+  //   left: 170px;
+  //   position: relative;
+  //   display: block;
+  //   z-index: 999;
+  //   top: 47%;
+  //   height: 120px;
+  //   width: 50px;
+  //   cursor: pointer;
+  // }
+  .img-arrow-open {
+    background-image: url('~@/assets/images/component/toogle.png');
+    left: 170px;
+    position: absolute;
+    display: block;
+    z-index: 999;
+    top: 47%;
+    height: 120px;
+    width: 50px;
+    cursor: pointer;
+  }
   .img-arrow-close {
     background-image: url('~@/assets/images/arrow2.svg');
-    left: 73px;
+    left: 70px;
     position: absolute;
+    display: block;
     z-index: 9999;
     top: 43%;
     height: 100px;

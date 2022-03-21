@@ -6,48 +6,74 @@
     >
     <img src="~/assets/images/component/navigation/img-2.png" class="img2">
     <img src="~/assets/images/component/navigation/img-3.png" class="img3">
+    <div class="clock">
+      {{ hours }}:{{ minutes }}
+    </div>
+    <img src="~/assets/images/component/rectangle2.png" class="img4">
+    <div class="exp">
+      EXP <br>
+      {{ exp }}/{{ max }}
+    </div>
     <div class="menu">
       <div class="triangle-left" />
       <div class="triangle-right" />
       <ul class="child-menu">
         <li>
-          <div class="card-menu" style="margin-left: 14px">
+          <div
+            class="card-menu"
+            style="margin-left: 14px"
+            @mouseover="hover1 = true"
+            @mouseleave="hover1 = false"
+          >
             <div class="triangle-left" />
             <div class="triangle-right" />
-            <img
-              src="~/assets/images/component/navigation/icon.png"
-              class="icon-menu"
-            >
+            <IconHome v-if="hover1" class="icon-menu1" bg-color="black" />
+            <IconHome v-else class="icon-menu1" bg-color="white" />
           </div>
         </li>
         <li>
-          <div class="card-menu">
+          <div
+            class="card-menu"
+            @mouseover="hover2 = true"
+            @mouseleave="hover2 = false"
+          >
             <div class="triangle-left" />
             <div class="triangle-right" />
-            <img
-              src="~/assets/images/component/navigation/icon.png"
-              class="icon-menu"
-            >
+            <IconSkillcard
+              v-if="hover2"
+              class="icon-menu2"
+              bg-color="black"
+              style="left: 10px"
+            />
+            <IconSkillcard v-else class="icon-menu2" bg-color="white" />
           </div>
         </li>
         <li>
-          <div class="card-menu">
+          <div
+            class="card-menu"
+            @mouseover="hover3 = true"
+            @mouseleave="hover3 = false"
+          >
             <div class="triangle-left" />
             <div class="triangle-right" />
-            <img
-              src="~/assets/images/component/navigation/icon.png"
-              class="icon-menu"
-            >
+            <IconCluster v-if="hover3" class="icon-menu3" bg-color="black" />
+            <IconCluster v-else class="icon-menu3" bg-color="white" />
           </div>
         </li>
         <li>
-          <div class="card-menu">
+          <div
+            class="card-menu"
+            @mouseover="hover4 = true"
+            @mouseleave="hover4 = false"
+          >
             <div class="triangle-left" />
             <div class="triangle-right" />
-            <img
-              src="~/assets/images/component/navigation/icon.png"
-              class="icon-menu"
-            >
+            <IconArchivements
+              v-if="hover4"
+              class="icon-menu4"
+              bg-color="black"
+            />
+            <IconArchivements v-else class="icon-menu4" bg-color="white" />
           </div>
         </li>
       </ul>
@@ -67,11 +93,92 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data () {
+    return {
+      data: {},
+      exp: 0,
+      max: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      hover1: false,
+      hover2: false,
+      hover3: false,
+      hover4: false
+    }
+  },
+  mounted () {
+    this.getData()
+    this.setTime()
+  },
+  methods: {
+    async getData () {
+      await this.$axios
+        .get('student/home/navigation')
+        .then((res) => {
+          this.data = res.data.data
+          this.exp = this.data.exp.current_exp
+          this.max = this.data.exp.max_exp
+        })
+        .catch((error) => {
+          console.log('error', error)
+        })
+    },
+    setTime () {
+      setInterval(() => {
+        const date = new Date()
+        this.hours = date.getHours()
+        this.minutes = this.checkSingleDigit(date.getMinutes())
+        this.seconds = this.checkSingleDigit(date.getSeconds())
+      }, 1000)
+    },
+    checkSingleDigit (digit) {
+      return ('0' + digit).slice(-2)
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .petra-navigation {
   z-index: 2;
   position: absolute;
+  width: 300px;
+  .clock {
+    font-family: 'Barlow';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 43px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    bottom: 80px;
+    left: 19px;
+    color: #ffffff;
+  }
+  .img4 {
+    bottom: 65px;
+    left: 33px;
+    color: #ffffff;
+    position: relative;
+  }
+  .exp {
+    font-family: 'Barlow';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    bottom: 24px;
+    left: 28px;
+    color: white;
+  }
   .menu {
     z-index: -1;
     background: rgba(43, 91, 163, 0.5);
@@ -100,6 +207,7 @@
           display: block;
           color: white;
           background: rgba(43, 91, 163, 0.75);
+          // background: white;
           width: 44px;
           height: 32.98px;
           margin-right: 4px;
@@ -128,10 +236,29 @@
               transparent;
             border-style: solid;
           }
-          .icon-menu {
+          .icon-menu1 {
+            height: 30px;
+            left: -2px;
+            top: 4.5px;
+            position: absolute;
+          }
+          .icon-menu2 {
             height: 38px;
-            left: 8px;
+            left: 10px;
             top: 1px;
+            position: absolute;
+          }
+          .icon-menu3 {
+            height: 38px;
+            left: 14px;
+            bottom: 0px;
+            top: 1px;
+            position: absolute;
+          }
+          .icon-menu4 {
+            height: 38px;
+            left: 9px;
+            top: -1px;
             position: absolute;
           }
         }
@@ -139,10 +266,23 @@
           background: white;
 
           .triangle-left {
+            width: 0;
+            height: 0;
+            left: -10px;
+            position: absolute;
+            border-width: 0 0px 32.98px 10px;
+            bottom: 0px;
             border-color: transparent transparent white transparent;
+            border-style: solid;
           }
           .triangle-right {
+            width: 0;
+            height: 0;
+            left: 100%;
+            position: absolute;
+            border-width: 33px 10px 0 0;
             border-color: white transparent transparent transparent;
+            border-style: solid;
           }
         }
       }
@@ -231,23 +371,24 @@
     }
   }
   .img-logo {
-    position: fixed;
+    position: absolute;
     width: 215px;
     bottom: 0px;
+    left: 0px;
   }
   .img2 {
     width: 145.58px;
-    left: 80px;
+    left: 0px;
     bottom: 0px;
     z-index: -1;
-    position: fixed;
+    position: absolute;
   }
   .img3 {
     width: 155px;
-    left: 55px;
+    left: -20px;
     bottom: -9px;
     z-index: -1;
-    position: fixed;
+    position: absolute;
   }
 }
 </style>

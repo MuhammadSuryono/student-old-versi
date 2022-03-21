@@ -1,19 +1,14 @@
 <template>
-  <div>
-    <Navbar class="navbars" style="z-index: 999" />
-    <div class="columns is-gapless" style="padding-top: 4.25rem; height: 100vh">
+  <div class="container-petra">
+    <Navbar class="navbars" />
+    <div class="columns is-gapless main-menu">
       <SidebarMain
-        class="column is-narrow"
+        class="column is-narrow sidebar-menu"
         :style="widthSidebar"
-        style="width: 200px; z-index: 3"
       />
       <div v-if="sidebar" class="petra-overlay" />
-      <Nuxt style="z-index: -2" />
-      <PNavigation
-        class="navigation-petra"
-        :style="navigations"
-        style="z-index: 1"
-      />
+      <Nuxt class="nuxt-menu" />
+      <PNavigation class="navigation-petra" :style="navigations" />
       <img src="~/assets/images/component/map/img-1.png" class="maps-petra">
       <img
         v-if="light"
@@ -69,61 +64,82 @@ export default {
   created () {
     this.sidebar = true
   },
-  methods: {
-    tes () {
-      console.log('close')
-    }
-  }
+  methods: {}
 }
 </script>
 
 <style lang="scss" scoped>
-.petra-overlay {
-  width: 100%;
-  height: 100%;
-  background: rgba(10, 10, 10, 0.5);
-  z-index: 2;
-  position: fixed;
-  top: 0px;
-}
-.navigation-petra {
-  z-index: 99;
-  position: relative;
-  bottom: 0px;
-  left: 0px;
-}
-.maps-petra {
-  z-index: 1;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  cursor: pointer;
-}
-.light-petra {
-  z-index: 1;
-  position: absolute;
-  bottom: 32vh;
-  right: 28vw;
-  cursor: pointer;
-  -webkit-animation: lights 10s linear infinite;
-}
-.light-petra-true {
-  width: 100%;
-  height: 100%;
-  background: rgba(10, 10, 10, 0.5);
-  z-index: 2;
-  position: fixed;
-  top: 0px;
-  .text-light {
-    position: absolute;
-    bottom: 80px;
-    left: 200px;
-  }
-  .avatar-light {
-    position: absolute;
-    top: 20vh;
-    right: 15vw;
-    cursor: pointer;
+.container-petra {
+  max-width: 1280px;
+  background-color: transparent;
+  margin: auto;
+  box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.05);
+  .main-menu {
+    max-width: 1280px;
+    padding-top: 4.25rem;
+    height: 100vh;
+    position: relative;
+    .sidebar-menu {
+      width: 200px;
+      z-index: 4;
+    }
+    .petra-overlay {
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 10, 10, 0.5);
+      z-index: 3;
+      position: fixed;
+      top: 0px;
+      max-width: 1280px;
+    }
+    .nuxt-menu {
+      z-index: -2;
+      max-width: 1280px;
+      box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.05);
+    }
+    .navigation-petra {
+      z-index: 99;
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      z-index: 2;
+    }
+    .maps-petra {
+      z-index: 1;
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .light-petra {
+      z-index: 1;
+      position: absolute;
+      bottom: 32vh;
+      right: 200px;
+      cursor: pointer;
+      -webkit-animation: lights 10s linear infinite;
+    }
+    .light-petra-true {
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 10, 10, 0.5);
+      z-index: 2;
+      position: absolute;
+      top: 0px;
+      .text-light {
+        position: absolute;
+        bottom: 110px;
+        left: 300px;
+        height: 118px;
+      }
+      .avatar-light {
+        position: absolute;
+        top: 20vh;
+        right: 200px;
+        height: 280px;
+        cursor: pointer;
+      }
+    }
   }
 }
 @-webkit-keyframes lights {
@@ -138,6 +154,8 @@ export default {
 .navbars {
   position: fixed;
   width: 100%;
+  z-index: 999;
+  max-width: 1280px;
 }
 
 .p-1 {

@@ -39,7 +39,7 @@ export const actions = {
     } catch (e) {
       return e.response
     }
-  },
+  }
   // async get ({ commit }) {
   //   commit('SET_LOADING', true)
   //   const res = await this.$repositories.user.get()

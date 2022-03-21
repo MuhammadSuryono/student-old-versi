@@ -11,6 +11,24 @@
   "PNavigation": {
     "description": "Auto imported from components/PNavigation.vue"
   },
+  "Profile": {
+    "description": "Auto imported from components/Profile.vue"
+  },
+  "IconArchivements": {
+    "description": "Auto imported from components/icon/Archivements.vue"
+  },
+  "IconCluster": {
+    "description": "Auto imported from components/icon/Cluster.vue"
+  },
+  "IconFaction": {
+    "description": "Auto imported from components/icon/Faction.vue"
+  },
+  "IconHome": {
+    "description": "Auto imported from components/icon/Home.vue"
+  },
+  "IconSkillcard": {
+    "description": "Auto imported from components/icon/Skillcard.vue"
+  },
   "SidebarAvatar": {
     "description": "Auto imported from components/sidebar/Avatar.vue"
   },

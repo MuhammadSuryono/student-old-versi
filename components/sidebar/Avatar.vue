@@ -1,27 +1,19 @@
 <template>
   <div>
     <span v-if="sidebar">
+      <!-- avatar -->
       <div class="avatar-container">
         <!-- personality -->
         <div class="petra-personality">
           <img src="~/assets/images/component/rectangle.png" class="btn-top">
           <img
-            src="~/assets/images/component/personality.png"
+            src="~/assets/images/component/pixlr-bg-result.png"
             class="btn-top2"
           >
         </div>
         <!-- faction -->
-        <div class="petra-faction">
-          <img
-            src="~/assets/images/component/rectangle.png"
-            class="btn-center"
-          >
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/3063/3063051.png"
-            class="btn-center2"
-          >
-        </div>
-        <!-- level -->
+        <IconFaction class="petra-faction" />
+        <img :src="faction" class="btn-center2">
         <div class="petra-level">
           <img
             src="~/assets/images/component/rectangle.png"
@@ -38,19 +30,22 @@
         <div class="trapesium-2" :style="btnStyles3" />
         <div class="square-bottom" :style="btnStyles1" />
         <img :src="avatarImg" class="img-logo">
+        <!-- edit profile -->
+        <div class="btn-edit">
+          <img src="~/assets/images/btn-editprofile.png">
+          <div class="text-edit">Edit Profile</div>
+        </div>
       </div>
+      <!-- name card -->
       <SidebarCardName
         class="name-card"
         :name="avatarName"
         :courses2="courses"
         :achievements2="achievements"
       />
+      <!-- manage decorations -->
       <div class="menu-b">
-        <div class="setting" style="width: 50px">
-          <img src="~/assets/images/component/btn.png" class="btn-s">
-          <v-icon dense dark class="icon-s"> mdi-cog-outline </v-icon>
-        </div>
-        <div class="setting" style="width: 100%; top: 10px; left: 5px">
+        <div class="setting" style="width: 100%; top: 10px; left: 0px">
           <img
             src="~/assets/images/component/bg-decors.png"
             class="btn-d"
@@ -62,7 +57,7 @@
           <div
             style="
               position: absolute;
-              left: 35px;
+              left: 53px;
               top: 6px;
               text-align: center;
               font-size: 14px;
@@ -158,7 +153,8 @@ export default {
     }
   },
   mounted () {
-    console.log('users : ', this.users)
+    console.log('faction', this.faction)
+    // this.sidebar = false
   }
 }
 </script>
@@ -186,11 +182,33 @@ export default {
 }
 .avatar-container {
   z-index: 1;
+  position: relative;
+  .btn-edit {
+    position: absolute;
+    top: 220px;
+    right: 5px;
+    z-index: 10;
+    cursor: pointer;
+    .text-edit {
+      position: absolute;
+      top: 1px;
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+    }
+  }
   .petra-personality {
-    top: 75px;
-    left: 145px;
+    top: -10px;
+    left: 135px;
     position: absolute;
     width: 47.68px;
+    cursor: pointer;
     .btn-top {
       z-index: 1;
       object-fit: cover;
@@ -205,34 +223,39 @@ export default {
     }
   }
   .petra-faction {
-    top: 128px;
-    left: 163px;
+    top: 41px;
+    left: 152.9px;
     position: absolute;
-    width: 27.68px;
+    width: 28.4px;
+    cursor: pointer;
     .btn-center {
       top: 0px;
       position: relative;
       width: 100%;
       z-index: 1;
     }
-    .btn-center2 {
-      top: 0px;
-      left: 0px;
-      position: absolute;
-      padding: 5px;
-      z-index: 2;
-    }
+  }
+  .btn-center2 {
+    top: 42px;
+    left: 151px;
+    position: absolute;
+    padding: 2px;
+    width: 31px;
+    height: 31px;
+    z-index: 5;
   }
   .petra-level {
-    top: 162px;
-    left: 163px;
+    top: 77px;
+    cursor: pointer;
+    left: 153px;
     position: absolute;
     z-index: 1;
-    width: 27.68px;
+    width: 27px;
     .btn-bottom {
       top: 0px;
       position: relative;
       width: 100%;
+      height: 26px;
     }
     .btn-bottom2 {
       bottom: 1px;
@@ -241,7 +264,7 @@ export default {
     }
     .text-level {
       color: white;
-      top: 14px;
+      top: 12.4px;
       left: 50%;
       transform: translate(-50%, -50%);
       position: absolute;
@@ -296,14 +319,15 @@ export default {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
   }
-}
-.img-logo {
-  position: absolute;
-  top: 95px;
-  z-index: 2;
-  width: 170px;
-  margin-left: 3px;
-  margin-right: auto;
+  .img-logo {
+    position: absolute;
+    top: 0px;
+    z-index: 2;
+    height: 247px;
+    // width: 170px;
+    margin-left: 3px;
+    margin-right: auto;
+  }
 }
 .name-card {
   position: relative;
@@ -344,7 +368,7 @@ export default {
     }
   }
   .img-logo2 {
-    top: 90px;
+    top: 17px;
     left: 6px;
     position: absolute;
     z-index: 2;

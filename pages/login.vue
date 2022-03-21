@@ -62,7 +62,9 @@ export default {
             if (response.data.data.user.role_id === 4) {
               console.log(response.data.data)
               this.$store.commit('user/SET_USERS', response.data.data)
-              this.$auth.strategy.token.set(response.data.data.access_token)
+              this.$auth.strategy.token.set(
+                'Bearer ' + response.data.data.access_token
+              )
               this.$router.push({ path: '/' })
             } else {
               this.$auth.logout()
@@ -104,7 +106,7 @@ export default {
   background-repeat: no-repeat, repeat;
   background-size: cover;
   background-position: center;
-  background-image: url('../assets/images/background.png');
+  background-image: url('../assets/images/placeholderbg.png');
 }
 .img-logo {
   height: 80px;
