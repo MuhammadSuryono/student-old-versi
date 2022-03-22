@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-page" style="width: 200px">
+  <div class="sidebar-page" style="width: 200px; z-index: 5">
     <section class="sidebar-layout">
       <b-sidebar
         position="static"
@@ -16,11 +16,12 @@
           <div v-if="!reduce" class="img-arrow-open" @click="onSidebar()" />
           <div v-else class="img-arrow-close" @click="onSidebar()" />
           <SidebarAvatar
-            :bg-color="bg_images"
-            :avatar-img="data.image"
+            :bg-color="data.avatar_bg"
+            :avatar-img="data.avatar_image"
             :avatar-name="data.name"
             :level="data.level"
             :faction="data.faction"
+            :faction-bg="data.faction_bg"
             :courses="data.courses"
             :achievements="data.achievements"
           />
@@ -40,13 +41,14 @@ export default {
       mobile: 'reduce',
       reduce: false,
       data: {
-        image: '',
-        bg_images: '',
+        avatar_image: '',
+        avatar_bg: '',
         name: '',
-        courses: '',
+        courses: 0,
         achievements: 0,
-        faction: 0,
-        level: ''
+        faction: '',
+        faction_bg: '',
+        level: 0
       }
     }
   },
@@ -69,7 +71,6 @@ export default {
   },
   mounted () {
     this.reduce = !this.sidebar
-    console.log(this.reduce)
     this.getData()
   },
   methods: {
@@ -77,20 +78,20 @@ export default {
       console.log('-------')
       this.data.courses = this.users.courses
       this.data.achievements = this.users.achievements
-      this.data.faction = this.users.faction
+      this.data.faction = this.users.faction.faction
+      this.data.faction_bg = this.users.faction.faction_bgcolor
       this.data.level = this.users.level
       // eslint-disable-next-line valid-typeof
       if (typeof this.users !== null || typeof this.users !== undefined) {
         this.data.name = this.users.first_name + ' ' + this.users.last_name
-        this.data.image = this.users.avatar.image
-        this.data.bg_images = this.users.image_background
+        this.data.avatar_image = this.users.avatar.image
+        this.data.avatar_bg = this.users.faction.avatar_bgcolor
       }
       console.log('sidebar :', this.data)
       console.log('-------')
     },
     onSidebar () {
       this.reduce = !this.reduce
-      console.log(this.reduce)
       this.$store.commit('user/SET_SIDEBAR')
     }
   }
@@ -130,7 +131,7 @@ export default {
     left: 170px;
     position: absolute;
     display: block;
-    z-index: 999;
+    z-index: 5;
     top: 47%;
     height: 120px;
     width: 50px;
@@ -141,7 +142,7 @@ export default {
     left: 70px;
     position: absolute;
     display: block;
-    z-index: 9999;
+    z-index: 5;
     top: 43%;
     height: 100px;
     width: 30px;

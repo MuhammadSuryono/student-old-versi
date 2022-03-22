@@ -12,7 +12,7 @@
           >
         </div>
         <!-- faction -->
-        <IconFaction class="petra-faction" />
+        <IconFaction :bg-color="factionBg" class="petra-faction" />
         <img :src="faction" class="btn-center2">
         <div class="petra-level">
           <img
@@ -31,8 +31,8 @@
         <div class="square-bottom" :style="btnStyles1" />
         <img :src="avatarImg" class="img-logo">
         <!-- edit profile -->
-        <div class="btn-edit">
-          <img src="~/assets/images/btn-editprofile.png">
+        <div class="btn-edit" @click="onEditProfile()">
+          <img src="~/assets/images/btn-petra.png">
           <div class="text-edit">Edit Profile</div>
         </div>
       </div>
@@ -108,12 +108,16 @@ export default {
       default: ''
     },
     level: {
-      type: String,
-      default: '0'
+      type: Number,
+      default: 0
     },
     faction: {
       type: String,
       default: ''
+    },
+    factionBg: {
+      type: String,
+      default: 'rgba(152, 18, 18, 0.75)'
     },
     courses: {
       type: Number,
@@ -152,9 +156,10 @@ export default {
       }
     }
   },
-  mounted () {
-    console.log('faction', this.faction)
-    // this.sidebar = false
+  methods: {
+    onEditProfile () {
+      this.$store.commit('user/SET_BTN_PROFILE', true)
+    }
   }
 }
 </script>

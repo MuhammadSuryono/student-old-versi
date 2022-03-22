@@ -2,14 +2,18 @@
   <div class="container-petra">
     <Navbar class="navbars" />
     <div class="columns is-gapless main-menu">
+      <!-- sidebar -->
       <SidebarMain
         class="column is-narrow sidebar-menu"
         :style="widthSidebar"
       />
       <div v-if="sidebar" class="petra-overlay" />
+      <!-- main -->
       <Nuxt class="nuxt-menu" />
-      <PNavigation class="navigation-petra" :style="navigations" />
+      <PNavigation class="navigation-petra" />
+      <!-- maps -->
       <img src="~/assets/images/component/map/img-1.png" class="maps-petra">
+      <!-- light -->
       <img
         v-if="light"
         src="~/assets/images/component/light/img-1.png"
@@ -27,6 +31,8 @@
           @click="light = true"
         >
       </div>
+      <!-- edit profile -->
+      <Profile :style="widthProfile" class="profile-petra" />
     </div>
   </div>
 </template>
@@ -43,6 +49,9 @@ export default {
     ...mapState({
       sidebar: (state) => {
         return state.user.sidebar
+      },
+      btn_profile: (state) => {
+        return state.user.btn_profile
       }
     }),
     widthSidebar () {
@@ -52,15 +61,14 @@ export default {
         return 'width:80px;'
       }
     },
-    navigations () {
+    widthProfile () {
       if (this.sidebar) {
-        return 'left:80px;'
+        return 'left:200px;'
       } else {
         return 'left:80px;'
       }
     }
   },
-
   created () {
     this.sidebar = true
   },
@@ -97,11 +105,19 @@ export default {
       max-width: 1280px;
       box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.05);
     }
+    .profile-petra {
+      z-index: 99;
+      position: absolute;
+      top: 0px;
+      left: 200px;
+      z-index: 4;
+      height: 100%;
+    }
     .navigation-petra {
       z-index: 99;
       position: absolute;
       bottom: 0px;
-      left: 0px;
+      left: 80px;
       z-index: 2;
     }
     .maps-petra {

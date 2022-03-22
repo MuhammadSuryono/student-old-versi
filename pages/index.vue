@@ -5,7 +5,11 @@
 <script>
 export default {
   name: 'HomePage',
-  layout: 'default'
+  layout: 'default',
+
+  mounted () {
+    console.log(this.$auth.strategy.token.get())
+  }
 }
 </script>
 <style lang="scss" scoped>
