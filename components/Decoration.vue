@@ -1,127 +1,34 @@
 <template>
   <div class="profile-card">
-    <PTitle name="Edit Profile" />
-    <!-- edit profile -->
+    <PTitle name="Manage Decorations" />
     <div v-if="tab === 1">
-      <div class="main-profile">
-        <div class="columns pr-4">
-          <div class="column is-narrow avatar-container">
-            <div class="square-top" :style="btnStyles1" />
-            <div class="trapesium-1" :style="btnStyles2" />
-            <div class="square-center" :style="btnStyles1" />
-            <div class="trapesium-2" :style="btnStyles3" />
-            <div class="square-bottom" :style="btnStyles1" />
-            <img :src="data.avatar_image" class="img-logo">
-
-            <div class="btn-edit" @click="tab = 3">
-              <img src="~/assets/images/btn-petra.png">
-              <div class="text-edit">
-                Change Avatar
-              </div>
-            </div>
-          </div>
-          <div class="column">
-            <div class="title-card" style="margin-bottom: 7px">
-              About me
-            </div>
-            <v-textarea
-              placeholder="Add Bio..."
-              name="input-7-1"
-              hide-details
-              outlined
-              rows="6"
-              class="form-petra"
-            />
-          </div>
-        </div>
-        <!-- fullname -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div class="title2-card">
-              Fullname
-            </div>
-          </div>
-          <div class="column">
-            <v-text-field hide-details outlined dense class="form-petra" />
-          </div>
-        </div>
-        <!-- username -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div class="title2-card">
-              Username
-            </div>
-          </div>
-          <div class="column">
-            <v-text-field hide-details outlined dense class="form-petra" />
-          </div>
-        </div>
-        <!-- email -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div class="title2-card">
-              Email Address
-            </div>
-          </div>
-          <div class="column">
-            <v-text-field hide-details outlined dense class="form-petra" />
-          </div>
-        </div>
-        <!-- gender  -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div class="title2-card">
-              Gender
-            </div>
-          </div>
-          <div class="column">
-            <v-text-field
-              hide-details
-              disabled
-              filled
-              outlined
-              dense
-              class="form-petra"
-            />
-          </div>
-        </div>
-        <!-- Learning Establishment -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div
-              class="title2-card"
-              style="padding-top: 2px; line-height: 19px"
-            >
-              Learning Establishment
-            </div>
-          </div>
-          <div class="column">
-            <v-text-field
-              hide-details
-              disabled
-              filled
-              outlined
-              dense
-              class="form-petra"
-            />
-          </div>
-        </div>
-        <div class="columns pr-4">
-          <div
-            class="column is-narrow avatar-container is-offset-5"
-            @click="tab = 2"
+      <div class="main-profile" style="margin-top: 80px">
+        <!-- foto -->
+        <v-row justify="center" align="center" no-gutters>
+          <img
+            src="~/assets/images/decor.png"
+            style="
+              width: 329.6px;
+              height: 180px;
+              margin-left: auto;
+              margin-right: auto;
+            "
           >
-            <div class="btn-edit" style="width: 258px; float: right">
+          <div
+            class="avatar-container"
+            style="margin-left: auto; margin-right: auto; margin-top: 10px"
+          >
+            <div class="btn-edit" @click="tab = 2">
               <img
                 src="~/assets/images/btn-petra.png"
-                style="width: 258px; height: 29px"
+                style="width: 224.22px; height: 36px"
               >
-              <div class="text-edit" style="top: 3px">
-                Change Password
+              <div class="text-edit" style="top: 7px">
+                Change Background
               </div>
             </div>
           </div>
-        </div>
+        </v-row>
       </div>
       <div class="columns pr-4 mt-4">
         <div class="column is-narrow avatar-container">
@@ -145,7 +52,6 @@
         </div>
       </div>
     </div>
-    <!-- change password -->
     <div v-if="tab === 2">
       <div class="column profile-container">
         <div class="btn-profile">
@@ -154,161 +60,50 @@
             style="width: 257.32px; height: 30px"
           >
           <div class="text-profile">
-            Change Password
+            Choose Background
           </div>
         </div>
       </div>
-      <div class="main-profile">
-        <!-- Old -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div class="title2-card">
-              Old Password
-            </div>
-          </div>
-          <div class="column">
-            <v-text-field
-              v-model="old_password"
-              hide-details
-              outlined
-              dense
-              class="form-petra"
-              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="show1 ? 'text' : 'password'"
-              name="input-10-1"
-              counter
-              @click:append="show1 = !show1"
-            />
-          </div>
-        </div>
-        <!-- New -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div class="title2-card">
-              New Password
-            </div>
-          </div>
-          <div class="column">
-            <v-text-field
-              v-model="new_password"
-              hide-details
-              outlined
-              dense
-              class="form-petra"
-              :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="show2 ? 'text' : 'password'"
-              name="input-10-1"
-              counter
-              @click:append="show2 = !show2"
-            />
-          </div>
-        </div>
-        <!-- confirm  -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div
-              class="title2-card"
-              style="padding-top: 2px; line-height: 19px"
-            >
-              Confirm New Password
-            </div>
-          </div>
-          <div class="column">
-            <v-text-field
-              v-model="confirm_password"
-              hide-details
-              outlined
-              dense
-              class="form-petra"
-              :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="show3 ? 'text' : 'password'"
-              name="input-10-1"
-              counter
-              @click:append="show3 = !show3"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="columns pr-4 mt-4">
-        <div class="column is-narrow avatar-container">
-          <div class="btn-edit" @click="tab = 1">
-            <img
-              src="~/assets/images/back-btn.png"
-              style="width: 98.15px;height: 36.49px;x"
-            >
-          </div>
-        </div>
-        <div class="column avatar-container">
-          <div class="btn-edit">
-            <img
-              src="~/assets/images/btn-petra.png"
-              style="width: 224.22px; height: 36px"
-            >
-            <div class="text-edit" style="top: 7px">
-              Save Changes
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- change avatar -->
-    <div v-if="tab === 3">
-      <div class="column profile-container">
-        <div class="btn-profile">
-          <img
-            src="~/assets/images/bg-profile.png"
-            style="width: 257.32px; height: 30px"
-          >
-          <div class="text-profile">
-            Change Avatar
-          </div>
-        </div>
-      </div>
-      <div class="main-profile" style="margin-top: 20px">
+      <div class="main-profile" style="margin-top: 40px">
         <!-- foto -->
         <div class="columns is-mobile" style="margin-top: 0px">
-          <div
-            class="column is-half is-offset-one-quarter avatar-container"
-            style="margin-top: 0px"
+          <img
+            src="~/assets/images/decor.png"
+            style="
+              width: 329.6px;
+              height: 180px;
+              margin-left: auto;
+              margin-right: auto;
+            "
           >
-            <div class="square-top" :style="btnStyles1" />
-            <div class="trapesium-1" :style="btnStyles2" />
-            <div class="square-center" :style="btnStyles1" />
-            <div class="trapesium-2" :style="btnStyles3" />
-            <div class="square-bottom" :style="btnStyles1" />
-            <img :src="data.avatar_image" class="img-logo">
-          </div>
         </div>
         <!-- box -->
         <div class="box-carousel pr-4">
           <div class="title-carousel">
             <img src="~/assets/images/carousel_1.png" class="bg-logo">
             <div class="text-logo">
-              All Avatars
+              All Backgrounds
             </div>
           </div>
           <div class="content-carousel">
-            <v-row no-gutters align="center" justify="center">
+            <v-row dense align="center" justify="center">
               <v-col
-                v-for="n in 8"
+                v-for="n in 4"
                 :key="n"
                 align="center"
                 justify="center"
                 cols="12"
-                sm="3"
+                sm="6"
                 class="item-carousel"
               >
-                <img
-                  src="~/assets/images/carousel_empty.png"
-                  class="carousel-logo"
-                >
+                <img src="~/assets/images/decor.png" class="carousel-logo">
               </v-col>
             </v-row>
             <v-pagination v-model="page" dark class="my-4" :length="4" />
           </div>
         </div>
       </div>
-      <div class="columns pr-4 mt-4">
+      <div class="columns pr-4 mt-10">
         <div class="column is-narrow avatar-container">
           <div class="btn-edit" @click="tab = 1">
             <img
@@ -393,7 +188,7 @@ export default {
   },
   methods: {
     closeProfile () {
-      this.$store.commit('user/SET_BTN_PROFILE')
+      this.$store.commit('user/SET_BTN_DECORATION')
     },
     getData () {
       this.data.courses = this.users.courses
@@ -484,8 +279,8 @@ export default {
           margin-right: auto;
           margin-top: 5px;
           .carousel-logo {
-            height: 70px;
-            width: 70px;
+            // height: 70px;
+            // width: 70px;
           }
         }
       }

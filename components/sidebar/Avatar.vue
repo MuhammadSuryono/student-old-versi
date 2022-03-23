@@ -45,7 +45,11 @@
       />
       <!-- manage decorations -->
       <div class="menu-b">
-        <div class="setting" style="width: 100%; top: 10px; left: 0px">
+        <div
+          class="setting"
+          style="width: 100%; top: 10px; left: 0px"
+          @click="onManageDecoration()"
+        >
           <img
             src="~/assets/images/component/bg-decors.png"
             class="btn-d"
@@ -158,7 +162,10 @@ export default {
   },
   methods: {
     onEditProfile () {
-      this.$store.commit('user/SET_BTN_PROFILE', true)
+      this.$store.commit('user/SET_BTN_PROFILE')
+    },
+    onManageDecoration () {
+      this.$store.commit('user/SET_BTN_DECORATION')
     }
   }
 }
@@ -196,7 +203,7 @@ export default {
     cursor: pointer;
     .text-edit {
       position: absolute;
-      top: 1px;
+      top: 3.6px;
       font-family: 'Roboto';
       font-style: normal;
       font-weight: 400;

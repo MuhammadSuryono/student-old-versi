@@ -1,4 +1,7 @@
 {
+  "Decoration": {
+    "description": "Auto imported from components/Decoration.vue"
+  },
   "Navbar": {
     "description": "Auto imported from components/Navbar.vue"
   },

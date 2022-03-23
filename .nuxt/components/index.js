@@ -1,3 +1,4 @@
+export { default as Decoration } from '../../components/Decoration.vue'
 export { default as Navbar } from '../../components/Navbar.vue'
 export { default as PButton } from '../../components/PButton.vue'
 export { default as PLights } from '../../components/PLights.vue'

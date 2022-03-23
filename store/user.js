@@ -2,7 +2,8 @@ export const state = () => ({
   isLoading: false,
   users: [],
   sidebar: true,
-  btn_profile: false
+  btn_profile: false,
+  btn_decoration: false
 })
 
 export const getters = {
@@ -17,12 +18,14 @@ export const mutations = {
   SET_USERS (state, users) {
     state.users = users.user
   },
-  SET_BTN_PROFILE (state, btn) {
-    state.btn_profile = btn
-    console.log(state.btn_profile)
+  SET_BTN_PROFILE (state) {
+    state.btn_profile = !state.btn_profile
   },
   SET_SIDEBAR (state) {
     state.sidebar = !state.sidebar
+  },
+  SET_BTN_DECORATION (state) {
+    state.btn_decoration = !state.btn_decoration
   }
 }
 

@@ -32,7 +32,13 @@
         >
       </div>
       <!-- edit profile -->
-      <Profile :style="widthProfile" class="profile-petra" />
+      <Profile v-if="btn_profile" :style="widthProfile" class="profile-petra" />
+      <!-- edit profile -->
+      <Decoration
+        v-if="btn_decoration"
+        :style="widthProfile"
+        class="profile-petra"
+      />
     </div>
   </div>
 </template>
@@ -52,6 +58,9 @@ export default {
       },
       btn_profile: (state) => {
         return state.user.btn_profile
+      },
+      btn_decoration: (state) => {
+        return state.user.btn_decoration
       }
     }),
     widthSidebar () {
@@ -89,6 +98,8 @@ export default {
     position: relative;
     .sidebar-menu {
       width: 200px;
+      position: fixed;
+      height: 100%;
       z-index: 4;
     }
     .petra-overlay {
@@ -111,6 +122,8 @@ export default {
       top: 0px;
       left: 200px;
       z-index: 4;
+      overflow-y: scroll;
+      overflow-x: hidden;
       height: 100%;
     }
     .navigation-petra {
