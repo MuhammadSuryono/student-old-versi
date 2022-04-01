@@ -26,10 +26,14 @@ export default {
     '~/plugins/repository.js',
     '~/plugins/buefy.js',
     '~/plugins/persistedState.client.js',
+    '~/plugins/clickOutside.js',
     {
       src: '~/plugins/vue-video-background',
       ssr: false
-    }
+    },
+    // '~/plugins/notifier.js',
+    '~/plugins/notifications-ssr.js',
+    '~/plugins/notifications-client.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

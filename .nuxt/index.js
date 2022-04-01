@@ -24,7 +24,10 @@ import nuxt_plugin_axios_7b5be7a0 from 'nuxt_plugin_axios_7b5be7a0' // Source: .
 import nuxt_plugin_repository_2cb156b7 from 'nuxt_plugin_repository_2cb156b7' // Source: ../plugins/repository.js (mode: 'all')
 import nuxt_plugin_buefy_d29bd2f0 from 'nuxt_plugin_buefy_d29bd2f0' // Source: ../plugins/buefy.js (mode: 'all')
 import nuxt_plugin_persistedStateclient_3b127e9c from 'nuxt_plugin_persistedStateclient_3b127e9c' // Source: ../plugins/persistedState.client.js (mode: 'client')
+import nuxt_plugin_clickOutside_0ea087a4 from 'nuxt_plugin_clickOutside_0ea087a4' // Source: ../plugins/clickOutside.js (mode: 'all')
 import nuxt_plugin_vuevideobackground_24001f9d from 'nuxt_plugin_vuevideobackground_24001f9d' // Source: ../plugins/vue-video-background (mode: 'client')
+import nuxt_plugin_notificationsssr_eb31a0c0 from 'nuxt_plugin_notificationsssr_eb31a0c0' // Source: ../plugins/notifications-ssr.js (mode: 'all')
+import nuxt_plugin_notificationsclient_f727f91e from 'nuxt_plugin_notificationsclient_f727f91e' // Source: ../plugins/notifications-client.js (mode: 'all')
 import nuxt_plugin_auth_2b075700 from 'nuxt_plugin_auth_2b075700' // Source: ./auth.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -263,8 +266,20 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_persistedStateclient_3b127e9c(app.context, inject)
   }
 
+  if (typeof nuxt_plugin_clickOutside_0ea087a4 === 'function') {
+    await nuxt_plugin_clickOutside_0ea087a4(app.context, inject)
+  }
+
   if (process.client && typeof nuxt_plugin_vuevideobackground_24001f9d === 'function') {
     await nuxt_plugin_vuevideobackground_24001f9d(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_notificationsssr_eb31a0c0 === 'function') {
+    await nuxt_plugin_notificationsssr_eb31a0c0(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_notificationsclient_f727f91e === 'function') {
+    await nuxt_plugin_notificationsclient_f727f91e(app.context, inject)
   }
 
   if (typeof nuxt_plugin_auth_2b075700 === 'function') {

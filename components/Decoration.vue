@@ -64,7 +64,7 @@
           </div>
         </div>
       </div>
-      <div class="main-profile" style="margin-top: 40px">
+      <div class="main-profile" style="margin-top: 40px; margin-bottom: 60px">
         <!-- foto -->
         <div class="columns is-mobile" style="margin-top: 0px">
           <img
@@ -103,7 +103,7 @@
           </div>
         </div>
       </div>
-      <div class="columns pr-4 mt-10">
+      <div class="columns pr-4 mt-40">
         <div class="column is-narrow avatar-container">
           <div class="btn-edit" @click="tab = 1">
             <img
@@ -255,7 +255,7 @@ export default {
         top: -10px;
         .bg-logo {
           height: 28px;
-          width: 134.93px;
+          width: 154.93px;
         }
         .text-logo {
           position: absolute;
@@ -279,7 +279,7 @@ export default {
           margin-right: auto;
           margin-top: 5px;
           .carousel-logo {
-            // height: 70px;
+            height: 100px;
             // width: 70px;
           }
         }

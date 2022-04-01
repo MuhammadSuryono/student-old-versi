@@ -23,9 +23,12 @@
             />
           </b-field>
           <recaptcha class="captcha columns is-centered" />
-          <b-button class="btn-login" @click="login()">
+          <!-- <b-button class="btn-login" @click="login()">
             Log In
-          </b-button>
+          </b-button> -->
+          <v-btn :loading="loading" class="btn-login" @click="login()">
+            Log In
+          </v-btn>
         </div>
       </div>
     </div>
@@ -40,6 +43,7 @@ export default {
 
   data () {
     return {
+      loading: false,
       state: {
         email: '',
         password: ''
@@ -52,16 +56,41 @@ export default {
       this.$router.push({ path: 'dashboard' })
     },
     login () {
+      this.loading = true
       this.$store
         .dispatch('user/loginWithoutCaptcha', {
           email: this.state.email,
           password: this.state.password
         })
         .then((response) => {
-          if (response.status === 200) {
+          this.loading = false
+          if (response.status === 200 || response.status === 201) {
             if (response.data.data.user.role_id === 4) {
-              console.log(response.data.data)
-              this.$store.commit('user/SET_USERS', response.data.data)
+              const data = response.data.data
+              this.$store.commit('user/SET_USERS', data)
+              if (
+                // eslint-disable-next-line valid-typeof
+                typeof data.user.avatar !== null ||
+                // eslint-disable-next-line valid-typeof
+                typeof data.user.avatar !== undefined
+              ) {
+                this.$store.dispatch(
+                  'user/updateImages',
+                  data.user.avatar.image
+                )
+                this.$store.dispatch(
+                  'user/updateImagesName',
+                  data.user.avatar.name
+                )
+              }
+              if (data.user.last_name !== null) {
+                this.$store.commit(
+                  'user/SET_FULLNAME',
+                  data.user.first_name + ' ' + data.user.last_name
+                )
+              } else {
+                this.$store.commit('user/SET_FULLNAME', data.user.first_name)
+              }
               this.$auth.strategy.token.set(
                 'Bearer ' + response.data.data.access_token
               )
@@ -75,6 +104,7 @@ export default {
               })
             }
           } else {
+            this.loading = false
             this.$toast.error(response.data.error.message, {
               position: 'top-center',
               duration: 5000
@@ -82,8 +112,8 @@ export default {
           }
         })
         .catch((error) => {
-          console.log('error : ', error)
-          this.$toast.error(error.response.status)
+          this.loading = false
+          this.$toast.error(error)
         })
     }
   }

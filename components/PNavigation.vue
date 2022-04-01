@@ -19,62 +19,135 @@
       <div class="triangle-right" />
       <ul class="child-menu">
         <li>
-          <div
-            class="card-menu"
-            style="margin-left: 14px"
-            @mouseover="hover1 = true"
-            @mouseleave="hover1 = false"
-          >
-            <div class="triangle-left" />
-            <div class="triangle-right" />
-            <IconHome v-if="hover1" class="icon-menu1" bg-color="black" />
-            <IconHome v-else class="icon-menu1" bg-color="white" />
-          </div>
+          <NuxtLink v-if="$route.path === '/'" class="sidebar-item" to="/">
+            <div
+              class="card-menu"
+              style="margin-left: 14px; background-color: white"
+              @mouseover="hover1 = true"
+              @mouseleave="hover1 = false"
+            >
+              <div class="triangle-left2" />
+              <div class="triangle-right2" />
+              <IconHome class="icon-menu1" bg-color="black" />
+            </div>
+          </NuxtLink>
+          <NuxtLink v-else class="sidebar-item" to="/">
+            <div
+              class="card-menu"
+              style="margin-left: 14px"
+              @mouseover="hover1 = true"
+              @mouseleave="hover1 = false"
+            >
+              <div class="triangle-left" />
+              <div class="triangle-right" />
+              <IconHome v-if="hover1" class="icon-menu1" bg-color="black" />
+              <IconHome v-else class="icon-menu1" bg-color="white" />
+            </div>
+          </NuxtLink>
         </li>
         <li>
-          <div
-            class="card-menu"
-            @mouseover="hover2 = true"
-            @mouseleave="hover2 = false"
+          <NuxtLink
+            v-if="$route.path === '/skillcard'"
+            class="sidebar-item"
+            to="/skillcard"
           >
-            <div class="triangle-left" />
-            <div class="triangle-right" />
-            <IconSkillcard
-              v-if="hover2"
-              class="icon-menu2"
-              bg-color="black"
-              style="left: 10px"
-            />
-            <IconSkillcard v-else class="icon-menu2" bg-color="white" />
-          </div>
+            <div
+              class="card-menu"
+              style="background-color: white"
+              @mouseover="hover2 = true"
+              @mouseleave="hover2 = false"
+            >
+              <div class="triangle-left2" />
+              <div class="triangle-right2" />
+              <IconSkillcard
+                class="icon-menu2"
+                bg-color="black"
+                style="left: 10px"
+              />
+            </div>
+          </NuxtLink>
+
+          <NuxtLink v-else class="sidebar-item" to="/skillcard">
+            <div
+              class="card-menu"
+              @mouseover="hover2 = true"
+              @mouseleave="hover2 = false"
+            >
+              <div class="triangle-left" />
+              <div class="triangle-right" />
+              <IconSkillcard
+                v-if="hover2"
+                class="icon-menu2"
+                bg-color="black"
+                style="left: 10px"
+              />
+              <IconSkillcard v-else class="icon-menu2" bg-color="white" />
+            </div>
+          </NuxtLink>
         </li>
         <li>
-          <div
-            class="card-menu"
-            @mouseover="hover3 = true"
-            @mouseleave="hover3 = false"
+          <NuxtLink
+            v-if="$route.path === '/personality'"
+            class="sidebar-item"
+            to="/personality"
           >
-            <div class="triangle-left" />
-            <div class="triangle-right" />
-            <IconCluster v-if="hover3" class="icon-menu3" bg-color="black" />
-            <IconCluster v-else class="icon-menu3" bg-color="white" />
-          </div>
+            <div
+              class="card-menu"
+              style="background-color: white"
+              @mouseover="hover3 = true"
+              @mouseleave="hover3 = false"
+            >
+              <div class="triangle-left2" />
+              <div class="triangle-right2" />
+              <IconCluster class="icon-menu3" bg-color="black" />
+            </div>
+          </NuxtLink>
+          <NuxtLink v-else class="sidebar-item" to="/personality">
+            <div
+              class="card-menu"
+              @mouseover="hover3 = true"
+              @mouseleave="hover3 = false"
+            >
+              <div class="triangle-left" />
+              <div class="triangle-right" />
+              <IconCluster v-if="hover3" class="icon-menu3" bg-color="black" />
+              <IconCluster v-else class="icon-menu3" bg-color="white" />
+            </div>
+          </NuxtLink>
         </li>
         <li>
-          <div
-            class="card-menu"
-            @mouseover="hover4 = true"
-            @mouseleave="hover4 = false"
+          <NuxtLink
+            v-if="$route.path === '/archivements'"
+            class="sidebar-item"
+            to="/archivements"
           >
-            <div class="triangle-left" />
-            <div class="triangle-right" />
-            <IconArchivements
-              v-if="hover4"
-              class="icon-menu4"
-              bg-color="black"
-            />
-            <IconArchivements v-else class="icon-menu4" bg-color="white" />
-          </div>
+            <div
+              class="card-menu"
+              style="background-color: white"
+              @mouseover="hover4 = true"
+              @mouseleave="hover4 = false"
+            >
+              <div class="triangle-left2" />
+              <div class="triangle-right2" />
+              <IconArchivements class="icon-menu4" bg-color="black" />
+            </div>
+          </NuxtLink>
+          <NuxtLink v-else class="sidebar-item" to="/archivements">
+            <div
+              class="card-menu"
+              @mouseover="hover4 = true"
+              @mouseleave="hover4 = false"
+            >
+              <div class="triangle-left" />
+              <div class="triangle-right" />
+              <IconArchivements
+                v-if="hover4"
+                class="icon-menu4"
+                bg-color="black"
+              />
+              <IconArchivements v-else class="icon-menu4" bg-color="white" />
+            </div>
+          </NuxtLink>
         </li>
       </ul>
     </div>
@@ -110,6 +183,7 @@ export default {
     }
   },
   mounted () {
+    console.log('path : ', this.$route.path)
     this.getData()
     this.setTime()
   },
@@ -226,6 +300,16 @@ export default {
               transparent;
             border-style: solid;
           }
+          .triangle-left2 {
+            width: 0;
+            height: 0;
+            left: -10px;
+            position: absolute;
+            border-width: 0 0px 32.98px 10px;
+            bottom: 0px;
+            border-color: transparent transparent white transparent;
+            border-style: solid;
+          }
           .triangle-right {
             width: 0;
             height: 0;
@@ -234,6 +318,15 @@ export default {
             border-width: 33px 10px 0 0;
             border-color: rgba(43, 91, 163, 0.75) transparent transparent
               transparent;
+            border-style: solid;
+          }
+          .triangle-right2 {
+            width: 0;
+            height: 0;
+            left: 100%;
+            position: absolute;
+            border-width: 33px 10px 0 0;
+            border-color: white transparent transparent transparent;
             border-style: solid;
           }
           .icon-menu1 {

@@ -8,7 +8,7 @@
     <div class="img-logo">
       <img src="~/assets/images/component/card-name.png">
       <div class="name-card">
-        {{ name }}
+        {{ myTasks }}
       </div>
     </div>
     <div class="modules">
@@ -22,6 +22,7 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   props: {
     name: {
@@ -36,6 +37,14 @@ export default {
       type: Number,
       default: 0
     }
+  },
+  computed: {
+    ...mapState({
+      myTasks: state => state.user.fullname,
+      fullname: (state) => {
+        return state.user.fullname
+      }
+    })
   }
 }
 </script>

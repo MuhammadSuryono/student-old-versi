@@ -44,6 +44,12 @@ export default {
     ...mapState({
       sidebar: (state) => {
         return state.user.sidebar
+      },
+      btn_profile: (state) => {
+        return state.user.btn_profile
+      },
+      btn_decoration: (state) => {
+        return state.user.btn_decoration
       }
     }),
     styleObj () {
@@ -59,6 +65,12 @@ export default {
       this.$router.push('/')
     },
     keluar () {
+      if (this.btn_profile) {
+        this.$store.commit('user/SET_BTN_PROFILE')
+      }
+      if (this.btn_decoration) {
+        this.$store.commit('user/SET_BTN_DECORATION')
+      }
       this.$auth.logout()
       this.$router.push('/login')
     }

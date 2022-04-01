@@ -1,14 +1,27 @@
+// export const state = () => ({
 export const state = () => ({
   isLoading: false,
   users: [],
+  profiles: [],
   sidebar: true,
   btn_profile: false,
-  btn_decoration: false
+  btn_decoration: false,
+  fullname: null,
+  images: null,
+  images_name: null,
+  decoration: null,
+  decoration_name: null
 })
 
 export const getters = {
   isLoading: state => state.isLoading,
-  users: state => state.users
+  users: state => state.users,
+  profiles: state => state.profiles,
+  fullname: state => state.fullname,
+  images: state => state.images,
+  images_name: state => state.images_name,
+  decoration: state => state.decoration,
+  decoration_name: state => state.decoration_name
 }
 
 export const mutations = {
@@ -18,14 +31,34 @@ export const mutations = {
   SET_USERS (state, users) {
     state.users = users.user
   },
+  SET_PROFILES (state, profiles) {
+    state.profiles = profiles
+  },
   SET_BTN_PROFILE (state) {
     state.btn_profile = !state.btn_profile
+    state.btn_decoration = false
   },
   SET_SIDEBAR (state) {
     state.sidebar = !state.sidebar
   },
   SET_BTN_DECORATION (state) {
     state.btn_decoration = !state.btn_decoration
+    state.btn_profile = false
+  },
+  SET_FULLNAME (state, data) {
+    state.fullname = data
+  },
+  SET_IMAGES (state, data) {
+    state.images = data
+  },
+  SET_IMAGES_NAME (state, data) {
+    state.images_name = data
+  },
+  SET_DECORATION (state, data) {
+    state.decoration = data
+  },
+  SET_DECORATION_NAME (state, data) {
+    state.decoration_name = data
   }
 }
 
@@ -42,85 +75,33 @@ export const actions = {
     } catch (e) {
       return e.response
     }
+  },
+  async get ({ commit }) {
+    commit('SET_LOADING', true)
+    const res = await this.$repositories.user.get()
+    return res
+  },
+  async updateProfile ({ commit }, payload) {
+    const res = await this.$repositories.user.update(payload)
+    return res
+  },
+  updateFullname ({ commit }, payload) {
+    commit('SET_FULLNAME', payload)
+  },
+  updateImages ({ commit }, payload) {
+    commit('SET_IMAGES', payload)
+  },
+  updateImagesName ({ commit }, payload) {
+    commit('SET_IMAGES_NAME', payload)
+  },
+  updateDecoration ({ commit }, payload) {
+    commit('SET_DECORATION', payload)
+  },
+  updateDecorationName ({ commit }, payload) {
+    commit('SET_DECORATION_NAME', payload)
+  },
+  async changePassword ({ commit }, payload) {
+    const res = await this.$repositories.user.changePass(payload)
+    return res
   }
-  // async get ({ commit }) {
-  //   commit('SET_LOADING', true)
-  //   const res = await this.$repositories.user.get()
-  //   if (res.status === 200) {
-  //     const profiles = res.data.data
-  //     profiles.gender = profiles.gender.toLowerCase()
-  //     profiles.user_type = profiles.user_type[0]
-  //     console.log('profile : ', profiles)
-  //     commit('SET_USERS', profiles)
-  //     commit('SET_LOADING', false)
-  //   } else {
-  //     commit('SET_LOADING', false)
-  //     this.$toast.error('Error', {
-  //       position: 'top-center',
-  //       duration: 5000
-  //     })
-  //   }
-  //   if (res.status === 401) {
-  //     commit('SET_LOADING', false)
-  //     this.$toast.error('Please relogin', {
-  //       position: 'top-center',
-  //       duration: 5000
-  //     })
-  //     this.$auth.logout()
-  //     this.$router.push('/login')
-  //   }
-  // },
-  // async updateProfile ({ commit }, payload) {
-  //   commit('SET_LOADING', true)
-  //   const res = await this.$repositories.user.update(payload)
-  //   if (res.status === 200) {
-  //     const profiles = res.data.data
-  //     // profiles.gender = profiles.gender.toLowerCase()
-  //     commit('SET_USERS', profiles)
-  //     commit('SET_LOADING', false)
-  //   } else {
-  //     commit('SET_LOADING', false)
-  //     this.$toast.error('Failed Update Profil', {
-  //       position: 'top-center',
-  //       duration: 5000
-  //     })
-  //   }
-  //   if (res.status === 401) {
-  //     commit('SET_LOADING', false)
-  //     this.$toast.error('Please relogin', {
-  //       position: 'top-center',
-  //       duration: 5000
-  //     })
-  //     this.$auth.logout()
-  //     this.$router.push('/login')
-  //   }
-  // },
-  // async changePassword ({ commit }, payload) {
-  //   commit('SET_LOADING', true)
-  //   const res = await this.$repositories.user.changePass(payload)
-  //   if (res.status === 200) {
-  //     commit('SET_LOADING', false)
-  //     this.$toasted.show('Success Update Password', {
-  //       theme: 'bubble',
-  //       type: 'success',
-  //       position: 'top-center',
-  //       duration: 5000
-  //     })
-  //   } else {
-  //     commit('SET_LOADING', false)
-  //     this.$toast.error('Failed Update Password', {
-  //       position: 'top-center',
-  //       duration: 5000
-  //     })
-  //   }
-  //   if (res.status === 401) {
-  //     commit('SET_LOADING', false)
-  //     this.$toast.error('Please relogin', {
-  //       position: 'top-center',
-  //       duration: 5000
-  //     })
-  //     this.$auth.logout()
-  //     this.$router.push('/login')
-  //   }
-  // }
 }

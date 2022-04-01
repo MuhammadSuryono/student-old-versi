@@ -10,7 +10,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .bg-img {
-  background-image: url('~@/assets/images/home/bg_home.png');
+  // background-image: url('~@/assets/images/home/bg_home.png');
   height: 90vh;
   margin-left: 10px;
   opacity: 0.4;

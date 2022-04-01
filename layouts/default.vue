@@ -1,44 +1,67 @@
 <template>
-  <div class="container-petra">
-    <Navbar class="navbars" />
-    <div class="columns is-gapless main-menu">
-      <!-- sidebar -->
-      <SidebarMain
-        class="column is-narrow sidebar-menu"
-        :style="widthSidebar"
-      />
-      <div v-if="sidebar" class="petra-overlay" />
-      <!-- main -->
-      <Nuxt class="nuxt-menu" />
-      <PNavigation class="navigation-petra" />
-      <!-- maps -->
-      <img src="~/assets/images/component/map/img-1.png" class="maps-petra">
-      <!-- light -->
-      <img
-        v-if="light"
-        src="~/assets/images/component/light/img-1.png"
-        class="light-petra"
-        @click="light = false"
-      >
-      <div v-else class="light-petra-true" @keydown.esc="tes()">
+  <div>
+    <div style="height: 100%; width: 100%; z-index: -9999" />
+
+    <div class="container-petra">
+      <Navbar class="navbars" />
+      <div class="columns is-gapless main-menu">
+        <!-- sidebar -->
+        <SidebarMain
+          class="column is-narrow sidebar-menu"
+          :style="widthSidebar"
+        />
+        <div v-if="sidebar" class="petra-overlay" />
+        <!-- main -->
+        <Nuxt v-if="$route.path !== '/'" class="nuxt-menu" style="z-index: 2" />
+        <Nuxt v-else class="nuxt-menu" />
+        <span v-if="$route.path === '/'">
+          <PNavigation class="navigation-petra" />
+          <!-- maps -->
+          <img
+            src="~/assets/images/component/map/img-1.png"
+            class="maps-petra"
+            @click="maps = !maps"
+          >
+          <img
+            v-if="maps"
+            src="~/assets/images/maps.png"
+            style="position: absolute; z-index: 5; left: 10%; cursor: pointer"
+            @click="maps = !maps"
+          >
+        </span>
+        <!-- light -->
         <img
-          src="~/assets/images/component/light/img-2.png"
-          class="text-light"
+          v-if="light"
+          src="~/assets/images/component/light/img-1.png"
+          class="light-petra"
+          @click="light = false"
         >
-        <img
-          src="~/assets/images/component/light/img-3.png"
-          class="avatar-light"
-          @click="light = true"
-        >
+        <div v-else class="light-petra-true" @keydown.esc="tes()">
+          <img
+            src="~/assets/images/component/light/img-2.png"
+            class="text-light"
+          >
+          <img
+            src="~/assets/images/component/light/img-3.png"
+            class="avatar-light"
+            @click="light = true"
+          >
+        </div>
+        <!-- edit profile -->
+        <!-- <transition name="slide-fade"> -->
+        <Profile
+          v-if="btn_profile"
+          class="profile-petra noselect"
+          :style="widthProfile2"
+        />
+        <!-- </transition> -->
+        <!-- decoration -->
+        <Decoration
+          v-if="btn_decoration"
+          :style="widthProfile"
+          class="profile-petra"
+        />
       </div>
-      <!-- edit profile -->
-      <Profile v-if="btn_profile" :style="widthProfile" class="profile-petra" />
-      <!-- edit profile -->
-      <Decoration
-        v-if="btn_decoration"
-        :style="widthProfile"
-        class="profile-petra"
-      />
     </div>
   </div>
 </template>
@@ -48,7 +71,8 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      light: true
+      light: true,
+      maps: false
     }
   },
   computed: {
@@ -76,20 +100,48 @@ export default {
       } else {
         return 'left:80px;'
       }
+    },
+    widthProfile2 () {
+      if (this.sidebar) {
+        return 'left:200px;'
+      } else {
+        return 'left:80px;'
+      }
     }
   },
   created () {
     this.sidebar = true
+    this.$notify('Hello user!')
   },
   methods: {}
 }
 </script>
 
 <style lang="scss" scoped>
+.slide-fade-enter-active {
+  transition: all 0.5s;
+}
+.slide-fade-leave-active {
+  transition: all 0.5s;
+  z-index: -9999;
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(-100%);
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
 .container-petra {
   max-width: 1280px;
-  background-color: transparent;
+  // background-color: transparent;
   margin: auto;
+  padding: 0px;
   box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.05);
   .main-menu {
     max-width: 1280px;
@@ -117,7 +169,7 @@ export default {
       box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.05);
     }
     .profile-petra {
-      z-index: 99;
+      z-index: -999;
       position: absolute;
       top: 0px;
       left: 200px;

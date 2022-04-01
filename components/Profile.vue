@@ -3,147 +3,159 @@
     <PTitle name="Edit Profile" />
     <!-- edit profile -->
     <div v-if="tab === 1">
-      <div class="main-profile">
-        <div class="columns pr-4">
-          <div class="column is-narrow avatar-container">
-            <div class="square-top" :style="btnStyles1" />
-            <div class="trapesium-1" :style="btnStyles2" />
-            <div class="square-center" :style="btnStyles1" />
-            <div class="trapesium-2" :style="btnStyles3" />
-            <div class="square-bottom" :style="btnStyles1" />
-            <img :src="data.avatar_image" class="img-logo">
+      <span v-if="!isLoading">
+        <div class="main-profile">
+          <div class="columns pr-4">
+            <div class="column is-narrow avatar-container">
+              <div class="square-top" :style="btnStyles1" />
+              <div class="trapesium-1" :style="btnStyles2" />
+              <div class="square-center" :style="btnStyles1" />
+              <div class="trapesium-2" :style="btnStyles3" />
+              <div class="square-bottom" :style="btnStyles1" />
+              <img :src="images" class="img-logo">
 
-            <div class="btn-edit" @click="tab = 3">
-              <img src="~/assets/images/btn-petra.png">
-              <div class="text-edit">
-                Change Avatar
+              <div class="btn-edit" @click="gotoAvatar()">
+                <img src="~/assets/images/btn-petra.png">
+                <div class="text-edit">Change Avatar</div>
+              </div>
+            </div>
+            <div class="column">
+              <div class="title-card" style="margin-bottom: 7px">About me</div>
+              <v-textarea
+                v-model="form.bio"
+                placeholder="Add Bio..."
+                name="input-7-1"
+                hide-details
+                outlined
+                rows="6"
+                class="form-petra"
+              />
+            </div>
+          </div>
+          <!-- fullname -->
+          <div class="columns pr-4 no-padding is-gapless">
+            <div class="column is-4">
+              <div class="title2-card">Fullname</div>
+            </div>
+            <div class="column">
+              <v-text-field
+                v-model="form.fullname"
+                hide-details
+                outlined
+                dense
+                class="form-petra"
+              />
+            </div>
+          </div>
+          <!-- username -->
+          <div class="columns pr-4 no-padding is-gapless">
+            <div class="column is-4">
+              <div class="title2-card">Username</div>
+            </div>
+            <div class="column">
+              <v-text-field
+                v-model="form.username"
+                hide-details
+                outlined
+                dense
+                class="form-petra"
+              />
+            </div>
+          </div>
+          <!-- email -->
+          <div class="columns pr-4 no-padding is-gapless">
+            <div class="column is-4">
+              <div class="title2-card">Email Address</div>
+            </div>
+            <div class="column">
+              <v-text-field
+                v-model="form.email"
+                hide-details
+                outlined
+                dense
+                class="form-petra"
+              />
+            </div>
+          </div>
+          <!-- gender  -->
+          <div class="columns pr-4 no-padding is-gapless">
+            <div class="column is-4">
+              <div class="title2-card">Gender</div>
+            </div>
+            <div class="column">
+              <v-text-field
+                v-model="form.gender"
+                hide-details
+                disabled
+                filled
+                outlined
+                dense
+                class="form-petra"
+              />
+            </div>
+          </div>
+          <!-- Learning Establishment -->
+          <div class="columns pr-4 no-padding is-gapless">
+            <div class="column is-4">
+              <div
+                class="title2-card"
+                style="padding-top: 2px; line-height: 19px"
+              >
+                Learning Establishment
+              </div>
+            </div>
+            <div class="column">
+              <v-text-field
+                v-model="form.learning"
+                hide-details
+                disabled
+                filled
+                outlined
+                dense
+                class="form-petra"
+              />
+            </div>
+          </div>
+          <div class="columns pr-4">
+            <div
+              class="column is-narrow avatar-container is-offset-5"
+              @click="tab = 2"
+            >
+              <div class="btn-edit" style="width: 258px; float: right">
+                <img
+                  src="~/assets/images/btn-petra.png"
+                  style="width: 258px; height: 29px"
+                >
+                <div class="text-edit" style="top: 3px">Change Password</div>
               </div>
             </div>
           </div>
-          <div class="column">
-            <div class="title-card" style="margin-bottom: 7px">
-              About me
-            </div>
-            <v-textarea
-              placeholder="Add Bio..."
-              name="input-7-1"
-              hide-details
-              outlined
-              rows="6"
-              class="form-petra"
-            />
-          </div>
         </div>
-        <!-- fullname -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div class="title2-card">
-              Fullname
+        <div class="columns pr-4 mt-4">
+          <div class="column is-narrow avatar-container">
+            <div class="btn-edit" @click="closeProfile()">
+              <img
+                src="~/assets/images/back-btn.png"
+                style="width: 98.15px;height: 36.49px;x"
+              >
             </div>
           </div>
-          <div class="column">
-            <v-text-field hide-details outlined dense class="form-petra" />
-          </div>
-        </div>
-        <!-- username -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div class="title2-card">
-              Username
-            </div>
-          </div>
-          <div class="column">
-            <v-text-field hide-details outlined dense class="form-petra" />
-          </div>
-        </div>
-        <!-- email -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div class="title2-card">
-              Email Address
-            </div>
-          </div>
-          <div class="column">
-            <v-text-field hide-details outlined dense class="form-petra" />
-          </div>
-        </div>
-        <!-- gender  -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div class="title2-card">
-              Gender
-            </div>
-          </div>
-          <div class="column">
-            <v-text-field
-              hide-details
-              disabled
-              filled
-              outlined
-              dense
-              class="form-petra"
-            />
-          </div>
-        </div>
-        <!-- Learning Establishment -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div
-              class="title2-card"
-              style="padding-top: 2px; line-height: 19px"
-            >
-              Learning Establishment
-            </div>
-          </div>
-          <div class="column">
-            <v-text-field
-              hide-details
-              disabled
-              filled
-              outlined
-              dense
-              class="form-petra"
-            />
-          </div>
-        </div>
-        <div class="columns pr-4">
-          <div
-            class="column is-narrow avatar-container is-offset-5"
-            @click="tab = 2"
-          >
-            <div class="btn-edit" style="width: 258px; float: right">
+          <div class="column avatar-container">
+            <div class="btn-edit" @click="updateProfile()">
               <img
                 src="~/assets/images/btn-petra.png"
-                style="width: 258px; height: 29px"
+                style="width: 224.22px; height: 36px"
               >
-              <div class="text-edit" style="top: 3px">
-                Change Password
-              </div>
+              <div class="text-edit" style="top: 7px">Save Changes</div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="columns pr-4 mt-4">
-        <div class="column is-narrow avatar-container">
-          <div class="btn-edit" @click="closeProfile()">
-            <img
-              src="~/assets/images/back-btn.png"
-              style="width: 98.15px;height: 36.49px;x"
-            >
-          </div>
-        </div>
-        <div class="column avatar-container">
-          <div class="btn-edit">
-            <img
-              src="~/assets/images/btn-petra.png"
-              style="width: 224.22px; height: 36px"
-            >
-            <div class="text-edit" style="top: 7px">
-              Save Changes
-            </div>
-          </div>
-        </div>
-      </div>
+      </span>
+      <v-skeleton-loader
+        v-else
+        type="card-avatar, article, actions"
+        style="margin-top: 80px"
+      />
     </div>
     <!-- change password -->
     <div v-if="tab === 2">
@@ -158,178 +170,217 @@
           </div>
         </div>
       </div>
-      <div class="main-profile">
-        <!-- Old -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div class="title2-card">
-              Old Password
+
+      <span v-if="!isLoading2">
+        <div class="main-profile">
+          <!-- Old -->
+          <div class="columns pr-4 no-padding is-gapless">
+            <div class="column is-4">
+              <div class="title2-card">Old Password</div>
+            </div>
+            <div class="column">
+              <v-text-field
+                v-model="old_password"
+                hide-details
+                outlined
+                dense
+                class="form-petra"
+                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show1 ? 'text' : 'password'"
+                name="input-10-1"
+                counter
+                @click:append="show1 = !show1"
+              />
             </div>
           </div>
-          <div class="column">
-            <v-text-field
-              v-model="old_password"
-              hide-details
-              outlined
-              dense
-              class="form-petra"
-              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="show1 ? 'text' : 'password'"
-              name="input-10-1"
-              counter
-              @click:append="show1 = !show1"
-            />
-          </div>
-        </div>
-        <!-- New -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div class="title2-card">
-              New Password
+          <!-- New -->
+          <div class="columns pr-4 no-padding is-gapless">
+            <div class="column is-4">
+              <div class="title2-card">New Password</div>
+            </div>
+            <div class="column">
+              <v-text-field
+                v-model="new_password"
+                hide-details
+                outlined
+                dense
+                class="form-petra"
+                :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show2 ? 'text' : 'password'"
+                name="input-10-1"
+                counter
+                @click:append="show2 = !show2"
+              />
             </div>
           </div>
-          <div class="column">
-            <v-text-field
-              v-model="new_password"
-              hide-details
-              outlined
-              dense
-              class="form-petra"
-              :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="show2 ? 'text' : 'password'"
-              name="input-10-1"
-              counter
-              @click:append="show2 = !show2"
-            />
-          </div>
-        </div>
-        <!-- confirm  -->
-        <div class="columns pr-4 no-padding is-gapless">
-          <div class="column is-4">
-            <div
-              class="title2-card"
-              style="padding-top: 2px; line-height: 19px"
-            >
-              Confirm New Password
+          <!-- confirm  -->
+          <div class="columns pr-4 no-padding is-gapless">
+            <div class="column is-4">
+              <div
+                class="title2-card"
+                style="padding-top: 2px; line-height: 19px"
+              >
+                Confirm New Password
+              </div>
             </div>
-          </div>
-          <div class="column">
-            <v-text-field
-              v-model="confirm_password"
-              hide-details
-              outlined
-              dense
-              class="form-petra"
-              :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="show3 ? 'text' : 'password'"
-              name="input-10-1"
-              counter
-              @click:append="show3 = !show3"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="columns pr-4 mt-4">
-        <div class="column is-narrow avatar-container">
-          <div class="btn-edit" @click="tab = 1">
-            <img
-              src="~/assets/images/back-btn.png"
-              style="width: 98.15px;height: 36.49px;x"
-            >
-          </div>
-        </div>
-        <div class="column avatar-container">
-          <div class="btn-edit">
-            <img
-              src="~/assets/images/btn-petra.png"
-              style="width: 224.22px; height: 36px"
-            >
-            <div class="text-edit" style="top: 7px">
-              Save Changes
+            <div class="column">
+              <v-text-field
+                v-model="confirm_password"
+                hide-details
+                outlined
+                dense
+                class="form-petra"
+                :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show3 ? 'text' : 'password'"
+                name="input-10-1"
+                counter
+                @click:append="show3 = !show3"
+              />
             </div>
           </div>
         </div>
-      </div>
+        <div class="columns pr-4 mt-4">
+          <div class="column is-narrow avatar-container">
+            <div class="btn-edit" @click="tab = 1">
+              <img
+                src="~/assets/images/back-btn.png"
+                style="width: 98.15px;height: 36.49px;x"
+              >
+            </div>
+          </div>
+          <div class="column avatar-container">
+            <div class="btn-edit" @click="changePassword()">
+              <img
+                src="~/assets/images/btn-petra.png"
+                style="width: 224.22px; height: 36px"
+              >
+              <div class="text-edit" style="top: 7px">Save Changes</div>
+            </div>
+          </div>
+        </div>
+      </span>
+      <v-skeleton-loader
+        v-else
+        v-bind="attrs"
+        type="card-avatar, article, actions"
+        style="margin-top: 80px"
+      />
     </div>
     <!-- change avatar -->
     <div v-if="tab === 3">
-      <div class="column profile-container">
-        <div class="btn-profile">
-          <img
-            src="~/assets/images/bg-profile.png"
-            style="width: 257.32px; height: 30px"
-          >
-          <div class="text-profile">
-            Change Avatar
+      <span v-if="!isLoading3">
+        <div class="column profile-container">
+          <div class="btn-profile">
+            <img
+              src="~/assets/images/bg-profile.png"
+              style="width: 257.32px; height: 30px"
+            >
+            <div class="text-profile">Change Avatar</div>
           </div>
         </div>
-      </div>
-      <div class="main-profile" style="margin-top: 20px">
-        <!-- foto -->
-        <div class="columns is-mobile" style="margin-top: 0px">
+        <div class="main-profile" style="margin-top: 20px">
+          <!-- foto -->
           <div
-            class="column is-half is-offset-one-quarter avatar-container"
-            style="margin-top: 0px"
+            class="columns is-mobile"
+            style="margin-top: 0px; margin-bottom: 0px"
           >
-            <div class="square-top" :style="btnStyles1" />
-            <div class="trapesium-1" :style="btnStyles2" />
-            <div class="square-center" :style="btnStyles1" />
-            <div class="trapesium-2" :style="btnStyles3" />
-            <div class="square-bottom" :style="btnStyles1" />
-            <img :src="data.avatar_image" class="img-logo">
-          </div>
-        </div>
-        <!-- box -->
-        <div class="box-carousel pr-4">
-          <div class="title-carousel">
-            <img src="~/assets/images/carousel_1.png" class="bg-logo">
-            <div class="text-logo">
-              All Avatars
+            <div
+              class="column is-offset-one-quarter avatar-container"
+              style="margin-top: 0px; margin-left: 174px"
+            >
+              <div class="square-top" :style="btnStyles1" />
+              <div class="trapesium-1" :style="btnStyles2" />
+              <div class="square-center" :style="btnStyles1" />
+              <div class="trapesium-2" :style="btnStyles3" />
+              <div class="square-bottom" :style="btnStyles1" />
+              <img :src="images" class="img-logo">
             </div>
           </div>
-          <div class="content-carousel">
-            <v-row no-gutters align="center" justify="center">
-              <v-col
-                v-for="n in 8"
-                :key="n"
-                align="center"
-                justify="center"
-                cols="12"
-                sm="3"
-                class="item-carousel"
-              >
-                <img
-                  src="~/assets/images/carousel_empty.png"
-                  class="carousel-logo"
+          <div class="name-card">
+            <img src="~/assets/images/name.png" class="img-card">
+            <div class="text-card">
+              {{ imagesName }}
+            </div>
+          </div>
+          <div class="box-carousel pr-4">
+            <div class="title-carousel">
+              <img src="~/assets/images/carousel_1.png" class="bg-logo">
+              <div class="text-logo">All Avatars</div>
+            </div>
+            <div class="content-carousel">
+              <v-row no-gutters align="center" justify="center">
+                <!-- <span> -->
+                <v-col
+                  v-for="(item, index) in dataAvatarItem"
+                  :key="index"
+                  align="center"
+                  justify="center"
+                  cols="12"
+                  sm="3"
+                  class="item-carousel"
+                  @click="selectedItem(index, item)"
                 >
-              </v-col>
-            </v-row>
-            <v-pagination v-model="page" dark class="my-4" :length="4" />
-          </div>
-        </div>
-      </div>
-      <div class="columns pr-4 mt-4">
-        <div class="column is-narrow avatar-container">
-          <div class="btn-edit" @click="tab = 1">
-            <img
-              src="~/assets/images/back-btn.png"
-              style="width: 98.15px;height: 36.49px;x"
-            >
-          </div>
-        </div>
-        <div class="column avatar-container">
-          <div class="btn-edit">
-            <img
-              src="~/assets/images/btn-petra.png"
-              style="width: 224.22px; height: 36px"
-            >
-            <div class="text-edit" style="top: 7px">
-              Save Changes
+                  <span v-if="item.avatar !== 'null'">
+                    <span v-if="index === activeItem">
+                      <img
+                        src="~/assets/images/carousel_active.png"
+                        class="carousel-logo-bg"
+                      >
+                    </span>
+                    <span v-else>
+                      <img
+                        v-if="item.selected === true"
+                        src="~/assets/images/carousel_used.png"
+                        class="carousel-logo-bg"
+                      >
+                      <img
+                        v-else
+                        src="~/assets/images/carousel_empty.png"
+                        class="carousel-logo-bg"
+                      >
+                    </span>
+                    <img :src="item.avatar" class="carousel-logo-item">
+                  </span>
+                  <span v-else>
+                    <img
+                      src="~/assets/images/carousel_disabled.png"
+                      class="carousel-logo-bg"
+                    >
+                  </span>
+                </v-col>
+                <!-- </span> -->
+              </v-row>
+              <v-pagination v-model="page" dark class="my-4" :length="4" />
             </div>
           </div>
         </div>
-      </div>
+        <div class="columns pr-4 mt-4">
+          <div class="column is-narrow avatar-container">
+            <div class="btn-edit" @click="tab = 1">
+              <img
+                src="~/assets/images/back-btn.png"
+                style="width: 98.15px;height: 36.49px;x"
+              >
+            </div>
+          </div>
+          <div class="column avatar-container">
+            <div class="btn-edit" @click="updateAvatar()">
+              <img
+                src="~/assets/images/btn-petra.png"
+                style="width: 224.22px; height: 36px"
+              >
+              <div class="text-edit" style="top: 7px">Save Changes</div>
+            </div>
+          </div>
+        </div>
+      </span>
+      <v-skeleton-loader
+        v-else
+        type="card-avatar, article, actions"
+        style="margin-top: 80px"
+      />
     </div>
+    <!-- </div> -->
   </div>
 </template>
 <script>
@@ -343,6 +394,8 @@ export default {
   },
   data () {
     return {
+      selected: {},
+      activeItem: null,
       page: 1,
       show1: false,
       show2: true,
@@ -351,6 +404,14 @@ export default {
       new_password: '',
       confirm_password: '',
       tab: 1,
+      form: {
+        bio: '',
+        fullname: '',
+        username: '',
+        email: '',
+        gender: '',
+        learning: ''
+      },
       data: {
         avatar_image: '',
         avatar_bg: '',
@@ -360,16 +421,32 @@ export default {
         faction: '',
         faction_bg: '',
         level: 0
-      }
+      },
+      isLoading: false,
+      isLoading2: false,
+      isLoading3: false
     }
   },
   computed: {
     ...mapState({
+      myTasks: state => state.user.fullname,
       users: (state) => {
         return state.user.users
       },
       sidebar: (state) => {
         return state.user.sidebar
+      },
+      images: (state) => {
+        return state.user.images
+      },
+      imagesName: (state) => {
+        return state.user.images_name
+      },
+      dataAvatar: (state) => {
+        return state.avatar.data.data.data
+      },
+      dataAvatarItem: (state) => {
+        return state.avatar.item
       }
     }),
     btnStyles1 () {
@@ -389,29 +466,184 @@ export default {
     }
   },
   mounted () {
+    this.$store.dispatch('user/get')
     this.getData()
   },
   methods: {
+    selectedItem (x, item) {
+      this.activeItem = x
+      this.selected = item
+    },
+    updateAvatar () {
+      console.log(this.selected)
+      this.$store
+        .dispatch('avatar/changeAvatar', {
+          avatars_game_id: this.selected.id
+        })
+        .then((response) => {
+          this.$store.dispatch('user/updateImages', this.selected.avatar)
+          this.$store.dispatch('user/updateImagesName', this.selected.name)
+          this.isLoading3 = false
+        })
+        .catch((error) => {
+          this.isLoading3 = false
+          this.$toast.error(error.response.data.message, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
+    gotoAvatar () {
+      this.getAvatar()
+      this.tab = 3
+    },
+    getAvatar () {
+      console.log('get avatar')
+      this.isLoading3 = true
+      this.$store
+        .dispatch('avatar/fetchAvatar')
+        .then((response) => {
+          this.isLoading3 = false
+        })
+        .catch((error) => {
+          this.isLoading3 = false
+          this.$toast.error(error.response.data.message, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
     closeProfile () {
       this.$store.commit('user/SET_BTN_PROFILE')
     },
-    getData () {
-      this.data.courses = this.users.courses
-      this.data.achievements = this.users.achievements
-      this.data.faction = this.users.faction.faction
-      this.data.faction_bg = this.users.faction.faction_bgcolor
-      this.data.level = this.users.level
-      // eslint-disable-next-line valid-typeof
-      if (typeof this.users !== null || typeof this.users !== undefined) {
-        this.data.name = this.users.first_name + ' ' + this.users.last_name
-        this.data.avatar_image = this.users.avatar.image
-        this.data.avatar_bg = this.users.faction.avatar_bgcolor
+    updateProfile () {
+      this.isLoading = true
+      const name = this.form.fullname.trim()
+      const Firstname = name.split(' ')[0]
+      const Lastname = name.substring(Firstname.length).trim()
+      const data = {
+        first_name: Firstname,
+        last_name: Lastname,
+        username: this.form.username,
+        about: this.form.bio,
+        email: this.form.email
       }
+
+      this.$store
+        .dispatch('user/updateProfile', data)
+        .then((response) => {
+          this.$store.dispatch(
+            'user/updateFullname',
+            data.first_name + ' ' + data.last_name
+          )
+          this.$store.dispatch('user/get')
+          this.isLoading = false
+          this.$toast.success('Success Update Profile', {
+            position: 'top-center',
+            duration: 5000
+          })
+        })
+        .catch((error) => {
+          console.log('error : ', error)
+          this.isLoading = false
+          this.$toast.error(error.response.data.message, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
+    changePassword () {
+      this.isLoading2 = true
+      this.$store
+        .dispatch('user/changePassword', {
+          old_password: this.old_password,
+          new_password: this.new_password,
+          new_password_confirmation: this.confirm_password
+        })
+        .then((response) => {
+          this.$toast.success('Success Update Password', {
+            position: 'top-center',
+            duration: 5000
+          })
+          this.$store.dispatch('user/get')
+          this.isLoading2 = false
+        })
+        .catch((error) => {
+          this.$toast.error(error.response.data.message, {
+            position: 'top-center',
+            duration: 5000
+          })
+          this.isLoading2 = false
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
+    getData () {
+      this.isLoading = true
+      this.$store
+        .dispatch('user/get')
+        .then((response) => {
+          this.isLoading = false
+          this.$store.commit('user/SET_PROFILES', response.data.data.user)
+          const data = response.data.data.user
+          this.form.bio = data.about
+          this.form.fullname = data.full_name
+          this.form.username = data.username
+          this.form.email = data.email
+          this.form.gender = data.gender
+          this.form.learning = data.student_type
+          // eslint-disable-next-line valid-typeof
+          if (typeof this.users !== null || typeof this.users !== undefined) {
+            this.data.name = this.users.first_name + ' ' + this.users.last_name
+            this.data.avatar_image = this.users.avatar.image
+            this.data.avatar_bg = this.users.faction.avatar_bgcolor
+          }
+        })
+        .catch((error) => {
+          this.isLoading = false
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
     }
   }
 }
 </script>
 <style lang="scss" scoped>
+.name-card {
+  position: relative;
+  .img-card {
+    width: 257px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .text-card {
+    top: -27px;
+    width: 200px;
+    position: relative;
+    text-align: center;
+    margin: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
 .profile-card {
   width: 540.46px;
   height: 100%;
@@ -482,10 +714,21 @@ export default {
           cursor: pointer;
           margin-left: auto;
           margin-right: auto;
-          margin-top: 5px;
-          .carousel-logo {
+          margin-top: 15px;
+          // background-color: Red;
+          position: relative;
+          .carousel-logo-bg {
             height: 70px;
             width: 70px;
+            object-fit: contain;
+          }
+          .carousel-logo-item {
+            height: 65px;
+            width: 65px;
+            object-fit: contain;
+            position: absolute;
+            top: 2px;
+            left: 22px;
           }
         }
       }

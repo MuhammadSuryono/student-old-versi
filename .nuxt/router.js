@@ -4,9 +4,11 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _d4e656b2 = () => interopDefault(import('../pages/archivements.vue' /* webpackChunkName: "pages/archivements" */))
 const _75174033 = () => interopDefault(import('../pages/home.vue' /* webpackChunkName: "pages/home" */))
 const _4bb5acc5 = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
 const _256c0b6c = () => interopDefault(import('../pages/personality.vue' /* webpackChunkName: "pages/personality" */))
+const _5668b43d = () => interopDefault(import('../pages/skillcard.vue' /* webpackChunkName: "pages/skillcard" */))
 const _4dd95a8a = () => interopDefault(import('../pages/splash.vue' /* webpackChunkName: "pages/splash" */))
 const _fbe3eca4 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -22,6 +24,10 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/archivements",
+    component: _d4e656b2,
+    name: "archivements"
+  }, {
     path: "/home",
     component: _75174033,
     name: "home"
@@ -33,6 +39,10 @@ export const routerOptions = {
     path: "/personality",
     component: _256c0b6c,
     name: "personality"
+  }, {
+    path: "/skillcard",
+    component: _5668b43d,
+    name: "skillcard"
   }, {
     path: "/splash",
     component: _4dd95a8a,

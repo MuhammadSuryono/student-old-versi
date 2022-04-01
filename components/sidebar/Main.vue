@@ -17,8 +17,8 @@
           <div v-else class="img-arrow-close" @click="onSidebar()" />
           <SidebarAvatar
             :bg-color="data.avatar_bg"
-            :avatar-img="data.avatar_image"
-            :avatar-name="data.name"
+            :avatar-img="images"
+            :avatar-name="fullname"
             :level="data.level"
             :faction="data.faction"
             :faction-bg="data.faction_bg"
@@ -54,6 +54,12 @@ export default {
   },
   computed: {
     ...mapState({
+      images: (state) => {
+        return state.user.images
+      },
+      fullname: (state) => {
+        return state.user.fullname
+      },
       users: (state) => {
         return state.user.users
       },
@@ -75,7 +81,6 @@ export default {
   },
   methods: {
     getData () {
-      console.log('-------')
       this.data.courses = this.users.courses
       this.data.achievements = this.users.achievements
       this.data.faction = this.users.faction.faction
@@ -87,8 +92,6 @@ export default {
         this.data.avatar_image = this.users.avatar.image
         this.data.avatar_bg = this.users.faction.avatar_bgcolor
       }
-      console.log('sidebar :', this.data)
-      console.log('-------')
     },
     onSidebar () {
       this.reduce = !this.reduce

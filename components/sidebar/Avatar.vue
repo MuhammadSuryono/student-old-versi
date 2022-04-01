@@ -31,7 +31,7 @@
         <div class="square-bottom" :style="btnStyles1" />
         <img :src="avatarImg" class="img-logo">
         <!-- edit profile -->
-        <div class="btn-edit" @click="onEditProfile()">
+        <div class="btn-edit noselect" @click="onEditProfile()">
           <img src="~/assets/images/btn-petra.png">
           <div class="text-edit">Edit Profile</div>
         </div>
@@ -171,6 +171,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
 .menu-b {
   display: flex;
   flex-wrap: nowrap;

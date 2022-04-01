@@ -1,10 +1,10 @@
-const resource = '/profile'
+const resource = '/student/profile'
 export default $axios => ({
   get () {
     return $axios.get(`${resource}`)
   },
   update (payload) {
-    return $axios.post(`${resource}`, payload)
+    return $axios.put(`${resource}`, payload)
   },
   changePass (payload) {
     return $axios.put(`${resource}/change-password`, {
