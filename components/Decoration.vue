@@ -18,7 +18,7 @@
             class="avatar-container"
             style="margin-left: auto; margin-right: auto; margin-top: 10px"
           >
-            <div class="btn-edit" @click="tab = 2">
+            <div class="btn-edit" @click="getDecoration()">
               <img
                 src="~/assets/images/btn-petra.png"
                 style="width: 224.22px; height: 36px"
@@ -64,66 +64,96 @@
           </div>
         </div>
       </div>
-      <div class="main-profile" style="margin-top: 40px; margin-bottom: 60px">
-        <!-- foto -->
-        <div class="columns is-mobile" style="margin-top: 0px">
-          <img
-            src="~/assets/images/decor.png"
-            style="
-              width: 329.6px;
-              height: 180px;
-              margin-left: auto;
-              margin-right: auto;
-            "
-          >
-        </div>
-        <!-- box -->
-        <div class="box-carousel pr-4">
-          <div class="title-carousel">
-            <img src="~/assets/images/carousel_1.png" class="bg-logo">
-            <div class="text-logo">
-              All Backgrounds
+      <span v-if="!isLoading2">
+        <div class="main-profile" style="margin-top: 40px; margin-bottom: 60px">
+          <!-- foto -->
+          <div class="columns is-mobile" style="margin-top: 0px">
+            <img
+              src="~/assets/images/decor.png"
+              style="
+                width: 329.6px;
+                height: 180px;
+                margin-left: auto;
+                margin-right: auto;
+              "
+            >
+          </div>
+          <!-- box -->
+          <div class="box-carousel pr-4">
+            <div class="title-carousel">
+              <img src="~/assets/images/carousel_1.png" class="bg-logo">
+              <div class="text-logo">All Backgrounds</div>
+            </div>
+            <div class="content-carousel">
+              <v-row dense align="center" justify="center">
+                <v-col
+                  v-for="(item, index) in dataDecorationItem"
+                  :key="index"
+                  align="center"
+                  justify="center"
+                  cols="12"
+                  sm="6"
+                  class="item-carousel"
+                  @click="selectedItem(index, item)"
+                >
+                  <span v-if="item.background !== 'null'">
+                    <!-- <span v-if="index === activeItem">
+                      <img
+                        src="~/assets/images/carousel_active.png"
+                        class="carousel-logo-bg"
+                      >
+                    </span>
+                    <span v-else>
+                      <img
+                        v-if="item.selected === true"
+                        src="~/assets/images/carousel_used.png"
+                        class="carousel-logo-bg"
+                      >
+                      <img
+                        v-else
+                        src="~/assets/images/carousel_empty.png"
+                        class="carousel-logo-bg"
+                      >
+                    </span> -->
+                    <img :src="item.background" class="carousel-logo-item">
+                  </span>
+                  <span v-else>
+                    <img
+                      src="~/assets/images/carousel_disabled.png"
+                      class="carousel-logo-bg"
+                    >
+                  </span>
+                </v-col>
+              </v-row>
+              <v-pagination v-model="page" dark class="my-4" :length="4" />
             </div>
           </div>
-          <div class="content-carousel">
-            <v-row dense align="center" justify="center">
-              <v-col
-                v-for="n in 4"
-                :key="n"
-                align="center"
-                justify="center"
-                cols="12"
-                sm="6"
-                class="item-carousel"
+        </div>
+        <div class="columns pr-4 mt-40">
+          <div class="column is-narrow avatar-container">
+            <div class="btn-edit" @click="tab = 1">
+              <img
+                src="~/assets/images/back-btn.png"
+                style="width: 98.15px;height: 36.49px;x"
               >
-                <img src="~/assets/images/decor.png" class="carousel-logo">
-              </v-col>
-            </v-row>
-            <v-pagination v-model="page" dark class="my-4" :length="4" />
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="columns pr-4 mt-40">
-        <div class="column is-narrow avatar-container">
-          <div class="btn-edit" @click="tab = 1">
-            <img
-              src="~/assets/images/back-btn.png"
-              style="width: 98.15px;height: 36.49px;x"
-            >
-          </div>
-        </div>
-        <div class="column avatar-container">
-          <div class="btn-edit">
-            <img
-              src="~/assets/images/btn-petra.png"
-              style="width: 224.22px; height: 36px"
-            >
-            <div class="text-edit" style="top: 7px">
-              Save Changes
+          <div class="column avatar-container">
+            <div class="btn-edit">
+              <img
+                src="~/assets/images/btn-petra.png"
+                style="width: 224.22px; height: 36px"
+              >
+              <div class="text-edit" style="top: 7px">Save Changes</div>
             </div>
           </div>
         </div>
-      </div>
+      </span>
+      <v-skeleton-loader
+        v-else
+        type="card-avatar, article, actions"
+        style="margin-top: 80px"
+      />
     </div>
   </div>
 </template>
@@ -138,6 +168,9 @@ export default {
   },
   data () {
     return {
+      selected: {},
+      activeItem: null,
+      isLoading2: false,
       page: 1,
       show1: false,
       show2: true,
@@ -165,6 +198,18 @@ export default {
       },
       sidebar: (state) => {
         return state.user.sidebar
+      },
+      // decoration: (state) => {
+      //   return state.decoration.images
+      // },
+      // decorationName: (state) => {
+      //   return state.decoration.images_name
+      // },
+      dataDecoration: (state) => {
+        return state.decoration.data.data.data
+      },
+      dataDecorationItem: (state) => {
+        return state.decoration.item
       }
     }),
     btnStyles1 () {
@@ -187,6 +232,30 @@ export default {
     this.getData()
   },
   methods: {
+    selectedItem (x, item) {
+      this.activeItem = x
+      this.selected = item
+    },
+    getDecoration () {
+      this.tab = 2
+      this.isLoading2 = true
+      this.$store
+        .dispatch('decoration/fetchDecoration')
+        .then((response) => {
+          this.isLoading2 = false
+        })
+        .catch((error) => {
+          this.isLoading2 = false
+          this.$toast.error(error.response.data.message, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
     closeProfile () {
       this.$store.commit('user/SET_BTN_DECORATION')
     },
@@ -277,10 +346,21 @@ export default {
           cursor: pointer;
           margin-left: auto;
           margin-right: auto;
-          margin-top: 5px;
-          .carousel-logo {
-            height: 100px;
-            // width: 70px;
+          margin-top: 15px;
+          // background-color: Red;
+          position: relative;
+          .carousel-logo-bg {
+            // height: 70px;
+            width: 170pxpx;
+            // object-fit: fill;
+          }
+          .carousel-logo-item {
+            height: 65px;
+            width: 162px;
+            object-fit: contain;
+            position: absolute;
+            top: 2px;
+            left: 0px;
           }
         }
       }

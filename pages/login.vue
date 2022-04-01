@@ -67,6 +67,7 @@ export default {
           if (response.status === 200 || response.status === 201) {
             if (response.data.data.user.role_id === 4) {
               const data = response.data.data
+              console.log('res:', data)
               this.$store.commit('user/SET_USERS', data)
               if (
                 // eslint-disable-next-line valid-typeof
@@ -74,6 +75,7 @@ export default {
                 // eslint-disable-next-line valid-typeof
                 typeof data.user.avatar !== undefined
               ) {
+                console.log('data user : ', data.user)
                 this.$store.dispatch(
                   'user/updateImages',
                   data.user.avatar.image

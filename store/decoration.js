@@ -25,12 +25,18 @@ export const mutations = {
 export const actions = {
   async fetchDecoration ({ commit }, payload) {
     try {
-      const response = await this.$repositories.avatar.get()
+      const response = await this.$repositories.decoration.get()
+      // const bg_active = response.data.data.data
+      // eslint-disable-next-line camelcase
+      // console.log('bg_active : ', response.data.data.data)
+      // const bg_active = response.data.data.data.find(x => x.selected === true)
+      // console.log('bg_active : ', bg_active)
       let newItem = []
       newItem = response.data.data.data
+      console.log('new item : ', newItem)
       if (newItem.length > 0) {
         if (newItem.length % 8 !== 0) {
-          for (let i = 0; i < newItem.length % 8; i++) {
+          for (let i = 0; i < newItem.length % 4; i++) {
             newItem.push({
               id: 'null',
               name: 'null',
