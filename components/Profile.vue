@@ -793,8 +793,9 @@ export default {
         position: absolute;
         top: 15px;
         z-index: 2;
-        height: 200px;
-        // margin-left: 3px;
+        margin-top: 1.8px;
+        height: 206px;
+        margin-left: -6px;
         // margin-right: auto;
       }
       .square-top {

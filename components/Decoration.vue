@@ -72,7 +72,17 @@
           <!-- foto -->
           <div class="columns is-mobile" style="margin-top: 0px">
             <img
+              v-if="!activeSelected"
               :src="pathDecoration"
+              style="
+                width: 329.6px;
+                height: 180px;
+                margin-left: auto;
+                margin-right: auto;
+              "
+            ><img
+              v-else
+              :src="selected.background"
               style="
                 width: 329.6px;
                 height: 180px;
@@ -83,8 +93,11 @@
           </div>
           <div class="name-card">
             <img src="~/assets/images/name.png" class="img-card">
-            <div class="text-card">
+            <div v-if="!activeSelected" class="text-card">
               {{ nameDecoration }}
+            </div>
+            <div v-else class="text-card">
+              {{ selected.name }}
             </div>
           </div>
           <!-- box -->
@@ -106,10 +119,26 @@
                   @click="selectedItem(index, item)"
                 >
                   <span v-if="item.background !== 'null'">
+                    <span v-if="index === activeItem" style="z-index: 8">
+                      <img
+                        src="~/assets/images/border-selected.png"
+                        style="
+                          position: absolute;
+                          top: 4px;
+                          z-index: 8;
+                          left: 24px;
+                        "
+                      >
+                    </span>
                     <!-- <span v-if="index === activeItem">
                       <img
-                        src="~/assets/images/decor_active.png"
-                        class="carousel-logo-bg"
+                        src="~/assets/images/border-selected.png"
+                        style="
+                          position: absolute;
+                          top: 4px;
+                          z-index: 8;
+                          left: 24px;
+                        "
                       >
                     </span>
                     <span v-else>
@@ -124,7 +153,10 @@
                         class="carousel-logo-bg"
                       >
                     </span> -->
-                    <img :src="item.background" class="carousel-logo-item">
+                    <div class="blackBg" />
+                    <div class="Image">
+                      <img :src="item.background" class="carousel-logo-item">
+                    </div>
                   </span>
                   <span v-else>
                     <img
@@ -134,7 +166,7 @@
                   </span>
                 </v-col>
               </v-row>
-              <v-pagination v-model="page" dark class="my-4" :length="4" />
+              <!-- <v-pagination v-model="page" dark class="my-4" :length="4" /> -->
             </div>
           </div>
         </div>
@@ -153,7 +185,13 @@
                 src="~/assets/images/btn-petra.png"
                 style="width: 224.22px; height: 36px"
               >
-              <div class="text-edit" style="top: 7px">Save Changes</div>
+              <div
+                class="text-edit"
+                style="top: 7px"
+                @click="updateDecoration()"
+              >
+                Save Changes
+              </div>
             </div>
           </div>
         </div>
@@ -177,6 +215,7 @@ export default {
   },
   data () {
     return {
+      activeSelected: false,
       selected: {},
       activeItem: null,
       isLoading: false,
@@ -248,9 +287,43 @@ export default {
     this.getData()
   },
   methods: {
+    updateDecoration () {
+      this.activeSelected = false
+      console.log(this.selected)
+      this.isLoading2 = true
+      this.$store
+        .dispatch('decoration/changeDecoration', {
+          background_id: this.selected.id
+        })
+        .then((response) => {
+          this.$store.dispatch(
+            'decoration/updateImages',
+            this.selected.background
+          )
+          this.$store.dispatch(
+            'decoration/updateImagesName',
+            this.selected.name
+          )
+          this.isLoading2 = false
+        })
+        .catch((error) => {
+          this.isLoading2 = false
+          this.$toast.error(error.response.data.message, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
     selectedItem (x, item) {
+      this.activeSelected = true
       this.activeItem = x
       this.selected = item
+      // console.log(x, item)
+      console.log(item)
     },
     getDecoration () {
       this.tab = 2
@@ -312,6 +385,46 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.Image {
+  position: absolute;
+  height: 70px;
+  width: 164px;
+  margin-left: 20px;
+}
+
+.Image img {
+  width: 100%;
+  height: 100%;
+  -webkit-clip-path: polygon(
+    20% 0%,
+    80% 0%,
+    100% 0%,
+    100% 70%,
+    00% 0%,
+    0% 100%,
+    0% 86%,
+    0% 20%
+  );
+  clip-path: polygon(
+    0% 0%,
+    0% 0%,
+    89% 0%,
+    100% 30%,
+    100% 100%,
+    0% 100%,
+    0% 86%,
+    0% 20%
+  );
+}
+
+.blackBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  // width: 100%;
+  // height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
 .name-card {
   position: relative;
   .img-card {
@@ -405,15 +518,20 @@ export default {
           // background-color: Red;
           position: relative;
           .carousel-logo-bg {
+            position: absolute;
+            top: 70px;
+            left: 25px;
             width: 165px;
             height: 70px;
             object-fit: contain;
           }
           .carousel-logo-item {
-            height: 70px;
-            width: 164px;
+            // height: 70px;
+            // width: 164px;
             object-fit: cover;
-            border: 1px solid red;
+            // border-radius: 10px;
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
             // position: relative;
             // position: absolute;
             // top: 2px;

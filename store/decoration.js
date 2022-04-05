@@ -32,10 +32,22 @@ export const mutations = {
   SET_CURRENT_DATA_DETAIL (state, item) {
     state.pathDecoration = item.path
     state.nameDecoration = item.title
+  },
+  SET_IMAGES (state, item) {
+    state.pathDecoration = item
+  },
+  SET_IMAGES_NAME (state, item) {
+    state.nameDecoration = item
   }
 }
 
 export const actions = {
+  updateImages ({ commit }, payload) {
+    commit('SET_IMAGES', payload)
+  },
+  updateImagesName ({ commit }, payload) {
+    commit('SET_IMAGES_NAME', payload)
+  },
   async fetchCurrentDecoration ({ commit }) {
     try {
       const response = await this.$repositories.decoration.getOne()
@@ -73,7 +85,7 @@ export const actions = {
   },
   async changeDecoration ({ commit }, payload) {
     try {
-      const response = await this.$repositories.avatar.update(payload)
+      const response = await this.$repositories.decoration.update(payload)
       return response
     } catch (e) {
       return e.response

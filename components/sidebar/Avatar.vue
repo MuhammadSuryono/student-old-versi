@@ -345,7 +345,8 @@ export default {
     z-index: 2;
     height: 247px;
     // width: 170px;
-    margin-left: 3px;
+    margin-top: 1.8px;
+    margin-left: -3px;
     margin-right: auto;
   }
 }
