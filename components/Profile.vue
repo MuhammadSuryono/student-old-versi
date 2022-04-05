@@ -293,13 +293,17 @@
               <div class="square-center" :style="btnStyles1" />
               <div class="trapesium-2" :style="btnStyles3" />
               <div class="square-bottom" :style="btnStyles1" />
-              <img :src="images" class="img-logo">
+              <img v-if="!activeSelected" :src="images" class="img-logo">
+              <img v-else :src="selected.avatar" class="img-logo">
             </div>
           </div>
           <div class="name-card">
             <img src="~/assets/images/name.png" class="img-card">
-            <div class="text-card">
+            <div v-if="!activeSelected" class="text-card">
               {{ imagesName }}
+            </div>
+            <div v-else class="text-card">
+              {{ selected.name }}
             </div>
           </div>
           <div class="box-carousel pr-4">
@@ -356,7 +360,7 @@
         </div>
         <div class="columns pr-4 mt-4">
           <div class="column is-narrow avatar-container">
-            <div class="btn-edit" @click="tab = 1">
+            <div class="btn-edit" @click="backtoTab1()">
               <img
                 src="~/assets/images/back-btn.png"
                 style="width: 98.15px;height: 36.49px;x"
@@ -394,6 +398,7 @@ export default {
   },
   data () {
     return {
+      activeSelected: false,
       selected: {},
       activeItem: null,
       page: 1,
@@ -471,11 +476,19 @@ export default {
   },
   methods: {
     selectedItem (x, item) {
+      this.activeSelected = true
       this.activeItem = x
       this.selected = item
+      console.log(this.selected)
+    },
+    backtoTab1 () {
+      this.tab = 1
+      this.activeSelected = false
     },
     updateAvatar () {
+      this.activeSelected = false
       console.log(this.selected)
+      this.isLoading3 = true
       this.$store
         .dispatch('avatar/changeAvatar', {
           avatars_game_id: this.selected.id

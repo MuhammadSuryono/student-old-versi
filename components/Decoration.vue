@@ -2,55 +2,58 @@
   <div class="profile-card">
     <PTitle name="Manage Decorations" />
     <div v-if="tab === 1">
-      <div class="main-profile" style="margin-top: 80px">
-        <!-- foto -->
-        <v-row justify="center" align="center" no-gutters>
-          <img
-            src="~/assets/images/decor.png"
-            style="
-              width: 329.6px;
-              height: 180px;
-              margin-left: auto;
-              margin-right: auto;
-            "
-          >
-          <div
-            class="avatar-container"
-            style="margin-left: auto; margin-right: auto; margin-top: 10px"
-          >
-            <div class="btn-edit" @click="getDecoration()">
+      <span v-if="!isLoading">
+        <div class="main-profile" style="margin-top: 80px">
+          <!-- foto -->
+          <v-row justify="center" align="center" no-gutters>
+            <img
+              :src="pathDecoration"
+              style="
+                width: 329.6px;
+                height: 180px;
+                margin-left: auto;
+                margin-right: auto;
+              "
+            >
+            <div
+              class="avatar-container"
+              style="margin-left: auto; margin-right: auto; margin-top: 10px"
+            >
+              <div class="btn-edit" @click="getDecoration()">
+                <img
+                  src="~/assets/images/btn-petra.png"
+                  style="width: 224.22px; height: 36px"
+                >
+                <div class="text-edit" style="top: 7px">Change Background</div>
+              </div>
+            </div>
+          </v-row>
+        </div>
+        <div class="columns pr-4 mt-4">
+          <div class="column is-narrow avatar-container">
+            <div class="btn-edit" @click="closeProfile()">
+              <img
+                src="~/assets/images/back-btn.png"
+                style="width: 98.15px;height: 36.49px;x"
+              >
+            </div>
+          </div>
+          <div class="column avatar-container">
+            <div class="btn-edit">
               <img
                 src="~/assets/images/btn-petra.png"
                 style="width: 224.22px; height: 36px"
               >
-              <div class="text-edit" style="top: 7px">
-                Change Background
-              </div>
-            </div>
-          </div>
-        </v-row>
-      </div>
-      <div class="columns pr-4 mt-4">
-        <div class="column is-narrow avatar-container">
-          <div class="btn-edit" @click="closeProfile()">
-            <img
-              src="~/assets/images/back-btn.png"
-              style="width: 98.15px;height: 36.49px;x"
-            >
-          </div>
-        </div>
-        <div class="column avatar-container">
-          <div class="btn-edit">
-            <img
-              src="~/assets/images/btn-petra.png"
-              style="width: 224.22px; height: 36px"
-            >
-            <div class="text-edit" style="top: 7px">
-              Save Changes
+              <div class="text-edit" style="top: 7px">Save Changes</div>
             </div>
           </div>
         </div>
-      </div>
+      </span>
+      <v-skeleton-loader
+        v-else
+        type="card-avatar, article, actions"
+        style="margin-top: 80px"
+      />
     </div>
     <div v-if="tab === 2">
       <div class="column profile-container">
@@ -69,7 +72,7 @@
           <!-- foto -->
           <div class="columns is-mobile" style="margin-top: 0px">
             <img
-              src="~/assets/images/decor.png"
+              :src="pathDecoration"
               style="
                 width: 329.6px;
                 height: 180px;
@@ -77,6 +80,12 @@
                 margin-right: auto;
               "
             >
+          </div>
+          <div class="name-card">
+            <img src="~/assets/images/name.png" class="img-card">
+            <div class="text-card">
+              {{ nameDecoration }}
+            </div>
           </div>
           <!-- box -->
           <div class="box-carousel pr-4">
@@ -99,19 +108,19 @@
                   <span v-if="item.background !== 'null'">
                     <!-- <span v-if="index === activeItem">
                       <img
-                        src="~/assets/images/carousel_active.png"
+                        src="~/assets/images/decor_active.png"
                         class="carousel-logo-bg"
                       >
                     </span>
                     <span v-else>
                       <img
                         v-if="item.selected === true"
-                        src="~/assets/images/carousel_used.png"
+                        src="~/assets/images/decor_used.png"
                         class="carousel-logo-bg"
                       >
                       <img
                         v-else
-                        src="~/assets/images/carousel_empty.png"
+                        src="~/assets/images/decor_empty.png"
                         class="carousel-logo-bg"
                       >
                     </span> -->
@@ -119,7 +128,7 @@
                   </span>
                   <span v-else>
                     <img
-                      src="~/assets/images/carousel_disabled.png"
+                      src="~/assets/images/decor_disabled.png"
                       class="carousel-logo-bg"
                     >
                   </span>
@@ -152,7 +161,7 @@
       <v-skeleton-loader
         v-else
         type="card-avatar, article, actions"
-        style="margin-top: 80px"
+        style="margin-top: 60px"
       />
     </div>
   </div>
@@ -170,6 +179,7 @@ export default {
     return {
       selected: {},
       activeItem: null,
+      isLoading: false,
       isLoading2: false,
       page: 1,
       show1: false,
@@ -210,6 +220,12 @@ export default {
       },
       dataDecorationItem: (state) => {
         return state.decoration.item
+      },
+      pathDecoration: (state) => {
+        return state.decoration.pathDecoration
+      },
+      nameDecoration: (state) => {
+        return state.decoration.nameDecoration
       }
     }),
     btnStyles1 () {
@@ -271,11 +287,50 @@ export default {
         this.data.avatar_image = this.users.avatar.image
         this.data.avatar_bg = this.users.faction.avatar_bgcolor
       }
+      this.getDataDecoration()
+    },
+    getDataDecoration () {
+      this.isLoading = true
+      this.$store
+        .dispatch('decoration/fetchCurrentDecoration')
+        .then((response) => {
+          this.isLoading = false
+        })
+        .catch((error) => {
+          this.isLoading = false
+          this.$toast.error(error.response.data.message, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
     }
   }
 }
 </script>
 <style lang="scss" scoped>
+.name-card {
+  position: relative;
+  .img-card {
+    width: 257px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .text-card {
+    top: -27px;
+    width: 200px;
+    position: relative;
+    text-align: center;
+    margin: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
 .profile-card {
   width: 540.46px;
   height: 100%;
@@ -350,18 +405,29 @@ export default {
           // background-color: Red;
           position: relative;
           .carousel-logo-bg {
-            // height: 70px;
-            width: 170pxpx;
-            // object-fit: fill;
+            width: 165px;
+            height: 70px;
+            object-fit: contain;
           }
           .carousel-logo-item {
-            height: 65px;
-            width: 162px;
-            object-fit: contain;
-            position: absolute;
-            top: 2px;
-            left: 0px;
+            height: 70px;
+            width: 164px;
+            object-fit: cover;
+            border: 1px solid red;
+            // position: relative;
+            // position: absolute;
+            // top: 2px;
+            // left: 25px;
           }
+          // .carousel-logo-item:before {
+          //   content: '';
+          //   position: absolute;
+          //   top: 0;
+          //   right: 0;
+          //   border-top: 80px solid white;
+          //   border-left: 80px solid red;
+          //   width: 0;
+          // }
         }
       }
     }

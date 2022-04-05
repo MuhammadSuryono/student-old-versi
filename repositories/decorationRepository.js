@@ -1,6 +1,10 @@
 const resource = '/student/profile'
+const resource2 = '/student'
 
 export default $axios => ({
+  getOne () {
+    return $axios.get(`${resource2}/home/background`)
+  },
   get () {
     return $axios.get(`${resource}/backgrounds`)
   },

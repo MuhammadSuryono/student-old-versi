@@ -1,13 +1,19 @@
 export const state = () => ({
   isLoading: false,
   data: [],
-  item: []
+  item: [],
+  currentDecoration: {},
+  pathDecoration: {},
+  nameDecoration: {}
 })
 
 export const getters = {
   isLoading: state => state.isLoading,
   data: state => state.data,
-  item: state => state.item
+  item: state => state.item,
+  currentDecoration: state => state.currentDecoration,
+  pathDecoration: state => state.pathDecoration,
+  nameDecoration: state => state.nameDecoration
 }
 
 export const mutations = {
@@ -19,18 +25,30 @@ export const mutations = {
   },
   SET_ITEM (state, item) {
     state.item = item
+  },
+  SET_CURRENT_DATA (state, item) {
+    state.currentDecoration = item
+  },
+  SET_CURRENT_DATA_DETAIL (state, item) {
+    state.pathDecoration = item.path
+    state.nameDecoration = item.title
   }
 }
 
 export const actions = {
+  async fetchCurrentDecoration ({ commit }) {
+    try {
+      const response = await this.$repositories.decoration.getOne()
+      commit('SET_CURRENT_DATA', response)
+      commit('SET_CURRENT_DATA_DETAIL', response.data.data.background)
+      return response
+    } catch (e) {
+      return e.response
+    }
+  },
   async fetchDecoration ({ commit }, payload) {
     try {
       const response = await this.$repositories.decoration.get()
-      // const bg_active = response.data.data.data
-      // eslint-disable-next-line camelcase
-      // console.log('bg_active : ', response.data.data.data)
-      // const bg_active = response.data.data.data.find(x => x.selected === true)
-      // console.log('bg_active : ', bg_active)
       let newItem = []
       newItem = response.data.data.data
       console.log('new item : ', newItem)
@@ -40,7 +58,7 @@ export const actions = {
             newItem.push({
               id: 'null',
               name: 'null',
-              avatar: 'null',
+              background: 'null',
               selected: null
             })
           }
