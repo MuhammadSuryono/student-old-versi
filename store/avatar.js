@@ -26,7 +26,7 @@ export const mutations = {
 export const actions = {
   async fetchAvatar ({ commit }, payload) {
     try {
-      const response = await this.$repositories.avatar.get()
+      const response = await this.$repositories.avatar.get(payload)
       let newItem = []
       newItem = response.data.data.data
       if (newItem.length > 0) {

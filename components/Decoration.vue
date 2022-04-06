@@ -2,7 +2,7 @@
   <div class="profile-card">
     <PTitle name="Manage Decorations" />
     <div v-if="tab === 1">
-      <span v-if="!isLoading">
+      <span>
         <div class="main-profile" style="margin-top: 80px">
           <!-- foto -->
           <v-row justify="center" align="center" no-gutters>
@@ -49,11 +49,11 @@
           </div>
         </div>
       </span>
-      <v-skeleton-loader
+      <!-- <v-skeleton-loader
         v-else
         type="card-avatar, article, actions"
         style="margin-top: 80px"
-      />
+      /> -->
     </div>
     <div v-if="tab === 2">
       <div class="column profile-container">
@@ -67,7 +67,7 @@
           </div>
         </div>
       </div>
-      <span v-if="!isLoading2">
+      <span>
         <div class="main-profile" style="margin-top: 40px; margin-bottom: 60px">
           <!-- foto -->
           <div class="columns is-mobile" style="margin-top: 0px">
@@ -119,7 +119,20 @@
                   @click="selectedItem(index, item)"
                 >
                   <span v-if="item.background !== 'null'">
-                    <span v-if="index === activeItem" style="z-index: 8">
+                    <img
+                      v-if="index === activeItem"
+                      src="~/assets/images/border-selected.png"
+                      style="
+                        position: absolute;
+                        top: 4px;
+                        z-index: 8;
+                        left: 24px;
+                      "
+                    >
+                    <span
+                      v-if="index === activeItem && item.selected === true"
+                      style="z-index: 8"
+                    >
                       <img
                         src="~/assets/images/border-selected.png"
                         style="
@@ -129,30 +142,37 @@
                           left: 24px;
                         "
                       >
-                    </span>
-                    <!-- <span v-if="index === activeItem">
                       <img
-                        src="~/assets/images/border-selected.png"
+                        src="~/assets/images/triangle-active.png"
                         style="
                           position: absolute;
                           top: 4px;
                           z-index: 8;
-                          left: 24px;
+                          right: 20px;
                         "
                       >
                     </span>
-                    <span v-else>
+                    <span v-if="item.selected === true" style="z-index: 8">
                       <img
-                        v-if="item.selected === true"
-                        src="~/assets/images/decor_used.png"
-                        class="carousel-logo-bg"
+                        src="~/assets/images/triangle-active.png"
+                        style="
+                          position: absolute;
+                          top: 4px;
+                          z-index: 8;
+                          right: 20px;
+                        "
                       >
-                      <img
-                        v-else
-                        src="~/assets/images/decor_empty.png"
-                        class="carousel-logo-bg"
-                      >
-                    </span> -->
+                    </span>
+
+                    <img
+                      src="~/assets/images/border-blue.png"
+                      style="
+                        position: absolute;
+                        top: 4px;
+                        z-index: 7;
+                        left: 24px;
+                      "
+                    >
                     <div class="blackBg" />
                     <div class="Image">
                       <img :src="item.background" class="carousel-logo-item">
@@ -166,7 +186,21 @@
                   </span>
                 </v-col>
               </v-row>
-              <!-- <v-pagination v-model="page" dark class="my-4" :length="4" /> -->
+              <!-- <b-pagination
+                total="70"
+                per-page="4"
+                :order="order"
+                class="my-4"
+              /> -->
+              <!-- <v-pagination v-model="page" class="my-4" :length="4" /> -->
+
+              <v-pagination
+                v-if="dataDecoration.data.data.total > 8"
+                v-model="page"
+                :length="Math.ceil(dataDecoration.data.data.total / 8)"
+                class="my-5"
+                @input="getDecoration()"
+              />
             </div>
           </div>
         </div>
@@ -196,11 +230,11 @@
           </div>
         </div>
       </span>
-      <v-skeleton-loader
+      <!-- <v-skeleton-loader
         v-else
         type="card-avatar, article, actions"
         style="margin-top: 60px"
-      />
+      /> -->
     </div>
   </div>
 </template>
@@ -215,6 +249,7 @@ export default {
   },
   data () {
     return {
+      order: 'is-centered',
       activeSelected: false,
       selected: {},
       activeItem: null,
@@ -255,7 +290,7 @@ export default {
       //   return state.decoration.images_name
       // },
       dataDecoration: (state) => {
-        return state.decoration.data.data.data
+        return state.decoration.data
       },
       dataDecorationItem: (state) => {
         return state.decoration.item
@@ -288,7 +323,7 @@ export default {
   },
   methods: {
     updateDecoration () {
-      this.activeSelected = false
+      // this.activeSelected = false
       console.log(this.selected)
       this.isLoading2 = true
       this.$store
@@ -328,8 +363,9 @@ export default {
     getDecoration () {
       this.tab = 2
       this.isLoading2 = true
+      this.activeItem = null
       this.$store
-        .dispatch('decoration/fetchDecoration')
+        .dispatch('decoration/fetchDecoration', this.page)
         .then((response) => {
           this.isLoading2 = false
         })
@@ -514,12 +550,13 @@ export default {
           cursor: pointer;
           margin-left: auto;
           margin-right: auto;
+          height: 70px;
           margin-top: 15px;
           // background-color: Red;
           position: relative;
           .carousel-logo-bg {
             position: absolute;
-            top: 70px;
+            top: 0px;
             left: 25px;
             width: 165px;
             height: 70px;
@@ -546,6 +583,10 @@ export default {
           //   border-left: 80px solid red;
           //   width: 0;
           // }
+        }
+        .item-carousel:hover {
+          color: rgba(83, 169, 230, 0.2);
+          // z-index: 9;
         }
       }
     }

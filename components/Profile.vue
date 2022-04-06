@@ -3,7 +3,7 @@
     <PTitle name="Edit Profile" />
     <!-- edit profile -->
     <div v-if="tab === 1">
-      <span v-if="!isLoading">
+      <span>
         <div class="main-profile">
           <div class="columns pr-4">
             <div class="column is-narrow avatar-container">
@@ -151,11 +151,11 @@
           </div>
         </div>
       </span>
-      <v-skeleton-loader
+      <!-- <v-skeleton-loader
         v-else
         type="card-avatar, article, actions"
         style="margin-top: 80px"
-      />
+      /> -->
     </div>
     <!-- change password -->
     <div v-if="tab === 2">
@@ -171,7 +171,7 @@
         </div>
       </div>
 
-      <span v-if="!isLoading2">
+      <span>
         <div class="main-profile">
           <!-- Old -->
           <div class="columns pr-4 no-padding is-gapless">
@@ -259,16 +259,16 @@
           </div>
         </div>
       </span>
-      <v-skeleton-loader
+      <!-- <v-skeleton-loader
         v-else
         v-bind="attrs"
         type="card-avatar, article, actions"
         style="margin-top: 80px"
-      />
+      /> -->
     </div>
     <!-- change avatar -->
     <div v-if="tab === 3">
-      <span v-if="!isLoading3">
+      <span>
         <div class="column profile-container">
           <div class="btn-profile">
             <img
@@ -285,7 +285,7 @@
             style="margin-top: 0px; margin-bottom: 0px"
           >
             <div
-              class="column is-offset-one-quarter avatar-container"
+              class="column is-offset-one-quarter avatar-container2"
               style="margin-top: 0px; margin-left: 174px"
             >
               <div class="square-top" :style="btnStyles1" />
@@ -309,7 +309,9 @@
           <div class="box-carousel pr-4">
             <div class="title-carousel">
               <img src="~/assets/images/carousel_1.png" class="bg-logo">
-              <div class="text-logo">All Avatars</div>
+              <div class="text-logo">
+                All Avatars {{ dataAvatar.data.data.total / 8 }}
+              </div>
             </div>
             <div class="content-carousel">
               <v-row no-gutters align="center" justify="center">
@@ -343,7 +345,11 @@
                         class="carousel-logo-bg"
                       >
                     </span>
-                    <img :src="item.avatar" class="carousel-logo-item">
+                    <img
+                      :src="item.avatar"
+                      class="carousel-logo-item"
+                      style=""
+                    >
                   </span>
                   <span v-else>
                     <img
@@ -354,7 +360,13 @@
                 </v-col>
                 <!-- </span> -->
               </v-row>
-              <v-pagination v-model="page" dark class="my-4" :length="4" />
+              <v-pagination
+                v-if="dataAvatar.data.data.total > 8"
+                v-model="page"
+                :length="Math.ceil(dataAvatar.data.data.total / 8)"
+                class="my-2"
+                @input="getAvatar()"
+              />
             </div>
           </div>
         </div>
@@ -378,11 +390,11 @@
           </div>
         </div>
       </span>
-      <v-skeleton-loader
+      <!-- <v-skeleton-loader
         v-else
         type="card-avatar, article, actions"
         style="margin-top: 80px"
-      />
+      /> -->
     </div>
     <!-- </div> -->
   </div>
@@ -448,7 +460,7 @@ export default {
         return state.user.images_name
       },
       dataAvatar: (state) => {
-        return state.avatar.data.data.data
+        return state.avatar.data
       },
       dataAvatarItem: (state) => {
         return state.avatar.item
@@ -476,17 +488,21 @@ export default {
   },
   methods: {
     selectedItem (x, item) {
+      console.log('selected')
+      console.log('x : ', x)
+      console.log('item : ', item)
+      console.log(this.selected)
+      console.log('selected')
       this.activeSelected = true
       this.activeItem = x
       this.selected = item
-      console.log(this.selected)
     },
     backtoTab1 () {
       this.tab = 1
       this.activeSelected = false
     },
     updateAvatar () {
-      this.activeSelected = false
+      // this.activeSelected = false
       console.log(this.selected)
       this.isLoading3 = true
       this.$store
@@ -514,11 +530,18 @@ export default {
       this.getAvatar()
       this.tab = 3
     },
-    getAvatar () {
-      console.log('get avatar')
+    next (x) {
+      console.log(x)
+    },
+    getAvatar (x) {
+      // if (typeof x !== 'undefined') {
+      this.activeItem = null
+      //   this.page = x
+      // }
+      console.log('activeItem : ', this.activeItem)
       this.isLoading3 = true
       this.$store
-        .dispatch('avatar/fetchAvatar')
+        .dispatch('avatar/fetchAvatar', this.page)
         .then((response) => {
           this.isLoading3 = false
         })
@@ -638,6 +661,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.v-pagination__item--active {
+  background-color: Red !important;
+}
 .name-card {
   position: relative;
   .img-card {
@@ -736,12 +762,14 @@ export default {
             object-fit: contain;
           }
           .carousel-logo-item {
-            height: 65px;
-            width: 65px;
-            object-fit: contain;
+            height: 45px;
+            width: 60px;
+            object-fit: cover;
+            object-position: 0px 0px;
             position: absolute;
-            top: 2px;
-            left: 22px;
+            top: 15.4px;
+            left: 21px;
+            transform: scale(1.3);
           }
         }
       }
@@ -791,12 +819,65 @@ export default {
       position: relative;
       .img-logo {
         position: absolute;
-        top: 15px;
+        bottom: 48px;
         z-index: 2;
         margin-top: 1.8px;
-        height: 206px;
-        margin-left: -6px;
-        // margin-right: auto;
+        object-fit: cover;
+        max-width: 140px;
+        height: 211px;
+      }
+      .square-top {
+        z-index: 1;
+        height: 57px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        width: 140px;
+        background-color: rgba(152, 18, 18, 0.75);
+      }
+      .square-center {
+        z-index: 1;
+        height: 57px;
+        width: 120px;
+        margin-right: 10px;
+        margin-left: 10px;
+        background-color: rgba(152, 18, 18, 0.75);
+      }
+      .square-bottom {
+        z-index: 1;
+        height: 57px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        width: 140px;
+        background-color: rgba(152, 18, 18, 0.75);
+      }
+      .trapesium-1 {
+        z-index: 1;
+        height: 0px;
+        width: 140px;
+        border-top: 20px solid rgba(152, 18, 18, 0.75);
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+      }
+      .trapesium-2 {
+        z-index: 1;
+        height: 0px;
+        width: 140px;
+        border-bottom: 20px solid rgba(152, 18, 18, 0.75);
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+      }
+    }
+    .avatar-container2 {
+      z-index: 1;
+      position: relative;
+      .img-logo {
+        position: absolute;
+        bottom: 12px;
+        z-index: 2;
+        margin-top: 1.8px;
+        object-fit: cover;
+        max-width: 140px;
+        height: 211px;
       }
       .square-top {
         z-index: 1;

@@ -1,8 +1,8 @@
 const resource = '/student/profile'
 
 export default $axios => ({
-  get () {
-    return $axios.get(`${resource}/my-avatar`)
+  get (payload) {
+    return $axios.get(`${resource}/my-avatar?per_page=8&page=${payload}`)
   },
   update (payload) {
     return $axios.put(`${resource}/change-avatar`, {

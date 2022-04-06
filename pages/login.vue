@@ -26,9 +26,9 @@
           <!-- <b-button class="btn-login" @click="login()">
             Log In
           </b-button> -->
-          <v-btn :loading="loading" class="btn-login" @click="login()">
+          <b-button :loading="loading" class="btn-login" @click="login()">
             Log In
-          </v-btn>
+          </b-button>
         </div>
       </div>
     </div>

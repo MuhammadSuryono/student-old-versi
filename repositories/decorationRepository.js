@@ -5,8 +5,8 @@ export default $axios => ({
   getOne () {
     return $axios.get(`${resource2}/home/background`)
   },
-  get () {
-    return $axios.get(`${resource}/backgrounds`)
+  get (payload) {
+    return $axios.get(`${resource}/backgrounds?per_page=4&page=${payload}`)
   },
   update (payload) {
     return $axios.put(`${resource}/change-background`, {

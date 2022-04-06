@@ -37,6 +37,9 @@ $input-background-color: white;
         }
     }
 }
+.v-pagination__item--active {
+  background-color: #154CA0 !important;
+}
 
 @import "~bulma/sass/utilities/_all";
 @import "~bulma";

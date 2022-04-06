@@ -60,7 +60,7 @@ export const actions = {
   },
   async fetchDecoration ({ commit }, payload) {
     try {
-      const response = await this.$repositories.decoration.get()
+      const response = await this.$repositories.decoration.get(payload)
       let newItem = []
       newItem = response.data.data.data
       console.log('new item : ', newItem)

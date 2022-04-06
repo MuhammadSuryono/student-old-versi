@@ -81,11 +81,11 @@
       <div class="trapesium-2" />
       <div class="square-bottom" />
       <img :src="avatarImg" class="img-logo2">
-      <div class="menu-p" style="margin-top: 13px">
+      <!-- <div class="menu-p" style="margin-top: 13px">
         <div class="cornered" />
         <div class="square" />
         <v-icon dark class="icon-s"> mdi-cog-outline </v-icon>
-      </div>
+      </div> -->
       <div class="menu-p">
         <div class="cornered" />
         <div class="square" />
@@ -228,6 +228,7 @@ export default {
     left: 135px;
     position: absolute;
     width: 47.68px;
+    z-index: 9;
     cursor: pointer;
     .btn-top {
       z-index: 1;
@@ -247,6 +248,7 @@ export default {
     left: 152.9px;
     position: absolute;
     width: 28.4px;
+    z-index: 9;
     cursor: pointer;
     .btn-center {
       top: 0px;
@@ -262,7 +264,7 @@ export default {
     padding: 2px;
     width: 31px;
     height: 31px;
-    z-index: 5;
+    z-index: 10;
   }
   .petra-level {
     top: 77px;
@@ -271,6 +273,7 @@ export default {
     position: absolute;
     z-index: 1;
     width: 27px;
+    z-index: 9;
     .btn-bottom {
       top: 0px;
       position: relative;
@@ -344,6 +347,7 @@ export default {
     top: 0px;
     z-index: 2;
     height: 247px;
+    object-fit: cover;
     // width: 170px;
     margin-top: 1.8px;
     margin-left: -3px;
