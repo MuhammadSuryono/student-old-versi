@@ -354,11 +354,11 @@ export default {
         })
     },
     selectedItem (x, item) {
-      this.activeSelected = true
-      this.activeItem = x
-      this.selected = item
-      // console.log(x, item)
-      console.log(item)
+      if (item.background !== 'null') {
+        this.activeSelected = true
+        this.activeItem = x
+        this.selected = item
+      }
     },
     getDecoration () {
       this.tab = 2

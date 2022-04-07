@@ -393,7 +393,7 @@ export default {
     }
   }
   .img-logo2 {
-    top: 17px;
+    top: 22px;
     left: 6px;
     position: absolute;
     z-index: 2;

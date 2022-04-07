@@ -441,7 +441,8 @@ export default {
       },
       isLoading: false,
       isLoading2: false,
-      isLoading3: false
+      isLoading3: false,
+      selectedCursor: 'pointer'
     }
   },
   computed: {
@@ -488,14 +489,16 @@ export default {
   },
   methods: {
     selectedItem (x, item) {
-      console.log('selected')
-      console.log('x : ', x)
-      console.log('item : ', item)
-      console.log(this.selected)
-      console.log('selected')
-      this.activeSelected = true
-      this.activeItem = x
-      this.selected = item
+      if (item.avatar !== 'null') {
+        this.activeSelected = true
+        this.activeItem = x
+        this.selected = item
+      } else {
+        // this.$toast.error('avatar not found', {
+        //   position: 'top-center',
+        //   duration: 5000
+        // })
+      }
     },
     backtoTab1 () {
       this.tab = 1
