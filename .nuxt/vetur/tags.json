@@ -29,6 +29,9 @@
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
   },
+  "IconAvatarBackground": {
+    "description": "Auto imported from components/icon/AvatarBackground.vue"
+  },
   "IconCluster": {
     "description": "Auto imported from components/icon/Cluster.vue"
   },

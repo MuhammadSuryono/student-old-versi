@@ -16,6 +16,7 @@ You can directly use them in pages and other components without the need to impo
 - `<PTitle>` | `<p-title>` (components/PTitle.vue)
 - `<Profile>` | `<profile>` (components/Profile.vue)
 - `<IconArchivements>` | `<icon-archivements>` (components/icon/Archivements.vue)
+- `<IconAvatarBackground>` | `<icon-avatar-background>` (components/icon/AvatarBackground.vue)
 - `<IconCluster>` | `<icon-cluster>` (components/icon/Cluster.vue)
 - `<IconFaction>` | `<icon-faction>` (components/icon/Faction.vue)
 - `<IconHome>` | `<icon-home>` (components/icon/Home.vue)

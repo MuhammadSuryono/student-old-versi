@@ -75,11 +75,15 @@
       </div>
     </span>
     <span v-else class="avatar-container2">
-      <div class="square-top" />
+      <!-- <div class="square-top" />
       <div class="trapesium-1" />
       <div class="square-center" />
       <div class="trapesium-2" />
-      <div class="square-bottom" />
+      <div class="square-bottom" /> -->
+      <IconAvatarBackground
+        :bg-color="bgColor"
+        style="width: 70px; height: 70px; margin-left: -5px"
+      />
       <img :src="avatarImg" class="img-logo2">
       <!-- <div class="menu-p" style="margin-top: 13px">
         <div class="cornered" />
@@ -393,20 +397,20 @@ export default {
     }
   }
   .img-logo2 {
-    top: 41px;
+    top: 55px;
     left: 22px;
     position: absolute;
     z-index: 2;
     // width: 70px;
     // height: 78px;
 
-    height: 40px;
-    width: 36px;
+    height: 15px;
+    width: 23px;
     margin-right: auto;
     z-index: 1;
     object-fit: cover;
-    object-position: 0px 0px;
-    transform: scale(1.6);
+    object-position: 40% 0%;
+    transform: scale(3.5);
   }
   .square-top {
     height: 15px;
