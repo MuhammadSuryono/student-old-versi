@@ -393,15 +393,20 @@ export default {
     }
   }
   .img-logo2 {
-    top: 22px;
-    left: 6px;
+    top: 41px;
+    left: 22px;
     position: absolute;
     z-index: 2;
-    width: 70px;
-    height: 78px;
+    // width: 70px;
+    // height: 78px;
+
+    height: 40px;
+    width: 36px;
     margin-right: auto;
     z-index: 1;
-    object-fit: contain;
+    object-fit: cover;
+    object-position: 0px 0px;
+    transform: scale(1.6);
   }
   .square-top {
     height: 15px;
@@ -411,14 +416,14 @@ export default {
     background-color: rgba(152, 18, 18, 0.75);
   }
   .square-center {
-    height: 10px;
+    height: 7px;
     width: 48px;
     margin-right: 6px;
     margin-left: 6px;
     background-color: rgba(152, 18, 18, 0.75);
   }
   .square-bottom {
-    height: 15px;
+    height: 12px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     width: 60px;

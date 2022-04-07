@@ -309,9 +309,7 @@
           <div class="box-carousel pr-4">
             <div class="title-carousel">
               <img src="~/assets/images/carousel_1.png" class="bg-logo">
-              <div class="text-logo">
-                All Avatars {{ dataAvatar.data.data.total / 8 }}
-              </div>
+              <div class="text-logo">All Avatars</div>
             </div>
             <div class="content-carousel">
               <v-row no-gutters align="center" justify="center">

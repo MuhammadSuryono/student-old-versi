@@ -197,7 +197,7 @@
               <v-pagination
                 v-if="dataDecoration.data.data.total > 8"
                 v-model="page"
-                :length="Math.ceil(dataDecoration.data.data.total / 8)"
+                :length="Math.ceil(dataDecoration.data.data.total / 4)"
                 class="my-5"
                 @input="getDecoration()"
               />
