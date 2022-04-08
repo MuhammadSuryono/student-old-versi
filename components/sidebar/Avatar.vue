@@ -397,20 +397,19 @@ export default {
     }
   }
   .img-logo2 {
-    top: 55px;
-    left: 22px;
+    top: 49px;
+    left: 29px;
     position: absolute;
     z-index: 2;
-    // width: 70px;
-    // height: 78px;
-
-    height: 15px;
-    width: 23px;
+    height: 20px;
+    width: 22px;
     margin-right: auto;
     z-index: 1;
+    -o-object-fit: cover;
     object-fit: cover;
+    -o-object-position: 40% 0%;
     object-position: 40% 0%;
-    transform: scale(3.5);
+    transform: scale(3);
   }
   .square-top {
     height: 15px;
