@@ -203,7 +203,7 @@ export default {
     setTime () {
       setInterval(() => {
         const date = new Date()
-        this.hours = date.getHours()
+        this.hours = String(date.getHours()).padStart(2, '0')
         this.minutes = this.checkSingleDigit(date.getMinutes())
         this.seconds = this.checkSingleDigit(date.getSeconds())
       }, 1000)
