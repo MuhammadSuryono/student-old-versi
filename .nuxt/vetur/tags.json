@@ -26,20 +26,14 @@
   "Profile": {
     "description": "Auto imported from components/Profile.vue"
   },
-  "SidebarAvatar": {
-    "description": "Auto imported from components/sidebar/Avatar.vue"
-  },
-  "SidebarCardName": {
-    "description": "Auto imported from components/sidebar/CardName.vue"
-  },
-  "SidebarMain": {
-    "description": "Auto imported from components/sidebar/Main.vue"
-  },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
   },
   "IconAvatarBackground": {
     "description": "Auto imported from components/icon/AvatarBackground.vue"
+  },
+  "IconBackBtn": {
+    "description": "Auto imported from components/icon/BackBtn.vue"
   },
   "IconCluster": {
     "description": "Auto imported from components/icon/Cluster.vue"
@@ -52,5 +46,14 @@
   },
   "IconSkillcard": {
     "description": "Auto imported from components/icon/Skillcard.vue"
+  },
+  "SidebarAvatar": {
+    "description": "Auto imported from components/sidebar/Avatar.vue"
+  },
+  "SidebarCardName": {
+    "description": "Auto imported from components/sidebar/CardName.vue"
+  },
+  "SidebarMain": {
+    "description": "Auto imported from components/sidebar/Main.vue"
   }
 }
