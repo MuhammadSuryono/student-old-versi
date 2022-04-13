@@ -79,6 +79,7 @@ export const actions = {
   async get ({ commit }) {
     commit('SET_LOADING', true)
     const res = await this.$repositories.user.get()
+    commit('SET_PROFILES', res)
     return res
   },
   async updateProfile ({ commit }, payload) {

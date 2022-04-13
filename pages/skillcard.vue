@@ -25,10 +25,23 @@
         </NuxtLink>
         <div class="main-skillcard columns">
           <div class="column is-narrow skillcard1">
-            <img
-              src="~/assets/images/skillcard/profile.png"
-              class="img-profile"
-            >
+            <div class="img-profile">
+              <IconBgAvatar :bg-color="avatar_bgcolor" />
+              <img :src="images" class="avatar-image">
+              <img :src="avatar_icon" class="avatar-icon">
+            </div>
+            <div class="skillcard-name">
+              <img
+                src="~/assets/images/skillcard/SkillcardNameFrame.svg"
+                class="skillcard-img"
+              >
+              <div class="skillcard-title">
+                {{ fullname }}
+              </div>
+              <div class="skillcard-type">
+                {{ profiles }} Student
+              </div>
+            </div>
           </div>
           <div class="column skillcard2">
             <div class="card-title">
@@ -129,6 +142,8 @@ export default {
 
   data () {
     return {
+      avatar_bgcolor: '',
+      avatar_icon: '',
       progress: 25,
       isLoading: false,
       data: [
@@ -198,11 +213,28 @@ export default {
       },
       nameDecoration: (state) => {
         return state.decoration.nameDecoration
+      },
+      users: (state) => {
+        return state.user.users
+      },
+      images: (state) => {
+        return state.user.images
+      },
+      fullname: (state) => {
+        return state.user.fullname
+      },
+      profiles: (state) => {
+        return state.user.profiles.data.data.user.student_type
       }
     })
   },
   mounted () {
     this.getDataDecoration()
+    this.avatar_bgcolor = this.users.faction.avatar_bgcolor
+    this.avatar_icon = this.users.faction.faction
+    this.$store.dispatch('user/get')
+    console.log(this.profiles)
+    // this.avatar_icon = this.users.faction.avatar_bgcolor
   },
   methods: {
     getDataDecoration () {
@@ -280,6 +312,7 @@ export default {
       box-sizing: border-box;
       border-radius: 8.18906px;
       transform: skew(-5deg);
+      z-index: 1;
       .btn-back {
         float: right;
         margin-right: 15px;
@@ -302,9 +335,69 @@ export default {
       .main-skillcard {
         margin-top: 30px;
         transform: skew(5deg);
+        z-index: 2;
         .skillcard1 {
+          z-index: 2;
           .img-profile {
             height: 368.55px;
+            position: Relative;
+            top: 0px;
+            z-index: 2;
+            // transform: skew(-1deg);
+            .avatar-image {
+              position: absolute;
+              left: 0px;
+              // top: 0px;
+              height: 368.55px;
+              max-width: 298px;
+              bottom: 0px;
+              z-index: 3;
+              object-fit: cover;
+            }
+            .avatar-icon {
+              position: absolute;
+              right: 7px;
+              top: -66px;
+              z-index: 1;
+              // width: 200px;
+              width: 280px;
+              object-fit: cover;
+              -o-object-position: 0% 40%;
+              object-position: 80px;
+              // top: -75px;
+            }
+          }
+          .skillcard-name {
+            position: relative;
+            top: 10px;
+            left: -8px;
+            z-index: 1;
+            .skillcard-title {
+              position: absolute;
+              top: 18px;
+              z-index: 2;
+              font-weight: 500;
+              font-size: 32px;
+              line-height: 14px;
+              /* or 44% */
+              width: 273px;
+              text-align: center;
+
+              color: #ffffff;
+            }
+            .skillcard-type {
+              position: absolute;
+              top: 65px;
+              z-index: 2;
+              font-weight: 500;
+              font-size: 16px;
+              line-height: 14px;
+              /* or 44% */
+              width: 256px;
+              text-align: center;
+
+              color: #ffffff;
+            }
           }
         }
         .skillcard2 {
