@@ -3,7 +3,7 @@
     class="bg-img"
     :style="{ backgroundImage: 'url(' + pathDecoration + ')' }"
   >
-    <div class="layer">
+    <div v-if="!isLoading" class="layer">
       <div class="card-profile">
         <img src="~/assets/images/bg-button.png" class="background-button">
         <img
@@ -243,19 +243,23 @@ export default {
   },
   methods: {
     getDataPersonalityCluster () {
+      this.isLoading = true
       this.$store
         .dispatch('skillcard/fetchPersonalityCluster')
         .then((response) => {
           console.log('res : ', response.data.data)
+          console.log(response.data.data.student_type)
           this.skillcard_student_type = response.data.data.student_type
-          this.skillcard_name = response.data.data.Personality_cluster.name
+          console.log(this.skillcard_student_type)
+          this.skillcard_name = response.data.data.personality_cluster.name
           this.skillcard_attribute =
-            response.data.data.Personality_cluster.attribute
+            response.data.data.personality_cluster.attribute
           this.skillcard_attribute_process =
             this.skillcard_attribute.join(' • ')
+          this.isLoading = false
         })
         .catch((error) => {
-          this.$toast.error(error.response.data.message, {
+          this.$toast.error(error.response, {
             position: 'top-center',
             duration: 5000
           })
@@ -263,6 +267,7 @@ export default {
             this.$auth.logout()
             this.$router.push('/login')
           }
+          this.isLoading = false
         })
     },
     getDataDecoration () {
