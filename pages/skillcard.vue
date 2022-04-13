@@ -39,7 +39,7 @@
                 {{ fullname }}
               </div>
               <div class="skillcard-type">
-                {{ profiles }} Student
+                {{ skillcard_student_type }} Student
               </div>
             </div>
           </div>
@@ -68,12 +68,12 @@
                   class="icon-button"
                 >
                 <div class="name-card">
-                  THE WARRIOR
+                  {{ skillcard_name }}
                 </div>
               </div>
               <div class="card-title2">
                 <div class="name-card">
-                  Growth • Self-evaluation • Teamwork
+                  {{ skillcard_attribute_process }}
                 </div>
               </div>
             </div>
@@ -142,6 +142,10 @@ export default {
 
   data () {
     return {
+      skillcard_student_type: '',
+      skillcard_name: '',
+      skillcard_attribute: [],
+      skillcard_attribute_process: [],
       avatar_bgcolor: '',
       avatar_icon: '',
       progress: 25,
@@ -230,6 +234,7 @@ export default {
   },
   mounted () {
     this.getDataDecoration()
+    this.getDataPersonalityCluster()
     this.avatar_bgcolor = this.users.faction.avatar_bgcolor
     this.avatar_icon = this.users.faction.faction
     this.$store.dispatch('user/get')
@@ -237,6 +242,29 @@ export default {
     // this.avatar_icon = this.users.faction.avatar_bgcolor
   },
   methods: {
+    getDataPersonalityCluster () {
+      this.$store
+        .dispatch('skillcard/fetchPersonalityCluster')
+        .then((response) => {
+          console.log('res : ', response.data.data)
+          this.skillcard_student_type = response.data.data.student_type
+          this.skillcard_name = response.data.data.Personality_cluster.name
+          this.skillcard_attribute =
+            response.data.data.Personality_cluster.attribute
+          this.skillcard_attribute_process =
+            this.skillcard_attribute.join(' • ')
+        })
+        .catch((error) => {
+          this.$toast.error(error.response.data.message, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
     getDataDecoration () {
       this.isLoading = true
       this.$store
