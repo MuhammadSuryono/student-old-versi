@@ -8,8 +8,9 @@ const _d4e656b2 = () => interopDefault(import('../pages/archivements.vue' /* web
 const _75174033 = () => interopDefault(import('../pages/home.vue' /* webpackChunkName: "pages/home" */))
 const _4bb5acc5 = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
 const _256c0b6c = () => interopDefault(import('../pages/personality.vue' /* webpackChunkName: "pages/personality" */))
-const _5668b43d = () => interopDefault(import('../pages/skillcard.vue' /* webpackChunkName: "pages/skillcard" */))
+const _78ba5900 = () => interopDefault(import('../pages/skillcard/index.vue' /* webpackChunkName: "pages/skillcard/index" */))
 const _4dd95a8a = () => interopDefault(import('../pages/splash.vue' /* webpackChunkName: "pages/splash" */))
+const _36e3d693 = () => interopDefault(import('../pages/skillcard/detail.vue' /* webpackChunkName: "pages/skillcard/detail" */))
 const _fbe3eca4 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -41,12 +42,16 @@ export const routerOptions = {
     name: "personality"
   }, {
     path: "/skillcard",
-    component: _5668b43d,
+    component: _78ba5900,
     name: "skillcard"
   }, {
     path: "/splash",
     component: _4dd95a8a,
     name: "splash"
+  }, {
+    path: "/skillcard/detail",
+    component: _36e3d693,
+    name: "skillcard-detail"
   }, {
     path: "/",
     component: _fbe3eca4,

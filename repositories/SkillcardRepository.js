@@ -1,7 +1,10 @@
-const resource = 'personality-cluster'
+const resource = 'game/skillset'
 
 export default $axios => ({
-  get (payload) {
-    return $axios.get(`${resource}/getUserPersonalityCluster`)
+  get () {
+    return $axios.get('personality-cluster/getUserPersonalityCluster')
+  },
+  getAllSkill () {
+    return $axios.get(`${resource}/getUserAllSkills`)
   }
 })

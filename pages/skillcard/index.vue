@@ -3,7 +3,7 @@
     class="bg-img"
     :style="{ backgroundImage: 'url(' + pathDecoration + ')' }"
   >
-    <div v-if="!isLoading" class="layer">
+    <div class="layer">
       <div class="card-profile">
         <img src="~/assets/images/bg-button.png" class="background-button">
         <img
@@ -39,7 +39,7 @@
                 {{ fullname }}
               </div>
               <div class="skillcard-type">
-                {{ skillcard_student_type }} Student
+                {{ dataSkillcard.student_type }} Student
               </div>
             </div>
           </div>
@@ -68,12 +68,12 @@
                   class="icon-button"
                 >
                 <div class="name-card">
-                  {{ skillcard_name }}
+                  {{ dataSkillcard.name }}
                 </div>
               </div>
               <div class="card-title2">
                 <div class="name-card">
-                  {{ skillcard_attribute_process }}
+                  {{ dataSkillcard.attribute }}
                 </div>
               </div>
             </div>
@@ -100,29 +100,31 @@
             <!-- <PProgress /> -->
             <div class="content-skill">
               <div
-                v-for="(i, index) in data"
+                v-for="(i, index) in dataSkills"
                 :key="index"
                 class="columns is-gapless list-card"
               >
-                <div class="column title-card">
-                  {{ index + 1 }}. {{ i.name }}
+                <div class="column title-card" @click="goDetail()">
+                  {{ index + 1 }}. {{ i.skill }}
                 </div>
                 <div class="column">
                   <div class="columns is-gapless">
+                    <!-- <div class="shell">
+                      <div class="bar" :style="{ width: '10%' }" />
+                    </div> -->
                     <div
-                      v-for="progres in 10"
-                      :key="progres"
+                      v-for="(progres, index) in 10"
+                      :key="index"
                       class="column"
                       style="
                         background-color: black;
                         margin-right: 2px;
-                        width: 100%;
                         height: 13px;
+                        width: 90%;
                         margin-top: 4px;
+                        z-index: 1;
                       "
-                    >
-                      <!-- a -->
-                    </div>
+                    />
                   </div>
                 </div>
               </div>
@@ -142,68 +144,10 @@ export default {
 
   data () {
     return {
-      skillcard_student_type: '',
-      skillcard_name: '',
-      skillcard_attribute: [],
-      skillcard_attribute_process: [],
       avatar_bgcolor: '',
       avatar_icon: '',
-      progress: 25,
-      isLoading: false,
-      data: [
-        {
-          name: 'Achievement Highlights',
-          percent: 90
-        },
-        {
-          name: 'Emotional Intelligence',
-          percent: 90
-        },
-        {
-          name: 'Commit to Lifetime Learning',
-          percent: 90
-        },
-        {
-          name: 'Tech Savviness',
-          percent: 90
-        },
-        {
-          name: 'Critical & Analytical Thinking',
-          percent: 90
-        },
-        {
-          name: 'Data literacy',
-          percent: 90
-        },
-        {
-          name: 'Adaptability & Flexibility',
-          percent: 90
-        },
-        {
-          name: 'Creativity & Innovation',
-          percent: 90
-        },
-        {
-          name: 'Cultural Competence',
-          percent: 90
-        },
-        {
-          name: 'Energy Environmental Awareness',
-          percent: 90
-        },
-        {
-          name: 'Problem Solving',
-          percent: 90
-        },
-        {
-          name: 'Interpersonal Skill',
-          percent: 90
-        },
-        {
-          name: 'Technical Skill',
-          percent: 90
-        }
-      ]
+      progress: 0,
+      isLoading: false
     }
   },
 
@@ -215,9 +159,6 @@ export default {
       pathDecoration: (state) => {
         return state.decoration.pathDecoration
       },
-      nameDecoration: (state) => {
-        return state.decoration.nameDecoration
-      },
       users: (state) => {
         return state.user.users
       },
@@ -227,37 +168,27 @@ export default {
       fullname: (state) => {
         return state.user.fullname
       },
-      profiles: (state) => {
-        return state.user.profiles.data.data.user.student_type
+      dataSkillcard: (state) => {
+        return state.skillcard.data
+      },
+      dataSkills: (state) => {
+        return state.skillcard.skills
       }
     })
   },
   mounted () {
-    this.getDataDecoration()
-    this.getDataPersonalityCluster()
+    this.$store.dispatch('user/get')
     this.avatar_bgcolor = this.users.faction.avatar_bgcolor
     this.avatar_icon = this.users.faction.faction
-    this.$store.dispatch('user/get')
-    console.log(this.profiles)
-    // this.avatar_icon = this.users.faction.avatar_bgcolor
+    this.getDataDecoration()
+    this.getDataPersonalityCluster()
+    this.getDataAllSkills()
   },
   methods: {
-    getDataPersonalityCluster () {
-      this.isLoading = true
+    getDataAllSkills () {
       this.$store
-        .dispatch('skillcard/fetchPersonalityCluster')
-        .then((response) => {
-          console.log('res : ', response.data.data)
-          console.log(response.data.data.student_type)
-          this.skillcard_student_type = response.data.data.student_type
-          console.log(this.skillcard_student_type)
-          this.skillcard_name = response.data.data.personality_cluster.name
-          this.skillcard_attribute =
-            response.data.data.personality_cluster.attribute
-          this.skillcard_attribute_process =
-            this.skillcard_attribute.join(' • ')
-          this.isLoading = false
-        })
+        .dispatch('skillcard/fetchAllSkill')
+        .then((response) => {})
         .catch((error) => {
           this.$toast.error(error.response, {
             position: 'top-center',
@@ -267,7 +198,21 @@ export default {
             this.$auth.logout()
             this.$router.push('/login')
           }
-          this.isLoading = false
+        })
+    },
+    getDataPersonalityCluster () {
+      this.$store
+        .dispatch('skillcard/fetchPersonalityCluster')
+        .then((response) => {})
+        .catch((error) => {
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
         })
     },
     getDataDecoration () {
@@ -288,6 +233,9 @@ export default {
             this.$router.push('/login')
           }
         })
+    },
+    goDetail () {
+      this.$router.push({ path: '/skillcard/detail' })
     }
   }
 }
@@ -618,23 +566,21 @@ export default {
                 display: flex;
                 align-items: center;
                 color: #ffffff;
+                cursor: pointer;
               }
               .shell {
+                position: absolute;
+                top: 4px;
                 height: 13px;
-                width: 250px;
-                padding: 3px;
+                width: 300px;
                 list-style-type: none;
                 overflow: hidden;
+                margin-top: 3px;
                 .bar {
-                  background: #02243f;
+                  background: green;
                   width: 20px;
                   height: 13px;
-                  span {
-                    float: right;
-                    padding: 4px 5px;
-                    color: #fff;
-                    font-size: 0.7em;
-                  }
+                  z-index: 2;
                 }
               }
             }
