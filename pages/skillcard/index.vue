@@ -539,7 +539,8 @@ export default {
             position: relative;
             top: 95px;
             width: 660.74px;
-            height: 100%;
+            // height: 100%;
+            padding-bottom: 50px;
             background: linear-gradient(
               180deg,
               rgba(41, 97, 181, 0.8) 0%,
