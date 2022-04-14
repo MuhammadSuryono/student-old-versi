@@ -80,7 +80,7 @@
       </div>
       <div
         class="content-menu-skillcard"
-        style="margin-left: 20px; margin-top: 10px"
+        style="margin-left: 20px; margin-top: 20px"
       >
         <v-row no-gutters style="width: 900px">
           <v-col v-for="i in 6" :key="i" cols="12" sm="4">
