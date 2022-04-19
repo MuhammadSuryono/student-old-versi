@@ -8,7 +8,7 @@
           class="icon-button"
         >
         <div class="name-card">
-          Emotional Intelligence
+          {{ detail.skill }}
         </div>
         <div class="column profile-container">
           <div class="btn-profile">
@@ -36,7 +36,7 @@
           class="background-button"
         >
         <div class="name-card">
-          What is “Emotional Intelligence”?
+          What is “{{ detail.skill }}”?
         </div>
       </div>
       <div class="card-title2">
@@ -55,21 +55,80 @@
                 Skill Score
               </div>
               <div class="score-card">
-                29.2%
+                {{ detail.score }}%
               </div>
             </div>
-            <img
-              src="~/assets/images/skillcard/detail-progress.png"
-              style="position: absolute; top: 69px; left: 64px; z-index: 6"
+            <div
+              class="column"
+              style="margin-top: 43px; margin-left: 45px; width: 202px"
             >
+              <div class="columns is-gapless">
+                <div
+                  v-for="(progres, index2) in 10"
+                  :key="index2"
+                  class="column"
+                  style="
+                    background-color: black;
+                    margin-right: 2px;
+                    height: 8px;
+                    z-index: 10;
+                    width: 100%;
+                  "
+                >
+                  <div
+                    v-if="
+                      parseFloat(detail.score) / 10 -
+                        Math.floor(parseFloat(detail.score) / 10) ===
+                        0
+                    "
+                    style="width: 100%; height: 100%"
+                  >
+                    <div
+                      v-if="index2 < parseFloat(detail.score) / 10"
+                      style="
+                        width: 100%;
+                        height: 100%;
+                        background-color: #ffcf24;
+                      "
+                    />
+                  </div>
+                  <div v-else style="width: 100%; height: 100%">
+                    <div
+                      v-if="index2 < Math.trunc(parseFloat(detail.score) / 10)"
+                      style="
+                        width: 100%;
+                        height: 100%;
+                        background-color: #ffcf24;
+                      "
+                    />
+                    <div
+                      v-if="
+                        index2 === Math.trunc(parseFloat(detail.score) / 10)
+                      "
+                      style="height: 100%; background-color: #ffcf24"
+                      :style="{
+                        width:
+                          Number(
+                            (
+                              detail.score / 10 -
+                              Math.trunc(parseFloat(detail.score) / 10)
+                            ).toFixed(2)
+                          ) *
+                          100 +
+                          '%'
+                      }"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <img
+              src="~/assets/images/skillcard/detail-progress.png"
+
+            > -->
           </div>
-          <div class="column skillcard2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse. sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua.
+          <div class="column skillcard2" style="height: 90px">
+            {{ detail.description }}
           </div>
         </div>
       </div>
@@ -91,6 +150,48 @@
     </div>
   </div>
 </template>
+<script>
+import { mapState } from 'vuex'
+export default {
+  data () {
+    return {
+      id: ''
+    }
+  },
+
+  computed: {
+    ...mapState({
+      detail: (state) => {
+        return state.skillcard.detail
+      }
+    })
+  },
+  mounted () {
+    // eslint-disable-next-line dot-notation
+    this.id = this.$router.currentRoute.query['id']
+    this.getData()
+  },
+  methods: {
+    getData () {
+      this.$store
+        .dispatch('skillcard/fetchDetailSkill', this.id)
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    }
+  }
+}
+</script>
 <style lang="scss" scoped>
 .main-detail {
   z-index: 2;

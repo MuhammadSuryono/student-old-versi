@@ -104,27 +104,66 @@
                 :key="index"
                 class="columns is-gapless list-card"
               >
-                <div class="column title-card" @click="goDetail()">
+                <div class="column title-card" @click="goDetail(i)">
                   {{ index + 1 }}. {{ i.skill }}
                 </div>
                 <div class="column">
                   <div class="columns is-gapless">
-                    <!-- <div class="shell">
-                      <div class="bar" :style="{ width: '10%' }" />
-                    </div> -->
                     <div
-                      v-for="(progres, index) in 10"
-                      :key="index"
+                      v-for="(progres, index2) in 10"
+                      :key="index2"
                       class="column"
                       style="
                         background-color: black;
-                        margin-right: 2px;
+                        margin-right: 3px;
                         height: 13px;
                         width: 90%;
                         margin-top: 4px;
                         z-index: 1;
                       "
-                    />
+                    >
+                      <div
+                        v-if="
+                          parseFloat(i.point) -
+                            Math.floor(parseFloat(i.point)) ===
+                            0
+                        "
+                        style="width: 100%; height: 100%"
+                      >
+                        <div
+                          v-if="index2 < parseFloat(i.point)"
+                          style="
+                            width: 100%;
+                            height: 100%;
+                            background-color: #ffcf24;
+                          "
+                        />
+                      </div>
+                      <div v-else style="width: 100%; height: 100%">
+                        <div
+                          v-if="index2 < Math.trunc(parseFloat(i.point))"
+                          style="
+                            width: 100%;
+                            height: 100%;
+                            background-color: #ffcf24;
+                          "
+                        />
+                        <div
+                          v-if="index2 === Math.trunc(parseFloat(i.point))"
+                          style="height: 100%; background-color: #ffcf24"
+                          :style="{
+                            width:
+                              Number(
+                                (
+                                  i.point - Math.trunc(parseFloat(i.point))
+                                ).toFixed(2)
+                              ) *
+                              100 +
+                              '%'
+                          }"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -234,8 +273,8 @@ export default {
           }
         })
     },
-    goDetail () {
-      this.$router.push({ path: '/skillcard/detail' })
+    goDetail (x) {
+      this.$router.push({ path: '/skillcard/detail?id=' + x.id })
     }
   }
 }
@@ -284,7 +323,8 @@ export default {
     }
     .content-skillcard {
       width: 1050px;
-      height: 80vh;
+      // height: 100%;
+      padding-bottom: 40px;
       margin-left: 150px;
       margin-top: 130px;
       background-color: rgba(239, 253, 253, 0.7);

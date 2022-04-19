@@ -3,6 +3,7 @@
     <div style="height: 100%; width: 100%; z-index: -9999" />
 
     <div class="container-petra">
+      <!-- {{ window.height }} -->
       <Navbar class="navbars" />
       <div class="columns is-gapless main-menu">
         <!-- sidebar -->
@@ -11,9 +12,20 @@
           :style="widthSidebar"
         />
         <div v-if="sidebar" class="petra-overlay" />
+        <!-- 698
+        924 -->
         <!-- main -->
-        <Nuxt v-if="$route.path !== '/'" class="nuxt-menu" style="z-index: 2" />
-        <Nuxt v-else class="nuxt-menu" />
+        <Nuxt
+          v-if="$route.path !== '/'"
+          class="nuxt-menu"
+          style="z-index: 2"
+          :style="{ height: window.height - 68 + 'px' }"
+        />
+        <Nuxt
+          v-else
+          class="nuxt-menu"
+          :style="{ height: window.height - 68 + 'px' }"
+        />
         <span v-if="$route.path === '/'">
           <PNavigation class="navigation-petra" />
           <!-- maps -->
@@ -72,7 +84,11 @@ export default {
   data () {
     return {
       light: true,
-      maps: false
+      maps: false,
+      window: {
+        width: 0,
+        height: 0
+      }
     }
   },
   computed: {
@@ -110,10 +126,21 @@ export default {
     }
   },
   created () {
+    // eslint-disable-next-line nuxt/no-globals-in-created
+    window.addEventListener('resize', this.handleResize)
     this.sidebar = true
     this.$notify('Hello user!')
+    this.handleResize()
   },
-  methods: {}
+  destroyed () {
+    window.removeEventListener('resize', this.handleResize)
+  },
+  methods: {
+    handleResize () {
+      this.window.width = window.innerWidth
+      this.window.height = window.innerHeight
+    }
+  }
 }
 </script>
 
@@ -146,13 +173,25 @@ export default {
   .main-menu {
     max-width: 1280px;
     padding-top: 4.25rem;
-    height: 100vh;
+    height: 100%;
+    // display: table-cell;
     position: relative;
     .sidebar-menu {
       width: 200px;
       position: fixed;
-      height: 100%;
+      // height: 100%;
       z-index: 4;
+    }
+    .nuxt-menu {
+      z-index: -2;
+      max-width: 1280px;
+      // height: 856px;
+      // display: flex;
+      // flex-direction: column;
+      // height: auto;
+      // width: auto;
+      min-height: 100%;
+      box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.05);
     }
     .petra-overlay {
       width: 100%;
@@ -162,11 +201,6 @@ export default {
       position: fixed;
       top: 0px;
       max-width: 1280px;
-    }
-    .nuxt-menu {
-      z-index: -2;
-      max-width: 1280px;
-      box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.05);
     }
     .profile-petra {
       z-index: -999;

@@ -4,7 +4,8 @@ export const state = () => ({
     student_type: '',
     attribute: ''
   },
-  skills: {}
+  skills: {},
+  detail: {}
 })
 
 export const getters = {
@@ -19,6 +20,9 @@ export const mutations = {
   },
   SET_SKILLS (state, item) {
     state.skills = item
+  },
+  SET_DETAIL_SKILLS (state, item) {
+    state.detail = item
   }
 }
 
@@ -36,6 +40,17 @@ export const actions = {
     try {
       const response = await this.$repositories.skillcard.getAllSkill()
       commit('SET_SKILLS', response.data.data.skills)
+      return response
+    } catch (e) {
+      return e.response
+    }
+  },
+  async fetchDetailSkill ({ commit }, payload) {
+    try {
+      const response = await this.$repositories.skillcard.getDetailSkill(
+        payload
+      )
+      commit('SET_DETAIL_SKILLS', response.data.data)
       return response
     } catch (e) {
       return e.response

@@ -478,8 +478,8 @@ export default {
   }
   .img3 {
     width: 155px;
-    left: -20px;
-    bottom: -9px;
+    left: -23px;
+    bottom: 0px;
     z-index: -1;
     position: absolute;
   }

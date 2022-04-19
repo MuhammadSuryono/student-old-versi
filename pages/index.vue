@@ -64,6 +64,8 @@ export default {
   background-image: url('~@/assets/images/home/bg_home.png');
   height: 100%;
   width: 100%;
+  // height: auto;
+  // width: auto;
   background-size: cover;
   background-position: center;
 }
