@@ -11,7 +11,12 @@ export default $axios => ({
   getDetailSkill (payload) {
     return $axios.get(`${resource}/getUserSkillBySkillId/${payload}`)
   },
+  getAllModule (payload) {
+    return $axios.get(
+      `${resource}/getUserModuleSkillBySkillId/${payload.id}?per_page=4&page=${payload.page}`
+    )
+  },
   getAllAchievement (payload) {
-    return $axios.get(`${resource2}/completed/all`)
+    return $axios.get(`${resource2}/completed/all?per_page=6&page=${payload}`)
   }
 })

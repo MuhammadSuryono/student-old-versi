@@ -122,30 +122,221 @@
                 </div>
               </div>
             </div>
-            <!-- <img
-              src="~/assets/images/skillcard/detail-progress.png"
-
-            > -->
           </div>
-          <div class="column skillcard2" style="height: 90px">
-            {{ detail.description }}
+          <div
+            v-if="
+              detail.description !== '' ||
+                detail.description !== null ||
+                detail.description !== 'null' ||
+                detail.description !== undefined ||
+                detail.description !== 'undefined' ||
+                typeof detail.description !== 'null' ||
+                typeof detail.description !== 'undefined'
+            "
+            class="column skillcard2"
+          >
+            {{ detail.description | truncate(420, '...') }}
+          </div>
+          <div v-else class="column skillcard2">
+            {{ detail.description | truncate(420, '...') }}
           </div>
         </div>
       </div>
-      <div class="tab-menu-skillcard">
-        <IconTabSkill class="tab1-menu" />
-        <IconTabSkill2 class="tab2-menu" />
-        <IconTabSkill2 class="tab3-menu" />
+      <div class="columns is-gapless tab-menu-skillcard">
+        <div v-if="selected1" class="column is-narrow tab-menu">
+          <IconTabSkill style="z-index: 99" />
+          <div class="text-tab" style="color: white">
+            All Module Results
+          </div>
+        </div>
+        <div v-else class="column is-narrow tab-menu" @click="tes(1, true)">
+          <IconTabSkill style="z-index: 99" />
+          <div class="text-tab">
+            All Module Results
+          </div>
+        </div>
+        <div v-if="selected2" class="column tab-menu" style="margin-left: 10px">
+          <IconTabSkill2 style="margin-left: -17px" />
+          <div class="text-tab" style="color: white">
+            All Achievements
+          </div>
+        </div>
+        <div
+          v-else
+          class="column tab-menu"
+          style="margin-left: 10px"
+          @click="tes(2, true)"
+        >
+          <IconTabSkill2 style="margin-left: -17px" />
+          <div class="text-tab">
+            All Achievements
+          </div>
+        </div>
       </div>
-      <div
-        class="content-menu-skillcard"
-        style="margin-left: 20px; margin-top: 20px"
-      >
-        <v-row no-gutters style="width: 900px">
-          <v-col v-for="i in 6" :key="i" cols="12" sm="4">
-            <img src="~/assets/images/skillcard/AchievementFrame.png">
+      <div class="content-menu-skillcard" style="margin-left: 20px">
+        <v-row
+          v-if="selected1"
+          style="width: 930px; margin-left: 3px; margin-top: 10px"
+        >
+          <v-col
+            v-for="(item, index) in Allmodule.data"
+            :key="index"
+            cols="12"
+            sm="3"
+          >
+            <!-- {{ Allmodule.data[0] }} -->
+            <div
+              style="
+                background-color: #fcfeff;
+                height: 100%;
+                padding-bottom: 20px;
+                width: 100%;
+              "
+            >
+              <img
+                :src="item.thumbnail"
+                style="
+                  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+                  border-radius: 4px;
+                  height: 128px;
+                  object-fit: cover;
+                  width: 100%;
+                "
+              >
+
+              <div
+                style="
+                  font-family: 'Roboto';
+                  font-style: italic;
+                  font-weight: 500;
+                  font-size: 14px;
+                  display: flex;
+                  align-items: center;
+
+                  color: #000000;
+                  padding-left: 10px;
+                "
+              >
+                {{ item.module }}
+              </div>
+              <div
+                class="module-score-tab1"
+                style="
+                  padding-left: 10px;
+                  font-family: 'Roboto';
+                  font-style: normal;
+                  font-weight: 400;
+                  font-size: 14px;
+                  line-height: 16px;
+                  padding-top: 10px;
+                  color: #6c6c6c;
+                "
+              >
+                Module Score: {{ item.score }}%
+              </div>
+              <div
+                style="
+                  padding-left: 10px;
+                  font-family: 'Roboto';
+                  font-style: normal;
+                  font-weight: 400;
+                  font-size: 12px;
+                  line-height: 16px;
+
+                  color: #6c6c6c;
+                "
+              >
+                Emotional Intelligence: {{ item.tax_bloom }}
+              </div>
+            </div>
           </v-col>
+          <v-pagination
+            v-if="Allmodule.total > 8"
+            v-model="currentPage"
+            :length="Math.ceil(Allmodule.total / 4)"
+            class="my-2"
+            style="margin-left: auto; margin-right: auto"
+            @input="getDataModule()"
+          />
         </v-row>
+        <div v-if="selected2" style="width: 900px">
+          <v-row
+            no-gutters
+            style="width: 900px; height: 200px; margin-bottom: 10px"
+          >
+            <v-col
+              v-for="(item2, index2) in Allarchivements.data"
+              :key="index2"
+              cols="12"
+              sm="4"
+            >
+              <div style="position: relative">
+                <img
+                  src="~/assets/images/skillcard/AchievementFrame.png"
+                  style="height: 104.594px; width: 299.984px"
+                >
+                <img
+                  style="
+                    position: absolute;
+                    top: 13px;
+                    left: 10px;
+                    height: 85px;
+                    width: 90px;
+                    object-fit: cover;
+                  "
+                  :src="item2.thumbnail"
+                >
+                <div
+                  style="
+                    position: absolute;
+                    top: 4px;
+                    left: 110px;
+                    font-family: 'Barlow';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 17px;
+                    line-height: 22px;
+                    display: flex;
+                    align-items: center;
+
+                    white-space: nowrap;
+                    width: 180px;
+                    color: #1951a5;
+                  "
+                >
+                  {{ item2.title | truncate(20, '...') }}
+                </div>
+                <div
+                  style="
+                    position: absolute;
+                    top: 37px;
+                    left: 110px;
+                    font-family: 'Barlow';
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 17px;
+                    font-size: 15px;
+                    align-items: center;
+                    width: 180px;
+                    color: white;
+                  "
+                >
+                  {{ item2.description | truncate(65, '...') }}
+                </div>
+              </div>
+            </v-col>
+          </v-row>
+          <div style="margin-top: 30px">
+            <v-pagination
+              v-if="Allarchivements.total > 8"
+              v-model="currentPage2"
+              :length="Math.ceil(Allarchivements.total / 6)"
+              class="my-2"
+              style="margin-left: auto; margin-right: auto; top: 200px"
+              @input="getDataArchivements()"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -153,9 +344,23 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  filters: {
+    truncate (text, length, suffix) {
+      if (text.length > length) {
+        return text.substring(0, length) + suffix
+      } else {
+        return text
+      }
+    }
+  },
   data () {
     return {
-      id: ''
+      id: '',
+      active_el: 0,
+      selected1: true,
+      selected2: false,
+      currentPage: 1,
+      currentPage2: 1
     }
   },
 
@@ -163,6 +368,12 @@ export default {
     ...mapState({
       detail: (state) => {
         return state.skillcard.detail
+      },
+      Allmodule: (state) => {
+        return state.skillcard.module
+      },
+      Allarchivements: (state) => {
+        return state.skillcard.archivements
       }
     })
   },
@@ -170,13 +381,62 @@ export default {
     // eslint-disable-next-line dot-notation
     this.id = this.$router.currentRoute.query['id']
     this.getData()
+    this.getDataModule()
+    this.getDataArchivements()
   },
   methods: {
+    tes (id, number) {
+      if (id === 1) {
+        this.selected1 = true
+        this.selected2 = false
+      }
+      if (id === 2) {
+        this.selected1 = false
+        this.selected2 = true
+      }
+    },
     getData () {
       this.$store
         .dispatch('skillcard/fetchDetailSkill', this.id)
         .then((response) => {
-          console.log(response)
+          // console.log(response)
+        })
+        .catch((error) => {
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
+    getDataModule () {
+      this.$store
+        .dispatch('skillcard/fetchAllModule', {
+          id: this.id,
+          page: this.currentPage
+        })
+        .then((response) => {
+          // console.log(response.data.data.modules)
+        })
+        .catch((error) => {
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
+    getDataArchivements () {
+      this.$store
+        .dispatch('skillcard/fetchAllArchivement', this.currentPage2)
+        .then((response) => {
+          console.log(response.data.data)
         })
         .catch((error) => {
           this.$toast.error(error.response, {
@@ -367,21 +627,27 @@ export default {
         align-items: center;
         z-index: 10;
         color: #ffffff;
+        height: 90px;
       }
     }
     .tab-menu-skillcard {
       margin-top: 200px;
       margin-left: 30px;
-      .tab1-menu {
+      .tab-menu {
         cursor: pointer;
-      }
-      .tab2-menu {
-        cursor: pointer;
-        margin-left: -17px;
-      }
-      .tab3-menu {
-        cursor: pointer;
-        margin-left: -17px;
+        .text-tab {
+          margin-top: -31px;
+          margin-left: 15px;
+          font-family: 'Barlow';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 17px;
+          display: flex;
+          align-items: center;
+
+          color: #7a89af;
+        }
       }
     }
   }

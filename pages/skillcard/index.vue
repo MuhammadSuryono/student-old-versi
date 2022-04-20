@@ -97,7 +97,6 @@
                 </div>
               </div>
             </div>
-            <!-- <PProgress /> -->
             <div class="content-skill">
               <div
                 v-for="(i, index) in dataSkills"
