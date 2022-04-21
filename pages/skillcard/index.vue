@@ -511,7 +511,7 @@ export default {
                 text-align: center;
 
                 top: 9.4px;
-                left: 99px;
+                left: 90px;
 
                 color: #ffcf24;
               }

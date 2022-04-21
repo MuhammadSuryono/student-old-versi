@@ -1,11 +1,21 @@
 <template>
-  <div>
+  <div style="background-color: #eef2f5; width: 1200px; height: 93vh">
     <div class="container">
-      <iframe ref="iframe" class="responsive-iframe" src="/pcgame/index.html" />
+      <b-button
+        type="is-primary"
+        class="is-align-items-center"
+        style="margin-top: 40px; z-index: 10"
+        @click="goHome()"
+      >
+        Lanjut
+      </b-button>
+      <iframe
+        ref="iframe"
+        class="responsive-iframe"
+        src="/pcgame/index.html"
+        :style="{ height: window.height - 200 + 'px' }"
+      />
     </div>
-    <b-button type="is-primary" class="is-align-items-center" @click="goHome()">
-      Lanjut
-    </b-button>
   </div>
 </template>
 
@@ -18,10 +28,18 @@ export default {
       finish: false,
       unityUrl: 'https://primeskills.id/technical/petraverse/vueconnect_pc/',
       loading: false,
-      token: ''
+      token: '',
+      window: {
+        width: 0,
+        height: 0
+      }
     }
   },
 
+  created () {
+    // eslint-disable-next-line nuxt/no-globals-in-created
+    window.addEventListener('resize', this.handleResize)
+  },
   mounted () {
     window.addEventListener('activityDoneEvent', this.goHome)
     this.$once('hook:beforeDestroy', () => {
@@ -34,10 +52,16 @@ export default {
     })
   },
 
+  destroyed () {
+    window.removeEventListener('resize', this.handleResize)
+  },
   methods: {
     goHome () {
       this.$router.push({ path: '/' })
-      // this.getToken()
+    },
+    handleResize () {
+      this.window.width = window.innerWidth
+      this.window.height = window.innerHeight
     },
 
     getToken () {
@@ -58,14 +82,16 @@ export default {
 .container {
   position: absolute;
   overflow: hidden;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+  width: 1200px;
+  top: 50px;
+  left: 110px;
+  height: 100%;
 }
 
 /* Then style the iframe to fit in the container div with full height and width */
 .responsive-iframe {
   position: absolute;
-  top: 0;
+  top: 10px;
   left: 0;
   bottom: 0;
   right: 0;

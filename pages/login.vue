@@ -4,33 +4,36 @@
     style="overflow: hidden"
   >
     <div class="hero-body">
-      <div class="container has-text-centered">
-        <img src="~/assets/images/logo_dashboard.png" class="img-logo">
-        <div class="card">
-          <div class="has-text-centered title">
-            Login to your Account
+      <v-row align="center" justify="center">
+        <v-col align="center" justify="center">
+          <img src="~/assets/images/logo_dashboard.png" class="img-logo">
+          <div class="card">
+            <div class="has-text-centered title">
+              Login to your Account
+            </div>
+            <b-field class="mt-14" style="background-color: white">
+              <b-input
+                v-model="state.email"
+                placeholder="Email"
+                class="inputs"
+              />
+            </b-field>
+            <b-field class="mt-14" style="background-color: white">
+              <b-input
+                v-model="state.password"
+                type="password"
+                placeholder="Password"
+                password-reveal
+                class="inputs"
+              />
+            </b-field>
+            <recaptcha class="captcha columns is-centered" />
+            <b-button :loading="loading" class="btn-login" @click="login()">
+              Log In
+            </b-button>
           </div>
-          <b-field class="mt-14" style="background-color: white">
-            <b-input v-model="state.email" placeholder="Email" class="inputs" />
-          </b-field>
-          <b-field class="mt-14" style="background-color: white">
-            <b-input
-              v-model="state.password"
-              type="password"
-              placeholder="Password"
-              password-reveal
-              class="inputs"
-            />
-          </b-field>
-          <recaptcha class="captcha columns is-centered" />
-          <!-- <b-button class="btn-login" @click="login()">
-            Log In
-          </b-button> -->
-          <b-button :loading="loading" class="btn-login" @click="login()">
-            Log In
-          </b-button>
-        </div>
-      </div>
+        </v-col>
+      </v-row>
     </div>
   </section>
 </template>
@@ -75,7 +78,6 @@ export default {
                 // eslint-disable-next-line valid-typeof
                 typeof data.user.avatar !== undefined
               ) {
-                console.log('data user : ', data.user)
                 this.$store.dispatch(
                   'user/updateImages',
                   data.user.avatar.image
@@ -122,17 +124,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-#particles-js {
-  position: absolute;
-  background-size: cover;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow-y: hidden;
-  z-index: 0;
-}
-
 .hero {
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
   background-repeat: no-repeat, repeat;

@@ -470,6 +470,7 @@ export default {
         top: 20px;
         position: absolute;
         left: 22px;
+        width: 360px;
         z-index: 5;
       }
       .icon-button {
