@@ -2,6 +2,9 @@
   "Decoration": {
     "description": "Auto imported from components/Decoration.vue"
   },
+  "Maps": {
+    "description": "Auto imported from components/Maps.vue"
+  },
   "Navbar": {
     "description": "Auto imported from components/Navbar.vue"
   },
@@ -46,6 +49,9 @@
   },
   "IconHome": {
     "description": "Auto imported from components/icon/Home.vue"
+  },
+  "IconLocation": {
+    "description": "Auto imported from components/icon/Location.vue"
   },
   "IconSkillcard": {
     "description": "Auto imported from components/icon/Skillcard.vue"

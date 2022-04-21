@@ -3,7 +3,6 @@
     <div style="height: 100%; width: 100%; z-index: -9999" />
 
     <div class="container-petra">
-      <!-- {{ window.height }} -->
       <Navbar class="navbars" />
       <div class="columns is-gapless main-menu">
         <!-- sidebar -->
@@ -12,8 +11,6 @@
           :style="widthSidebar"
         />
         <div v-if="sidebar" class="petra-overlay" />
-        <!-- 698
-        924 -->
         <!-- main -->
         <Nuxt
           v-if="$route.path !== '/'"
@@ -26,20 +23,46 @@
           class="nuxt-menu"
           :style="{ height: window.height - 68 + 'px' }"
         />
-        <span v-if="$route.path === '/'">
+        <span v-if="$route.path === '/' || $route.path === '/library'">
           <PNavigation class="navigation-petra" />
+        </span>
+        <span v-if="$route.path === '/'">
           <!-- maps -->
           <img
             src="~/assets/images/component/map/img-1.png"
             class="maps-petra"
-            @click="maps = !maps"
+            @click="showMaps()"
           >
-          <img
+          <div
             v-if="maps"
-            src="~/assets/images/maps.png"
-            style="position: absolute; z-index: 5; left: 10%; cursor: pointer"
-            @click="maps = !maps"
+            class="detail-maps"
+            :style="{
+              height: window.height - 68 + 'px'
+            }"
+            style="
+              position: absolute;
+              z-index: 3;
+              left: 80px;
+              width: 1200px;
+              background: rgba(10, 10, 10, 0.5);
+            "
           >
+            <div
+              style="
+                width: 1085px;
+                height: 607px;
+                margin: auto;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 4;
+                bottom: 0;
+                right: 0;
+              "
+            >
+              <Maps />
+            </div>
+          </div>
         </span>
         <!-- light -->
         <img
@@ -60,13 +83,11 @@
           >
         </div>
         <!-- edit profile -->
-        <!-- <transition name="slide-fade"> -->
         <Profile
           v-if="btn_profile"
           class="profile-petra noselect"
           :style="widthProfile2"
         />
-        <!-- </transition> -->
         <!-- decoration -->
         <Decoration
           v-if="btn_decoration"
@@ -83,8 +104,8 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
+      showDialog: true,
       light: true,
-      maps: false,
       window: {
         width: 0,
         height: 0
@@ -95,6 +116,9 @@ export default {
     ...mapState({
       sidebar: (state) => {
         return state.user.sidebar
+      },
+      maps: (state) => {
+        return state.user.btn_maps
       },
       btn_profile: (state) => {
         return state.user.btn_profile
@@ -139,6 +163,9 @@ export default {
     handleResize () {
       this.window.width = window.innerWidth
       this.window.height = window.innerHeight
+    },
+    showMaps () {
+      this.$store.commit('user/SET_MAPS')
     }
   }
 }

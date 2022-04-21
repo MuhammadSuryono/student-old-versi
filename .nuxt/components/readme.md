@@ -7,6 +7,7 @@ You can directly use them in pages and other components without the need to impo
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
 - `<Decoration>` | `<decoration>` (components/Decoration.vue)
+- `<Maps>` | `<maps>` (components/Maps.vue)
 - `<Navbar>` | `<navbar>` (components/Navbar.vue)
 - `<PButton>` | `<p-button>` (components/PButton.vue)
 - `<PLights>` | `<p-lights>` (components/PLights.vue)
@@ -22,6 +23,7 @@ You can directly use them in pages and other components without the need to impo
 - `<IconCluster>` | `<icon-cluster>` (components/icon/Cluster.vue)
 - `<IconFaction>` | `<icon-faction>` (components/icon/Faction.vue)
 - `<IconHome>` | `<icon-home>` (components/icon/Home.vue)
+- `<IconLocation>` | `<icon-location>` (components/icon/Location.vue)
 - `<IconSkillcard>` | `<icon-skillcard>` (components/icon/Skillcard.vue)
 - `<IconTabSkill>` | `<icon-tab-skill>` (components/icon/TabSkill.vue)
 - `<IconTabSkill2>` | `<icon-tab-skill2>` (components/icon/TabSkill2.vue)

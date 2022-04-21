@@ -97,16 +97,43 @@
                 </div>
               </div>
             </div>
-            <div class="content-skill">
+            <div class="content-skill" style="width: 670px; left: -10px">
               <div
                 v-for="(i, index) in dataSkills"
                 :key="index"
                 class="columns is-gapless list-card"
+                style="height: 25px"
               >
-                <div class="column title-card" @click="goDetail(i)">
+                <div
+                  class="column title-card"
+                  style="transform: skew(-10deg); z-index: 20"
+                >
                   {{ index + 1 }}. {{ i.skill }}
                 </div>
-                <div class="column">
+                <div class="column" style="transform: skew(-10deg)">
+                  <div class="columns is-gapless" />
+                </div>
+              </div>
+            </div>
+            <div
+              class="content-skill"
+              style="
+                background: transparent;
+                border-color: transparent;
+                transform: skew(0deg);
+                position: absolute;
+                top: 158px;
+              "
+            >
+              <div
+                v-for="(i, index) in dataSkills"
+                :key="index"
+                class="columns is-gapless list-card2"
+              >
+                <div class="column title-card" @click="goDetail(i)">
+                  <!-- {{ index + 1 }}. {{ i.skill }} -->
+                </div>
+                <div class="column" style="transform: skew(-10deg)">
                   <div class="columns is-gapless">
                     <div
                       v-for="(progres, index2) in 10"
@@ -578,8 +605,6 @@ export default {
             position: relative;
             top: 95px;
             width: 660.74px;
-            // height: 100%;
-            // padding-bottom: 50px;
             background: linear-gradient(
               180deg,
               rgba(41, 97, 181, 0.8) 0%,
@@ -589,7 +614,7 @@ export default {
             box-sizing: border-box;
             border-radius: 3.27562px;
             transform: skew(-10deg);
-            padding-top: 15px;
+            padding-top: 5px;
             .list-card {
               transform: skew(10deg);
               margin-bottom: 0px;
@@ -629,6 +654,47 @@ export default {
             }
 
             .list-card:nth-child(even) {
+              background-color: transparent;
+            }
+            .list-card2 {
+              transform: skew(10deg);
+              margin-bottom: 2px;
+              padding-left: 20px;
+              padding-top: 3px;
+              padding-bottom: 3px;
+              padding-right: 40px;
+              // margin-top: 10px;
+              .title-card {
+                font-family: 'Barlow';
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 19px;
+                display: flex;
+                align-items: center;
+                color: #ffffff;
+                cursor: pointer;
+              }
+              .shell {
+                position: absolute;
+                top: 4px;
+                height: 13px;
+                width: 300px;
+                list-style-type: none;
+                overflow: hidden;
+                margin-top: 3px;
+                .bar {
+                  background: green;
+                  width: 20px;
+                  height: 13px;
+                  z-index: 2;
+                }
+              }
+            }
+            .list-card2:nth-child(odd) {
+              background-color: transparent;
+            }
+
+            .list-card2:nth-child(even) {
               background-color: transparent;
             }
           }

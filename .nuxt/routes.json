@@ -14,6 +14,13 @@
     "_name": "_75174033"
   },
   {
+    "name": "library",
+    "path": "/library",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library.vue",
+    "chunkName": "pages/library",
+    "_name": "_013c2817"
+  },
+  {
     "name": "login",
     "path": "/login",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/login.vue",

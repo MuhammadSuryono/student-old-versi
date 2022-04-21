@@ -10,7 +10,8 @@ export const state = () => ({
   images: null,
   images_name: null,
   decoration: null,
-  decoration_name: null
+  decoration_name: null,
+  btn_maps: false
 })
 
 export const getters = {
@@ -40,6 +41,9 @@ export const mutations = {
   },
   SET_SIDEBAR (state) {
     state.sidebar = !state.sidebar
+  },
+  SET_MAPS (state) {
+    state.btn_maps = !state.btn_maps
   },
   SET_BTN_DECORATION (state) {
     state.btn_decoration = !state.btn_decoration
