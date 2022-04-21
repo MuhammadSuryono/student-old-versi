@@ -1,11 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <iframe
-        ref="iframe"
-        class="responsive-iframe"
-        src="/vueconnect_pc/index.html"
-      />
+      <iframe ref="iframe" class="responsive-iframe" src="/pcgame/index.html" />
     </div>
     <b-button type="is-primary" class="is-align-items-center" @click="goHome()">
       Lanjut
@@ -15,8 +11,8 @@
 
 <script>
 export default {
-  name: 'App',
-  layout: 'default',
+  name: 'PersonalityPage',
+  layout: 'dashboard',
   data () {
     return {
       finish: false,
@@ -45,7 +41,7 @@ export default {
     },
 
     getToken () {
-      const token = this.$store.state.user.token
+      const token = this.$auth.strategy.token.get()
       this.$refs.iframe.contentWindow.sendToken(token)
     },
     sendToken () {

@@ -10,10 +10,11 @@ import '../assets/css/main.scss'
 
 import '../node_modules/vuetify/dist/vuetify.css'
 
+import _5fa3735e from '../layouts/dashboard.vue'
 import _6f6c098b from '../layouts/default.vue'
 import _77a66d33 from '../layouts/login.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b),"_login": sanitizeComponent(_77a66d33) }
+const layouts = { "_dashboard": sanitizeComponent(_5fa3735e),"_default": sanitizeComponent(_6f6c098b),"_login": sanitizeComponent(_77a66d33) }
 
 export default {
   render (h, props) {
