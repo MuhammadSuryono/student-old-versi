@@ -12,22 +12,14 @@
         />
         <div v-if="sidebar" class="petra-overlay" />
         <!-- main -->
-        <Nuxt
-          v-if="$route.path !== '/'"
-          class="nuxt-menu"
-          style="z-index: 2"
-          :style="{ height: window.height - 68 + 'px' }"
-        />
-        <Nuxt
-          v-else
-          class="nuxt-menu"
-          :style="{ height: window.height - 68 + 'px' }"
-        />
+        <Nuxt v-if="$route.path !== '/'" class="nuxt-menu" style="z-index: 2" />
+        <Nuxt v-else class="nuxt-menu" />
+
         <span v-if="$route.path === '/' || $route.path === '/library'">
           <PNavigation class="navigation-petra" />
         </span>
+        <!-- maps and light -->
         <span v-if="$route.path === '/'">
-          <!-- maps -->
           <img
             src="~/assets/images/component/map/img-1.png"
             class="maps-petra"
@@ -42,6 +34,7 @@
             style="
               position: absolute;
               z-index: 3;
+              top: 68px;
               left: 80px;
               width: 1200px;
               background: rgba(10, 10, 10, 0.5);
@@ -63,25 +56,24 @@
               <Maps />
             </div>
           </div>
+          <img
+            v-if="light"
+            src="~/assets/images/component/light/img-1.png"
+            class="light-petra"
+            @click="light = false"
+          >
+          <div v-else class="light-petra-true" @keydown.esc="tes()">
+            <img
+              src="~/assets/images/component/light/img-2.png"
+              class="text-light"
+            >
+            <img
+              src="~/assets/images/component/light/img-3.png"
+              class="avatar-light"
+              @click="light = true"
+            >
+          </div>
         </span>
-        <!-- light -->
-        <img
-          v-if="light"
-          src="~/assets/images/component/light/img-1.png"
-          class="light-petra"
-          @click="light = false"
-        >
-        <div v-else class="light-petra-true" @keydown.esc="tes()">
-          <img
-            src="~/assets/images/component/light/img-2.png"
-            class="text-light"
-          >
-          <img
-            src="~/assets/images/component/light/img-3.png"
-            class="avatar-light"
-            @click="light = true"
-          >
-        </div>
         <!-- edit profile -->
         <Profile
           v-if="btn_profile"
@@ -165,6 +157,7 @@ export default {
       this.window.height = window.innerHeight
     },
     showMaps () {
+      console.log('tes')
       this.$store.commit('user/SET_MAPS')
     }
   }
@@ -201,24 +194,26 @@ export default {
     max-width: 1280px;
     padding-top: 4.25rem;
     height: 100%;
-    // display: table-cell;
     position: relative;
+    flex: 1 1 auto;
+    min-height: 100vh;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
     .sidebar-menu {
       width: 200px;
       position: fixed;
-      // height: 100%;
       z-index: 4;
+      height: 100vh;
+      max-height: calc(100% - 0px);
     }
     .nuxt-menu {
       z-index: -2;
       max-width: 1280px;
-      // height: 856px;
-      // display: flex;
-      // flex-direction: column;
-      // height: auto;
-      // width: auto;
-      min-height: 100%;
-      box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.05);
+      height: 100%;
+      display: flex;
+      flex: 1 0 auto;
+      transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .petra-overlay {
       width: 100%;
