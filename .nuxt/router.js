@@ -5,12 +5,15 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _d4e656b2 = () => interopDefault(import('../pages/archivements.vue' /* webpackChunkName: "pages/archivements" */))
+const _570c0e75 = () => interopDefault(import('../pages/collection/index.vue' /* webpackChunkName: "pages/collection/index" */))
 const _75174033 = () => interopDefault(import('../pages/home.vue' /* webpackChunkName: "pages/home" */))
 const _013c2817 = () => interopDefault(import('../pages/library.vue' /* webpackChunkName: "pages/library" */))
 const _4bb5acc5 = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
+const _1d74ca7a = () => interopDefault(import('../pages/module/index.vue' /* webpackChunkName: "pages/module/index" */))
 const _256c0b6c = () => interopDefault(import('../pages/personality.vue' /* webpackChunkName: "pages/personality" */))
 const _78ba5900 = () => interopDefault(import('../pages/skillcard/index.vue' /* webpackChunkName: "pages/skillcard/index" */))
 const _4dd95a8a = () => interopDefault(import('../pages/splash.vue' /* webpackChunkName: "pages/splash" */))
+const _607e65a0 = () => interopDefault(import('../pages/module/detail.vue' /* webpackChunkName: "pages/module/detail" */))
 const _36e3d693 = () => interopDefault(import('../pages/skillcard/detail.vue' /* webpackChunkName: "pages/skillcard/detail" */))
 const _fbe3eca4 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -30,6 +33,10 @@ export const routerOptions = {
     component: _d4e656b2,
     name: "archivements"
   }, {
+    path: "/collection",
+    component: _570c0e75,
+    name: "collection"
+  }, {
     path: "/home",
     component: _75174033,
     name: "home"
@@ -42,6 +49,10 @@ export const routerOptions = {
     component: _4bb5acc5,
     name: "login"
   }, {
+    path: "/module",
+    component: _1d74ca7a,
+    name: "module"
+  }, {
     path: "/personality",
     component: _256c0b6c,
     name: "personality"
@@ -53,6 +64,10 @@ export const routerOptions = {
     path: "/splash",
     component: _4dd95a8a,
     name: "splash"
+  }, {
+    path: "/module/detail",
+    component: _607e65a0,
+    name: "module-detail"
   }, {
     path: "/skillcard/detail",
     component: _36e3d693,

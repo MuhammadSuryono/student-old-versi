@@ -1,4 +1,7 @@
 {
+  "Back": {
+    "description": "Auto imported from components/Back.vue"
+  },
   "Decoration": {
     "description": "Auto imported from components/Decoration.vue"
   },
@@ -23,6 +26,9 @@
   "PProgress": {
     "description": "Auto imported from components/PProgress.vue"
   },
+  "PSearch": {
+    "description": "Auto imported from components/PSearch.vue"
+  },
   "PTitle": {
     "description": "Auto imported from components/PTitle.vue"
   },
@@ -41,17 +47,26 @@
   "IconBgAvatar": {
     "description": "Auto imported from components/icon/BgAvatar.vue"
   },
+  "IconBgBack": {
+    "description": "Auto imported from components/icon/BgBack.vue"
+  },
   "IconCluster": {
     "description": "Auto imported from components/icon/Cluster.vue"
   },
   "IconFaction": {
     "description": "Auto imported from components/icon/Faction.vue"
   },
+  "IconFilter": {
+    "description": "Auto imported from components/icon/Filter.vue"
+  },
   "IconHome": {
     "description": "Auto imported from components/icon/Home.vue"
   },
   "IconLocation": {
     "description": "Auto imported from components/icon/Location.vue"
+  },
+  "IconSearch": {
+    "description": "Auto imported from components/icon/Search.vue"
   },
   "IconSkillcard": {
     "description": "Auto imported from components/icon/Skillcard.vue"

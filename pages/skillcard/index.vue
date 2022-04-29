@@ -49,10 +49,6 @@
                 src="~/assets/images/skillcard/bg-title.svg"
                 class="background-button"
               >
-              <!-- <img
-                src="~/assets/images/skillcard/icon_skillcard.png"
-                class="icon-button"
-              > -->
               <div class="name-card">
                 Soft Skills Cluster
               </div>
@@ -307,7 +303,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .bg-img {
-  height: 100%;
+  min-height: 670px;
   width: 100%;
   z-index: 2;
   background-size: cover;
@@ -354,7 +350,6 @@ export default {
       margin-left: 150px;
       margin-top: 130px;
       background-color: rgba(239, 253, 253, 0.7);
-      // opacity: 0.8;
       border: 2.45672px solid #2b5ba3;
       box-sizing: border-box;
       border-radius: 8.18906px;

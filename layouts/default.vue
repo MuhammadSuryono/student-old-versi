@@ -193,7 +193,7 @@ export default {
   .main-menu {
     max-width: 1280px;
     padding-top: 4.25rem;
-    height: 100%;
+    // height: 100%;
     position: relative;
     flex: 1 1 auto;
     min-height: 100vh;
@@ -204,14 +204,12 @@ export default {
       width: 200px;
       position: fixed;
       z-index: 4;
-      height: 100vh;
-      max-height: calc(100% - 0px);
     }
     .nuxt-menu {
       z-index: -2;
       max-width: 1280px;
-      height: 100%;
-      display: flex;
+      // height: 100%;
+      // display: flex;
       flex: 1 0 auto;
       transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }

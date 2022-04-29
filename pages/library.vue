@@ -26,7 +26,7 @@
       style="position: absolute; right: 20px; bottom: 40px; cursor: pointer"
       @click="goBack()"
     >
-    <div class="btn-edit">
+    <div class="btn-edit" @click="toModule()">
       <img src="~/assets/images/library/btn.svg" style="height: 45px">
       <div class="text-edit">
         Search Modules
@@ -38,7 +38,7 @@
         Search Courses
       </div>
     </div>
-    <div class="btn-edit" style="top: 470px">
+    <div class="btn-edit" style="top: 470px" @click="goCollection()">
       <img src="~/assets/images/library/btn.svg" style="height: 45px">
       <div class="text-edit">
         My Collection
@@ -64,6 +64,12 @@ export default {
   methods: {
     goBack () {
       this.$router.push('/')
+    },
+    toModule () {
+      this.$router.push('/module')
+    },
+    goCollection () {
+      this.$router.push('/collection')
     }
   }
 }

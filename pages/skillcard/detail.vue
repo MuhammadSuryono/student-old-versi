@@ -455,13 +455,15 @@ export default {
 <style lang="scss" scoped>
 .main-detail {
   z-index: 2;
-  height: 100%;
+  min-height: 1000px;
   width: 100%;
-  z-index: 2;
   background-size: cover;
   background-position: center;
   background-image: url('../../assets/images/skillcard/bg-detail.svg');
   .header-skillcard {
+    position: absolute;
+    height: 200px;
+    width: 100%;
     .card-profile {
       position: relative;
       left: 80px;
@@ -535,11 +537,12 @@ export default {
     }
   }
   .content-skillcard {
+    position: absolute;
     width: 100%;
-    height: 100%;
+    height: 900px;
     margin-right: 84px;
     margin-left: 174px;
-    margin-top: -45px;
+    margin-top: 20px;
     background-image: url('~@/assets/images/skillcard/bg-detail2.svg');
     .card-title1 {
       position: relative;

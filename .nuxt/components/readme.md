@@ -6,6 +6,7 @@ You can directly use them in pages and other components without the need to impo
 
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
+- `<Back>` | `<back>` (components/Back.vue)
 - `<Decoration>` | `<decoration>` (components/Decoration.vue)
 - `<Maps>` | `<maps>` (components/Maps.vue)
 - `<Navbar>` | `<navbar>` (components/Navbar.vue)
@@ -14,16 +15,20 @@ You can directly use them in pages and other components without the need to impo
 - `<PNavigation>` | `<p-navigation>` (components/PNavigation.vue)
 - `<PNotification>` | `<p-notification>` (components/PNotification.vue)
 - `<PProgress>` | `<p-progress>` (components/PProgress.vue)
+- `<PSearch>` | `<p-search>` (components/PSearch.vue)
 - `<PTitle>` | `<p-title>` (components/PTitle.vue)
 - `<Profile>` | `<profile>` (components/Profile.vue)
 - `<IconArchivements>` | `<icon-archivements>` (components/icon/Archivements.vue)
 - `<IconAvatarBackground>` | `<icon-avatar-background>` (components/icon/AvatarBackground.vue)
 - `<IconBackBtn>` | `<icon-back-btn>` (components/icon/BackBtn.vue)
 - `<IconBgAvatar>` | `<icon-bg-avatar>` (components/icon/BgAvatar.vue)
+- `<IconBgBack>` | `<icon-bg-back>` (components/icon/BgBack.vue)
 - `<IconCluster>` | `<icon-cluster>` (components/icon/Cluster.vue)
 - `<IconFaction>` | `<icon-faction>` (components/icon/Faction.vue)
+- `<IconFilter>` | `<icon-filter>` (components/icon/Filter.vue)
 - `<IconHome>` | `<icon-home>` (components/icon/Home.vue)
 - `<IconLocation>` | `<icon-location>` (components/icon/Location.vue)
+- `<IconSearch>` | `<icon-search>` (components/icon/Search.vue)
 - `<IconSkillcard>` | `<icon-skillcard>` (components/icon/Skillcard.vue)
 - `<IconTabSkill>` | `<icon-tab-skill>` (components/icon/TabSkill.vue)
 - `<IconTabSkill2>` | `<icon-tab-skill2>` (components/icon/TabSkill2.vue)
