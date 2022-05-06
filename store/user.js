@@ -44,6 +44,7 @@ export const mutations = {
   },
   SET_MAPS (state) {
     state.btn_maps = !state.btn_maps
+    console.log(' state.btn_maps', state.btn_maps)
   },
   SET_BTN_DECORATION (state) {
     state.btn_decoration = !state.btn_decoration

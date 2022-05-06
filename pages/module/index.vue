@@ -19,7 +19,12 @@
       <div class="filter-module">
         <div class="columns is-gapless mb-0 pb-0">
           <div class="hexagon">
-            <input v-model="searchData" type="text" placeholder="Search...">
+            <input
+              v-model="searchData"
+              type="text"
+              placeholder="Search..."
+              @keyup.enter="toSearch"
+            >
           </div>
           <div class="search-btn" @click="toSearch()">
             <IconSearch class="icons" />
@@ -56,13 +61,8 @@
         </div>
         <div class="card-list">
           <v-row v-if="selected1" no-gutters style="padding: 20px">
-            <v-col
-              v-for="(i, index) in items.data"
-              :key="index"
-              cols="12"
-              sm="3"
-            >
-              <div class="box-card">
+            <v-col v-for="(i, index) in items" :key="index" cols="12" sm="3">
+              <div class="box-card" @click="toDetail()">
                 <img src="~/assets/images/module/card.svg" class="bg-card">
                 <img
                   src="~/assets/images/module/star-card.svg"
@@ -72,11 +72,17 @@
                 <div class="title-card">
                   {{ i.module_name }}
                 </div>
-                <div class="price-card">FREE</div>
+                <div v-if="i.enrolled" class="in-collection">IN COLLECTION</div>
+                <div v-else class="price-card">
+                  <span v-if="i.price === 0"> FREE </span>
+                  <span v-else>
+                    {{ i.price }}
+                  </span>
+                </div>
                 <div class="rating-card columns">
                   {{ i.module_rating }}/5
                   <b-rate
-                    v-model="module_rating"
+                    v-model="i.module_rating"
                     icon-pack="mdi"
                     size="is-small"
                     icon="mdi mdi-star"
@@ -90,15 +96,16 @@
             </v-col>
           </v-row>
           <infinite-loading
-            v-if="items.data"
+            v-if="items.length"
             spinner="spinner"
             style="margin-bottom: 15px"
             @infinite="infiniteScroll"
           >
-            <div slot="spinner">
-              <v-progress-circular indeterminate color="primary" />
+            <div slot="spinner" style="color: white">
+              <v-progress-circular indeterminate color="white" />
             </div>
             <div slot="no-results" style="color: white">No results</div>
+            <div slot="no-more" style="color: white">No more data</div>
           </infinite-loading>
         </div>
       </span>
@@ -114,156 +121,35 @@
             color: #1c4091;
           "
         >
-          {{ items.total }} result found.
+          {{ total_search }} result found.
         </div>
-        <div class="card-list">
+        <div class="card-list" style="padding-bottom: 20px">
           <div
-            v-for="(item, index) in items.data"
+            v-for="(item, index) in items"
             :key="index"
-            style="padding: 20px"
+            style="padding: 20px 20px 10px 20px"
           >
-            <v-toolbar color="white" class="contain-list">
-              <img
-                :src="item.display_picture"
-                style="height: 79px; width: 122px"
-              >
+            <v-toolbar color="white" class="contain-list" @click="toDetail()">
+              <img :src="item.display_picture" class="img-title">
               <v-divider class="mx-4" vertical />
-              <div style="width: 300px">
-                <div
-                  style="
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 16.8687px;
-                    line-height: 22px;
-
-                    color: #3b69bc;
-                  "
-                >
+              <div class="data-desc">
+                <div class="module-name">
                   {{ item.module_name }}
                 </div>
-                <div
-                  style="
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 12.6515px;
-                    line-height: 16px;
-
-                    color: #859bb5;
-                  "
-                >
-                  By {{ item.studio_name }}
-                </div>
+                <div class="studio-name">By {{ item.studio_name }}</div>
               </div>
               <v-spacer />
               <v-divider class="mx-4" vertical />
-              <div>
-                <div
-                  style="
-                    font-style: normal;
-                    font-weight: 400;
-                    font-size: 16.8687px;
-                    line-height: 22px;
-                    color: #3e4d68;
-                  "
-                >
-                  Module Details
-                </div>
-                <div
-                  style="
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 12.6515px;
-                    line-height: 14px;
-
-                    color: #859bb5;
-                  "
-                >
+              <div class="data-details">
+                <div class="module-details">Module Details</div>
+                <div class="module-disc" style="">
                   {{ item.total_discussion }} Discussions
                 </div>
               </div>
               <v-spacer />
               <v-divider class="mx-4" vertical />
-              <div
-                style="
-                  background-color: #0aa7c1;
-                  width: 158.61px;
-                  height: 38.76px;
-                  text-align: center;
-                  font-style: normal;
-                  font-weight: 500;
-                  font-size: 19.2785px;
-                  line-height: 25px;
-                  padding-top: 6px;
-
-                  color: #ffffff;
-                "
-              >
-                Play
-              </div>
+              <div class="btn-play">Play</div>
             </v-toolbar>
-            <!-- <v-row
-            no-gutters
-            align="center"
-            justify="justify-center"
-            class="contain-list"
-          >
-            <v-col cols="3" align="center" justify="center">
-              <v-card class="pa-2" outlined tile> One of three columns </v-card>
-            </v-col>
-            <v-col cols="4" align="center" justify="center">
-              <v-card class="pa-2" outlined tile> One of three columns </v-card>
-            </v-col>
-            <v-col
-              cols="3"
-              align="start"
-              justify="center"
-              style="padding-left: 20px"
-            >
-              <div
-                style="
-                  font-style: normal;
-                  font-weight: 400;
-                  font-size: 16.8687px;
-                  line-height: 22px;
-                  color: #3e4d68;
-                "
-              >
-                Module Details
-              </div>
-              <div
-                style="
-                  font-style: normal;
-                  font-weight: 500;
-                  font-size: 12.6515px;
-                  line-height: 14px;
-
-                  color: #859bb5;
-                "
-              >
-                Chapter: 6 <br>
-                212 Discussions
-              </div>
-            </v-col>
-            <v-col cols="2" align="center" justify="center">
-              <div
-                style="
-                  background-color: #0aa7c1;
-                  width: 158.61px;
-                  height: 38.76px;
-                  text-align: center;
-                  font-style: normal;
-                  font-weight: 500;
-                  font-size: 19.2785px;
-                  line-height: 25px;
-                  padding-top: 6px;
-
-                  color: #ffffff;
-                "
-              >
-                Play
-              </div>
-            </v-col>
-          </v-row> -->
           </div>
         </div>
       </span>
@@ -279,11 +165,13 @@
         <div class="container-dialog">
           <div class="tag-card">
             <v-row
+              no-gutters
               justify="space-between"
               style="
-                padding-right: 10px;
-                padding-left: 10px;
                 margin-bottom: 5px;
+                border-bottom: solid 2px #ffffff;
+                margin-right: 10px;
+                margin-left: 10px;
               "
             >
               <v-col cols="6">
@@ -292,12 +180,12 @@
                 </div>
               </v-col>
               <v-col cols="6">
-                <div class="reset-filter">
+                <div class="reset-filter" @click="selection = []">
                   Reset Filter
                 </div>
               </v-col>
             </v-row>
-            <v-item-group multiple>
+            <v-item-group v-model="selection" multiple>
               <v-row no-gutters>
                 <v-col
                   v-for="n in tagData.data"
@@ -400,6 +288,7 @@ export default {
 
   data () {
     return {
+      selection: [],
       dialog: false,
       selected1: true,
       selected2: false,
@@ -437,7 +326,9 @@ export default {
       ],
       selectedItem: '',
       searchBtn: false,
-      keyword: ''
+      keyword: '',
+      total: 0,
+      total_search: 0
     }
   },
 
@@ -467,7 +358,6 @@ export default {
       this.window.height = window.innerHeight
     },
     toSearch () {
-      console.log('search : ', this.searchData.length)
       if (this.searchData.length > 0) {
         this.searchBtn = true
         this.getsearchData()
@@ -484,7 +374,8 @@ export default {
       this.$store
         .dispatch('module/fetchAllSearchModule', data)
         .then((response) => {
-          this.items = response.data.data
+          this.items = response.data.data.data
+          this.total_search = response.data.data.total
         })
         .catch((error) => {
           this.$toast.error(error.response, {
@@ -506,7 +397,9 @@ export default {
       this.$store
         .dispatch('module/fetchAllSearchModule', data)
         .then((response) => {
-          this.items = response.data.data
+          this.items = response.data.data.data
+          this.total = response.data.data.total
+          console.log('items : ', this.items)
         })
         .catch((error) => {
           this.$toast.error(error.response, {
@@ -537,17 +430,17 @@ export default {
         })
     },
     infiniteScroll ($state) {
-      const data = {
-        page: this.page,
-        keyword: this.searchData
-      }
       setTimeout(() => {
         this.page++
+        const data = {
+          page: this.page,
+          keyword: this.searchData
+        }
         this.$store
           .dispatch('module/fetchAllSearchModule', data)
           .then((resp) => {
             if (resp.data.data.data.length > 1) {
-              resp.data.data.data.forEach(item => this.items.data.push(item))
+              resp.data.data.data.forEach(item => this.items.push(item))
               $state.loaded()
             } else {
               $state.complete()
@@ -568,7 +461,6 @@ export default {
     goBack () {
       this.$router.push('/library')
     },
-
     tab (id, number) {
       if (id === 1) {
         this.selected1 = true
@@ -578,11 +470,17 @@ export default {
         this.selected1 = false
         this.selected2 = true
       }
+    },
+    toDetail () {
+      this.$router.push('/module/detail')
     }
   }
 }
 </script>
 <style lang="scss" scoped>
+.hexagon input:focus {
+  outline: none;
+}
 .bg-img {
   background-image: url('~@/assets/images/module/bg.png');
   height: 100%;
@@ -718,6 +616,7 @@ export default {
       .box-card {
         position: relative;
         height: 240px;
+        cursor: pointer;
         .bg-card {
           width: 100%;
           position: absolute;
@@ -735,6 +634,11 @@ export default {
           top: 0px;
           height: 120px;
           object-fit: cover;
+          --g: #000, #0000 1deg 179deg, #000 180deg;
+          --mask: conic-gradient(from -45deg at top 18px right 18px, var(--g))
+            100% 0 /100% 100% no-repeat;
+          -webkit-mask: var(--mask);
+          mask: var(--mask);
         }
         .star-card {
           padding-left: 10px;
@@ -769,8 +673,25 @@ export default {
           font-size: 18px;
           line-height: 23px;
           text-align: right;
-
           color: #a6a6a6;
+        }
+        .in-collection {
+          z-index: 6;
+          bottom: 30px;
+          right: 20px;
+          position: absolute;
+
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 14px;
+          text-align: center;
+          color: #ffffff;
+          text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+          background: #ffcf24;
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          border-radius: 4px;
+          padding: 4px 8px 4px 8px;
         }
         .rating-card {
           padding-right: 10px;
@@ -791,7 +712,58 @@ export default {
         width: 100%;
         background-color: white;
         .img-title {
+          height: 79px;
+          width: 122px;
         }
+        .data-desc {
+          width: 300px;
+          .module-name {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16.8687px;
+            line-height: 22px;
+            color: #3b69bc;
+          }
+          .studio-name {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12.6515px;
+            line-height: 16px;
+            color: #859bb5;
+          }
+        }
+        .data-details {
+          .module-details {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16.8687px;
+            line-height: 22px;
+            color: #3e4d68;
+          }
+          .module-disc {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12.6515px;
+            line-height: 14px;
+            color: #859bb5;
+          }
+        }
+        .btn-play {
+          background-color: #0aa7c1;
+          width: 158.61px;
+          height: 38.76px;
+          text-align: center;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 19.2785px;
+          line-height: 25px;
+          padding-top: 6px;
+          color: #ffffff;
+          cursor: pointer;
+        }
+      }
+      .contain-list >>> .v-toolbar__content {
+        padding: 0px !important;
       }
     }
   }
@@ -849,8 +821,11 @@ export default {
         line-height: 24px;
         padding-top: 1px;
         border: 1px solid #7289aa;
-
         color: #7289aa;
+
+        position: absolute;
+        top: 45px;
+        right: 30px;
       }
       .box-filter {
         text-align: center;

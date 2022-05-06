@@ -147,6 +147,7 @@ export default {
     this.sidebar = true
     this.$notify('Hello user!')
     this.handleResize()
+    this.$store.commit('user/SET_MAPS', false)
   },
   destroyed () {
     window.removeEventListener('resize', this.handleResize)

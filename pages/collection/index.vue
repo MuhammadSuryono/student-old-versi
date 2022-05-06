@@ -45,7 +45,7 @@
         </div>
         <div class="card-list">
           <div
-            v-for="(item, index) in items.data"
+            v-for="(item, index) in items"
             :key="index"
             style="padding: 10px"
           >
@@ -365,7 +365,7 @@ export default {
       this.$store
         .dispatch('module/fetchAllMyCollection', data)
         .then((response) => {
-          this.items = response.data.data
+          this.items = response.data.data.data
         })
         .catch((error) => {
           this.$toast.error(error.response, {
