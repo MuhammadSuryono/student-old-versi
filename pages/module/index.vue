@@ -199,7 +199,7 @@
                   cols="12"
                   md="4"
                   style="padding: 10px"
-                  @click="selection2 = []"
+                  @click="selection2 = ''"
                 >
                   <v-item v-slot="{ active, toggle }">
                     <v-card
@@ -284,7 +284,7 @@ export default {
   data () {
     return {
       selection: [],
-      selection2: [],
+      selection2: '',
       dialog: false,
       selected1: true,
       selected2: false,
@@ -311,7 +311,8 @@ export default {
       total: 0,
       total_search: 0,
       infiniteId: 1,
-      infiniteId2: 1
+      infiniteId2: 1,
+      payload: {}
     }
   },
 
@@ -336,6 +337,34 @@ export default {
     this.getDataTag()
   },
   methods: {
+    filterData () {
+      this.page = 1
+      const data = {
+        page: this.page,
+        keyword: this.searchData,
+        filterBy: this.selection,
+        sortBy: this.selection2
+      }
+      // this.payload = data
+      console.log(data)
+      // this.$store
+      //   .dispatch('module/fetchAllSearchModule', data)
+      //   .then((response) => {
+      //     this.items = response.data.data.data
+      //     this.total = response.data.data.total
+      //     console.log('items : ', this.items)
+      //   })
+      //   .catch((error) => {
+      //     this.$toast.error(error.response, {
+      //       position: 'top-center',
+      //       duration: 5000
+      //     })
+      //     if (error.status === 401) {
+      //       this.$auth.logout()
+      //       this.$router.push('/login')
+      //     }
+      //   })
+    },
     handleResize () {
       this.window.width = window.innerWidth
       this.window.height = window.innerHeight
@@ -355,16 +384,20 @@ export default {
       this.page = 1
       const data = {
         page: this.page,
-        keyword: this.searchData
+        keyword: this.searchData,
+        filterBy: this.selection,
+        sortBy: this.selection2
       }
       this.$store
         .dispatch('module/fetchAllSearchModule', data)
         .then((response) => {
+          console.log('res', response)
           this.items = response.data.data.data
           this.total = response.data.data.total
           console.log('items : ', this.items)
         })
         .catch((error) => {
+          console.log('error : ', error.response)
           this.$toast.error(error.response, {
             position: 'top-center',
             duration: 5000
@@ -397,7 +430,9 @@ export default {
         this.page++
         const data = {
           page: this.page,
-          keyword: this.searchData
+          keyword: this.searchData,
+          filterBy: this.selection,
+          sortBy: this.selection2
         }
         this.$store
           .dispatch('module/fetchAllSearchModule', data)
