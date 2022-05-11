@@ -97,6 +97,7 @@
           </v-row>
           <infinite-loading
             v-if="items.length"
+            :identifier="infiniteId"
             spinner="spinner"
             style="margin-bottom: 15px"
             @infinite="infiniteScroll"
@@ -121,7 +122,7 @@
             color: #1c4091;
           "
         >
-          {{ total_search }} result found.
+          {{ total }} result found.
         </div>
         <div class="card-list" style="padding-bottom: 20px">
           <div
@@ -151,6 +152,20 @@
               <div class="btn-play">Play</div>
             </v-toolbar>
           </div>
+
+          <infinite-loading
+            v-if="items.length"
+            spinner="spinner"
+            style="margin-top: 10px"
+            :identifier="infiniteId2"
+            @infinite="infiniteScroll"
+          >
+            <div slot="spinner" style="color: white">
+              <v-progress-circular indeterminate color="white" />
+            </div>
+            <div slot="no-results" style="color: white">No results</div>
+            <div slot="no-more" style="color: white">No more data</div>
+          </infinite-loading>
         </div>
       </span>
     </div>
@@ -164,16 +179,7 @@
       <div class="center-dialog">
         <div class="container-dialog">
           <div class="tag-card">
-            <v-row
-              no-gutters
-              justify="space-between"
-              style="
-                margin-bottom: 5px;
-                border-bottom: solid 2px #ffffff;
-                margin-right: 10px;
-                margin-left: 10px;
-              "
-            >
+            <v-row no-gutters justify="space-between" class="tag-contain">
               <v-col cols="6">
                 <div class="tag-btn">
                   Tag
@@ -188,11 +194,12 @@
             <v-item-group v-model="selection" multiple>
               <v-row no-gutters>
                 <v-col
-                  v-for="n in tagData.data"
-                  :key="n"
+                  v-for="n in tagData"
+                  :key="n.id"
                   cols="12"
                   md="4"
                   style="padding: 10px"
+                  @click="selection2 = []"
                 >
                   <v-item v-slot="{ active, toggle }">
                     <v-card
@@ -214,14 +221,12 @@
               </v-row>
             </v-item-group>
           </div>
-          <div style="margin-top: 30px">
+          <div class="sort-card">
             <v-row
+              no-gutters
               justify="space-between"
-              style="
-                padding-right: 10px;
-                padding-left: 10px;
-                margin-bottom: 5px;
-              "
+              class="sort-contain"
+              style=""
             >
               <v-col cols="6">
                 <div class="tag-btn">
@@ -229,14 +234,15 @@
                 </div>
               </v-col>
             </v-row>
-            <v-item-group>
+            <v-item-group v-model="selection2">
               <v-row no-gutters>
                 <v-col
-                  v-for="a in dataSort"
-                  :key="a"
+                  v-for="(a, indexSort) in dataSort"
+                  :key="indexSort"
                   cols="12"
                   md="4"
                   style="padding: 10px"
+                  @click="selection = []"
                 >
                   <v-item v-slot="{ active, toggle }">
                     <v-card
@@ -259,18 +265,7 @@
             </v-item-group>
           </div>
           <v-row>
-            <v-btn
-              style="
-                background-color: #4c7bc1;
-                color: white;
-                text-transform: capitalize;
-                width: 228.23px;
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: 40px;
-              "
-              @click="dialog = false"
-            >
+            <v-btn class="apply-filter" style="" @click="filterData()">
               Apply Filter
             </v-btn>
           </v-row>
@@ -289,33 +284,19 @@ export default {
   data () {
     return {
       selection: [],
+      selection2: [],
       dialog: false,
       selected1: true,
       selected2: false,
-
       page: 1,
+      page2: 1,
       items: {},
       searchData: '',
-
       rate: 2,
       window: {
         width: 0,
         height: 0
       },
-      dataFilter: [
-        'Religious',
-        'Art',
-        'Business',
-        'Technology',
-        'Math',
-        'History',
-        'Rature',
-        'Law',
-        'Character Building',
-        'Thesis',
-        'IT',
-        'Psychology'
-      ],
       dataSort: [
         'Name',
         'Popular',
@@ -328,7 +309,9 @@ export default {
       searchBtn: false,
       keyword: '',
       total: 0,
-      total_search: 0
+      total_search: 0,
+      infiniteId: 1,
+      infiniteId2: 1
     }
   },
 
@@ -338,7 +321,7 @@ export default {
         return state.module.dataSearchModule
       },
       tagData: (state) => {
-        return state.module.dataTag
+        return state.module.dataTag.data
       }
     })
   },
@@ -358,35 +341,15 @@ export default {
       this.window.height = window.innerHeight
     },
     toSearch () {
+      this.infiniteId += 1
+      this.infiniteId2 += 1
       if (this.searchData.length > 0) {
         this.searchBtn = true
-        this.getsearchData()
+        this.getData()
       } else {
-        console.log('kosong')
         this.searchBtn = false
         this.getData()
       }
-    },
-    getsearchData () {
-      const data = {
-        keyword: this.searchData
-      }
-      this.$store
-        .dispatch('module/fetchAllSearchModule', data)
-        .then((response) => {
-          this.items = response.data.data.data
-          this.total_search = response.data.data.total
-        })
-        .catch((error) => {
-          this.$toast.error(error.response, {
-            position: 'top-center',
-            duration: 5000
-          })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
-        })
     },
     getData () {
       this.page = 1
@@ -461,14 +424,16 @@ export default {
     goBack () {
       this.$router.push('/library')
     },
-    tab (id, number) {
+    tab (id) {
       if (id === 1) {
         this.selected1 = true
         this.selected2 = false
+        this.infiniteId += 1
       }
       if (id === 2) {
         this.selected1 = false
         this.selected2 = true
+        this.infiniteId2 += 1
       }
     },
     toDetail () {
@@ -653,6 +618,7 @@ export default {
           padding-left: 10px;
           z-index: 6;
           top: 135px;
+          width: 80%;
           left: 10px;
           position: absolute;
           font-style: normal;
@@ -792,40 +758,77 @@ export default {
       padding: 20px;
       .tag-card {
         margin-top: 30px;
+        .tag-contain {
+          margin-bottom: 5px;
+          border-bottom: solid 2px #ffffff;
+          margin-right: 10px;
+          margin-left: 10px;
+          .tag-btn {
+            height: 27px;
+            width: 140.8px;
+            background-color: white;
+            border-radius: 0px;
+            text-align: center;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            padding-top: 1px;
+            cursor: pointer;
+            color: #7289aa;
+          }
+          .reset-filter {
+            float: right;
+            height: 27px;
+            cursor: pointer;
+            width: 142px;
+            background-color: transparent;
+            border-radius: 0px;
+            text-align: center;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            padding-top: 1px;
+            border: 1px solid #7289aa;
+            color: #7289aa;
+            position: absolute;
+            top: 45px;
+            right: 30px;
+          }
+        }
       }
-      .tag-btn {
-        height: 27px;
-        width: 140.8px;
-        background-color: white;
-        border-radius: 0px;
-        text-align: center;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
-        padding-top: 1px;
-        cursor: pointer;
-        color: #7289aa;
+      .sort-card {
+        margin-top: 30px;
+        .sort-contain {
+          margin-bottom: 5px;
+          border-bottom: solid 2px #ffffff;
+          margin-right: 10px;
+          margin-left: 10px;
+          .tag-btn {
+            height: 27px;
+            width: 140.8px;
+            background-color: white;
+            border-radius: 0px;
+            text-align: center;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            padding-top: 1px;
+            cursor: pointer;
+            color: #7289aa;
+          }
+        }
       }
-      .reset-filter {
-        float: right;
-        height: 27px;
-        cursor: pointer;
-        width: 142px;
-        background-color: transparent;
-        border-radius: 0px;
-        text-align: center;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
-        padding-top: 1px;
-        border: 1px solid #7289aa;
-        color: #7289aa;
-
-        position: absolute;
-        top: 45px;
-        right: 30px;
+      .apply-filter {
+        background-color: #4c7bc1;
+        color: white;
+        text-transform: capitalize;
+        width: 228.23px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 40px;
       }
       .box-filter {
         text-align: center;

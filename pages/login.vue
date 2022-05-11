@@ -98,7 +98,7 @@ export default {
               this.$auth.strategy.token.set(
                 'Bearer ' + response.data.data.access_token
               )
-              this.$router.push({ path: '/splash' })
+              this.$router.push({ path: '/module' })
             } else {
               this.$auth.logout()
               this.$router.push('/login')

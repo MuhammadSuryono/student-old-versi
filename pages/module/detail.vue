@@ -1020,7 +1020,7 @@ export default {
                   top: 23px;
                   left: 41px;
                   font-size: 12px;
-                  width: 500px;
+                  width: 480px;
                   //   right: 10px;
                 }
               }
