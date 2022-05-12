@@ -2,35 +2,73 @@ const resource = '/student/module'
 
 export default $axios => ({
   getSearchModule (payload) {
-    console.log('payload')
-    console.log(payload.keyword === '')
-    console.log(payload.sortBy === '')
-    console.log(payload.filterBy.length === 0)
-    console.log('payload')
-    if (
-      payload.keyword === '' &&
-      payload.sortBy === '' &&
-      payload.filterBy.length === 0
-    ) {
-      return $axios.get(`${resource}?per_page=8&page=${payload.page}`)
-    } else if (payload.sortBy === '') {
-      if (payload.keyword === '') {
+    if (payload.keyword === '') {
+      if (
+        (payload.sortBy === '' || typeof payload.sortBy === 'undefined') &&
+        payload.filterBy.length === 0
+      ) {
+        return $axios.get(`${resource}?per_page=8&page=${payload.page}`)
+      }
+      if (
+        (payload.sortBy !== '' || typeof payload.sortBy !== 'undefined') &&
+        payload.filterBy.length === 0
+      ) {
+        return $axios.get(
+          `${resource}?per_page=8&page=${payload.page}&sortBy=${payload.sortBy}`
+        )
+      }
+      if (
+        (payload.sortBy === '' || typeof payload.sortBy === 'undefined') &&
+        payload.filterBy.length !== 0
+      ) {
         return $axios.get(
           `${resource}?per_page=8&page=${payload.page}&filterBy=${payload.filterBy}`
         )
-      } else {
+      }
+      // api is not support
+      if (
+        (payload.sortBy !== '' || typeof payload.sortBy !== 'undefined') &&
+        payload.filterBy.length !== 0
+      ) {
         return $axios.get(
-          `${resource}?per_page=8&page=${payload.page}&keyword=${payload.keyword}&filterBy=${payload.filterBy}`
+          `${resource}?per_page=8&page=${payload.page}&sortBy=${payload.sortBy}&filterBy=${payload.filterBy}`
         )
       }
-    } else if (payload.keyword === '') {
-      return $axios.get(
-        `${resource}?per_page=8&page=${payload.page}&sortBy=${payload.sortBy}`
-      )
-    } else {
-      return $axios.get(
-        `${resource}?per_page=8&page=${payload.page}&keyword=${payload.keyword}&sortBy=${payload.sortBy}`
-      )
+    }
+    if (payload.keyword !== '') {
+      if (
+        (payload.sortBy === '' || typeof payload.sortBy === 'undefined') &&
+        payload.filterBy.length === 0
+      ) {
+        return $axios.get(
+          `${resource}?per_page=8&page=${payload.page}&keyword=${payload.keyword}`
+        )
+      }
+      if (
+        (payload.sortBy !== '' || typeof payload.sortBy !== 'undefined') &&
+        payload.filterBy.length === 0
+      ) {
+        return $axios.get(
+          `${resource}?per_page=8&page=${payload.page}&sortBy=${payload.sortBy}&keyword=${payload.keyword}`
+        )
+      }
+      if (
+        (payload.sortBy === '' || typeof payload.sortBy === 'undefined') &&
+        payload.filterBy.length !== 0
+      ) {
+        return $axios.get(
+          `${resource}?per_page=8&page=${payload.page}&filterBy=${payload.filterBy}&keyword=${payload.keyword}`
+        )
+      }
+      // api is not support
+      if (
+        (payload.sortBy !== '' || typeof payload.sortBy !== 'undefined') &&
+        payload.filterBy.length !== 0
+      ) {
+        return $axios.get(
+          `${resource}?per_page=8&page=${payload.page}&sortBy=${payload.sortBy}&filterBy=${payload.filterBy}&keyword=${payload.keyword}`
+        )
+      }
     }
   },
   getMyCollection (payload) {

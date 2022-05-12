@@ -38,7 +38,9 @@
         <div class="columns is-gapless mb-0 pb-0">
           <div v-if="selected1" class="tab-petra">
             <img src="~/assets/images/tab/tab-active.svg" class="icon-button">
-            <div class="text-petra">See Modules</div>
+            <div class="text-petra">
+              See Modules {{ infiniteId }} {{ infiniteId2 }}
+            </div>
           </div>
           <div v-else class="tab-petra" @click="tab(1, true)">
             <img
@@ -97,7 +99,7 @@
           </v-row>
           <infinite-loading
             v-if="items.length"
-            :identifier="infiniteId"
+            :identifier="infiniteId2"
             spinner="spinner"
             style="margin-bottom: 15px"
             @infinite="infiniteScroll"
@@ -257,7 +259,7 @@
                       }"
                       @click="toggle"
                     >
-                      {{ a }}
+                      {{ a.name }}
                     </v-card>
                   </v-item>
                 </v-col>
@@ -285,6 +287,7 @@ export default {
     return {
       selection: [],
       selection2: '',
+      selection3: '',
       dialog: false,
       selected1: true,
       selected2: false,
@@ -298,12 +301,26 @@ export default {
         height: 0
       },
       dataSort: [
-        'Name',
-        'Popular',
-        'Latest',
-        'Rating',
-        'Lowest Rating',
-        'Relevance'
+        {
+          id: 'highest_rating',
+          name: 'Highest Rating'
+        },
+        {
+          id: 'lowest_rating',
+          name: 'Lowest Rating'
+        },
+        {
+          id: 'title',
+          name: 'Title'
+        },
+        {
+          id: 'created_at',
+          name: 'Created At'
+        },
+        {
+          id: 'popular',
+          name: 'Popular'
+        }
       ],
       selectedItem: '',
       searchBtn: false,
@@ -315,7 +332,6 @@ export default {
       payload: {}
     }
   },
-
   computed: {
     ...mapState({
       data: (state) => {
@@ -331,39 +347,31 @@ export default {
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
   },
-
   mounted () {
     this.getData()
     this.getDataTag()
   },
   methods: {
     filterData () {
-      this.page = 1
-      const data = {
-        page: this.page,
-        keyword: this.searchData,
-        filterBy: this.selection,
-        sortBy: this.selection2
+      this.infiniteId2 += 1
+      if (
+        this.selection.length === 0 &&
+        (this.selection2 === '' || typeof this.selection2 === 'undefined')
+      ) {
+        this.infiniteId += 1
+        console.log('infiniteId', this.infiniteId)
+        this.selection3 = ''
+        this.searchBtn = false
+        this.getData()
+      } else {
+        this.searchBtn = true
+        if (this.selection2 === '' || typeof this.selection2 === 'undefined') {
+          this.getData()
+        } else {
+          this.selection3 = this.dataSort[this.selection2].id
+          this.getData()
+        }
       }
-      // this.payload = data
-      console.log(data)
-      // this.$store
-      //   .dispatch('module/fetchAllSearchModule', data)
-      //   .then((response) => {
-      //     this.items = response.data.data.data
-      //     this.total = response.data.data.total
-      //     console.log('items : ', this.items)
-      //   })
-      //   .catch((error) => {
-      //     this.$toast.error(error.response, {
-      //       position: 'top-center',
-      //       duration: 5000
-      //     })
-      //     if (error.status === 401) {
-      //       this.$auth.logout()
-      //       this.$router.push('/login')
-      //     }
-      //   })
     },
     handleResize () {
       this.window.width = window.innerWidth
@@ -386,18 +394,17 @@ export default {
         page: this.page,
         keyword: this.searchData,
         filterBy: this.selection,
-        sortBy: this.selection2
+        sortBy: this.selection3
       }
       this.$store
         .dispatch('module/fetchAllSearchModule', data)
         .then((response) => {
-          console.log('res', response)
           this.items = response.data.data.data
           this.total = response.data.data.total
           console.log('items : ', this.items)
+          this.dialog = false
         })
         .catch((error) => {
-          console.log('error : ', error.response)
           this.$toast.error(error.response, {
             position: 'top-center',
             duration: 5000
@@ -432,7 +439,7 @@ export default {
           page: this.page,
           keyword: this.searchData,
           filterBy: this.selection,
-          sortBy: this.selection2
+          sortBy: this.selection3
         }
         this.$store
           .dispatch('module/fetchAllSearchModule', data)
