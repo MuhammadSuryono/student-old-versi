@@ -32,13 +32,13 @@
         Search Modules
       </div>
     </div>
-    <div class="btn-edit" style="top: 410px">
+    <!-- <div class="btn-edit" style="top: 410px">
       <img src="~/assets/images/library/btn.svg" style="height: 45px">
       <div class="text-edit">
         Search Courses
       </div>
-    </div>
-    <div class="btn-edit" style="top: 470px" @click="goCollection()">
+    </div> -->
+    <div class="btn-edit" style="top: 410px" @click="goCollection()">
       <img src="~/assets/images/library/btn.svg" style="height: 45px">
       <div class="text-edit">
         My Collection
@@ -66,10 +66,10 @@ export default {
       this.$router.push('/')
     },
     toModule () {
-      this.$router.push('/module')
+      this.$router.push('/library/module')
     },
     goCollection () {
-      this.$router.push('/collection')
+      this.$router.push('/library/collection')
     }
   }
 }

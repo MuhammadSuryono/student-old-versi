@@ -5,16 +5,16 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _d4e656b2 = () => interopDefault(import('../pages/archivements.vue' /* webpackChunkName: "pages/archivements" */))
-const _570c0e75 = () => interopDefault(import('../pages/collection/index.vue' /* webpackChunkName: "pages/collection/index" */))
 const _75174033 = () => interopDefault(import('../pages/home.vue' /* webpackChunkName: "pages/home" */))
-const _013c2817 = () => interopDefault(import('../pages/library.vue' /* webpackChunkName: "pages/library" */))
+const _1c0bfd4c = () => interopDefault(import('../pages/library/index.vue' /* webpackChunkName: "pages/library/index" */))
 const _4bb5acc5 = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
-const _1d74ca7a = () => interopDefault(import('../pages/module/index.vue' /* webpackChunkName: "pages/module/index" */))
 const _256c0b6c = () => interopDefault(import('../pages/personality.vue' /* webpackChunkName: "pages/personality" */))
 const _78ba5900 = () => interopDefault(import('../pages/skillcard/index.vue' /* webpackChunkName: "pages/skillcard/index" */))
 const _4dd95a8a = () => interopDefault(import('../pages/splash.vue' /* webpackChunkName: "pages/splash" */))
-const _607e65a0 = () => interopDefault(import('../pages/module/detail.vue' /* webpackChunkName: "pages/module/detail" */))
+const _2faa596e = () => interopDefault(import('../pages/library/collection/index.vue' /* webpackChunkName: "pages/library/collection/index" */))
+const _3ee02cd2 = () => interopDefault(import('../pages/library/module/index.vue' /* webpackChunkName: "pages/library/module/index" */))
 const _36e3d693 = () => interopDefault(import('../pages/skillcard/detail.vue' /* webpackChunkName: "pages/skillcard/detail" */))
+const _6c7f4e48 = () => interopDefault(import('../pages/library/module/detail.vue' /* webpackChunkName: "pages/library/module/detail" */))
 const _fbe3eca4 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -33,25 +33,17 @@ export const routerOptions = {
     component: _d4e656b2,
     name: "archivements"
   }, {
-    path: "/collection",
-    component: _570c0e75,
-    name: "collection"
-  }, {
     path: "/home",
     component: _75174033,
     name: "home"
   }, {
     path: "/library",
-    component: _013c2817,
+    component: _1c0bfd4c,
     name: "library"
   }, {
     path: "/login",
     component: _4bb5acc5,
     name: "login"
-  }, {
-    path: "/module",
-    component: _1d74ca7a,
-    name: "module"
   }, {
     path: "/personality",
     component: _256c0b6c,
@@ -65,13 +57,21 @@ export const routerOptions = {
     component: _4dd95a8a,
     name: "splash"
   }, {
-    path: "/module/detail",
-    component: _607e65a0,
-    name: "module-detail"
+    path: "/library/collection",
+    component: _2faa596e,
+    name: "library-collection"
+  }, {
+    path: "/library/module",
+    component: _3ee02cd2,
+    name: "library-module"
   }, {
     path: "/skillcard/detail",
     component: _36e3d693,
     name: "skillcard-detail"
+  }, {
+    path: "/library/module/detail",
+    component: _6c7f4e48,
+    name: "library-module-detail"
   }, {
     path: "/",
     component: _fbe3eca4,

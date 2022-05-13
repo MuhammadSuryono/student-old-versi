@@ -3,72 +3,84 @@
     "name": "archivements",
     "path": "/archivements",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/archivements.vue",
-    "chunkName": "pages/archivements"
-  },
-  {
-    "name": "collection",
-    "path": "/collection",
-    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/collection/index.vue",
-    "chunkName": "pages/collection/index"
+    "chunkName": "pages/archivements",
+    "_name": "_d4e656b2"
   },
   {
     "name": "home",
     "path": "/home",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/home.vue",
-    "chunkName": "pages/home"
+    "chunkName": "pages/home",
+    "_name": "_75174033"
   },
   {
     "name": "library",
     "path": "/library",
-    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library.vue",
-    "chunkName": "pages/library"
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/index.vue",
+    "chunkName": "pages/library/index",
+    "_name": "_1c0bfd4c"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/login.vue",
-    "chunkName": "pages/login"
-  },
-  {
-    "name": "module",
-    "path": "/module",
-    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/module/index.vue",
-    "chunkName": "pages/module/index"
+    "chunkName": "pages/login",
+    "_name": "_4bb5acc5"
   },
   {
     "name": "personality",
     "path": "/personality",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/personality.vue",
-    "chunkName": "pages/personality"
+    "chunkName": "pages/personality",
+    "_name": "_256c0b6c"
   },
   {
     "name": "skillcard",
     "path": "/skillcard",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/skillcard/index.vue",
-    "chunkName": "pages/skillcard/index"
+    "chunkName": "pages/skillcard/index",
+    "_name": "_78ba5900"
   },
   {
     "name": "splash",
     "path": "/splash",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/splash.vue",
-    "chunkName": "pages/splash"
+    "chunkName": "pages/splash",
+    "_name": "_4dd95a8a"
   },
   {
-    "name": "module-detail",
-    "path": "/module/detail",
-    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/module/detail.vue",
-    "chunkName": "pages/module/detail"
+    "name": "library-collection",
+    "path": "/library/collection",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/collection/index.vue",
+    "chunkName": "pages/library/collection/index",
+    "_name": "_2faa596e"
+  },
+  {
+    "name": "library-module",
+    "path": "/library/module",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/index.vue",
+    "chunkName": "pages/library/module/index",
+    "_name": "_3ee02cd2"
   },
   {
     "name": "skillcard-detail",
     "path": "/skillcard/detail",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/skillcard/detail.vue",
-    "chunkName": "pages/skillcard/detail"
+    "chunkName": "pages/skillcard/detail",
+    "_name": "_36e3d693"
+  },
+  {
+    "name": "library-module-detail",
+    "path": "/library/module/detail",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail.vue",
+    "chunkName": "pages/library/module/detail",
+    "_name": "_6c7f4e48"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_fbe3eca4"
   }
 ]

@@ -531,7 +531,7 @@ export default {
   mounted () {},
   methods: {
     goBack () {
-      this.$router.push('/module')
+      this.$router.push('/library/module')
     },
     tab (id, number) {
       if (id === 1) {

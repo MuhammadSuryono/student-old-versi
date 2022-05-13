@@ -38,9 +38,7 @@
         <div class="columns is-gapless mb-0 pb-0">
           <div v-if="selected1" class="tab-petra">
             <img src="~/assets/images/tab/tab-active.svg" class="icon-button">
-            <div class="text-petra">
-              See Modules {{ infiniteId }} {{ infiniteId2 }}
-            </div>
+            <div class="text-petra">See Modules</div>
           </div>
           <div v-else class="tab-petra" @click="tab(1, true)">
             <img
@@ -49,7 +47,7 @@
             >
             <div class="text-petra">See Modules</div>
           </div>
-          <div v-if="selected2" class="tab-petra">
+          <!-- <div v-if="selected2" class="tab-petra">
             <img src="~/assets/images/tab/tab-active.svg" class="icon-button">
             <div class="text-petra">Latest Modules</div>
           </div>
@@ -59,7 +57,7 @@
               class="icon-button"
             >
             <div class="text-petra">Latest Modules</div>
-          </div>
+          </div> -->
         </div>
         <div class="card-list">
           <v-row v-if="selected1" no-gutters style="padding: 20px">
@@ -113,26 +111,16 @@
         </div>
       </span>
       <span v-else>
-        <div
-          class="columns is-gapless mb-0 pb-0"
-          style="
-            font-style: normal;
-            font-weight: 600;
-            font-size: 21px;
-            line-height: 27px;
-
-            color: #1c4091;
-          "
-        >
+        <div class="columns is-gapless mb-0 pb-0 total-found">
           {{ total }} result found.
         </div>
-        <div class="card-list" style="padding-bottom: 20px">
+        <div v-if="!isLoading" class="card-list" style="padding-bottom: 20px">
           <div
             v-for="(item, index) in items"
             :key="index"
             style="padding: 20px 20px 10px 20px"
           >
-            <v-toolbar color="white" class="contain-list" @click="toDetail()">
+            <v-toolbar color="white" class="contain-list">
               <img :src="item.display_picture" class="img-title">
               <v-divider class="mx-4" vertical />
               <div class="data-desc">
@@ -151,10 +139,9 @@
               </div>
               <v-spacer />
               <v-divider class="mx-4" vertical />
-              <div class="btn-play">Play</div>
+              <div class="btn-play" @click="toDetail()">Play</div>
             </v-toolbar>
           </div>
-
           <infinite-loading
             v-if="items.length"
             spinner="spinner"
@@ -169,111 +156,135 @@
             <div slot="no-more" style="color: white">No more data</div>
           </infinite-loading>
         </div>
-      </span>
-    </div>
-    <div
-      v-if="dialog"
-      class="dialog-filter"
-      :style="{
-        height: window.height - 68 + 'px'
-      }"
-    >
-      <div class="center-dialog">
-        <div class="container-dialog">
-          <div class="tag-card">
-            <v-row no-gutters justify="space-between" class="tag-contain">
-              <v-col cols="6">
-                <div class="tag-btn">
-                  Tag
-                </div>
-              </v-col>
-              <v-col cols="6">
-                <div class="reset-filter" @click="selection = []">
-                  Reset Filter
-                </div>
-              </v-col>
-            </v-row>
-            <v-item-group v-model="selection" multiple>
-              <v-row no-gutters>
-                <v-col
-                  v-for="n in tagData"
-                  :key="n.id"
-                  cols="12"
-                  md="4"
-                  style="padding: 10px"
-                  @click="selection2 = ''"
-                >
-                  <v-item v-slot="{ active, toggle }">
-                    <v-card
-                      class="d-flex align-center box-filter"
-                      dark
-                      height="30"
-                      :style="{
-                        backgroundColor: active
-                          ? 'rgba(128, 204, 255, 0.75)'
-                          : 'rgba(43, 43, 86, 0.75)',
-                        color: active ? '#0071BC' : 'white'
-                      }"
-                      @click="toggle"
-                    >
-                      {{ n.name }}
-                    </v-card>
-                  </v-item>
-                </v-col>
-              </v-row>
-            </v-item-group>
-          </div>
-          <div class="sort-card">
-            <v-row
-              no-gutters
-              justify="space-between"
-              class="sort-contain"
-              style=""
-            >
-              <v-col cols="6">
-                <div class="tag-btn">
-                  Sort by
-                </div>
-              </v-col>
-            </v-row>
-            <v-item-group v-model="selection2">
-              <v-row no-gutters>
-                <v-col
-                  v-for="(a, indexSort) in dataSort"
-                  :key="indexSort"
-                  cols="12"
-                  md="4"
-                  style="padding: 10px"
-                  @click="selection = []"
-                >
-                  <v-item v-slot="{ active, toggle }">
-                    <v-card
-                      class="d-flex align-center box-filter"
-                      dark
-                      height="30"
-                      :style="{
-                        backgroundColor: active
-                          ? 'rgba(128, 204, 255, 0.75)'
-                          : 'rgba(43, 43, 86, 0.75)',
-                        color: active ? '#0071BC' : 'white'
-                      }"
-                      @click="toggle"
-                    >
-                      {{ a.name }}
-                    </v-card>
-                  </v-item>
-                </v-col>
-              </v-row>
-            </v-item-group>
-          </div>
-          <v-row>
-            <v-btn class="apply-filter" style="" @click="filterData()">
-              Apply Filter
-            </v-btn>
+        <div v-else class="card-list" style="min-height: 300px">
+          <v-row
+            align="center"
+            justify="center"
+            style="width: 100%; height: 100%"
+          >
+            <v-col align="center" justify="center">
+              <v-progress-circular
+                indeterminate
+                color="white"
+                style="color: white; padding-top: 250px"
+              />
+            </v-col>
           </v-row>
         </div>
-      </div>
+      </span>
     </div>
+    <LightBox @wheel.prevent @touchmove.prevent @scroll.prevent>
+      <div
+        v-if="dialog"
+        class="dialog-filter"
+        :style="{
+          height: window.height - 68 + 'px'
+        }"
+      >
+        <div class="center-dialog">
+          <div class="container-dialog">
+            <v-btn
+              icon
+              style="position: absolute; top: 10px; right: 20px"
+              @click="dialog = false"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+            <div class="tag-card">
+              <v-row no-gutters justify="space-between" class="tag-contain">
+                <v-col cols="6">
+                  <div class="tag-btn">
+                    Tag
+                  </div>
+                </v-col>
+                <v-col cols="6">
+                  <div class="reset-filter" @click="selection = []">
+                    Reset Filter
+                  </div>
+                </v-col>
+              </v-row>
+              <v-item-group v-model="selection" multiple>
+                <v-row no-gutters>
+                  <v-col
+                    v-for="n in tagData"
+                    :key="n.id"
+                    cols="12"
+                    md="4"
+                    style="padding: 10px"
+                    @click="selection2 = ''"
+                  >
+                    <v-item v-slot="{ active, toggle }">
+                      <v-card
+                        class="d-flex align-center box-filter"
+                        dark
+                        height="30"
+                        :style="{
+                          backgroundColor: active
+                            ? 'rgba(128, 204, 255, 0.75)'
+                            : 'rgba(43, 43, 86, 0.75)',
+                          color: active ? '#0071BC' : 'white'
+                        }"
+                        @click="toggle"
+                      >
+                        {{ n.name }}
+                      </v-card>
+                    </v-item>
+                  </v-col>
+                </v-row>
+              </v-item-group>
+            </div>
+            <div class="sort-card">
+              <v-row
+                no-gutters
+                justify="space-between"
+                class="sort-contain"
+                style=""
+              >
+                <v-col cols="6">
+                  <div class="tag-btn">
+                    Sort by
+                  </div>
+                </v-col>
+              </v-row>
+              <v-item-group v-model="selection2">
+                <v-row no-gutters>
+                  <v-col
+                    v-for="(a, indexSort) in dataSort"
+                    :key="indexSort"
+                    cols="12"
+                    md="4"
+                    style="padding: 10px"
+                    @click="selection = []"
+                  >
+                    <v-item v-slot="{ active, toggle }">
+                      <v-card
+                        class="d-flex align-center box-filter"
+                        dark
+                        height="30"
+                        :style="{
+                          backgroundColor: active
+                            ? 'rgba(128, 204, 255, 0.75)'
+                            : 'rgba(43, 43, 86, 0.75)',
+                          color: active ? '#0071BC' : 'white'
+                        }"
+                        @click="toggle"
+                      >
+                        {{ a.name }}
+                      </v-card>
+                    </v-item>
+                  </v-col>
+                </v-row>
+              </v-item-group>
+            </div>
+            <v-row>
+              <v-btn class="apply-filter" style="" @click="filterData()">
+                Apply Filter
+              </v-btn>
+            </v-row>
+          </div>
+        </div>
+      </div>
+    </LightBox>
   </div>
 </template>
 
@@ -311,11 +322,11 @@ export default {
         },
         {
           id: 'title',
-          name: 'Title'
+          name: 'Name'
         },
         {
           id: 'created_at',
-          name: 'Created At'
+          name: 'Latest'
         },
         {
           id: 'popular',
@@ -329,7 +340,8 @@ export default {
       total_search: 0,
       infiniteId: 1,
       infiniteId2: 1,
-      payload: {}
+      payload: {},
+      isLoading: false
     }
   },
   computed: {
@@ -396,6 +408,7 @@ export default {
         filterBy: this.selection,
         sortBy: this.selection3
       }
+      this.isLoading = true
       this.$store
         .dispatch('module/fetchAllSearchModule', data)
         .then((response) => {
@@ -403,8 +416,10 @@ export default {
           this.total = response.data.data.total
           console.log('items : ', this.items)
           this.dialog = false
+          this.isLoading = false
         })
         .catch((error) => {
+          this.isLoading = false
           this.$toast.error(error.response, {
             position: 'top-center',
             duration: 5000
@@ -479,7 +494,7 @@ export default {
       }
     },
     toDetail () {
-      this.$router.push('/module/detail')
+      this.$router.push('/library/module/detail')
     }
   }
 }
@@ -774,11 +789,19 @@ export default {
         padding: 0px !important;
       }
     }
+    .total-found {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 21px;
+      line-height: 27px;
+      color: #1c4091;
+    }
   }
 }
 .dialog-filter {
   z-index: 9;
   position: absolute;
+  overflow: hidden;
   top: 68px;
   left: 80px;
   width: 1200px;
@@ -799,7 +822,7 @@ export default {
       background-color: #e2e5e8;
       padding: 20px;
       .tag-card {
-        margin-top: 30px;
+        margin-top: 40px;
         .tag-contain {
           margin-bottom: 5px;
           border-bottom: solid 2px #ffffff;
@@ -835,7 +858,7 @@ export default {
             border: 1px solid #7289aa;
             color: #7289aa;
             position: absolute;
-            top: 45px;
+            top: 56px;
             right: 30px;
           }
         }
