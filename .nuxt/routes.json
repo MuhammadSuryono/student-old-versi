@@ -72,9 +72,44 @@
   {
     "name": "library-module-detail",
     "path": "/library/module/detail",
-    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail.vue",
-    "chunkName": "pages/library/module/detail",
-    "_name": "_6c7f4e48"
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/index.vue",
+    "chunkName": "pages/library/module/detail/index",
+    "_name": "_27c5ca5f"
+  },
+  {
+    "name": "library-module-detail-finalquiz",
+    "path": "/library/module/detail/finalquiz",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/finalquiz.vue",
+    "chunkName": "pages/library/module/detail/finalquiz",
+    "_name": "_39299950"
+  },
+  {
+    "name": "library-module-detail-game",
+    "path": "/library/module/detail/game",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/game.vue",
+    "chunkName": "pages/library/module/detail/game",
+    "_name": "_5f83baf5"
+  },
+  {
+    "name": "library-module-detail-quiz",
+    "path": "/library/module/detail/quiz",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/quiz.vue",
+    "chunkName": "pages/library/module/detail/quiz",
+    "_name": "_eabeb050"
+  },
+  {
+    "name": "library-module-detail-reading",
+    "path": "/library/module/detail/reading",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/reading.vue",
+    "chunkName": "pages/library/module/detail/reading",
+    "_name": "_2108d9d9"
+  },
+  {
+    "name": "library-module-detail-video",
+    "path": "/library/module/detail/video",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/video.vue",
+    "chunkName": "pages/library/module/detail/video",
+    "_name": "_b14a8cf0"
   },
   {
     "name": "index",

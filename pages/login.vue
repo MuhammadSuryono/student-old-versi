@@ -98,7 +98,7 @@ export default {
               this.$auth.strategy.token.set(
                 'Bearer ' + response.data.data.access_token
               )
-              this.$router.push({ path: '/module' })
+              this.$router.push({ path: '/library' })
             } else {
               this.$auth.logout()
               this.$router.push('/login')

@@ -11,7 +11,10 @@
           Search Module
         </div>
       </div>
-      <div class="btn-back" @click="goBack()">
+      <div v-if="!searchBtn" class="btn-back" @click="goBack()">
+        <Back />
+      </div>
+      <div v-else class="btn-back" @click="searchBtn = false">
         <Back />
       </div>
     </div>
@@ -70,7 +73,10 @@
                 >
                 <img :src="i.display_picture" class="display-pic">
                 <div class="title-card">
-                  {{ i.module_name }}
+                  {{ i.module_name }} <br>
+
+                  <span style="font-weight: normal; font-size: 14px">
+                    {{ i.academic_field }}</span>
                 </div>
                 <div v-if="i.enrolled" class="in-collection">IN COLLECTION</div>
                 <div v-else class="price-card">
@@ -127,7 +133,9 @@
                 <div class="module-name">
                   {{ item.module_name }}
                 </div>
-                <div class="studio-name">By {{ item.studio_name }}</div>
+                <div class="studio-name">
+                  By {{ item.studio_name }} | {{ item.academic_field }}
+                </div>
               </div>
               <v-spacer />
               <v-divider class="mx-4" vertical />
@@ -675,7 +683,7 @@ export default {
           padding-left: 10px;
           z-index: 6;
           top: 135px;
-          width: 80%;
+          width: 94%;
           left: 10px;
           position: absolute;
           font-style: normal;
@@ -683,6 +691,9 @@ export default {
           font-size: 15px;
           line-height: 18px;
           color: #5b6987;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .price-card {
           z-index: 6;
@@ -785,8 +796,8 @@ export default {
           cursor: pointer;
         }
       }
-      .contain-list >>> .v-toolbar__content {
-        padding: 0px !important;
+      .contain-list::v-deep .v-toolbar__content {
+        padding-left: 0px !important;
       }
     }
     .total-found {

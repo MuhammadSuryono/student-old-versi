@@ -114,7 +114,11 @@
             </div>
             <div class="petra-content">
               <div style="padding: 20px 20px 10px 20px">
-                <v-toolbar color="white" class="contain-list">
+                <v-toolbar
+                  color="white"
+                  class="contain-list"
+                  @click="toReading()"
+                >
                   <img
                     src="https://i.picsum.photos/id/248/300/300.jpg?hmac=Iib4d9sRMu9H0sibj_DmuT4icfBinQG4FB8NrdU9Sg0"
                     class="img-title"
@@ -143,7 +147,11 @@
                     </div>
                   </div>
                 </v-toolbar>
-                <v-toolbar color="white" class="contain-list">
+                <v-toolbar
+                  color="white"
+                  class="contain-list"
+                  @click="toVideo()"
+                >
                   <img
                     src="https://i.picsum.photos/id/248/300/300.jpg?hmac=Iib4d9sRMu9H0sibj_DmuT4icfBinQG4FB8NrdU9Sg0"
                     class="img-title"
@@ -152,7 +160,7 @@
                   <v-divider class="mx-4" vertical />
                   <div class="data-desc">
                     <div class="module-name">
-                      Introduction to Reading
+                      Introduction to Video
                     </div>
                     <div class="studio-name">
                       This is an activity where Students can read through text
@@ -164,7 +172,7 @@
                   <v-spacer />
                   <div class="data-read">
                     <div class="module-name">
-                      READING ACTIVITY
+                      VIDEO ACTIVITY
                     </div>
                     <div class="studio-name">
                       15 Pages <br>
@@ -172,7 +180,7 @@
                     </div>
                   </div>
                 </v-toolbar>
-                <v-toolbar color="white" class="contain-list">
+                <v-toolbar color="white" class="contain-list" @click="toGame()">
                   <img
                     src="https://i.picsum.photos/id/248/300/300.jpg?hmac=Iib4d9sRMu9H0sibj_DmuT4icfBinQG4FB8NrdU9Sg0"
                     class="img-title"
@@ -181,7 +189,7 @@
                   <v-divider class="mx-4" vertical />
                   <div class="data-desc">
                     <div class="module-name">
-                      Introduction to Reading
+                      Introduction to Game
                     </div>
                     <div class="studio-name">
                       This is an activity where Students can read through text
@@ -193,7 +201,7 @@
                   <v-spacer />
                   <div class="data-read">
                     <div class="module-name">
-                      READING ACTIVITY
+                      GAME ACTIVITY
                     </div>
                     <div class="studio-name">
                       15 Pages <br>
@@ -201,7 +209,7 @@
                     </div>
                   </div>
                 </v-toolbar>
-                <v-toolbar color="white" class="contain-list">
+                <v-toolbar color="white" class="contain-list" @click="toQuiz()">
                   <img
                     src="https://i.picsum.photos/id/248/300/300.jpg?hmac=Iib4d9sRMu9H0sibj_DmuT4icfBinQG4FB8NrdU9Sg0"
                     class="img-title"
@@ -210,7 +218,7 @@
                   <v-divider class="mx-4" vertical />
                   <div class="data-desc">
                     <div class="module-name">
-                      Introduction to Reading
+                      Introduction to Quiz
                     </div>
                     <div class="studio-name">
                       This is an activity where Students can read through text
@@ -222,7 +230,7 @@
                   <v-spacer />
                   <div class="data-read">
                     <div class="module-name">
-                      READING ACTIVITY
+                      QUIZ ACTIVITY
                     </div>
                     <div class="studio-name">
                       15 Pages <br>
@@ -230,7 +238,11 @@
                     </div>
                   </div>
                 </v-toolbar>
-                <v-toolbar color="white" class="contain-list">
+                <v-toolbar
+                  color="white"
+                  class="contain-list"
+                  @click="toFinalQuiz()"
+                >
                   <img
                     src="https://i.picsum.photos/id/248/300/300.jpg?hmac=Iib4d9sRMu9H0sibj_DmuT4icfBinQG4FB8NrdU9Sg0"
                     class="img-title"
@@ -239,7 +251,7 @@
                   <v-divider class="mx-4" vertical />
                   <div class="data-desc">
                     <div class="module-name">
-                      Introduction to Reading
+                      Introduction to Final Quiz
                     </div>
                     <div class="studio-name">
                       This is an activity where Students can read through text
@@ -251,36 +263,7 @@
                   <v-spacer />
                   <div class="data-read">
                     <div class="module-name">
-                      READING ACTIVITY
-                    </div>
-                    <div class="studio-name">
-                      15 Pages <br>
-                      212 Discussions
-                    </div>
-                  </div>
-                </v-toolbar>
-                <v-toolbar color="white" class="contain-list">
-                  <img
-                    src="https://i.picsum.photos/id/248/300/300.jpg?hmac=Iib4d9sRMu9H0sibj_DmuT4icfBinQG4FB8NrdU9Sg0"
-                    class="img-title"
-                  >
-                  <img src="~/assets/images/module/lock.svg" class="img-lock">
-                  <v-divider class="mx-4" vertical />
-                  <div class="data-desc">
-                    <div class="module-name">
-                      Introduction to Reading
-                    </div>
-                    <div class="studio-name">
-                      This is an activity where Students can read through text
-                      provided by the Lecturer.
-                    </div>
-                  </div>
-                  <v-spacer />
-                  <v-divider class="mx-4" vertical />
-                  <v-spacer />
-                  <div class="data-read">
-                    <div class="module-name">
-                      READING ACTIVITY
+                      FINAL QUIZ ACTIVITY
                     </div>
                     <div class="studio-name">
                       15 Pages <br>
@@ -542,11 +525,30 @@ export default {
         this.selected1 = false
         this.selected2 = true
       }
+    },
+    toReading () {
+      this.$router.push('/library/module/detail/reading')
+    },
+    toVideo () {
+      this.$router.push('/library/module/detail/video')
+    },
+    toGame () {
+      this.$router.push('/library/module/detail/game')
+    },
+    toQuiz () {
+      this.$router.push('/library/module/detail/quiz')
+    },
+    toFinalQuiz () {
+      this.$router.push('/library/module/detail/finalquiz')
     }
   }
 }
 </script>
 <style lang="scss" scoped>
+.contain-list >>> .v-toolbar__content,
+.v-toolbar__extension {
+  padding-left: 0px;
+}
 .bg-img {
   background-image: url('~@/assets/images/module/bg.png');
   height: 100%;
@@ -766,17 +768,20 @@ export default {
             width: 100%;
             height: 100%;
             .contain-list {
+              cursor: pointer;
               height: 75px;
               width: 100%;
+              opacity: 0.6;
               background-color: white;
-              margin-bottom: 20px;
+              // background-color: rgba(255, 255, 255, 0.3);
+              margin-bottom: 25px;
               .img-title {
-                height: 79px;
+                height: 75px;
                 width: 122px;
               }
               .img-lock {
                 position: absolute;
-                left: 67px;
+                left: 52px;
               }
               .data-desc {
                 width: 280px;
@@ -796,6 +801,7 @@ export default {
                 }
               }
               .data-read {
+                width: 150px;
                 .module-name {
                   font-style: normal;
                   font-size: 13.8687px;
@@ -810,8 +816,11 @@ export default {
                 }
               }
             }
-            .contain-list >>> .v-toolbar__content {
-              padding: 0px !important;
+            .contain-list::v-deep .v-toolbar__content {
+              padding-left: 0px !important;
+            }
+            .contain-list:hover {
+              opacity: 1;
             }
           }
         }
