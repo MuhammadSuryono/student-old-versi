@@ -202,7 +202,7 @@
               <v-row no-gutters justify="space-between" class="tag-contain">
                 <v-col cols="6">
                   <div class="tag-btn">
-                    Tag
+                    Tag {{ selection }}
                   </div>
                 </v-col>
                 <v-col cols="6">
