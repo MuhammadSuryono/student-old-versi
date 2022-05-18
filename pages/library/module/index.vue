@@ -65,7 +65,7 @@
         <div class="card-list">
           <v-row v-if="selected1" no-gutters style="padding: 20px">
             <v-col v-for="(i, index) in items" :key="index" cols="12" sm="3">
-              <div class="box-card" @click="toDetail()">
+              <div class="box-card" @click="toDetail(i)">
                 <img src="~/assets/images/module/card.svg" class="bg-card">
                 <img
                   src="~/assets/images/module/star-card.svg"
@@ -379,7 +379,6 @@ export default {
         (this.selection2 === '' || typeof this.selection2 === 'undefined')
       ) {
         this.infiniteId += 1
-        console.log('infiniteId', this.infiniteId)
         this.selection3 = ''
         this.searchBtn = false
         this.getData()
@@ -501,8 +500,12 @@ export default {
         this.infiniteId2 += 1
       }
     },
-    toDetail () {
-      this.$router.push('/library/module/detail')
+    toDetail (data) {
+      console.log(data)
+      // this.$router.push({
+      //   name: 'library-module-detail',
+      //   params: { index: 1 }
+      // })
     }
   }
 }

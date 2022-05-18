@@ -504,12 +504,16 @@ export default {
   data () {
     return {
       selected1: true,
-      selected2: false
+      selected2: false,
+      id: ''
     }
   },
 
   computed: {},
-  created () {},
+  created () {
+    this.id = this.$route.params.detail
+    console.log('id : ', this.id)
+  },
 
   mounted () {},
   methods: {

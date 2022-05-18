@@ -119,6 +119,7 @@
                 transform: skew(0deg);
                 position: absolute;
                 top: 158px;
+                margin-bottom: 40px;
               "
             >
               <div
@@ -187,6 +188,15 @@
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="card-title2">
+                <img
+                  src="~/assets/images/skillcard/download.png"
+                  class="background-button"
+                >
+                <div class="name-card">
+                  Download PDF
                 </div>
               </div>
             </div>
@@ -303,7 +313,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .bg-img {
-  min-height: 670px;
+  height: 890px;
   width: 100%;
   z-index: 2;
   background-size: cover;
@@ -410,6 +420,7 @@ export default {
             }
           }
           .skillcard-name {
+            margin-bottom: 40px;
             position: relative;
             top: 10px;
             left: -8px;
@@ -691,6 +702,28 @@ export default {
 
             .list-card2:nth-child(even) {
               background-color: transparent;
+            }
+
+            .card-title2 {
+              margin-top: 20px;
+              margin-bottom: 20px;
+              top: 2.6px;
+              position: relative;
+              left: 400px;
+              width: 225px;
+              height: 30px;
+              cursor: pointer;
+              .name-card {
+                z-index: 6;
+                position: absolute;
+                font-family: 'Barlow';
+                font-size: 17.6537px;
+                line-height: 22px;
+                text-align: center;
+                color: #ffffff;
+                top: 4px;
+                left: 60px;
+              }
             }
           }
         }
