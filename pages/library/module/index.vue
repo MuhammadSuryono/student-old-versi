@@ -253,7 +253,7 @@
                         }"
                         @click="toggle"
                       >
-                        {{ n.name }} {{ n.id }}
+                        {{ n.name }}
                       </v-card>
                     </v-item>
                   </v-col>
@@ -324,6 +324,7 @@ export default {
   data () {
     return {
       selection: [],
+      selection4: [],
       selection2: '',
       selection3: '',
       dialog: false,
@@ -396,6 +397,7 @@ export default {
       this.infiniteId2 += 1
       this.searchData = ''
       this.selection = []
+      this.selection4 = []
       this.selection2 = ''
       this.selection3 = ''
       this.searchBtn = false
@@ -412,6 +414,7 @@ export default {
         this.infiniteId2 += 1
         this.searchData = ''
         this.selection = []
+        this.selection4 = []
         this.selection2 = ''
         this.selection3 = ''
         this.searchBtn = false
@@ -424,15 +427,11 @@ export default {
           typeof this.selection2 !== 'undefined'
         ) {
           if (this.selection.length !== 0) {
-            // this.searchBtn = true
-            // this.tagData.map((item, index) => {
-            //   console.log(this.tagData[0])
-            // })
+            this.selection4 = []
             for (let i = 0; i < this.selection.length; i++) {
-              console.log('selection 1', i)
-              console.log('selection 1', this.selection)
-              console.log('selection 1', this.tagData[this.selection])
+              this.selection4.push(this.tagData[this.selection[i]].id)
             }
+            this.getData()
           } else {
             this.searchBtn = true
             this.selection3 = this.dataSort[this.selection2].id
@@ -462,7 +461,7 @@ export default {
       const data = {
         page: this.page,
         keyword: this.searchData,
-        filterBy: this.selection,
+        filterBy: this.selection4,
         sortBy: this.selection3
       }
       this.$store
@@ -508,7 +507,7 @@ export default {
         const data = {
           page: this.page,
           keyword: this.searchData,
-          filterBy: this.selection,
+          filterBy: this.selection4,
           sortBy: this.selection3
         }
         this.$store
