@@ -211,11 +211,12 @@
                   </div>
                 </v-col>
               </v-row>
-              <v-item-group v-model="selection" multiple>
+              <v-item-group multiple>
                 <v-row no-gutters>
                   <v-col
                     v-for="n in tagData"
                     :key="n.id"
+                    :value="n.id"
                     cols="12"
                     md="4"
                     style="padding: 10px"
@@ -234,7 +235,7 @@
                         }"
                         @click="toggle"
                       >
-                        {{ n.name }}
+                        {{ n.name }} {{ n.id }}
                       </v-card>
                     </v-item>
                   </v-col>
@@ -355,12 +356,21 @@ export default {
   computed: {
     ...mapState({
       data: (state) => {
-        return state.module.dataSearchModule
+        return state.module.dataModule
       },
       tagData: (state) => {
         return state.module.dataTag.data
       }
     })
+
+    // listSelection: {
+    //   get: function() {
+    //     return this.value.id;
+    //   },
+    //   set: function(newVal) {
+    //     this.$emit('input', this.items.find(item => item.id === newVal));
+    //   }
+    // }
   },
   created () {
     // eslint-disable-next-line nuxt/no-globals-in-created
@@ -417,7 +427,7 @@ export default {
       }
       this.isLoading = true
       this.$store
-        .dispatch('module/fetchAllSearchModule', data)
+        .dispatch('module/fetchAllModule', data)
         .then((response) => {
           this.items = response.data.data.data
           this.total = response.data.data.total
@@ -464,7 +474,7 @@ export default {
           sortBy: this.selection3
         }
         this.$store
-          .dispatch('module/fetchAllSearchModule', data)
+          .dispatch('module/fetchAllModule', data)
           .then((resp) => {
             if (resp.data.data.data.length > 1) {
               resp.data.data.data.forEach(item => this.items.push(item))
@@ -501,11 +511,10 @@ export default {
       }
     },
     toDetail (data) {
-      console.log(data)
-      // this.$router.push({
-      //   name: 'library-module-detail',
-      //   params: { index: 1 }
-      // })
+      this.$router.push({
+        name: 'library-module-detail',
+        params: { index: data.module_id }
+      })
     }
   }
 }

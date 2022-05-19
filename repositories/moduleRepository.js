@@ -1,7 +1,7 @@
 const resource = '/student/module'
 
 export default $axios => ({
-  getSearchModule (payload) {
+  getModule (payload) {
     if (payload.keyword === '') {
       if (
         (payload.sortBy === '' || typeof payload.sortBy === 'undefined') &&
@@ -70,6 +70,9 @@ export default $axios => ({
         )
       }
     }
+  },
+  getDetailModule (payload) {
+    return $axios.get(`${resource}/${payload}`)
   },
   getMyCollection (payload) {
     if (payload.page === undefined || payload.page === 'undefined') {

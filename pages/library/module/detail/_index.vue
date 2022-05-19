@@ -512,10 +512,11 @@ export default {
   computed: {},
   created () {
     this.id = this.$route.params.detail
-    console.log('id : ', this.id)
   },
 
-  mounted () {},
+  mounted () {
+    // this.getData()
+  },
   methods: {
     goBack () {
       this.$router.push('/library/module')
