@@ -14,7 +14,7 @@
       <div v-if="!searchBtn" class="btn-back" @click="goBack()">
         <Back />
       </div>
-      <div v-else class="btn-back" @click="searchBtn = false">
+      <div v-else class="btn-back" @click="resetfilter()">
         <Back />
       </div>
     </div>
@@ -63,57 +63,76 @@
           </div> -->
         </div>
         <div class="card-list">
-          <v-row v-if="selected1" no-gutters style="padding: 20px">
-            <v-col v-for="(i, index) in items" :key="index" cols="12" sm="3">
-              <div class="box-card" @click="toDetail(i)">
-                <img src="~/assets/images/module/card.svg" class="bg-card">
-                <img
-                  src="~/assets/images/module/star-card.svg"
-                  class="star-card"
-                >
-                <img :src="i.display_picture" class="display-pic">
-                <div class="title-card">
-                  {{ i.module_name }} <br>
+          <div v-if="!isLoading">
+            <v-row v-if="selected1" no-gutters style="padding: 20px">
+              <v-col v-for="(i, index) in items" :key="index" cols="12" sm="3">
+                <div class="box-card" @click="toDetail(i)">
+                  <img src="~/assets/images/module/card.svg" class="bg-card">
+                  <img
+                    src="~/assets/images/module/star-card.svg"
+                    class="star-card"
+                  >
+                  <img :src="i.display_picture" class="display-pic">
+                  <div class="title-card">
+                    {{ i.module_name }} <br>
 
-                  <span style="font-weight: normal; font-size: 14px">
-                    {{ i.academic_field }}</span>
+                    <span style="font-weight: normal; font-size: 14px">
+                      {{ i.academic_field }}</span>
+                  </div>
+                  <div v-if="i.enrolled" class="in-collection">
+                    IN COLLECTION
+                  </div>
+                  <div v-else class="price-card">
+                    <span v-if="i.price === 0"> FREE </span>
+                    <span v-else>
+                      {{ i.price }}
+                    </span>
+                  </div>
+                  <div class="rating-card columns">
+                    {{ i.module_rating }}/5
+                    <b-rate
+                      v-model="i.module_rating"
+                      icon-pack="mdi"
+                      size="is-small"
+                      icon="mdi mdi-star"
+                      style="margin-left: 4px"
+                      :max="5"
+                      spaced
+                      disabled
+                    />
+                  </div>
                 </div>
-                <div v-if="i.enrolled" class="in-collection">IN COLLECTION</div>
-                <div v-else class="price-card">
-                  <span v-if="i.price === 0"> FREE </span>
-                  <span v-else>
-                    {{ i.price }}
-                  </span>
-                </div>
-                <div class="rating-card columns">
-                  {{ i.module_rating }}/5
-                  <b-rate
-                    v-model="i.module_rating"
-                    icon-pack="mdi"
-                    size="is-small"
-                    icon="mdi mdi-star"
-                    style="margin-left: 4px"
-                    :max="5"
-                    spaced
-                    disabled
-                  />
-                </div>
+              </v-col>
+            </v-row>
+            <infinite-loading
+              v-if="items.length"
+              :identifier="infiniteId2"
+              spinner="spinner"
+              style="margin-bottom: 15px"
+              @infinite="infiniteScroll"
+            >
+              <div slot="spinner" style="color: white">
+                <v-progress-circular indeterminate color="white" />
               </div>
-            </v-col>
-          </v-row>
-          <infinite-loading
-            v-if="items.length"
-            :identifier="infiniteId2"
-            spinner="spinner"
-            style="margin-bottom: 15px"
-            @infinite="infiniteScroll"
-          >
-            <div slot="spinner" style="color: white">
-              <v-progress-circular indeterminate color="white" />
-            </div>
-            <div slot="no-results" style="color: white">No results</div>
-            <div slot="no-more" style="color: white">No more data</div>
-          </infinite-loading>
+              <div slot="no-results" style="color: white">No results</div>
+              <div slot="no-more" style="color: white">No more data</div>
+            </infinite-loading>
+          </div>
+          <div v-else style="height: 400px">
+            <v-row
+              align="center"
+              justify="center"
+              style="width: 100%; height: 100%"
+            >
+              <v-col align="center" justify="center">
+                <v-progress-circular
+                  indeterminate
+                  color="white"
+                  style="color: white; padding-top: 250px"
+                />
+              </v-col>
+            </v-row>
+          </div>
         </div>
       </span>
       <span v-else>
@@ -202,7 +221,7 @@
               <v-row no-gutters justify="space-between" class="tag-contain">
                 <v-col cols="6">
                   <div class="tag-btn">
-                    Tag {{ selection }}
+                    Tag
                   </div>
                 </v-col>
                 <v-col cols="6">
@@ -211,12 +230,11 @@
                   </div>
                 </v-col>
               </v-row>
-              <v-item-group multiple>
+              <v-item-group v-model="selection" multiple>
                 <v-row no-gutters>
                   <v-col
                     v-for="n in tagData"
                     :key="n.id"
-                    :value="n.id"
                     cols="12"
                     md="4"
                     style="padding: 10px"
@@ -362,15 +380,6 @@ export default {
         return state.module.dataTag.data
       }
     })
-
-    // listSelection: {
-    //   get: function() {
-    //     return this.value.id;
-    //   },
-    //   set: function(newVal) {
-    //     this.$emit('input', this.items.find(item => item.id === newVal));
-    //   }
-    // }
   },
   created () {
     // eslint-disable-next-line nuxt/no-globals-in-created
@@ -382,23 +391,53 @@ export default {
     this.getDataTag()
   },
   methods: {
+    resetfilter () {
+      this.infiniteId += 1
+      this.infiniteId2 += 1
+      this.searchData = ''
+      this.selection = []
+      this.selection2 = ''
+      this.selection3 = ''
+      this.searchBtn = false
+      this.getData()
+    },
     filterData () {
       this.infiniteId2 += 1
       if (
         this.selection.length === 0 &&
         (this.selection2 === '' || typeof this.selection2 === 'undefined')
       ) {
+        this.isLoading = true
         this.infiniteId += 1
+        this.infiniteId2 += 1
+        this.searchData = ''
+        this.selection = []
+        this.selection2 = ''
         this.selection3 = ''
         this.searchBtn = false
         this.getData()
       } else {
-        this.searchBtn = true
-        if (this.selection2 === '' || typeof this.selection2 === 'undefined') {
-          this.getData()
-        } else {
-          this.selection3 = this.dataSort[this.selection2].id
-          this.getData()
+        // eslint-disable-next-line no-lonely-if
+        if (
+          this.selection.length !== 0 ||
+          this.selection2 !== '' ||
+          typeof this.selection2 !== 'undefined'
+        ) {
+          if (this.selection.length !== 0) {
+            // this.searchBtn = true
+            // this.tagData.map((item, index) => {
+            //   console.log(this.tagData[0])
+            // })
+            for (let i = 0; i < this.selection.length; i++) {
+              console.log('selection 1', i)
+              console.log('selection 1', this.selection)
+              console.log('selection 1', this.tagData[this.selection])
+            }
+          } else {
+            this.searchBtn = true
+            this.selection3 = this.dataSort[this.selection2].id
+            this.getData()
+          }
         }
       }
     },
@@ -418,6 +457,7 @@ export default {
       }
     },
     getData () {
+      this.isLoading = true
       this.page = 1
       const data = {
         page: this.page,
@@ -425,13 +465,11 @@ export default {
         filterBy: this.selection,
         sortBy: this.selection3
       }
-      this.isLoading = true
       this.$store
         .dispatch('module/fetchAllModule', data)
         .then((response) => {
           this.items = response.data.data.data
           this.total = response.data.data.total
-          console.log('items : ', this.items)
           this.dialog = false
           this.isLoading = false
         })
