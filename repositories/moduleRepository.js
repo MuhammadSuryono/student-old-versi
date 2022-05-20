@@ -74,6 +74,21 @@ export default $axios => ({
   getDetailModule (payload) {
     return $axios.get(`${resource}/${payload}/collection`)
   },
+  addModule (payload) {
+    return $axios.post('/module/subscribe', {
+      user_id: payload.user_id,
+      module_id: payload.module_id
+    })
+  },
+  getAllReview (payload) {
+    return $axios.get(`${resource}/${payload}/collection/review`)
+  },
+  postReview (payload) {
+    return $axios.post(`${resource}/${payload.id}/collection/review`, {
+      review: payload.review,
+      rating: payload.rating
+    })
+  },
   getMyCollection (payload) {
     if (payload.page === undefined || payload.page === 'undefined') {
       return $axios.get(`${resource}/collection?&keyword=${payload.keyword}`)

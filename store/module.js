@@ -37,10 +37,35 @@ export const actions = {
     }
   },
   async fetchDetailModule ({ commit }, payload) {
-    console.log('id : ', payload)
     try {
       const response = await this.$repositories.module.getDetailModule(payload)
       commit('SET_DATA_DETAIL_MODULE', response.data.data)
+      return response
+    } catch (e) {
+      return e.response
+    }
+  },
+  async addModule ({ commit }, payload) {
+    try {
+      const response = await this.$repositories.module.addModule(payload)
+      // commit('SET_DATA_DETAIL_MODULE', response.data.data)
+      return response
+    } catch (e) {
+      return e.response
+    }
+  },
+  async getReview ({ commit }, payload) {
+    try {
+      const response = await this.$repositories.module.getAllReview(payload)
+      // commit('SET_DATA_DETAIL_MODULE', response.data.data)
+      return response
+    } catch (e) {
+      return e.response
+    }
+  },
+  async addReview ({ commit }, payload) {
+    try {
+      const response = await this.$repositories.module.postReview(payload)
       return response
     } catch (e) {
       return e.response

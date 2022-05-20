@@ -89,7 +89,7 @@
                     </span>
                   </div>
                   <div class="rating-card columns">
-                    {{ i.module_rating }}/5
+                    {{ i.module_rating.toFixed(1) }}/5
                     <b-rate
                       v-model="i.module_rating"
                       icon-pack="mdi"
@@ -548,6 +548,7 @@ export default {
       }
     },
     toDetail (data) {
+      localStorage.setItem('enrolled', data.enrolled)
       this.$router.push({
         name: 'library-module-detail',
         params: { index: data.module_id }

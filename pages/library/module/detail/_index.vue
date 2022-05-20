@@ -57,15 +57,15 @@
       </div>
       <div class="card-list">
         <div v-if="selected1" class="columns tab-1-petra">
-          <div class="bg-1" :style="tinggi2" />
-          <div class="bg-2" :style="tinggi2" />
+          <div v-if="!isLoading" class="bg-1" :style="tinggi2" />
+          <div v-if="!isLoading" class="bg-2" :style="tinggi2" />
           <span class="petra-rating">
             <img
               src="~/assets/images/module/detail-star.svg"
               class="rating-bg"
             >
             <div class="rating-card columns">
-              {{ detailModule.module_rating }}/5
+              {{ detailModule.module_rating.toFixed(1) }}/5
               <b-rate
                 v-model="detailModule.module_rating"
                 icon-pack="mdi"
@@ -79,22 +79,30 @@
             </div>
           </span>
           <span class="petra-students">
-            <div class="bg-student">1,221 Students</div>
+            <div class="bg-student">
+              {{ detailModule.total_enrolled }} Students
+            </div>
           </span>
           <div ref="infoBox" class="column is-narrow left-side">
             <img :src="detailModule.display_picture" class="display-pic">
             <div class="petra-description">
               {{ detailModule.module_description }}
             </div>
-            <div class="petra-c1">
-              Emotional Intelligence (C1),<br>
-              Tech Savviness (C5),<br>
-              Creativity and Innovation (C2).
+            <div
+              v-for="(soft, index) in detailModule.soft_skills"
+              :key="index"
+              class="petra-c1"
+            >
+              {{ soft.name }} ({{ soft.symbol }}),<br>
             </div>
             <div class="petra-owner">
-              by TUTI ASTUTI, Diploma of Designs.
+              by {{ detailModule.studio_name }}, Diploma of Designs.
             </div>
-            <div class="petra-button-collection">
+            <div
+              v-if="enrolled === 'false' || enrolled === false"
+              class="petra-button-collection"
+              @click="buyModule()"
+            >
               Add to My Collection
               <br>
               FREE
@@ -110,162 +118,141 @@
                 Activity Rail
               </div>
             </div>
-            <div class="petra-content">
-              <div style="padding: 20px 20px 10px 20px">
+            <div class="petra-content" style="padding-top: 20px">
+              <div
+                v-for="(rail, indexRail) in detailModule.activity_rails"
+                :key="indexRail"
+                style="padding: 0px 20px 0px 20px"
+              >
                 <v-toolbar
+                  v-if="enrolled === 'false' || enrolled === false"
                   color="white"
                   class="contain-list"
+                  style="opacity: 0.6"
+                >
+                  <img src="~/assets/images/module/lock.svg" class="img-lock">
+                  <img :src="rail.thumbnail" class="img-title">
+                  <v-divider class="mx-4" vertical />
+                  <div class="data-desc">
+                    <div class="module-name">
+                      {{ rail.title }} {{ indexRail }}
+                    </div>
+                    <div
+                      class="studio-name"
+                      style="
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                      "
+                    >
+                      {{ rail.description }}
+                    </div>
+                  </div>
+                  <v-spacer />
+                  <v-divider class="mx-4" vertical />
+                  <v-spacer />
+                  <div class="data-read">
+                    <div class="module-name" style="text-transform: uppercase">
+                      {{ rail.type_activity }} ACTIVITY
+                    </div>
+                    <div
+                      v-if="rail.type_activity === 'reading'"
+                      class="studio-name"
+                    >
+                      {{ rail.detail.total_pages }} Pages <br>
+                      {{ rail.detail.count_discussion }} Discussions
+                    </div>
+                    <div
+                      v-if="rail.type_activity === 'game'"
+                      class="studio-name"
+                    >
+                      Score : {{ rail.detail.score }} <br>
+                      {{ rail.detail.count_discussion }} Discussions
+                    </div>
+                    <div
+                      v-if="rail.type_activity === 'quiz'"
+                      class="studio-name"
+                    >
+                      High Score : {{ rail.detail.high_score }} <br>
+                      {{ rail.detail.count_discussion }} Discussions
+                    </div>
+                    <div
+                      v-if="rail.type_activity === 'video'"
+                      class="studio-name"
+                    >
+                      Duration : {{ rail.detail.duration }} <br>
+                      {{ rail.detail.count_discussion }} Discussions
+                    </div>
+                  </div>
+                </v-toolbar>
+                <v-toolbar
+                  v-else
+                  color="white"
+                  class="contain-list"
+                  :style="rail.detail.is_locked ? 'opacity:0.6' : 'opacity: 1;'"
                   @click="toReading()"
                 >
+                  <span v-if="rail.detail.is_locked">
+                    <div class="finish-previous">
+                      Finish previous Chapter to unlock.
+                    </div>
+                  </span>
                   <img
-                    src="https://i.picsum.photos/id/248/300/300.jpg?hmac=Iib4d9sRMu9H0sibj_DmuT4icfBinQG4FB8NrdU9Sg0"
-                    class="img-title"
+                    v-if="rail.detail.is_locked"
+                    src="~/assets/images/module/lock.svg"
+                    class="img-lock"
                   >
-                  <img src="~/assets/images/module/lock.svg" class="img-lock">
+                  <img :src="rail.thumbnail" class="img-title">
                   <v-divider class="mx-4" vertical />
                   <div class="data-desc">
                     <div class="module-name">
-                      Introduction to Reading
+                      {{ rail.title }}
                     </div>
-                    <div class="studio-name">
-                      This is an activity where Students can read through text
-                      provided by the Lecturer.
+                    <div
+                      class="studio-name"
+                      style="
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                      "
+                    >
+                      {{ rail.description }}
                     </div>
                   </div>
                   <v-spacer />
                   <v-divider class="mx-4" vertical />
                   <v-spacer />
                   <div class="data-read">
-                    <div class="module-name">
-                      READING ACTIVITY
+                    <div class="module-name" style="text-transform: uppercase">
+                      {{ rail.type_activity }} ACTIVITY
                     </div>
-                    <div class="studio-name">
-                      15 Pages <br>
-                      212 Discussions
+                    <div
+                      v-if="rail.type_activity === 'reading'"
+                      class="studio-name"
+                    >
+                      {{ rail.detail.total_pages }} Pages <br>
+                      {{ rail.detail.count_discussion }} Discussions
                     </div>
-                  </div>
-                </v-toolbar>
-                <v-toolbar
-                  color="white"
-                  class="contain-list"
-                  @click="toVideo()"
-                >
-                  <img
-                    src="https://i.picsum.photos/id/248/300/300.jpg?hmac=Iib4d9sRMu9H0sibj_DmuT4icfBinQG4FB8NrdU9Sg0"
-                    class="img-title"
-                  >
-                  <img src="~/assets/images/module/lock.svg" class="img-lock">
-                  <v-divider class="mx-4" vertical />
-                  <div class="data-desc">
-                    <div class="module-name">
-                      Introduction to Video
+                    <div
+                      v-if="rail.type_activity === 'game'"
+                      class="studio-name"
+                    >
+                      Score : {{ rail.detail.score }} <br>
+                      {{ rail.detail.count_discussion }} Discussions
                     </div>
-                    <div class="studio-name">
-                      This is an activity where Students can read through text
-                      provided by the Lecturer.
+                    <div
+                      v-if="rail.type_activity === 'quiz'"
+                      class="studio-name"
+                    >
+                      High Score : {{ rail.detail.high_score }} <br>
+                      {{ rail.detail.count_discussion }} Discussions
                     </div>
-                  </div>
-                  <v-spacer />
-                  <v-divider class="mx-4" vertical />
-                  <v-spacer />
-                  <div class="data-read">
-                    <div class="module-name">
-                      VIDEO ACTIVITY
-                    </div>
-                    <div class="studio-name">
-                      15 Pages <br>
-                      212 Discussions
-                    </div>
-                  </div>
-                </v-toolbar>
-                <v-toolbar color="white" class="contain-list" @click="toGame()">
-                  <img
-                    src="https://i.picsum.photos/id/248/300/300.jpg?hmac=Iib4d9sRMu9H0sibj_DmuT4icfBinQG4FB8NrdU9Sg0"
-                    class="img-title"
-                  >
-                  <img src="~/assets/images/module/lock.svg" class="img-lock">
-                  <v-divider class="mx-4" vertical />
-                  <div class="data-desc">
-                    <div class="module-name">
-                      Introduction to Game
-                    </div>
-                    <div class="studio-name">
-                      This is an activity where Students can read through text
-                      provided by the Lecturer.
-                    </div>
-                  </div>
-                  <v-spacer />
-                  <v-divider class="mx-4" vertical />
-                  <v-spacer />
-                  <div class="data-read">
-                    <div class="module-name">
-                      GAME ACTIVITY
-                    </div>
-                    <div class="studio-name">
-                      15 Pages <br>
-                      212 Discussions
-                    </div>
-                  </div>
-                </v-toolbar>
-                <v-toolbar color="white" class="contain-list" @click="toQuiz()">
-                  <img
-                    src="https://i.picsum.photos/id/248/300/300.jpg?hmac=Iib4d9sRMu9H0sibj_DmuT4icfBinQG4FB8NrdU9Sg0"
-                    class="img-title"
-                  >
-                  <img src="~/assets/images/module/lock.svg" class="img-lock">
-                  <v-divider class="mx-4" vertical />
-                  <div class="data-desc">
-                    <div class="module-name">
-                      Introduction to Quiz
-                    </div>
-                    <div class="studio-name">
-                      This is an activity where Students can read through text
-                      provided by the Lecturer.
-                    </div>
-                  </div>
-                  <v-spacer />
-                  <v-divider class="mx-4" vertical />
-                  <v-spacer />
-                  <div class="data-read">
-                    <div class="module-name">
-                      QUIZ ACTIVITY
-                    </div>
-                    <div class="studio-name">
-                      15 Pages <br>
-                      212 Discussions
-                    </div>
-                  </div>
-                </v-toolbar>
-                <v-toolbar
-                  color="white"
-                  class="contain-list"
-                  @click="toFinalQuiz()"
-                >
-                  <img
-                    src="https://i.picsum.photos/id/248/300/300.jpg?hmac=Iib4d9sRMu9H0sibj_DmuT4icfBinQG4FB8NrdU9Sg0"
-                    class="img-title"
-                  >
-                  <img src="~/assets/images/module/lock.svg" class="img-lock">
-                  <v-divider class="mx-4" vertical />
-                  <div class="data-desc">
-                    <div class="module-name">
-                      Introduction to Final Quiz
-                    </div>
-                    <div class="studio-name">
-                      This is an activity where Students can read through text
-                      provided by the Lecturer.
-                    </div>
-                  </div>
-                  <v-spacer />
-                  <v-divider class="mx-4" vertical />
-                  <v-spacer />
-                  <div class="data-read">
-                    <div class="module-name">
-                      FINAL QUIZ ACTIVITY
-                    </div>
-                    <div class="studio-name">
-                      15 Pages <br>
-                      212 Discussions
+                    <div
+                      v-if="rail.type_activity === 'video'"
+                      class="studio-name"
+                    >
+                      Duration : {{ rail.detail.duration }} <br>
+                      {{ rail.detail.count_discussion }} Discussions
                     </div>
                   </div>
                 </v-toolbar>
@@ -288,15 +275,15 @@
                 class="rating-bg"
               >
               <div class="rating-card columns">
-                2.9/5
+                {{ ratingReview }}/5
                 <b-rate
+                  v-model="ratingReview"
                   icon-pack="mdi"
                   size="is-small"
                   icon="mdi mdi-star"
                   style="margin-left: 4px"
                   :max="5"
                   spaced
-                  disabled
                 />
               </div>
             </span>
@@ -313,10 +300,14 @@
               >
 
               <div class="hexagon">
-                <textarea type="text" style="width: 100%; height: 100%" />
+                <textarea
+                  v-model="descReview"
+                  type="text"
+                  style="width: 100%; height: 100%"
+                />
               </div>
             </span>
-            <div class="petra-button">
+            <div class="petra-button" @click="addReview()">
               Submit Review
             </div>
           </div>
@@ -332,13 +323,17 @@
             </div>
             <div class="petra-content">
               <div style="padding: 20px 20px 10px 20px">
-                <div class="columns is-gapless">
+                <div
+                  v-for="(review, indexReview) in itemsReview.data"
+                  :key="indexReview"
+                  class="columns is-gapless"
+                >
                   <div class="column is-narrow pic-petra">
                     <img src="~/assets/images/module/Avatar.png">
                   </div>
                   <div class="column box-list">
                     <div class="student-name">
-                      Robert Suhendra
+                      {{ review.user }}
                     </div>
 
                     <span class="petra-rating">
@@ -347,8 +342,9 @@
                         class="rating-bg"
                       >
                       <div class="rating-card columns">
-                        2.9/5
+                        {{ review.rating.toFixed(1) }} /5
                         <b-rate
+                          v-model="review.rating"
                           icon-pack="mdi"
                           size="is-small"
                           icon="mdi mdi-star"
@@ -361,126 +357,8 @@
                     </span>
                     <div class="petra-review">
                       <div class="box-review" />
-                      <!-- <img
-                        src="~/assets/images/module/review-box.png"
-                        class="review-box"
-                      > -->
-                      <!-- <img
-                        src="~/assets/images/module/review-corner.png"
-                        class="review-corner"
-                      > -->
                       <div class="content-text">
-                        “Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.”
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="columns is-gapless">
-                  <div class="column is-narrow pic-petra">
-                    <img src="~/assets/images/module/Avatar.png">
-                  </div>
-                  <div class="column box-list">
-                    <div class="student-name">
-                      Robert Suhendra
-                    </div>
-
-                    <span class="petra-rating">
-                      <img
-                        src="~/assets/images/module/detail-star.svg"
-                        class="rating-bg"
-                      >
-                      <div class="rating-card columns">
-                        2.9/5
-                        <b-rate
-                          icon-pack="mdi"
-                          size="is-small"
-                          icon="mdi mdi-star"
-                          style="margin-left: 4px"
-                          :max="5"
-                          spaced
-                          disabled
-                        />
-                      </div>
-                    </span>
-                    <div class="petra-review">
-                      <div class="box-review" />
-                      <!-- <img
-                        src="~/assets/images/module/review-box.png"
-                        class="review-box"
-                      > -->
-                      <!-- <img
-                        src="~/assets/images/module/review-corner.png"
-                        class="review-corner"
-                      > -->
-                      <div class="content-text">
-                        “Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.”
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="columns is-gapless">
-                  <div class="column is-narrow pic-petra">
-                    <img src="~/assets/images/module/Avatar.png">
-                  </div>
-                  <div class="column box-list">
-                    <div class="student-name">
-                      Robert Suhendra
-                    </div>
-
-                    <span class="petra-rating">
-                      <img
-                        src="~/assets/images/module/detail-star.svg"
-                        class="rating-bg"
-                      >
-                      <div class="rating-card columns">
-                        2.9/5
-                        <b-rate
-                          icon-pack="mdi"
-                          size="is-small"
-                          icon="mdi mdi-star"
-                          style="margin-left: 4px"
-                          :max="5"
-                          spaced
-                          disabled
-                        />
-                      </div>
-                    </span>
-                    <div class="petra-review">
-                      <div class="box-review" />
-                      <!-- <img
-                        src="~/assets/images/module/review-box.png"
-                        class="review-box"
-                      > -->
-                      <!-- <img
-                        src="~/assets/images/module/review-corner.png"
-                        class="review-corner"
-                      > -->
-                      <div class="content-text">
-                        “Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.”
+                        {{ review.review }}
                       </div>
                     </div>
                   </div>
@@ -504,7 +382,12 @@ export default {
       selected1: true,
       selected2: false,
       id: '',
-      tinggi: 0
+      tinggi: 0,
+      isLoading: true,
+      enrolled: false,
+      itemsReview: {},
+      ratingReview: 0,
+      descReview: ''
     }
   },
 
@@ -520,18 +403,97 @@ export default {
   },
   created () {
     this.getData()
+    this.getReview()
   },
   mounted () {
-    this.tinggi = this.$refs.infoBox.clientHeight + 'px;'
+    this.enrolled = localStorage.getItem('enrolled')
   },
   methods: {
+    addReview () {
+      this.isLoading = true
+      const data = {
+        id: this.$route.params.index,
+        review: this.descReview,
+        rating: this.ratingReview
+      }
+      this.$store
+        .dispatch('module/addReview', data)
+        .then((response) => {
+          console.log('response:', response.data.error.message)
+          this.$toast.error(response.data.error.message, {
+            position: 'top-center',
+            duration: 5000
+          })
+          this.getReview()
+          this.getData()
+        })
+        .catch((error) => {
+          console.log('error:', error)
+          this.isLoading = false
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
+    buyModule () {
+      this.isLoading = true
+      const data = {
+        user_id: localStorage.getItem('user_id'),
+        module_id: this.$route.params.index
+      }
+      console.log(data)
+      this.$store
+        .dispatch('module/addModule', data)
+        .then((response) => {
+          this.getData()
+        })
+        .catch((error) => {
+          this.isLoading = false
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
     getData () {
+      this.isLoading = true
       this.$store
         .dispatch('module/fetchDetailModule', this.$route.params.index)
         .then((response) => {
+          this.tinggi = this.$refs.infoBox.clientHeight + 'px;'
+          this.isLoading = false
           console.log(response.data.data)
         })
         .catch((error) => {
+          this.isLoading = false
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
+    getReview () {
+      this.$store
+        .dispatch('module/getReview', this.$route.params.index)
+        .then((response) => {
+          console.log('review : ', response.data.data)
+          this.itemsReview = response.data.data
+        })
+        .catch((error) => {
+          this.isLoading = false
           this.$toast.error(error.response, {
             position: 'top-center',
             duration: 5000
@@ -839,10 +801,33 @@ export default {
               cursor: pointer;
               height: 75px;
               width: 100%;
-              opacity: 0.6;
+
               background-color: white;
               // background-color: rgba(255, 255, 255, 0.3);
               margin-bottom: 25px;
+              .finish-previous {
+                border: solid 1px white;
+                background-color: #fff380;
+                position: absolute;
+                width: 303.58px;
+                padding: 10px 10px 0px 10px;
+                height: 38.19px;
+                text-align: center;
+                top: 50%;
+                left: 50%;
+                font-size: 13px;
+                transform: translate(-50%, -50%);
+                --g: #000, #0000 1deg 179deg, #000 180deg;
+
+                --mask: conic-gradient(
+                      from -45deg at top 8px right 8px,
+                      var(--g)
+                    )
+                    100% 0 /51% 100% no-repeat,
+                  conic-gradient(from -225deg at bottom 8px left 8px, var(--g))
+                    0 100%/51% 100% no-repeat;
+                -webkit-mask: var(--mask);
+              }
               .img-title {
                 height: 75px;
                 width: 122px;
@@ -886,9 +871,6 @@ export default {
             }
             .contain-list::v-deep .v-toolbar__content {
               padding-left: 0px !important;
-            }
-            .contain-list:hover {
-              opacity: 1;
             }
           }
         }

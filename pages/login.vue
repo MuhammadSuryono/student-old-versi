@@ -71,6 +71,7 @@ export default {
             if (response.data.data.user.role_id === 4) {
               const data = response.data.data
               console.log('res:', data)
+              localStorage.setItem('user_id', data.user.id)
               this.$store.commit('user/SET_USERS', data)
               if (
                 // eslint-disable-next-line valid-typeof
