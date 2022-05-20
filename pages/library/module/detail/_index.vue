@@ -7,13 +7,13 @@
           class="background-button"
         >
         <div class="name-card">
-          Technopreneurship
+          {{ detailModule.module_name }}
         </div>
       </div>
       <div class="card-title">
         <img src="~/assets/images/module/detail-box.svg" class="detail-box">
         <div class="name-card2">
-          Introduction to Technopreneur
+          Introduction to {{ detailModule.module_name }}
         </div>
       </div>
       <div class="btn-back" @click="goBack()">
@@ -57,37 +57,34 @@
       </div>
       <div class="card-list">
         <div v-if="selected1" class="columns tab-1-petra">
-          <div class="column is-narrow left-side">
-            <img src="~/assets/images/module/act.png" class="background-card">
+          <div class="bg-1" :style="tinggi2" />
+          <div class="bg-2" :style="tinggi2" />
+          <span class="petra-rating">
             <img
-              src="~/assets/images/module/detail-img.png"
-              class="display-pic"
+              src="~/assets/images/module/detail-star.svg"
+              class="rating-bg"
             >
-            <span class="petra-rating">
-              <img
-                src="~/assets/images/module/detail-star.svg"
-                class="rating-bg"
-              >
-              <div class="rating-card columns">
-                2.9/5
-                <b-rate
-                  icon-pack="mdi"
-                  size="is-small"
-                  icon="mdi mdi-star"
-                  style="margin-left: 4px"
-                  :max="5"
-                  spaced
-                  disabled
-                />
-              </div>
-            </span>
-            <span class="petra-students">
-              <div class="bg-student">1,221 Students</div>
-            </span>
+            <div class="rating-card columns">
+              {{ detailModule.module_rating }}/5
+              <b-rate
+                v-model="detailModule.module_rating"
+                icon-pack="mdi"
+                size="is-small"
+                icon="mdi mdi-star"
+                style="margin-left: 4px"
+                :max="5"
+                spaced
+                disabled
+              />
+            </div>
+          </span>
+          <span class="petra-students">
+            <div class="bg-student">1,221 Students</div>
+          </span>
+          <div ref="infoBox" class="column is-narrow left-side">
+            <img :src="detailModule.display_picture" class="display-pic">
             <div class="petra-description">
-              Welcome to understanding how modules work! Through this module, we
-              will learn the step-by-step process through this mockup all about
-              modules.
+              {{ detailModule.module_description }}
             </div>
             <div class="petra-c1">
               Emotional Intelligence (C1),<br>
@@ -97,8 +94,9 @@
             <div class="petra-owner">
               by TUTI ASTUTI, Diploma of Designs.
             </div>
-            <div class="petra-button">
-              Add to My Collection <br>
+            <div class="petra-button-collection">
+              Add to My Collection
+              <br>
               FREE
             </div>
           </div>
@@ -496,7 +494,7 @@
   </div>
 </template>
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'ModuleDetailPage',
   layout: 'default',
@@ -505,19 +503,45 @@ export default {
     return {
       selected1: true,
       selected2: false,
-      id: ''
+      id: '',
+      tinggi: 0
     }
   },
 
-  computed: {},
-  created () {
-    this.id = this.$route.params.detail
+  computed: {
+    ...mapState({
+      detailModule: (state) => {
+        return state.module.dataDetailModule
+      }
+    }),
+    tinggi2 () {
+      return 'height:' + this.tinggi
+    }
   },
-
+  created () {
+    this.getData()
+  },
   mounted () {
-    // this.getData()
+    this.tinggi = this.$refs.infoBox.clientHeight + 'px;'
   },
   methods: {
+    getData () {
+      this.$store
+        .dispatch('module/fetchDetailModule', this.$route.params.index)
+        .then((response) => {
+          console.log(response.data.data)
+        })
+        .catch((error) => {
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
     goBack () {
       this.$router.push('/library/module')
     },
@@ -585,6 +609,10 @@ export default {
         text-shadow: 0px 1px 1px #cff0ff;
         top: 13px;
         left: 76px;
+        width: 240px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .detail-box {
         position: absolute;
@@ -603,6 +631,10 @@ export default {
         color: white;
         top: 53px;
         left: 79px;
+        width: 310px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
     .btn-back {
@@ -643,19 +675,80 @@ export default {
       width: 100%;
       .tab-1-petra {
         padding: 20px;
+        .bg-1 {
+          position: absolute;
+          width: 200px;
+          left: 163px;
+          background: #5d93ce;
+          opacity: 0.5;
+          margin-top: 4px;
+          --g: #000, #0000 1deg 179deg, #000 180deg;
+          --mask: conic-gradient(
+              from -225deg at bottom 18px left 18px,
+              var(--g)
+            )
+            0 100%/51% 100% no-repeat;
+          -webkit-mask: var(--mask);
+        }
+        .bg-2 {
+          position: absolute;
+          width: 200px;
+          left: 306px;
+          background: #5d93ce;
+          opacity: 0.5;
+          margin-top: -4px;
+          --g: #000, #0000 1deg 179deg, #000 180deg;
+          --mask: conic-gradient(from -45deg at top 18px right 18px, var(--g))
+            100% 0 /100% 100% no-repeat;
+          -webkit-mask: var(--mask);
+          mask: var(--mask);
+        }
+        .rating-bg {
+          position: absolute;
+          top: 371px;
+          left: 165px;
+          z-index: 2;
+        }
+        .rating-card {
+          position: absolute;
+          top: 386px;
+          left: 185px;
+          font-style: normal;
+          z-index: 2;
+          font-weight: 500;
+          font-size: 15.6103px;
+          color: #ffffff;
+        }
+        .bg-student {
+          position: absolute;
+          z-index: 2;
+          top: 399px;
+          left: 171px;
+          background: #2b2b56;
+          height: 22px;
+          width: 147.87px;
+          text-align: center;
+          color: #a2cff4;
+          font-size: 12px;
+          padding-top: 3px;
+        }
         .left-side {
-          width: 338px;
+          width: 332.4px;
           height: 100%;
           position: relative;
-          .background-card {
-            position: absolute;
-            top: 0px;
-            object-fit: cover;
-          }
+          background-color: white;
+          --g: #000, #0000 1deg 179deg, #000 180deg;
+
+          --mask: conic-gradient(from -45deg at top 18px right 18px, var(--g))
+              100% 0 /51% 100% no-repeat,
+            conic-gradient(from -225deg at bottom 18px left 18px, var(--g)) 0
+              100%/51% 100% no-repeat;
+          -webkit-mask: var(--mask);
+          mask: var(--mask);
           .display-pic {
             position: absolute;
-            top: 3px;
-            left: 15px;
+            top: 0px;
+            left: 0px;
             height: 195px;
             width: 332px;
             object-fit: cover;
@@ -665,49 +758,21 @@ export default {
             -webkit-mask: var(--mask);
             mask: var(--mask);
           }
-          .rating-bg {
-            position: absolute;
-            top: 148px;
-            left: 12px;
-          }
-          .rating-card {
-            position: absolute;
-            top: 162px;
-            left: 32px;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 15.6103px;
-            color: #ffffff;
-          }
-          .bg-student {
-            position: absolute;
-            top: 176px;
-            left: 19px;
-            background: #2b2b56;
-            height: 22px;
-            width: 147.87px;
-            text-align: center;
-            color: #a2cff4;
-            font-size: 12px;
-            padding-top: 3px;
-          }
           .petra-description {
-            position: absolute;
-            top: 215px;
-            left: 25px;
-            width: 90%;
+            margin-top: 197px;
+            padding-left: 0px;
+            z-index: 4;
+            width: 100%;
             font-style: normal;
             font-weight: 400;
             font-size: 14px;
             line-height: 18px;
             text-align: justify;
             color: #5b6987;
+            margin-bottom: 21px;
           }
           .petra-c1 {
-            position: absolute;
-            top: 310px;
-            left: 25px;
-            width: 90%;
+            width: 100%;
             font-style: normal;
             font-weight: 400;
             font-size: 14px;
@@ -716,12 +781,10 @@ export default {
             float: right;
             text-align: right;
             font-weight: bold;
+            margin-bottom: 10px;
           }
           .petra-owner {
-            position: absolute;
-            top: 375px;
-            left: 25px;
-            width: 90%;
+            width: 100%;
             font-style: normal;
             font-weight: 400;
             font-size: 14px;
@@ -731,20 +794,20 @@ export default {
             text-align: right;
             opacity: 0.75;
             font-weight: bold;
+            margin-bottom: 80px;
           }
-          .petra-button {
-            padding: 2px 10px 2px 10px;
-            width: 245.38px;
-            position: absolute;
-            top: 440px;
+          .petra-button-collection {
             background: #4c7bc1;
+            width: 80%;
+            margin-left: 23px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            position: absolute;
+            bottom: 15px;
             text-align: center;
             font-size: 14px;
-            text-align: center;
             color: #f2f2f2;
             cursor: pointer;
-            left: 55%;
-            transform: translate(-50%, -50%);
           }
         }
         .right-side {

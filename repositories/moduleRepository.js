@@ -72,7 +72,7 @@ export default $axios => ({
     }
   },
   getDetailModule (payload) {
-    return $axios.get(`${resource}/${payload}`)
+    return $axios.get(`${resource}/${payload}/collection`)
   },
   getMyCollection (payload) {
     if (payload.page === undefined || payload.page === 'undefined') {

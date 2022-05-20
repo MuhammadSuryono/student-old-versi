@@ -37,6 +37,7 @@ export const actions = {
     }
   },
   async fetchDetailModule ({ commit }, payload) {
+    console.log('id : ', payload)
     try {
       const response = await this.$repositories.module.getDetailModule(payload)
       commit('SET_DATA_DETAIL_MODULE', response.data.data)
