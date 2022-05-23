@@ -95,11 +95,15 @@
             >
               {{ soft.name }} ({{ soft.symbol }}),<br>
             </div>
-            <div class="petra-owner">
-              by {{ detailModule.studio_name }}, Diploma of Designs.
+            <div class="petra-owner" :style="enrolled === 'false' ? 'margin-bottom:80px;' : 'margin-bottom:10px;'">
+              by
+              <span v-if="detailModule.lecturer !== ''">{{
+                detailModule.lecturer
+              }}</span>
+              <span v-else>-</span>
             </div>
             <div
-              v-if="enrolled === 'false' || enrolled === false"
+              v-if="enrolled === 'false'"
               class="petra-button-collection"
               @click="buyModule()"
             >
@@ -756,7 +760,7 @@ export default {
             text-align: right;
             opacity: 0.75;
             font-weight: bold;
-            margin-bottom: 80px;
+            margin-bottom: 10px;
           }
           .petra-button-collection {
             background: #4c7bc1;
