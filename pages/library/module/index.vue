@@ -428,11 +428,16 @@ export default {
         ) {
           if (this.selection.length !== 0) {
             this.selection4 = []
+            this.selection2 = ''
+            this.selection3 = ''
             for (let i = 0; i < this.selection.length; i++) {
               this.selection4.push(this.tagData[this.selection[i]].id)
             }
+            this.searchBtn = true
             this.getData()
           } else {
+            this.selection = []
+            this.selection4 = []
             this.searchBtn = true
             this.selection3 = this.dataSort[this.selection2].id
             this.getData()
