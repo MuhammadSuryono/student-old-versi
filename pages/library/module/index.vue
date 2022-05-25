@@ -553,9 +553,8 @@ export default {
       }
     },
     toDetail (data) {
-      localStorage.setItem('enrolled', data.enrolled)
       this.$router.push({
-        name: 'library-module-detail',
+        name: 'library-module-detail-index',
         params: { index: data.module_id }
       })
     }

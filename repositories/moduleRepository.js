@@ -100,5 +100,11 @@ export default $axios => ({
   },
   getDataTag () {
     return $axios.get('module/subject')
+  },
+  // activity
+  getDetailActivity (payload) {
+    return $axios.get(
+      `${resource}/${payload.module}/collection/activity/${payload.activity}`
+    )
   }
 })

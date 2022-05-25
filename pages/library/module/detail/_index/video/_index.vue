@@ -13,7 +13,7 @@
       <div class="card-title">
         <div class="detail-box" />
         <div class="name-card2">
-          Introduction to Module Details | Introduction to Game
+          Introduction to Module Details | Introduction to Quiz
         </div>
       </div>
       <div class="btn-back" @click="goBack()">
@@ -83,10 +83,10 @@
             <img src="~/assets/images/module/act.png" class="background-card">
             <img src="~/assets/images/module/game.png" class="display-pic">
             <div class="petra-title-card">
-              Introduction to Game <br>
+              Introduction to Quiz <br>
               <span
                 style="font-style: italic; font-weight: normal; font-size: 14px"
-              >GAME ACTIVITY</span>
+              >QUIZ ACTIVITY</span>
             </div>
             <div class="petra-description">
               This is an activity where Students can read through text provided
@@ -98,15 +98,7 @@
           </div>
         </div>
         <div class="column is-narrow header-right" style="margin-left: 20px">
-          <div class="card-activity">
-            <v-btn
-              class="btn-act"
-              small
-              style="margin-left: 280px; margin-top: 200px"
-            >
-              Play Game
-            </v-btn>
-          </div>
+          <div class="card-activity" />
         </div>
       </div>
       <div v-if="selected3">

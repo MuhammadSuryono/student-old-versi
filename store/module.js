@@ -2,7 +2,9 @@ export const state = () => ({
   dataModule: {},
   dataDetailModule: {},
   dataCollection: {},
-  dataTag: {}
+  dataTag: {},
+  dataDetailActivity: {},
+  idModule: ''
 })
 
 export const getters = {
@@ -23,6 +25,12 @@ export const mutations = {
   },
   SET_DATA_TAG (state, item) {
     state.dataTag = item
+  },
+  SET_DATA_DETAIL_ACTIVITY (state, item) {
+    state.dataDetailActivity = item
+  },
+  SET_DATA_ID_MODULE (state, item) {
+    state.idModule = item
   }
 }
 
@@ -88,5 +96,20 @@ export const actions = {
     } catch (e) {
       return e.response
     }
+  },
+
+  async fetchDetailActivity ({ commit }, payload) {
+    try {
+      const response = await this.$repositories.module.getDetailActivity(
+        payload
+      )
+      commit('SET_DATA_DETAIL_ACTIVITY', response.data.data)
+      return response
+    } catch (e) {
+      return e.response
+    }
+  },
+  idModule ({ commit }, payload) {
+    commit('SET_DATA_ID_MODULE', payload)
   }
 }

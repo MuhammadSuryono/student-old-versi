@@ -14,12 +14,11 @@ const _4dd95a8a = () => interopDefault(import('../pages/splash.vue' /* webpackCh
 const _2faa596e = () => interopDefault(import('../pages/library/collection/index.vue' /* webpackChunkName: "pages/library/collection/index" */))
 const _3ee02cd2 = () => interopDefault(import('../pages/library/module/index.vue' /* webpackChunkName: "pages/library/module/index" */))
 const _36e3d693 = () => interopDefault(import('../pages/skillcard/detail.vue' /* webpackChunkName: "pages/skillcard/detail" */))
-const _39299950 = () => interopDefault(import('../pages/library/module/detail/finalquiz.vue' /* webpackChunkName: "pages/library/module/detail/finalquiz" */))
-const _6f32335d = () => interopDefault(import('../pages/library/module/detail/game/_index.vue' /* webpackChunkName: "pages/library/module/detail/game/_index" */))
-const _7e9e911a = () => interopDefault(import('../pages/library/module/detail/quiz/_index.vue' /* webpackChunkName: "pages/library/module/detail/quiz/_index" */))
-const _7449680e = () => interopDefault(import('../pages/library/module/detail/reading/_index.vue' /* webpackChunkName: "pages/library/module/detail/reading/_index" */))
-const _49238d2c = () => interopDefault(import('../pages/library/module/detail/video/_index.vue' /* webpackChunkName: "pages/library/module/detail/video/_index" */))
-const _1e2a7396 = () => interopDefault(import('../pages/library/module/detail/_index.vue' /* webpackChunkName: "pages/library/module/detail/_index" */))
+const _54091cce = () => interopDefault(import('../pages/library/module/detail/_index/index.vue' /* webpackChunkName: "pages/library/module/detail/_index/index" */))
+const _0e780717 = () => interopDefault(import('../pages/library/module/detail/_index/game/_index.vue' /* webpackChunkName: "pages/library/module/detail/_index/game/_index" */))
+const _1de464d4 = () => interopDefault(import('../pages/library/module/detail/_index/quiz/_index.vue' /* webpackChunkName: "pages/library/module/detail/_index/quiz/_index" */))
+const _f695b402 = () => interopDefault(import('../pages/library/module/detail/_index/reading/_index.vue' /* webpackChunkName: "pages/library/module/detail/_index/reading/_index" */))
+const _24e2dcf0 = () => interopDefault(import('../pages/library/module/detail/_index/video/_index.vue' /* webpackChunkName: "pages/library/module/detail/_index/video/_index" */))
 const _fbe3eca4 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -74,29 +73,25 @@ export const routerOptions = {
     component: _36e3d693,
     name: "skillcard-detail"
   }, {
-    path: "/library/module/detail/finalquiz",
-    component: _39299950,
-    name: "library-module-detail-finalquiz"
-  }, {
-    path: "/library/module/detail/game/:index",
-    component: _6f32335d,
-    name: "library-module-detail-game"
-  }, {
-    path: "/library/module/detail/quiz/:index",
-    component: _7e9e911a,
-    name: "library-module-detail-quiz"
-  }, {
-    path: "/library/module/detail/reading/:index",
-    component: _7449680e,
-    name: "library-module-detail-reading"
-  }, {
-    path: "/library/module/detail/video/:index",
-    component: _49238d2c,
-    name: "library-module-detail-video"
-  }, {
     path: "/library/module/detail/:index",
-    component: _1e2a7396,
-    name: "library-module-detail"
+    component: _54091cce,
+    name: "library-module-detail-index"
+  }, {
+    path: "/library/module/detail/:index/game/:index",
+    component: _0e780717,
+    name: "library-module-detail-index-game"
+  }, {
+    path: "/library/module/detail/:index/quiz/:index",
+    component: _1de464d4,
+    name: "library-module-detail-index-quiz"
+  }, {
+    path: "/library/module/detail/:index/reading/:index",
+    component: _f695b402,
+    name: "library-module-detail-index-reading"
+  }, {
+    path: "/library/module/detail/:index/video/:index",
+    component: _24e2dcf0,
+    name: "library-module-detail-index-video"
   }, {
     path: "/",
     component: _fbe3eca4,

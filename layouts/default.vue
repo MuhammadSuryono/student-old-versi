@@ -2,6 +2,7 @@
   <div>
     <div style="height: 100%; width: 100%; z-index: -9999" />
 
+    <PModal style="z-index: 9999" />
     <div class="container-petra">
       <Navbar class="navbars" />
       <div class="columns is-gapless main-menu">

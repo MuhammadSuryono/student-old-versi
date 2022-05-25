@@ -33,7 +33,8 @@ export default {
     },
     // '~/plugins/notifier.js',
     '~/plugins/notifications-ssr.js',
-    '~/plugins/notifications-client.js'
+    '~/plugins/notifications-client.js',
+    '~/plugins/modal.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

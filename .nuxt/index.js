@@ -28,6 +28,7 @@ import nuxt_plugin_clickOutside_0ea087a4 from 'nuxt_plugin_clickOutside_0ea087a4
 import nuxt_plugin_vuevideobackground_24001f9d from 'nuxt_plugin_vuevideobackground_24001f9d' // Source: ../plugins/vue-video-background (mode: 'client')
 import nuxt_plugin_notificationsssr_eb31a0c0 from 'nuxt_plugin_notificationsssr_eb31a0c0' // Source: ../plugins/notifications-ssr.js (mode: 'all')
 import nuxt_plugin_notificationsclient_f727f91e from 'nuxt_plugin_notificationsclient_f727f91e' // Source: ../plugins/notifications-client.js (mode: 'all')
+import nuxt_plugin_modal_640f2cc0 from 'nuxt_plugin_modal_640f2cc0' // Source: ../plugins/modal.js (mode: 'all')
 import nuxt_plugin_auth_2b075700 from 'nuxt_plugin_auth_2b075700' // Source: ./auth.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -280,6 +281,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_notificationsclient_f727f91e === 'function') {
     await nuxt_plugin_notificationsclient_f727f91e(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_modal_640f2cc0 === 'function') {
+    await nuxt_plugin_modal_640f2cc0(app.context, inject)
   }
 
   if (typeof nuxt_plugin_auth_2b075700 === 'function') {

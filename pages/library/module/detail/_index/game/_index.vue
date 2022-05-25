@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-img">
+  <div v-if="!isLoading" class="bg-img">
     <div class="header-module">
       <div class="card-title">
         <img
@@ -7,13 +7,13 @@
           class="background-button"
         >
         <div class="name-card">
-          Search Modules
+          {{ detailActivity.name }}
         </div>
       </div>
       <div class="card-title">
         <div class="detail-box" />
         <div class="name-card2">
-          Introduction to Module Details | Introduction to Video
+          {{ detailActivity.name }} | Game Activity
         </div>
       </div>
       <div class="btn-back" @click="goBack()">
@@ -81,38 +81,26 @@
         <div class="column is-narrow header-left">
           <div class="card-list">
             <img src="~/assets/images/module/act.png" class="background-card">
-            <img src="~/assets/images/module/video.png" class="display-pic">
+            <img :src="detailActivity.thumbnail" class="display-pic">
             <div class="petra-title-card">
-              Introduction to Video <br>
+              {{ detailActivity.name }} <br>
               <span
                 style="font-style: italic; font-weight: normal; font-size: 14px"
-              >VIDEO ACTIVITY</span>
+              >GAME ACTIVITY</span>
             </div>
             <div class="petra-description">
-              This is an activity where Students can read through text provided
-              by the Lecturer. There will be no scores, just reading.
+              {{ detailActivity.introduction }}
             </div>
             <div class="petra-c1">
-              Duration: 15 minutes 31 seconds. <br>
               999 discussion replies.
             </div>
           </div>
         </div>
         <div class="column is-narrow header-right" style="margin-left: 20px">
-          <div class="card-activity">
-            <iframe
-              width="730"
-              height="500"
-              src="https://www.youtube.com/embed/6yI_tok_gJw"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            />
-          </div>
+          <div class="card-activity" />
         </div>
       </div>
-      <div v-if="selected2">
+      <div v-if="selected3">
         <div class="columns tab-2-petra">
           <div class="column is-narrow left-side">
             <img
@@ -325,42 +313,64 @@
   </div>
 </template>
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 export default {
-  name: 'ModuleDetailPage',
+  name: 'ModuleActivityGame',
   layout: 'default',
 
   data () {
     return {
+      isLoading: false,
       selected1: true,
-      selected2: false,
-      playerOptions: {
-        // videojs options
-        muted: true,
-        language: 'en',
-        playbackRates: [0.7, 1.0, 1.5, 2.0],
-        sources: [
-          {
-            type: 'video/mp4',
-            src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm'
-          }
-        ],
-        poster: '/static/images/author.jpg'
-      }
+      selected3: false
     }
   },
 
   computed: {
-    player () {
-      return this.$refs.videoPlayer.player
-    }
+    ...mapState({
+      detailActivity: (state) => {
+        return state.module.dataDetailActivity
+      },
+      idModule: (state) => {
+        return state.module.idModule
+      }
+    })
   },
-  created () {},
+  created () {
+    this.getAll()
+  },
 
   mounted () {},
   methods: {
+    getAll () {
+      this.getData()
+    },
+    getData () {
+      this.isLoading = true
+      const data = {
+        module: this.idModule,
+        activity: this.$route.params.index
+      }
+      this.$store
+        .dispatch('module/fetchDetailActivity', data)
+        .then((response) => {
+          this.isLoading = false
+          console.log(response.data.data)
+        })
+        .catch((error) => {
+          this.isLoading = false
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
     goBack () {
-      this.$router.push('/library/module/detail')
+      this.$router.go(-1)
     },
     tab (id, number) {
       if (id === 1) {
@@ -371,45 +381,7 @@ export default {
         this.selected1 = false
         this.selected2 = true
       }
-    },
-    toReading () {
-      this.$router.push('/library/module/detail/reading')
-    },
-    toVideo () {
-      this.$router.push('/library/module/detail/video')
-    },
-    toGame () {
-      this.$router.push('/library/module/detail/game')
-    },
-    toQuiz () {
-      this.$router.push('/library/module/detail/quiz')
-    },
-    toFinalQuiz () {
-      this.$router.push('/library/module/detail/finalquiz')
-    },
-
-    // listen event
-    onPlayerPlay (player) {
-      // console.log('player play!', player)
-    },
-    onPlayerPause (player) {
-      // console.log('player pause!', player)
-    },
-    // ...player event
-
-    // or listen state event
-    playerStateChanged (playerCurrentState) {
-      // console.log('player current update state', playerCurrentState)
-    },
-
-    // player is ready
-    playerReadied (player) {
-      console.log('the player is readied', player)
-      // you can use it to do something...
-      // player.[methods]
-    },
-    onPlayerLoadeddata () {},
-    onPlayerCanplay () {}
+    }
   }
 }
 </script>
@@ -593,7 +565,7 @@ export default {
       background: #effdfd;
       box-shadow: inset -5px 0px 4px rgba(28, 71, 132, 0.08),
         inset 5px 0px 8px rgba(28, 71, 132, 0.08);
-      height: 500px;
+      height: 400px;
       width: 730px;
       .title-chapter {
         font-weight: 600;

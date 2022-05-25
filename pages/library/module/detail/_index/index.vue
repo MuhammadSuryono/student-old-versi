@@ -95,7 +95,14 @@
             >
               {{ soft.name }} ({{ soft.symbol }}),<br>
             </div>
-            <div class="petra-owner" :style="enrolled === 'false' ? 'margin-bottom:80px;' : 'margin-bottom:10px;'">
+            <div
+              class="petra-owner"
+              :style="
+                detailModule.enrolled === false
+                  ? 'margin-bottom:80px;'
+                  : 'margin-bottom:10px;'
+              "
+            >
               by
               <span v-if="detailModule.lecturer !== ''">{{
                 detailModule.lecturer
@@ -103,7 +110,7 @@
               <span v-else>-</span>
             </div>
             <div
-              v-if="enrolled === 'false'"
+              v-if="detailModule.enrolled === false"
               class="petra-button-collection"
               @click="buyModule()"
             >
@@ -129,7 +136,7 @@
                 style="padding: 0px 20px 0px 20px"
               >
                 <v-toolbar
-                  v-if="enrolled === 'false' || enrolled === false"
+                  v-if="detailModule.enrolled === false"
                   color="white"
                   class="contain-list"
                   style="opacity: 0.6"
@@ -194,7 +201,7 @@
                   color="white"
                   class="contain-list"
                   :style="rail.detail.is_locked ? 'opacity:0.6' : 'opacity: 1;'"
-                  @click="toReading()"
+                  @click="detailActivity(rail)"
                 >
                   <span v-if="rail.detail.is_locked">
                     <div class="finish-previous">
@@ -328,12 +335,12 @@
             <div class="petra-content">
               <div style="padding: 20px 20px 10px 20px">
                 <div
-                  v-for="(review, indexReview) in itemsReview.data"
+                  v-for="(review, indexReview) in itemsReview"
                   :key="indexReview"
                   class="columns is-gapless"
                 >
-                  <div class="column is-narrow pic-petra">
-                    <img src="~/assets/images/module/Avatar.png">
+                  <div class="column is-narrow">
+                    <img :src="review.avatar" class="pic-petra">
                   </div>
                   <div class="column box-list">
                     <div class="student-name">
@@ -360,8 +367,7 @@
                       </div>
                     </span>
                     <div class="petra-review">
-                      <div class="box-review" />
-                      <div class="content-text">
+                      <div class="box-review">
                         {{ review.review }}
                       </div>
                     </div>
@@ -388,7 +394,6 @@ export default {
       id: '',
       tinggi: 0,
       isLoading: true,
-      enrolled: false,
       itemsReview: {},
       ratingReview: 0,
       descReview: ''
@@ -406,13 +411,14 @@ export default {
     }
   },
   created () {
-    this.getData()
-    this.getReview()
+    this.getAll()
   },
-  mounted () {
-    this.enrolled = localStorage.getItem('enrolled')
-  },
+  mounted () {},
   methods: {
+    getAll () {
+      this.getData()
+      this.getReview()
+    },
     addReview () {
       this.isLoading = true
       const data = {
@@ -444,6 +450,20 @@ export default {
           }
         })
     },
+    openDialog () {
+      this.$dialog.open({
+        message: 'Are you sure you want to do this?',
+        resolver: async (result) => {
+          try {
+            const res = await result
+            /* eslint-disable no-console */
+            console.log(res)
+          } catch (error) {
+            console.warn(error)
+          }
+        }
+      })
+    },
     buyModule () {
       this.isLoading = true
       const data = {
@@ -454,7 +474,7 @@ export default {
       this.$store
         .dispatch('module/addModule', data)
         .then((response) => {
-          this.getData()
+          this.getAll()
         })
         .catch((error) => {
           this.isLoading = false
@@ -493,8 +513,8 @@ export default {
       this.$store
         .dispatch('module/getReview', this.$route.params.index)
         .then((response) => {
-          console.log('review : ', response.data.data)
           this.itemsReview = response.data.data
+          console.log('reviews : ', this.itemsReview)
         })
         .catch((error) => {
           this.isLoading = false
@@ -521,20 +541,29 @@ export default {
         this.selected2 = true
       }
     },
-    toReading () {
-      this.$router.push('/library/module/detail/reading')
-    },
-    toVideo () {
-      this.$router.push('/library/module/detail/video')
-    },
-    toGame () {
-      this.$router.push('/library/module/detail/game')
-    },
-    toQuiz () {
-      this.$router.push('/library/module/detail/quiz')
-    },
-    toFinalQuiz () {
-      this.$router.push('/library/module/detail/finalquiz')
+    detailActivity (rail) {
+      console.log(rail.type_activity)
+      this.$store.dispatch('module/idModule', this.$route.params.index)
+      if (rail.type_activity === 'game') {
+        this.$router.push({
+          path: `/library/module/detail/${this.$route.params.index}/game/${rail.id}`
+        })
+      }
+      if (rail.type_activity === 'video') {
+        this.$router.push({
+          path: `/library/module/detail/${this.$route.params.index}/video/${rail.id}`
+        })
+      }
+      if (rail.type_activity === 'reading') {
+        this.$router.push({
+          path: `/library/module/detail/${this.$route.params.index}/reading/${rail.id}`
+        })
+      }
+      if (rail.type_activity === 'quiz') {
+        this.$router.push({
+          path: `/library/module/detail/${this.$route.params.index}/quiz/${rail.id}`
+        })
+      }
     }
   }
 }
@@ -995,6 +1024,9 @@ export default {
             width: 100%;
             height: 500px;
             overflow-y: scroll;
+            .pic-petra {
+              height: 100px;
+            }
             .box-list {
               position: relative;
               background-color: white;
@@ -1047,11 +1079,11 @@ export default {
               }
               .petra-review {
                 padding: 15px 20px 20px 30px;
-                position: relative;
-                height: 170px;
+                // position: relative;
+                // min-height: 88px;
                 .box-review {
                   background: #f2f2f2;
-                  height: 100%;
+                  min-height: 88px;
                   width: 100%;
                   --g: #000, #0000 1deg 179deg, #000 180deg;
                   --mask: conic-gradient(
@@ -1066,17 +1098,8 @@ export default {
                       0 100%/51% 100% no-repeat;
                   -webkit-mask: var(--mask);
                   mask: var(--mask);
-                }
-                .review-box {
-                  position: absolute;
-                  top: 15px;
-                  width: 517px;
-                  height: 100%;
-                }
-                .review-corner {
-                  position: absolute;
-                  top: 12px;
-                  right: 17px;
+                  font-size: 12px;
+                  padding: 10px;
                 }
                 .content-text {
                   position: absolute;
