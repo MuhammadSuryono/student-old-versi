@@ -9,6 +9,7 @@ import InfiniteLoading from 'vue-infinite-loading'
 import VueVideoPlayer from 'vue-video-player'
 
 import 'video.js/dist/video-js.css'
+import CloudflareVideoPlayer from 'vue-cloudflare-video-player'
 Vue.component('Unity', UnityWebgl)
 Vue.use(Buefy)
 Vue.use(AOS)
@@ -20,3 +21,5 @@ Vue.use(
   events: global videojs events
 } */
 )
+
+Vue.use(CloudflareVideoPlayer)

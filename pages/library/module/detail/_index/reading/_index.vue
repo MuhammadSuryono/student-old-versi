@@ -83,10 +83,7 @@
             <div v-if="!isLoading" class="bg-1" :style="tinggi2" />
             <div v-if="!isLoading" class="bg-2" :style="tinggi2" />
             <div class="column is-narrow left-side">
-              <img
-                src="https://i.picsum.photos/id/495/300/300.jpg?hmac=A9YVCMdxoYv0Ck6HxE28k5rQuCh0JliJ8KcpSer_Nsg"
-                class="display-pic"
-              >
+              <img :src="detailActivity.thumbnail" class="display-pic">
               <div class="petra-title-card">
                 {{ detailActivity.name }} <br>
                 <span
@@ -110,10 +107,39 @@
           </div>
         </div>
         <div class="column is-narrow header-right" style="margin-left: 20px">
-          <div class="card-activity" />
+          <div class="card-activity">
+            <div class="bg-act">
+              <div class="columns is-gapless" style="margin-bottom: 0px">
+                <div class="column is-narrow title-chapter">
+                  Chapter {{ page }} -
+                  {{ dataContent[page - 1].title }}
+                </div>
+                <div class="column">
+                  <div
+                    class="btn-act"
+                    @click="dialogDownload(dataContent[page - 1])"
+                  >
+                    <div class="name-act">
+                      Download Attachments
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="hr-line" />
+              <div class="description-activity">
+                {{ dataContent[page - 1].content }}
+              </div>
+            </div>
+            <v-pagination
+              v-if="dataContent.length > 0"
+              v-model="page"
+              :length="dataContent.length"
+              class="my-2"
+            />
+          </div>
         </div>
       </div>
-      <div v-if="selected3">
+      <div v-if="selected2">
         <div class="columns tab-2-petra">
           <div class="column is-narrow left-side">
             <img
@@ -323,6 +349,77 @@
         </div>
       </div>
     </div>
+
+    <LightBox @wheel.prevent @touchmove.prevent @scroll.prevent>
+      <div
+        v-if="dialog"
+        class="dialog-filter"
+        :style="{
+          height: window.height - 68 + 'px'
+        }"
+      >
+        <div class="center-dialog">
+          <div class="container-dialog">
+            <v-btn
+              icon
+              style="position: absolute; top: 10px; right: 20px"
+              @click="dialog = false"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+
+            <div class="tag-card">
+              <v-row no-gutters justify="space-between" class="tag-contain">
+                <v-col cols="6">
+                  <div class="tag-btn">
+                    Download Attachments
+                  </div>
+                </v-col>
+              </v-row>
+              <div
+                v-for="(
+                  itemAttachment, indexAttachment
+                ) in dataAttachment.attachments"
+                :key="indexAttachment"
+                style="padding: 10px 10px 0px 10px"
+              >
+                <v-toolbar
+                  color="white"
+                  class="contain-list"
+                  style="opacity: 0.6"
+                >
+                  <img
+                    src="data:image/png;base64,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"
+                    class="img-lock"
+                    style="height: 40px"
+                  >
+                  <v-divider class="mx-4" vertical />
+                  <div class="data-desc">
+                    <div class="module-name">
+                      {{ itemAttachment.name }}
+                    </div>
+                  </div>
+                  <v-spacer />
+                  <v-divider class="mx-4" vertical />
+                  <v-spacer />
+                  <div
+                    style="
+                      background-color: #0aa7c1;
+                      padding: 5px 20px 5px 20px;
+                      color: #ffffff;
+                      cursor: pointer;
+                    "
+                    @click="download(itemAttachment.link)"
+                  >
+                    Download
+                  </div>
+                </v-toolbar>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </LightBox>
   </div>
 </template>
 <script>
@@ -337,7 +434,15 @@ export default {
       selected1: true,
       selected2: false,
       selected3: false,
-      tinggi: 0
+      tinggi: 0,
+      page: 1,
+      content: {},
+      dialog: false,
+      window: {
+        width: 0,
+        height: 0
+      },
+      dataAttachment: {}
     }
   },
 
@@ -345,6 +450,9 @@ export default {
     ...mapState({
       detailActivity: (state) => {
         return state.module.dataDetailActivity
+      },
+      dataContent: (state) => {
+        return state.module.dataContent
       },
       idModule: (state) => {
         return state.module.idModule
@@ -355,11 +463,26 @@ export default {
     }
   },
   created () {
+    // eslint-disable-next-line nuxt/no-globals-in-created
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
     this.getAll()
   },
 
   mounted () {},
   methods: {
+    download (x) {
+      const url = x
+      window.open(url)
+    },
+    handleResize () {
+      this.window.width = window.innerWidth
+      this.window.height = window.innerHeight
+    },
+    dialogDownload (data) {
+      this.dataAttachment = data
+      this.dialog = true
+    },
     getAll () {
       this.getData()
     },
@@ -373,9 +496,6 @@ export default {
       this.$store
         .dispatch('module/fetchDetailActivity', data)
         .then((response) => {
-          console.log(response.data.data)
-          this.tinggi = this.$refs.infoBox.clientHeight + 'px;'
-
           this.isLoading = false
         })
         .catch((error) => {
@@ -687,33 +807,61 @@ export default {
       }
     }
     .card-activity {
-      background: #effdfd;
+      background: #2c6ec2;
       box-shadow: inset -5px 0px 4px rgba(28, 71, 132, 0.08),
         inset 5px 0px 8px rgba(28, 71, 132, 0.08);
-      height: 400px;
+      height: 100%;
       width: 730px;
-      .title-chapter {
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 21px;
-        display: flex;
-        align-items: center;
-        padding-left: 30px;
-      }
-      .btn-act {
-        background-color: #4c7bc1;
-        color: white;
-        text-transform: capitalize;
-        width: 228.23px;
-      }
-      .description-activity {
-        width: 100%;
-        padding: 10px 20px 30px 30px;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 16px;
-        display: flex;
-        align-items: center;
+      padding: 20px 10px 10px 10px;
+      .bg-act {
+        background: #f5fbff;
+        padding: 10px;
+        min-height: 200px;
+        .title-chapter {
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          padding-left: 30px;
+          font-size: 16px;
+          line-height: 25px;
+          color: #3b69bc;
+          width: 450px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .btn-act {
+          background-color: #259def;
+          color: white;
+          text-transform: capitalize;
+          width: 200px;
+          padding: 5px 10px 5px 10px;
+          text-align: center;
+          transform: skew(-18deg);
+          float: right;
+          margin-right: 20px;
+          cursor: pointer;
+          .name-act {
+            font-size: 12px;
+            text-align: center;
+            transform: skew(18deg);
+          }
+        }
+        .hr-line {
+          border-bottom: solid 2px #5d93ce;
+          margin-top: 10px;
+          width: 100%;
+        }
+        .description-activity {
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 19px;
+          text-align: justify;
+
+          color: #5b6987;
+          margin-top: 10px;
+          margin-bottom: 20px;
+        }
       }
     }
     .tab-2-petra {
@@ -920,6 +1068,113 @@ export default {
             }
           }
         }
+      }
+    }
+  }
+}
+
+.dialog-filter {
+  z-index: 9;
+  position: absolute;
+  overflow: hidden;
+  top: 68px;
+  left: 80px;
+  width: 1200px;
+  background: rgba(10, 10, 10, 0.5);
+  .center-dialog {
+    width: 781.56px;
+    height: 607px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    bottom: 0;
+    right: 0;
+    .container-dialog {
+      height: 100%;
+      width: 100%;
+      background-color: #e2e5e8;
+      padding: 20px;
+      .tag-card {
+        margin-top: 40px;
+        .tag-contain {
+          margin-bottom: 5px;
+          border-bottom: solid 2px #ffffff;
+          margin-right: 10px;
+          margin-left: 10px;
+          .tag-btn {
+            height: 27px;
+            width: 200px;
+            background-color: white;
+            border-radius: 0px;
+            text-align: center;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            padding-top: 1px;
+            cursor: pointer;
+            color: #7289aa;
+          }
+          .reset-filter {
+            float: right;
+            height: 27px;
+            cursor: pointer;
+            width: 142px;
+            background-color: transparent;
+            border-radius: 0px;
+            text-align: center;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            padding-top: 1px;
+            border: 1px solid #7289aa;
+            color: #7289aa;
+            position: absolute;
+            top: 56px;
+            right: 30px;
+          }
+        }
+      }
+      .sort-card {
+        margin-top: 30px;
+        .sort-contain {
+          margin-bottom: 5px;
+          border-bottom: solid 2px #ffffff;
+          margin-right: 10px;
+          margin-left: 10px;
+          .tag-btn {
+            height: 27px;
+            width: 140.8px;
+            background-color: white;
+            border-radius: 0px;
+            text-align: center;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            padding-top: 1px;
+            cursor: pointer;
+            color: #7289aa;
+          }
+        }
+      }
+      .apply-filter {
+        background-color: #4c7bc1;
+        color: white;
+        text-transform: capitalize;
+        width: 228.23px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 40px;
+      }
+      .box-filter {
+        text-align: center;
+        padding-top: 5px;
+        font-size: 13px;
+        border: 1.07473px solid #ffffff;
       }
     }
   }

@@ -4,7 +4,8 @@ export const state = () => ({
   dataCollection: {},
   dataTag: {},
   dataDetailActivity: {},
-  idModule: ''
+  idModule: '',
+  dataContent: {}
 })
 
 export const getters = {
@@ -31,6 +32,9 @@ export const mutations = {
   },
   SET_DATA_ID_MODULE (state, item) {
     state.idModule = item
+  },
+  SET_DATA_CONTENT (state, item) {
+    state.dataContent = item
   }
 }
 
@@ -104,6 +108,7 @@ export const actions = {
         payload
       )
       commit('SET_DATA_DETAIL_ACTIVITY', response.data.data)
+      commit('SET_DATA_CONTENT', response.data.data.content)
       return response
     } catch (e) {
       return e.response
