@@ -79,20 +79,27 @@
       <!-- content -->
       <div v-if="selected1" class="columns is-gapless mb-0 pb-0">
         <div class="column is-narrow header-left">
-          <div class="card-list">
-            <img src="~/assets/images/module/act.png" class="background-card">
-            <img :src="detailActivity.thumbnail" class="display-pic">
-            <div class="petra-title-card">
-              {{ detailActivity.name }} <br>
-              <span
-                style="font-style: italic; font-weight: normal; font-size: 14px"
-              >GAME ACTIVITY</span>
-            </div>
-            <div class="petra-description">
-              {{ detailActivity.introduction }}
-            </div>
-            <div class="petra-c1">
-              999 discussion replies.
+          <div ref="infoBox" class="card-list">
+            <div v-if="!isLoading" class="bg-1" :style="tinggi2" />
+            <div v-if="!isLoading" class="bg-2" :style="tinggi2" />
+            <div class="column is-narrow left-side">
+              <img
+                src="https://i.picsum.photos/id/495/300/300.jpg?hmac=A9YVCMdxoYv0Ck6HxE28k5rQuCh0JliJ8KcpSer_Nsg"
+                class="display-pic"
+              >
+              <div class="petra-title-card">
+                {{ detailActivity.name }} <br>
+                <span
+                  style="
+                    font-style: italic;
+                    font-weight: normal;
+                    font-size: 14px;
+                  "
+                >GAME ACTIVITY</span>
+              </div>
+              <div class="petra-description">
+                {{ detailActivity.introduction }}
+              </div>
             </div>
           </div>
         </div>
@@ -315,14 +322,16 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  name: 'ModuleActivityGame',
+  name: 'ModuleActivityReading',
   layout: 'default',
 
   data () {
     return {
       isLoading: false,
       selected1: true,
-      selected3: false
+      selected2: false,
+      selected3: false,
+      tinggi: 0
     }
   },
 
@@ -334,7 +343,10 @@ export default {
       idModule: (state) => {
         return state.module.idModule
       }
-    })
+    }),
+    tinggi2 () {
+      return 'height:' + this.tinggi
+    }
   },
   created () {
     this.getAll()
@@ -346,6 +358,7 @@ export default {
       this.getData()
     },
     getData () {
+      console.log('tess ')
       this.isLoading = true
       const data = {
         module: this.idModule,
@@ -354,8 +367,10 @@ export default {
       this.$store
         .dispatch('module/fetchDetailActivity', data)
         .then((response) => {
-          this.isLoading = false
           console.log(response.data.data)
+          this.tinggi = this.$refs.infoBox.clientHeight + 'px;'
+
+          this.isLoading = false
         })
         .catch((error) => {
           this.isLoading = false
@@ -421,6 +436,10 @@ export default {
         text-shadow: 0px 1px 1px #cff0ff;
         top: 13px;
         left: 76px;
+        width: 240px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .detail-box {
         position: absolute;
@@ -443,6 +462,10 @@ export default {
         color: white;
         top: 53px;
         left: 79px;
+        width: 370px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
     .btn-back {
@@ -499,66 +522,162 @@ export default {
     }
 
     .card-list {
-      margin-top: 5px;
-      height: 700px;
       width: 100%;
-      position: relative;
-      .background-card {
+      height: 100%;
+      // margin-top: 5px;
+      // height: 700px;
+      // width: 100%;
+      // position: relative;
+
+      .bg-1 {
         position: absolute;
-        top: 0px;
-        object-fit: cover;
+        width: 200px;
+        left: 154px;
+        background: #5d93ce;
+        opacity: 0.5;
+        margin-top: 4px;
+        --g: #000, #0000 1deg 179deg, #000 180deg;
+        --mask: conic-gradient(from -225deg at bottom 18px left 18px, var(--g))
+          0 100%/51% 100% no-repeat;
+        -webkit-mask: var(--mask);
       }
-      .display-pic {
+      .bg-2 {
         position: absolute;
-        top: 1px;
-        left: 0px;
-        height: 213px;
-        width: 337px;
-        -o-object-fit: cover;
-        object-fit: cover;
+        width: 200px;
+        left: 297px;
+        background: #5d93ce;
+        opacity: 0.5;
+        margin-top: -4px;
         --g: #000, #0000 1deg 179deg, #000 180deg;
         --mask: conic-gradient(from -45deg at top 18px right 18px, var(--g))
           100% 0 /100% 100% no-repeat;
         -webkit-mask: var(--mask);
         mask: var(--mask);
       }
-      .petra-title-card {
+      .rating-bg {
         position: absolute;
-        top: 220px;
-        left: 15px;
-        width: 90%;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 16px;
-        line-height: 20px;
-        text-align: justify;
-        color: #000000;
+        top: 371px;
+        left: 165px;
+        z-index: 2;
       }
-      .petra-description {
+      .rating-card {
         position: absolute;
-        top: 280px;
-        left: 15px;
-        width: 90%;
+        top: 386px;
+        left: 185px;
         font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 18px;
-        text-align: justify;
-        color: #5b6987;
+        z-index: 2;
+        font-weight: 500;
+        font-size: 15.6103px;
+        color: #ffffff;
       }
-      .petra-c1 {
+      .bg-student {
         position: absolute;
-        top: 410px;
-        left: 18px;
-        width: 90%;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 18px;
-        color: #5b6987;
-        float: right;
-        text-align: right;
-        font-weight: bold;
+        z-index: 2;
+        top: 399px;
+        left: 171px;
+        background: #2b2b56;
+        height: 22px;
+        width: 147.87px;
+        text-align: center;
+        color: #a2cff4;
+        font-size: 12px;
+        padding-top: 3px;
+      }
+
+      .left-side {
+        width: 332.4px;
+        height: 100%;
+        position: relative;
+        background-color: white;
+        --g: #000, #0000 1deg 179deg, #000 180deg;
+
+        --mask: conic-gradient(from -45deg at top 18px right 18px, var(--g))
+            100% 0 /51% 100% no-repeat,
+          conic-gradient(from -225deg at bottom 18px left 18px, var(--g)) 0 100%/51%
+            100% no-repeat;
+        -webkit-mask: var(--mask);
+        mask: var(--mask);
+        .display-pic {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          height: 195px;
+          width: 332px;
+          object-fit: cover;
+          --g: #000, #0000 1deg 179deg, #000 180deg;
+          --mask: conic-gradient(from -45deg at top 18px right 18px, var(--g))
+            100% 0 /100% 100% no-repeat;
+          -webkit-mask: var(--mask);
+          mask: var(--mask);
+        }
+
+        .petra-title-card {
+          margin-top: 194px;
+          padding-left: 0px;
+          z-index: 4;
+          width: 100%;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 20px;
+          text-align: justify;
+          color: #000000;
+        }
+        .petra-description {
+          margin-top: 10px;
+          padding-left: 0px;
+          z-index: 4;
+          width: 100%;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 18px;
+          text-align: justify;
+          color: #5b6987;
+          margin-bottom: 21px;
+          height: 100px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .petra-c1 {
+          width: 100%;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 18px;
+          color: #5b6987;
+          float: right;
+          text-align: right;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+        .petra-owner {
+          width: 100%;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 18px;
+          color: #0071bc;
+          float: right;
+          text-align: right;
+          opacity: 0.75;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+        .petra-button-collection {
+          background: #4c7bc1;
+          width: 80%;
+          margin-left: 23px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          position: absolute;
+          bottom: 15px;
+          text-align: center;
+          font-size: 14px;
+          color: #f2f2f2;
+          cursor: pointer;
+        }
       }
     }
     .card-activity {
