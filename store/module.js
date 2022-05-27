@@ -5,7 +5,8 @@ export const state = () => ({
   dataTag: {},
   dataDetailActivity: {},
   idModule: '',
-  dataContent: {}
+  dataContent: {},
+  dataAllDiscuss: {}
 })
 
 export const getters = {
@@ -35,6 +36,9 @@ export const mutations = {
   },
   SET_DATA_CONTENT (state, item) {
     state.dataContent = item
+  },
+  SET_DATA_ALL_DISCUSS (state, item) {
+    state.dataAllDiscuss = item
   }
 }
 
@@ -116,5 +120,22 @@ export const actions = {
   },
   idModule ({ commit }, payload) {
     commit('SET_DATA_ID_MODULE', payload)
+  },
+  async fetchAllDiscuss ({ commit }, payload) {
+    try {
+      const response = await this.$repositories.module.getAllDiscuss(payload)
+      commit('SET_DATA_ALL_DISCUSS', response.data.data)
+      return response
+    } catch (e) {
+      return e.response
+    }
+  },
+  async postDiscuss ({ commit }, payload) {
+    try {
+      const response = await this.$repositories.module.postDiscuss(payload)
+      return response
+    } catch (e) {
+      return e.response
+    }
   }
 }

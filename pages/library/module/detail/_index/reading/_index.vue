@@ -146,28 +146,7 @@
               src="~/assets/images/module/review-bg.png"
               class="background-card"
             >
-            <div class="rate-text">
-              Please rate module here.
-            </div>
-            <span class="petra-rating">
-              <img
-                src="~/assets/images/module/detail-star.svg"
-                class="rating-bg"
-              >
-              <div class="rating-card columns">
-                2.9/5
-                <b-rate
-                  icon-pack="mdi"
-                  size="is-small"
-                  icon="mdi mdi-star"
-                  style="margin-left: 4px"
-                  :max="5"
-                  spaced
-                  disabled
-                />
-              </div>
-            </span>
-            <span class="petra-comment">
+            <span class="petra-comment" style="top: 50px">
               <div class="comment-text">Leave a comment.</div>
               <img
                 src="~/assets/images/module/comment-border.svg"
@@ -180,165 +159,39 @@
               >
 
               <div class="hexagon">
-                <textarea type="text" style="width: 100%; height: 100%" />
+                <textarea
+                  v-model="descReview"
+                  type="text"
+                  style="width: 100%; height: 100%"
+                />
               </div>
             </span>
-            <div class="petra-button">
+            <div class="petra-button" @click="addReview()">
               Submit Review
             </div>
           </div>
           <div class="column right-side">
             <div class="petra-content">
               <div style="padding: 20px 20px 10px 20px">
-                <div class="columns is-gapless">
-                  <div class="column is-narrow pic-petra">
-                    <img src="~/assets/images/module/Avatar.png">
+                <div
+                  v-for="(review, indexReview) in itemsDiscuss.data"
+                  :key="indexReview"
+                  class="columns is-gapless"
+                >
+                  <div class="column is-narrow">
+                    <img
+                      :src="review.photo_path"
+                      class="pic-petra"
+                      style="width: 80px; height: 80px; object-fit: cover"
+                    >
                   </div>
                   <div class="column box-list">
                     <div class="student-name">
-                      Robert Suhendra
+                      {{ review.username }}
                     </div>
-
-                    <span class="petra-rating">
-                      <img
-                        src="~/assets/images/module/detail-star.svg"
-                        class="rating-bg"
-                      >
-                      <div class="rating-card columns">
-                        2.9/5
-                        <b-rate
-                          icon-pack="mdi"
-                          size="is-small"
-                          icon="mdi mdi-star"
-                          style="margin-left: 4px"
-                          :max="5"
-                          spaced
-                          disabled
-                        />
-                      </div>
-                    </span>
                     <div class="petra-review">
-                      <div class="box-review" />
-                      <!-- <img
-                        src="~/assets/images/module/review-box.png"
-                        class="review-box"
-                      > -->
-                      <!-- <img
-                        src="~/assets/images/module/review-corner.png"
-                        class="review-corner"
-                      > -->
-                      <div class="content-text">
-                        “Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.”
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="columns is-gapless">
-                  <div class="column is-narrow pic-petra">
-                    <img src="~/assets/images/module/Avatar.png">
-                  </div>
-                  <div class="column box-list">
-                    <div class="student-name">
-                      Robert Suhendra
-                    </div>
-
-                    <span class="petra-rating">
-                      <img
-                        src="~/assets/images/module/detail-star.svg"
-                        class="rating-bg"
-                      >
-                      <div class="rating-card columns">
-                        2.9/5
-                        <b-rate
-                          icon-pack="mdi"
-                          size="is-small"
-                          icon="mdi mdi-star"
-                          style="margin-left: 4px"
-                          :max="5"
-                          spaced
-                          disabled
-                        />
-                      </div>
-                    </span>
-                    <div class="petra-review">
-                      <div class="box-review" />
-                      <!-- <img
-                        src="~/assets/images/module/review-box.png"
-                        class="review-box"
-                      > -->
-                      <!-- <img
-                        src="~/assets/images/module/review-corner.png"
-                        class="review-corner"
-                      > -->
-                      <div class="content-text">
-                        “Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.”
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="columns is-gapless">
-                  <div class="column is-narrow pic-petra">
-                    <img src="~/assets/images/module/Avatar.png">
-                  </div>
-                  <div class="column box-list">
-                    <div class="student-name">
-                      Robert Suhendra
-                    </div>
-
-                    <span class="petra-rating">
-                      <img
-                        src="~/assets/images/module/detail-star.svg"
-                        class="rating-bg"
-                      >
-                      <div class="rating-card columns">
-                        2.9/5
-                        <b-rate
-                          icon-pack="mdi"
-                          size="is-small"
-                          icon="mdi mdi-star"
-                          style="margin-left: 4px"
-                          :max="5"
-                          spaced
-                          disabled
-                        />
-                      </div>
-                    </span>
-                    <div class="petra-review">
-                      <div class="box-review" />
-                      <!-- <img
-                        src="~/assets/images/module/review-box.png"
-                        class="review-box"
-                      > -->
-                      <!-- <img
-                        src="~/assets/images/module/review-corner.png"
-                        class="review-corner"
-                      > -->
-                      <div class="content-text">
-                        “Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.”
+                      <div class="box-review" style="padding: 10px">
+                        {{ review.comment }}
                       </div>
                     </div>
                   </div>
@@ -442,7 +295,9 @@ export default {
         width: 0,
         height: 0
       },
-      dataAttachment: {}
+      dataAttachment: {},
+      itemsDiscuss: {},
+      descReview: ''
     }
   },
 
@@ -471,6 +326,33 @@ export default {
 
   mounted () {},
   methods: {
+    addReview () {
+      const data = {
+        module_rail_id: this.$route.params.index,
+        review: this.descReview
+      }
+      this.$store
+        .dispatch('module/postDiscuss', data)
+        .then((response) => {
+          this.$store
+            .dispatch('module/fetchAllDiscuss', this.$route.params.index)
+            .then((response) => {
+              this.itemsDiscuss = response.data.data
+            })
+        })
+        .catch((error) => {
+          console.log('error:', error)
+          this.isLoading = false
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
     download (x) {
       const url = x
       window.open(url)
@@ -483,8 +365,30 @@ export default {
       this.dataAttachment = data
       this.dialog = true
     },
+    getAllDiscuss () {
+      this.isLoading = true
+      this.$store
+        .dispatch('module/fetchAllDiscuss', this.$route.params.index)
+        .then((response) => {
+          this.itemsDiscuss = response.data.data
+          console.log(response.data.data)
+          this.isLoading = false
+        })
+        .catch((error) => {
+          this.isLoading = false
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
     getAll () {
       this.getData()
+      this.getAllDiscuss()
     },
     getData () {
       console.log('tess ')

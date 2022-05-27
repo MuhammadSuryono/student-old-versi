@@ -106,5 +106,14 @@ export default $axios => ({
     return $axios.get(
       `${resource}/${payload.module}/collection/activity/${payload.activity}`
     )
+  },
+  getAllDiscuss (payload) {
+    return $axios.get(`/activity/module/rail/${payload}/discuss`)
+  },
+  postDiscuss (payload) {
+    return $axios.post('/activity/module/discuss', {
+      module_rail_id: payload.module_rail_id,
+      review: payload.review
+    })
   }
 })
