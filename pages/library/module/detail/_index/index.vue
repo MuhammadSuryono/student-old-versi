@@ -340,7 +340,11 @@
                   class="columns is-gapless"
                 >
                   <div class="column is-narrow">
-                    <img :src="review.avatar" class="pic-petra">
+                    <img
+                      :src="review.avatar"
+                      class="pic-petra"
+                      style="width: 80px; height: 80px; object-fit: cover"
+                    >
                   </div>
                   <div class="column box-list">
                     <div class="student-name">
@@ -542,27 +546,28 @@ export default {
       }
     },
     detailActivity (rail) {
-      console.log(rail.type_activity)
-      this.$store.dispatch('module/idModule', this.$route.params.index)
-      if (rail.type_activity === 'game') {
-        this.$router.push({
-          path: `/library/module/detail/${this.$route.params.index}/game/${rail.id}`
-        })
-      }
-      if (rail.type_activity === 'video') {
-        this.$router.push({
-          path: `/library/module/detail/${this.$route.params.index}/video/${rail.id}`
-        })
-      }
-      if (rail.type_activity === 'reading') {
-        this.$router.push({
-          path: `/library/module/detail/${this.$route.params.index}/reading/${rail.id}`
-        })
-      }
-      if (rail.type_activity === 'quiz') {
-        this.$router.push({
-          path: `/library/module/detail/${this.$route.params.index}/quiz/${rail.id}`
-        })
+      if (!rail.detail.is_locked) {
+        this.$store.dispatch('module/idModule', this.$route.params.index)
+        if (rail.type_activity === 'game') {
+          this.$router.push({
+            path: `/library/module/detail/${this.$route.params.index}/game/${rail.id}`
+          })
+        }
+        if (rail.type_activity === 'video') {
+          this.$router.push({
+            path: `/library/module/detail/${this.$route.params.index}/video/${rail.id}`
+          })
+        }
+        if (rail.type_activity === 'reading') {
+          this.$router.push({
+            path: `/library/module/detail/${this.$route.params.index}/reading/${rail.id}`
+          })
+        }
+        if (rail.type_activity === 'quiz') {
+          this.$router.push({
+            path: `/library/module/detail/${this.$route.params.index}/quiz/${rail.id}`
+          })
+        }
       }
     }
   }
