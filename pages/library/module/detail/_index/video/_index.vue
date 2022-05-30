@@ -100,7 +100,7 @@
 
               <div class="petra-c1">
                 Duration:
-                {{ detailActivity.content.meta_data.meta.total_time }}
+                <!-- {{ detailActivity.content.meta_data.meta.total_time }} -->
                 <br>
                 {{ detailActivity.discussions }} Discussion
               </div>
