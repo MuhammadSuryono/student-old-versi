@@ -108,7 +108,9 @@ export default $axios => ({
     )
   },
   getAllDiscuss (payload) {
-    return $axios.get(`/activity/module/rail/${payload}/discuss`)
+    return $axios.get(
+      `/activity/module/rail/${payload.id}/discuss?page=${payload.page}`
+    )
   },
   postDiscuss (payload) {
     return $axios.post('/activity/module/discuss', {
