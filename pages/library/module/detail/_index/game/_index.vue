@@ -137,6 +137,15 @@
               src="~/assets/images/module/review-bg.png"
               class="background-card"
             >
+            <div
+              class="p-displaypic"
+              :style="{ backgroundColor: dataUser.faction.avatar_bgcolor }"
+            >
+              <img :src="dataUser.avatar.image" class="p-img">
+            </div>
+            <div class="p-username">
+              {{ dataUser.username }}
+            </div>
             <span class="petra-comment">
               <div class="comment-text">Leave a comment.</div>
               <img
@@ -256,6 +265,9 @@ export default {
       },
       dataAllDiscuss: (state) => {
         return state.module.dataAllDiscuss
+      },
+      dataUser: (state) => {
+        return state.user.users
       }
     }),
     tinggi2 () {
@@ -276,7 +288,9 @@ export default {
     this.getAll()
   },
 
-  mounted () {},
+  mounted () {
+    console.log('user : ', this.dataUser)
+  },
   methods: {
     addReview () {
       const data = {
@@ -759,7 +773,49 @@ export default {
         .background-card {
           position: absolute;
           top: 0px;
+          left: 81px;
           object-fit: cover;
+        }
+        .p-displaypic {
+          position: absolute;
+          top: 0px;
+          left: 13px;
+          height: 76.09px;
+          width: 70.28px;
+          background-color: Red;
+          .p-img {
+            position: absolute;
+            top: 35px;
+            left: 24px;
+            height: 20px;
+            width: 22px;
+            margin-right: auto;
+            z-index: 1;
+            -o-object-fit: cover;
+            object-fit: cover;
+            -o-object-position: 40% 0%;
+            object-position: 40% 0%;
+            transform: scale(3);
+          }
+        }
+        .p-username {
+          position: absolute;
+          top: 0px;
+          left: 90px;
+          background-color: #2e5799;
+          height: 32px;
+          width: 234px;
+          --g: #000, rgba(0, 0, 0, 0) 1deg 179deg, #000 180deg;
+          --mask: conic-gradient(from 15deg at top 18px right 18px, var(--g))
+            100% 0 /100% 100% no-repeat;
+          -webkit-mask: var(--mask);
+          mask: var(--mask);
+          color: white;
+          padding: 4px 5px 0px 14px;
+          font-size: 15px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .rate-text {
           position: absolute;

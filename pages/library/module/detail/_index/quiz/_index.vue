@@ -120,7 +120,16 @@
               src="~/assets/images/module/review-bg.png"
               class="background-card"
             >
-            <span class="petra-comment" style="top: 50px">
+            <div
+              class="p-displaypic"
+              :style="{ backgroundColor: dataUser.faction.avatar_bgcolor }"
+            >
+              <img :src="dataUser.avatar.image" class="p-img">
+            </div>
+            <div class="p-username">
+              {{ dataUser.username }}
+            </div>
+            <span class="petra-comment">
               <div class="comment-text">Leave a comment.</div>
               <img
                 src="~/assets/images/module/comment-border.svg"
@@ -140,15 +149,18 @@
                 />
               </div>
             </span>
-            <div class="petra-button" @click="addReview()">
-              Submit Review
-            </div>
+            <PButton
+              :disabled="disableBtn"
+              class="petra-button"
+              text="Submit Review"
+              @click.native="addReview()"
+            />
           </div>
           <div class="column right-side">
             <div class="petra-content">
               <div style="padding: 20px 20px 10px 20px">
                 <div
-                  v-for="(review, indexReview) in itemsDiscuss.data"
+                  v-for="(review, indexReview) in itemsDiscuss"
                   :key="indexReview"
                   class="columns is-gapless"
                 >
@@ -170,6 +182,24 @@
                     </div>
                   </div>
                 </div>
+
+                <infinite-loading
+                  v-if="itemsDiscuss.length"
+                  :identifier="infiniteId"
+                  spinner="spinner"
+                  style="margin-bottom: 15px"
+                  @infinite="infiniteScroll"
+                >
+                  <div slot="spinner" style="color: white">
+                    <v-progress-circular indeterminate color="white" />
+                  </div>
+                  <div slot="no-results" style="color: white">
+                    No results
+                  </div>
+                  <div slot="no-more" style="color: white">
+                    No more data
+                  </div>
+                </infinite-loading>
               </div>
             </div>
           </div>
@@ -192,7 +222,9 @@ export default {
       selected3: false,
       tinggi: 0,
       itemsDiscuss: {},
-      descReview: ''
+      descReview: '',
+      infiniteId: 1,
+      total: 0
     }
   },
 
@@ -203,10 +235,20 @@ export default {
       },
       idModule: (state) => {
         return state.module.idModule
+      },
+      dataUser: (state) => {
+        return state.user.users
       }
     }),
     tinggi2 () {
       return 'height:' + this.tinggi
+    },
+    disableBtn () {
+      if (this.descReview === '') {
+        return true
+      } else {
+        return false
+      }
     }
   },
   created () {
@@ -223,10 +265,18 @@ export default {
       this.$store
         .dispatch('module/postDiscuss', data)
         .then((response) => {
+          this.infiniteId += 1
+          this.descReview = ''
+          this.page = 1
+          const data = {
+            id: this.$route.params.index,
+            page: this.page
+          }
           this.$store
-            .dispatch('module/fetchAllDiscuss', this.$route.params.index)
+            .dispatch('module/fetchAllDiscuss', data)
             .then((response) => {
-              this.itemsDiscuss = response.data.data
+              this.itemsDiscuss = response.data.data.data
+              this.total = response.data.data.total
             })
         })
         .catch((error) => {
@@ -248,10 +298,16 @@ export default {
     },
     getAllDiscuss () {
       this.isLoading = true
+      this.page = 1
+      const data = {
+        id: this.$route.params.index,
+        page: this.page
+      }
       this.$store
-        .dispatch('module/fetchAllDiscuss', this.$route.params.index)
+        .dispatch('module/fetchAllDiscuss', data)
         .then((response) => {
-          this.itemsDiscuss = response.data.data
+          this.itemsDiscuss = response.data.data.data
+          this.total = response.data.data.total
           console.log(response.data.data)
           this.isLoading = false
         })
@@ -266,6 +322,35 @@ export default {
             this.$router.push('/login')
           }
         })
+    },
+    infiniteScroll ($state) {
+      setTimeout(() => {
+        this.page++
+        const data = {
+          page: this.page,
+          id: this.$route.params.index
+        }
+        this.$store
+          .dispatch('module/fetchAllDiscuss', data)
+          .then((resp) => {
+            if (resp.data.data.data.length > 1) {
+              resp.data.data.data.forEach(item => this.itemsDiscuss.push(item))
+              $state.loaded()
+            } else {
+              $state.complete()
+            }
+          })
+          .catch((error) => {
+            this.$toast.error(error.response, {
+              position: 'top-center',
+              duration: 5000
+            })
+            if (error.status === 401) {
+              this.$auth.logout()
+              this.$router.push('/login')
+            }
+          })
+      }, 500)
     },
     getData () {
       console.log('tess ')
@@ -622,6 +707,7 @@ export default {
     }
     .tab-2-petra {
       padding: 15px 0px 0px 0px;
+
       .left-side {
         width: 338px;
         height: 100%;
@@ -629,7 +715,49 @@ export default {
         .background-card {
           position: absolute;
           top: 0px;
+          left: 81px;
           object-fit: cover;
+        }
+        .p-displaypic {
+          position: absolute;
+          top: 0px;
+          left: 13px;
+          height: 76.09px;
+          width: 70.28px;
+          background-color: Red;
+          .p-img {
+            position: absolute;
+            top: 35px;
+            left: 24px;
+            height: 20px;
+            width: 22px;
+            margin-right: auto;
+            z-index: 1;
+            -o-object-fit: cover;
+            object-fit: cover;
+            -o-object-position: 40% 0%;
+            object-position: 40% 0%;
+            transform: scale(3);
+          }
+        }
+        .p-username {
+          position: absolute;
+          top: 0px;
+          left: 90px;
+          background-color: #2e5799;
+          height: 32px;
+          width: 234px;
+          --g: #000, rgba(0, 0, 0, 0) 1deg 179deg, #000 180deg;
+          --mask: conic-gradient(from 15deg at top 18px right 18px, var(--g))
+            100% 0 /100% 100% no-repeat;
+          -webkit-mask: var(--mask);
+          mask: var(--mask);
+          color: white;
+          padding: 4px 5px 0px 14px;
+          font-size: 15px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .rate-text {
           position: absolute;
@@ -658,33 +786,33 @@ export default {
         }
         .petra-comment {
           position: relative;
-          top: 92px;
+          top: 28px;
           left: 93px;
           .comment-text {
             font-style: normal;
             font-weight: 500;
             font-size: 14.6454px;
             color: #5b6987;
-            margin-bottom: 3px;
+            margin-bottom: 11px;
           }
           .bg-bor {
             z-index: 4;
           }
           .bg-com {
             position: absolute;
-            top: 23px;
+            top: 33px;
             left: 0px;
             z-index: 3;
           }
           .bg-cor {
             position: absolute;
-            top: 23px;
+            top: 33px;
             right: 0px;
             z-index: 5;
           }
           .hexagon {
             position: absolute;
-            top: 34px;
+            top: 38px;
             left: 10px;
             z-index: 6;
             font-size: 14px;
@@ -696,18 +824,11 @@ export default {
           }
         }
         .petra-button {
-          padding: 5px 10px 5px 10px;
-          width: 171.78px;
           position: absolute;
-          top: 440px;
-          background: #4c7bc1;
-          text-align: center;
-          font-size: 14px;
-          text-align: center;
-          color: #f2f2f2;
+          top: 427px;
           cursor: pointer;
-          left: 66%;
-          transform: translate(-50%, -50%);
+          left: 51%;
+          transform: translate(-15%, -50%);
         }
       }
       .right-side {
@@ -785,11 +906,13 @@ export default {
             }
             .petra-review {
               padding: 15px 20px 20px 30px;
-              position: relative;
-              height: 170px;
+              // position: relative;
+              // min-height: 88px;
               .box-review {
+                display: table;
+                table-layout: fixed;
                 background: #f2f2f2;
-                height: 100%;
+                min-height: 88px;
                 width: 100%;
                 --g: #000, #0000 1deg 179deg, #000 180deg;
                 --mask: conic-gradient(
@@ -801,17 +924,9 @@ export default {
                     0 100%/51% 100% no-repeat;
                 -webkit-mask: var(--mask);
                 mask: var(--mask);
-              }
-              .review-box {
-                position: absolute;
-                top: 15px;
-                width: 517px;
-                height: 100%;
-              }
-              .review-corner {
-                position: absolute;
-                top: 12px;
-                right: 17px;
+                font-size: 12px;
+                padding: 10px;
+                word-wrap: break-word;
               }
               .content-text {
                 position: absolute;
