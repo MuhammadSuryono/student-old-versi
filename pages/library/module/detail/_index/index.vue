@@ -277,6 +277,16 @@
               src="~/assets/images/module/review-bg.png"
               class="background-card"
             >
+
+            <div
+              class="p-displaypic"
+              :style="{ backgroundColor: dataUser.faction.avatar_bgcolor }"
+            >
+              <img :src="dataUser.avatar.image" class="p-img">
+            </div>
+            <div class="p-username">
+              {{ dataUser.username }}
+            </div>
             <div class="rate-text">
               Please rate module here.
             </div>
@@ -318,9 +328,12 @@
                 />
               </div>
             </span>
-            <div class="petra-button" @click="addReview()">
-              Submit Review
-            </div>
+            <PButton
+              :disabled="disableBtn"
+              class="petra-button"
+              text="Submit Review"
+              @click.native="addReview()"
+            />
           </div>
           <div class="column right-side">
             <div class="petra-title">
@@ -339,11 +352,23 @@
                   :key="indexReview"
                   class="columns is-gapless"
                 >
-                  <div class="column is-narrow">
+                  <div
+                    class="column is-narrow"
+                    style="height: 80px"
+                    :style="{ backgroundColor: '#' + review.avatar_background }"
+                  >
                     <img
                       :src="review.avatar"
                       class="pic-petra"
-                      style="width: 80px; height: 80px; object-fit: cover"
+                      style="
+                        width: 80px;
+                        height: 67px;
+                        object-fit: cover;
+                        object-fit: cover;
+                        -o-object-position: 53% 0%;
+                        object-position: 53% 0%;
+                        margin-top: 13px;
+                      "
                     >
                   </div>
                   <div class="column box-list">
@@ -408,6 +433,9 @@ export default {
     ...mapState({
       detailModule: (state) => {
         return state.module.dataDetailModule
+      },
+      dataUser: (state) => {
+        return state.user.users
       }
     }),
     tinggi2 () {
@@ -417,7 +445,9 @@ export default {
   created () {
     this.getAll()
   },
-  mounted () {},
+  mounted () {
+    console.log(this.dataUser)
+  },
   methods: {
     getAll () {
       this.getData()
@@ -922,7 +952,50 @@ export default {
           .background-card {
             position: absolute;
             top: 0px;
+            left: 81px;
             object-fit: cover;
+          }
+          .p-displaypic {
+            position: absolute;
+            top: 0px;
+            left: 13px;
+            height: 76.09px;
+            width: 70.28px;
+            background-color: Red;
+            .p-img {
+              position: absolute;
+              top: 35px;
+              left: 24px;
+              height: 20px;
+              width: 22px;
+              margin-right: auto;
+              z-index: 1;
+              -o-object-fit: cover;
+              object-fit: cover;
+              -o-object-position: 40% 0%;
+              object-position: 40% 0%;
+              transform: scale(3);
+            }
+          }
+
+          .p-username {
+            position: absolute;
+            top: 0px;
+            left: 90px;
+            background-color: #2e5799;
+            height: 32px;
+            width: 234px;
+            --g: #000, rgba(0, 0, 0, 0) 1deg 179deg, #000 180deg;
+            --mask: conic-gradient(from 15deg at top 18px right 18px, var(--g))
+              100% 0 /100% 100% no-repeat;
+            -webkit-mask: var(--mask);
+            mask: var(--mask);
+            color: white;
+            padding: 4px 5px 0px 14px;
+            font-size: 15px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
           .rate-text {
             position: absolute;
@@ -989,18 +1062,11 @@ export default {
             }
           }
           .petra-button {
-            padding: 5px 10px 5px 10px;
-            width: 171.78px;
             position: absolute;
-            top: 440px;
-            background: #4c7bc1;
-            text-align: center;
-            font-size: 14px;
-            text-align: center;
-            color: #f2f2f2;
+            top: 455px;
             cursor: pointer;
-            left: 66%;
-            transform: translate(-50%, -50%);
+            left: 51%;
+            transform: translate(-15%, -50%);
           }
         }
         .right-side {

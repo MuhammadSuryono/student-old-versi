@@ -126,8 +126,11 @@
                 </div>
               </div>
               <div class="hr-line" />
-              <div class="description-activity">
-                {{ dataContent[page - 1].content }}
+              <div
+                class="description-activity"
+                v-html="dataContent[page - 1].content"
+              >
+                <!-- {{ dataContent[page - 1].content }} -->
               </div>
             </div>
             <v-pagination
