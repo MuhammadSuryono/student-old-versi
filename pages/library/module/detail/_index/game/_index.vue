@@ -181,21 +181,50 @@
                   :key="indexReview"
                   class="columns is-gapless"
                 >
-                  <div class="column is-narrow">
+                  <div
+                    class="column is-narrow"
+                    style="height: 80px"
+                    :style="{ backgroundColor: '#' + review.avatar_background }"
+                  >
                     <img
-                      :src="review.photo_path"
+                      :src="review.avatar"
                       class="pic-petra"
-                      style="width: 80px; height: 80px; object-fit: cover"
+                      style="
+                        width: 80px;
+                        height: 67px;
+                        object-fit: cover;
+                        object-fit: cover;
+                        -o-object-position: 53% 0%;
+                        object-position: 53% 0%;
+                        margin-top: 13px;
+                      "
                     >
                   </div>
                   <div class="column box-list">
                     <div class="student-name">
                       {{ review.username }}
                     </div>
-                    <div class="petra-review">
+                    <div class="petra-review" style="padding-bottom: 20px">
                       <div class="box-review" style="padding: 10px">
                         {{ review.comment }}
                       </div>
+                    </div>
+                    <div class="no-select reply-btn">
+                      Reply
+                    </div>
+                    <div class="reply-hide">
+                      <span
+                        v-if="showReply"
+                        class="no-select"
+                        @click="showReply = false"
+                      >
+                        <b-icon icon="chevron-up" size="is-small" />Show 3
+                        replies.
+                      </span>
+                      <span v-else class="no-select" @click="showReply = true">
+                        <b-icon icon="chevron-down" size="is-small" />Hide 3
+                        replies.
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -251,7 +280,8 @@ export default {
       descReview: '',
       itemsDiscuss: {},
       infiniteId: 1,
-      total: 0
+      total: 0,
+      showReply: true
     }
   },
 
@@ -922,13 +952,30 @@ export default {
             height: 100%;
             object-fit: cover;
             --g: #000, #0000 1deg 179deg, #000 180deg;
-
             --mask: conic-gradient(from -45deg at top 18px right 18px, var(--g))
                 100% 0 /51% 100% no-repeat,
               conic-gradient(from -225deg at bottom 18px left 18px, var(--g)) 0
                 100%/51% 100% no-repeat;
             -webkit-mask: var(--mask);
             mask: var(--mask);
+            .reply-btn {
+              position: absolute;
+              right: 20px;
+              bottom: 10px;
+              cursor: pointer;
+              font-size: 11px;
+              line-height: 15px;
+              float: right;
+              color: #21529b;
+            }
+            .reply-hide {
+              text-align: center;
+              cursor: pointer;
+              font-size: 11px;
+              line-height: 15px;
+              color: #21529b;
+              padding-bottom: 10px;
+            }
             .student-name {
               background-color: #2e5799;
               width: 196.45px;

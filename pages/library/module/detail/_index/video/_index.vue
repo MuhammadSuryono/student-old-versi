@@ -164,11 +164,23 @@
                   :key="indexReview"
                   class="columns is-gapless"
                 >
-                  <div class="column is-narrow">
+                  <div
+                    class="column is-narrow"
+                    style="height: 80px"
+                    :style="{ backgroundColor: '#' + review.avatar_background }"
+                  >
                     <img
-                      :src="review.photo_path"
+                      :src="review.avatar"
                       class="pic-petra"
-                      style="width: 80px; height: 80px; object-fit: cover"
+                      style="
+                        width: 80px;
+                        height: 67px;
+                        object-fit: cover;
+                        object-fit: cover;
+                        -o-object-position: 53% 0%;
+                        object-position: 53% 0%;
+                        margin-top: 13px;
+                      "
                     >
                   </div>
                   <div class="column box-list">
