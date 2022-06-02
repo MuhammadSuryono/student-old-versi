@@ -110,7 +110,12 @@
           </div>
         </div>
         <div class="column is-narrow header-right" style="margin-left: 20px">
-          <div class="card-activity" />
+          <!-- <div class="card-activity" /> -->
+            <iframe
+        ref="iframe"
+        src="/quiz/index.html"
+        :style="{ height: window.height - 200 + 'px', width: window.width + 'px' }"
+      />
         </div>
       </div>
       <div v-if="selected2">
@@ -186,8 +191,13 @@ export default {
 
   data () {
     return {
+        window: {
+        width: 720,
+        height: 720
+      },
       isLoading: false,
       selected1: true,
+      rail_id : null,
       selected2: false,
       selected3: false,
       tinggi: 0,
@@ -203,18 +213,66 @@ export default {
       },
       idModule: (state) => {
         return state.module.idModule
+      },
+       getDetailRail: (state) => {
+        //  let activity = state.module.dataDetailModule.activity_rails.find(e => e.id === this.rail_id)
+         let activity = state.module.dataDetailModule.activity_rails
+
+//  this.rail_id = activity.activity_id
+        return activity;
       }
     }),
     tinggi2 () {
       return 'height:' + this.tinggi
+    },
+    getRailId(){
+      let rail =this.getDetailRail.filter(e => e.id === parseInt(this.$route.params.index))
+      return rail[0].activity_id
     }
   },
   created () {
     this.getAll()
+    console.log('qctivityyy');
+    console.log(this.$route.params.index);
+// console.log(found););
+  // console.log(this.getDetailRail.activity_id);
+     window.addEventListener('resize', this.handleResize)
   },
 
-  mounted () {},
+  mounted () {
+       window.addEventListener('activityDoneEvent', this.activityDone)
+    this.$once('hook:beforeDestroy', () => {
+      window.removeEventListener('activityDoneEvent', this.activityDone)
+    })
+
+    window.addEventListener('getTokenQuizEvent', this.getTokenQuiz)
+    this.$once('hook:beforeDestroy', () => {
+      window.removeEventListener('getTokenQuizEvent', this.getTokenQuiz)
+    })
+  },
+
+  destroyed () {
+    window.removeEventListener('resize', this.handleResize)
+  },
   methods: {
+     
+    goHome () {
+      this.$router.push({ path: '/' })
+    },
+    handleResize () {
+      this.window.width = window.innerWidth
+      this.window.height = window.innerHeight
+    },
+
+    getTokenQuiz () {
+      const token = this.$auth.strategy.token.get()
+      this.$refs.iframe.contentWindow.sendTokenQuiz(token,this.getRailId)
+    },
+  
+    activityDone () {
+      // this.finish = true
+      alert('finish');
+    },
     addReview () {
       const data = {
         module_rail_id: this.$route.params.index,
