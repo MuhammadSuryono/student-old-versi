@@ -144,7 +144,7 @@
               <img :src="dataUser.avatar.image" class="p-img">
             </div>
             <div class="p-username">
-              {{ dataUser.username }}
+              {{ dataUser.username }} {{ indexSub2 }}
             </div>
             <span class="petra-comment">
               <div class="comment-text">Leave a comment.</div>
@@ -179,52 +179,123 @@
                 <div
                   v-for="(review, indexReview) in itemsDiscuss"
                   :key="indexReview"
-                  class="columns is-gapless"
+                  style="margin-bottom: 15px"
                 >
-                  <div
-                    class="column is-narrow"
-                    style="height: 80px"
-                    :style="{ backgroundColor: '#' + review.avatar_background }"
-                  >
-                    <img
-                      :src="review.avatar"
-                      class="pic-petra"
-                      style="
-                        width: 80px;
-                        height: 67px;
-                        object-fit: cover;
-                        object-fit: cover;
-                        -o-object-position: 53% 0%;
-                        object-position: 53% 0%;
-                        margin-top: 13px;
-                      "
+                  <div class="columns is-gapless" style="margin-bottom: 10px">
+                    <div
+                      class="column is-narrow"
+                      style="height: 80px"
+                      :style="{
+                        backgroundColor: '#' + review.avatar_background
+                      }"
                     >
-                  </div>
-                  <div class="column box-list">
-                    <div class="student-name">
-                      {{ review.username }}
+                      <img :src="review.avatar" class="pic-petra">
                     </div>
-                    <div class="petra-review" style="padding-bottom: 20px">
-                      <div class="box-review" style="padding: 10px">
-                        {{ review.comment }}
+                    <div class="column box-list">
+                      <div class="student-name">
+                        {{ review.username }}
+                      </div>
+                      <div class="petra-review" style="padding-bottom: 40px">
+                        <div class="box-review" style="padding: 10px">
+                          {{ review.comment }}
+                        </div>
+                      </div>
+                      <div
+                        class="no-select reply-btn"
+                        @click="openReply2(indexReview, review.comment_id)"
+                      >
+                        Reply
+                      </div>
+                      <div
+                        v-if="review.sub_comments.data.length > 0"
+                        class="reply-hide"
+                      >
+                        <span
+                          v-if="showReply"
+                          class="no-select"
+                          @click="openReply(false)"
+                        >
+                          <b-icon icon="chevron-up" size="is-small" />Hide
+                          {{ review.sub_comments.data.length }}
+                          replies.
+                        </span>
+                        <span
+                          v-else
+                          class="no-select"
+                          @click="openReply(true, indexReview)"
+                        >
+                          <b-icon icon="chevron-down" size="is-small" />Show
+                          {{ review.sub_comments.data.length }}
+                          replies.
+                        </span>
                       </div>
                     </div>
-                    <div class="no-select reply-btn">
-                      Reply
-                    </div>
-                    <div class="reply-hide">
-                      <span
-                        v-if="showReply"
-                        class="no-select"
-                        @click="showReply = false"
+                  </div>
+                  <!-- list sub reply  -->
+                  <div
+                    v-if="showReply && indexReview === indexSub"
+                    class="show-comment"
+                  >
+                    <div
+                      v-for="(sub, indexSub) in review.sub_comments.data"
+                      :key="indexSub"
+                      class="columns is-gapless"
+                      style="margin-bottom: 10px"
+                    >
+                      <div
+                        class="column is-narrow"
+                        style="height: 80px"
+                        :style="{
+                          backgroundColor: '#' + sub.avatar_background
+                        }"
                       >
-                        <b-icon icon="chevron-up" size="is-small" />Show 3
-                        replies.
-                      </span>
-                      <span v-else class="no-select" @click="showReply = true">
-                        <b-icon icon="chevron-down" size="is-small" />Hide 3
-                        replies.
-                      </span>
+                        <img :src="sub.avatar" class="pic-petra">
+                      </div>
+                      <div class="column box-list">
+                        <div class="student-name">
+                          {{ sub.username }}
+                        </div>
+                        <div class="petra-review" style="padding-bottom: 20px">
+                          <div class="box-review" style="padding: 10px">
+                            {{ sub.comment }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--  box comment  -->
+                  <div
+                    v-if="boxReply && indexReview === indexSub2"
+                    class="show-comment"
+                  >
+                    <div class="columns is-gapless" style="margin-bottom: 10px">
+                      <div
+                        class="column is-narrow"
+                        style="height: 80px"
+                        :style="{
+                          backgroundColor: '#' + review.avatar_background
+                        }"
+                      >
+                        <img :src="review.avatar" class="pic-petra">
+                      </div>
+                      <div class="column box-list">
+                        <div class="student-name">
+                          {{ review.username }}
+                        </div>
+                        <div class="petra-review" style="padding-bottom: 70px">
+                          <textarea
+                            v-model="subReply"
+                            class="box-review"
+                            style="padding: 10px; overflow-y: scroll"
+                          />
+                        </div>
+                        <PButton
+                          :disabled="disableBtn2"
+                          class="petra-button2"
+                          text="Reply"
+                          @click.native="submitComment()"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -278,10 +349,15 @@ export default {
       linkVideo: '',
       ratingReview: 0,
       descReview: '',
+      subReply: '',
       itemsDiscuss: {},
       infiniteId: 1,
       total: 0,
-      showReply: true
+      showReply: true,
+      indexSub: 0,
+      indexSub2: 0,
+      boxReply: false,
+      dataSubReply: {}
     }
   },
 
@@ -309,6 +385,13 @@ export default {
       } else {
         return false
       }
+    },
+    disableBtn2 () {
+      if (this.subReply === '') {
+        return true
+      } else {
+        return false
+      }
     }
   },
   created () {
@@ -322,6 +405,54 @@ export default {
     console.log('user : ', this.dataUser)
   },
   methods: {
+    openReply2 (y, x) {
+      console.log(x)
+      this.indexSub2 = y
+      this.boxReply = !this.boxReply
+      this.dataSubReply = x
+    },
+    openReply (x, y) {
+      this.showReply = x
+      if (x === true) {
+        this.indexSub = y
+      }
+    },
+    submitComment () {
+      const data = {
+        id: this.dataSubReply,
+        review: this.subReply
+      }
+      this.$store
+        .dispatch('module/postSubDiscuss', data)
+        .then((response) => {
+          this.infiniteId += 1
+          this.descReview = ''
+          this.subReply = ''
+          this.page = 1
+          const data = {
+            id: this.$route.params.index,
+            page: this.page
+          }
+          this.$store
+            .dispatch('module/fetchAllDiscuss', data)
+            .then((response) => {
+              this.itemsDiscuss = response.data.data.data
+              this.total = response.data.data.total
+            })
+        })
+        .catch((error) => {
+          console.log('error:', error)
+          this.isLoading = false
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
     addReview () {
       const data = {
         module_rail_id: this.$route.params.index,
@@ -409,7 +540,7 @@ export default {
         .then((response) => {
           this.itemsDiscuss = response.data.data.data
           this.total = response.data.data.total
-          console.log(response.data.data)
+          console.log('discuss : ', response.data.data)
           this.isLoading = false
         })
         .catch((error) => {
@@ -945,6 +1076,15 @@ export default {
           width: 100%;
           height: 500px;
           overflow-y: scroll;
+          .pic-petra {
+            width: 80px;
+            height: 67px;
+            object-fit: cover;
+            object-fit: cover;
+            -o-object-position: 53% 0%;
+            object-position: 53% 0%;
+            margin-top: 13px;
+          }
           .box-list {
             position: relative;
             background-color: white;
@@ -958,6 +1098,12 @@ export default {
                 100%/51% 100% no-repeat;
             -webkit-mask: var(--mask);
             mask: var(--mask);
+            .petra-button2 {
+              cursor: pointer;
+              right: 24px;
+              position: absolute;
+              bottom: 9px;
+            }
             .reply-btn {
               position: absolute;
               right: 20px;
@@ -1042,6 +1188,19 @@ export default {
                 //   right: 10px;
               }
             }
+          }
+          .show-comment {
+            margin-left: 80px;
+            width: 583px;
+            height: 100%;
+            // object-fit: cover;
+            // --g: #000, #0000 1deg 179deg, #000 180deg;
+            // --mask: conic-gradient(from -45deg at top 18px right 18px, var(--g))
+            //     100% 0 /51% 100% no-repeat,
+            //   conic-gradient(from -225deg at bottom 18px left 18px, var(--g)) 0
+            //     100%/51% 100% no-repeat;
+            // -webkit-mask: var(--mask);
+            // mask: var(--mask);
           }
         }
       }

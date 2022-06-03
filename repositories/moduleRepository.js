@@ -117,5 +117,10 @@ export default $axios => ({
       module_rail_id: payload.module_rail_id,
       review: payload.review
     })
+  },
+  postSubDiscuss (payload) {
+    return $axios.post(`/activity/module/discuss/${payload.id}/reply`, {
+      review: payload.review
+    })
   }
 })

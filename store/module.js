@@ -137,5 +137,13 @@ export const actions = {
     } catch (e) {
       return e.response
     }
+  },
+  async postSubDiscuss ({ commit }, payload) {
+    try {
+      const response = await this.$repositories.module.postSubDiscuss(payload)
+      return response
+    } catch (e) {
+      return e.response
+    }
   }
 }
