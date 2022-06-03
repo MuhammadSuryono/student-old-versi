@@ -77,6 +77,13 @@
     "_name": "_54091cce"
   },
   {
+    "name": "library-module-detail-index-game-embed",
+    "path": "/library/module/detail/:index/game/embed",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/_index/game/embed.vue",
+    "chunkName": "pages/library/module/detail/_index/game/embed",
+    "_name": "_e063e576"
+  },
+  {
     "name": "library-module-detail-index-game",
     "path": "/library/module/detail/:index/game/:index",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/_index/game/_index.vue",
