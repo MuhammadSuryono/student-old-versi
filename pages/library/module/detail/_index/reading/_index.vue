@@ -716,7 +716,7 @@ export default {
 
       .left-side {
         width: 332.4px;
-        height: 100%;
+        height: 500px;
         position: relative;
         background-color: white;
         --g: #000, #0000 1deg 179deg, #000 180deg;
