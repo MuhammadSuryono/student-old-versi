@@ -35,17 +35,11 @@
   "PTitle": {
     "description": "Auto imported from components/PTitle.vue"
   },
+  "PTitleV2": {
+    "description": "Auto imported from components/PTitleV2.vue"
+  },
   "Profile": {
     "description": "Auto imported from components/Profile.vue"
-  },
-  "SidebarAvatar": {
-    "description": "Auto imported from components/sidebar/Avatar.vue"
-  },
-  "SidebarCardName": {
-    "description": "Auto imported from components/sidebar/CardName.vue"
-  },
-  "SidebarMain": {
-    "description": "Auto imported from components/sidebar/Main.vue"
   },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
@@ -88,5 +82,14 @@
   },
   "IconTabSkill2": {
     "description": "Auto imported from components/icon/TabSkill2.vue"
+  },
+  "SidebarAvatar": {
+    "description": "Auto imported from components/sidebar/Avatar.vue"
+  },
+  "SidebarCardName": {
+    "description": "Auto imported from components/sidebar/CardName.vue"
+  },
+  "SidebarMain": {
+    "description": "Auto imported from components/sidebar/Main.vue"
   }
 }

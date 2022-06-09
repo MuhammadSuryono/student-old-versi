@@ -8,12 +8,16 @@
     <div
       @mouseover="hover1 = true"
       @mouseleave="hover1 = false"
-      @click="goTravel()"
+      @click="goTravel('Library')"
     >
       <IconLocation v-if="hover1" class="loc-1" bg-color="#ffcf24" />
       <IconLocation v-else class="loc-1" bg-color="#154CA0" />
     </div>
-    <div @mouseover="hover2 = true" @mouseleave="hover2 = false">
+    <div
+      @mouseover="hover2 = true"
+      @mouseleave="hover2 = false"
+      @click="goTravel('Faction')"
+    >
       <IconLocation v-if="hover2" class="loc-2" bg-color="#ffcf24" />
       <IconLocation v-else class="loc-2" bg-color="#154CA0" />
     </div>
@@ -28,6 +32,7 @@
       >
     </div>
     <img v-if="hover1" src="~/assets/images/maps/popup.png" class="popup-1">
+    <img v-if="hover2" src="~/assets/images/maps/popup.png" class="popup-2">
     <!-- </div> -->
     <div
       v-if="showLoc"
@@ -55,7 +60,7 @@
         <img class="center-petra" src="~/assets/images/maps/goget.svg">
       </div>
       <div class="text-lib">
-        Travel to the Library?
+        Travel to the {{ destination }}?
       </div>
       <div class="btn-edit" @click="goLibrary()">
         <img
@@ -86,18 +91,25 @@ export default {
       hover1: false,
       hover2: false,
       hover3: false,
-      showLoc: false
+      showLoc: false,
+      destination: ''
     }
   },
   methods: {
     closeMaps () {
       this.$store.commit('user/SET_MAPS')
     },
-    goTravel () {
+    goTravel (x) {
+      this.destination = x
       this.showLoc = true
     },
     goLibrary () {
-      this.$router.push('/library')
+      if (this.destination === 'Library') {
+        this.$router.push('/library')
+      }
+      if (this.destination === 'Faction') {
+        this.$router.push('/faction')
+      }
     }
   }
 }
@@ -158,6 +170,13 @@ export default {
   z-index: 6;
   bottom: 180px;
   left: 247px;
+  cursor: pointer;
+}
+.popup-2 {
+  position: absolute;
+  z-index: 6;
+  top: 138px;
+  right: 237px;
   cursor: pointer;
 }
 .center-petra {
