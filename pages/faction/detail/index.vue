@@ -854,16 +854,15 @@
                   :style="{ backgroundColor: 'red' }"
                 >
                   <img
-                    src="~/assets/images/module/detail-rail.svg"
+                    src="https://www.freecodecamp.org/news/content/images/2022/06/helloWorld.png"
                     class="pic-petra"
                     style="
                       width: 80px;
-                      height: 67px;
+    height: 81px;
                       object-fit: cover;
                       object-fit: cover;
                       -o-object-position: 53% 0%;
                       object-position: 53% 0%;
-                      margin-top: 13px;
                     "
                   >
                 </div>

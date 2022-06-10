@@ -38,39 +38,81 @@
         <div class="column is-narrow header-right" style="margin-left: 20px">
           <div class="columns is-gapless mb-0 pb-0">
             <div v-if="selected1" class="tab-petra">
-              <img
-                src="~/assets/images/tab/tab-active.svg"
-                class="icon-button"
-              >
-              <div class="text-petra">
-                Activity Content
+              <div class="columns is-gapless">
+                <div class="column is-narrow icon-button no-select">
+                  <div class="text-btn">
+                    Activity Content
+                  </div>
+                </div>
+                <div class="column is-narrow icon-button2" />
               </div>
             </div>
             <div v-else class="tab-petra" @click="tab(1, true)">
-              <img
-                src="~/assets/images/tab/tab-nonactive.svg"
-                class="icon-button"
-              >
-              <div class="text-petra">
-                Activity Content
+              <div class="columns is-gapless">
+                <div
+                  class="column is-narrow icon-button no-select"
+                  style="background-color: #7d96aa"
+                >
+                  <div class="text-btn" style="color: white">
+                    Activity Content
+                  </div>
+                </div>
+                <div
+                  class="column is-narrow icon-button2"
+                  style="background: #6c889e"
+                />
               </div>
             </div>
             <div v-if="selected2" class="tab-petra">
-              <img
-                src="~/assets/images/tab/tab-active.svg"
-                class="icon-button"
-              >
-              <div class="text-petra">
-                See All Discussions
+              <div class="columns is-gapless">
+                <div class="column is-narrow icon-button no-select">
+                  <div class="text-btn">
+                    Rewards & Achievements
+                  </div>
+                </div>
+                <div class="column is-narrow icon-button2" />
               </div>
             </div>
             <div v-else class="tab-petra" @click="tab(2, true)">
-              <img
-                src="~/assets/images/tab/tab-nonactive.svg"
-                class="icon-button"
-              >
-              <div class="text-petra">
-                See All Discussions
+              <div class="columns is-gapless">
+                <div
+                  class="column is-narrow icon-button no-select"
+                  style="background-color: #7d96aa"
+                >
+                  <div class="text-btn" style="color: white">
+                    Rewards & Achievements
+                  </div>
+                </div>
+                <div
+                  class="column is-narrow icon-button2"
+                  style="background: #6c889e"
+                />
+              </div>
+            </div>
+            <div v-if="selected3" class="tab-petra">
+              <div class="columns is-gapless">
+                <div class="column is-narrow icon-button no-select">
+                  <div class="text-btn">
+                    See All Discussions
+                  </div>
+                </div>
+                <div class="column is-narrow icon-button2" />
+              </div>
+            </div>
+            <div v-else class="tab-petra" @click="tab(3, true)">
+              <div class="columns is-gapless">
+                <div
+                  class="column is-narrow icon-button no-select"
+                  style="background-color: #7d96aa"
+                >
+                  <div class="text-btn" style="color: white">
+                    See All Discussions
+                  </div>
+                </div>
+                <div
+                  class="column is-narrow icon-button2"
+                  style="background: #6c889e"
+                />
               </div>
             </div>
           </div>
@@ -195,7 +237,146 @@
           </div>
         </div>
       </div>
-      <div v-if="selected2">
+      <div v-if="selected2" class="columns is-gapless mb-0 pb-0">
+        <div class="column is-narrow header-left">
+          <div ref="infoBox" class="card-list">
+            <div v-if="!isLoading" class="bg-1" :style="tinggi2" />
+            <div v-if="!isLoading" class="bg-2" :style="tinggi2" />
+            <div class="column is-narrow left-side">
+              <img :src="detailActivity.thumbnail" class="display-pic">
+              <div class="petra-title-card">
+                {{ detailActivity.name }} <br>
+                <span
+                  style="
+                    font-style: italic;
+                    font-weight: normal;
+                    font-size: 14px;
+                  "
+                >GAME ACTIVITY
+                </span>
+              </div>
+              <div class="petra-description">
+                {{ detailActivity.introduction }}
+              </div>
+
+              <div class="petra-c1">
+                {{ detailActivity.total_discussions }} discussion replies
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-narrow header-right" style="margin-left: 20px">
+          <div class="columns is-gapless reward-card">
+            <div class="column is-narrow comp-reward">
+              <div class="head-reward">
+                Completion Reward
+              </div>
+              <div class="columns is-gapless photo-reward">
+                <div class="column is-narrow left-reward">
+                  <img
+                    :src="detailActivity.month_reward.avatar_female"
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: contain;
+                      background: rgba(0, 0, 0, 0.5);
+                      object-position: 40% 0%;
+                    "
+                  >
+                  <div
+                    v-if="dataUser.gender !== 'Female'"
+                    style="
+                      width: 135px;
+                      height: 135px;
+                      background: rgba(10, 10, 10, 0.5);
+                      z-index: 3;
+                      position: fixed;
+                      top: 330px;
+                    "
+                  />
+                </div>
+                <div class="column is-narrow right-reward">
+                  <img
+                    :src="detailActivity.month_reward.avatar_male"
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      object-position: 40% 0%;
+                      object-fit: cover;
+                      background: rgba(0, 0, 0, 0.5);
+                    "
+                  >
+                  <div
+                    v-if="dataUser.gender !== 'Male'"
+                    style="
+                      width: 135px;
+                      height: 135px;
+                      background: rgba(10, 10, 10, 0.5);
+                      z-index: 3;
+                      position: fixed;
+                      top: 330px;
+                    "
+                  />
+                </div>
+              </div>
+              <div class="avatar-name">
+                <div style="padding-top: 3px">
+                  <span style="font-weight: bold">USER AVATARS </span><br>
+                  <span
+                    style="font-weight: normal; color: #608ac8"
+                  >“{{ detailActivity.month_reward.name }}”
+                  </span>
+                </div>
+              </div>
+              <div
+                v-if="
+                  detailActivity.month_reward.is_acquired === true ||
+                    detailActivity.month_reward.is_acquired === 'true'
+                "
+                style="
+                  background: #4c7bc1;
+                  height: 34.73019027709961px;
+                  width: 168.09616088867188px;
+                  margin-left: auto;
+                  margin-right: auto;
+                  color: white;
+                  text-align: Center;
+                  padding-top: 7px;
+                  font-size: 14px;
+                  margin-top: 20px;
+                "
+              >
+                Reward Acquired!
+              </div>
+            </div>
+            <div class="column is-narrow list-reward">
+              <div
+                v-for="(x, indexArchivement) in archievements"
+                :key="indexArchivement"
+                class="columns is-gapless card-list-avatar"
+                :style="
+                  x.is_acquired
+                    ? 'background : rgba(212, 234, 255, 1)'
+                    : 'background : rgba(212, 234, 255, 0.3)'
+                "
+              >
+                <div class="column is-narrow left-ava">
+                  <img :src="x.image" class="height:100%;width:100%">
+                </div>
+                <div class="column right-ava">
+                  <div class="head-ava">
+                    {{ x.name }}
+                  </div>
+                  <div class="desc-ava">
+                    {{ x.description }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="selected3">
         <div class="columns tab-2-petra">
           <div class="column is-narrow left-side">
             <img
@@ -422,7 +603,8 @@ export default {
       indexSub: null,
       indexSub2: 0,
       boxReply: false,
-      dataSubReply: {}
+      dataSubReply: {},
+      archievements: {}
     }
   },
 
@@ -583,6 +765,8 @@ export default {
         .dispatch('module/fetchDetailActivity', data)
         .then((response) => {
           console.log(response.data.data)
+          this.archievements = response.data.data.achievements
+          console.log('archivement : ', response.data.data.achievements)
           this.isLoading = false
         })
         .catch((error) => {
@@ -660,10 +844,17 @@ export default {
       if (id === 1) {
         this.selected1 = true
         this.selected2 = false
+        this.selected3 = false
       }
       if (id === 2) {
         this.selected1 = false
         this.selected2 = true
+        this.selected3 = false
+      }
+      if (id === 3) {
+        this.selected1 = false
+        this.selected2 = false
+        this.selected3 = true
       }
     }
   }
@@ -773,7 +964,28 @@ export default {
       padding-bottom: 0px;
       height: 30px;
       .icon-button {
+        background: #f5fbff;
         height: 30px;
+        min-width: 200px;
+        padding-right: 10px;
+        padding-left: 10px;
+        transform: skew(-18deg);
+        text-align: center;
+        margin-right: 5px;
+      }
+      .icon-button2 {
+        transform: skew(-18deg);
+        background: #fff380;
+        height: 30px;
+        width: 8px;
+        margin-right: 10px;
+      }
+      .text-btn {
+        transform: skew(18deg);
+        font-weight: 500;
+        font-size: 15px;
+        text-align: center;
+        padding-top: 3px;
       }
       .text-petra {
         position: absolute;
@@ -1270,6 +1482,133 @@ export default {
             //     100%/51% 100% no-repeat;
             // -webkit-mask: var(--mask);
             // mask: var(--mask);
+          }
+        }
+      }
+    }
+    .reward-card {
+      background: #2c6ec2;
+      height: 486.21539306640625px;
+      width: 702.491943359375px;
+      padding: 20px;
+      .comp-reward {
+        background: rgba(162, 207, 244, 0.75);
+        width: 321.75px;
+        height: 100%;
+        --g: #000, #0000 1deg 179deg, #000 180deg;
+        --mask: conic-gradient(from -45deg at top 18px right 18px, var(--g))
+          100% 0 /100% 100% no-repeat;
+        -webkit-mask: var(--mask);
+        mask: var(--mask);
+        padding: 0px 15px 15px 0px !important;
+        .head-reward {
+          height: 28px;
+          max-width: 240px;
+          color: #d4eaff;
+          background: #2e5799;
+          --g: #000, #0000 1deg 179deg, #000 180deg;
+          --mask: conic-gradient(from 30deg at bottom 5px right 20px, var(--g))
+            100% 100%/100% 100% no-repeat;
+          -webkit-mask: var(--mask);
+          mask: var(--mask);
+          font-weight: 700;
+          font-size: 14px;
+          padding-left: 20px;
+          padding-top: 2.8px;
+        }
+        .photo-reward {
+          width: 100%;
+          height: 135px;
+          margin-top: 50px;
+          padding-left: 15px !important;
+          padding-right: 15px !important;
+          .left-reward {
+            background: rgba(78, 234, 160, 1);
+            width: 135px;
+            height: 100%;
+            border: 2px solid white;
+          }
+          .right-reward {
+            background: rgba(78, 234, 160, 1);
+            width: 135px;
+            height: 100%;
+            border: 2px solid white;
+            margin-left: 10px;
+          }
+        }
+        .avatar-name {
+          background: #ffffff;
+          height: 55px;
+          width: 272px;
+          margin-left: auto;
+          margin-right: auto;
+          --g: #000, #0000 1deg 179deg, #000 180deg;
+          --mask: conic-gradient(from -45deg at top 0px right 10px, var(--g))
+              100% 0 /51% 100% no-repeat,
+            conic-gradient(from -225deg at bottom 0px left 10px, var(--g)) 0
+              100%/51% 100% no-repeat;
+          -webkit-mask: var(--mask);
+          mask: var(--mask);
+          text-align: Center;
+        }
+      }
+      .list-reward {
+        margin-left: 20px;
+        height: 450px;
+        width: 320px;
+        overflow-y: scroll;
+        .card-list-avatar {
+          min-height: 100px;
+          width: 300px;
+          background: #d4eaff;
+          --g: #000, #0000 1deg 179deg, #000 180deg;
+          --mask: conic-gradient(from -45deg at top 0px right 20px, var(--g))
+              100% 0 /51% 100% no-repeat,
+            conic-gradient(from -225deg at bottom 0px left 20px, var(--g)) 0
+              100%/51% 100% no-repeat;
+          -webkit-mask: var(--mask);
+          mask: var(--mask);
+          padding: 10px 10px 10px 20px;
+          .left-ava {
+            width: 80px;
+            height: 80px;
+          }
+          .right-ava {
+            padding-right: 15px !important;
+            .head-ava {
+              background: #0071bc;
+              height: 23.34px;
+              width: 95%;
+              --g: #000, #0000 1deg 179deg, #000 180deg;
+              --mask: conic-gradient(
+                  from -45deg at top 0px right 10px,
+                  var(--g)
+                )
+                100% 0 /100% 100% no-repeat;
+              -webkit-mask: var(--mask);
+              mask: var(--mask);
+              font-weight: 500;
+              font-size: 14px;
+              color: #ffffff;
+              padding-left: 10px;
+              padding-top: 1px;
+              text-transform: uppercase;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            .desc-ava {
+              height: 55px;
+              width: 100%;
+              white-space: initial !important;
+              margin-left: 10px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              font-size: 11px;
+              color: #5b6987;
+              margin-top: 5px;
+            }
           }
         }
       }

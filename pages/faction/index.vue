@@ -74,7 +74,7 @@
         <div class="column image-reward">
           <div class="border-image">
             <img
-              src="https://thumbs.dreamstime.com/b/examples-word-written-wood-block-examples-text-table-concept-examples-word-written-wood-block-examples-text-table-125610689.jpg"
+              src="https://www.freecodecamp.org/news/content/images/2022/06/helloWorld.png"
               style="width: 100%; height: 100%; object-fit: cover"
             >
           </div>
