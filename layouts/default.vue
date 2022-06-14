@@ -1,7 +1,6 @@
 <template>
   <div>
     <div style="height: 100%; width: 100%; z-index: -9999" />
-
     <PModal style="z-index: 9999" />
     <div class="container-petra">
       <Navbar class="navbars" />
@@ -16,8 +15,20 @@
         <Nuxt v-if="$route.path !== '/'" class="nuxt-menu" style="z-index: 2" />
         <Nuxt v-else class="nuxt-menu" />
 
-        <span v-if="$route.path === '/' || $route.path === '/library'">
-          <PNavigation class="navigation-petra" />
+        <span
+          v-if="
+            $route.path === '/' ||
+              $route.path === '/library' ||
+              $route.path === '/faction' ||
+              $route.path === '/faction/detail'
+          "
+        >
+          <PNavigation
+            class="navigation-petra"
+            :style="
+              $route.path === '/faction/detail' ? 'opacity:0.4' : 'opacity:1;'
+            "
+          />
         </span>
         <!-- maps and light -->
         <span v-if="$route.path === '/'">

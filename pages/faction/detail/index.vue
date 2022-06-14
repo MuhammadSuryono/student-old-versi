@@ -74,7 +74,7 @@
             <div class="column is-narrow right-current" />
           </div>
           <div class="progress-skill columns is-gapless">
-            <div class="columns is-narrow">
+            <div class="columns is-narrow" style="margin-top: 0px">
               <img
                 src="~/assets/images/faction/icon_1.png"
                 class="icon-faction"
@@ -82,7 +82,12 @@
             </div>
             <div
               class="columns is-narrow"
-              style="width: 500px; margin-left: 20px"
+              style="
+                width: 500px;
+                margin-left: 20px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+              "
             >
               <div
                 v-for="(progres, index2) in 10"
@@ -90,26 +95,31 @@
                 class="column sub-prog"
               >
                 <div
-                  v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
+                  v-if="
+                    parseFloat(value1) - Math.floor(parseFloat(value1)) === 0
+                  "
                   class="sub-det"
                 >
                   <div
-                    v-if="index2 < parseFloat(value)"
+                    v-if="index2 < parseFloat(value1)"
                     class="sub-det sub-filled"
+                    style="background-color: #ff8383"
                   />
                 </div>
                 <div v-else class="sub-det">
                   <div
-                    v-if="index2 < Math.trunc(parseFloat(value))"
+                    v-if="index2 < Math.trunc(parseFloat(value1))"
                     class="sub-det sub-filled"
+                    style="background-color: #ff8383"
                   />
                   <div
-                    v-if="index2 === Math.trunc(parseFloat(value))"
+                    v-if="index2 === Math.trunc(parseFloat(value1))"
                     class="sub-filled sub-no-width"
+                    style="background-color: #ff8383"
                     :style="{
                       width:
                         Number(
-                          (value - Math.trunc(parseFloat(value))).toFixed(2)
+                          (value1 - Math.trunc(parseFloat(value1))).toFixed(2)
                         ) *
                         100 +
                         '%'
@@ -119,11 +129,11 @@
               </div>
             </div>
             <div class="columns is-narrow lvl-prog">
-              LV 4 /10
+              LV {{ value1 }} /10
             </div>
           </div>
           <div class="progress-skill columns is-gapless">
-            <div class="columns is-narrow">
+            <div class="columns is-narrow" style="margin-top: 0px">
               <img
                 src="~/assets/images/faction/icon_2.png"
                 class="icon-faction"
@@ -131,7 +141,12 @@
             </div>
             <div
               class="columns is-narrow"
-              style="width: 500px; margin-left: 20px"
+              style="
+                width: 500px;
+                margin-left: 20px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+              "
             >
               <div
                 v-for="(progres, index2) in 10"
@@ -139,26 +154,31 @@
                 class="column sub-prog"
               >
                 <div
-                  v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
+                  v-if="
+                    parseFloat(value2) - Math.floor(parseFloat(value2)) === 0
+                  "
                   class="sub-det"
                 >
                   <div
-                    v-if="index2 < parseFloat(value)"
+                    v-if="index2 < parseFloat(value2)"
                     class="sub-det sub-filled"
+                    style="background-color: #ffc973"
                   />
                 </div>
                 <div v-else class="sub-det">
                   <div
-                    v-if="index2 < Math.trunc(parseFloat(value))"
+                    v-if="index2 < Math.trunc(parseFloat(value2))"
                     class="sub-det sub-filled"
+                    style="background-color: #ffc973"
                   />
                   <div
-                    v-if="index2 === Math.trunc(parseFloat(value))"
+                    v-if="index2 === Math.trunc(parseFloat(value2))"
                     class="sub-filled sub-no-width"
+                    style="background-color: #ffc973"
                     :style="{
                       width:
                         Number(
-                          (value - Math.trunc(parseFloat(value))).toFixed(2)
+                          (value2 - Math.trunc(parseFloat(value2))).toFixed(2)
                         ) *
                         100 +
                         '%'
@@ -168,11 +188,11 @@
               </div>
             </div>
             <div class="columns is-narrow lvl-prog">
-              LV 4 /10
+              LV {{ value2 }} /10
             </div>
           </div>
           <div class="progress-skill columns is-gapless">
-            <div class="columns is-narrow">
+            <div class="columns is-narrow" style="margin-top: 0px">
               <img
                 src="~/assets/images/faction/icon_3.png"
                 class="icon-faction"
@@ -180,7 +200,12 @@
             </div>
             <div
               class="columns is-narrow"
-              style="width: 500px; margin-left: 20px"
+              style="
+                width: 500px;
+                margin-left: 20px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+              "
             >
               <div
                 v-for="(progres, index2) in 10"
@@ -188,26 +213,31 @@
                 class="column sub-prog"
               >
                 <div
-                  v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
+                  v-if="
+                    parseFloat(value3) - Math.floor(parseFloat(value3)) === 0
+                  "
                   class="sub-det"
                 >
                   <div
-                    v-if="index2 < parseFloat(value)"
+                    v-if="index2 < parseFloat(value3)"
                     class="sub-det sub-filled"
+                    style="background-color: #d1a171"
                   />
                 </div>
                 <div v-else class="sub-det">
                   <div
-                    v-if="index2 < Math.trunc(parseFloat(value))"
+                    v-if="index2 < Math.trunc(parseFloat(value3))"
                     class="sub-det sub-filled"
+                    style="background-color: #d1a171"
                   />
                   <div
-                    v-if="index2 === Math.trunc(parseFloat(value))"
+                    v-if="index2 === Math.trunc(parseFloat(value3))"
                     class="sub-filled sub-no-width"
+                    style="background-color: #d1a171"
                     :style="{
                       width:
                         Number(
-                          (value - Math.trunc(parseFloat(value))).toFixed(2)
+                          (value3 - Math.trunc(parseFloat(value3))).toFixed(2)
                         ) *
                         100 +
                         '%'
@@ -217,11 +247,11 @@
               </div>
             </div>
             <div class="columns is-narrow lvl-prog">
-              LV 4 /10
+              LV {{ value3 }} /10
             </div>
           </div>
           <div class="progress-skill columns is-gapless">
-            <div class="columns is-narrow">
+            <div class="columns is-narrow" style="margin-top: 0px">
               <img
                 src="~/assets/images/faction/icon_4.png"
                 class="icon-faction"
@@ -229,7 +259,12 @@
             </div>
             <div
               class="columns is-narrow"
-              style="width: 500px; margin-left: 20px"
+              style="
+                width: 500px;
+                margin-left: 20px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+              "
             >
               <div
                 v-for="(progres, index2) in 10"
@@ -237,26 +272,31 @@
                 class="column sub-prog"
               >
                 <div
-                  v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
+                  v-if="
+                    parseFloat(value4) - Math.floor(parseFloat(value4)) === 0
+                  "
                   class="sub-det"
                 >
                   <div
-                    v-if="index2 < parseFloat(value)"
+                    v-if="index2 < parseFloat(value4)"
                     class="sub-det sub-filled"
+                    style="background-color: #bdff83"
                   />
                 </div>
                 <div v-else class="sub-det">
                   <div
-                    v-if="index2 < Math.trunc(parseFloat(value))"
+                    v-if="index2 < Math.trunc(parseFloat(value4))"
                     class="sub-det sub-filled"
+                    style="background-color: #bdff83"
                   />
                   <div
-                    v-if="index2 === Math.trunc(parseFloat(value))"
+                    v-if="index2 === Math.trunc(parseFloat(value4))"
                     class="sub-filled sub-no-width"
+                    style="background-color: #bdff83"
                     :style="{
                       width:
                         Number(
-                          (value - Math.trunc(parseFloat(value))).toFixed(2)
+                          (value4 - Math.trunc(parseFloat(value4))).toFixed(2)
                         ) *
                         100 +
                         '%'
@@ -266,11 +306,11 @@
               </div>
             </div>
             <div class="columns is-narrow lvl-prog">
-              LV 4 /10
+              LV {{ value4 }} /10
             </div>
           </div>
           <div class="progress-skill columns is-gapless">
-            <div class="columns is-narrow">
+            <div class="columns is-narrow" style="margin-top: 0px">
               <img
                 src="~/assets/images/faction/icon_5.png"
                 class="icon-faction"
@@ -278,7 +318,12 @@
             </div>
             <div
               class="columns is-narrow"
-              style="width: 500px; margin-left: 20px"
+              style="
+                width: 500px;
+                margin-left: 20px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+              "
             >
               <div
                 v-for="(progres, index2) in 10"
@@ -286,26 +331,31 @@
                 class="column sub-prog"
               >
                 <div
-                  v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
+                  v-if="
+                    parseFloat(value5) - Math.floor(parseFloat(value5)) === 0
+                  "
                   class="sub-det"
                 >
                   <div
-                    v-if="index2 < parseFloat(value)"
+                    v-if="index2 < parseFloat(value5)"
                     class="sub-det sub-filled"
+                    style="background-color: #66d4ff"
                   />
                 </div>
                 <div v-else class="sub-det">
                   <div
-                    v-if="index2 < Math.trunc(parseFloat(value))"
+                    v-if="index2 < Math.trunc(parseFloat(value5))"
                     class="sub-det sub-filled"
+                    style="background-color: #66d4ff"
                   />
                   <div
-                    v-if="index2 === Math.trunc(parseFloat(value))"
+                    v-if="index2 === Math.trunc(parseFloat(value5))"
                     class="sub-filled sub-no-width"
+                    style="background-color: #66d4ff"
                     :style="{
                       width:
                         Number(
-                          (value - Math.trunc(parseFloat(value))).toFixed(2)
+                          (value5 - Math.trunc(parseFloat(value5))).toFixed(2)
                         ) *
                         100 +
                         '%'
@@ -315,7 +365,7 @@
               </div>
             </div>
             <div class="columns is-narrow lvl-prog">
-              LV 4 /10
+              LV {{ value5 }} /10
             </div>
           </div>
         </div>
@@ -335,17 +385,18 @@
               <img
                 src="~/assets/images/faction/icon_1.png"
                 class="icon-faction"
+                style="margin-top: 10px"
               >
             </div>
             <div
               class="columns is-narrow"
-              style="width: 500px; margin-left: 20px"
+              style="width: 500px; margin-left: 17px; transform: skew(18deg)"
             >
               <div
                 v-for="(progres, index2) in 4"
                 :key="index2"
                 class="column sub-prog"
-                style="padding-top: 13px; margin-top: 25px"
+                style="padding-top: 24px; margin-top: 25px"
               >
                 <div
                   v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
@@ -385,17 +436,18 @@
               <img
                 src="~/assets/images/faction/icon_2.png"
                 class="icon-faction"
+                style="margin-top: 10px"
               >
             </div>
             <div
               class="columns is-narrow"
-              style="width: 500px; margin-left: 20px"
+              style="width: 500px; margin-left: 17px; transform: skew(18deg)"
             >
               <div
                 v-for="(progres, index2) in 4"
                 :key="index2"
                 class="column sub-prog"
-                style="padding-top: 13px; margin-top: 25px"
+                style="padding-top: 24px; margin-top: 25px"
               >
                 <div
                   v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
@@ -435,17 +487,18 @@
               <img
                 src="~/assets/images/faction/icon_3.png"
                 class="icon-faction"
+                style="margin-top: 10px"
               >
             </div>
             <div
               class="columns is-narrow"
-              style="width: 500px; margin-left: 20px"
+              style="width: 500px; margin-left: 17px; transform: skew(18deg)"
             >
               <div
                 v-for="(progres, index2) in 4"
                 :key="index2"
                 class="column sub-prog"
-                style="padding-top: 13px; margin-top: 25px"
+                style="padding-top: 24px; margin-top: 25px"
               >
                 <div
                   v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
@@ -485,17 +538,18 @@
               <img
                 src="~/assets/images/faction/icon_4.png"
                 class="icon-faction"
+                style="margin-top: 10px"
               >
             </div>
             <div
               class="columns is-narrow"
-              style="width: 500px; margin-left: 20px"
+              style="width: 500px; margin-left: 17px; transform: skew(18deg)"
             >
               <div
                 v-for="(progres, index2) in 4"
                 :key="index2"
                 class="column sub-prog"
-                style="padding-top: 13px; margin-top: 25px"
+                style="padding-top: 24px; margin-top: 25px"
               >
                 <div
                   v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
@@ -535,17 +589,18 @@
               <img
                 src="~/assets/images/faction/icon_5.png"
                 class="icon-faction"
+                style="margin-top: 10px"
               >
             </div>
             <div
               class="columns is-narrow"
-              style="width: 500px; margin-left: 20px"
+              style="width: 500px; margin-left: 17px; transform: skew(18deg)"
             >
               <div
                 v-for="(progres, index2) in 4"
                 :key="index2"
                 class="column sub-prog"
-                style="padding-top: 13px; margin-top: 25px"
+                style="padding-top: 24px; margin-top: 25px"
               >
                 <div
                   v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
@@ -639,6 +694,7 @@
                   <img
                     src="~/assets/images/faction/icon_1.png"
                     class="icon-faction"
+                    style="margin-top: 14px"
                   >
                 </div>
                 <div class="column is-narrow" style="margin-left: 15px">
@@ -681,6 +737,7 @@
                   <img
                     src="~/assets/images/faction/icon_2.png"
                     class="icon-faction"
+                    style="margin-top: 14px"
                   >
                 </div>
                 <div class="column is-narrow" style="margin-left: 15px">
@@ -723,6 +780,7 @@
                   <img
                     src="~/assets/images/faction/icon_3.png"
                     class="icon-faction"
+                    style="margin-top: 14px"
                   >
                 </div>
                 <div class="column is-narrow" style="margin-left: 15px">
@@ -765,6 +823,7 @@
                   <img
                     src="~/assets/images/faction/icon_4.png"
                     class="icon-faction"
+                    style="margin-top: 14px"
                   >
                 </div>
                 <div class="column is-narrow" style="margin-left: 15px">
@@ -807,6 +866,7 @@
                   <img
                     src="~/assets/images/faction/icon_5.png"
                     class="icon-faction"
+                    style="margin-top: 14px"
                   >
                 </div>
                 <div class="column is-narrow" style="margin-left: 15px">
@@ -851,14 +911,14 @@
                 <div
                   class="column is-narrow"
                   style="height: 80px"
-                  :style="{ backgroundColor: 'red' }"
+                  :style="{ backgroundColor: '#48ffde' }"
                 >
                   <img
-                    src="https://www.freecodecamp.org/news/content/images/2022/06/helloWorld.png"
+                    src="~/assets/images/ava.png"
                     class="pic-petra"
                     style="
                       width: 80px;
-    height: 81px;
+                      height: 81px;
                       object-fit: cover;
                       object-fit: cover;
                       -o-object-position: 53% 0%;
@@ -929,7 +989,11 @@ export default {
 
   data () {
     return {
-      value: 2,
+      value1: 2.7,
+      value2: 3.8,
+      value3: 1.6,
+      value4: 5.4,
+      value5: 8.2,
       selected1: true,
       selected2: false,
       selected3: false
@@ -1079,23 +1143,23 @@ export default {
         transform: skew(-18deg);
         padding-left: 20px;
         .icon-faction {
-          height: 45px;
-          width: 45px;
+          height: 51px;
+          width: 51px;
           transform: skew(18deg);
-          margin-top: 14.6px;
         }
         .sub-prog {
           background-color: #d7faff;
           border-radius: 5px;
-          height: 12px;
-          margin-top: 29px;
+          padding: 0px;
           margin-left: 5px;
-          padding-top: 5px;
           z-index: 1;
+          margin-top: 18px;
+          margin-bottom: 16px;
           .sub-det {
             width: 100%;
             height: 100%;
             border-radius: 5px;
+            // height: 22px;
           }
           .sub-filled {
             background-color: #fff380;
@@ -1115,8 +1179,8 @@ export default {
         }
       }
       .petra-content {
-        background: rgba(44, 110, 194, 0.85);
-        border: 2px solid #d4eaff;
+        // background: rgba(44, 110, 194, 0.85);
+        // border: 2px solid #d4eaff;
         width: 470px;
         height: 500px;
         margin-left: 25px;

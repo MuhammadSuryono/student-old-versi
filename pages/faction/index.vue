@@ -74,7 +74,7 @@
         <div class="column image-reward">
           <div class="border-image">
             <img
-              src="https://www.freecodecamp.org/news/content/images/2022/06/helloWorld.png"
+              src="~/assets/images/faction/background.png"
               style="width: 100%; height: 100%; object-fit: cover"
             >
           </div>
