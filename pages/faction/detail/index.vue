@@ -73,12 +73,13 @@
             </div>
             <div class="column is-narrow right-current" />
           </div>
-          <div class="progress-skill columns is-gapless">
+          <div
+            v-for="(itemProgress, indexProgress) in dataProgressBar"
+            :key="indexProgress"
+            class="progress-skill columns is-gapless"
+          >
             <div class="columns is-narrow" style="margin-top: 0px">
-              <img
-                src="~/assets/images/faction/icon_1.png"
-                class="icon-faction"
-              >
+              <img :src="itemProgress.faction_icon" class="icon-faction">
             </div>
             <div
               class="columns is-narrow"
@@ -96,30 +97,71 @@
               >
                 <div
                   v-if="
-                    parseFloat(value1) - Math.floor(parseFloat(value1)) === 0
+                    parseFloat(itemProgress.current_level) -
+                      Math.floor(parseFloat(itemProgress.current_level)) ===
+                      0
                   "
                   class="sub-det"
                 >
                   <div
-                    v-if="index2 < parseFloat(value1)"
+                    v-if="index2 < parseFloat(itemProgress.current_level)"
                     class="sub-det sub-filled"
-                    style="background-color: #ff8383"
+                    :class="
+                      indexProgress === 0
+                        ? 'class1'
+                        : indexProgress === 1
+                          ? 'class2'
+                          : indexProgress === 2
+                            ? 'class3'
+                            : indexProgress === 3
+                              ? 'class4'
+                              : 'class5'
+                    "
                   />
                 </div>
                 <div v-else class="sub-det">
                   <div
-                    v-if="index2 < Math.trunc(parseFloat(value1))"
+                    v-if="
+                      index2 <
+                        Math.trunc(parseFloat(itemProgress.current_level))
+                    "
                     class="sub-det sub-filled"
-                    style="background-color: #ff8383"
+                    :class="
+                      indexProgress === 0
+                        ? 'class1'
+                        : indexProgress === 1
+                          ? 'class2'
+                          : indexProgress === 2
+                            ? 'class3'
+                            : indexProgress === 3
+                              ? 'class4'
+                              : 'class5'
+                    "
                   />
                   <div
-                    v-if="index2 === Math.trunc(parseFloat(value1))"
+                    v-if="
+                      index2 ===
+                        Math.trunc(parseFloat(itemProgress.current_level))
+                    "
                     class="sub-filled sub-no-width"
-                    style="background-color: #ff8383"
+                    :class="
+                      indexProgress === 0
+                        ? 'class1'
+                        : indexProgress === 1
+                          ? 'class2'
+                          : indexProgress === 2
+                            ? 'class3'
+                            : indexProgress === 3
+                              ? 'class4'
+                              : 'class5'
+                    "
                     :style="{
                       width:
                         Number(
-                          (value1 - Math.trunc(parseFloat(value1))).toFixed(2)
+                          (
+                            itemProgress.current_level -
+                            Math.trunc(parseFloat(itemProgress.current_level))
+                          ).toFixed(2)
                         ) *
                         100 +
                         '%'
@@ -129,10 +171,10 @@
               </div>
             </div>
             <div class="columns is-narrow lvl-prog">
-              LV {{ value1 }} /10
+              LV {{ itemProgress.current_level }} /10
             </div>
           </div>
-          <div class="progress-skill columns is-gapless">
+          <!-- <div class="progress-skill columns is-gapless">
             <div class="columns is-narrow" style="margin-top: 0px">
               <img
                 src="~/assets/images/faction/icon_2.png"
@@ -367,7 +409,7 @@
             <div class="columns is-narrow lvl-prog">
               LV {{ value5 }} /10
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div v-if="selected2" class="columns is-gapless">
@@ -983,6 +1025,7 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'FactionDetailPage',
   layout: 'default',
@@ -999,7 +1042,58 @@ export default {
       selected3: false
     }
   },
+  computed: {
+    ...mapState({
+      dataProgressBar: (state) => {
+        return state.faction.dataProgressBar
+      }
+    }),
+    fillClass1 () {
+      return 'class2'
+    }
+  },
+  mounted () {
+    this.getAll()
+  },
   methods: {
+    getAll () {
+      this.getData()
+      this.getData2()
+    },
+    getData () {
+      this.$store
+        .dispatch('faction/fetchProgressBar')
+        .then((response) => {
+          console.log('faction : ', response)
+        })
+        .catch((error) => {
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
+    getData2 () {
+      this.$store
+        .dispatch('faction/fetchCommentStars')
+        .then((response) => {
+          console.log('fetchCommentStars : ', response)
+        })
+        .catch((error) => {
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
     goBack () {
       this.$router.push('/faction')
     },
@@ -1024,6 +1118,21 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.class1 {
+  background-color: #ff8383;
+}
+.class2 {
+  background-color: #ffc973;
+}
+.class3 {
+  background-color: #d1a171;
+}
+.class4 {
+  background-color: #bdff83;
+}
+.class5 {
+  background-color: #66d4ff;
+}
 .bg-img {
   background-image: url('~@/assets/images/faction/background.png');
   height: 100%;
@@ -1162,7 +1271,7 @@ export default {
             // height: 22px;
           }
           .sub-filled {
-            background-color: #fff380;
+            // background-color: #fff380;
           }
           .sub-no-width {
             height: 100%;

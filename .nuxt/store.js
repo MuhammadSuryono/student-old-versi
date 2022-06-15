@@ -19,6 +19,7 @@ let store = {};
 
   resolveStoreModules(require('../store/avatar.js'), 'avatar.js')
   resolveStoreModules(require('../store/decoration.js'), 'decoration.js')
+  resolveStoreModules(require('../store/faction.js'), 'faction.js')
   resolveStoreModules(require('../store/module.js'), 'module.js')
   resolveStoreModules(require('../store/skillcard.js'), 'skillcard.js')
   resolveStoreModules(require('../store/user.js'), 'user.js')
@@ -30,6 +31,7 @@ let store = {};
     module.hot.accept([
       '../store/avatar.js',
       '../store/decoration.js',
+      '../store/faction.js',
       '../store/module.js',
       '../store/skillcard.js',
       '../store/user.js',
