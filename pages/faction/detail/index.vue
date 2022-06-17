@@ -420,7 +420,7 @@
                 v-for="(itemStar, indexStar) in dataCommentStars.data_reward"
                 :key="indexStar"
                 class="progress-skill columns is-gapless"
-                style="width: 210px; height: 55px"
+                style="width: 210px; height: 55px; margin-bottom: 18px"
               >
                 <div class="columns is-narrow">
                   <div
@@ -482,6 +482,7 @@
                 v-for="(review, indexReview) in itemsDiscuss"
                 :key="indexReview"
                 class="columns is-gapless"
+                style="margin-bottom: 10px"
               >
                 <div
                   class="column is-narrow"
@@ -491,7 +492,21 @@
                   }"
                 >
                   <img
+                    v-if="review.avatar === null || review.avatar === 'null'"
                     src="~/assets/images/ava.png"
+                    class="pic-petra"
+                    style="
+                      width: 80px;
+                      height: 81px;
+                      object-fit: cover;
+                      object-fit: cover;
+                      -o-object-position: 53% 0%;
+                      object-position: 53% 0%;
+                    "
+                  >
+                  <img
+                    v-else
+                    :src="review.avatar"
                     class="pic-petra"
                     style="
                       width: 80px;
@@ -511,7 +526,6 @@
                   <div class="petra-review">
                     <div class="box-review">
                       {{ review.comment }}
-                      <div>asdas</div>
                     </div>
                   </div>
                 </div>
