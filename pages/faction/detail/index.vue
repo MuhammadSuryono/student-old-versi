@@ -174,242 +174,6 @@
               LV {{ itemProgress.current_level }} /10
             </div>
           </div>
-          <!-- <div class="progress-skill columns is-gapless">
-            <div class="columns is-narrow" style="margin-top: 0px">
-              <img
-                src="~/assets/images/faction/icon_2.png"
-                class="icon-faction"
-              >
-            </div>
-            <div
-              class="columns is-narrow"
-              style="
-                width: 500px;
-                margin-left: 20px;
-                margin-top: 0px;
-                margin-bottom: 0px;
-              "
-            >
-              <div
-                v-for="(progres, index2) in 10"
-                :key="index2"
-                class="column sub-prog"
-              >
-                <div
-                  v-if="
-                    parseFloat(value2) - Math.floor(parseFloat(value2)) === 0
-                  "
-                  class="sub-det"
-                >
-                  <div
-                    v-if="index2 < parseFloat(value2)"
-                    class="sub-det sub-filled"
-                    style="background-color: #ffc973"
-                  />
-                </div>
-                <div v-else class="sub-det">
-                  <div
-                    v-if="index2 < Math.trunc(parseFloat(value2))"
-                    class="sub-det sub-filled"
-                    style="background-color: #ffc973"
-                  />
-                  <div
-                    v-if="index2 === Math.trunc(parseFloat(value2))"
-                    class="sub-filled sub-no-width"
-                    style="background-color: #ffc973"
-                    :style="{
-                      width:
-                        Number(
-                          (value2 - Math.trunc(parseFloat(value2))).toFixed(2)
-                        ) *
-                        100 +
-                        '%'
-                    }"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="columns is-narrow lvl-prog">
-              LV {{ value2 }} /10
-            </div>
-          </div>
-          <div class="progress-skill columns is-gapless">
-            <div class="columns is-narrow" style="margin-top: 0px">
-              <img
-                src="~/assets/images/faction/icon_3.png"
-                class="icon-faction"
-              >
-            </div>
-            <div
-              class="columns is-narrow"
-              style="
-                width: 500px;
-                margin-left: 20px;
-                margin-top: 0px;
-                margin-bottom: 0px;
-              "
-            >
-              <div
-                v-for="(progres, index2) in 10"
-                :key="index2"
-                class="column sub-prog"
-              >
-                <div
-                  v-if="
-                    parseFloat(value3) - Math.floor(parseFloat(value3)) === 0
-                  "
-                  class="sub-det"
-                >
-                  <div
-                    v-if="index2 < parseFloat(value3)"
-                    class="sub-det sub-filled"
-                    style="background-color: #d1a171"
-                  />
-                </div>
-                <div v-else class="sub-det">
-                  <div
-                    v-if="index2 < Math.trunc(parseFloat(value3))"
-                    class="sub-det sub-filled"
-                    style="background-color: #d1a171"
-                  />
-                  <div
-                    v-if="index2 === Math.trunc(parseFloat(value3))"
-                    class="sub-filled sub-no-width"
-                    style="background-color: #d1a171"
-                    :style="{
-                      width:
-                        Number(
-                          (value3 - Math.trunc(parseFloat(value3))).toFixed(2)
-                        ) *
-                        100 +
-                        '%'
-                    }"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="columns is-narrow lvl-prog">
-              LV {{ value3 }} /10
-            </div>
-          </div>
-          <div class="progress-skill columns is-gapless">
-            <div class="columns is-narrow" style="margin-top: 0px">
-              <img
-                src="~/assets/images/faction/icon_4.png"
-                class="icon-faction"
-              >
-            </div>
-            <div
-              class="columns is-narrow"
-              style="
-                width: 500px;
-                margin-left: 20px;
-                margin-top: 0px;
-                margin-bottom: 0px;
-              "
-            >
-              <div
-                v-for="(progres, index2) in 10"
-                :key="index2"
-                class="column sub-prog"
-              >
-                <div
-                  v-if="
-                    parseFloat(value4) - Math.floor(parseFloat(value4)) === 0
-                  "
-                  class="sub-det"
-                >
-                  <div
-                    v-if="index2 < parseFloat(value4)"
-                    class="sub-det sub-filled"
-                    style="background-color: #bdff83"
-                  />
-                </div>
-                <div v-else class="sub-det">
-                  <div
-                    v-if="index2 < Math.trunc(parseFloat(value4))"
-                    class="sub-det sub-filled"
-                    style="background-color: #bdff83"
-                  />
-                  <div
-                    v-if="index2 === Math.trunc(parseFloat(value4))"
-                    class="sub-filled sub-no-width"
-                    style="background-color: #bdff83"
-                    :style="{
-                      width:
-                        Number(
-                          (value4 - Math.trunc(parseFloat(value4))).toFixed(2)
-                        ) *
-                        100 +
-                        '%'
-                    }"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="columns is-narrow lvl-prog">
-              LV {{ value4 }} /10
-            </div>
-          </div>
-          <div class="progress-skill columns is-gapless">
-            <div class="columns is-narrow" style="margin-top: 0px">
-              <img
-                src="~/assets/images/faction/icon_5.png"
-                class="icon-faction"
-              >
-            </div>
-            <div
-              class="columns is-narrow"
-              style="
-                width: 500px;
-                margin-left: 20px;
-                margin-top: 0px;
-                margin-bottom: 0px;
-              "
-            >
-              <div
-                v-for="(progres, index2) in 10"
-                :key="index2"
-                class="column sub-prog"
-              >
-                <div
-                  v-if="
-                    parseFloat(value5) - Math.floor(parseFloat(value5)) === 0
-                  "
-                  class="sub-det"
-                >
-                  <div
-                    v-if="index2 < parseFloat(value5)"
-                    class="sub-det sub-filled"
-                    style="background-color: #66d4ff"
-                  />
-                </div>
-                <div v-else class="sub-det">
-                  <div
-                    v-if="index2 < Math.trunc(parseFloat(value5))"
-                    class="sub-det sub-filled"
-                    style="background-color: #66d4ff"
-                  />
-                  <div
-                    v-if="index2 === Math.trunc(parseFloat(value5))"
-                    class="sub-filled sub-no-width"
-                    style="background-color: #66d4ff"
-                    :style="{
-                      width:
-                        Number(
-                          (value5 - Math.trunc(parseFloat(value5))).toFixed(2)
-                        ) *
-                        100 +
-                        '%'
-                    }"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="columns is-narrow lvl-prog">
-              LV {{ value5 }} /10
-            </div>
-          </div> -->
         </div>
       </div>
       <div v-if="selected2" class="columns is-gapless">
@@ -422,45 +186,108 @@
             </div>
             <div class="column is-narrow right-current" />
           </div>
-          <div class="progress-skill columns is-gapless">
-            <div class="columns is-narrow">
-              <img
-                src="~/assets/images/faction/icon_1.png"
-                class="icon-faction"
-                style="margin-top: 10px"
-              >
+
+          <div
+            v-for="(
+              itemProgress, indexProgress
+            ) in dataModuleDominance.factions"
+            :key="indexProgress"
+            class="progress-skill columns is-gapless"
+          >
+            <div class="columns is-narrow" style="margin-top: 0px">
+              <img :src="itemProgress.image" class="icon-faction">
             </div>
             <div
               class="columns is-narrow"
-              style="width: 500px; margin-left: 17px; transform: skew(18deg)"
+              style="
+                width: 500px;
+                margin-left: 20px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+              "
             >
               <div
                 v-for="(progres, index2) in 4"
                 :key="index2"
                 class="column sub-prog"
-                style="padding-top: 24px; margin-top: 25px"
               >
                 <div
-                  v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
+                  v-if="
+                    parseFloat(itemProgress.module_percentage / 25) -
+                      Math.floor(
+                        parseFloat(itemProgress.module_percentage / 25)
+                      ) ===
+                      0
+                  "
                   class="sub-det"
                 >
                   <div
-                    v-if="index2 < parseFloat(value)"
+                    v-if="
+                      index2 < parseFloat(itemProgress.module_percentage / 25)
+                    "
                     class="sub-det sub-filled"
+                    :class="
+                      indexProgress === 0
+                        ? 'class1'
+                        : indexProgress === 1
+                          ? 'class2'
+                          : indexProgress === 2
+                            ? 'class3'
+                            : indexProgress === 3
+                              ? 'class4'
+                              : 'class5'
+                    "
                   />
                 </div>
                 <div v-else class="sub-det">
                   <div
-                    v-if="index2 < Math.trunc(parseFloat(value))"
+                    v-if="
+                      index2 <
+                        Math.trunc(
+                          parseFloat(itemProgress.module_percentage / 25)
+                        )
+                    "
                     class="sub-det sub-filled"
+                    :class="
+                      indexProgress === 0
+                        ? 'class1'
+                        : indexProgress === 1
+                          ? 'class2'
+                          : indexProgress === 2
+                            ? 'class3'
+                            : indexProgress === 3
+                              ? 'class4'
+                              : 'class5'
+                    "
                   />
                   <div
-                    v-if="index2 === Math.trunc(parseFloat(value))"
+                    v-if="
+                      index2 ===
+                        Math.trunc(
+                          parseFloat(itemProgress.module_percentage / 25)
+                        )
+                    "
                     class="sub-filled sub-no-width"
+                    :class="
+                      indexProgress === 0
+                        ? 'class1'
+                        : indexProgress === 1
+                          ? 'class2'
+                          : indexProgress === 2
+                            ? 'class3'
+                            : indexProgress === 3
+                              ? 'class4'
+                              : 'class5'
+                    "
                     :style="{
                       width:
                         Number(
-                          (value - Math.trunc(parseFloat(value))).toFixed(2)
+                          (
+                            itemProgress.module_percentage / 25 -
+                            Math.trunc(
+                              parseFloat(itemProgress.module_percentage / 25)
+                            )
+                          ).toFixed(2)
                         ) *
                         100 +
                         '%'
@@ -470,211 +297,7 @@
               </div>
             </div>
             <div class="columns is-narrow lvl-prog">
-              50%
-            </div>
-          </div>
-          <div class="progress-skill columns is-gapless">
-            <div class="columns is-narrow">
-              <img
-                src="~/assets/images/faction/icon_2.png"
-                class="icon-faction"
-                style="margin-top: 10px"
-              >
-            </div>
-            <div
-              class="columns is-narrow"
-              style="width: 500px; margin-left: 17px; transform: skew(18deg)"
-            >
-              <div
-                v-for="(progres, index2) in 4"
-                :key="index2"
-                class="column sub-prog"
-                style="padding-top: 24px; margin-top: 25px"
-              >
-                <div
-                  v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
-                  class="sub-det"
-                >
-                  <div
-                    v-if="index2 < parseFloat(value)"
-                    class="sub-det sub-filled"
-                  />
-                </div>
-                <div v-else class="sub-det">
-                  <div
-                    v-if="index2 < Math.trunc(parseFloat(value))"
-                    class="sub-det sub-filled"
-                  />
-                  <div
-                    v-if="index2 === Math.trunc(parseFloat(value))"
-                    class="sub-filled sub-no-width"
-                    :style="{
-                      width:
-                        Number(
-                          (value - Math.trunc(parseFloat(value))).toFixed(2)
-                        ) *
-                        100 +
-                        '%'
-                    }"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="columns is-narrow lvl-prog">
-              50%
-            </div>
-          </div>
-          <div class="progress-skill columns is-gapless">
-            <div class="columns is-narrow">
-              <img
-                src="~/assets/images/faction/icon_3.png"
-                class="icon-faction"
-                style="margin-top: 10px"
-              >
-            </div>
-            <div
-              class="columns is-narrow"
-              style="width: 500px; margin-left: 17px; transform: skew(18deg)"
-            >
-              <div
-                v-for="(progres, index2) in 4"
-                :key="index2"
-                class="column sub-prog"
-                style="padding-top: 24px; margin-top: 25px"
-              >
-                <div
-                  v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
-                  class="sub-det"
-                >
-                  <div
-                    v-if="index2 < parseFloat(value)"
-                    class="sub-det sub-filled"
-                  />
-                </div>
-                <div v-else class="sub-det">
-                  <div
-                    v-if="index2 < Math.trunc(parseFloat(value))"
-                    class="sub-det sub-filled"
-                  />
-                  <div
-                    v-if="index2 === Math.trunc(parseFloat(value))"
-                    class="sub-filled sub-no-width"
-                    :style="{
-                      width:
-                        Number(
-                          (value - Math.trunc(parseFloat(value))).toFixed(2)
-                        ) *
-                        100 +
-                        '%'
-                    }"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="columns is-narrow lvl-prog">
-              50%
-            </div>
-          </div>
-          <div class="progress-skill columns is-gapless">
-            <div class="columns is-narrow">
-              <img
-                src="~/assets/images/faction/icon_4.png"
-                class="icon-faction"
-                style="margin-top: 10px"
-              >
-            </div>
-            <div
-              class="columns is-narrow"
-              style="width: 500px; margin-left: 17px; transform: skew(18deg)"
-            >
-              <div
-                v-for="(progres, index2) in 4"
-                :key="index2"
-                class="column sub-prog"
-                style="padding-top: 24px; margin-top: 25px"
-              >
-                <div
-                  v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
-                  class="sub-det"
-                >
-                  <div
-                    v-if="index2 < parseFloat(value)"
-                    class="sub-det sub-filled"
-                  />
-                </div>
-                <div v-else class="sub-det">
-                  <div
-                    v-if="index2 < Math.trunc(parseFloat(value))"
-                    class="sub-det sub-filled"
-                  />
-                  <div
-                    v-if="index2 === Math.trunc(parseFloat(value))"
-                    class="sub-filled sub-no-width"
-                    :style="{
-                      width:
-                        Number(
-                          (value - Math.trunc(parseFloat(value))).toFixed(2)
-                        ) *
-                        100 +
-                        '%'
-                    }"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="columns is-narrow lvl-prog">
-              50%
-            </div>
-          </div>
-          <div class="progress-skill columns is-gapless">
-            <div class="columns is-narrow">
-              <img
-                src="~/assets/images/faction/icon_5.png"
-                class="icon-faction"
-                style="margin-top: 10px"
-              >
-            </div>
-            <div
-              class="columns is-narrow"
-              style="width: 500px; margin-left: 17px; transform: skew(18deg)"
-            >
-              <div
-                v-for="(progres, index2) in 4"
-                :key="index2"
-                class="column sub-prog"
-                style="padding-top: 24px; margin-top: 25px"
-              >
-                <div
-                  v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
-                  class="sub-det"
-                >
-                  <div
-                    v-if="index2 < parseFloat(value)"
-                    class="sub-det sub-filled"
-                  />
-                </div>
-                <div v-else class="sub-det">
-                  <div
-                    v-if="index2 < Math.trunc(parseFloat(value))"
-                    class="sub-det sub-filled"
-                  />
-                  <div
-                    v-if="index2 === Math.trunc(parseFloat(value))"
-                    class="sub-filled sub-no-width"
-                    :style="{
-                      width:
-                        Number(
-                          (value - Math.trunc(parseFloat(value))).toFixed(2)
-                        ) *
-                        100 +
-                        '%'
-                    }"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="columns is-narrow lvl-prog">
-              50%
+              {{ itemProgress.module_percentage }} %
             </div>
           </div>
         </div>
@@ -688,7 +311,7 @@
                 Current leading faction
               </div>
               <div class="text-growth">
-                GROWTH
+                {{ dataModuleDominance.lead_faction.faction_name }}
               </div>
             </div>
           </div>
@@ -702,15 +325,39 @@
           </div>
           <div class="next-level-card">
             <div class="columns is-gapless">
-              <div class="column is-narrow left-img" />
-              <div class="column is-narrow right-img" />
+              <div class="column is-narrow left-img">
+                <img
+                  :src="dataModuleDominance.next_reward.image_male"
+                  style="
+                    height: 100px;
+                    margin-top: 30px;
+                    object-fit: cover;
+                    margin-left: auto;
+                    margin-right: auto;
+                    display: block;
+                  "
+                >
+              </div>
+              <div class="column is-narrow right-img">
+                <img
+                  :src="dataModuleDominance.next_reward.image_female"
+                  style="
+                    height: 100px;
+                    margin-top: 30px;
+                    object-fit: cover;
+                    margin-left: auto;
+                    display: block;
+                    margin-right: auto;
+                  "
+                >
+              </div>
             </div>
             <div class="card-user">
               <div class="user-avatar">
                 USER AVATAR
               </div>
               <div class="user-strategy">
-                THE STRATEGISTS
+                {{ dataModuleDominance.next_reward.name }}
               </div>
             </div>
           </div>
@@ -729,12 +376,14 @@
           <div class="columns is-gapless">
             <div class="column is-narrow">
               <div
+                v-for="(itemStar, indexStar) in dataCommentStars.data_reward"
+                :key="indexStar"
                 class="progress-skill columns is-gapless"
                 style="width: 210px; height: 55px"
               >
                 <div class="columns is-narrow">
                   <img
-                    src="~/assets/images/faction/icon_1.png"
+                    :src="itemStar.image"
                     class="icon-faction"
                     style="margin-top: 14px"
                   >
@@ -766,179 +415,7 @@
                     "
                   >
                     <div style="transform: skew(18deg)">
-                      321
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="progress-skill columns is-gapless"
-                style="width: 210px; height: 55px"
-              >
-                <div class="columns is-narrow">
-                  <img
-                    src="~/assets/images/faction/icon_2.png"
-                    class="icon-faction"
-                    style="margin-top: 14px"
-                  >
-                </div>
-                <div class="column is-narrow" style="margin-left: 15px">
-                  <div
-                    style="
-                      font-size: 12px;
-                      color: #ffffff;
-                      margin-top: 5px;
-                      width: 100%;
-                      font-weight: 600;
-                      transform: skew(18deg);
-                      margin-left: 5px;
-                    "
-                  >
-                    Comment Star Count
-                  </div>
-                  <div
-                    style="
-                      margin-left: 5px;
-                      background: #2e5799;
-                      border-radius: 2px;
-                      height: 23px;
-                      width: 128.5px;
-                      color: #ff8383;
-                      text-align: center;
-                      font-weight: 700;
-                    "
-                  >
-                    <div style="transform: skew(18deg)">
-                      321
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="progress-skill columns is-gapless"
-                style="width: 210px; height: 55px"
-              >
-                <div class="columns is-narrow">
-                  <img
-                    src="~/assets/images/faction/icon_3.png"
-                    class="icon-faction"
-                    style="margin-top: 14px"
-                  >
-                </div>
-                <div class="column is-narrow" style="margin-left: 15px">
-                  <div
-                    style="
-                      font-size: 12px;
-                      color: #ffffff;
-                      margin-top: 5px;
-                      width: 100%;
-                      font-weight: 600;
-                      transform: skew(18deg);
-                      margin-left: 5px;
-                    "
-                  >
-                    Comment Star Count
-                  </div>
-                  <div
-                    style="
-                      margin-left: 5px;
-                      background: #2e5799;
-                      border-radius: 2px;
-                      height: 23px;
-                      width: 128.5px;
-                      color: #ff8383;
-                      text-align: center;
-                      font-weight: 700;
-                    "
-                  >
-                    <div style="transform: skew(18deg)">
-                      321
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="progress-skill columns is-gapless"
-                style="width: 210px; height: 55px"
-              >
-                <div class="columns is-narrow">
-                  <img
-                    src="~/assets/images/faction/icon_4.png"
-                    class="icon-faction"
-                    style="margin-top: 14px"
-                  >
-                </div>
-                <div class="column is-narrow" style="margin-left: 15px">
-                  <div
-                    style="
-                      font-size: 12px;
-                      color: #ffffff;
-                      margin-top: 5px;
-                      width: 100%;
-                      font-weight: 600;
-                      transform: skew(18deg);
-                      margin-left: 5px;
-                    "
-                  >
-                    Comment Star Count
-                  </div>
-                  <div
-                    style="
-                      margin-left: 5px;
-                      background: #2e5799;
-                      border-radius: 2px;
-                      height: 23px;
-                      width: 128.5px;
-                      color: #ff8383;
-                      text-align: center;
-                      font-weight: 700;
-                    "
-                  >
-                    <div style="transform: skew(18deg)">
-                      321
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="progress-skill columns is-gapless"
-                style="width: 210px; height: 55px"
-              >
-                <div class="columns is-narrow">
-                  <img
-                    src="~/assets/images/faction/icon_5.png"
-                    class="icon-faction"
-                    style="margin-top: 14px"
-                  >
-                </div>
-                <div class="column is-narrow" style="margin-left: 15px">
-                  <div
-                    style="
-                      font-size: 12px;
-                      color: #ffffff;
-                      margin-top: 5px;
-                      width: 100%;
-                      font-weight: 600;
-                      transform: skew(18deg);
-                      margin-left: 5px;
-                    "
-                  >
-                    Comment Star Count
-                  </div>
-                  <div
-                    style="
-                      margin-left: 5px;
-                      background: #2e5799;
-                      border-radius: 2px;
-                      height: 23px;
-                      width: 128.5px;
-                      color: #ff8383;
-                      text-align: center;
-                      font-weight: 700;
-                    "
-                  >
-                    <div style="transform: skew(18deg)">
-                      321
+                      {{ itemStar.total_comment_starts }}
                     </div>
                   </div>
                 </div>
@@ -946,14 +423,16 @@
             </div>
             <div class="column is-narrow petra-content">
               <div
-                v-for="(review, indexReview) in 5"
+                v-for="(review, indexReview) in itemsDiscuss"
                 :key="indexReview"
                 class="columns is-gapless"
               >
                 <div
                   class="column is-narrow"
                   style="height: 80px"
-                  :style="{ backgroundColor: '#48ffde' }"
+                  :style="{
+                    backgroundColor: '#' + review.avatar_background_color
+                  }"
                 >
                   <img
                     src="~/assets/images/ava.png"
@@ -970,12 +449,12 @@
                 </div>
                 <div class="column box-list">
                   <div class="student-name">
-                    tes
+                    {{ review.name }}
                   </div>
 
                   <div class="petra-review">
                     <div class="box-review">
-                      asdasd
+                      {{ review.comment }}
                     </div>
                   </div>
                 </div>
@@ -993,7 +472,7 @@
                 Current leading faction
               </div>
               <div class="text-growth">
-                GROWTH
+                {{ dataCommentStars.lead_faction.name }}
               </div>
             </div>
           </div>
@@ -1007,15 +486,39 @@
           </div>
           <div class="next-level-card">
             <div class="columns is-gapless">
-              <div class="column is-narrow left-img" />
-              <div class="column is-narrow right-img" />
+              <div class="column is-narrow left-img">
+                <img
+                  :src="dataCommentStars.next_reward.image_male"
+                  style="
+                    height: 100px;
+                    margin-top: 30px;
+                    object-fit: cover;
+                    margin-left: auto;
+                    margin-right: auto;
+                    display: block;
+                  "
+                >
+              </div>
+              <div class="column is-narrow right-img">
+                <img
+                  :src="dataCommentStars.next_reward.image_female"
+                  style="
+                    height: 100px;
+                    margin-top: 30px;
+                    object-fit: cover;
+                    margin-left: auto;
+                    display: block;
+                    margin-right: auto;
+                  "
+                >
+              </div>
             </div>
             <div class="card-user">
               <div class="user-avatar">
                 USER AVATAR
               </div>
               <div class="user-strategy">
-                THE STRATEGISTS
+                {{ dataCommentStars.next_reward.name }}
               </div>
             </div>
           </div>
@@ -1039,13 +542,25 @@ export default {
       value5: 8.2,
       selected1: true,
       selected2: false,
-      selected3: false
+      selected3: false,
+
+      total: 0,
+      itemsDiscuss: {}
     }
   },
   computed: {
     ...mapState({
       dataProgressBar: (state) => {
         return state.faction.dataProgressBar
+      },
+      dataModuleDominance: (state) => {
+        return state.faction.dataModuleDominance
+      },
+      dataCommentStars: (state) => {
+        return state.faction.dataCommentStars
+      },
+      dataCommentStarsList: (state) => {
+        return state.faction.dataCommentStarsList
       }
     }),
     fillClass1 () {
@@ -1057,15 +572,15 @@ export default {
   },
   methods: {
     getAll () {
-      this.getData()
-      this.getData2()
+      this.getDataProgressBar()
+      this.getDataModuleDominance()
+      this.getDataCommentStars()
+      this.getDataCommentStarsList()
     },
-    getData () {
+    getDataProgressBar () {
       this.$store
         .dispatch('faction/fetchProgressBar')
-        .then((response) => {
-          console.log('faction : ', response)
-        })
+        .then((response) => {})
         .catch((error) => {
           this.$toast.error(error.response, {
             position: 'top-center',
@@ -1077,11 +592,42 @@ export default {
           }
         })
     },
-    getData2 () {
+    getDataModuleDominance () {
+      this.$store
+        .dispatch('faction/fetchModuleDominance')
+        .then((response) => {})
+        .catch((error) => {
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
+    getDataCommentStars () {
       this.$store
         .dispatch('faction/fetchCommentStars')
+        .then((response) => {})
+        .catch((error) => {
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
+    },
+    getDataCommentStarsList () {
+      this.$store
+        .dispatch('faction/fetchCommentStarsList')
         .then((response) => {
-          console.log('fetchCommentStars : ', response)
+          this.itemsDiscuss = response.data.data.data
+          this.total = response.data.data.total
         })
         .catch((error) => {
           this.$toast.error(error.response, {

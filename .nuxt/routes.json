@@ -3,114 +3,133 @@
     "name": "archivements",
     "path": "/archivements",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/archivements.vue",
-    "chunkName": "pages/archivements"
+    "chunkName": "pages/archivements",
+    "_name": "_d4e656b2"
   },
   {
     "name": "faction",
     "path": "/faction",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/faction/index.vue",
-    "chunkName": "pages/faction/index"
+    "chunkName": "pages/faction/index",
+    "_name": "_1636717b"
   },
   {
     "name": "home",
     "path": "/home",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/home.vue",
-    "chunkName": "pages/home"
+    "chunkName": "pages/home",
+    "_name": "_75174033"
   },
   {
     "name": "library",
     "path": "/library",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/index.vue",
-    "chunkName": "pages/library/index"
+    "chunkName": "pages/library/index",
+    "_name": "_1c0bfd4c"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/login.vue",
-    "chunkName": "pages/login"
+    "chunkName": "pages/login",
+    "_name": "_4bb5acc5"
   },
   {
     "name": "personality",
     "path": "/personality",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/personality.vue",
-    "chunkName": "pages/personality"
+    "chunkName": "pages/personality",
+    "_name": "_256c0b6c"
   },
   {
     "name": "skillcard",
     "path": "/skillcard",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/skillcard/index.vue",
-    "chunkName": "pages/skillcard/index"
+    "chunkName": "pages/skillcard/index",
+    "_name": "_78ba5900"
   },
   {
     "name": "splash",
     "path": "/splash",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/splash.vue",
-    "chunkName": "pages/splash"
+    "chunkName": "pages/splash",
+    "_name": "_4dd95a8a"
   },
   {
     "name": "faction-detail",
     "path": "/faction/detail",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/faction/detail/index.vue",
-    "chunkName": "pages/faction/detail/index"
+    "chunkName": "pages/faction/detail/index",
+    "_name": "_a2d54c0a"
   },
   {
     "name": "library-collection",
     "path": "/library/collection",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/collection/index.vue",
-    "chunkName": "pages/library/collection/index"
+    "chunkName": "pages/library/collection/index",
+    "_name": "_2faa596e"
   },
   {
     "name": "library-module",
     "path": "/library/module",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/index.vue",
-    "chunkName": "pages/library/module/index"
+    "chunkName": "pages/library/module/index",
+    "_name": "_3ee02cd2"
   },
   {
     "name": "skillcard-detail",
     "path": "/skillcard/detail",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/skillcard/detail.vue",
-    "chunkName": "pages/skillcard/detail"
+    "chunkName": "pages/skillcard/detail",
+    "_name": "_36e3d693"
   },
   {
     "name": "library-module-detail-index",
     "path": "/library/module/detail/:index",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/_index/index.vue",
-    "chunkName": "pages/library/module/detail/_index/index"
+    "chunkName": "pages/library/module/detail/_index/index",
+    "_name": "_54091cce"
   },
   {
     "name": "library-module-detail-index-game-embed",
     "path": "/library/module/detail/:index/game/embed",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/_index/game/embed.vue",
-    "chunkName": "pages/library/module/detail/_index/game/embed"
+    "chunkName": "pages/library/module/detail/_index/game/embed",
+    "_name": "_e063e576"
   },
   {
     "name": "library-module-detail-index-game",
     "path": "/library/module/detail/:index/game/:index",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/_index/game/_index.vue",
-    "chunkName": "pages/library/module/detail/_index/game/_index"
+    "chunkName": "pages/library/module/detail/_index/game/_index",
+    "_name": "_0e780717"
   },
   {
     "name": "library-module-detail-index-quiz",
     "path": "/library/module/detail/:index/quiz/:index",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/_index/quiz/_index.vue",
-    "chunkName": "pages/library/module/detail/_index/quiz/_index"
+    "chunkName": "pages/library/module/detail/_index/quiz/_index",
+    "_name": "_1de464d4"
   },
   {
     "name": "library-module-detail-index-reading",
     "path": "/library/module/detail/:index/reading/:index",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/_index/reading/_index.vue",
-    "chunkName": "pages/library/module/detail/_index/reading/_index"
+    "chunkName": "pages/library/module/detail/_index/reading/_index",
+    "_name": "_f695b402"
   },
   {
     "name": "library-module-detail-index-video",
     "path": "/library/module/detail/:index/video/:index",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/_index/video/_index.vue",
-    "chunkName": "pages/library/module/detail/_index/video/_index"
+    "chunkName": "pages/library/module/detail/_index/video/_index",
+    "_name": "_24e2dcf0"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_fbe3eca4"
   }
 ]

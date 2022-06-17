@@ -25,26 +25,49 @@
               class="column sub-prog"
             >
               <div
-                v-if="parseFloat(value) - Math.floor(parseFloat(value)) === 0"
+                v-if="
+                  parseFloat(dataFactionUser.faction.current_level) -
+                    Math.floor(
+                      parseFloat(dataFactionUser.faction.current_level)
+                    ) ===
+                    0
+                "
                 class="sub-det"
               >
                 <div
-                  v-if="index2 < parseFloat(value)"
+                  v-if="
+                    index2 < parseFloat(dataFactionUser.faction.current_level)
+                  "
                   class="sub-det sub-filled"
                 />
               </div>
               <div v-else class="sub-det">
                 <div
-                  v-if="index2 < Math.trunc(parseFloat(value))"
+                  v-if="
+                    index2 <
+                      Math.trunc(
+                        parseFloat(dataFactionUser.faction.current_level)
+                      )
+                  "
                   class="sub-det sub-filled"
                 />
                 <div
-                  v-if="index2 === Math.trunc(parseFloat(value))"
+                  v-if="
+                    index2 ===
+                      Math.trunc(
+                        parseFloat(dataFactionUser.faction.current_level)
+                      )
+                  "
                   class="sub-filled sub-no-width"
                   :style="{
                     width:
                       Number(
-                        (value - Math.trunc(parseFloat(value))).toFixed(2)
+                        (
+                          dataFactionUser.faction.current_level -
+                          Math.trunc(
+                            parseFloat(dataFactionUser.faction.current_level)
+                          )
+                        ).toFixed(2)
                       ) *
                       100 +
                       '%'
@@ -55,7 +78,7 @@
           </div>
         </div>
         <div class="column lvl-fac">
-          LV 10/10
+          LV {{ dataFactionUser.faction.current_level }}/10
         </div>
       </div>
       <div class="columns is-gapless reward-card">
@@ -65,8 +88,8 @@
               <div class="next">
                 NEXT REWARD
               </div>
-              <div class="suite">
-                DELUXE SUITE
+              <div class="suite" style="text-transform: uppercase">
+                {{ dataFactionUser.next_reward.name }}
               </div>
             </div>
           </div>
@@ -74,7 +97,7 @@
         <div class="column image-reward">
           <div class="border-image">
             <img
-              src="~/assets/images/faction/background.png"
+              :src="dataFactionUser.next_reward.image"
               style="width: 100%; height: 100%; object-fit: cover"
             >
           </div>
@@ -89,6 +112,7 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'FactionPage',
   layout: 'default',
@@ -98,12 +122,39 @@ export default {
       value: 9.8
     }
   },
+  computed: {
+    ...mapState({
+      dataFactionUser: (state) => {
+        return state.faction.dataFactionUser
+      }
+    })
+  },
+  mounted () {
+    this.getData()
+  },
   methods: {
     goBack () {
       this.$router.push('/')
     },
     detailfaction () {
       this.$router.push('/faction/detail')
+    },
+    getData () {
+      this.$store
+        .dispatch('faction/fetchFactionUser')
+        .then((response) => {
+          console.log('fetchFactionUser : ', response.data.data)
+        })
+        .catch((error) => {
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
     }
   }
 }
