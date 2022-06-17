@@ -79,6 +79,20 @@
             class="progress-skill columns is-gapless"
           >
             <div class="columns is-narrow" style="margin-top: 0px">
+              <div
+                class="circle-faction"
+                :class="
+                  indexProgress === 0
+                    ? 'border1'
+                    : indexProgress === 1
+                      ? 'border2'
+                      : indexProgress === 2
+                        ? 'border3'
+                        : indexProgress === 3
+                          ? 'border4'
+                          : 'border5'
+                "
+              />
               <img :src="itemProgress.faction_icon" class="icon-faction">
             </div>
             <div
@@ -195,6 +209,20 @@
             class="progress-skill columns is-gapless"
           >
             <div class="columns is-narrow" style="margin-top: 0px">
+              <div
+                class="circle-faction"
+                :class="
+                  indexProgress === 0
+                    ? 'border1'
+                    : indexProgress === 1
+                      ? 'border2'
+                      : indexProgress === 2
+                        ? 'border3'
+                        : indexProgress === 3
+                          ? 'border4'
+                          : 'border5'
+                "
+              />
               <img :src="itemProgress.image" class="icon-faction">
             </div>
             <div
@@ -204,12 +232,21 @@
                 margin-left: 20px;
                 margin-top: 0px;
                 margin-bottom: 0px;
+
+                transform: skew(18deg);
               "
             >
               <div
                 v-for="(progres, index2) in 4"
                 :key="index2"
                 class="column sub-prog"
+                style="
+                  margin-left: 9px;
+                  z-index: 1;
+                  margin-top: 14px;
+                  margin-bottom: 12px;
+                  border-radius:2px;
+              }"
               >
                 <div
                   v-if="
@@ -220,12 +257,14 @@
                       0
                   "
                   class="sub-det"
+                  style="border-radius: 2px"
                 >
                   <div
                     v-if="
                       index2 < parseFloat(itemProgress.module_percentage / 25)
                     "
                     class="sub-det sub-filled"
+                    style="border-radius: 2px"
                     :class="
                       indexProgress === 0
                         ? 'class1'
@@ -239,7 +278,7 @@
                     "
                   />
                 </div>
-                <div v-else class="sub-det">
+                <div v-else class="sub-det" style="border-radius: 2px">
                   <div
                     v-if="
                       index2 <
@@ -248,6 +287,7 @@
                         )
                     "
                     class="sub-det sub-filled"
+                    style="border-radius: 2px"
                     :class="
                       indexProgress === 0
                         ? 'class1'
@@ -268,6 +308,7 @@
                         )
                     "
                     class="sub-filled sub-no-width"
+                    style="border-radius: 2px"
                     :class="
                       indexProgress === 0
                         ? 'class1'
@@ -382,6 +423,21 @@
                 style="width: 210px; height: 55px"
               >
                 <div class="columns is-narrow">
+                  <div
+                    class="circle-faction"
+                    style="top: 3px"
+                    :class="
+                      indexStar === 0
+                        ? 'border1'
+                        : indexStar === 1
+                          ? 'border2'
+                          : indexStar === 2
+                            ? 'border3'
+                            : indexStar === 3
+                              ? 'border4'
+                              : 'border5'
+                    "
+                  />
                   <img
                     :src="itemStar.image"
                     class="icon-faction"
@@ -431,7 +487,7 @@
                   class="column is-narrow"
                   style="height: 80px"
                   :style="{
-                    backgroundColor: '#' + review.avatar_background_color
+                    backgroundColor: review.avatar_background_color
                   }"
                 >
                   <img
@@ -455,6 +511,7 @@
                   <div class="petra-review">
                     <div class="box-review">
                       {{ review.comment }}
+                      <div>asdas</div>
                     </div>
                   </div>
                 </div>
@@ -540,9 +597,9 @@ export default {
       value3: 1.6,
       value4: 5.4,
       value5: 8.2,
-      selected1: true,
+      selected1: false,
       selected2: false,
-      selected3: false,
+      selected3: true,
 
       total: 0,
       itemsDiscuss: {}
@@ -664,6 +721,21 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.border1 {
+  border: 1px solid #ff8383;
+}
+.border2 {
+  border: 1px solid #ffc973;
+}
+.border3 {
+  border: 1px solid #d1a171;
+}
+.border4 {
+  border: 1px solid #bdff83;
+}
+.border5 {
+  border: 1px solid #66d4ff;
+}
 .class1 {
   background-color: #ff8383;
 }
@@ -802,6 +874,16 @@ export default {
           width: 51px;
           transform: skew(18deg);
         }
+        .circle-faction {
+          height: 47px;
+          width: 47px;
+          background-color: white;
+          position: absolute;
+          top: 2px;
+          left: 10px;
+          transform: skew(18deg);
+          border-radius: 50%;
+        }
         .sub-prog {
           background-color: #d7faff;
           border-radius: 5px;
@@ -837,7 +919,7 @@ export default {
         // background: rgba(44, 110, 194, 0.85);
         // border: 2px solid #d4eaff;
         width: 470px;
-        height: 500px;
+        height: 370px;
         margin-left: 25px;
         overflow-y: scroll;
         .pic-petra {
@@ -861,10 +943,13 @@ export default {
             background-color: #2e5799;
             width: 196.45px;
             height: 24.04px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             object-fit: cover;
             --g: #000, #0000 1deg 179deg, #000 180deg;
             --mask: conic-gradient(
-                from 45deg at bottom 18px right 18px,
+                from 20deg at bottom 18px right 18px,
                 var(--g)
               )
               100% 100%/100% 100% no-repeat;
@@ -873,7 +958,7 @@ export default {
             color: white;
             font-size: 13.9056px;
             color: #d4eaff;
-            padding: 2px 10px 0px 10px;
+            padding: 2px 40px 0px 10px;
           }
 
           .rating-bg {
@@ -895,6 +980,8 @@ export default {
             // position: relative;
             // min-height: 88px;
             .box-review {
+              display: table;
+              table-layout: fixed;
               background: #f2f2f2;
               min-height: 88px;
               width: 100%;
@@ -907,6 +994,7 @@ export default {
               mask: var(--mask);
               font-size: 12px;
               padding: 10px;
+              word-wrap: break-word;
             }
             .content-text {
               position: absolute;
