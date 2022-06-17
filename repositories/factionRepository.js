@@ -13,7 +13,7 @@ export default $axios => ({
   getCommentStar () {
     return $axios.get('/faction-statistics/comment-stars')
   },
-  getCommentStarlist () {
-    return $axios.get('/faction-statistics/comment-stars/list')
+  getCommentStarlist (payload) {
+    return $axios.get(`/faction-statistics/comment-stars/list?page=${payload}`)
   }
 })

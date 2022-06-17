@@ -516,6 +516,24 @@
                   </div>
                 </div>
               </div>
+
+              <infinite-loading
+                v-if="itemsDiscuss.length"
+                :identifier="infiniteId"
+                spinner="spinner"
+                style="margin-bottom: 15px"
+                @infinite="infiniteScroll"
+              >
+                <div slot="spinner" style="color: black">
+                  <v-progress-circular indeterminate color="black" />
+                </div>
+                <div slot="no-results" style="color: black">
+                  No results
+                </div>
+                <div slot="no-more" style="color: black">
+                  No more data
+                </div>
+              </infinite-loading>
             </div>
           </div>
         </div>
@@ -597,12 +615,13 @@ export default {
       value3: 1.6,
       value4: 5.4,
       value5: 8.2,
-      selected1: false,
+      selected1: true,
       selected2: false,
-      selected3: true,
-
+      selected3: false,
+      page: 1,
       total: 0,
-      itemsDiscuss: {}
+      itemsDiscuss: {},
+      infiniteId: 1
     }
   },
   computed: {
@@ -681,10 +700,11 @@ export default {
     },
     getDataCommentStarsList () {
       this.$store
-        .dispatch('faction/fetchCommentStarsList')
+        .dispatch('faction/fetchCommentStarsList', this.page)
         .then((response) => {
           this.itemsDiscuss = response.data.data.data
           this.total = response.data.data.total
+          console.log('total : ', this.total)
         })
         .catch((error) => {
           this.$toast.error(error.response, {
@@ -696,6 +716,32 @@ export default {
             this.$router.push('/login')
           }
         })
+    },
+
+    infiniteScroll ($state) {
+      setTimeout(() => {
+        this.page++
+        this.$store
+          .dispatch('faction/fetchCommentStarsList', this.page)
+          .then((resp) => {
+            if (resp.data.data.data.length > 1) {
+              resp.data.data.data.forEach(item => this.itemsDiscuss.push(item))
+              $state.loaded()
+            } else {
+              $state.complete()
+            }
+          })
+          .catch((error) => {
+            this.$toast.error(error.response, {
+              position: 'top-center',
+              duration: 5000
+            })
+            if (error.status === 401) {
+              this.$auth.logout()
+              this.$router.push('/login')
+            }
+          })
+      }, 500)
     },
     goBack () {
       this.$router.push('/faction')

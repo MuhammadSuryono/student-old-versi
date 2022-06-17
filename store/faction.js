@@ -69,9 +69,9 @@ export const actions = {
       return e.response
     }
   },
-  async fetchCommentStarsList ({ commit }) {
+  async fetchCommentStarsList ({ commit }, payload) {
     try {
-      const response = await this.$repositories.faction.getCommentStarlist()
+      const response = await this.$repositories.faction.getCommentStarlist(payload)
       commit('SET_COMMENT_STARS_LIST', response.data.data)
       return response
     } catch (e) {
