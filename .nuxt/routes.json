@@ -7,6 +7,13 @@
     "_name": "_d4e656b2"
   },
   {
+    "name": "cluster",
+    "path": "/cluster",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/cluster.vue",
+    "chunkName": "pages/cluster",
+    "_name": "_3cef4454"
+  },
+  {
     "name": "faction",
     "path": "/faction",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/faction/index.vue",

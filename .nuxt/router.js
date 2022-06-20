@@ -5,6 +5,7 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _d4e656b2 = () => interopDefault(import('../pages/archivements.vue' /* webpackChunkName: "pages/archivements" */))
+const _3cef4454 = () => interopDefault(import('../pages/cluster.vue' /* webpackChunkName: "pages/cluster" */))
 const _1636717b = () => interopDefault(import('../pages/faction/index.vue' /* webpackChunkName: "pages/faction/index" */))
 const _75174033 = () => interopDefault(import('../pages/home.vue' /* webpackChunkName: "pages/home" */))
 const _1c0bfd4c = () => interopDefault(import('../pages/library/index.vue' /* webpackChunkName: "pages/library/index" */))
@@ -39,6 +40,10 @@ export const routerOptions = {
     path: "/archivements",
     component: _d4e656b2,
     name: "archivements"
+  }, {
+    path: "/cluster",
+    component: _3cef4454,
+    name: "cluster"
   }, {
     path: "/faction",
     component: _1636717b,

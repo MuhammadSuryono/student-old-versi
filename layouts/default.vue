@@ -159,7 +159,9 @@ export default {
     this.sidebar = true
     this.$notify('Hello user!')
     this.handleResize()
-    this.$store.commit('user/SET_MAPS', false)
+    if (this.maps) {
+      this.$store.commit('user/SET_MAPS')
+    }
   },
   destroyed () {
     window.removeEventListener('resize', this.handleResize)
@@ -170,7 +172,6 @@ export default {
       this.window.height = window.innerHeight
     },
     showMaps () {
-      console.log('tes')
       this.$store.commit('user/SET_MAPS')
     }
   }

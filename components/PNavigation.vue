@@ -87,9 +87,9 @@
         </li>
         <li>
           <NuxtLink
-            v-if="$route.path === '/personality'"
+            v-if="$route.path === '/cluster'"
             class="sidebar-item"
-            to="/personality"
+            to="/cluster"
           >
             <div
               class="card-menu"
@@ -102,7 +102,7 @@
               <IconCluster class="icon-menu3" bg-color="black" />
             </div>
           </NuxtLink>
-          <NuxtLink v-else class="sidebar-item" to="/personality">
+          <NuxtLink v-else class="sidebar-item" to="/cluster">
             <div
               class="card-menu"
               @mouseover="hover3 = true"
