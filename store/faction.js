@@ -3,7 +3,8 @@ export const state = () => ({
   dataProgressBar: {},
   dataModuleDominance: {},
   dataCommentStars: {},
-  dataCommentStarsList: {}
+  dataCommentStarsList: {},
+  dataFactionIcon: {}
 })
 
 export const getters = {
@@ -11,7 +12,8 @@ export const getters = {
   dataProgressBar: state => state.dataProgressBar,
   dataModuleDominance: state => state.dataModuleDominance,
   dataCommentStars: state => state.dataCommentStars,
-  dataCommentStarsList: state => state.dataCommentStarsList
+  dataCommentStarsList: state => state.dataCommentStarsList,
+  dataFactionIcon: state => state.dataFactionIcon
 }
 
 export const mutations = {
@@ -29,7 +31,10 @@ export const mutations = {
   },
   SET_COMMENT_STARS_LIST (state, item) {
     state.dataCommentStarsList = item
-  }
+  },
+  SET_FACTION_USER_ICON (state, item) {
+    state.dataFactionIcon = item
+  },
 }
 
 export const actions = {
@@ -37,6 +42,7 @@ export const actions = {
     try {
       const response = await this.$repositories.faction.getFactionUser()
       commit('SET_FACTION_USER', response.data.data)
+      commit('SET_FACTION_USER_ICON', response.data.data.faction.faction_icon)
       return response
     } catch (e) {
       return e.response

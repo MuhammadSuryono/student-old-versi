@@ -14,7 +14,7 @@
                   Your Result:
                 </div>
                 <div class="desc-results">
-                  You are the {{ cluster.personality_cluster.name }}
+                  You are {{ cluster.personality_cluster.name }}
                 </div>
               </div>
               <div class="skill-cluster">

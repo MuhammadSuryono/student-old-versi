@@ -2,7 +2,7 @@
   <div class="bg-img">
     <div class="header-module">
       <div class="card-title">
-        <img src="~/assets/images/faction/logo.svg" class="logo-faction">
+        <img :src="dataFactionIcon" class="logo-faction">
         <img
           src="~/assets/images/module/box-title.svg"
           class="background-button"
@@ -651,6 +651,9 @@ export default {
       },
       dataCommentStarsList: (state) => {
         return state.faction.dataCommentStarsList
+      },
+      dataFactionIcon: (state) => {
+        return state.faction.dataFactionIcon
       }
     }),
     fillClass1 () {
@@ -834,9 +837,13 @@ export default {
       }
       .logo-faction {
         position: absolute;
-        top: -12px;
-        left: 21px;
+        top: 3px;
+        left: 30px;
         z-index: 6;
+        height: 54px;
+        background-color: white;
+        border-radius: 100%;
+        border: 1px solid grey;
       }
       .name-card {
         z-index: 6;
