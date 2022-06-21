@@ -12,5 +12,8 @@ export default $axios => ({
       new_password: payload.new_password,
       new_password_confirmation: payload.new_password_confirmation
     })
+  },
+  getCluster () {
+    return $axios.get('/personality-cluster/getUserPersonalityCluster')
   }
 })

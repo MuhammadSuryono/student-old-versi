@@ -14,12 +14,12 @@
                   Your Result:
                 </div>
                 <div class="desc-results">
-                  You are the SCHOLAR
+                  You are the {{ cluster.personality_cluster.name }}
                 </div>
               </div>
               <div class="skill-cluster">
                 <div class="cluster-text">
-                  Growth • Self-evaluation • Teamwork
+                  {{ attribute }}
                 </div>
               </div>
               <img class="bg-left" src="~/assets/images/leftangle.png">
@@ -28,19 +28,7 @@
             </div>
             <img class="triangle" src="~/assets/images/traingle-left.svg">
             <div class="body-cluster">
-              The Warrior excels in communication and leadership skills while is
-              also a team player. They communicate effectively in both
-              individual and group settings, concerning various situations. They
-              posses sternness and resilience in making decisions, solving
-              problems, and may encourage people to compete to reach a certain
-              goal. In a collaborative setting, they provide a significant
-              contribution and help fellow members, who may have different
-              background and initial objectives, achieve common goals.They
-              posses sternness and resilience in making decisions, solving
-              problems, and may encourage people to compete to reach a certain
-              goal. In a collaborative setting, they provide a significant
-              contribution and help fellow members, who may have different
-              background and initial objectives, achieve common goals.
+              {{ cluster.personality_cluster.description }}
             </div>
             <img src="~/assets/images/border-bottom.png">
           </div>
@@ -60,7 +48,9 @@ export default {
   layout: 'default',
 
   data () {
-    return {}
+    return {
+      attribute: ''
+    }
   },
 
   computed: {
@@ -70,12 +60,37 @@ export default {
       },
       images: (state) => {
         return state.user.images
+      },
+      cluster: (state) => {
+        return state.user.cluster
       }
     })
+  },
+  mounted () {
+    this.getData()
   },
   methods: {
     goBack () {
       this.$router.push('/')
+    },
+    getData () {
+      this.$store
+        .dispatch('user/getCluster')
+        .then((response) => {
+          console.log('getCluster : ', response)
+          this.attribute =
+            response.data.data.personality_cluster.attribute.join(' • ')
+        })
+        .catch((error) => {
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
     }
   }
 }
@@ -125,8 +140,9 @@ export default {
         }
         .desc-results {
           font-size: 37px;
-          padding-left: 210px;
+          padding-left: 170px;
           padding-top: 0px;
+          text-align: center;
         }
       }
       .skill-cluster {
@@ -144,7 +160,6 @@ export default {
           font-size: 20px;
           display: flex;
           align-items: center;
-          text-align: justify;
           color: #32558b;
           position: absolute;
           top: 50%;
