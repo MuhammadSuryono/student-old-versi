@@ -791,10 +791,10 @@ export default {
   border: 1px solid #ffc973;
 }
 .border3 {
-  border: 1px solid #d1a171;
+  border: 1px solid #bdff83;
 }
 .border4 {
-  border: 1px solid #bdff83;
+  border: 1px solid #d1a171;
 }
 .border5 {
   border: 1px solid #66d4ff;
@@ -806,10 +806,10 @@ export default {
   background-color: #ffc973;
 }
 .class3 {
-  background-color: #d1a171;
+  background-color: #bdff83;
 }
 .class4 {
-  background-color: #bdff83;
+  background-color: #d1a171;
 }
 .class5 {
   background-color: #66d4ff;
