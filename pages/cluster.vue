@@ -7,7 +7,7 @@
       <v-row align="center" justify="center">
         <v-col align="center" justify="center">
           <div class="cluster-card">
-            <img :src="images" class="avatar-img">
+            <img :src="cluster.personality_cluster.avatar" class="avatar-img">
             <div class="header-cluster">
               <div class="results">
                 <div class="head-results">

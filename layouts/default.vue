@@ -70,7 +70,7 @@
           </div>
           <img
             v-if="light"
-            src="~/assets/images/component/light/img-1.png"
+            src="~/assets/images/library/mascot.png"
             class="light-petra"
             @click="light = false"
           >
@@ -80,7 +80,7 @@
               class="text-light"
             >
             <img
-              src="~/assets/images/component/light/img-3.png"
+              src="~/assets/images/library/mascot.png"
               class="avatar-light"
               @click="light = true"
             >
