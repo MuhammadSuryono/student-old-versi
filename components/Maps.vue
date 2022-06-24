@@ -32,7 +32,10 @@
       >
     </div>
     <img v-if="hover1" src="~/assets/images/maps/popup.png" class="popup-1">
-    <img v-if="hover2" src="~/assets/images/maps/popup.png" class="popup-2">
+    <img v-if="hover2" src="~/assets/images/maps/popup2.png" class="popup-2">
+    <div v-if="hover2" class="popup-2-text">
+      Faction
+    </div>
     <!-- </div> -->
     <div
       v-if="showLoc"
@@ -178,6 +181,14 @@ export default {
   top: 138px;
   right: 237px;
   cursor: pointer;
+}
+.popup-2-text {
+  position: absolute;
+  z-index: 7;
+  top: 248px;
+  right: 330px;
+  color: black;
+  font-style: italic;
 }
 .center-petra {
   margin: auto;
