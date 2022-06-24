@@ -285,6 +285,7 @@ export default {
     console.log(this.$route.params.index)
     // console.log(found););
     // console.log(this.getDetailRail.activity_id);
+    // eslint-disable-next-line nuxt/no-globals-in-created
     window.addEventListener('resize', this.handleResize)
   },
 
