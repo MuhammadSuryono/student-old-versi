@@ -13,21 +13,17 @@
 export default {
   name: 'HomePage',
   layout: 'login',
-  mounted () {
-    // this.checkUser()
-  },
+  mounted () {},
   methods: {
-    // check user if eligable for take Personality Cluster Test
     checkUser () {
       this.$axios
         .get('/personality-cluster/check')
         .then((response) => {
-          const eligable = response.data.eligable
-          console.log(eligable)
-          if (eligable === true) {
+          console.log('eligable: ', response.data.eligible)
+          if (response.data.eligible) {
             this.$router.push({ path: '/personality' })
           } else {
-            this.$router.push({ path: '/personality' })
+            this.$router.push({ path: '/' })
           }
         })
         .catch((error) => {
@@ -36,7 +32,6 @@ export default {
     },
     end () {
       this.checkUser()
-      // this.$router.push({ path: '/' })
     }
   }
 }

@@ -12,6 +12,7 @@ export const state = () => ({
   decoration: null,
   decoration_name: null,
   btn_maps: false,
+  check_cluster: {},
   cluster: {},
   cluster_attribute: {}
 })
@@ -25,6 +26,7 @@ export const getters = {
   images_name: state => state.images_name,
   decoration: state => state.decoration,
   decoration_name: state => state.decoration_name,
+  check_cluster: state => state.check_cluster,
   cluster: state => state.cluster,
   cluster_attribute: state => state.cluster_attribute
 }
@@ -70,6 +72,9 @@ export const mutations = {
   },
   SET_CLUSTER (state, item) {
     state.cluster = item
+  },
+  SET_CHECK_CLUSTER (state, item) {
+    state.check_cluster = item
   },
   SET_CLUSTER_ATTRIBUTE (state, item) {
     state.cluster_attribute = item
@@ -118,6 +123,11 @@ export const actions = {
   async changePassword ({ commit }, payload) {
     const res = await this.$repositories.user.changePass(payload)
     return res
+  },
+  async checkCluster ({ commit }) {
+    const response = await this.$repositories.user.getCheckCluster()
+    commit('SET_CHECK_CLUSTER', response.data.data)
+    return response
   },
   async getCluster ({ commit }) {
     const response = await this.$repositories.user.getCluster()
