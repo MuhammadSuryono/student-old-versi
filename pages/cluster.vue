@@ -97,12 +97,14 @@ export default {
               'You will be redirected to the personality cluster test page in 5 seconds',
               {
                 position: 'top-center',
-                duration: 5000
+                duration: 7000
               }
             )
-            // setTimeout(function () {
-            this.$router.push('/personality')
-            // }, 5000)
+
+            const self = setInterval(() => {
+              this.$router.push('/personality')
+              clearInterval(self)
+            }, 5000)
           }
           if (error.response.data.status === 401) {
             this.$auth.logout()
