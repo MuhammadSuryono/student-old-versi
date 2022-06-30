@@ -7,14 +7,14 @@
       <v-row align="center" justify="center">
         <v-col align="center" justify="center">
           <div class="cluster-card">
-            <img :src="cluster.personality_cluster.avatar" class="avatar-img">
+            <img :src="cluster.avatar" class="avatar-img">
             <div class="header-cluster">
               <div class="results">
                 <div class="head-results">
                   Your Result:
                 </div>
                 <div class="desc-results">
-                  You are {{ cluster.personality_cluster.name }}
+                  You are {{ cluster.name }}
                 </div>
               </div>
               <div class="skill-cluster">
@@ -28,7 +28,7 @@
             </div>
             <img class="triangle" src="~/assets/images/traingle-left.svg">
             <div class="body-cluster">
-              {{ cluster.personality_cluster.description }}
+              {{ cluster.description }}
             </div>
             <img src="~/assets/images/border-bottom.png">
           </div>
@@ -49,7 +49,9 @@ export default {
 
   data () {
     return {
-      attribute: ''
+      attribute: '',
+      cluster: {},
+      isLoading: false
     }
   },
 
@@ -60,10 +62,10 @@ export default {
       },
       images: (state) => {
         return state.user.images
-      },
-      cluster: (state) => {
-        return state.user.cluster
       }
+      // cluster: (state) => {
+      //   return state.user.cluster
+      // }
     })
   },
   mounted () {
@@ -74,19 +76,35 @@ export default {
       this.$router.push('/')
     },
     getData () {
+      console.log('getdata')
+      this.isLoading = true
       this.$store
         .dispatch('user/getCluster')
         .then((response) => {
-          console.log('getCluster : ', response)
-          this.attribute =
-            response.data.data.personality_cluster.attribute.join(' • ')
-        })
-        .catch((error) => {
-          this.$toast.error(error.response, {
+          this.isLoading = false
+          this.cluster = response.data.data.personality_cluster
+          this.attribute = this.cluster.attribute.join(' • ')
+          this.$toast('asd', {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
+        })
+        .catch((error) => {
+          this.isLoading = false
+          console.log('error : ', error.response.data.status)
+          if (error.response.data.status === 404) {
+            this.$toast.error(
+              'You will be redirected to the personality cluster test page in 5 seconds',
+              {
+                position: 'top-center',
+                duration: 5000
+              }
+            )
+            // setTimeout(function () {
+            this.$router.push('/personality')
+            // }, 5000)
+          }
+          if (error.response.data.status === 401) {
             this.$auth.logout()
             this.$router.push('/login')
           }

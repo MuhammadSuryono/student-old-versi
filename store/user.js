@@ -12,7 +12,8 @@ export const state = () => ({
   decoration: null,
   decoration_name: null,
   btn_maps: false,
-  cluster: {}
+  cluster: {},
+  cluster_attribute: {}
 })
 
 export const getters = {
@@ -24,7 +25,8 @@ export const getters = {
   images_name: state => state.images_name,
   decoration: state => state.decoration,
   decoration_name: state => state.decoration_name,
-  cluster: state => state.cluster
+  cluster: state => state.cluster,
+  cluster_attribute: state => state.cluster_attribute
 }
 
 export const mutations = {
@@ -46,7 +48,6 @@ export const mutations = {
   },
   SET_MAPS (state) {
     state.btn_maps = !state.btn_maps
-    console.log(' state.btn_maps', state.btn_maps)
   },
   SET_BTN_DECORATION (state) {
     state.btn_decoration = !state.btn_decoration
@@ -69,6 +70,9 @@ export const mutations = {
   },
   SET_CLUSTER (state, item) {
     state.cluster = item
+  },
+  SET_CLUSTER_ATTRIBUTE (state, item) {
+    state.cluster_attribute = item
   }
 }
 
@@ -116,12 +120,8 @@ export const actions = {
     return res
   },
   async getCluster ({ commit }) {
-    try {
-      const response = await this.$repositories.user.getCluster()
-      commit('SET_CLUSTER', response.data.data)
-      return response
-    } catch (e) {
-      return e.response
-    }
+    const response = await this.$repositories.user.getCluster()
+    commit('SET_CLUSTER', response.data.data)
+    return response
   }
 }
