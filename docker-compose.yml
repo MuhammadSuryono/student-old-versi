@@ -1,0 +1,27 @@
+version: '3' 
+
+networks: 
+  nuxt: 
+   driver: bridge 
+
+services:
+  ### Applications Code Container #############################
+  applications: 
+    image: tianon/true
+    volumes: 
+      - ./:/usr/src/app 
+    container_name: nuxt-app-student 
+    networks: 
+      - nuxt
+
+  ### NuxtJS frontend Container #############################
+  nuxtjs: 
+    build: 
+      context: ./ 
+    volumes: 
+      - applications 
+    ports: 
+      - 5000:5000 
+    container_name: nuxt-student 
+    networks: 
+      - nuxt

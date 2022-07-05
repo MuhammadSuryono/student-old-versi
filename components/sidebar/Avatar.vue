@@ -5,9 +5,9 @@
       <div class="avatar-container">
         <!-- personality -->
         <div class="petra-personality">
-          <img src="~/assets/images/component/rectangle.png" class="btn-top">
+          <img src="/assets/images/component/rectangle.png" class="btn-top">
           <img
-            src="~/assets/images/component/pixlr-bg-result.png"
+            src="/assets/images/component/pixlr-bg-result.png"
             class="btn-top2"
           >
         </div>
@@ -16,13 +16,13 @@
         <img :src="faction" class="btn-center2">
         <div class="petra-level">
           <img
-            src="~/assets/images/component/rectangle.png"
+            src="/assets/images/component/rectangle.png"
             class="btn-bottom"
           >
           <div class="text-level">
             {{ level }}
           </div>
-          <img src="~/assets/images/component/level.png" class="btn-bottom2">
+          <img src="/assets/images/component/level.png" class="btn-bottom2">
         </div>
         <div class="square-top" :style="btnStyles1" />
         <div class="trapesium-1" :style="btnStyles2" />
@@ -32,7 +32,7 @@
         <img :src="avatarImg" class="img-logo">
         <!-- edit profile -->
         <div class="btn-edit noselect" @click="onEditProfile()">
-          <img src="~/assets/images/btn-petra.png">
+          <img src="/assets/images/btn-petra.png">
           <div class="text-edit">Edit Profile</div>
         </div>
       </div>
@@ -51,7 +51,7 @@
           @click="onManageDecoration()"
         >
           <img
-            src="~/assets/images/component/bg-decors.png"
+            src="/assets/images/component/bg-decors.png"
             class="btn-d"
             style="height: 40.8px; width: 180px; left: 0px"
           >
