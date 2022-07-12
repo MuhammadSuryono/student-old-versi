@@ -134,7 +134,7 @@ export default {
       this.$router.push({ path: '/' })
     },
     openReply2 (y, x) {
-      console.log(x)
+   
       this.indexSub2 = y
       this.boxReply = !this.boxReply
       this.dataSubReply = x
