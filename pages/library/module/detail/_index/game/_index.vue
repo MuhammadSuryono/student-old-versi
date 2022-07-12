@@ -154,7 +154,7 @@
             style="position: relative"
           >
             <img
-              src="~/assets/images/Video.svg"
+              src="~/assets/images/195.svg"
               style="height: 100%; width: 100%"
             >
             <div
@@ -736,8 +736,14 @@ export default {
         })
     },
     playGame (x) {
+      // console.log(x);
       this.$router.push({
-        path: `/library/module/detail/${this.idModule}/game/embed`
+        name: "library-module-detail-index-game-embed",
+        params: {
+          link: x
+        }
+
+        // path: `/library/module/detail/${this.idModule}/game/embed`
       })
     },
     playGame2 (x) {
