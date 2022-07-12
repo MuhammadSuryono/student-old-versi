@@ -29,7 +29,7 @@
         <div class="square-center" :style="btnStyles1" />
         <div class="trapesium-2" :style="btnStyles3" />
         <div class="square-bottom" :style="btnStyles1" />
-        <img :src="avatarImg" class="img-logo">
+        <img :src="images" class="img-logo">
         <!-- edit profile -->
         <div class="btn-edit noselect" @click="onEditProfile()">
           <img src="~/assets/images/btn-petra.png">
@@ -55,9 +55,11 @@
             class="btn-d"
             style="height: 40.8px; width: 180px; left: 0px"
           >
-          <v-icon dark dense class="icon-s" style="top: 11px">
-            mdi-umbrella-outline
-          </v-icon>
+          <img
+            src="~/assets/images/decor.svg"
+            class="icon-s"
+            style="top: 7px; height: 28px; left: 12px"
+          >
           <div
             style="
               position: absolute;
@@ -75,25 +77,19 @@
       </div>
     </span>
     <span v-else class="avatar-container2">
-      <!-- <div class="square-top" />
-      <div class="trapesium-1" />
-      <div class="square-center" />
-      <div class="trapesium-2" />
-      <div class="square-bottom" /> -->
       <IconAvatarBackground
         :bg-color="bgColor"
         style="width: 70px; height: 70px; margin-left: -5px"
       />
-      <img :src="avatarImg" class="img-logo2">
-      <!-- <div class="menu-p" style="margin-top: 13px">
+      <img :src="images" class="img-logo2">
+      <div class="menu-p" @click="onManageDecoration()">
         <div class="cornered" />
         <div class="square" />
-        <v-icon dark class="icon-s"> mdi-cog-outline </v-icon>
-      </div> -->
-      <div class="menu-p">
-        <div class="cornered" />
-        <div class="square" />
-        <v-icon dark class="icon-s"> mdi-umbrella-outline </v-icon>
+        <img
+          src="~/assets/images/decor.svg"
+          class="icon-s"
+          style="left: 16px; top: 5px; height: 28px"
+        >
       </div>
     </span>
   </div>
@@ -141,6 +137,9 @@ export default {
   },
   computed: {
     ...mapState({
+      images: (state) => {
+        return state.user.images
+      },
       sidebar: (state) => {
         return state.user.sidebar
       },
@@ -199,7 +198,7 @@ export default {
     }
     .icon-s {
       position: absolute;
-      top: 20px;
+      top: 0px;
       left: 9px;
     }
   }

@@ -190,7 +190,7 @@
                   </div>
                 </div>
               </div>
-              <div class="card-title2">
+              <!-- <div class="card-title2">
                 <img
                   src="~/assets/images/skillcard/download.png"
                   class="background-button"
@@ -198,7 +198,7 @@
                 <div class="name-card">
                   Download PDF
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

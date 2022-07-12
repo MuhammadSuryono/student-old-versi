@@ -6,9 +6,7 @@
         :mobile="mobile"
         :expand-on-hover="expandOnHover"
         :reduce="reduce"
-        :delay="expandWithDelay ? 1000 : null"
         type="is-light"
-        fullheight
         open
         style="width: 200px"
       >
@@ -36,7 +34,7 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      expandOnHover: false,
+      expandOnHover: true,
       expandWithDelay: false,
       mobile: 'reduce',
       reduce: false,
@@ -78,6 +76,7 @@ export default {
   mounted () {
     this.reduce = !this.sidebar
     this.getData()
+    console.log('reduced : ', this.reduce)
   },
   methods: {
     getData () {
@@ -94,7 +93,16 @@ export default {
       }
     },
     onSidebar () {
+      console.log('asdas', this.reduce)
       this.reduce = !this.reduce
+      this.$store.commit('user/SET_SIDEBAR')
+    },
+    onSidebarOpen () {
+      this.reduce = true
+      this.$store.commit('user/SET_SIDEBAR')
+    },
+    onSidebarClose () {
+      this.reduce = false
       this.$store.commit('user/SET_SIDEBAR')
     }
   }
