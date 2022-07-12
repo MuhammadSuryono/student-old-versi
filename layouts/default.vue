@@ -3,6 +3,13 @@
     <div style="height: 100%; width: 100%; z-index: -9999" />
     <PModal style="z-index: 9999" />
     <div class="container-petra">
+      <transition name="fade" appear>
+        <Popup
+          v-if="popup"
+          style="transition: all 0.5s ease-in-out"
+          @close-modal="close()"
+        />
+      </transition>
       <Navbar class="navbars" />
       <div class="columns is-gapless main-menu">
         <!-- sidebar -->
@@ -14,7 +21,6 @@
         <!-- main -->
         <Nuxt v-if="$route.path !== '/'" class="nuxt-menu" style="z-index: 2" />
         <Nuxt v-else class="nuxt-menu" />
-
         <span
           v-if="
             $route.path === '/' ||
@@ -37,54 +43,67 @@
             class="maps-petra"
             @click="showMaps()"
           >
-          <div
-            v-if="maps"
-            class="detail-maps"
-            :style="{
-              height: window.height - 68 + 'px'
-            }"
-            style="
-              position: absolute;
-              z-index: 3;
-              top: 68px;
-              left: 80px;
-              width: 1200px;
-              background: rgba(10, 10, 10, 0.5);
-            "
-          >
+          <transition name="fade" appear>
             <div
+              v-if="maps"
+              class="detail-maps"
+              :style="{
+                height: window.height - 68 + 'px'
+              }"
               style="
-                width: 1085px;
-                height: 607px;
-                margin: auto;
                 position: absolute;
-                top: 0;
-                left: 0;
-                z-index: 4;
-                bottom: 0;
-                right: 0;
+                z-index: 3;
+                top: 68px;
+                left: 80px;
+                width: 1200px;
               "
             >
-              <Maps />
+              <div
+                style="
+                  background: rgba(10, 10, 10, 0.5);
+                  width: 100%;
+                  height: 100%;
+                  cursor: pointer;
+                "
+                @click="closeMaps()"
+              />
+              <div
+                style="
+                  width: 1085px;
+                  height: 607px;
+                  margin: auto;
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  z-index: 4;
+                  bottom: 0;
+                  right: 0;
+                "
+              >
+                <Maps />
+              </div>
             </div>
-          </div>
+          </transition>
           <img
             v-if="light"
             src="~/assets/images/library/mascot.png"
             class="light-petra"
             @click="light = false"
           >
-          <div v-else class="light-petra-true" @keydown.esc="tes()">
-            <img
-              src="~/assets/images/component/light/img-2.png"
-              class="text-light"
-            >
-            <img
-              src="~/assets/images/library/mascot.png"
-              class="avatar-light"
-              @click="light = true"
-            >
-          </div>
+          <transition v-else name="fade" appear>
+            <div class="light-petra-true" @keydown.esc="tes()">
+              <div class="bg-overlay" @click="light = true" />
+              <img
+                src="~/assets/images/component/light/img-2.png"
+                class="text-light"
+              >
+              <img
+                src="~/assets/images/library/mascot.png"
+                class="avatar-light"
+                @click="light = true"
+              >
+            </div>
+          </transition>
         </span>
         <!-- edit profile -->
         <Profile
@@ -113,11 +132,15 @@ export default {
       window: {
         width: 0,
         height: 0
-      }
+      },
+      coomingSoon: false
     }
   },
   computed: {
     ...mapState({
+      popup: (state) => {
+        return state.user.popup
+      },
       sidebar: (state) => {
         return state.user.sidebar
       },
@@ -167,6 +190,15 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   methods: {
+    onSidebar () {
+      this.$store.commit('user/SET_SIDEBAR')
+    },
+    closeMaps () {
+      this.$store.commit('user/SET_MAPS')
+    },
+    close () {
+      this.$store.commit('user/SET_POPUP')
+    },
     handleResize () {
       this.window.width = window.innerWidth
       this.window.height = window.innerHeight
@@ -179,6 +211,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s linear;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
 .slide-fade-enter-active {
   transition: all 0.5s;
 }
@@ -271,10 +313,15 @@ export default {
     .light-petra-true {
       width: 100%;
       height: 100%;
-      background: rgba(10, 10, 10, 0.5);
       z-index: 2;
       position: absolute;
       top: 0px;
+      .bg-overlay {
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 10, 10, 0.5);
+        cursor: pointer;
+      }
       .text-light {
         position: absolute;
         bottom: 110px;

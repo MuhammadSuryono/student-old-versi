@@ -116,11 +116,7 @@
           </NuxtLink>
         </li>
         <li>
-          <NuxtLink
-            v-if="$route.path === '/archivements'"
-            class="sidebar-item"
-            to="/archivements"
-          >
+          <div v-if="$route.path === '/archivements'">
             <div
               class="card-menu"
               style="background-color: white"
@@ -131,8 +127,8 @@
               <div class="triangle-right2" />
               <IconArchivements class="icon-menu4" bg-color="black" />
             </div>
-          </NuxtLink>
-          <NuxtLink v-else class="sidebar-item" to="/archivements">
+          </div>
+          <div v-else class="sidebar-item" @click="showPopup()">
             <div
               class="card-menu"
               @mouseover="hover4 = true"
@@ -147,7 +143,7 @@
               />
               <IconArchivements v-else class="icon-menu4" bg-color="white" />
             </div>
-          </NuxtLink>
+          </div>
         </li>
       </ul>
     </div>
@@ -188,6 +184,9 @@ export default {
     this.setTime()
   },
   methods: {
+    showPopup () {
+      this.$store.commit('user/SET_POPUP')
+    },
     async getData () {
       await this.$axios
         .get('student/home/navigation')

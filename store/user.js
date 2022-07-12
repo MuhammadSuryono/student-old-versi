@@ -14,7 +14,8 @@ export const state = () => ({
   btn_maps: false,
   check_cluster: {},
   cluster: {},
-  cluster_attribute: {}
+  cluster_attribute: {},
+  popup: false
 })
 
 export const getters = {
@@ -32,6 +33,9 @@ export const getters = {
 }
 
 export const mutations = {
+  SET_POPUP (state) {
+    state.popup = !state.popup
+  },
   SET_LOADING: (state, isLoading) => {
     state.isLoading = isLoading
   },

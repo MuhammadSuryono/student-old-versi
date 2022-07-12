@@ -83,6 +83,7 @@ export default {
                   'user/updateImages',
                   data.user.avatar.image
                 )
+
                 this.$store.dispatch(
                   'user/updateImagesName',
                   data.user.avatar.name
