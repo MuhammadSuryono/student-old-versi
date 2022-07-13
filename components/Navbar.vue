@@ -4,7 +4,7 @@
       <template #brand>
         <div class="logo" :style="styleObj">
           <img
-            src="~/assets/images/logo_dashboard.png"
+            src="~/assets/images/new_logo.png"
             class="img-logo"
             @click="home()"
           >
