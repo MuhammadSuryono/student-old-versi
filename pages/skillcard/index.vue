@@ -100,10 +100,7 @@
                 class="columns is-gapless list-card"
                 style="height: 25px"
               >
-                <div
-                  class="column title-card"
-                  style="transform: skew(-10deg); z-index: 20"
-                >
+                <div class="column title-card">
                   {{ index + 1 }}. {{ i.skill }}
                 </div>
                 <div class="column" style="transform: skew(-10deg)">
@@ -638,6 +635,11 @@ export default {
                 align-items: center;
                 color: #ffffff;
                 cursor: pointer;
+                transform: skew(-10deg);
+                z-index: 20;;
+              }
+              .title-card:hover {
+                text-decoration: underline;
               }
               .shell {
                 position: absolute;

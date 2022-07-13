@@ -415,7 +415,7 @@
             <PButton
               :disabled="disableBtn"
               class="petra-button"
-              text="Submit Review"
+              text="Submit Comment"
               @click.native="addReview()"
             />
           </div>
@@ -736,14 +736,11 @@ export default {
         })
     },
     playGame (x) {
-      // console.log(x);
       this.$router.push({
-        name: "library-module-detail-index-game-embed",
+        name: 'library-module-detail-index-game-embed',
         params: {
           link: x
         }
-
-        // path: `/library/module/detail/${this.idModule}/game/embed`
       })
     },
     playGame2 (x) {

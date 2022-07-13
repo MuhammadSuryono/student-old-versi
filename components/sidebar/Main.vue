@@ -80,6 +80,7 @@ export default {
   },
   methods: {
     getData () {
+      console.log('user', this.users)
       this.data.courses = this.users.courses
       this.data.achievements = this.users.achievements
       this.data.faction = this.users.faction.faction

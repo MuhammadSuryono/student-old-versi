@@ -25,8 +25,7 @@
           v-if="
             $route.path === '/' ||
               $route.path === '/library' ||
-              $route.path === '/faction' ||
-              $route.path === '/faction/detail'
+              $route.path === '/faction'
           "
         >
           <PNavigation
