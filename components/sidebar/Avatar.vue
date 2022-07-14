@@ -7,7 +7,8 @@
         <div class="petra-personality">
           <img src="~/assets/images/component/rectangle.png" class="btn-top">
           <img
-            src="~/assets/images/component/pixlr-bg-result.png"
+          v-if="cluster != null"
+            :src="cluster.icon"
             class="btn-top2"
           >
         </div>
@@ -139,6 +140,10 @@
 import { mapState } from 'vuex'
 export default {
   props: {
+    cluster: {
+      type: Object,
+      default: null
+    },
     bgColor: {
       type: String,
       default: 'rgba(152, 18, 18, 0.75)'
@@ -173,13 +178,16 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      cluster : null,
+    }
   },
   computed: {
     ...mapState({
       images: (state) => {
         return state.user.images
       },
+      
       sidebar: (state) => {
         return state.user.sidebar
       },
@@ -203,7 +211,8 @@ export default {
       }
     }
   },
-  methods: {
+ 
+  methods: { 
     onEditProfile () {
       this.$store.commit('user/SET_BTN_PROFILE')
     },
@@ -282,10 +291,10 @@ export default {
       position: relative;
     }
     .btn-top2 {
-      top: 0px;
+      top: 2px;
       left: 0px;
       position: absolute;
-      padding: 5px;
+      padding: 2px;
       z-index: 2;
     }
   }
