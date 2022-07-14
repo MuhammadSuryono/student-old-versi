@@ -1,6 +1,7 @@
 FROM node:12
 WORKDIR /nuxt-student
 COPY . .
+COPY .env .
 RUN npm install
 RUN npm run build
 RUN npm run generate
