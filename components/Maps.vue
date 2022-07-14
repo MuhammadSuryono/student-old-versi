@@ -31,11 +31,18 @@
         style="width: 98.15px;height: 36.49px;x"
       >
     </div>
-    <img v-if="hover1" src="~/assets/images/maps/popup.png" class="popup-1">
-    <img v-if="hover2" src="~/assets/images/maps/popup2.png" class="popup-2">
-    <div v-if="hover2" class="popup-2-text">
-      Faction
-    </div>
+    <img
+      v-if="hover1"
+      src="~/assets/images/maps/library.png"
+      class="popup-1"
+      style="height: 130px"
+    >
+    <img
+      v-if="hover2"
+      src="~/assets/images/maps/faction.png"
+      class="popup-2"
+      style="height: 130px"
+    >
     <!-- </div> -->
     <div
       v-if="showLoc"

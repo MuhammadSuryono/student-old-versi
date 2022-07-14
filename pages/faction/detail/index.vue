@@ -200,7 +200,6 @@
             </div>
             <div class="column is-narrow right-current" />
           </div>
-
           <div
             v-for="(
               itemProgress, indexProgress
@@ -352,7 +351,7 @@
                 Current leading faction
               </div>
               <div class="text-growth">
-                {{ dataModuleDominance.lead_faction.faction_name }}
+                {{ dataModuleDominance.lead_faction_name }}
               </div>
             </div>
           </div>
@@ -368,7 +367,7 @@
             <div class="columns is-gapless">
               <div class="column is-narrow left-img">
                 <img
-                  :src="dataModuleDominance.next_reward.image_male"
+                  :src="dataModuleDominance.next_reward_male"
                   style="
                     height: 100px;
                     margin-top: 30px;
@@ -381,7 +380,7 @@
               </div>
               <div class="column is-narrow right-img">
                 <img
-                  :src="dataModuleDominance.next_reward.image_female"
+                  :src="dataModuleDominance.next_reward_female"
                   style="
                     height: 100px;
                     margin-top: 30px;
@@ -398,7 +397,7 @@
                 USER AVATAR
               </div>
               <div class="user-strategy">
-                {{ dataModuleDominance.next_reward.name }}
+                {{ dataModuleDominance.next_reward_name }}
               </div>
             </div>
           </div>
@@ -561,7 +560,7 @@
                 Current leading faction
               </div>
               <div class="text-growth">
-                {{ dataCommentStars.lead_faction.name }}
+                {{ dataCommentStars.lead_faction_name }}
               </div>
             </div>
           </div>
@@ -577,7 +576,7 @@
             <div class="columns is-gapless">
               <div class="column is-narrow left-img">
                 <img
-                  :src="dataCommentStars.next_reward.image_male"
+                  :src="dataCommentStars.next_reward_male"
                   style="
                     height: 100px;
                     margin-top: 30px;
@@ -590,7 +589,7 @@
               </div>
               <div class="column is-narrow right-img">
                 <img
-                  :src="dataCommentStars.next_reward.image_female"
+                  :src="dataCommentStars.next_reward_female"
                   style="
                     height: 100px;
                     margin-top: 30px;
@@ -607,7 +606,7 @@
                 USER AVATAR
               </div>
               <div class="user-strategy">
-                {{ dataCommentStars.next_reward.name }}
+                {{ dataCommentStars.next_reward_name }}
               </div>
             </div>
           </div>
@@ -635,7 +634,21 @@ export default {
       page: 1,
       total: 0,
       itemsDiscuss: {},
-      infiniteId: 1
+      infiniteId: 1,
+      dataModuleDominance: {
+        factions: null,
+        lead_faction_name: '',
+        next_reward_name: '',
+        next_reward_male: null,
+        next_reward_female: null
+      },
+      dataCommentStars: {
+        data_reward: null,
+        lead_faction_name: '',
+        next_reward_name: '',
+        next_reward_male: null,
+        next_reward_female: null
+      }
     }
   },
   computed: {
@@ -643,12 +656,12 @@ export default {
       dataProgressBar: (state) => {
         return state.faction.dataProgressBar
       },
-      dataModuleDominance: (state) => {
-        return state.faction.dataModuleDominance
-      },
-      dataCommentStars: (state) => {
-        return state.faction.dataCommentStars
-      },
+      // dataModuleDominance: (state) => {
+      //   return state.faction.dataModuleDominance
+      // },
+      // dataCommentStars: (state) => {
+      //   return state.faction.dataCommentStars
+      // },
       dataCommentStarsList: (state) => {
         return state.faction.dataCommentStarsList
       },
@@ -688,7 +701,23 @@ export default {
     getDataModuleDominance () {
       this.$store
         .dispatch('faction/fetchModuleDominance')
-        .then((response) => {})
+        .then((response) => {
+          const data = response.data.data
+          if (data.factions.length !== 0) {
+            this.dataModuleDominance.factions = data.factions
+          }
+          if (data.lead_faction !== null || data.lead_faction !== '') {
+            this.dataModuleDominance.lead_faction_name =
+              data.lead_faction.faction_name
+          }
+          if (data.next_reward !== null || data.next_reward !== '') {
+            this.dataModuleDominance.next_reward_name = data.next_reward.name
+            this.dataModuleDominance.next_reward_male =
+              data.next_reward.image_male
+            this.dataModuleDominance.next_reward_female =
+              data.next_reward.image_female
+          }
+        })
         .catch((error) => {
           this.$toast.error(error.response, {
             position: 'top-center',
@@ -703,7 +732,22 @@ export default {
     getDataCommentStars () {
       this.$store
         .dispatch('faction/fetchCommentStars')
-        .then((response) => {})
+        .then((response) => {
+          const data = response.data.data
+          if (data.data_reward.length !== 0) {
+            this.dataCommentStars.data_reward = data.data_reward
+          }
+
+          if (data.next_reward !== null || data.next_reward !== '') {
+            this.dataCommentStars.next_reward_name = data.next_reward.name
+            this.dataCommentStars.next_reward_male = data.next_reward.image_male
+            this.dataCommentStars.next_reward_female =
+              data.next_reward.image_female
+          }
+          if (data.lead_faction !== null || data.lead_faction !== '') {
+            this.dataCommentStars.lead_faction_name = data.lead_faction.name
+          }
+        })
         .catch((error) => {
           this.$toast.error(error.response, {
             position: 'top-center',

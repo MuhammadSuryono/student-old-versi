@@ -154,7 +154,7 @@
             style="position: relative"
           >
             <img
-              src="~/assets/images/Video.svg"
+              src="~/assets/images/195.svg"
               style="height: 100%; width: 100%"
             >
             <div
@@ -415,7 +415,7 @@
             <PButton
               :disabled="disableBtn"
               class="petra-button"
-              text="Submit Review"
+              text="Submit Comment"
               @click.native="addReview()"
             />
           </div>
@@ -737,7 +737,10 @@ export default {
     },
     playGame (x) {
       this.$router.push({
-        path: `/library/module/detail/${this.idModule}/game/embed`
+        name: 'library-module-detail-index-game-embed',
+        params: {
+          link: x
+        }
       })
     },
     playGame2 (x) {

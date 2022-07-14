@@ -22,7 +22,12 @@
     </div>
 
     <div class="content-module">
-      <img src="~/assets/images/Video.svg" style="height: 100%; width: 100%">
+      <!-- <img src="~/assets/images/Video.svg" style="height: 100%; width: 100%"> -->
+        <iframe
+        ref="iframe"
+        :src='"/" +gameSource+ "/index.html"'
+        :style="{ height: window.height - 200 + 'px', width: '100%'}"
+      />
     </div>
   </div>
 </template>
@@ -34,6 +39,10 @@ export default {
 
   data () {
     return {
+       window: {
+        width: 0,
+        height: 500
+      },
       isLoading: false,
       selected1: true,
       selected2: false,
@@ -58,7 +67,8 @@ export default {
       indexSub: null,
       indexSub2: 0,
       boxReply: false,
-      dataSubReply: {}
+      dataSubReply: {},
+      gameSource : null,
     }
   },
 
@@ -96,6 +106,7 @@ export default {
     }
   },
   created () {
+    this.gameSource = this.$route.params.link
     // eslint-disable-next-line nuxt/no-globals-in-created
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
@@ -103,11 +114,27 @@ export default {
   },
 
   mounted () {
-    console.log('user : ', this.dataUser)
+  window.addEventListener('activityDoneEvent', this.goHome)
+    this.$once('hook:beforeDestroy', () => {
+      window.removeEventListener('activityDoneEvent', this.goHome)
+    })
+
+    window.addEventListener('getTokenEvent', this.getToken)
+    this.$once('hook:beforeDestroy', () => {
+      window.removeEventListener('getTokenEvent', this.getToken)
+    })
+  
   },
   methods: {
+      getToken () {
+      const token = this.$auth.strategy.token.get()
+      this.$refs.iframe.contentWindow.sendToken(token)
+    },
+      goHome () {
+      this.$router.push({ path: '/' })
+    },
     openReply2 (y, x) {
-      console.log(x)
+   
       this.indexSub2 = y
       this.boxReply = !this.boxReply
       this.dataSubReply = x

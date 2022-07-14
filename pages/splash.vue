@@ -6,6 +6,9 @@
       :loop="false"
       @ended="end()"
     />
+    <div class="skip-video" @click="skip()">
+      Skip Video
+    </div>
   </div>
 </template>
 
@@ -30,9 +33,31 @@ export default {
           console.log(error)
         })
     },
+    skip () {
+      this.checkUser()
+      // this.$router.push({ path: '/personality' })
+    },
     end () {
       this.checkUser()
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.skip-video {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  height: 50px;
+  width: 170px;
+  text-align: Center;
+  z-index: 999;
+  background-color: white;
+  align-content: center;
+  align-items: center;
+  padding-top: 13px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+</style>

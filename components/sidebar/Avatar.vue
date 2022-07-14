@@ -12,7 +12,7 @@
           >
         </div>
         <!-- faction -->
-        <IconFaction :bg-color="factionBg" class="petra-faction" />
+        <IconFaction bg-color="white" class="petra-faction" />
         <img :src="faction" class="btn-center2">
         <div class="petra-level">
           <img
@@ -63,7 +63,7 @@
           <div
             style="
               position: absolute;
-              left: 53px;
+              left: 62px;
               top: 6px;
               text-align: center;
               font-size: 14px;
@@ -75,6 +75,37 @@
           </div>
         </div>
       </div>
+      <!-- library -->
+      <div class="menu-b">
+        <div
+          class="setting"
+          style="width: 100%; top: -38px; left: 0px"
+          @click="onLibrary()"
+        >
+          <img
+            src="~/assets/images/component/bg-decors.png"
+            class="btn-d"
+            style="height: 40.8px; width: 180px; left: 0px"
+          >
+          <img
+            src="~/assets/images/decor.svg"
+            class="icon-s"
+            style="top: 7px; height: 28px; left: 12px"
+          >
+          <div
+            style="
+              position: absolute;
+              left: 74px;
+              top: 13px;
+              text-align: center;
+              font-size: 14px;
+              line-height: 14px;
+            "
+          >
+            Library
+          </div>
+        </div>
+      </div>
     </span>
     <span v-else class="avatar-container2">
       <IconAvatarBackground
@@ -83,6 +114,15 @@
       />
       <img :src="images" class="img-logo2">
       <div class="menu-p" @click="onManageDecoration()">
+        <div class="cornered" />
+        <div class="square" />
+        <img
+          src="~/assets/images/decor.svg"
+          class="icon-s"
+          style="left: 16px; top: 5px; height: 28px"
+        >
+      </div>
+      <div class="menu-p" @click="onLibrary()">
         <div class="cornered" />
         <div class="square" />
         <img
@@ -169,6 +209,9 @@ export default {
     },
     onManageDecoration () {
       this.$store.commit('user/SET_BTN_DECORATION')
+    },
+    onLibrary () {
+      this.$router.push('/library')
     }
   }
 }
