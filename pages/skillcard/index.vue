@@ -60,8 +60,9 @@
                   class="background-button"
                 >
                 <img
-                  src="~/assets/images/skillcard/info.png"
+                  :src="cluster.icon"
                   class="icon-button"
+                  v-if="cluster != null"
                 >
                 <div class="name-card">
                   {{ dataSkillcard.name }}
@@ -212,6 +213,7 @@ export default {
 
   data () {
     return {
+      cluster: null,
       avatar_bgcolor: '',
       avatar_icon: '',
       progress: 0,
@@ -271,7 +273,10 @@ export default {
     getDataPersonalityCluster () {
       this.$store
         .dispatch('skillcard/fetchPersonalityCluster')
-        .then((response) => {})
+        .then((response) => {
+          this.cluster = response.data.data.personality_cluster
+          // console.log(response.data.data.personality_cluster);
+        })
         .catch((error) => {
           this.$toast.error(error.response, {
             position: 'top-center',
