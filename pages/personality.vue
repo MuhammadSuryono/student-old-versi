@@ -1,20 +1,15 @@
 <template>
-  <div style="background-color: #eef2f5; width: 1200px; height: 93vh">
-    <div class="container">
+  <div style="background-color: #eef2f5; width: 1200px; height: 100vh">
+    <div class="containers">
       <b-button
         type="is-primary"
         class="is-align-items-center"
-        style="margin-top: 40px; z-index: 10"
+        style="z-index: 10; position: absolute; left: 450px; width: 300px"
         @click="goHome()"
       >
         Lanjut
       </b-button>
-      <iframe
-        ref="iframe"
-        class="responsive-iframe"
-        src="/pcgame/index.html"
-        :style="{ height: window.height - 200 + 'px' }"
-      />
+      <iframe ref="iframe" class="responsive-iframe" src="/pcgame/index.html" />
     </div>
   </div>
 </template>
@@ -79,23 +74,30 @@ export default {
 </script>
 
 <style>
-.container {
-  position: absolute;
+.containers {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  /* position: relative;
   overflow: hidden;
   width: 1200px;
   top: 50px;
   left: 110px;
-  height: 100%;
+  height: 100%; */
 }
 
 /* Then style the iframe to fit in the container div with full height and width */
 .responsive-iframe {
   position: absolute;
-  top: 10px;
-  left: 0;
+  top: 20px;
+  /* left: 0;
   bottom: 0;
-  right: 0;
+  right: 0; */
   width: 100%;
+  overflow: hidden;
   height: 100%;
 }
 </style>

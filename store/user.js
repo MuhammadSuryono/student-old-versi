@@ -3,7 +3,7 @@ export const state = () => ({
   isLoading: false,
   users: [],
   profiles: [],
-  sidebar: true,
+  sidebar: false,
   btn_profile: false,
   btn_decoration: false,
   fullname: null,

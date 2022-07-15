@@ -56,7 +56,9 @@
               <v-text-field
                 v-model="form.username"
                 hide-details
+                filled
                 outlined
+                disabled
                 dense
                 class="form-petra"
               />
@@ -171,7 +173,7 @@
         </div>
       </div>
 
-      <span>
+      <span v-if="!isLoading2">
         <div class="main-profile">
           <!-- Old -->
           <div class="columns pr-4 no-padding is-gapless">
@@ -259,16 +261,16 @@
           </div>
         </div>
       </span>
-      <!-- <v-skeleton-loader
+      <v-skeleton-loader
         v-else
         v-bind="attrs"
         type="card-avatar, article, actions"
         style="margin-top: 80px"
-      /> -->
+      />
     </div>
     <!-- change avatar -->
     <div v-if="tab === 3">
-      <span>
+      <span v-if="!isLoading3">
         <div class="column profile-container">
           <div class="btn-profile">
             <img
@@ -306,7 +308,7 @@
               {{ selected.name }}
             </div>
           </div>
-          <div class="box-carousel pr-4">
+          <div v-if="dataAvatarItem.length > 0" class="box-carousel pr-4">
             <div class="title-carousel">
               <img src="~/assets/images/carousel_1.png" class="bg-logo">
               <div class="text-logo">All Avatars</div>
@@ -388,11 +390,11 @@
           </div>
         </div>
       </span>
-      <!-- <v-skeleton-loader
+      <v-skeleton-loader
         v-else
         type="card-avatar, article, actions"
         style="margin-top: 80px"
-      /> -->
+      />
     </div>
     <!-- </div> -->
   </div>
@@ -569,7 +571,7 @@ export default {
       const data = {
         first_name: Firstname,
         last_name: Lastname,
-        username: this.form.username,
+        // username: this.form.username,
         about: this.form.bio,
         email: this.form.email
       }

@@ -21,10 +21,10 @@
       <IconLocation v-if="hover2" class="loc-2" bg-color="#ffcf24" />
       <IconLocation v-else class="loc-2" bg-color="#154CA0" />
     </div>
-    <div @mouseover="hover3 = true" @mouseleave="hover3 = false">
+    <!-- <div @mouseover="hover3 = true" @mouseleave="hover3 = false">
       <IconLocation v-if="hover3" class="loc-3" bg-color="#ffcf24" />
       <IconLocation v-else class="loc-3" bg-color="#154CA0" />
-    </div>
+    </div> -->
     <div class="btn-back" @click="closeMaps()">
       <img
         src="~/assets/images/back-btn.png"

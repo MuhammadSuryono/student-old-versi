@@ -2,7 +2,7 @@
   <div class="profile-card">
     <PTitle name="Manage Decorations" />
     <div v-if="tab === 1">
-      <span>
+      <span v-if="!isLoading">
         <div class="main-profile" style="margin-top: 80px">
           <!-- foto -->
           <v-row justify="center" align="center" no-gutters>
@@ -49,11 +49,11 @@
           </div>
         </div>
       </span>
-      <!-- <v-skeleton-loader
+      <v-skeleton-loader
         v-else
         type="card-avatar, article, actions"
         style="margin-top: 80px"
-      /> -->
+      />
     </div>
     <div v-if="tab === 2">
       <div class="column profile-container">
@@ -67,7 +67,7 @@
           </div>
         </div>
       </div>
-      <span>
+      <span v-if="!isLoading2">
         <div class="main-profile" style="margin-top: 40px; margin-bottom: 60px">
           <!-- foto -->
           <div class="columns is-mobile" style="margin-top: 0px">
@@ -230,11 +230,11 @@
           </div>
         </div>
       </span>
-      <!-- <v-skeleton-loader
+      <v-skeleton-loader
         v-else
         type="card-avatar, article, actions"
         style="margin-top: 60px"
-      /> -->
+      />
     </div>
   </div>
 </template>

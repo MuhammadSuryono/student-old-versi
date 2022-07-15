@@ -135,10 +135,10 @@
             "
             class="column skillcard2"
           >
-            {{ detail.description | truncate(420, '...') }}
+            {{ detail.description }}
           </div>
           <div v-else class="column skillcard2">
-            {{ detail.description | truncate(420, '...') }}
+            {{ detail.description }}
           </div>
         </div>
       </div>
@@ -304,7 +304,7 @@
                     color: #1951a5;
                   "
                 >
-                  {{ item2.title | truncate(20, '...') }}
+                  {{ item2.title }}
                 </div>
                 <div
                   style="
@@ -321,7 +321,7 @@
                     color: white;
                   "
                 >
-                  {{ item2.description | truncate(65, '...') }}
+                  {{ item2.description }}
                 </div>
               </div>
             </v-col>
