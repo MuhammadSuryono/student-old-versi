@@ -3,7 +3,7 @@
     <PTitle name="Edit Profile" />
     <!-- edit profile -->
     <div v-if="tab === 1">
-      <span>
+      <span v-if="!isLoading">
         <div class="main-profile">
           <div class="columns pr-4">
             <div class="column is-narrow avatar-container">
@@ -151,11 +151,11 @@
           </div>
         </div>
       </span>
-      <!-- <v-skeleton-loader
+      <v-skeleton-loader
         v-else
         type="card-avatar, article, actions"
         style="margin-top: 80px"
-      /> -->
+      />
     </div>
     <!-- change password -->
     <div v-if="tab === 2">
@@ -833,7 +833,6 @@ export default {
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
         width: 140px;
-        background-color: rgba(152, 18, 18, 0.75);
       }
       .square-center {
         z-index: 1;
@@ -841,7 +840,6 @@ export default {
         width: 120px;
         margin-right: 10px;
         margin-left: 10px;
-        background-color: rgba(152, 18, 18, 0.75);
       }
       .square-bottom {
         z-index: 1;
@@ -849,13 +847,12 @@ export default {
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         width: 140px;
-        background-color: rgba(152, 18, 18, 0.75);
       }
       .trapesium-1 {
         z-index: 1;
         height: 0px;
         width: 140px;
-        border-top: 20px solid rgba(152, 18, 18, 0.75);
+        border-top: 20px solid;
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
       }
@@ -863,7 +860,7 @@ export default {
         z-index: 1;
         height: 0px;
         width: 140px;
-        border-bottom: 20px solid rgba(152, 18, 18, 0.75);
+        border-bottom: 20px solid;
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
       }

@@ -9,6 +9,7 @@ You can directly use them in pages and other components without the need to impo
 - `<Back>` | `<back>` (components/Back.vue)
 - `<Decoration>` | `<decoration>` (components/Decoration.vue)
 - `<Maps>` | `<maps>` (components/Maps.vue)
+- `<ModuleTitle>` | `<module-title>` (components/ModuleTitle.vue)
 - `<Navbar>` | `<navbar>` (components/Navbar.vue)
 - `<PButton>` | `<p-button>` (components/PButton.vue)
 - `<PLights>` | `<p-lights>` (components/PLights.vue)

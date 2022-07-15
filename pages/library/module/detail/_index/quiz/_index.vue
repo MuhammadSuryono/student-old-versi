@@ -1,25 +1,10 @@
 <template>
   <div v-if="!isLoading" class="bg-img">
-    <div class="header-module">
-      <div class="card-title">
-        <img
-          src="~/assets/images/module/box-title.svg"
-          class="background-button"
-        >
-        <div class="name-card">
-          {{ detailActivity.name }}
-        </div>
-      </div>
-      <div class="card-title">
-        <div class="detail-box" />
-        <div class="name-card2">
-          {{ detailActivity.name }} | Quiz Activity
-        </div>
-      </div>
-      <div class="btn-back" @click="goBack()">
-        <Back />
-      </div>
-    </div>
+    <ModuleTitle
+      :title="detailActivity.name"
+      :subtitle="detailActivity.name"
+      type="Quiz"
+    />
 
     <div class="content-module">
       <!-- tab -->
@@ -98,7 +83,7 @@
                 >QUIZ ACTIVITY</span>
               </div>
               <div class="petra-description">
-                {{ detailActivity.introduction }}
+                {{ detailActivity }}
               </div>
 
               <div class="petra-c1">
@@ -427,7 +412,7 @@ export default {
       this.$store
         .dispatch('module/fetchDetailActivity', data)
         .then((response) => {
-          console.log(response.data.data)
+          console.log(response)
           this.tinggi = this.$refs.infoBox.clientHeight + 'px;'
 
           this.isLoading = false

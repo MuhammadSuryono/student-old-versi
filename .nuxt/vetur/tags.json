@@ -8,6 +8,9 @@
   "Maps": {
     "description": "Auto imported from components/Maps.vue"
   },
+  "ModuleTitle": {
+    "description": "Auto imported from components/ModuleTitle.vue"
+  },
   "Navbar": {
     "description": "Auto imported from components/Navbar.vue"
   },
