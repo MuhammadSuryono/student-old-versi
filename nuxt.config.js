@@ -83,7 +83,8 @@ export default {
   },
 
   axios: {
-    baseURL: 'https://api-petra.primeskills.id/api/v1'
+    // baseURL: 'https://api-petra.primeskills.id/api/v1'
+    baseURL: 'https://petralms.test/api/v1'
   },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)

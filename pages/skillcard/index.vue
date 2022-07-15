@@ -253,8 +253,27 @@ export default {
     this.getDataDecoration()
     this.getDataPersonalityCluster()
     this.getDataAllSkills()
+    this.getModule();
   },
   methods: {
+      addUserSkills(){
+      this.$axios.post('/game/skillset/addUserSkill').then(res => {
+        console.log(res.data.data)
+         this.getDataAllSkills()
+        // this.$router.push('/skillcard')
+      })
+    },
+      getModule(){
+      this.$axios.get('/get-module-skills').then(res => {
+        let modules = res.data.data
+      modules.forEach(module_id => {
+         this.$axios.post('/game/skillset/addUserModuleSkill', {module_id: module_id}).then(res => {
+          console.log(res.data.data);
+         })
+      });
+      this.addUserSkills()
+      })
+    },
     getDataAllSkills () {
       this.$store
         .dispatch('skillcard/fetchAllSkill')
