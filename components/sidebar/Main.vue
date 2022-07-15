@@ -15,6 +15,7 @@
           <div v-else class="img-arrow-close" @click="onSidebar()" />
           <SidebarAvatar
             :bg-color="data.avatar_bg"
+            :cluster="cluster"
             :avatar-img="images"
             :avatar-name="fullname"
             :level="data.level"
@@ -38,6 +39,7 @@ export default {
       expandWithDelay: false,
       mobile: 'reduce',
       reduce: false,
+      cluster: null,
       data: {
         avatar_image: '',
         avatar_bg: '',
@@ -76,9 +78,17 @@ export default {
   mounted () {
     this.reduce = !this.sidebar
     this.getData()
+    this.getCluster()
     console.log('reduced : ', this.reduce)
   },
   methods: {
+      getCluster(){
+      this.$axios.get("personality-cluster/getUserPersonalityCluster").then(response => {
+        this.cluster = response.data.data.personality_cluster
+      }).catch(error => {
+        console.log(error)
+      })
+    },
     getData () {
       console.log('user', this.users)
       this.data.courses = this.users.courses

@@ -21,11 +21,6 @@
       "content": "student"
     },
     {
-      "hid": "description",
-      "name": "description",
-      "content": "## Build Setup"
-    },
-    {
       "hid": "og:type",
       "name": "og:type",
       "property": "og:type",
@@ -42,12 +37,6 @@
       "name": "og:site_name",
       "property": "og:site_name",
       "content": "student"
-    },
-    {
-      "hid": "og:description",
-      "name": "og:description",
-      "property": "og:description",
-      "content": "## Build Setup"
     }
   ],
   "link": [
@@ -64,7 +53,7 @@
     },
     {
       "rel": "manifest",
-      "href": "/_nuxt/manifest.742e5017.json",
+      "href": "/_nuxt/manifest.ca2007dd.json",
       "hid": "manifest"
     }
   ],
