@@ -103,10 +103,11 @@
           alert(message);
         });
       };
-	  
+
 	  function sendToken(token) {
-	    console.log("Token received");
-		unityBox.SendMessage('LMSConnector', 'TokenReceive', token);
+	    console.log(`Token received: ${token}`);
+      localStorage.setItem('token', token);
+		  unityBox.SendMessage('LMSConnector', 'TokenReceive', token);
 	  }
       document.body.appendChild(script);
     </script>
