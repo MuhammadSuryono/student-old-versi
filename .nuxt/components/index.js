@@ -1,6 +1,7 @@
 export { default as Back } from '../../components/Back.vue'
 export { default as Decoration } from '../../components/Decoration.vue'
 export { default as Maps } from '../../components/Maps.vue'
+export { default as ModuleTitle } from '../../components/ModuleTitle.vue'
 export { default as Navbar } from '../../components/Navbar.vue'
 export { default as PButton } from '../../components/PButton.vue'
 export { default as PLights } from '../../components/PLights.vue'

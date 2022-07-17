@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar class="navbar">
+    <b-navbar class="navbar" :mobile-burger="false">
       <template #brand>
         <div class="logo" :style="styleObj">
           <img
@@ -23,11 +23,11 @@
         </b-navbar-item>
       </template>
     </b-navbar>
-    <div v-show="showSetting" class="modal-right">
+    <!-- <div v-show="showSetting" class="modal-right">
       <b-button class="btn-setting">
         Setting
       </b-button>
-    </div>
+    </div> -->
   </div>
 </template>
 

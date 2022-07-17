@@ -40,11 +40,15 @@
         </div>
       </div>
       <div class="card-title2">
+        .
         <img
           src="~/assets/images/skillcard/detail-description.svg"
           class="background-button"
         >
-        <div class="columns">
+        <div
+          class="columns is-gapless"
+          style="margin-top: -23px; margin-left: 31px"
+        >
           <div class="column is-narrow skillcard1">
             <div class="card-title1">
               <img
@@ -60,7 +64,7 @@
             </div>
             <div
               class="column"
-              style="margin-top: 43px; margin-left: 45px; width: 202px"
+              style="margin-top: 56px; margin-left: 25px; width: 202px"
             >
               <div class="columns is-gapless">
                 <div
@@ -135,10 +139,10 @@
             "
             class="column skillcard2"
           >
-            {{ detail.description | truncate(420, '...') }}
+            {{ detail.description }}
           </div>
           <div v-else class="column skillcard2">
-            {{ detail.description | truncate(420, '...') }}
+            {{ detail.description }}
           </div>
         </div>
       </div>
@@ -299,12 +303,14 @@
                     display: flex;
                     align-items: center;
 
-                    white-space: nowrap;
                     width: 180px;
                     color: #1951a5;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                   "
                 >
-                  {{ item2.title | truncate(20, '...') }}
+                  {{ item2.title }}
                 </div>
                 <div
                   style="
@@ -319,9 +325,12 @@
                     align-items: center;
                     width: 180px;
                     color: white;
+                    height: 50px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                   "
                 >
-                  {{ item2.description | truncate(65, '...') }}
+                  {{ item2.description }}
                 </div>
               </div>
             </v-col>
@@ -558,7 +567,7 @@ export default {
       .name-card {
         z-index: 6;
         position: absolute;
-        top: 1.4px;
+        top: 1.8px;
         left: 44px;
         font-size: 25.6px;
         color: #ffffff;
@@ -566,21 +575,25 @@ export default {
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
+        width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
     .card-title2 {
       position: relative;
       top: 150px;
-      width: 990px;
+      width: 950px;
       .background-button {
         position: absolute;
-        left: 0px;
+        left: 16px;
         z-index: 5;
         height: 90px;
         width: 100%;
       }
       .skillcard1 {
-        width: 280px;
+        width: 264px;
         .card-title1 {
           position: absolute;
           top: 0px;
@@ -622,6 +635,7 @@ export default {
         }
       }
       .skillcard2 {
+        padding-top: 12px !important;
         font-family: 'Barlow';
         font-style: italic;
         font-weight: 600;
@@ -631,7 +645,11 @@ export default {
         align-items: center;
         z-index: 10;
         color: #ffffff;
-        height: 90px;
+        height: 88px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        display: block;
       }
     }
     .tab-menu-skillcard {

@@ -16,6 +16,7 @@
                 v-model="state.email"
                 placeholder="Email"
                 class="inputs"
+                @keyup.native.enter="login()"
               />
             </b-field>
             <b-field class="mt-14" style="background-color: white">
@@ -25,6 +26,7 @@
                 placeholder="Password"
                 password-reveal
                 class="inputs"
+                @keyup.native.enter="login()"
               />
             </b-field>
             <recaptcha class="captcha columns is-centered" />
@@ -58,69 +60,100 @@ export default {
     toHome () {
       this.$router.push({ path: 'dashboard' })
     },
+    validateEmail (email) {
+      const re = /\S+@\S+\.\S+/
+      return re.test(email)
+    },
     login () {
-      this.loading = true
-      this.$store
-        .dispatch('user/loginWithoutCaptcha', {
-          email: this.state.email,
-          password: this.state.password
+      if (this.state.email === '' || this.state.password === '') {
+        if (this.state.email === '' && this.state.password === '') {
+          this.$toast.error('Email & Password can not be empty.', {
+            position: 'top-center',
+            duration: 5000
+          })
+        }
+        if (this.state.email === '' && this.state.password !== '') {
+          this.$toast.error('Email can not be empty.', {
+            position: 'top-center',
+            duration: 5000
+          })
+        }
+        if (this.state.email !== '' && this.state.password === '') {
+          this.$toast.error('Password can not be empty.', {
+            position: 'top-center',
+            duration: 5000
+          })
+        }
+      } else if (!this.validateEmail(this.state.email)) {
+        this.$toast.error('Email must be valid', {
+          position: 'top-center',
+          duration: 5000
         })
-        .then((response) => {
-          this.loading = false
-          if (response.status === 200 || response.status === 201) {
-            if (response.data.data.user.role_id === 4) {
-              const data = response.data.data
-              console.log('res:', data)
-              localStorage.setItem('user_id', data.user.id)
-              this.$store.commit('user/SET_USERS', data)
-              if (
-                // eslint-disable-next-line valid-typeof
-                typeof data.user.avatar !== null ||
-                // eslint-disable-next-line valid-typeof
-                typeof data.user.avatar !== undefined
-              ) {
-                this.$store.dispatch(
-                  'user/updateImages',
-                  data.user.avatar.image
-                )
+      } else {
+        this.loading = true
+        this.$store
+          .dispatch('user/loginWithoutCaptcha', {
+            email: this.state.email,
+            password: this.state.password
+          })
+          .then((response) => {
+            this.loading = false
+            if (response.status === 200 || response.status === 201) {
+              if (response.data.data.user.role_id === 4) {
+                const data = response.data.data
+                console.log('res:', data)
+                localStorage.setItem('user_id', data.user.id)
+                this.$store.commit('user/SET_USERS', data)
+                if (
+                  // eslint-disable-next-line valid-typeof
+                  typeof data.user.avatar !== null ||
+                  // eslint-disable-next-line valid-typeof
+                  typeof data.user.avatar !== undefined
+                ) {
+                  this.$store.dispatch(
+                    'user/updateImages',
+                    data.user.avatar.image
+                  )
 
-                this.$store.dispatch(
-                  'user/updateImagesName',
-                  data.user.avatar.name
+                  this.$store.dispatch(
+                    'user/updateImagesName',
+                    data.user.avatar.name
+                  )
+                }
+                if (data.user.last_name !== null) {
+                  this.$store.commit(
+                    'user/SET_FULLNAME',
+                    data.user.first_name + ' ' + data.user.last_name
+                  )
+                } else {
+                  this.$store.commit('user/SET_FULLNAME', data.user.first_name)
+                }
+                this.$auth.strategy.token.set(
+                  'Bearer ' + response.data.data.access_token
                 )
-              }
-              if (data.user.last_name !== null) {
-                this.$store.commit(
-                  'user/SET_FULLNAME',
-                  data.user.first_name + ' ' + data.user.last_name
-                )
+                this.$router.push({ path: '/splash' })
               } else {
-                this.$store.commit('user/SET_FULLNAME', data.user.first_name)
+                this.$auth.logout()
+                this.$router.push('/login')
+                this.$toast.error('Please login with student account.', {
+                  position: 'top-center',
+                  duration: 5000
+                })
               }
-              this.$auth.strategy.token.set(
-                'Bearer ' + response.data.data.access_token
-              )
-              this.$router.push({ path: '/splash' })
             } else {
-              this.$auth.logout()
-              this.$router.push('/login')
-              this.$toast.error('Please login with student account.', {
+              this.loading = false
+              this.$toast.error(response.data.error.message, {
                 position: 'top-center',
                 duration: 5000
               })
             }
-          } else {
+          })
+          .catch((error) => {
+            console.log('resp3')
             this.loading = false
-            this.$toast.error(response.data.error.message, {
-              position: 'top-center',
-              duration: 5000
-            })
-          }
-        })
-        .catch((error) => {
-          this.loading = false
-          this.$toast.error(error)
-        })
+            this.$toast.error(error)
+          })
+      }
     }
   }
 }

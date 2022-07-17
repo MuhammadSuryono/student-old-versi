@@ -113,8 +113,10 @@ export const actions = {
       )
       commit('SET_DATA_DETAIL_ACTIVITY', response.data.data)
       commit('SET_DATA_CONTENT', response.data.data.content)
+      console.log('fetchDetailActivity', response)
       return response
     } catch (e) {
+      console.log('e', e)
       return e.response
     }
   },

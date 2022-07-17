@@ -1,25 +1,10 @@
 <template>
   <div v-if="!isLoading" class="bg-img">
-    <div class="header-module">
-      <div class="card-title">
-        <img
-          src="~/assets/images/module/box-title.svg"
-          class="background-button"
-        >
-        <div class="name-card">
-          {{ detailActivity.name }}
-        </div>
-      </div>
-      <div class="card-title">
-        <div class="detail-box" />
-        <div class="name-card2">
-          {{ detailActivity.name }} | Game Activity
-        </div>
-      </div>
-      <div class="btn-back" @click="goBack()">
-        <Back />
-      </div>
-    </div>
+    <ModuleTitle
+      :title="detailActivity.name"
+      :subtitle="detailActivity.name"
+      type="Game"
+    />
 
     <div class="content-module">
       <!-- tab -->
@@ -1083,7 +1068,7 @@ export default {
         mask: var(--mask);
         .display-pic {
           position: absolute;
-          top: 0px;
+          top: -4px;
           left: 0px;
           height: 195px;
           width: 332px;
@@ -1096,6 +1081,7 @@ export default {
         }
 
         .petra-title-card {
+          text-align: left;
           margin-top: 194px;
           padding-left: 0px;
           z-index: 4;
@@ -1119,10 +1105,7 @@ export default {
           text-align: justify;
           color: #5b6987;
           margin-bottom: 21px;
-          height: 100px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          height: 175px;
         }
         .petra-c1 {
           width: 100%;
