@@ -5,7 +5,7 @@
       <div class="avatar-container">
         <!-- personality -->
         <div class="petra-personality">
-          <img src="~/assets/images/component/rectangle.png" class="btn-top">
+          <img src="~/assets/images/component/Rectangle.png" class="btn-top">
           <img
           v-if="cluster != null"
             :src="cluster.icon"
@@ -17,7 +17,7 @@
         <img :src="faction" class="btn-center2">
         <div class="petra-level">
           <img
-            src="~/assets/images/component/rectangle.png"
+            src="~/assets/images/component/Rectangle.png"
             class="btn-bottom"
           >
           <div class="text-level">
