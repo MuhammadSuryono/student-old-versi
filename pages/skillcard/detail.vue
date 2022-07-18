@@ -40,7 +40,6 @@
         </div>
       </div>
       <div class="card-title2">
-        .
         <img
           src="~/assets/images/skillcard/detail-description.svg"
           class="background-button"
@@ -178,172 +177,199 @@
         </div>
       </div>
       <div class="content-menu-skillcard" style="margin-left: 20px">
-        <v-row
-          v-if="selected1"
-          style="width: 930px; margin-left: 3px; margin-top: 10px"
-        >
-          <v-col
-            v-for="(item, index) in Allmodule.data"
-            :key="index"
-            cols="12"
-            sm="3"
+        <div v-if="selected1">
+          <div v-if="Allmodule.total !== 0">
+            <v-row style="width: 930px; margin-left: 3px; margin-top: 10px">
+              <v-col
+                v-for="(item, index) in Allmodule.data"
+                :key="index"
+                cols="12"
+                sm="3"
+              >
+                <!-- {{ Allmodule.data[0] }} -->
+                <div
+                  style="
+                    background-color: #fcfeff;
+                    height: 100%;
+                    padding-bottom: 20px;
+                    width: 100%;
+                  "
+                >
+                  <img
+                    :src="item.thumbnail"
+                    style="
+                      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+                      border-radius: 4px;
+                      height: 128px;
+                      object-fit: cover;
+                      width: 100%;
+                    "
+                  >
+
+                  <div
+                    style="
+                      font-family: 'Roboto';
+                      font-style: italic;
+                      font-weight: 500;
+                      font-size: 14px;
+                      display: flex;
+                      align-items: center;
+
+                      color: #000000;
+                      padding-left: 10px;
+                    "
+                  >
+                    {{ item.module }}
+                  </div>
+                  <div
+                    class="module-score-tab1"
+                    style="
+                      padding-left: 10px;
+                      font-family: 'Roboto';
+                      font-style: normal;
+                      font-weight: 400;
+                      font-size: 14px;
+                      line-height: 16px;
+                      padding-top: 10px;
+                      color: #6c6c6c;
+                    "
+                  >
+                    Module Score: {{ item.score }}%
+                  </div>
+                  <div
+                    style="
+                      padding-left: 10px;
+                      font-family: 'Roboto';
+                      font-style: normal;
+                      font-weight: 400;
+                      font-size: 12px;
+                      line-height: 16px;
+
+                      color: #6c6c6c;
+                    "
+                  >
+                    Emotional Intelligence: {{ item.tax_bloom }}
+                  </div>
+                </div>
+              </v-col>
+              <v-pagination
+                v-if="Allmodule.total > 8"
+                v-model="currentPage"
+                :length="Math.ceil(Allmodule.total / 4)"
+                class="my-2"
+                style="margin-left: auto; margin-right: auto"
+                @input="getDataModule()"
+              />
+            </v-row>
+          </div>
+          <div
+            v-else
+            style="
+              color: white;
+              font-size: 18px;
+              font-weight: bold;
+              margin-top: 100px;
+              margin-left: 400px;
+            "
           >
-            <!-- {{ Allmodule.data[0] }} -->
-            <div
-              style="
-                background-color: #fcfeff;
-                height: 100%;
-                padding-bottom: 20px;
-                width: 100%;
-              "
-            >
-              <img
-                :src="item.thumbnail"
-                style="
-                  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-                  border-radius: 4px;
-                  height: 128px;
-                  object-fit: cover;
-                  width: 100%;
-                "
-              >
-
-              <div
-                style="
-                  font-family: 'Roboto';
-                  font-style: italic;
-                  font-weight: 500;
-                  font-size: 14px;
-                  display: flex;
-                  align-items: center;
-
-                  color: #000000;
-                  padding-left: 10px;
-                "
-              >
-                {{ item.module }}
-              </div>
-              <div
-                class="module-score-tab1"
-                style="
-                  padding-left: 10px;
-                  font-family: 'Roboto';
-                  font-style: normal;
-                  font-weight: 400;
-                  font-size: 14px;
-                  line-height: 16px;
-                  padding-top: 10px;
-                  color: #6c6c6c;
-                "
-              >
-                Module Score: {{ item.score }}%
-              </div>
-              <div
-                style="
-                  padding-left: 10px;
-                  font-family: 'Roboto';
-                  font-style: normal;
-                  font-weight: 400;
-                  font-size: 12px;
-                  line-height: 16px;
-
-                  color: #6c6c6c;
-                "
-              >
-                Emotional Intelligence: {{ item.tax_bloom }}
-              </div>
-            </div>
-          </v-col>
-          <v-pagination
-            v-if="Allmodule.total > 8"
-            v-model="currentPage"
-            :length="Math.ceil(Allmodule.total / 4)"
-            class="my-2"
-            style="margin-left: auto; margin-right: auto"
-            @input="getDataModule()"
-          />
-        </v-row>
+            Coming Soon
+          </div>
+        </div>
         <div v-if="selected2" style="width: 900px">
-          <v-row
-            no-gutters
-            style="width: 900px; height: 200px; margin-bottom: 10px"
-          >
-            <v-col
-              v-for="(item2, index2) in Allarchivements.data"
-              :key="index2"
-              cols="12"
-              sm="4"
+          <div v-if="Allarchivements.total !== 0">
+            <v-row
+              no-gutters
+              style="width: 900px; height: 200px; margin-bottom: 10px"
             >
-              <div style="position: relative">
-                <img
-                  src="~/assets/images/skillcard/AchievementFrame.png"
-                  style="height: 104.594px; width: 299.984px"
-                >
-                <img
-                  style="
-                    position: absolute;
-                    top: 13px;
-                    left: 10px;
-                    height: 85px;
-                    width: 90px;
-                    object-fit: cover;
-                  "
-                  :src="item2.thumbnail"
-                >
-                <div
-                  style="
-                    position: absolute;
-                    top: 4px;
-                    left: 110px;
-                    font-family: 'Barlow';
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 17px;
-                    line-height: 22px;
-                    display: flex;
-                    align-items: center;
+              <v-col
+                v-for="(item2, index2) in Allarchivements.data"
+                :key="index2"
+                cols="12"
+                sm="4"
+              >
+                <div style="position: relative">
+                  <img
+                    src="~/assets/images/skillcard/AchievementFrame.png"
+                    style="height: 104.594px; width: 299.984px"
+                  >
+                  <img
+                    style="
+                      position: absolute;
+                      top: 13px;
+                      left: 10px;
+                      height: 85px;
+                      width: 90px;
+                      object-fit: cover;
+                    "
+                    :src="item2.thumbnail"
+                  >
+                  <div
+                    style="
+                      position: absolute;
+                      top: 4px;
+                      left: 110px;
+                      font-family: 'Barlow';
+                      font-style: normal;
+                      font-weight: 600;
+                      font-size: 17px;
+                      line-height: 22px;
+                      display: flex;
+                      align-items: center;
 
-                    width: 180px;
-                    color: #1951a5;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  {{ item2.title }}
+                      width: 180px;
+                      color: #1951a5;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                    "
+                  >
+                    {{ item2.title }}
+                  </div>
+                  <div
+                    style="
+                      position: absolute;
+                      top: 37px;
+                      left: 110px;
+                      font-family: 'Barlow';
+                      font-style: normal;
+                      font-weight: 400;
+                      line-height: 17px;
+                      font-size: 15px;
+                      align-items: center;
+                      width: 180px;
+                      color: white;
+                      height: 50px;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                    "
+                  >
+                    {{ item2.description }}
+                  </div>
                 </div>
-                <div
-                  style="
-                    position: absolute;
-                    top: 37px;
-                    left: 110px;
-                    font-family: 'Barlow';
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 17px;
-                    font-size: 15px;
-                    align-items: center;
-                    width: 180px;
-                    color: white;
-                    height: 50px;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                >
-                  {{ item2.description }}
-                </div>
-              </div>
-            </v-col>
-          </v-row>
-          <div style="margin-top: 30px">
-            <v-pagination
-              v-if="Allarchivements.total > 8"
-              v-model="currentPage2"
-              :length="Math.ceil(Allarchivements.total / 6)"
-              class="my-2"
-              style="margin-left: auto; margin-right: auto; top: 200px"
-              @input="getDataArchivements()"
-            />
+              </v-col>
+            </v-row>
+            <div style="margin-top: 30px">
+              <v-pagination
+                v-if="Allarchivements.total > 8"
+                v-model="currentPage2"
+                :length="Math.ceil(Allarchivements.total / 6)"
+                class="my-2"
+                style="margin-left: auto; margin-right: auto; top: 200px"
+                @input="getDataArchivements()"
+              />
+            </div>
+          </div>
+          <div
+            v-else
+            style="
+              color: white;
+              font-size: 18px;
+              font-weight: bold;
+              margin-top: 100px;
+              margin-left: 400px;
+            "
+          >
+            Coming Soon
           </div>
         </div>
       </div>
