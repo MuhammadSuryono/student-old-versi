@@ -1,15 +1,21 @@
 <template>
-  <div style="background-color: #eef2f5; width: 1200px; height: 100vh">
-    <div class="containers">
-      <b-button
-        type="is-primary"
-        class="is-align-items-center"
-        style="z-index: 10; position: absolute; left: 450px; width: 300px"
-        @click="goHome()"
+  <div class="container-personality">
+    <div style="margin-left: 180px; width: 1000px; height: 700px">
+      <iframe
+        ref="iframe"
+        src="/pcgame/index.html"
+        style="width: 100%; height: 100%"
+      />
+    </div>
+    asadas
+    <div class="btn-edit">
+      <img
+        src="~/assets/images/btn-petra.png"
+        style="width: 224.22px; height: 36px"
       >
+      <div class="text-edit">
         Lanjut
-      </b-button>
-      <iframe ref="iframe" class="responsive-iframe" src="/pcgame/index.html" />
+      </div>
     </div>
   </div>
 </template>
@@ -17,7 +23,7 @@
 <script>
 export default {
   name: 'PersonalityPage',
-  layout: 'dashboard',
+  layout: 'default',
   data () {
     return {
       finish: false,
@@ -59,13 +65,13 @@ export default {
       this.window.height = window.innerHeight
     },
 
-    getToken () {
-      const token = this.$auth.strategy.token.get()
-      this.$refs.iframe.contentWindow.sendToken(token)
-    },
-    sendToken () {
-      this.$refs.iframe.contentWindow.sendToken(this.token)
-    },
+    // getToken () {
+    //   const token = this.$auth.strategy.token.get()
+    //   this.$refs.iframe.contentWindow.sendToken(token)
+    // },
+    // sendToken () {
+    //   this.$refs.iframe.contentWindow.sendToken(this.token)
+    // },
     activityDoneEvent () {
       this.finish = true
     }
@@ -73,7 +79,36 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.container-personality {
+  background-image: url('~@/assets/images/module/bg.png');
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  background-size: cover;
+  background-position: center;
+  .btn-edit {
+    width: 225px;
+    cursor: pointer;
+    position: relative;
+    top: -87px;
+    left: 570px;
+    .text-edit {
+      position: absolute;
+      top: 7px;
+      color: #c7d6fd;
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+    }
+  }
+}
 .containers {
   position: relative;
   top: 0px;
@@ -81,23 +116,5 @@ export default {
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  /* position: relative;
-  overflow: hidden;
-  width: 1200px;
-  top: 50px;
-  left: 110px;
-  height: 100%; */
-}
-
-/* Then style the iframe to fit in the container div with full height and width */
-.responsive-iframe {
-  position: absolute;
-  top: 20px;
-  /* left: 0;
-  bottom: 0;
-  right: 0; */
-  width: 100%;
-  overflow: hidden;
-  height: 100%;
 }
 </style>

@@ -3,6 +3,7 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
+  layoutTransition: 'fade',
 
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
@@ -83,8 +84,8 @@ export default {
   },
 
   axios: {
-    // baseURL: 'https://api-petra.primeskills.id/api/v1'
-    baseURL: 'https://petralms.test/api/v1'
+    baseURL: 'https://api-petra.primeskills.id/api/v1'
+    // baseURL: 'https://petralms.test/api/v1'
   },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
