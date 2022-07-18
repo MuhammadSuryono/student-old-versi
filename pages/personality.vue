@@ -8,7 +8,7 @@
       />
     </div>
     asadas
-    <div class="btn-edit">
+    <div class="btn-edit" @click="goHome()">
       <img
         src="~/assets/images/btn-petra.png"
         style="width: 224.22px; height: 36px"
@@ -64,14 +64,13 @@ export default {
       this.window.width = window.innerWidth
       this.window.height = window.innerHeight
     },
-
-    // getToken () {
-    //   const token = this.$auth.strategy.token.get()
-    //   this.$refs.iframe.contentWindow.sendToken(token)
-    // },
-    // sendToken () {
-    //   this.$refs.iframe.contentWindow.sendToken(this.token)
-    // },
+    getToken () {
+      const token = this.$auth.strategy.token.get()
+      this.$refs.iframe.contentWindow.sendToken(token)
+    },
+    sendToken () {
+      this.$refs.iframe.contentWindow.sendToken(this.token)
+    },
     activityDoneEvent () {
       this.finish = true
     }
@@ -108,13 +107,5 @@ export default {
       right: 0;
     }
   }
-}
-.containers {
-  position: relative;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
 }
 </style>
