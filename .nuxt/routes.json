@@ -105,6 +105,13 @@
     "_name": "_bd9b5ad8"
   },
   {
+    "name": "library-module-detail-index-quiz-embed",
+    "path": "/library/module/detail/:index/quiz/embed",
+    "component": "/Users/mohamadwahyudin/projects/vue/lms-student/pages/library/module/detail/_index/quiz/embed.vue",
+    "chunkName": "pages/library/module/detail/_index/quiz/embed",
+    "_name": "_2e14c937"
+  },
+  {
     "name": "library-module-detail-index-game",
     "path": "/library/module/detail/:index/game/:index",
     "component": "/Users/mohamadwahyudin/projects/vue/lms-student/pages/library/module/detail/_index/game/_index.vue",
