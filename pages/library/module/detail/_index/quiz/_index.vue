@@ -1,10 +1,25 @@
 <template>
   <div v-if="!isLoading" class="bg-img">
-    <ModuleTitle
-      :title="detailActivity.name"
-      :subtitle="detailActivity.name"
-      type="Quiz"
-    />
+    <div class="header-module">
+      <div class="card-title">
+        <img
+          src="~/assets/images/module/box-title.svg"
+          class="background-button"
+        >
+        <div class="name-card">
+          {{ detailActivity.title }}
+        </div>
+      </div>
+      <div class="card-title">
+        <div class="detail-box" />
+        <div class="name-card2">
+          {{ detailActivity.title }} | Quiz Activity
+        </div>
+      </div>
+      <div class="btn-back" @click="goBack()">
+        <Back />
+      </div>
+    </div>
 
     <div class="content-module">
       <!-- tab -->
@@ -73,7 +88,7 @@
                 class="display-pic"
               >
               <div class="petra-title-card">
-                {{ detailActivity.name }} <br>
+                {{ detailActivity.title }} <br>
                 <span
                   style="
                     font-style: italic;
@@ -83,27 +98,42 @@
                 >QUIZ ACTIVITY</span>
               </div>
               <div class="petra-description">
-                {{ detailActivity }}
+                {{ detailActivity.description }}
               </div>
 
               <div class="petra-c1">
-                {{ detailActivity.total_pages }} Pages <br>
-                {{ detailActivity.discussions }} Discussion <br>
-                {{ detailActivity.total_attachments }} Attachments <br>
+                <!-- {{ detailActivity.discussions }} Discussion <br> -->
               </div>
             </div>
           </div>
         </div>
         <div class="column is-narrow header-right" style="margin-left: 20px">
-          <!-- <div class="card-activity" /> -->
-          <iframe
-            ref="iframe"
-            src="/quiz/index.html"
-            :style="{
-              height: window.height - 200 + 'px',
-              width: window.width + 'px'
-            }"
-          />
+          <div
+            class="card-activity"
+            style="position: relative"
+          >
+            <img
+              src="~/assets/images/195.svg"
+              style="height: 100%; width: 100%"
+            >
+            <div
+              style="
+                position: absolute;
+                z-index: 999;
+                width: 229.53px;
+                color: #f2f2f2;
+                text-align: center;
+                top: 230px;
+                left: 240px;
+                padding: 5px;
+                cursor: pointer;
+                background-color: #4c7bc1;
+              "
+              @click="playGame(detailActivity.link)"
+            >
+              Play
+            </div>
+          </div>
         </div>
       </div>
       <div v-if="selected2">
@@ -221,13 +251,8 @@ export default {
 
   data () {
     return {
-      window: {
-        width: 720,
-        height: 720
-      },
       isLoading: false,
       selected1: true,
-      rail_id: null,
       selected2: false,
       selected3: false,
       tinggi: 0,
@@ -240,72 +265,64 @@ export default {
 
   computed: {
     ...mapState({
+        detailModule: (state) => {
+        return state.module.dataDetailModule
+      },
       detailActivity: (state) => {
         return state.module.dataDetailActivity
       },
       idModule: (state) => {
         return state.module.idModule
       },
-      getDetailRail: (state) => {
-        //  let activity = state.module.dataDetailModule.activity_rails.find(e => e.id === this.rail_id)
-        const activity = state.module.dataDetailModule.activity_rails
-
-        //  this.rail_id = activity.activity_id
-        return activity
+      dataUser: (state) => {
+        return state.user.users
       }
     }),
+      quizId(){
+      // find activity id by params index
+      let activity = this.detailModule.activity_rails.find(activity => activity.id == parseInt(this.$route.params.index))
+      // return this.$route.params.index
+      return parseInt(activity.activity_id);
+    },
     tinggi2 () {
       return 'height:' + this.tinggi
     },
-    getRailId () {
-      const rail = this.getDetailRail.filter(
-        e => e.id === parseInt(this.$route.params.index)
-      )
-      return rail[0].activity_id
+    disableBtn () {
+      if (this.descReview === '') {
+        return true
+      } else {
+        return false
+      }
     }
   },
   created () {
+    // this.handleResize()
     this.getAll()
-    console.log('qctivityyy')
-    console.log(this.$route.params.index)
-    // console.log(found););
-    // console.log(this.getDetailRail.activity_id);
-    // eslint-disable-next-line nuxt/no-globals-in-created
-    window.addEventListener('resize', this.handleResize)
   },
 
-  mounted () {
-    window.addEventListener('activityDoneEvent', this.activityDone)
-    this.$once('hook:beforeDestroy', () => {
-      window.removeEventListener('activityDoneEvent', this.activityDone)
-    })
-
-    window.addEventListener('getTokenQuizEvent', this.getTokenQuiz)
-    this.$once('hook:beforeDestroy', () => {
-      window.removeEventListener('getTokenQuizEvent', this.getTokenQuiz)
-    })
-  },
-
-  destroyed () {
-    window.removeEventListener('resize', this.handleResize)
-  },
+  mounted () {},
   methods: {
-    goHome () {
-      this.$router.push({ path: '/' })
+       playGame (x) {
+      // console.log(x);
+      this.$router.push({
+        name: "library-module-detail-index-quiz-embed",
+        params: {
+          link: this.quizId
+        }
+
+        // path: `/library/module/detail/${this.idModule}/game/embed`
+      })
+    },
+    playGame2 (x) {
+      window.open(x, '_blank')
     },
     handleResize () {
       this.window.width = window.innerWidth
       this.window.height = window.innerHeight
     },
-
-    getTokenQuiz () {
-      const token = this.$auth.strategy.token.get()
-      this.$refs.iframe.contentWindow.sendTokenQuiz(token, this.getRailId)
-    },
-
-    activityDone () {
-      // this.finish = true
-      alert('finish')
+    dialogDownload (data) {
+      this.dataAttachment = data
+      this.dialog = true
     },
     addReview () {
       const data = {
@@ -412,7 +429,7 @@ export default {
       this.$store
         .dispatch('module/fetchDetailActivity', data)
         .then((response) => {
-          console.log(response)
+          console.log(response.data.data)
           this.tinggi = this.$refs.infoBox.clientHeight + 'px;'
 
           this.isLoading = false

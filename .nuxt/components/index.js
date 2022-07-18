@@ -29,20 +29,19 @@ export { default as IconSearch } from '../../components/icon/Search.vue'
 export { default as IconSkillcard } from '../../components/icon/Skillcard.vue'
 export { default as IconTabSkill } from '../../components/icon/TabSkill.vue'
 export { default as IconTabSkill2 } from '../../components/icon/TabSkill2.vue'
-export { default as SidebarAvatar } from '../../components/sidebar/Avatar.vue'
-export { default as SidebarCardName } from '../../components/sidebar/CardName.vue'
-export { default as SidebarMain } from '../../components/sidebar/Main.vue'
 
 // nuxt/nuxt.js#8607
-function wrapFunctional(options) {
+function wrapFunctional (options) {
   if (!options || !options.functional) {
     return options
   }
 
-  const propKeys = Array.isArray(options.props) ? options.props : Object.keys(options.props || {})
+  const propKeys = Array.isArray(options.props)
+    ? options.props
+    : Object.keys(options.props || {})
 
   return {
-    render(h) {
+    render (h) {
       const attrs = {}
       const props = {}
 
@@ -54,12 +53,16 @@ function wrapFunctional(options) {
         }
       }
 
-      return h(options, {
-        on: this.$listeners,
-        attrs,
-        props,
-        scopedSlots: this.$scopedSlots,
-      }, this.$slots.default)
+      return h(
+        options,
+        {
+          on: this.$listeners,
+          attrs,
+          props,
+          scopedSlots: this.$scopedSlots
+        },
+        this.$slots.default
+      )
     }
   }
 }
