@@ -375,7 +375,7 @@
               <img :src="dataUser.avatar.image" class="p-img">
             </div>
             <div class="p-username">
-              {{ dataUser.username }} {{ indexSub2 }}
+              {{ dataUser.username }}
             </div>
             <span class="petra-comment">
               <div class="comment-text">Leave a comment.</div>
@@ -417,7 +417,7 @@
                       class="column is-narrow"
                       style="height: 80px"
                       :style="{
-                        backgroundColor: '#' + review.avatar_background
+                        backgroundColor: review.avatar_background
                       }"
                     >
                       <img :src="review.avatar" class="pic-petra">

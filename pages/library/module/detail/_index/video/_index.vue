@@ -152,7 +152,7 @@
                   <div
                     class="column is-narrow"
                     style="height: 80px"
-                    :style="{ backgroundColor: '#' + review.avatar_background }"
+                    :style="{ backgroundColor: review.avatar_background }"
                   >
                     <img
                       :src="review.avatar"

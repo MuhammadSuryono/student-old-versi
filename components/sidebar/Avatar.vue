@@ -6,11 +6,7 @@
         <!-- personality -->
         <div class="petra-personality">
           <img src="~/assets/images/component/Rectangle.png" class="btn-top">
-          <img
-          v-if="cluster != null"
-            :src="cluster.icon"
-            class="btn-top2"
-          >
+          <img v-if="cluster != null" :src="cluster.icon" class="btn-top2">
         </div>
         <!-- faction -->
         <IconFaction bg-color="white" class="petra-faction" />
@@ -89,7 +85,7 @@
             style="height: 40.8px; width: 180px; left: 0px"
           >
           <img
-            src="~/assets/images/decor.svg"
+            src="~/assets/images/clarity_library-line.png"
             class="icon-s"
             style="top: 7px; height: 28px; left: 12px"
           >
@@ -127,7 +123,7 @@
         <div class="cornered" />
         <div class="square" />
         <img
-          src="~/assets/images/decor.svg"
+          src="~/assets/images/clarity_library-line.png"
           class="icon-s"
           style="left: 16px; top: 5px; height: 28px"
         >
@@ -179,7 +175,7 @@ export default {
   },
   data () {
     return {
-      cluster : null,
+      cluster: null
     }
   },
   computed: {
@@ -187,7 +183,7 @@ export default {
       images: (state) => {
         return state.user.images
       },
-      
+
       sidebar: (state) => {
         return state.user.sidebar
       },
@@ -211,8 +207,8 @@ export default {
       }
     }
   },
- 
-  methods: { 
+
+  methods: {
     onEditProfile () {
       this.$store.commit('user/SET_BTN_PROFILE')
     },

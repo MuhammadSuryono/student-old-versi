@@ -22,6 +22,7 @@ You can directly use them in pages and other components without the need to impo
 - `<PTitleV2>` | `<p-title-v2>` (components/PTitleV2.vue)
 - `<Popup>` | `<popup>` (components/Popup.vue)
 - `<Profile>` | `<profile>` (components/Profile.vue)
+- `<FactionReward>` | `<faction-reward>` (components/faction/Reward.vue)
 - `<IconArchivements>` | `<icon-archivements>` (components/icon/Archivements.vue)
 - `<IconAvatarBackground>` | `<icon-avatar-background>` (components/icon/AvatarBackground.vue)
 - `<IconBackBtn>` | `<icon-back-btn>` (components/icon/BackBtn.vue)
