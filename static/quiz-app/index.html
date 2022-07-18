@@ -105,8 +105,10 @@
       };
 
       function sendTokenQuiz(token,quizId) {
-      console.log(token,quizId);
-		unityBox.SendMessage('LMSConnector', 'receiveTokenQuiz', token,quizId);
+     
+      let tokenQuiz = `${token},${quizId}`;
+      console.log(tokenQuiz);
+		unityBox.SendMessage('LMSConnector', 'receiveTokenQuiz', tokenQuiz);
 	  }
       document.body.appendChild(script);
     </script>
