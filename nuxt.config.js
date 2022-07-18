@@ -54,7 +54,8 @@ export default {
   ],
 
   router: {
-    middleware: ['auth']
+    middleware: ['auth'],
+    base: process.env.basePath ?? '/'
   },
 
   auth: {
@@ -84,8 +85,7 @@ export default {
   },
 
   axios: {
-    baseURL: 'https://api-petra.primeskills.id/api/v1'
-    // baseURL: 'https://petralms.test/api/v1'
+    baseURL: process.env.baseUrl ?? '/'
   },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
@@ -108,7 +108,9 @@ export default {
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {},
+  build: {
+    publicPath: process.env.basePathBuild ?? '/_nuxt/'
+  },
 
   vue: {
     config: {
