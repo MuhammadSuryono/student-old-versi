@@ -355,7 +355,7 @@
                   <div
                     class="column is-narrow"
                     style="height: 80px"
-                    :style="{ backgroundColor: '#' + review.avatar_background }"
+                    :style="{ backgroundColor: review.avatar_background }"
                   >
                     <img
                       :src="review.avatar"
@@ -463,11 +463,7 @@ export default {
       this.$store
         .dispatch('module/addReview', data)
         .then((response) => {
-          console.log('response:', response.data.error.message)
-          this.$toast.error(response.data.error.message, {
-            position: 'top-center',
-            duration: 5000
-          })
+          console.log('success')
           this.getReview()
           this.getData()
         })
@@ -544,6 +540,7 @@ export default {
         })
     },
     getReview () {
+      console.log('getReview')
       this.$store
         .dispatch('module/getReview', this.$route.params.index)
         .then((response) => {
