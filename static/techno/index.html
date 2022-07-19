@@ -69,10 +69,12 @@
 
       var script = document.createElement("script");
       script.src = loaderUrl;
+      var unityBox = null;
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
+          unityBox = unityInstance;
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
             unityInstance.SetFullscreen(1);
@@ -81,6 +83,11 @@
           alert(message);
         });
       };
+
+      function sendToken(token) {
+	    console.log("Token received");
+		unityBox.SendMessage('LMSConnector', 'TokenReceive', token);
+	  }
       document.body.appendChild(script);
     </script>
   </body>
