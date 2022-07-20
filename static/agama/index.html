@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | Petra Digital Institute</title>
-    <link rel="shortcut icon" href="https://petralms.s3.ap-southeast-1.amazonaws.com/webgl/softskills_cluster/TemplateData/favicon.ico">
-    <link rel="stylesheet" href="https://petralms.s3.ap-southeast-1.amazonaws.com/webgl/softskills_cluster/TemplateData/style.css">
+    <link rel="shortcut icon" href="https://petralms.s3.ap-southeast-1.amazonaws.com/webgl/agama-webgl/TemplateData/favicon.ico">
+    <link rel="stylesheet" href="https://petralms.s3.ap-southeast-1.amazonaws.com/webgl/agama-webgl/TemplateData/style.css">
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
@@ -26,12 +26,12 @@
       </div>
     </div>
     <script>
-      var buildUrl = "https://petralms.s3.ap-southeast-1.amazonaws.com/webgl/softskills_cluster/Build";
-      var loaderUrl = buildUrl + "/SoftSkills-WithLMSLogin-20220609.loader.js";
+      var buildUrl = "https://petralms.s3.ap-southeast-1.amazonaws.com/webgl/agama-webgl/Build";
+      var loaderUrl = buildUrl + "/Agama-WithLMSLogin-20220624.loader.js";
       var config = {
-        dataUrl: buildUrl + "/SoftSkills-WithLMSLogin-20220609.data",
-        frameworkUrl: buildUrl + "/SoftSkills-WithLMSLogin-20220609.framework.js",
-        codeUrl: buildUrl + "/SoftSkills-WithLMSLogin-20220609.wasm",
+        dataUrl: buildUrl + "/Agama-WithLMSLogin-20220624.data",
+        frameworkUrl: buildUrl + "/Agama-WithLMSLogin-20220624.framework.js",
+        codeUrl: buildUrl + "/Agama-WithLMSLogin-20220624.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Universitas Kristen Petra",
         productName: "Petra Digital Institute",
@@ -83,7 +83,6 @@
           alert(message);
         });
       };
-
       function sendToken(token) {
 	    console.log("Token received");
 		unityBox.SendMessage('LMSConnector', 'TokenReceive', token);
