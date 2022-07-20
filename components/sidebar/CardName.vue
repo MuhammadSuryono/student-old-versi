@@ -13,7 +13,7 @@
     </div>
     <div class="modules">
       <div class="courses">
-        {{ courses2 }} COURSES
+        {{ courses2 }} MODULES
       </div>
       <div class="archievements">
         {{ achievements2 }} ACHIEVEMENTS
