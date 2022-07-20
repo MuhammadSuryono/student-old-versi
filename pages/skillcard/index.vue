@@ -250,7 +250,7 @@ export default {
     this.$store.dispatch('user/get')
     this.avatar_bgcolor = this.users.faction.avatar_bgcolor
     this.avatar_icon = this.users.faction.faction
-    // this.getDataAll()
+    this.getDataAll()
   },
   methods: {
     getDataAll () {
