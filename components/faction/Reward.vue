@@ -7,26 +7,33 @@
             NEXT REWARD
           </div>
           <div class="suite" style="text-transform: uppercase">
-            <!-- {{ dataFactionUser.next_reward.name }} -->asdasd
+            {{ title }}
           </div>
         </div>
       </div>
     </div>
     <div class="column image-reward">
-      <div class="border-image" />
+      <div
+        class="border-image"
+        :style="{ backgroundImage: 'url(' + image + ')' }"
+      />
     </div>
-    <!-- <img
-      src="https://petralms.s3.ap-southeast-1.amazonaws.com/images/background/decoration_testing/peakpx.jpg"
-      style="
-        z-index: -1;
-        position: absolute;
-        height: 73px;
-        width: 172px;
-        left: 600px;
-      "
-    > -->
   </div>
 </template>
+<script>
+export default {
+  props: {
+    title: {
+      type: String,
+      default: ''
+    },
+    image: {
+      type: String,
+      default: ''
+    }
+  }
+}
+</script>
 <style lang="scss" scoped>
 .reward-card {
   height: 79.78px;
@@ -70,28 +77,20 @@
     width: 100%;
     height: 100%;
     margin-left: 10px;
-    // transform: skew(-18deg);
-    background: rgba(255, 243, 128, 0.5);
+    height: 100%;
+    transform: skew(-18deg);
     border: 0.54px solid #f2f2f2;
     z-index: 3;
     border-radius: 5px;
     position: relative;
-    --g: #000, #0000 1deg 179deg, #000 180deg;
-    --mask: conic-gradient(from -165deg at top 80px left 0px, var(--g)) 0 0 /51%
-        100% no-repeat,
-      conic-gradient(from -45deg at bottom 30px right 30px, var(--g)) 100% 100%/51%
-        100% no-repeat;
-    -webkit-mask: var(--mask);
-    mask: var(--mask);
-    // .border-image {
-    //   border: 2px solid #ffffff;
-    //   width: 100%;
-    //   height: 100%;
-    //   position: absolute;
-    //   border-radius: 5px;
-    //   top: -3px;
-    //   left: -3px;
-    // }
+    .border-image {
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+      left: -3px;
+    }
   }
 }
 </style>

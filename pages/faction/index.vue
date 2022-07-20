@@ -81,7 +81,10 @@
           LV {{ dataFactionUser.faction.current_level }}/10
         </div>
       </div>
-      <FactionReward />
+      <FactionReward
+        :title="dataFactionUser.next_reward.name"
+        :image="dataFactionUser.next_reward.image"
+      />
       <div class="btn-faction no-select" @click="detailfaction()">
         <div class="border-2">
           See Faction Details

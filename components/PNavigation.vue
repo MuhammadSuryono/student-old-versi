@@ -11,8 +11,10 @@
     </div>
     <img src="~/assets/images/component/rectangle2.png" class="img4">
     <div class="exp">
-      EXP <br>
-      {{ exp }}/{{ max }}
+      <div class="text-exp">
+        EXP <br>
+        {{ exp }}/{{ max }}
+      </div>
     </div>
     <div class="menu">
       <div class="triangle-left" />
@@ -240,17 +242,18 @@ export default {
     position: relative;
   }
   .exp {
-    font-family: 'Barlow';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    text-align: center;
     position: absolute;
     bottom: 24px;
-    left: 28px;
+    left: 27px;
     color: white;
+    width: 70px;
+    .text-exp {
+      font-family: 'Barlow';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      text-align: center;
+    }
   }
   .menu {
     z-index: -1;

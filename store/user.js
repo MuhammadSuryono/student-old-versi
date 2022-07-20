@@ -88,6 +88,8 @@ export const mutations = {
 export const actions = {
   async loginWithoutCaptcha ({ commit }, payload) {
     try {
+      // const token = await this.$recaptcha.getResponse()
+      // console.log(token)
       const response = await this.$auth.loginWith('local', {
         data: {
           email: payload.email,

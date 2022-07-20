@@ -1,6 +1,6 @@
 <template>
   <div class="container-personality">
-    <div style="margin-left: 180px; width: 1000px; height: 700px">
+    <div style="margin-left: 170px; width: 1100px; height: 700px">
       <iframe
         ref="iframe"
         src="/pcgame/index.html"

@@ -60,9 +60,9 @@
                   class="background-button"
                 >
                 <img
+                  v-if="cluster != null"
                   :src="cluster.icon"
                   class="icon-button"
-                  v-if="cluster != null"
                 >
                 <div class="name-card">
                   {{ dataSkillcard.name }}
@@ -217,7 +217,7 @@ export default {
       avatar_bgcolor: '',
       avatar_icon: '',
       progress: 0,
-      isLoading: false
+      isLoading: true
     }
   },
 
@@ -250,18 +250,23 @@ export default {
     this.$store.dispatch('user/get')
     this.avatar_bgcolor = this.users.faction.avatar_bgcolor
     this.avatar_icon = this.users.faction.faction
-    this.getDataDecoration()
-    this.getDataPersonalityCluster()
-    this.getDataAllSkills()
- 
+    // this.getDataAll()
   },
   methods: {
-   
+    getDataAll () {
+      this.getDataDecoration()
+      this.getDataPersonalityCluster()
+      this.getDataAllSkills()
+    },
     getDataAllSkills () {
+      this.isLoading = true
       this.$store
         .dispatch('skillcard/fetchAllSkill')
-        .then((response) => {})
+        .then((response) => {
+          this.isLoading = false
+        })
         .catch((error) => {
+          this.isLoading = false
           this.$toast.error(error.response, {
             position: 'top-center',
             duration: 5000
@@ -273,13 +278,15 @@ export default {
         })
     },
     getDataPersonalityCluster () {
+      this.isLoading = true
       this.$store
         .dispatch('skillcard/fetchPersonalityCluster')
         .then((response) => {
           this.cluster = response.data.data.personality_cluster
-          // console.log(response.data.data.personality_cluster);
+          this.isLoading = false
         })
         .catch((error) => {
+          this.isLoading = false
           this.$toast.error(error.response, {
             position: 'top-center',
             duration: 5000
@@ -643,7 +650,7 @@ export default {
                 color: #ffffff;
                 cursor: pointer;
                 transform: skew(-10deg);
-                z-index: 20;;
+                z-index: 20;
               }
               .title-card:hover {
                 text-decoration: underline;

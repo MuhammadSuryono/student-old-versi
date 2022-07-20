@@ -149,7 +149,6 @@ export default {
             }
           })
           .catch((error) => {
-            console.log('resp3')
             this.loading = false
             this.$toast.error(error)
           })
