@@ -14,6 +14,7 @@ export { default as PTitle } from '../../components/PTitle.vue'
 export { default as PTitleV2 } from '../../components/PTitleV2.vue'
 export { default as Popup } from '../../components/Popup.vue'
 export { default as Profile } from '../../components/Profile.vue'
+export { default as FactionReward } from '../../components/faction/Reward.vue'
 export { default as IconArchivements } from '../../components/icon/Archivements.vue'
 export { default as IconAvatarBackground } from '../../components/icon/AvatarBackground.vue'
 export { default as IconBackBtn } from '../../components/icon/BackBtn.vue'
@@ -31,7 +32,6 @@ export { default as IconTabSkill2 } from '../../components/icon/TabSkill2.vue'
 export { default as SidebarAvatar } from '../../components/sidebar/Avatar.vue'
 export { default as SidebarCardName } from '../../components/sidebar/CardName.vue'
 export { default as SidebarMain } from '../../components/sidebar/Main.vue'
-export { default as FactionReward } from '../../components/faction/Reward.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {
