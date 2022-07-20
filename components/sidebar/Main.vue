@@ -109,10 +109,11 @@ export default {
       }
     },
     async getTotal () {
-      await this.$axios
-        .get('/student/me/')
+     await this.$axios
+        .get('/student/me')
         .then((res) => {
           console.log(res)
+          this.data.level = res.data.user_level
           this.totalModule = res.data.modules
           this.totalArchivement = res.data.achievements
         })
