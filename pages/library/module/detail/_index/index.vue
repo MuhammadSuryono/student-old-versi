@@ -146,7 +146,7 @@
                   <v-divider class="mx-4" vertical />
                   <div class="data-desc">
                     <div class="module-name">
-                      {{ rail.title }} {{ indexRail }}
+                      {{ rail.title }}
                     </div>
                     <div
                       class="studio-name"
