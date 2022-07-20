@@ -23,9 +23,6 @@ You can directly use them in pages and other components without the need to impo
 - `<Popup>` | `<popup>` (components/Popup.vue)
 - `<Profile>` | `<profile>` (components/Profile.vue)
 - `<FactionReward>` | `<faction-reward>` (components/faction/Reward.vue)
-- `<SidebarAvatar>` | `<sidebar-avatar>` (components/sidebar/Avatar.vue)
-- `<SidebarCardName>` | `<sidebar-card-name>` (components/sidebar/CardName.vue)
-- `<SidebarMain>` | `<sidebar-main>` (components/sidebar/Main.vue)
 - `<IconArchivements>` | `<icon-archivements>` (components/icon/Archivements.vue)
 - `<IconAvatarBackground>` | `<icon-avatar-background>` (components/icon/AvatarBackground.vue)
 - `<IconBackBtn>` | `<icon-back-btn>` (components/icon/BackBtn.vue)
@@ -40,7 +37,6 @@ You can directly use them in pages and other components without the need to impo
 - `<IconSkillcard>` | `<icon-skillcard>` (components/icon/Skillcard.vue)
 - `<IconTabSkill>` | `<icon-tab-skill>` (components/icon/TabSkill.vue)
 - `<IconTabSkill2>` | `<icon-tab-skill2>` (components/icon/TabSkill2.vue)
-<<<<<<< HEAD
-- `<FactionReward>` | `<faction-reward>` (components/faction/Reward.vue)
-=======
->>>>>>> 0658ce16404144049d7d6eceee0860febbcb192a
+- `<SidebarAvatar>` | `<sidebar-avatar>` (components/sidebar/Avatar.vue)
+- `<SidebarCardName>` | `<sidebar-card-name>` (components/sidebar/CardName.vue)
+- `<SidebarMain>` | `<sidebar-main>` (components/sidebar/Main.vue)
