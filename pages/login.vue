@@ -128,11 +128,13 @@ export default {
                 } else {
                   this.$store.commit('user/SET_FULLNAME', data.user.first_name)
                 }
-                this.$auth.strategy.token.set(
-                  'Bearer ' + response.data.data.access_token
-                )
+                console.log(true)
+                // this.$auth.strategy.token.set(
+                //   'Bearer ' + response.data.data.access_token
+                // )
                 this.$router.push({ path: '/splash' })
               } else {
+                console.log(false)
                 this.$auth.logout()
                 this.$router.push('/login')
                 this.$toast.error('Please login with student account.', {

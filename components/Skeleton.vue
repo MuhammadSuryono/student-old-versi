@@ -1,0 +1,124 @@
+<template>
+  <main>
+    <ul class="o-vertical-spacing o-vertical-spacing--l">
+      <li class="blog-post o-media">
+        <div class="o-media__body">
+          <div class="o-vertical-spacing">
+            <h3 class="blog-post__headline" style="height: 20px">
+              <span class="skeleton-box" style="width: 100%" />
+            </h3>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </main>
+</template>
+<style lang="scss" scoped>
+.skeleton-box {
+  display: inline-block;
+  height: 100%;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  background-color: #dddbdd;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(#fff, 0) 0,
+      rgba(#fff, 0.2) 20%,
+      rgba(#fff, 0.5) 60%,
+      rgba(#fff, 0)
+    );
+    animation: shimmer 1s infinite;
+    content: '';
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+.blog-post {
+  &__headline {
+    // font-size: 1.25em;
+    // font-weight: bold;
+  }
+
+  &__meta {
+    font-size: 0.85em;
+    color: #6b6b6b;
+  }
+}
+
+// OBJECTS
+
+.o-media {
+  display: flex;
+
+  &__body {
+    flex-grow: 1;
+    margin-left: 0em;
+  }
+}
+
+.o-vertical-spacing {
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  &--l {
+    > * + * {
+      margin-top: 2em;
+    }
+  }
+}
+
+// MISC
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 42em;
+  margin: 0 auto;
+  padding: 3em 1em;
+  font-family: 'Karla', sans-serif;
+  line-height: 1.4;
+}
+
+header {
+  max-width: 42em;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+main {
+  //   margin-top: 3em;
+}
+
+header {
+  h1 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 2em;
+  }
+
+  p {
+    &:not(:first-child) {
+      margin-top: 1em;
+    }
+  }
+}
+</style>
