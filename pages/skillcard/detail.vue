@@ -7,7 +7,7 @@
           src="~/assets/images/skillcard/icon_skillcard.png"
           class="icon-button"
         >
-        <div class="name-card">
+        <div v-if="!isLoading" class="name-card">
           {{ detail.skill }}
         </div>
         <div class="column profile-container">
@@ -35,7 +35,7 @@
           src="~/assets/images/skillcard/detail-name.svg"
           class="background-button"
         >
-        <div class="name-card">
+        <div v-if="!isLoading" class="name-card">
           What is “{{ detail.skill }}”?
         </div>
       </div>
@@ -395,7 +395,8 @@ export default {
       selected1: true,
       selected2: false,
       currentPage: 1,
-      currentPage2: 1
+      currentPage2: 1,
+      isLoading: false
     }
   },
 
@@ -431,12 +432,15 @@ export default {
       }
     },
     getData () {
+      this.isLoading = true
       this.$store
         .dispatch('skillcard/fetchDetailSkill', this.id)
         .then((response) => {
+          this.isLoading = false
           // console.log(response)
         })
         .catch((error) => {
+          this.isLoading = false
           this.$toast.error(error.response, {
             position: 'top-center',
             duration: 5000

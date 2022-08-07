@@ -1,14 +1,14 @@
 <template>
   <div class="container-personality">
-    <div style="margin-left: 180px; width: 1000px; height: 700px">
+    <div style="margin-left: 170px; width: 1100px; height: 700px">
       <iframe
         ref="iframe"
         src="/pcgame/index.html"
         style="width: 100%; height: 100%"
       />
     </div>
-    asadas
-    <div class="btn-edit" @click="goHome()">
+   
+    <!-- <div class="btn-edit" @click="goHome()">
       <img
         src="~/assets/images/btn-petra.png"
         style="width: 224.22px; height: 36px"
@@ -16,7 +16,7 @@
       <div class="text-edit">
         Lanjut
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

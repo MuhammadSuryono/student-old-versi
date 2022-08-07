@@ -47,7 +47,11 @@
             Module Dominance
           </div>
         </div>
-        <div v-if="selected3" class="no-select tab-petra">
+        <div
+          v-if="selected3"
+          class="no-select tab-petra"
+          @click="tab(3, false)"
+        >
           <img src="~/assets/images/tab/tab-active.svg" class="icon-button">
           <div class="text-petra">
             Comment Stars

@@ -3,7 +3,6 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
-  layoutTransition: 'fade',
 
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
@@ -59,17 +58,23 @@ export default {
   },
 
   auth: {
+    redirect: {
+      login: '/splash',
+      logout: '/login',
+      callback: '/login',
+      home: false
+    },
     strategies: {
       local: {
         token: {
-          required: false,
-          type: false
+          maxAge: 21600,
+          property: 'data.access_token',
+          global: true
         },
         endpoints: {
           login: {
             url: '/login',
-            method: 'post',
-            propertyName: 'data.data.access_token'
+            method: 'post'
           },
           logout: false,
           user: false

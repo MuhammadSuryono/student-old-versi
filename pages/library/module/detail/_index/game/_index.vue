@@ -256,7 +256,23 @@
               <div class="head-reward">
                 Completion Reward
               </div>
-              <div class="columns is-gapless photo-reward">
+              <div
+                style="
+                  background: #4c7bc1;
+                  height: 34.73019027709961px;
+                  width: 168.09616088867188px;
+                  margin-left: auto;
+                  margin-right: auto;
+                  color: white;
+                  text-align: Center;
+                  padding-top: 7px;
+                  font-size: 14px;
+                  margin-top: 170px;
+                "
+              >
+                Coming Soon
+              </div>
+              <!-- <div class="columns is-gapless photo-reward">
                 <div class="column is-narrow left-reward">
                   <img
                     :src="detailActivity.month_reward.avatar_female"
@@ -332,7 +348,7 @@
                 "
               >
                 Reward Acquired!
-              </div>
+              </div> -->
             </div>
             <div class="column is-narrow list-reward">
               <div
@@ -375,7 +391,7 @@
               <img :src="dataUser.avatar.image" class="p-img">
             </div>
             <div class="p-username">
-              {{ dataUser.username }} {{ indexSub2 }}
+              {{ dataUser.username }}
             </div>
             <span class="petra-comment">
               <div class="comment-text">Leave a comment.</div>
@@ -417,7 +433,7 @@
                       class="column is-narrow"
                       style="height: 80px"
                       :style="{
-                        backgroundColor: '#' + review.avatar_background
+                        backgroundColor: review.avatar_background
                       }"
                     >
                       <img :src="review.avatar" class="pic-petra">
@@ -584,7 +600,7 @@ export default {
       itemsDiscuss: {},
       infiniteId: 1,
       total: 0,
-      showReply: true,
+      showReply: false,
       indexSub: null,
       indexSub2: 0,
       boxReply: false,
@@ -670,6 +686,7 @@ export default {
             .then((response) => {
               this.itemsDiscuss = response.data.data.data
               this.total = response.data.data.total
+              this.boxReply = false
             })
         })
         .catch((error) => {

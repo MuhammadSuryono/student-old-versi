@@ -29,7 +29,7 @@ export default {
 
     const transitionEl = h('transition', {
       props: {
-        name: 'fade',
+        name: 'layout',
         mode: 'out-in'
       },
       on: {

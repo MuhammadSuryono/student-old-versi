@@ -105,6 +105,13 @@
     "_name": "_e063e576"
   },
   {
+    "name": "library-module-detail-index-quiz-embed",
+    "path": "/library/module/detail/:index/quiz/embed",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/_index/quiz/embed.vue",
+    "chunkName": "pages/library/module/detail/_index/quiz/embed",
+    "_name": "_1cb083e8"
+  },
+  {
     "name": "library-module-detail-index-game",
     "path": "/library/module/detail/:index/game/:index",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/petra-lms-frontend-student/pages/library/module/detail/_index/game/_index.vue",

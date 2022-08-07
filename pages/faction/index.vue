@@ -81,28 +81,10 @@
           LV {{ dataFactionUser.faction.current_level }}/10
         </div>
       </div>
-      <div class="columns is-gapless reward-card">
-        <div class="column is-narrow next-reward">
-          <div class="border-card">
-            <div class="content-reward">
-              <div class="next">
-                NEXT REWARD
-              </div>
-              <div class="suite" style="text-transform: uppercase">
-                {{ dataFactionUser.next_reward.name }}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="column image-reward">
-          <div class="border-image">
-            <img
-              :src="dataFactionUser.next_reward.image"
-              style="width: 100%; height: 100%; object-fit: cover"
-            >
-          </div>
-        </div>
-      </div>
+      <FactionReward
+        :title="dataFactionUser.next_reward.name"
+        :image="dataFactionUser.next_reward.image"
+      />
       <div class="btn-faction no-select" @click="detailfaction()">
         <div class="border-2">
           See Faction Details

@@ -21,8 +21,8 @@
             :level="data.level"
             :faction="data.faction"
             :faction-bg="data.faction_bg"
-            :courses="data.courses"
-            :achievements="data.achievements"
+            :courses="totalModule"
+            :achievements="totalArchivement"
           />
         </div>
       </b-sidebar>
@@ -35,6 +35,8 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
+      totalModule: 0,
+      totalArchivement: 0,
       expandOnHover: true,
       expandWithDelay: false,
       mobile: 'reduce',
@@ -79,15 +81,18 @@ export default {
     this.reduce = !this.sidebar
     this.getData()
     this.getCluster()
-    console.log('reduced : ', this.reduce)
+    this.getTotal()
   },
   methods: {
-      getCluster(){
-      this.$axios.get("personality-cluster/getUserPersonalityCluster").then(response => {
-        this.cluster = response.data.data.personality_cluster
-      }).catch(error => {
-        console.log(error)
-      })
+    getCluster () {
+      this.$axios
+        .get('personality-cluster/getUserPersonalityCluster')
+        .then((response) => {
+          this.cluster = response.data.data.personality_cluster
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
     getData () {
       console.log('user', this.users)
@@ -103,10 +108,27 @@ export default {
         this.data.avatar_bg = this.users.faction.avatar_bgcolor
       }
     },
+    async getTotal () {
+     await this.$axios
+        .get('/student/me')
+        .then((res) => {
+          console.log(res)
+          this.data.level = res.data.user_level
+          this.totalModule = res.data.modules
+          this.totalArchivement = res.data.achievements
+        })
+        .catch((error) => {
+          this.$notify.error({
+            title: 'Error',
+            message: error,
+            type: 'success'
+          })
+        })
+    },
     onSidebar () {
-      console.log('asdas', this.reduce)
       this.reduce = !this.reduce
       this.$store.commit('user/SET_SIDEBAR')
+      this.getTotal()
     },
     onSidebarOpen () {
       this.reduce = true

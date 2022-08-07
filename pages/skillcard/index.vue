@@ -60,17 +60,27 @@
                   class="background-button"
                 >
                 <img
+                  v-if="cluster != null"
                   :src="cluster.icon"
                   class="icon-button"
-                  v-if="cluster != null"
                 >
                 <div class="name-card">
-                  {{ dataSkillcard.name }}
+                  <span v-if="!isLoading_1">
+                    {{ dataSkillcard.name }}
+                  </span>
+                  <Skeleton v-else style="width: 150px; margin-top: 2px" />
                 </div>
               </div>
               <div class="card-title2">
                 <div class="name-card">
-                  {{ dataSkillcard.attribute }}
+                  <span v-if="!isLoading_1">
+                    {{ dataSkillcard.attribute }}
+                  </span>
+                  <span v-else>
+                    <Skeleton
+                      style="width: 220px; margin-top: 10px; margin-left: 10px"
+                    />
+                  </span>
                 </div>
               </div>
             </div>
@@ -95,21 +105,52 @@
               </div>
             </div>
             <div class="content-skill" style="width: 670px; left: -10px">
-              <div
-                v-for="(i, index) in dataSkills"
-                :key="index"
-                class="columns is-gapless list-card"
-                style="height: 25px"
-              >
-                <div class="column title-card">
-                  {{ index + 1 }}. {{ i.skill }}
+              <span v-if="!isLoading_2">
+                <div
+                  v-for="(i, index) in dataSkills"
+                  :key="index"
+                  class="columns is-gapless list-card"
+                  style="height: 25px"
+                >
+                  <div class="column title-card">
+                    {{ index + 1 }}. {{ i.skill }}
+                  </div>
+                  <div class="column" style="transform: skew(-10deg)">
+                    <div class="columns is-gapless" />
+                  </div>
                 </div>
-                <div class="column" style="transform: skew(-10deg)">
-                  <div class="columns is-gapless" />
-                </div>
-              </div>
+              </span>
+              <span v-else>
+                <Skeleton
+                  style="width: 640px; margin-top: 10px; margin-left: 10px"
+                />
+                <Skeleton
+                  style="width: 640px; margin-top: 10px; margin-left: 10px"
+                />
+                <Skeleton
+                  style="width: 640px; margin-top: 10px; margin-left: 10px"
+                />
+                <Skeleton
+                  style="width: 640px; margin-top: 10px; margin-left: 10px"
+                />
+                <Skeleton
+                  style="width: 640px; margin-top: 10px; margin-left: 10px"
+                />
+                <Skeleton
+                  style="width: 640px; margin-top: 10px; margin-left: 10px"
+                />
+                <Skeleton
+                  style="
+                    width: 640px;
+                    margin-top: 10px;
+                    margin-bottom: 20px;
+                    margin-left: 10px;
+                  "
+                />
+              </span>
             </div>
             <div
+              v-if="!isLoading_2"
               class="content-skill"
               style="
                 background: transparent;
@@ -217,7 +258,9 @@ export default {
       avatar_bgcolor: '',
       avatar_icon: '',
       progress: 0,
-      isLoading: false
+      isLoading_1: false,
+      isLoading_2: true,
+      isLoading: true
     }
   },
 
@@ -250,18 +293,23 @@ export default {
     this.$store.dispatch('user/get')
     this.avatar_bgcolor = this.users.faction.avatar_bgcolor
     this.avatar_icon = this.users.faction.faction
-    this.getDataDecoration()
-    this.getDataPersonalityCluster()
-    this.getDataAllSkills()
- 
+    this.getDataAll()
   },
   methods: {
-   
+    getDataAll () {
+      this.getDataDecoration()
+      this.getDataPersonalityCluster()
+      this.getDataAllSkills()
+    },
     getDataAllSkills () {
+      this.isLoading_2 = true
       this.$store
         .dispatch('skillcard/fetchAllSkill')
-        .then((response) => {})
+        .then((response) => {
+          this.isLoading_2 = false
+        })
         .catch((error) => {
+          this.isLoading_2 = false
           this.$toast.error(error.response, {
             position: 'top-center',
             duration: 5000
@@ -273,13 +321,15 @@ export default {
         })
     },
     getDataPersonalityCluster () {
+      this.isLoading_1 = true
       this.$store
         .dispatch('skillcard/fetchPersonalityCluster')
         .then((response) => {
+          this.isLoading_1 = false
           this.cluster = response.data.data.personality_cluster
-          // console.log(response.data.data.personality_cluster);
         })
         .catch((error) => {
+          this.isLoading_1 = false
           this.$toast.error(error.response, {
             position: 'top-center',
             duration: 5000
@@ -292,12 +342,15 @@ export default {
     },
     getDataDecoration () {
       this.isLoading = true
+      console.log('getDataDecoration : ')
       this.$store
         .dispatch('decoration/fetchCurrentDecoration')
         .then((response) => {
+          console.log('res : ', response)
           this.isLoading = false
         })
         .catch((error) => {
+          console.log('error : ', error)
           this.isLoading = false
           this.$toast.error(error.response.data.message, {
             position: 'top-center',
@@ -643,7 +696,7 @@ export default {
                 color: #ffffff;
                 cursor: pointer;
                 transform: skew(-10deg);
-                z-index: 20;;
+                z-index: 20;
               }
               .title-card:hover {
                 text-decoration: underline;

@@ -266,7 +266,7 @@ export default {
       // height: 100%;
       // display: flex;
       flex: 1 0 auto;
-      transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      // transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .petra-overlay {
       width: 100%;

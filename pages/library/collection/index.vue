@@ -19,14 +19,19 @@
       <div class="filter-module">
         <div class="columns is-gapless mb-0 pb-0">
           <div class="hexagon">
-            <input v-model="searchData" type="text" placeholder="Search...">
+            <input
+              v-model="searchData"
+              type="text"
+              placeholder="Search..."
+              @keyup.enter="toSearch"
+            >
           </div>
           <div class="search-btn" @click="toSearch()">
             <IconSearch class="icons" />
           </div>
-          <div class="filter-btn" @click="dialog = true">
+          <!-- <div class="filter-btn" @click="dialog = true">
             <IconFilter class="icons" />
-          </div>
+          </div> -->
         </div>
       </div>
       <span>
@@ -41,93 +46,124 @@
             color: #1c4091;
           "
         >
-          {{ items.total }} result found.
+          {{ items.length }} result found.
         </div>
         <div class="card-list">
-          <div
-            v-for="(item, index) in items"
-            :key="index"
-            style="padding: 10px"
-          >
-            <v-toolbar color="white" class="contain-list">
-              <img
-                :src="item.display_picture"
-                style="height: 79px; width: 122px"
-              >
-              <v-divider class="mx-4" vertical />
-              <div style="width: 300px">
-                <div
-                  style="
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 16.8687px;
-                    line-height: 22px;
-
-                    color: #3b69bc;
-                  "
+          <div v-if="!isLoading">
+            <div
+              v-for="(item, index) in items"
+              :key="index"
+              style="padding: 10px"
+            >
+              <v-toolbar color="white" class="contain-list">
+                <img
+                  :src="item.display_picture"
+                  style="height: 79px; width: 122px"
                 >
-                  {{ item.module_name }}
+                <v-divider class="mx-4" vertical />
+                <div style="width: 300px">
+                  <div
+                    style="
+                      font-style: normal;
+                      font-weight: 600;
+                      font-size: 16.8687px;
+                      line-height: 22px;
+
+                      color: #3b69bc;
+                    "
+                  >
+                    {{ item.module_name }}
+                  </div>
+                  <div
+                    style="
+                      font-style: normal;
+                      font-weight: 500;
+                      font-size: 12.6515px;
+                      line-height: 16px;
+
+                      color: #859bb5;
+                    "
+                  >
+                    By {{ item.studio_name }}
+                  </div>
                 </div>
+                <v-spacer />
+                <v-divider class="mx-4" vertical />
+                <div>
+                  <div
+                    style="
+                      font-style: normal;
+                      font-weight: 400;
+                      font-size: 16.8687px;
+                      line-height: 22px;
+                      color: #3e4d68;
+                    "
+                  >
+                    Module Details
+                  </div>
+                  <div
+                    style="
+                      font-style: normal;
+                      font-weight: 500;
+                      font-size: 12.6515px;
+                      line-height: 14px;
+
+                      color: #859bb5;
+                    "
+                  >
+                    {{ item.total_discussion }} Discussions
+                  </div>
+                </div>
+                <v-spacer />
+                <v-divider class="mx-4" vertical />
                 <div
                   style="
+                    background-color: #0aa7c1;
+                    width: 158.61px;
+                    height: 38.76px;
+                    text-align: center;
                     font-style: normal;
                     font-weight: 500;
-                    font-size: 12.6515px;
-                    line-height: 16px;
-
-                    color: #859bb5;
+                    font-size: 19.2785px;
+                    line-height: 25px;
+                    padding-top: 6px;
+                    cursor: pointer;
+                    color: #ffffff;
                   "
+                  @click="toDetail(item)"
                 >
-                  By {{ item.studio_name }}
+                  Play
                 </div>
+              </v-toolbar>
+            </div>
+            <infinite-loading
+              v-if="items.length"
+              spinner="spinner"
+              style="margin-top: 10px; margin-bottom: 20px"
+              :identifier="infiniteId"
+              @infinite="infiniteScroll"
+            >
+              <div slot="spinner" style="color: white">
+                <v-progress-circular indeterminate color="white" />
               </div>
-              <v-spacer />
-              <v-divider class="mx-4" vertical />
-              <div>
-                <div
-                  style="
-                    font-style: normal;
-                    font-weight: 400;
-                    font-size: 16.8687px;
-                    line-height: 22px;
-                    color: #3e4d68;
-                  "
-                >
-                  Module Details
-                </div>
-                <div
-                  style="
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 12.6515px;
-                    line-height: 14px;
-
-                    color: #859bb5;
-                  "
-                >
-                  {{ item.total_discussion }} Discussions
-                </div>
-              </div>
-              <v-spacer />
-              <v-divider class="mx-4" vertical />
-              <div
-                style="
-                  background-color: #0aa7c1;
-                  width: 158.61px;
-                  height: 38.76px;
-                  text-align: center;
-                  font-style: normal;
-                  font-weight: 500;
-                  font-size: 19.2785px;
-                  line-height: 25px;
-                  padding-top: 6px;
-
-                  color: #ffffff;
-                "
-              >
-                Play
-              </div>
-            </v-toolbar>
+              <div slot="no-results" style="color: white">No results</div>
+              <div slot="no-more" style="color: white">No more data</div>
+            </infinite-loading>
+          </div>
+          <div v-else style="height: 400px">
+            <v-row
+              align="center"
+              justify="center"
+              style="width: 100%; height: 100%"
+            >
+              <v-col align="center" justify="center">
+                <v-progress-circular
+                  indeterminate
+                  color="white"
+                  style="color: white; padding-top: 250px"
+                />
+              </v-col>
+            </v-row>
           </div>
         </div>
       </span>
@@ -264,14 +300,15 @@ export default {
 
   data () {
     return {
+      isLoading: false,
+      total: 0,
+      infiniteId: 1,
       dialog: false,
       selected1: true,
       selected2: false,
-
       page: 1,
       items: {},
       searchData: '',
-
       rate: 2,
       window: {
         width: 0,
@@ -323,40 +360,28 @@ export default {
     this.getData()
   },
   methods: {
+    toDetail (data) {
+      this.$router.push({
+        name: 'library-module-detail-index',
+        params: { index: data.module_id }
+      })
+    },
     handleResize () {
       this.window.width = window.innerWidth
       this.window.height = window.innerHeight
     },
     toSearch () {
+      this.infiniteId += 1
       if (this.searchData.length > 0) {
         this.searchBtn = true
-        this.getsearchData()
+        this.getData()
       } else {
         this.searchBtn = false
         this.getData()
       }
     },
-    getsearchData () {
-      const data = {
-        keyword: this.searchData
-      }
-      this.$store
-        .dispatch('module/fetchAllMyCollection', data)
-        .then((response) => {
-          this.items = response.data.data
-        })
-        .catch((error) => {
-          this.$toast.error(error.response, {
-            position: 'top-center',
-            duration: 5000
-          })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
-        })
-    },
     getData () {
+      this.isLoading = true
       this.page = 1
       const data = {
         page: this.page,
@@ -366,6 +391,8 @@ export default {
         .dispatch('module/fetchAllMyCollection', data)
         .then((response) => {
           this.items = response.data.data.data
+          this.total = response.data.data.total
+          this.isLoading = false
         })
         .catch((error) => {
           this.$toast.error(error.response, {
@@ -379,12 +406,12 @@ export default {
         })
     },
     infiniteScroll ($state) {
-      const data = {
-        page: this.page,
-        keyword: this.searchData
-      }
       setTimeout(() => {
         this.page++
+        const data = {
+          page: this.page,
+          keyword: this.searchData
+        }
         this.$store
           .dispatch('module/fetchAllMyCollection', data)
           .then((resp) => {
@@ -409,22 +436,14 @@ export default {
     },
     goBack () {
       this.$router.push('/library')
-    },
-
-    tab (id, number) {
-      if (id === 1) {
-        this.selected1 = true
-        this.selected2 = false
-      }
-      if (id === 2) {
-        this.selected1 = false
-        this.selected2 = true
-      }
     }
   }
 }
 </script>
 <style lang="scss" scoped>
+.hexagon input:focus {
+  outline: none;
+}
 .bg-img {
   background-image: url('~@/assets/images/module/bg.png');
   height: 100%;

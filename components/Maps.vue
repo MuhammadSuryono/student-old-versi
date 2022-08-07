@@ -2,7 +2,7 @@
   <div style="position: relative; width: 1085px; height: 607px; z-index: 5">
     <!-- <div> -->
     <img
-      src="~/assets/images/maps/maps-container.png"
+      src="~/assets/images/Frame_70.png"
       style="position: absolute; z-index: 5; top: 0px"
     >
     <div
@@ -21,10 +21,6 @@
       <IconLocation v-if="hover2" class="loc-2" bg-color="#ffcf24" />
       <IconLocation v-else class="loc-2" bg-color="#154CA0" />
     </div>
-    <!-- <div @mouseover="hover3 = true" @mouseleave="hover3 = false">
-      <IconLocation v-if="hover3" class="loc-3" bg-color="#ffcf24" />
-      <IconLocation v-else class="loc-3" bg-color="#154CA0" />
-    </div> -->
     <div class="btn-back" @click="closeMaps()">
       <img
         src="~/assets/images/back-btn.png"
@@ -67,7 +63,8 @@
         style="position: absolute; z-index: 5; top: 20px; left: 29px"
       >
       <div>
-        <img class="center-petra" src="~/assets/images/maps/goget.svg">
+        <img class="center-petra" src="~/assets/images/Frame_71.png">
+        <img class="center-petra2" src="~/assets/images/travel-text.png">
       </div>
       <div class="text-lib">
         Travel to the {{ destination }}?
@@ -200,7 +197,16 @@ export default {
 .center-petra {
   margin: auto;
   position: absolute;
-  top: -150px;
+  height: 100px;
+  top: -217px;
+  left: 13px;
+  bottom: 0;
+  right: 0;
+}
+.center-petra2 {
+  margin: auto;
+  position: absolute;
+  top: 0px;
   left: 0;
   bottom: 0;
   right: 0;
