@@ -50,6 +50,7 @@ export const actions = {
   },
   async fetchCurrentDecoration ({ commit }) {
     try {
+      console.log('tes fetchCurrentDecoration')
       const response = await this.$repositories.decoration.getOne()
       commit('SET_CURRENT_DATA', response)
       commit('SET_CURRENT_DATA_DETAIL', response.data.data.background)
@@ -78,6 +79,7 @@ export const actions = {
       }
       commit('SET_DATA', response)
       commit('SET_ITEM', newItem)
+      console.log('tes')
       return response
     } catch (e) {
       return e.response

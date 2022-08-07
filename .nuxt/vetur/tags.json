@@ -47,8 +47,8 @@
   "Profile": {
     "description": "Auto imported from components/Profile.vue"
   },
-  "FactionReward": {
-    "description": "Auto imported from components/faction/Reward.vue"
+  "Skeleton": {
+    "description": "Auto imported from components/Skeleton.vue"
   },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
@@ -91,6 +91,9 @@
   },
   "IconTabSkill2": {
     "description": "Auto imported from components/icon/TabSkill2.vue"
+  },
+  "FactionReward": {
+    "description": "Auto imported from components/faction/Reward.vue"
   },
   "SidebarAvatar": {
     "description": "Auto imported from components/sidebar/Avatar.vue"

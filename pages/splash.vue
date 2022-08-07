@@ -16,7 +16,10 @@
 export default {
   name: 'HomePage',
   layout: 'login',
-  mounted () {},
+  mounted () {
+    // this.$auth.logout()
+    // this.$router.push('/login')
+  },
   methods: {
     checkUser () {
       this.$axios
