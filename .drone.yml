@@ -63,5 +63,3 @@ trigger:
     - push
 depends_on:
   - Build for development
-
-
