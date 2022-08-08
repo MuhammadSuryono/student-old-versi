@@ -35,6 +35,7 @@ steps:
     environment:
       IMAGE_NAME: primeskills/petra-student:dev-${DRONE_COMMIT_SHA:0:6}
       CONTAINER_NAME: petra-student-dev
+      PORT_PUBLISH: 5006
     settings:
       host:
         from_secret: server_host
