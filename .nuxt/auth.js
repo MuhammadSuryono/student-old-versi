@@ -43,7 +43,6 @@ export default function (ctx, inject) {
   // local
   $auth.registerStrategy('local', new LocalScheme($auth, {
   "token": {
-    "maxAge": 21600,
     "property": "data.access_token",
     "global": true
   },

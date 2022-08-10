@@ -67,7 +67,6 @@ export default {
     strategies: {
       local: {
         token: {
-          maxAge: 21600,
           property: 'data.access_token',
           global: true
         },

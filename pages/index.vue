@@ -4,6 +4,10 @@
     :style="{ backgroundImage: 'url(' + pathDecoration + ')' }"
   >
     <!-- {{ pathDecoration }} -->
+
+    <vue-video
+      src="https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3"
+    />
   </div>
 </template>
 

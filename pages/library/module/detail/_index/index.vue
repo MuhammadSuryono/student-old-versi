@@ -454,31 +454,44 @@ export default {
       this.getReview()
     },
     addReview () {
-      this.isLoading = true
-      const data = {
-        id: this.$route.params.index,
-        review: this.descReview,
-        rating: this.ratingReview
-      }
-      this.$store
-        .dispatch('module/addReview', data)
-        .then((response) => {
-          console.log('success')
-          this.getReview()
-          this.getData()
+      if (this.descReview === '' || this.ratingReview === 0) {
+        this.$toast.error('Review and rate module is required', {
+          position: 'top-center',
+          duration: 5000
         })
-        .catch((error) => {
-          console.log('error:', error)
-          this.isLoading = false
-          this.$toast.error(error.response, {
-            position: 'top-center',
-            duration: 5000
+      } else {
+        this.isLoading = true
+        const data = {
+          id: this.$route.params.index,
+          review: this.descReview,
+          rating: this.ratingReview
+        }
+        this.$store
+          .dispatch('module/addReview', data)
+          .then((response) => {
+            console.log('success', response)
+            if (response.status !== 200 || response.status !== 201) {
+              this.$toast.error(response.data.error.message, {
+                position: 'top-center',
+                duration: 5000
+              })
+            }
+            this.getReview()
+            this.getData()
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
-        })
+          .catch((error) => {
+            console.log('error:', error)
+            this.isLoading = false
+            this.$toast.error(error.response, {
+              position: 'top-center',
+              duration: 5000
+            })
+            if (error.status === 401) {
+              this.$auth.logout()
+              this.$router.push('/login')
+            }
+          })
+      }
     },
     openDialog () {
       this.$dialog.open({

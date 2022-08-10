@@ -493,7 +493,7 @@
                         class="column is-narrow"
                         style="height: 80px"
                         :style="{
-                          backgroundColor: '#' + sub.avatar_background
+                          backgroundColor: sub.avatar_background
                         }"
                       >
                         <img :src="sub.avatar" class="pic-petra">
@@ -520,14 +520,14 @@
                         class="column is-narrow"
                         style="height: 80px"
                         :style="{
-                          backgroundColor: '#' + review.avatar_background
+                          backgroundColor: dataUser.faction.avatar_bgcolor
                         }"
                       >
-                        <img :src="review.avatar" class="pic-petra">
+                        <img :src="dataUser.avatar.image" class="pic-petra">
                       </div>
                       <div class="column box-list">
                         <div class="student-name">
-                          {{ review.username }}
+                          {{ dataUser.username }}
                         </div>
                         <div class="petra-review" style="padding-bottom: 70px">
                           <textarea
@@ -685,6 +685,7 @@ export default {
             .dispatch('module/fetchAllDiscuss', data)
             .then((response) => {
               this.itemsDiscuss = response.data.data.data
+              console.log('discuss ', this.itemsDiscuss)
               this.total = response.data.data.total
               this.boxReply = false
             })
