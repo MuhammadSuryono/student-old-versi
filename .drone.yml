@@ -1,0 +1,72 @@
+kind: pipeline
+type: docker
+name: Build for development
+
+steps:
+  - name: "Build Image Development Student"
+    image: plugins/docker
+    environment:
+      app_version: dev-${DRONE_COMMIT_SHA:0:6}
+      app_environment: development
+    commands:
+      - echo "basePath=/student-dev/" > .env
+      - echo "basePathBuild=/student-dev/_nuxt/" >> .env
+      - echo "baseUrl=https://dev.petraverse.id/api" >> .env
+      - cat .env
+    settings:
+      repo: primeskills/petra-student
+      tags:
+        - dev-${DRONE_COMMIT_SHA:0:6}
+        - dev-latest
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      dockerfile: Dockerfile
+
+trigger:
+  branch:
+    - development
+  event:
+    - push
+---
+kind: pipeline
+type: docker
+name: Deploy development
+
+steps:
+  - name: ssh commands
+    image: appleboy/drone-ssh
+    environment:
+      IMAGE_NAME: primeskills/petra-student:dev-${DRONE_COMMIT_SHA:0:6}
+      CONTAINER_NAME: petra-student-dev
+      PORT_PUBLISH: 5006
+    settings:
+      host:
+        from_secret: server_host
+      username:
+        from_secret: server_username
+      key:
+        from_secret: rsa_key
+      port: 22
+      envs:
+        - IMAGE_NAME
+        - CONTAINER_NAME
+      script:
+        - sudo docker stop $CONTAINER_NAME
+        - sudo docker rm $CONTAINER_NAME
+        - sudo docker system prune -a -f
+        - echo "Pull image docker"
+        - sudo docker pull $IMAGE_NAME
+        - echo "Run image docker"
+        - docker run -d --name $CONTAINER_NAME --publish $PORT_PUBLISH:3000 $IMAGE_NAME
+
+trigger:
+  branch:
+    - development
+  event:
+    - push
+depends_on:
+  - Build for development
+  
+
