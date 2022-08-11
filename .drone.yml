@@ -8,6 +8,11 @@ steps:
     environment:
       app_version: dev-${DRONE_COMMIT_SHA:0:6}
       app_environment: development
+    commands:
+      - echo "basePath=/student-dev/" > .env
+      - echo "basePathBuild=/student-dev/_nuxt/" >> .env
+      - echo "baseUrl=https://dev.petraverse.id/api" >> .env
+      - cat .env
     settings:
       repo: primeskills/petra-student
       tags:
@@ -21,7 +26,7 @@ steps:
 
 trigger:
   branch:
-    - dev/master
+    - development
   event:
     - push
 ---
@@ -58,7 +63,7 @@ steps:
 
 trigger:
   branch:
-    - dev/master
+    - development
   event:
     - push
 depends_on:
