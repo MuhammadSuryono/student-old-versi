@@ -65,6 +65,7 @@ export default {
       this.$router.push('/')
     },
     keluar () {
+      this.$store.commit('user/SET_BG_AUDIO', false)
       if (this.btn_profile) {
         this.$store.commit('user/SET_BTN_PROFILE')
       }

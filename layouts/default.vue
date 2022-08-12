@@ -123,6 +123,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import bgAudio from '../assets/audio/audio_bg.mp3'
 export default {
   data () {
     return {
@@ -132,7 +133,8 @@ export default {
         width: 0,
         height: 0
       },
-      coomingSoon: false
+      coomingSoon: false,
+      audio: null
     }
   },
   computed: {
@@ -151,6 +153,10 @@ export default {
       },
       btn_decoration: (state) => {
         return state.user.btn_decoration
+      },
+      playBg: (state) => {
+        // console.log('default playBg', state.user.playBg)
+        return state.user.playBg
       }
     }),
     widthSidebar () {
@@ -184,11 +190,32 @@ export default {
     if (this.maps) {
       this.$store.commit('user/SET_MAPS')
     }
+    this.playsound()
   },
   destroyed () {
     window.removeEventListener('resize', this.handleResize)
   },
   methods: {
+    playsound () {
+      console.log('play : ', this.playBg)
+      if (this.playBg) {
+        const audioFile = require('@/assets/audio/audio_btn.mp3')
+        const myAudio = new Audio(audioFile)
+        if (typeof myAudio.loop === 'boolean') {
+          myAudio.loop = true
+        } else {
+          myAudio.addEventListener(
+            'ended',
+            function () {
+              this.currentTime = 0
+              this.play()
+            },
+            false
+          )
+        }
+        myAudio.play()
+      }
+    },
     onSidebar () {
       this.$store.commit('user/SET_SIDEBAR')
     },
@@ -203,6 +230,7 @@ export default {
       this.window.height = window.innerHeight
     },
     showMaps () {
+      this.playsound()
       this.$store.commit('user/SET_MAPS')
     }
   }

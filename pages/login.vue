@@ -101,7 +101,6 @@ export default {
             if (response.status === 200 || response.status === 201) {
               if (response.data.data.user.role_id === 4) {
                 const data = response.data.data
-                console.log('res:', data)
                 localStorage.setItem('user_id', data.user.id)
                 this.$store.commit('user/SET_USERS', data)
                 if (
@@ -114,7 +113,6 @@ export default {
                     'user/updateImages',
                     data.user.avatar.image
                   )
-
                   this.$store.dispatch(
                     'user/updateImagesName',
                     data.user.avatar.name
@@ -128,7 +126,6 @@ export default {
                 } else {
                   this.$store.commit('user/SET_FULLNAME', data.user.first_name)
                 }
-                console.log(true)
                 // this.$auth.strategy.token.set(
                 //   'Bearer ' + response.data.data.access_token
                 // )
