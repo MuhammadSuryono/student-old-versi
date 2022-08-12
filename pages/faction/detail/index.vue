@@ -396,12 +396,15 @@
                 >
               </div>
             </div>
+            <img
+              src="~/assets/images/comingsoon.png"
+              style="position:absolute;top:368px;">
             <div class="card-user">
               <div class="user-avatar">
-                USER AVATAR
+                AVATAR REWARD
               </div>
               <div class="user-strategy">
-                {{ dataModuleDominance.next_reward_name }}
+                COMING SOON
               </div>
             </div>
           </div>
@@ -605,12 +608,15 @@
                 >
               </div>
             </div>
+            <img
+              src="~/assets/images/comingsoon.png"
+              style="position:absolute;top:368px;">
             <div class="card-user">
               <div class="user-avatar">
-                USER AVATAR
+                BACKGROUND REWARD
               </div>
               <div class="user-strategy">
-                {{ dataCommentStars.next_reward_name }}
+                COMING SOON
               </div>
             </div>
           </div>

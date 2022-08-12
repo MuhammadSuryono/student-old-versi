@@ -199,7 +199,7 @@ export default {
     playsound () {
       console.log('play : ', this.playBg)
       if (this.playBg) {
-        const audioFile = require('@/assets/audio/audio_btn.mp3')
+        const audioFile = require('@/assets/audio/audio_bg.mp3')
         const myAudio = new Audio(audioFile)
         if (typeof myAudio.loop === 'boolean') {
           myAudio.loop = true

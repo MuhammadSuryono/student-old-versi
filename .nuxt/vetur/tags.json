@@ -29,8 +29,14 @@
   "PNotification": {
     "description": "Auto imported from components/PNotification.vue"
   },
+  "Popup": {
+    "description": "Auto imported from components/Popup.vue"
+  },
   "PProgress": {
     "description": "Auto imported from components/PProgress.vue"
+  },
+  "Profile": {
+    "description": "Auto imported from components/Profile.vue"
   },
   "PSearch": {
     "description": "Auto imported from components/PSearch.vue"
@@ -40,12 +46,6 @@
   },
   "PTitleV2": {
     "description": "Auto imported from components/PTitleV2.vue"
-  },
-  "Popup": {
-    "description": "Auto imported from components/Popup.vue"
-  },
-  "Profile": {
-    "description": "Auto imported from components/Profile.vue"
   },
   "Skeleton": {
     "description": "Auto imported from components/Skeleton.vue"
