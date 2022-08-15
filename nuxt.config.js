@@ -35,6 +35,7 @@ export default {
     '~/plugins/notifications-ssr.js',
     '~/plugins/notifications-client.js',
     '~/plugins/modal.js'
+    // '~/plugins/auth.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -60,7 +61,7 @@ export default {
   auth: {
     redirect: {
       login: '/login',
-      logout: '/',
+      logout: false,
       callback: '/',
       home: '/splash'
     },
@@ -69,7 +70,8 @@ export default {
         token: {
           property: 'data.access_token',
           global: true,
-          maxAge: 1800
+          // maxAge: 10
+          maxAge: 7200
         },
         endpoints: {
           login: {
@@ -80,7 +82,8 @@ export default {
           user: false
         }
       }
-    }
+    },
+    plugins: ['~/plugins/auth.js']
   },
 
   recaptcha: {

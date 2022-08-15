@@ -1,7 +1,7 @@
 {
   "name": "student",
   "short_name": "student",
-  "description": "```bash\r # install dependencies\r $ npm install",
+  "description": "## Build Setup",
   "icons": [
     {
       "src": "/admin/admin/_nuxt/icons/icon_64x64.9a7eb7.png",

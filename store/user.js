@@ -19,7 +19,8 @@ export const state = () => ({
   cluster_attribute: {},
   popup: false,
   playBtn: false,
-  playBg: false
+  playBg: false,
+  expired: false
 })
 
 export const getters = {
@@ -37,6 +38,9 @@ export const getters = {
 }
 
 export const mutations = {
+  SET_EXPIRED (state, payload) {
+    state.expired = payload
+  },
   SET_BG_AUDIO (state, payload) {
     // eslint-disable-next-line no-new
     new Audio(bgAudio)
