@@ -25,6 +25,8 @@ export default {
             position: 'top-center',
             duration: 5000
           })
+
+          this.$store.commit('user/SET_BG_AUDIO', true)
           if (response.data.eligible) {
             this.$router.push({ path: '/personality' })
           } else {
@@ -37,6 +39,8 @@ export default {
     },
     end () {
       this.checkUser()
+      // this.$auth.logout()
+      // this.$router.push('/login')
     }
   }
 }

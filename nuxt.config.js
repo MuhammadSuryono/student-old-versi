@@ -35,6 +35,7 @@ export default {
     '~/plugins/notifications-ssr.js',
     '~/plugins/notifications-client.js',
     '~/plugins/modal.js'
+    // '~/plugins/auth.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -59,16 +60,18 @@ export default {
 
   auth: {
     redirect: {
-      login: '/splash',
-      logout: '/login',
-      callback: '/login',
-      home: false
+      login: '/login',
+      logout: false,
+      callback: '/',
+      home: '/splash'
     },
     strategies: {
       local: {
         token: {
           property: 'data.access_token',
-          global: true
+          global: true,
+          // maxAge: 10
+          maxAge: 7200
         },
         endpoints: {
           login: {
@@ -79,7 +82,8 @@ export default {
           user: false
         }
       }
-    }
+    },
+    plugins: ['~/plugins/auth.js']
   },
 
   recaptcha: {
@@ -113,7 +117,17 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    publicPath: process.env.basePathBuild ?? '/_nuxt/'
+    publicPath: process.env.basePathBuild ?? '/_nuxt/',
+    extend (config, ctx) {
+      config.module.rules.push({
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]',
+          esModule: false
+        }
+      })
+    }
   },
 
   vue: {
