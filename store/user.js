@@ -59,13 +59,23 @@ export const mutations = {
   SET_BG_AUDIO (state, payload) {
     state.playBg = payload
     const myAudio = new Audio(bgAudio)
+
+    console.log('now', myAudio)
+    console.log('now', myAudio.duration)
+    console.log('now', myAudio.currentTime)
     if (state.playBg) {
       if (typeof myAudio.loop === 'boolean') {
         myAudio.loop = true
       }
       myAudio.play()
+      console.log('play', myAudio)
+      console.log('play', myAudio.duration)
+      console.log('play', myAudio.currentTime)
     } else {
       myAudio.pause()
+      myAudio.currentTime = 0
+      console.log('pause', myAudio)
+      console.log('pause', myAudio.currentTime)
     }
   },
   SET_POPUP (state) {

@@ -1,5 +1,7 @@
 <template>
   <div>
+    <audio src="~/assets/audio/audio_bg.mp3" autoplay loop />
+
     <div style="height: 100%; width: 100%; z-index: -9999" />
     <PModal style="z-index: 9999" />
     <div class="container-petra">
@@ -198,7 +200,7 @@ export default {
     }
   },
   created () {
-    this.$store.commit('user/SET_BG_AUDIO', true)
+    // this.$store.commit('user/SET_BG_AUDIO', true)
     this.audio = new Audio()
     // eslint-disable-next-line nuxt/no-globals-in-created
     window.addEventListener('resize', this.handleResize)

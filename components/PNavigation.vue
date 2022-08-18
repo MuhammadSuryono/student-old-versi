@@ -130,7 +130,7 @@
               style="background-color: white"
               @mouseover="hover4 = true"
               @mouseleave="hover4 = false"
-              @click="buttonAudio()"
+              @click="popupAudio()"
             >
               <div class="triangle-left2" />
               <div class="triangle-right2" />
@@ -142,7 +142,7 @@
               class="card-menu"
               @mouseover="hover4 = true"
               @mouseleave="hover4 = false"
-              @click="buttonAudio()"
+              @click="popupAudio()"
             >
               <div class="triangle-left" />
               <div class="triangle-right" />
@@ -196,6 +196,9 @@ export default {
   methods: {
     showPopup () {
       this.$store.commit('user/SET_POPUP')
+    },
+    popupAudio() {
+      this.$store.commit('user/SET_POPUP_AUDIO', true)
     },
     buttonAudio () {
       this.$store.commit('user/SET_BTN_AUDIO', true)
