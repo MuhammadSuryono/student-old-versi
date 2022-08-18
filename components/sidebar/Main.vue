@@ -109,7 +109,7 @@ export default {
       }
     },
     async getTotal () {
-     await this.$axios
+      await this.$axios
         .get('/student/me')
         .then((res) => {
           console.log(res)
@@ -126,15 +126,18 @@ export default {
         })
     },
     onSidebar () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.reduce = !this.reduce
       this.$store.commit('user/SET_SIDEBAR')
       this.getTotal()
     },
     onSidebarOpen () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.reduce = true
       this.$store.commit('user/SET_SIDEBAR')
     },
     onSidebarClose () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.reduce = false
       this.$store.commit('user/SET_SIDEBAR')
     }

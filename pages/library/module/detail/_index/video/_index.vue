@@ -356,6 +356,7 @@ export default {
   mounted () {},
   methods: {
     addReview () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       const data = {
         module_rail_id: this.$route.params.index,
         review: this.descReview
@@ -490,9 +491,11 @@ export default {
         })
     },
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.go(-1)
     },
     tab (id, number) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (id === 1) {
         this.selected1 = true
         this.selected2 = false

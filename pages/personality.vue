@@ -41,6 +41,7 @@ export default {
     window.addEventListener('resize', this.handleResize)
   },
   mounted () {
+    this.$store.commit('user/SET_BG_AUDIO', false)
     this.checkUser()
     window.addEventListener('activityDoneEvent', this.goHome)
     this.$once('hook:beforeDestroy', () => {

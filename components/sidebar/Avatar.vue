@@ -211,12 +211,15 @@ export default {
   methods: {
     onEditProfile () {
       this.$store.commit('user/SET_BTN_PROFILE')
+      this.$store.commit('user/SET_BTN_AUDIO', true)
     },
     onManageDecoration () {
       this.$store.commit('user/SET_BTN_DECORATION')
+      this.$store.commit('user/SET_BTN_AUDIO', true)
     },
     onLibrary () {
       this.$router.push('/library')
+      this.$store.commit('user/SET_BTN_AUDIO', true)
     }
   }
 }

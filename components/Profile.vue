@@ -121,7 +121,7 @@
           <div class="columns pr-4">
             <div
               class="column is-narrow avatar-container is-offset-5"
-              @click="tab = 2"
+              @click="openTab(2)"
             >
               <div class="btn-edit" style="width: 258px; float: right">
                 <img
@@ -243,7 +243,7 @@
         </div>
         <div class="columns pr-4 mt-4">
           <div class="column is-narrow avatar-container">
-            <div class="btn-edit" @click="tab = 1">
+            <div class="btn-edit" @click="openTab(1)">
               <img
                 src="~/assets/images/back-btn.png"
                 style="width: 98.15px;height: 36.49px;x"
@@ -488,6 +488,10 @@ export default {
     this.getData()
   },
   methods: {
+    openTab (x) {
+      this.tab = x
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+    },
     selectedItem (x, item) {
       if (item.avatar !== 'null') {
         this.activeSelected = true
@@ -501,10 +505,12 @@ export default {
       }
     },
     backtoTab1 () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.tab = 1
       this.activeSelected = false
     },
     updateAvatar () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       // this.activeSelected = false
       console.log(this.selected)
       this.isLoading3 = true
@@ -530,6 +536,7 @@ export default {
         })
     },
     gotoAvatar () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.getAvatar()
       this.tab = 3
     },
@@ -537,11 +544,7 @@ export default {
       console.log(x)
     },
     getAvatar (x) {
-      // if (typeof x !== 'undefined') {
       this.activeItem = null
-      //   this.page = x
-      // }
-      console.log('activeItem : ', this.activeItem)
       this.isLoading3 = true
       this.$store
         .dispatch('avatar/fetchAvatar', this.page)
@@ -562,8 +565,10 @@ export default {
     },
     closeProfile () {
       this.$store.commit('user/SET_BTN_PROFILE')
+      this.$store.commit('user/SET_BTN_AUDIO', true)
     },
     updateProfile () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.isLoading = true
       const name = this.form.fullname.trim()
       const Firstname = name.split(' ')[0]
@@ -604,6 +609,7 @@ export default {
         })
     },
     changePassword () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.isLoading2 = true
       this.$store
         .dispatch('user/changePassword', {

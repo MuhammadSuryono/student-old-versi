@@ -1,4 +1,6 @@
-// export const state = () => ({
+import bgAudio from '../assets/audio/audio_bg.mp3'
+import btnAudio from '../assets/audio/audio_btn.mp3'
+import popupAudio from '../assets/audio/audio_popup.mp3'
 export const state = () => ({
   isLoading: false,
   users: [],
@@ -15,7 +17,9 @@ export const state = () => ({
   check_cluster: {},
   cluster: {},
   cluster_attribute: {},
-  popup: false
+  popup: false,
+  playBg: false,
+  expired: false
 })
 
 export const getters = {
@@ -33,6 +37,37 @@ export const getters = {
 }
 
 export const mutations = {
+  SET_EXPIRED (state, payload) {
+    state.expired = payload
+  },
+  SET_BTN_AUDIO (state, payload) {
+    const myAudio = new Audio(btnAudio)
+    if (payload) {
+      myAudio.play()
+    } else {
+      myAudio.pause()
+    }
+  },
+  SET_POPUP_AUDIO (state, payload) {
+    const myAudio = new Audio(popupAudio)
+    if (payload) {
+      myAudio.play()
+    } else {
+      myAudio.pause()
+    }
+  },
+  SET_BG_AUDIO (state, payload) {
+    state.playBg = payload
+    const myAudio = new Audio(bgAudio)
+    if (state.playBg) {
+      if (typeof myAudio.loop === 'boolean') {
+        myAudio.loop = true
+      }
+      myAudio.play()
+    } else {
+      myAudio.pause()
+    }
+  },
   SET_POPUP (state) {
     state.popup = !state.popup
   },

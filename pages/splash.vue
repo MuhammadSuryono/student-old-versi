@@ -36,6 +36,7 @@ export default {
         })
     },
     end () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.checkUser()
     }
   }

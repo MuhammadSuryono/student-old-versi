@@ -73,6 +73,7 @@ export default {
   },
   methods: {
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push('/')
     },
     getData () {

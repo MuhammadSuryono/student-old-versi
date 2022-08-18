@@ -108,10 +108,7 @@
           </div>
         </div>
         <div class="column is-narrow header-right" style="margin-left: 20px">
-          <div
-            class="card-activity"
-            style="position: relative"
-          >
+          <div class="card-activity" style="position: relative">
             <img
               src="~/assets/images/195.svg"
               style="height: 100%; width: 100%"
@@ -353,7 +350,7 @@ export default {
 
   computed: {
     ...mapState({
-        detailModule: (state) => {
+      detailModule: (state) => {
         return state.module.dataDetailModule
       },
       detailActivity: (state) => {
@@ -366,11 +363,13 @@ export default {
         return state.user.users
       }
     }),
-      quizId(){
+    quizId () {
       // find activity id by params index
-      let activity = this.detailModule.activity_rails.find(activity => activity.id == parseInt(this.$route.params.index))
+      const activity = this.detailModule.activity_rails.find(
+        activity => activity.id == parseInt(this.$route.params.index)
+      )
       // return this.$route.params.index
-      return parseInt(activity.activity_id);
+      return parseInt(activity.activity_id)
     },
     tinggi2 () {
       return 'height:' + this.tinggi
@@ -390,10 +389,11 @@ export default {
 
   mounted () {},
   methods: {
-       playGame (x) {
+    playGame (x) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       // console.log(x);
       this.$router.push({
-        name: "library-module-detail-index-quiz-embed",
+        name: 'library-module-detail-index-quiz-embed',
         params: {
           link: this.quizId
         }
@@ -402,6 +402,7 @@ export default {
       })
     },
     playGame2 (x) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       window.open(x, '_blank')
     },
     handleResize () {
@@ -413,6 +414,7 @@ export default {
       this.dialog = true
     },
     addReview () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       const data = {
         module_rail_id: this.$route.params.index,
         review: this.descReview
@@ -535,9 +537,11 @@ export default {
         })
     },
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.go(-1)
     },
     tab (id, number) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (id === 1) {
         this.selected1 = true
         this.selected2 = false

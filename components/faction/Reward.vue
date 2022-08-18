@@ -12,12 +12,9 @@
         </div>
       </div>
     </div>
-    <div class="column image-reward">
-      <div
-        class="border-image"
-        :style="{ backgroundImage: 'url(' + image + ')' }"
-      />
-    </div>
+    <div class="column image-reward" :style="{ backgroundImage: 'url(' + image + ')' }" />
+    
+    <div class="bg-img-reward" />
   </div>
 </template>
 <script>
@@ -37,7 +34,7 @@ export default {
 <style lang="scss" scoped>
 .reward-card {
   height: 79.78px;
-  width: 498.41px;
+  width: 499px;
   .next-reward {
     height: 61.67px;
     width: 310px;
@@ -73,24 +70,30 @@ export default {
       }
     }
   }
+  .bg-img-reward {
+    width: 198px;
+    height: 78px;
+    background: #FFF380;
+    opacity: 0.5;
+    position: absolute;
+    border-radius: 6px;
+    z-index: 3;
+    left: 439px;
+    top: 259px;
+  }
   .image-reward {
     width: 100%;
     height: 100%;
-    margin-left: 10px;
+    margin-left: -10px;
     height: 100%;
-    transform: skew(-18deg);
     border: 0.54px solid #f2f2f2;
-    z-index: 3;
-    border-radius: 5px;
+    z-index: 4;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
     position: relative;
-    .border-image {
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      width: 100%;
-      height: 100%;
-      left: -3px;
-    }
+    background-size: cover;
+    background-position: center;
   }
 }
 </style>

@@ -2,13 +2,7 @@
   <div
     class="bg-img"
     :style="{ backgroundImage: 'url(' + pathDecoration + ')' }"
-  >
-    <!-- {{ pathDecoration }} -->
-
-    <vue-video
-      src="https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3"
-    />
-  </div>
+  />
 </template>
 
 <script>
@@ -19,7 +13,8 @@ export default {
 
   data () {
     return {
-      isLoading: false
+      isLoading: false,
+      audio: null
     }
   },
 
@@ -38,9 +33,14 @@ export default {
   },
 
   mounted () {
+    // this.$store.commit('user/SET_BG_AUDIO', true)
     this.getDataDecoration()
   },
   methods: {
+    playsound () {
+      this.audio = new Audio(require('@/assets/audio/audio_bg.mp3'))
+      this.audio.play()
+    },
     getDataDecoration () {
       this.isLoading = true
       this.$store
