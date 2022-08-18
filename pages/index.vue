@@ -33,6 +33,7 @@ export default {
   },
 
   mounted () {
+    // this.$store.commit('user/SET_BG_AUDIO', true)
     this.getDataDecoration()
   },
   methods: {

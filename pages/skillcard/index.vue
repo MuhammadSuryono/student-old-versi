@@ -16,7 +16,7 @@
       </div>
       <div class="content-skillcard">
         <NuxtLink to="/">
-          <div class="btn-back">
+          <div class="btn-back" @click="buttonAudio()">
             <IconBackBtn />
             <div class="text-btn">
               BACK
@@ -296,6 +296,9 @@ export default {
     this.getDataAll()
   },
   methods: {
+    buttonAudio () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+    },
     getDataAll () {
       this.getDataDecoration()
       this.getDataPersonalityCluster()
@@ -363,6 +366,7 @@ export default {
         })
     },
     goDetail (x) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push({ path: '/skillcard/detail?id=' + x.id })
     }
   }

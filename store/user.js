@@ -1,6 +1,6 @@
-// export const state = () => ({
-
 import bgAudio from '../assets/audio/audio_bg.mp3'
+import btnAudio from '../assets/audio/audio_btn.mp3'
+import popupAudio from '../assets/audio/audio_popup.mp3'
 export const state = () => ({
   isLoading: false,
   users: [],
@@ -18,7 +18,6 @@ export const state = () => ({
   cluster: {},
   cluster_attribute: {},
   popup: false,
-  playBtn: false,
   playBg: false,
   expired: false
 })
@@ -41,14 +40,33 @@ export const mutations = {
   SET_EXPIRED (state, payload) {
     state.expired = payload
   },
-  SET_BG_AUDIO (state, payload) {
-    // eslint-disable-next-line no-new
-    new Audio(bgAudio)
-    console.log('payload :', payload)
-    state.playBg = payload
+  SET_BTN_AUDIO (state, payload) {
+    const myAudio = new Audio(btnAudio)
+    if (payload) {
+      myAudio.play()
+    } else {
+      myAudio.pause()
+    }
   },
-  SET_BTN_AUDIO (state) {
-    state.playBtn = !state.playBtn
+  SET_POPUP_AUDIO (state, payload) {
+    const myAudio = new Audio(popupAudio)
+    if (payload) {
+      myAudio.play()
+    } else {
+      myAudio.pause()
+    }
+  },
+  SET_BG_AUDIO (state, payload) {
+    state.playBg = payload
+    const myAudio = new Audio(bgAudio)
+    if (state.playBg) {
+      if (typeof myAudio.loop === 'boolean') {
+        myAudio.loop = true
+      }
+      myAudio.play()
+    } else {
+      myAudio.pause()
+    }
   },
   SET_POPUP (state) {
     state.popup = !state.popup

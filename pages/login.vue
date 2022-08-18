@@ -75,6 +75,9 @@ export default {
   computed: {
     ...mapState({
       expired: (state) => {
+        if (state.user.expired) {
+          this.$store.commit('user/SET_POPUP_AUDIO', true)
+        }
         return state.user.expired
       }
     })
@@ -95,6 +98,7 @@ export default {
       this.$store.commit('user/SET_EXPIRED', false)
     },
     login () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (this.state.email === '' || this.state.password === '') {
         if (this.state.email === '' && this.state.password === '') {
           this.$toast.error('Email & Password can not be empty.', {

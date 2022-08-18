@@ -398,7 +398,8 @@
             </div>
             <img
               src="~/assets/images/comingsoon.png"
-              style="position:absolute;top:368px;">
+              style="position: absolute; top: 368px"
+            >
             <div class="card-user">
               <div class="user-avatar">
                 AVATAR REWARD
@@ -610,7 +611,8 @@
             </div>
             <img
               src="~/assets/images/comingsoon.png"
-              style="position:absolute;top:368px;">
+              style="position: absolute; top: 368px"
+            >
             <div class="card-user">
               <div class="user-avatar">
                 BACKGROUND REWARD
@@ -815,9 +817,11 @@ export default {
       }, 500)
     },
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push('/faction')
     },
     tab (id) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (id === 1) {
         this.selected1 = true
         this.selected2 = false

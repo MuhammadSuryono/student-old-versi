@@ -454,6 +454,7 @@ export default {
       this.getReview()
     },
     addReview () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (this.descReview === '' || this.ratingReview === 0) {
         this.$toast.error('Review and rate module is required', {
           position: 'top-center',
@@ -508,6 +509,7 @@ export default {
       })
     },
     buyModule () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.isLoading = true
       const data = {
         user_id: localStorage.getItem('user_id'),
@@ -573,9 +575,11 @@ export default {
         })
     },
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push('/library/module')
     },
     tab (id, number) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (id === 1) {
         this.selected1 = true
         this.selected2 = false
@@ -586,6 +590,7 @@ export default {
       }
     },
     detailActivity (rail) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (!rail.detail.is_locked) {
         this.$store.dispatch('module/idModule', this.$route.params.index)
         if (rail.type_activity === 'game') {

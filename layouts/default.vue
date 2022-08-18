@@ -87,11 +87,11 @@
             v-if="light"
             src="~/assets/images/library/mascot.png"
             class="light-petra"
-            @click="light = false"
+            @click="onLight()"
           >
           <transition v-else name="fade" appear>
-            <div class="light-petra-true" @keydown.esc="tes()">
-              <div class="bg-overlay" @click="light = true" />
+            <div class="light-petra-true">
+              <div class="bg-overlay" @click="onLight()" />
               <img
                 src="~/assets/images/component/light/img-2.png"
                 class="text-light"
@@ -99,7 +99,7 @@
               <img
                 src="~/assets/images/library/mascot.png"
                 class="avatar-light"
-                @click="light = true"
+                @click="onLight()"
               >
             </div>
           </transition>
@@ -123,7 +123,6 @@
 
 <script>
 import { mapState } from 'vuex'
-import bgAudio from '../assets/audio/audio_bg.mp3'
 export default {
   data () {
     return {
@@ -155,10 +154,18 @@ export default {
         return state.user.btn_decoration
       },
       playBg: (state) => {
-        // console.log('default playBg', state.user.playBg)
         return state.user.playBg
       }
     }),
+    testing () {
+      if (this.playBg) {
+        console.log('oke true')
+        return true
+      } else {
+        console.log('iya false')
+        return false
+      }
+    },
     widthSidebar () {
       if (this.sidebar) {
         return 'width:200px;'
@@ -181,7 +188,18 @@ export default {
       }
     }
   },
+  watch: {
+    '$store.state.user' (url) {
+      console.log(url)
+      // this.audio.pause()
+      // this.audio.src = url
+      // this.audio.currentTime = 0
+      // this.audio.play()
+    }
+  },
   created () {
+    this.$store.commit('user/SET_BG_AUDIO', true)
+    this.audio = new Audio()
     // eslint-disable-next-line nuxt/no-globals-in-created
     window.addEventListener('resize', this.handleResize)
     this.sidebar = true
@@ -190,48 +208,41 @@ export default {
     if (this.maps) {
       this.$store.commit('user/SET_MAPS')
     }
-    this.playsound()
   },
   destroyed () {
     window.removeEventListener('resize', this.handleResize)
   },
   methods: {
-    playsound () {
-      console.log('play : ', this.playBg)
-      if (this.playBg) {
-        const audioFile = require('@/assets/audio/audio_bg.mp3')
-        const myAudio = new Audio(audioFile)
-        if (typeof myAudio.loop === 'boolean') {
-          myAudio.loop = true
-        } else {
-          myAudio.addEventListener(
-            'ended',
-            function () {
-              this.currentTime = 0
-              this.play()
-            },
-            false
-          )
-        }
-        myAudio.play()
+    onLight () {
+      this.light = !this.light
+      if (this.light) {
+        this.buttonAudio()
+      } else {
+        this.$store.commit('user/SET_POPUP_AUDIO', true)
       }
     },
     onSidebar () {
       this.$store.commit('user/SET_SIDEBAR')
+      this.buttonAudio()
     },
     closeMaps () {
       this.$store.commit('user/SET_MAPS')
+      this.buttonAudio()
     },
     close () {
       this.$store.commit('user/SET_POPUP')
+      this.buttonAudio()
     },
     handleResize () {
       this.window.width = window.innerWidth
       this.window.height = window.innerHeight
     },
     showMaps () {
-      this.playsound()
       this.$store.commit('user/SET_MAPS')
+      this.$store.commit('user/SET_POPUP_AUDIO', true)
+    },
+    buttonAudio () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
     }
   }
 }
