@@ -38,21 +38,6 @@
       </v-row>
     </div>
 
-    <transition name="fade" appear>
-      <div v-if="expired" class="modal-dialog">
-        <div class="overlay-bg" @click="closePopup()" />
-        <div class="outside-card">
-          <img src="~/assets/images/library/mascot.png" class="avatar-light">
-          <div class="card-popup">
-            <div class="bg-popup">
-              <div class="text-popup">
-                You have been logged out due to inactivity.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </transition>
   </section>
 </template>
 
