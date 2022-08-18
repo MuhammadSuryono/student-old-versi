@@ -61,17 +61,16 @@ export default {
   auth: {
     redirect: {
       login: '/login',
-      logout: false,
       callback: '/',
-      home: '/splash'
+      home: '/'
     },
     strategies: {
       local: {
         token: {
           property: 'data.access_token',
           global: true,
-          // maxAge: 10
-          maxAge: 7200
+          maxAge: 30
+          // maxAge: 7200
         },
         endpoints: {
           login: {
@@ -80,7 +79,8 @@ export default {
           },
           logout: false,
           user: false
-        }
+        },
+        autoLogout: false
       }
     },
     plugins: ['~/plugins/auth.js']

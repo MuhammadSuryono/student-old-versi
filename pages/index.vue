@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="!isLoading"
     class="bg-img"
     :style="{ backgroundImage: 'url(' + pathDecoration + ')' }"
   />
@@ -54,10 +55,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     }
   }

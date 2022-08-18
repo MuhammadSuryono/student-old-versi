@@ -59,6 +59,7 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 export default {
+  auth: false,
   name: 'LoginPage',
   layout: 'login',
 
@@ -131,6 +132,7 @@ export default {
             password: this.state.password
           })
           .then((response) => {
+            this.$store.commit('user/SET_LOGGEDIN', true)
             this.$store.commit('user/SET_EXPIRED', false)
             this.loading = false
             if (response.status === 200 || response.status === 201) {

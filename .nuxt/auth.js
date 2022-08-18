@@ -17,8 +17,8 @@ export default function (ctx, inject) {
   "watchLoggedIn": true,
   "redirect": {
     "login": "/login",
-    "logout": false,
-    "home": "/splash",
+    "logout": "/",
+    "home": "/",
     "callback": "/"
   },
   "vuex": {
@@ -45,7 +45,7 @@ export default function (ctx, inject) {
   "token": {
     "property": "data.access_token",
     "global": true,
-    "maxAge": 7200
+    "maxAge": 30
   },
   "endpoints": {
     "login": {
@@ -55,6 +55,7 @@ export default function (ctx, inject) {
     "logout": false,
     "user": false
   },
+  "autoLogout": false,
   "name": "local"
 }))
 

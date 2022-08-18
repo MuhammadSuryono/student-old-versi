@@ -1,9 +1,23 @@
 <template>
   <div>
     <audio src="~/assets/audio/audio_bg.mp3" autoplay loop />
-
     <div style="height: 100%; width: 100%; z-index: -9999" />
     <PModal style="z-index: 9999" />
+    <transition name="fade" appear>
+      <div v-if="!isLoggedIn" class="modal-dialog">
+        <div class="overlay-bg" />
+        <div class="outside-card">
+          <img src="~/assets/images/library/mascot.png" class="avatar-light">
+          <div class="card-popup">
+            <div class="bg-popup">
+              <div class="text-popup">
+                You have been logged out due to inactivity.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
     <div class="container-petra">
       <transition name="fade" appear>
         <Popup
@@ -140,6 +154,9 @@ export default {
   },
   computed: {
     ...mapState({
+      isLoggedIn: (state) => {
+        return state.user.isLoggedIn
+      },
       popup: (state) => {
         return state.user.popup
       },
@@ -251,6 +268,73 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.modal-dialog {
+  margin: auto;
+  padding: 0px;
+  max-width: 1280px;
+  z-index: 9999;
+  .overlay-bg {
+    height: 100vh;
+    width: 1280px;
+    background: rgba(10, 10, 10, 0.5);
+    cursor: pointer;
+    position: absolute;
+    z-index: 9999;
+  }
+  .outside-card {
+    z-index: 9999;
+
+    height: 200px;
+    width: 600px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    // position: absolute;
+    .avatar-light {
+      height: 217px;
+      z-index: 99999;
+      position: absolute;
+      margin-left: -28px;
+      margin-top: -39px;
+    }
+    .card-popup {
+      height: 100%;
+      width: 100%;
+      --g: #000, #0000 1deg 179deg, #000 180deg;
+      --mask: conic-gradient(from -45deg at top 15px right 15px, var(--g)) 100%
+          0 /51% 100% no-repeat,
+        conic-gradient(from -225deg at bottom 15px left 15px, var(--g)) 0 100%/51%
+          100% no-repeat;
+      -webkit-mask: var(--mask);
+      mask: var(--mask);
+      padding: 20px;
+      background-color: white;
+      .bg-popup {
+        background-color: #f2f2f2;
+        height: 100%;
+        width: 100%;
+        --g: #000, #0000 1deg 179deg, #000 180deg;
+        --mask: conic-gradient(from -45deg at top 15px right 15px, var(--g))
+            100% 0 /51% 100% no-repeat,
+          conic-gradient(from -225deg at bottom 15px left 15px, var(--g)) 0 100%/51%
+            100% no-repeat;
+        -webkit-mask: var(--mask);
+        mask: var(--mask);
+        .text-popup {
+          line-height: 160px;
+          text-align: center;
+          align-items: center;
+          font-size: 16px;
+          margin-left: 122px;
+          color: #5b6987;
+        }
+      }
+    }
+  }
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.4s linear;

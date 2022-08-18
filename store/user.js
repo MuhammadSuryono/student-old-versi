@@ -19,7 +19,8 @@ export const state = () => ({
   cluster_attribute: {},
   popup: false,
   playBg: false,
-  expired: false
+  expired: false,
+  isLoggedIn: false
 })
 
 export const getters = {
@@ -37,6 +38,9 @@ export const getters = {
 }
 
 export const mutations = {
+  SET_LOGGEDIN (state, payload) {
+    state.isLoggedIn = payload
+  },
   SET_EXPIRED (state, payload) {
     state.expired = payload
   },
