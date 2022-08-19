@@ -50,9 +50,6 @@
   "Skeleton": {
     "description": "Auto imported from components/Skeleton.vue"
   },
-  "FactionReward": {
-    "description": "Auto imported from components/faction/Reward.vue"
-  },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
   },
@@ -103,5 +100,8 @@
   },
   "SidebarMain": {
     "description": "Auto imported from components/sidebar/Main.vue"
+  },
+  "FactionReward": {
+    "description": "Auto imported from components/faction/Reward.vue"
   }
 }

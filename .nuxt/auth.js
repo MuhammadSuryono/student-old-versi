@@ -45,7 +45,7 @@ export default function (ctx, inject) {
   "token": {
     "property": "data.access_token",
     "global": true,
-    "maxAge": 30
+    "maxAge": 7200
   },
   "endpoints": {
     "login": {
