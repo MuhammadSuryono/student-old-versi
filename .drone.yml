@@ -138,9 +138,9 @@ steps:
 
 trigger:
   branch:
-    - production
+    - prod
   event:
-    - promote
+    - push
 
 ---
 kind: pipeline
@@ -204,6 +204,6 @@ steps:
 
 trigger:
   branch:
-    - production
+    - staging
   event:
-    - promote
+    - push
