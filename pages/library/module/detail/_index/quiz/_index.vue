@@ -108,10 +108,7 @@
           </div>
         </div>
         <div class="column is-narrow header-right" style="margin-left: 20px">
-          <div
-            class="card-activity"
-            style="position: relative"
-          >
+          <div class="card-activity" style="position: relative">
             <img
               src="~/assets/images/195.svg"
               style="height: 100%; width: 100%"
@@ -175,7 +172,7 @@
             <PButton
               :disabled="disableBtn"
               class="petra-button"
-              text="Submit Review"
+              text="Submit Comment"
               @click.native="addReview()"
             />
           </div>
@@ -185,34 +182,122 @@
                 <div
                   v-for="(review, indexReview) in itemsDiscuss"
                   :key="indexReview"
-                  class="columns is-gapless"
+                  style="margin-bottom: 15px"
                 >
-                  <div
-                    class="column is-narrow"
-                    style="height: 80px"
-                    :style="{ backgroundColor: review.avatar_background }"
-                  >
-                    <img
-                      :src="review.avatar"
-                      class="pic-petra"
-                      style="
-                        width: 80px;
-                        height: 67px;
-                        object-fit: cover;
-                        object-fit: cover;
-                        -o-object-position: 53% 0%;
-                        object-position: 53% 0%;
-                        margin-top: 13px;
-                      "
+                  <div class="columns is-gapless" style="margin-bottom: 10px">
+                    <div
+                      class="column is-narrow"
+                      style="height: 80px"
+                      :style="{
+                        backgroundColor: review.avatar_background
+                      }"
                     >
-                  </div>
-                  <div class="column box-list">
-                    <div class="student-name">
-                      {{ review.username }}
+                      <img :src="review.avatar" class="pic-petra">
                     </div>
-                    <div class="petra-review">
-                      <div class="box-review" style="padding: 10px">
-                        {{ review.comment }}
+                    <div class="column box-list">
+                      <div class="student-name">
+                        {{ review.username }}
+                      </div>
+                      <div class="petra-review" style="padding-bottom: 40px">
+                        <div class="box-review" style="padding: 10px">
+                          {{ review.comment }}
+                        </div>
+                      </div>
+                      <div
+                        class="no-select reply-btn"
+                        @click="openReply2(indexReview, review.comment_id)"
+                      >
+                        Reply
+                      </div>
+                      <div
+                        v-if="review.sub_comments.data.length > 0"
+                        class="reply-hide"
+                      >
+                        <span
+                          v-if="showReply"
+                          class="no-select"
+                          @click="openReply(false)"
+                        >
+                          <b-icon icon="chevron-up" size="is-small" />Hide
+                          {{ review.sub_comments.data.length }}
+                          replies.
+                        </span>
+                        <span
+                          v-else
+                          class="no-select"
+                          @click="openReply(true, indexReview)"
+                        >
+                          <b-icon icon="chevron-down" size="is-small" />Show
+                          {{ review.sub_comments.data.length }}
+                          replies.
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- list sub reply  -->
+                  <div
+                    v-if="showReply && indexReview === indexSub"
+                    class="show-comment"
+                  >
+                    <div
+                      v-for="(sub, indexSub) in review.sub_comments.data"
+                      :key="indexSub"
+                      class="columns is-gapless"
+                      style="margin-bottom: 10px"
+                    >
+                      <div
+                        class="column is-narrow"
+                        style="height: 80px"
+                        :style="{
+                          backgroundColor: sub.avatar_background
+                        }"
+                      >
+                        <img :src="sub.avatar" class="pic-petra">
+                      </div>
+                      <div class="column box-list">
+                        <div class="student-name">
+                          {{ sub.username }}
+                        </div>
+                        <div class="petra-review" style="padding-bottom: 20px">
+                          <div class="box-review" style="padding: 10px">
+                            {{ sub.comment }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--  box comment  -->
+                  <div
+                    v-if="boxReply && indexReview === indexSub2"
+                    class="show-comment"
+                  >
+                    <div class="columns is-gapless" style="margin-bottom: 10px">
+                      <div
+                        class="column is-narrow"
+                        style="height: 80px"
+                        :style="{
+                          backgroundColor: dataUser.faction.avatar_bgcolor
+                        }"
+                      >
+                        <img :src="review.avatar" class="pic-petra">
+                      </div>
+                      <div class="column box-list">
+                        <div class="student-name">
+                          {{ dataUser.username }}
+                        </div>
+                        <div class="petra-review" style="padding-bottom: 70px">
+                          <textarea
+                            v-model="subReply"
+                            class="box-review"
+                            style="padding: 10px; overflow-y: scroll"
+                          />
+                        </div>
+                        <PButton
+                          :disabled="disableBtn2"
+                          class="petra-button2"
+                          text="Reply"
+                          @click.native="submitComment()"
+                        />
                       </div>
                     </div>
                   </div>
@@ -265,7 +350,7 @@ export default {
 
   computed: {
     ...mapState({
-        detailModule: (state) => {
+      detailModule: (state) => {
         return state.module.dataDetailModule
       },
       detailActivity: (state) => {
@@ -278,11 +363,13 @@ export default {
         return state.user.users
       }
     }),
-      quizId(){
+    quizId () {
       // find activity id by params index
-      let activity = this.detailModule.activity_rails.find(activity => activity.id == parseInt(this.$route.params.index))
+      const activity = this.detailModule.activity_rails.find(
+        activity => activity.id == parseInt(this.$route.params.index)
+      )
       // return this.$route.params.index
-      return parseInt(activity.activity_id);
+      return parseInt(activity.activity_id)
     },
     tinggi2 () {
       return 'height:' + this.tinggi
@@ -302,10 +389,11 @@ export default {
 
   mounted () {},
   methods: {
-       playGame (x) {
+    playGame (x) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       // console.log(x);
       this.$router.push({
-        name: "library-module-detail-index-quiz-embed",
+        name: 'library-module-detail-index-quiz-embed',
         params: {
           link: this.quizId
         }
@@ -314,6 +402,7 @@ export default {
       })
     },
     playGame2 (x) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       window.open(x, '_blank')
     },
     handleResize () {
@@ -325,6 +414,7 @@ export default {
       this.dialog = true
     },
     addReview () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       const data = {
         module_rail_id: this.$route.params.index,
         review: this.descReview
@@ -447,9 +537,11 @@ export default {
         })
     },
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.go(-1)
     },
     tab (id, number) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (id === 1) {
         this.selected1 = true
         this.selected2 = false

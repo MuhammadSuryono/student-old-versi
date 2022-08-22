@@ -39,13 +39,13 @@
             </div>
           </div>
           <div class="column avatar-container">
-            <div class="btn-edit">
+            <!-- <div class="btn-edit">
               <img
                 src="~/assets/images/btn-petra.png"
                 style="width: 224.22px; height: 36px"
               >
               <div class="text-edit" style="top: 7px">Save Changes</div>
-            </div>
+            </div> -->
           </div>
         </div>
       </span>
@@ -206,7 +206,7 @@
         </div>
         <div class="columns pr-4 mt-40">
           <div class="column is-narrow avatar-container">
-            <div class="btn-edit" @click="tab = 1">
+            <div class="btn-edit" @click="backTab(1)">
               <img
                 src="~/assets/images/back-btn.png"
                 style="width: 98.15px;height: 36.49px;x"
@@ -322,7 +322,12 @@ export default {
     this.getData()
   },
   methods: {
+    backTab (x) {
+      this.tab = x
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+    },
     updateDecoration () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       // this.activeSelected = false
       console.log(this.selected)
       this.isLoading2 = true
@@ -354,6 +359,7 @@ export default {
         })
     },
     selectedItem (x, item) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (item.background !== 'null') {
         this.activeSelected = true
         this.activeItem = x
@@ -361,6 +367,7 @@ export default {
       }
     },
     getDecoration () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.tab = 2
       this.isLoading2 = true
       this.activeItem = null
@@ -383,6 +390,7 @@ export default {
     },
     closeProfile () {
       this.$store.commit('user/SET_BTN_DECORATION')
+      this.$store.commit('user/SET_BTN_AUDIO', true)
     },
     getData () {
       this.data.courses = this.users.courses

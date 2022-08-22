@@ -1,7 +1,28 @@
 <template>
   <div>
+    <audio src="~/assets/audio/audio_bg.mp3" autoplay loop />
     <div style="height: 100%; width: 100%; z-index: -9999" />
     <PModal style="z-index: 9999" />
+    <transition name="fade" appear>
+      <div v-if="!isLoggedIn" class="modal-dialog">
+        <div class="overlay-bg" />
+        <div class="outside-card">
+          <div class="top-corner" />
+          <div class="bottom-corner" />
+          <img src="~/assets/images/library/mascot.png" class="avatar-light">
+          <div class="card-popup">
+            <div class="bg-popup">
+              <div class="text-popup">
+                You have been logged out due to inactivity.
+              </div>
+            </div>
+          </div>
+          <div class="btn-logout" @click="logout()">
+            OK
+          </div>
+        </div>
+      </div>
+    </transition>
     <div class="container-petra">
       <transition name="fade" appear>
         <Popup
@@ -87,11 +108,11 @@
             v-if="light"
             src="~/assets/images/library/mascot.png"
             class="light-petra"
-            @click="light = false"
+            @click="onLight()"
           >
           <transition v-else name="fade" appear>
-            <div class="light-petra-true" @keydown.esc="tes()">
-              <div class="bg-overlay" @click="light = true" />
+            <div class="light-petra-true">
+              <div class="bg-overlay" @click="onLight()" />
               <img
                 src="~/assets/images/component/light/img-2.png"
                 class="text-light"
@@ -99,7 +120,7 @@
               <img
                 src="~/assets/images/library/mascot.png"
                 class="avatar-light"
-                @click="light = true"
+                @click="onLight()"
               >
             </div>
           </transition>
@@ -132,11 +153,15 @@ export default {
         width: 0,
         height: 0
       },
-      coomingSoon: false
+      coomingSoon: false,
+      audio: null
     }
   },
   computed: {
     ...mapState({
+      isLoggedIn: (state) => {
+        return state.user.isLoggedIn
+      },
       popup: (state) => {
         return state.user.popup
       },
@@ -151,8 +176,20 @@ export default {
       },
       btn_decoration: (state) => {
         return state.user.btn_decoration
+      },
+      playBg: (state) => {
+        return state.user.playBg
       }
     }),
+    testing () {
+      if (this.playBg) {
+        console.log('oke true')
+        return true
+      } else {
+        console.log('iya false')
+        return false
+      }
+    },
     widthSidebar () {
       if (this.sidebar) {
         return 'width:200px;'
@@ -175,7 +212,18 @@ export default {
       }
     }
   },
+  watch: {
+    '$store.state.user' (url) {
+      console.log(url)
+      // this.audio.pause()
+      // this.audio.src = url
+      // this.audio.currentTime = 0
+      // this.audio.play()
+    }
+  },
   created () {
+    // this.$store.commit('user/SET_BG_AUDIO', true)
+    this.audio = new Audio()
     // eslint-disable-next-line nuxt/no-globals-in-created
     window.addEventListener('resize', this.handleResize)
     this.sidebar = true
@@ -189,14 +237,40 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   methods: {
+    logout () {
+      this.$store.commit('user/SET_LOGGEDIN', false)
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+      this.$store.commit('user/SET_EXPIRED', false)
+      localStorage.setItem('localAuth', true)
+      this.$store.commit('user/SET_BG_AUDIO', false)
+      if (this.btn_profile) {
+        this.$store.commit('user/SET_BTN_PROFILE')
+      }
+      if (this.btn_decoration) {
+        this.$store.commit('user/SET_BTN_DECORATION')
+      }
+      this.$auth.logout()
+      this.$router.push('/login')
+    },
+    onLight () {
+      this.light = !this.light
+      if (this.light) {
+        this.buttonAudio()
+      } else {
+        this.$store.commit('user/SET_POPUP_AUDIO', true)
+      }
+    },
     onSidebar () {
       this.$store.commit('user/SET_SIDEBAR')
+      this.buttonAudio()
     },
     closeMaps () {
       this.$store.commit('user/SET_MAPS')
+      this.buttonAudio()
     },
     close () {
       this.$store.commit('user/SET_POPUP')
+      this.buttonAudio()
     },
     handleResize () {
       this.window.width = window.innerWidth
@@ -204,12 +278,138 @@ export default {
     },
     showMaps () {
       this.$store.commit('user/SET_MAPS')
+      this.$store.commit('user/SET_POPUP_AUDIO', true)
+    },
+    buttonAudio () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.modal-dialog {
+  margin: auto;
+  padding: 0px;
+  max-width: 1280px;
+  z-index: 9999;
+  .overlay-bg {
+    height: 100vh;
+    width: 1280px;
+    background: rgba(10, 10, 10, 0.5);
+    cursor: pointer;
+    position: absolute;
+    z-index: 9999;
+  }
+  .outside-card {
+    z-index: 9999;
+    height: 200px;
+    width: 600px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    .btn-logout {
+      background-color: #0aa7c1;
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      height: 30px;
+      width: 110px;
+      z-index: 999;
+      cursor: pointer;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      text-align: center;
+      color: #f2f2f2;
+      .bg-corner {
+        background: #7289aa;
+        opacity: 0.35;
+        border: 0.657738px solid #ffffff;
+        height: 18px;
+        width: 18px;
+        left: 0px;
+        top: 0px;
+        border-radius: 0px;
+        position: absolute;
+      }
+    }
+    .bottom-corner {
+      background-color: #2e5799;
+      position: absolute;
+      bottom: -3px;
+      left: -3px;
+      height: 100px;
+      width: 100px;
+      --g: #000, #0000 1deg 179deg, #000 180deg;
+      --mask: conic-gradient(from -45deg at top 15px right 15px, var(--g)) 100%
+          0 /51% 100% no-repeat,
+        conic-gradient(from -225deg at bottom 15px left 15px, var(--g)) 0 100%/51%
+          100% no-repeat;
+      -webkit-mask: var(--mask);
+      mask: var(--mask);
+    }
+    .top-corner {
+      background-color: #2e5799;
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      height: 100px;
+      width: 100px;
+      --g: #000, #0000 1deg 179deg, #000 180deg;
+      --mask: conic-gradient(from -45deg at top 15px right 15px, var(--g)) 100%
+          0 /51% 100% no-repeat,
+        conic-gradient(from -225deg at bottom 15px left 15px, var(--g)) 0 100%/51%
+          100% no-repeat;
+      -webkit-mask: var(--mask);
+      mask: var(--mask);
+    }
+    // position: absolute;
+    .avatar-light {
+      height: 217px;
+      z-index: 99999;
+      position: absolute;
+      margin-left: -28px;
+      margin-top: -39px;
+    }
+    .card-popup {
+      height: 100%;
+      width: 100%;
+      --g: #000, #0000 1deg 179deg, #000 180deg;
+      --mask: conic-gradient(from -45deg at top 15px right 15px, var(--g)) 100%
+          0 /51% 100% no-repeat,
+        conic-gradient(from -225deg at bottom 15px left 15px, var(--g)) 0 100%/51%
+          100% no-repeat;
+      -webkit-mask: var(--mask);
+      mask: var(--mask);
+      padding: 8px;
+      background-color: white;
+      .bg-popup {
+        background-color: #f2f2f2;
+        height: 100%;
+        width: 100%;
+        --g: #000, #0000 1deg 179deg, #000 180deg;
+        --mask: conic-gradient(from -45deg at top 15px right 15px, var(--g))
+            100% 0 /51% 100% no-repeat,
+          conic-gradient(from -225deg at bottom 15px left 15px, var(--g)) 0 100%/51%
+            100% no-repeat;
+        -webkit-mask: var(--mask);
+        mask: var(--mask);
+        .text-popup {
+          line-height: 160px;
+          text-align: center;
+          align-items: center;
+          font-size: 16px;
+          margin-left: 122px;
+          color: #5b6987;
+        }
+      }
+    }
+  }
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.4s linear;

@@ -30,6 +30,7 @@ import nuxt_plugin_notificationsssr_eb31a0c0 from 'nuxt_plugin_notificationsssr_
 import nuxt_plugin_notificationsclient_f727f91e from 'nuxt_plugin_notificationsclient_f727f91e' // Source: ../plugins/notifications-client.js (mode: 'all')
 import nuxt_plugin_modal_640f2cc0 from 'nuxt_plugin_modal_640f2cc0' // Source: ../plugins/modal.js (mode: 'all')
 import nuxt_plugin_auth_2b075700 from 'nuxt_plugin_auth_2b075700' // Source: ./auth.js (mode: 'all')
+import nuxt_plugin_auth_7f7561ce from 'nuxt_plugin_auth_7f7561ce' // Source: ../plugins/auth.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -94,7 +95,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"titleTemplate":"Petraverse","title":"Petraverse","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Petraverse"},{"hid":"charset","charset":"utf-8"},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"apple-mobile-web-app-title","name":"apple-mobile-web-app-title","content":"student"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:title","name":"og:title","property":"og:title","content":"student"},{"hid":"og:site_name","name":"og:site_name","property":"og:site_name","content":"student"},{"hid":"og:description","name":"og:description","property":"og:description","content":"## Build Setup"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ficon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"},{"hid":"shortcut-icon","rel":"shortcut icon","href":"\u002Fadmin\u002Fadmin\u002F_nuxt\u002Ficons\u002Ficon_64x64.9a7eb7.png"},{"hid":"apple-touch-icon","rel":"apple-touch-icon","href":"\u002Fadmin\u002Fadmin\u002F_nuxt\u002Ficons\u002Ficon_512x512.9a7eb7.png","sizes":"512x512"},{"rel":"manifest","href":"\u002Fadmin\u002Fadmin\u002F_nuxt\u002Fmanifest.ac035db1.json","hid":"manifest"}],"style":[],"script":[],"htmlAttrs":{"lang":"en"}},
+    head: {"titleTemplate":"Petraverse","title":"Petraverse","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Petraverse"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ficon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[],"script":[]},
 
     store,
     router,
@@ -289,6 +290,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_auth_2b075700 === 'function') {
     await nuxt_plugin_auth_2b075700(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_auth_7f7561ce === 'function') {
+    await nuxt_plugin_auth_7f7561ce(app.context, inject)
   }
 
   // Lock enablePreview in context

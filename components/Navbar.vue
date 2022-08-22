@@ -33,6 +33,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import bgAudio from '../assets/audio/audio_bg.mp3'
 export default {
   data () {
     return {
@@ -62,9 +63,15 @@ export default {
   },
   methods: {
     home () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push('/')
     },
     keluar () {
+      this.$store.commit('user/SET_LOGGEDIN', false)
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+      this.$store.commit('user/SET_EXPIRED', false)
+      localStorage.setItem('localAuth', true)
+      this.$store.commit('user/SET_BG_AUDIO', false)
       if (this.btn_profile) {
         this.$store.commit('user/SET_BTN_PROFILE')
       }

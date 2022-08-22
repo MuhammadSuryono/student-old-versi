@@ -9,6 +9,9 @@ import InfiniteLoading from 'vue-infinite-loading'
 import VueVideoPlayer from 'vue-video-player'
 
 import 'video.js/dist/video-js.css'
+import VueAudio from 'vue-audio-better'
+
+Vue.use(VueAudio)
 Vue.component('Unity', UnityWebgl)
 Vue.use(Buefy)
 Vue.use(AOS)

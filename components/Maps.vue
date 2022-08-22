@@ -78,7 +78,7 @@
           Let's go!
         </div>
       </div>
-      <div class="btn-edit" style="top: 400px" @click="showLoc = false">
+      <div class="btn-edit" style="top: 400px" @click="cancel()">
         <img
           src="~/assets/images/btn-petra.png"
           style="width: 224.22px; height: 36px"
@@ -103,14 +103,21 @@ export default {
     }
   },
   methods: {
+    cancel () {
+      this.showLoc = false
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+    },
     closeMaps () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$store.commit('user/SET_MAPS')
     },
     goTravel (x) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.destination = x
       this.showLoc = true
     },
     goLibrary () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (this.destination === 'Library') {
         this.$router.push('/library')
       }

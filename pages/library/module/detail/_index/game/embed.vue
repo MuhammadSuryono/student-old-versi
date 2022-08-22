@@ -23,10 +23,10 @@
 
     <div class="content-module">
       <!-- <img src="~/assets/images/Video.svg" style="height: 100%; width: 100%"> -->
-        <iframe
+      <iframe
         ref="iframe"
-        :src='"/" +gameSource+ "/index.html"'
-        :style="{ height: window.height - 200 + 'px', width: '100%'}"
+        :src="'/' + gameSource + '/index.html'"
+        :style="{ height: window.height - 200 + 'px', width: '100%' }"
       />
     </div>
   </div>
@@ -39,7 +39,7 @@ export default {
 
   data () {
     return {
-       window: {
+      window: {
         width: 0,
         height: 500
       },
@@ -68,7 +68,7 @@ export default {
       indexSub2: 0,
       boxReply: false,
       dataSubReply: {},
-      gameSource : null,
+      gameSource: null
     }
   },
 
@@ -114,7 +114,7 @@ export default {
   },
 
   mounted () {
-  window.addEventListener('activityDoneEvent', this.goHome)
+    window.addEventListener('activityDoneEvent', this.goHome)
     this.$once('hook:beforeDestroy', () => {
       window.removeEventListener('activityDoneEvent', this.goHome)
     })
@@ -123,18 +123,17 @@ export default {
     this.$once('hook:beforeDestroy', () => {
       window.removeEventListener('getTokenEvent', this.getToken)
     })
-  
   },
   methods: {
-      getToken () {
+    getToken () {
       const token = this.$auth.strategy.token.get()
       this.$refs.iframe.contentWindow.sendToken(token)
     },
-      goHome () {
+    goHome () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push({ path: '/' })
     },
     openReply2 (y, x) {
-   
       this.indexSub2 = y
       this.boxReply = !this.boxReply
       this.dataSubReply = x
@@ -313,6 +312,7 @@ export default {
       }, 500)
     },
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.go(-1)
     },
     tab (id, number) {

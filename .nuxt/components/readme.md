@@ -37,7 +37,7 @@ You can directly use them in pages and other components without the need to impo
 - `<IconSkillcard>` | `<icon-skillcard>` (components/icon/Skillcard.vue)
 - `<IconTabSkill>` | `<icon-tab-skill>` (components/icon/TabSkill.vue)
 - `<IconTabSkill2>` | `<icon-tab-skill2>` (components/icon/TabSkill2.vue)
-- `<FactionReward>` | `<faction-reward>` (components/faction/Reward.vue)
 - `<SidebarAvatar>` | `<sidebar-avatar>` (components/sidebar/Avatar.vue)
 - `<SidebarCardName>` | `<sidebar-card-name>` (components/sidebar/CardName.vue)
 - `<SidebarMain>` | `<sidebar-main>` (components/sidebar/Main.vue)
+- `<FactionReward>` | `<faction-reward>` (components/faction/Reward.vue)

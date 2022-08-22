@@ -124,7 +124,7 @@ export default {
     this.$once('hook:beforeDestroy', () => {
       window.removeEventListener('getTokenQuizEvent', this.getTokenQuiz)
     })
-  
+
   },
   methods: {
       getTokenQuiz () {
@@ -136,7 +136,7 @@ export default {
       this.$router.push({ path: '/' })
     },
     openReply2 (y, x) {
-   
+
       this.indexSub2 = y
       this.boxReply = !this.boxReply
       this.dataSubReply = x
@@ -315,6 +315,7 @@ export default {
       }, 500)
     },
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.go(-1)
     },
     tab (id, number) {

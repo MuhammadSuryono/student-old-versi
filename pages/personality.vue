@@ -7,7 +7,6 @@
         style="width: 100%; height: 100%"
       />
     </div>
-   
     <!-- <div class="btn-edit" @click="goHome()">
       <img
         src="~/assets/images/btn-petra.png"
@@ -42,6 +41,8 @@ export default {
     window.addEventListener('resize', this.handleResize)
   },
   mounted () {
+    this.$store.commit('user/SET_BG_AUDIO', false)
+    this.checkUser()
     window.addEventListener('activityDoneEvent', this.goHome)
     this.$once('hook:beforeDestroy', () => {
       window.removeEventListener('activityDoneEvent', this.goHome)
@@ -73,6 +74,17 @@ export default {
     },
     activityDoneEvent () {
       this.finish = true
+    },
+    checkUser () {
+      this.$axios
+        .get('/personality-cluster/check')
+        .then((response) => {
+          console.log('eligable: ', response.data.eligible)
+          if (!response.data.eligible) {
+            this.$router.push({ path: '/' })
+          }
+        })
+        .catch(() => {})
     }
   }
 }

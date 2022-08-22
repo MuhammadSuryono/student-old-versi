@@ -27,6 +27,7 @@
               style="margin-left: 14px; background-color: white"
               @mouseover="hover1 = true"
               @mouseleave="hover1 = false"
+              @click="buttonAudio()"
             >
               <div class="triangle-left2" />
               <div class="triangle-right2" />
@@ -39,6 +40,7 @@
               style="margin-left: 14px"
               @mouseover="hover1 = true"
               @mouseleave="hover1 = false"
+              @click="buttonAudio()"
             >
               <div class="triangle-left" />
               <div class="triangle-right" />
@@ -58,6 +60,7 @@
               style="background-color: white"
               @mouseover="hover2 = true"
               @mouseleave="hover2 = false"
+              @click="buttonAudio()"
             >
               <div class="triangle-left2" />
               <div class="triangle-right2" />
@@ -74,6 +77,7 @@
               class="card-menu"
               @mouseover="hover2 = true"
               @mouseleave="hover2 = false"
+              @click="buttonAudio()"
             >
               <div class="triangle-left" />
               <div class="triangle-right" />
@@ -98,6 +102,7 @@
               style="background-color: white"
               @mouseover="hover3 = true"
               @mouseleave="hover3 = false"
+              @click="buttonAudio()"
             >
               <div class="triangle-left2" />
               <div class="triangle-right2" />
@@ -109,6 +114,7 @@
               class="card-menu"
               @mouseover="hover3 = true"
               @mouseleave="hover3 = false"
+              @click="buttonAudio()"
             >
               <div class="triangle-left" />
               <div class="triangle-right" />
@@ -124,6 +130,7 @@
               style="background-color: white"
               @mouseover="hover4 = true"
               @mouseleave="hover4 = false"
+              @click="popupAudio()"
             >
               <div class="triangle-left2" />
               <div class="triangle-right2" />
@@ -135,6 +142,7 @@
               class="card-menu"
               @mouseover="hover4 = true"
               @mouseleave="hover4 = false"
+              @click="popupAudio()"
             >
               <div class="triangle-left" />
               <div class="triangle-right" />
@@ -188,6 +196,12 @@ export default {
   methods: {
     showPopup () {
       this.$store.commit('user/SET_POPUP')
+    },
+    popupAudio() {
+      this.$store.commit('user/SET_POPUP_AUDIO', true)
+    },
+    buttonAudio () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
     },
     async getData () {
       await this.$axios

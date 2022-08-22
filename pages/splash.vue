@@ -6,7 +6,7 @@
       :loop="false"
       @ended="end()"
     />
-    <div class="skip-video" @click="skip()">
+    <div class="skip-video" @click="end()">
       Skip Video
     </div>
   </div>
@@ -16,16 +16,15 @@
 export default {
   name: 'HomePage',
   layout: 'login',
-  mounted () {
-    // this.$auth.logout()
-    // this.$router.push('/login')
-  },
   methods: {
     checkUser () {
       this.$axios
         .get('/personality-cluster/check')
         .then((response) => {
-          console.log('eligable: ', response.data.eligible)
+          this.$toast.success(response.data.message, {
+            position: 'top-center',
+            duration: 5000
+          })
           if (response.data.eligible) {
             this.$router.push({ path: '/personality' })
           } else {
@@ -36,11 +35,8 @@ export default {
           console.log(error)
         })
     },
-    skip () {
-      this.checkUser()
-      // this.$router.push({ path: '/personality' })
-    },
     end () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.checkUser()
     }
   }

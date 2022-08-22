@@ -22,12 +22,12 @@
           </div>
         </div>
       </div>
-      <NuxtLink to="/skillcard" class="btn-back">
-        <IconBackBtn />
-        <div class="text-btn">
-          BACK
-        </div>
-      </NuxtLink>
+      <span @click="buttonAudio()">
+        <NuxtLink to="/skillcard" class="btn-back">
+          <IconBackBtn />
+          <div class="text-btn">BACK</div>
+        </NuxtLink>
+      </span>
     </div>
     <div class="content-skillcard">
       <div class="card-title1">
@@ -421,7 +421,11 @@ export default {
     this.getDataArchivements()
   },
   methods: {
+    buttonAudio () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+    },
     tes (id, number) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (id === 1) {
         this.selected1 = true
         this.selected2 = false

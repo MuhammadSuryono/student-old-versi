@@ -16,10 +16,10 @@ export default function (ctx, inject) {
   "fullPathRedirect": false,
   "watchLoggedIn": true,
   "redirect": {
-    "login": "/splash",
-    "logout": "/login",
-    "home": false,
-    "callback": "/login"
+    "login": "/login",
+    "logout": "/",
+    "home": "/",
+    "callback": "/"
   },
   "vuex": {
     "namespace": "auth"
@@ -43,9 +43,9 @@ export default function (ctx, inject) {
   // local
   $auth.registerStrategy('local', new LocalScheme($auth, {
   "token": {
-    "maxAge": 21600,
     "property": "data.access_token",
-    "global": true
+    "global": true,
+    "maxAge": 7200
   },
   "endpoints": {
     "login": {
@@ -55,6 +55,7 @@ export default function (ctx, inject) {
     "logout": false,
     "user": false
   },
+  "autoLogout": false,
   "name": "local"
 }))
 
