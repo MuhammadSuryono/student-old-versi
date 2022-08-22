@@ -141,6 +141,7 @@ trigger:
     - prod
   event:
     - push
+    - promote
 
 ---
 kind: pipeline
@@ -207,3 +208,4 @@ trigger:
     - staging
   event:
     - push
+    - promote
