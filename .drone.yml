@@ -31,10 +31,9 @@ steps:
         from_secret: docker_password
       dockerfile: Dockerfile
 
-
 trigger:
   branch:
-    - drone-deployment
+    - development
   event:
     - push
 ---
@@ -71,7 +70,7 @@ steps:
 
 trigger:
   branch:
-    - drone-deployment
+    - development
   event:
     - push
 depends_on:
