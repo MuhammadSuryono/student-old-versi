@@ -33,7 +33,7 @@ steps:
 
 trigger:
   branch:
-    - development
+    - drone-deployment
   event:
     - push
 ---
@@ -70,7 +70,7 @@ steps:
 
 trigger:
   branch:
-    - development
+    - drone-deployment
   event:
     - push
 depends_on:
