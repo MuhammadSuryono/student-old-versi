@@ -31,6 +31,7 @@ steps:
         from_secret: docker_password
       dockerfile: Dockerfile
 
+
 trigger:
   branch:
     - drone-deployment
