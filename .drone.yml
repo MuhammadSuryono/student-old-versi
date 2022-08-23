@@ -3,16 +3,23 @@ type: docker
 name: Build for development
 
 steps:
-  - name: "Build Image Development Student"
-    image: plugins/docker
+  - name: "Build app"
+    image: node:12.13.0-alpine
     environment:
-      app_version: dev-${DRONE_COMMIT_SHA:0:6}
-      app_environment: development
+      GOOS: linux
+      GOARCH: amd64
+      CGO_ENABLED: 0
     commands:
       - echo "basePath=/student-dev/" > .env
       - echo "basePathBuild=/student-dev/_nuxt/" >> .env
       - echo "baseUrl=https://dev.petraverse.id/api" >> .env
       - cat .env
+
+  - name: "Build Image Development Student"
+    image: plugins/docker
+    environment:
+      app_version: dev-${DRONE_COMMIT_SHA:0:6}
+      app_environment: development
     settings:
       repo: primeskills/petra-student
       tags:
@@ -39,7 +46,7 @@ steps:
     image: appleboy/drone-ssh
     environment:
       IMAGE_NAME: primeskills/petra-student:dev-${DRONE_COMMIT_SHA:0:6}
-      CONTAINER_NAME: petra-student-dev
+      CONTAINER_NAME: nuxt-app-student-dev
       PORT_PUBLISH: 5006
     settings:
       host:
@@ -68,5 +75,137 @@ trigger:
     - push
 depends_on:
   - Build for development
-  
 
+---
+kind: pipeline
+type: docker
+name: Deploy production
+
+steps:
+  - name: "Build app"
+    image: node:12.13.0-alpine
+    environment:
+      GOOS: linux
+      GOARCH: amd64
+      CGO_ENABLED: 0
+    commands:
+      - echo "basePath=/" > .env
+      - echo "basePathBuild=/_nuxt/" >> .env
+      - echo "baseUrl=https://api.petraverse.id/v1" >> .env
+      - cat .env
+
+  - name: "Build Image Production Student"
+    image: plugins/docker
+    environment:
+      app_version: prod-${DRONE_COMMIT_SHA:0:6}
+      app_environment: production
+    settings:
+      repo: primeskills/petra-student
+      tags:
+        - prod-${DRONE_COMMIT_SHA:0:6}
+        - prod-latest
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      dockerfile: Dockerfile
+
+  - name: ssh commands
+    image: appleboy/drone-ssh
+    environment:
+      IMAGE_NAME: primeskills/petra-student:prod-${DRONE_COMMIT_SHA:0:6}
+      CONTAINER_NAME: nuxt-student
+      PORT_PUBLISH: 5000
+    settings:
+      host:
+        from_secret: server_host
+      username:
+        from_secret: server_username
+      key:
+        from_secret: rsa_key
+      port: 22
+      envs:
+        - IMAGE_NAME
+        - CONTAINER_NAME
+      script:
+        - sudo docker stop $CONTAINER_NAME
+        - sudo docker rm $CONTAINER_NAME
+        - sudo docker system prune -a -f
+        - echo "Pull image docker"
+        - sudo docker pull $IMAGE_NAME
+        - echo "Run image docker"
+        - docker run -d --name $CONTAINER_NAME --publish $PORT_PUBLISH:3000 $IMAGE_NAME
+
+trigger:
+  branch:
+    - prod
+  event:
+    - push
+    - promote
+
+---
+kind: pipeline
+type: docker
+name: Deploy staging
+
+steps:
+  - name: "Build app"
+    image: node:12.13.0-alpine
+    environment:
+      GOOS: linux
+      GOARCH: amd64
+      CGO_ENABLED: 0
+    commands:
+      - echo "basePath=/student/" > .env
+      - echo "basePathBuild=/student/_nuxt/" >> .env
+      - echo "baseUrl=https://staging.petraverse.id/api" >> .env
+      - cat .env
+
+  - name: "Build Image Staging Student"
+    image: plugins/docker
+    environment:
+      app_version: staging-${DRONE_COMMIT_SHA:0:6}
+      app_environment: production
+    settings:
+      repo: primeskills/petra-student
+      tags:
+        - staging-${DRONE_COMMIT_SHA:0:6}
+        - staging-latest
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      dockerfile: Dockerfile
+
+  - name: ssh commands
+    image: appleboy/drone-ssh
+    environment:
+      IMAGE_NAME: primeskills/petra-student:prod-${DRONE_COMMIT_SHA:0:6}
+      CONTAINER_NAME: nuxt-student-staging
+      PORT_PUBLISH: 5002
+    settings:
+      host:
+        from_secret: server_host
+      username:
+        from_secret: server_username
+      key:
+        from_secret: rsa_key
+      port: 22
+      envs:
+        - IMAGE_NAME
+        - CONTAINER_NAME
+      script:
+        - sudo docker stop $CONTAINER_NAME
+        - sudo docker rm $CONTAINER_NAME
+        - sudo docker system prune -a -f
+        - echo "Pull image docker"
+        - sudo docker pull $IMAGE_NAME
+        - echo "Run image docker"
+        - docker run -d --name $CONTAINER_NAME --publish $PORT_PUBLISH:3000 $IMAGE_NAME
+
+trigger:
+  branch:
+    - staging
+  event:
+    - push
+    - promote
