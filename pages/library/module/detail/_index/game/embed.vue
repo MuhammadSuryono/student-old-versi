@@ -174,10 +174,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     addReview () {
@@ -209,10 +205,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     playGame (x) {
@@ -249,10 +241,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     getAllDiscuss () {
@@ -276,10 +264,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     infiniteScroll ($state) {
@@ -304,10 +288,6 @@ export default {
               position: 'top-center',
               duration: 5000
             })
-            if (error.status === 401) {
-              this.$auth.logout()
-              this.$router.push('/login')
-            }
           })
       }, 500)
     },

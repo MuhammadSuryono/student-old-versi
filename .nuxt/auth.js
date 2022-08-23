@@ -19,7 +19,7 @@ export default function (ctx, inject) {
     "login": "/login",
     "logout": "/",
     "home": "/",
-    "callback": "/"
+    "callback": "/login"
   },
   "vuex": {
     "namespace": "auth"

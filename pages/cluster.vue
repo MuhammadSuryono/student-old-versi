@@ -107,10 +107,6 @@ export default {
               clearInterval(self)
             }, 5000)
           }
-          if (error.response.data.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     }
   }

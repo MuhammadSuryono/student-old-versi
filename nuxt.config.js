@@ -59,11 +59,11 @@ export default {
   },
 
   auth: {
-    redirect: {
-      login: '/login',
-      callback: '/',
-      home: '/'
-    },
+    // redirect: {
+    //   login: '/login',
+    //   callback: '/',
+    //   home: '/'
+    // },
     strategies: {
       local: {
         token: {
