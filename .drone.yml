@@ -33,7 +33,7 @@ steps:
 
 trigger:
   branch:
-    - development
+    - drone-deployment
   event:
     - push
 ---
@@ -67,10 +67,9 @@ steps:
         - sudo docker pull $IMAGE_NAME
         - echo "Run image docker"
         - docker run -d --name $CONTAINER_NAME --publish $PORT_PUBLISH:3000 $IMAGE_NAME
-
 trigger:
   branch:
-    - development
+    - drone-deployment
   event:
     - push
 depends_on:
