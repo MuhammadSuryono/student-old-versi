@@ -23,10 +23,10 @@
 
     <div class="content-module">
       <!-- <img src="~/assets/images/Video.svg" style="height: 100%; width: 100%"> -->
-        <iframe
+      <iframe
         ref="iframe"
-        src='/quiz-app/index.html'
-        :style="{ height: window.height - 200 + 'px', width: '100%'}"
+        src="/quiz-app/index.html"
+        :style="{ height: window.height - 200 + 'px', width: '100%' }"
       />
     </div>
   </div>
@@ -39,7 +39,7 @@ export default {
 
   data () {
     return {
-       window: {
+      window: {
         width: 0,
         height: 500
       },
@@ -68,7 +68,7 @@ export default {
       indexSub2: 0,
       boxReply: false,
       dataSubReply: {},
-      gameSource : null,
+      gameSource: null
     }
   },
 
@@ -115,7 +115,7 @@ export default {
   },
 
   mounted () {
-  window.addEventListener('activityDoneEvent', this.goHome)
+    window.addEventListener('activityDoneEvent', this.goHome)
     this.$once('hook:beforeDestroy', () => {
       window.removeEventListener('activityDoneEvent', this.goHome)
     })
@@ -124,19 +124,17 @@ export default {
     this.$once('hook:beforeDestroy', () => {
       window.removeEventListener('getTokenQuizEvent', this.getTokenQuiz)
     })
-
   },
   methods: {
-      getTokenQuiz () {
+    getTokenQuiz () {
       const token = this.$auth.strategy.token.get()
-      let quizId = this.gameSource;
-      this.$refs.iframe.contentWindow.sendTokenQuiz(token,quizId)
+      const quizId = this.gameSource
+      this.$refs.iframe.contentWindow.sendTokenQuiz(token, quizId)
     },
-      goHome () {
+    goHome () {
       this.$router.push({ path: '/' })
     },
     openReply2 (y, x) {
-
       this.indexSub2 = y
       this.boxReply = !this.boxReply
       this.dataSubReply = x
@@ -177,10 +175,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     addReview () {
@@ -212,10 +206,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     playGame (x) {
@@ -252,10 +242,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     getAllDiscuss () {
@@ -279,10 +265,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     infiniteScroll ($state) {
@@ -307,10 +289,6 @@ export default {
               position: 'top-center',
               duration: 5000
             })
-            if (error.status === 401) {
-              this.$auth.logout()
-              this.$router.push('/login')
-            }
           })
       }, 500)
     },

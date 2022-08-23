@@ -23,6 +23,7 @@ You can directly use them in pages and other components without the need to impo
 - `<Popup>` | `<popup>` (components/Popup.vue)
 - `<Profile>` | `<profile>` (components/Profile.vue)
 - `<Skeleton>` | `<skeleton>` (components/Skeleton.vue)
+- `<FactionReward>` | `<faction-reward>` (components/faction/Reward.vue)
 - `<IconArchivements>` | `<icon-archivements>` (components/icon/Archivements.vue)
 - `<IconAvatarBackground>` | `<icon-avatar-background>` (components/icon/AvatarBackground.vue)
 - `<IconBackBtn>` | `<icon-back-btn>` (components/icon/BackBtn.vue)
@@ -40,4 +41,3 @@ You can directly use them in pages and other components without the need to impo
 - `<SidebarAvatar>` | `<sidebar-avatar>` (components/sidebar/Avatar.vue)
 - `<SidebarCardName>` | `<sidebar-card-name>` (components/sidebar/CardName.vue)
 - `<SidebarMain>` | `<sidebar-main>` (components/sidebar/Main.vue)
-- `<FactionReward>` | `<faction-reward>` (components/faction/Reward.vue)

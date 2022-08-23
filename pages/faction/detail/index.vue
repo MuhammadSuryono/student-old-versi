@@ -193,6 +193,40 @@
             </div>
           </div>
         </div>
+        <div class="column is-narrow right-side-faction">
+          <div class="columns is-gapless grown-card">
+            <div class="column is-narrow">
+              <img src="~/assets/images/faction/Crown.png" class="logo-crown">
+            </div>
+            <div class="column is-narrow" style="margin-left: 15px">
+              <div class="text-lead">
+                Current leading faction
+              </div>
+              <div class="text-growth">
+                {{ dataModuleDominance.lead_faction_name }}
+              </div>
+            </div>
+          </div>
+          <div class="columns is-gapless no-select current-progress">
+            <div class="column is-narrow left-current">
+              <div class="text-current">
+                Next Level Reward
+              </div>
+            </div>
+            <div class="column is-narrow right-current" />
+          </div>
+          <div class="next-level-card">
+            <img src="~/assets/images/group_1031.svg">
+            <div class="card-user" style="width: 258px; margin-left: 7px">
+              <div class="user-avatar">
+                AVATAR REWARD
+              </div>
+              <div class="user-strategy">
+                COMING SOON
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div v-if="selected2" class="columns is-gapless">
         <div class="column is-narrow left-side-faction">
@@ -368,39 +402,8 @@
             <div class="column is-narrow right-current" />
           </div>
           <div class="next-level-card">
-            <div class="columns is-gapless">
-              <div class="column is-narrow left-img">
-                <img
-                  :src="dataModuleDominance.next_reward_male"
-                  style="
-                    height: 100px;
-                    margin-top: 30px;
-                    object-fit: cover;
-                    margin-left: auto;
-                    margin-right: auto;
-                    display: block;
-                  "
-                >
-              </div>
-              <div class="column is-narrow right-img">
-                <img
-                  :src="dataModuleDominance.next_reward_female"
-                  style="
-                    height: 100px;
-                    margin-top: 30px;
-                    object-fit: cover;
-                    margin-left: auto;
-                    display: block;
-                    margin-right: auto;
-                  "
-                >
-              </div>
-            </div>
-            <img
-              src="~/assets/images/comingsoon.png"
-              style="position: absolute; top: 368px"
-            >
-            <div class="card-user">
+            <img src="~/assets/images/group_1031.svg">
+            <div class="card-user" style="width: 258px; margin-left: 7px">
               <div class="user-avatar">
                 AVATAR REWARD
               </div>
@@ -568,7 +571,7 @@
                 Current leading faction
               </div>
               <div class="text-growth">
-                {{ dataCommentStars.lead_faction_name }}
+                {{ dataModuleDominance.lead_faction_name }}
               </div>
             </div>
           </div>
@@ -582,37 +585,37 @@
           </div>
           <div class="next-level-card">
             <div class="columns is-gapless">
-              <div class="column is-narrow left-img">
-                <img
-                  :src="dataCommentStars.next_reward_male"
-                  style="
-                    height: 100px;
-                    margin-top: 30px;
-                    object-fit: cover;
-                    margin-left: auto;
-                    margin-right: auto;
-                    display: block;
-                  "
-                >
-              </div>
-              <div class="column is-narrow right-img">
-                <img
-                  :src="dataCommentStars.next_reward_female"
-                  style="
-                    height: 100px;
-                    margin-top: 30px;
-                    object-fit: cover;
-                    margin-left: auto;
-                    display: block;
-                    margin-right: auto;
-                  "
-                >
-              </div>
+              <div
+                class="left-img"
+                style="
+                  width: 100%;
+                  margin-left: 0px;
+                  background-color: #80a8da;
+                  border-radius: 10px;
+                "
+              />
             </div>
             <img
-              src="~/assets/images/comingsoon.png"
-              style="position: absolute; top: 368px"
+              src="~/assets/images/confirmation_overlay.svg"
+              style="
+                position: absolute;
+                top: 390px;
+                margin-left: 0px;
+                width: 275px;
+              "
             >
+            <div
+              style="
+                position: absolute;
+                top: 402px;
+                font-weight: 700;
+                font-size: 24px;
+                color: rgb(58, 92, 166);
+                margin-left: 52px;
+              "
+            >
+              COMING SOON
+            </div>
             <div class="card-user">
               <div class="user-avatar">
                 BACKGROUND REWARD
@@ -704,10 +707,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     getDataModuleDominance () {
@@ -735,10 +734,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     getDataCommentStars () {
@@ -765,10 +760,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     getDataCommentStarsList () {
@@ -784,10 +775,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
 
@@ -809,10 +796,6 @@ export default {
               position: 'top-center',
               duration: 5000
             })
-            if (error.status === 401) {
-              this.$auth.logout()
-              this.$router.push('/login')
-            }
           })
       }, 500)
     },
@@ -1161,7 +1144,7 @@ export default {
         }
       }
       .current-progress {
-        margin-bottom: 12px;
+        margin-bottom: 0px;
         margin-left: 5px;
         .left-current {
           background: #2e5799;
@@ -1189,7 +1172,7 @@ export default {
         background: rgba(255, 255, 255, 0.8);
         height: 267px;
         width: 295px;
-        margin-left: 5px;
+        margin-left: 0px;
         padding: 10px;
 
         .left-img {

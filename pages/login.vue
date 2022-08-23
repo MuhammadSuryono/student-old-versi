@@ -37,7 +37,6 @@
         </v-col>
       </v-row>
     </div>
-
   </section>
 </template>
 
@@ -171,6 +170,7 @@ export default {
             }
           })
           .catch((error) => {
+            console.log('catch')
             this.loading = false
             this.$toast.error(error)
           })

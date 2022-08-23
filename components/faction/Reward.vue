@@ -12,8 +12,28 @@
         </div>
       </div>
     </div>
-    <div class="column image-reward" :style="{ backgroundImage: 'url(' + image + ')' }" />
-    
+    <div class="column image-reward">
+      <img
+        src="~/assets/images/confirmation_overlay.svg"
+        style="position: absolute; top: 21px; left: 0px"
+      >
+      <img
+        src="~/assets/images/library/mascot.png"
+        style="position: absolute; top: -36px; right: -34px; height: 82px"
+      >
+      <div
+        style="
+          position: absolute;
+          top: 28px;
+          left: 30px;
+          font-weight: 700;
+          font-size: 15px;
+          color: #3a5ca6;
+        "
+      >
+        COMING SOON
+      </div>
+    </div>
     <div class="bg-img-reward" />
   </div>
 </template>
@@ -37,7 +57,7 @@ export default {
   width: 499px;
   .next-reward {
     height: 61.67px;
-    width: 310px;
+    width: 337px;
     z-index: 2;
     padding: 6px !important;
     background: #ffffff;
@@ -71,15 +91,15 @@ export default {
     }
   }
   .bg-img-reward {
-    width: 198px;
+    width: 172px;
     height: 78px;
-    background: #FFF380;
+    background: #fff380;
     opacity: 0.5;
     position: absolute;
     border-radius: 6px;
     z-index: 3;
-    left: 439px;
-    top: 259px;
+    left: 465px;
+    top: 260px;
   }
   .image-reward {
     width: 100%;
@@ -92,8 +112,9 @@ export default {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     position: relative;
-    background-size: cover;
-    background-position: center;
+    // background-size: cover;
+    // background-position: center;
+    background: #80a9da;
   }
 }
 </style>
