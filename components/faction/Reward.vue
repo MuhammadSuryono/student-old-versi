@@ -98,8 +98,8 @@ export default {
     position: absolute;
     border-radius: 6px;
     z-index: 3;
-    left: 465px;
-    top: 260px;
+    left: 463px;
+    top: 255px;
   }
   .image-reward {
     width: 100%;
