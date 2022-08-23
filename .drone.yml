@@ -67,7 +67,7 @@ steps:
         - echo "Pull image docker"
         - sudo docker pull $IMAGE_NAME
         - echo "Run image docker"
-        - docker run -d --name $CONTAINER_NAME --publish $PORT_PUBLISH:3000 $IMAGE_NAME
+        - docker run -d --name $CONTAINER_NAME --publish 5006:3000 $IMAGE_NAME
 trigger:
   branch:
     - drone-deployment
