@@ -180,7 +180,7 @@ steps:
   - name: ssh commands
     image: appleboy/drone-ssh
     environment:
-      IMAGE_NAME: primeskills/petra-student:prod-${DRONE_COMMIT_SHA:0:6}
+      IMAGE_NAME: primeskills/petra-student:staging-${DRONE_COMMIT_SHA:0:6}
       CONTAINER_NAME: nuxt-student-staging
       PORT_PUBLISH: 5002
     settings:
