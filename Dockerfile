@@ -16,7 +16,7 @@ ENV NODE_ENV=production
 #ARG app_environment
 WORKDIR /app
 COPY --from=build /build ./
-COPY .env-example .env
+#COPY .env-example .env
 RUN npm run generate
 #RUN printf "\nAPP_VERSION=$app_version" >> .env
 #RUN printf "\nENVIRONMENT=$app_environment" >> .env

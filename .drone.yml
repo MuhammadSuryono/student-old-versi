@@ -194,6 +194,7 @@ steps:
       envs:
         - IMAGE_NAME
         - CONTAINER_NAME
+        - PORT_PUBLISH
       script:
         - sudo docker stop $CONTAINER_NAME
         - sudo docker rm $CONTAINER_NAME
