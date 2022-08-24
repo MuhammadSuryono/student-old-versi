@@ -29,7 +29,7 @@ steps:
         from_secret: docker_username
       password:
         from_secret: docker_password
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
 
 trigger:
   branch:
@@ -127,6 +127,7 @@ steps:
       envs:
         - IMAGE_NAME
         - CONTAINER_NAME
+        - PORT_PUBLISH
       script:
         - sudo docker stop $CONTAINER_NAME
         - sudo docker rm $CONTAINER_NAME
@@ -137,12 +138,9 @@ steps:
         - docker run -d --name $CONTAINER_NAME --publish $PORT_PUBLISH:3000 $IMAGE_NAME
 
 trigger:
-  branch:
-    - prod
   target:
     - prod
   event:
-    - push
     - promote
 
 ---
@@ -177,7 +175,7 @@ steps:
         from_secret: docker_username
       password:
         from_secret: docker_password
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.staging
 
   - name: ssh commands
     image: appleboy/drone-ssh
