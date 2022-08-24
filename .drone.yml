@@ -206,10 +206,7 @@ steps:
         - echo "Run image docker"
         - docker run -d --name $CONTAINER_NAME --publish $PORT_PUBLISH:3000 $IMAGE_NAME
 trigger:
-  branch:
-    - staging
   target:
     - staging
   event:
-    - push
     - promote
