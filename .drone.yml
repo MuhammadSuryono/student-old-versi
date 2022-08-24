@@ -12,7 +12,7 @@ steps:
     commands:
       - echo "basePath=/student-dev/" > .env
       - echo "basePathBuild=/student-dev/_nuxt/" >> .env
-      - echo "baseUrl=https://dev.petraverse.id/api" >> .env
+      - echo "baseUrl=http://dev.petraverse.id/api" >> .env
       - cat .env
 
   - name: "Build Image Development Student"
@@ -158,7 +158,7 @@ steps:
     commands:
       - echo "basePath=/student/" > .env
       - echo "basePathBuild=/student/_nuxt/" >> .env
-      - echo "baseUrl=https://staging.petraverse.id/api" >> .env
+      - echo "baseUrl=http://staging.petraverse.id/api" >> .env
       - cat .env
 
   - name: "Build Image Staging Student"
