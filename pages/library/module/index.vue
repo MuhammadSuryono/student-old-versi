@@ -32,7 +32,7 @@
           <div class="search-btn" @click="toSearch()">
             <IconSearch class="icons" />
           </div>
-          <div class="filter-btn" @click="dialog = true">
+          <div class="filter-btn" @click="closeDialog()">
             <IconFilter class="icons" />
           </div>
         </div>
@@ -201,19 +201,13 @@
       </span>
     </div>
     <LightBox @wheel.prevent @touchmove.prevent @scroll.prevent>
-      <div
-        v-if="dialog"
-        class="dialog-filter"
-        :style="{
-          height: window.height - 68 + 'px'
-        }"
-      >
+      <div v-if="dialog" class="dialog-filter" style="height: 90vh">
         <div class="center-dialog">
           <div class="container-dialog">
             <v-btn
               icon
               style="position: absolute; top: 10px; right: 20px"
-              @click="dialog = false"
+              @click="closeDialog()"
             >
               <v-icon>mdi-close</v-icon>
             </v-btn>
@@ -225,7 +219,7 @@
                   </div>
                 </v-col>
                 <v-col cols="6">
-                  <div class="reset-filter" @click="selection = []">
+                  <div class="reset-filter" @click="resetSelection(1)">
                     Reset Filter
                   </div>
                 </v-col>
@@ -238,7 +232,7 @@
                     cols="12"
                     md="4"
                     style="padding: 10px"
-                    @click="selection2 = ''"
+                    @click="resetSelection(2)"
                   >
                     <v-item v-slot="{ active, toggle }">
                       <v-card
@@ -281,7 +275,7 @@
                     cols="12"
                     md="4"
                     style="padding: 10px"
-                    @click="selection = []"
+                    @click="resetSelection(1)"
                   >
                     <v-item v-slot="{ active, toggle }">
                       <v-card
@@ -392,7 +386,25 @@ export default {
     this.getDataTag()
   },
   methods: {
+    resetSelection (x) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+      if (x === 1) {
+        this.selection = []
+      }
+      if (x === 2) {
+        this.selection2 = ''
+      }
+    },
+    closeDialog () {
+      this.dialog = !this.dialog
+      if (this.dialog) {
+        this.$store.commit('user/SET_POPUP_AUDIO', true)
+      } else {
+        this.$store.commit('user/SET_BTN_AUDIO', true)
+      }
+    },
     resetfilter () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.infiniteId += 1
       this.infiniteId2 += 1
       this.searchData = ''
@@ -404,6 +416,7 @@ export default {
       this.getData()
     },
     filterData () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.infiniteId2 += 1
       if (
         this.selection.length === 0 &&
@@ -450,6 +463,7 @@ export default {
       this.window.height = window.innerHeight
     },
     toSearch () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.infiniteId += 1
       this.infiniteId2 += 1
       if (this.searchData.length > 0) {
@@ -483,10 +497,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     getDataTag () {
@@ -500,10 +510,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     infiniteScroll ($state) {
@@ -530,17 +536,15 @@ export default {
               position: 'top-center',
               duration: 5000
             })
-            if (error.status === 401) {
-              this.$auth.logout()
-              this.$router.push('/login')
-            }
           })
       }, 500)
     },
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push('/library')
     },
     tab (id) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (id === 1) {
         this.selected1 = true
         this.selected2 = false
@@ -553,6 +557,7 @@ export default {
       }
     },
     toDetail (data) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push({
         name: 'library-module-detail-index',
         params: { index: data.module_id }

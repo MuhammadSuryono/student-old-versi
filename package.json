@@ -25,12 +25,14 @@
     "stream-vue": "^0.3.3",
     "unity-webgl": "^2.0.0",
     "v-click-outside": "^3.1.2",
+    "vue-audio-better": "^3.0.1",
     "vue-cloudflare-video-player": "0.0.7",
     "vue-infinite-loading": "^2.4.5",
     "vue-notification": "^1.3.20",
     "vue-responsive-video-background-player": "^1.3.0",
     "vue-video-player": "^5.0.2",
     "vuenity": "^1.1.5",
+    "vuetify-audio": "^0.3.3",
     "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {

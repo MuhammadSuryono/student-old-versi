@@ -119,9 +119,11 @@ export default {
   },
   methods: {
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push('/')
     },
     detailfaction () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push('/faction/detail')
     },
     getData () {
@@ -135,10 +137,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     }
   }
@@ -152,6 +150,29 @@ export default {
   z-index: 2;
   background-size: cover;
   background-position: center;
+  .coba {
+    width: 200px;
+    height: 100px;
+    background-color: Red;
+    margin-left: 300px;
+    align-items: center;
+    transform: skew(-30deg);
+    overflow: hidden;
+    border-left: solid;
+    position: relative;
+    .img-coba {
+      position: relative;
+      text-align: center;
+      transform: skew(30deg);
+      width: 140%;
+      height: 100%;
+      display: block;
+      /* optionnal */
+      /*object-fit: cover;
+  object-position:center center;*/
+      margin: 0 -20%; /* in relation with width */
+    }
+  }
   .header-module {
     width: 100%;
     height: 120px;

@@ -63,12 +63,15 @@ export default {
   mounted () {},
   methods: {
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push('/')
     },
     toModule () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push('/library/module')
     },
     goCollection () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push('/library/collection')
     }
   }

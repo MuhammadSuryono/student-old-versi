@@ -493,7 +493,7 @@
                         class="column is-narrow"
                         style="height: 80px"
                         :style="{
-                          backgroundColor: '#' + sub.avatar_background
+                          backgroundColor: sub.avatar_background
                         }"
                       >
                         <img :src="sub.avatar" class="pic-petra">
@@ -520,14 +520,14 @@
                         class="column is-narrow"
                         style="height: 80px"
                         :style="{
-                          backgroundColor: '#' + review.avatar_background
+                          backgroundColor: dataUser.faction.avatar_bgcolor
                         }"
                       >
-                        <img :src="review.avatar" class="pic-petra">
+                        <img :src="dataUser.avatar.image" class="pic-petra">
                       </div>
                       <div class="column box-list">
                         <div class="student-name">
-                          {{ review.username }}
+                          {{ dataUser.username }}
                         </div>
                         <div class="petra-review" style="padding-bottom: 70px">
                           <textarea
@@ -654,18 +654,21 @@ export default {
   },
   methods: {
     openReply2 (y, x) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       console.log(x)
       this.indexSub2 = y
       this.boxReply = !this.boxReply
       this.dataSubReply = x
     },
     openReply (x, y) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.showReply = x
       if (x === true) {
         this.indexSub = y
       }
     },
     submitComment () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       const data = {
         id: this.dataSubReply,
         review: this.subReply
@@ -685,6 +688,7 @@ export default {
             .dispatch('module/fetchAllDiscuss', data)
             .then((response) => {
               this.itemsDiscuss = response.data.data.data
+              console.log('discuss ', this.itemsDiscuss)
               this.total = response.data.data.total
               this.boxReply = false
             })
@@ -696,13 +700,10 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     addReview () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       const data = {
         module_rail_id: this.$route.params.index,
         review: this.descReview
@@ -731,13 +732,10 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     playGame (x) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push({
         name: 'library-module-detail-index-game-embed',
         params: {
@@ -746,6 +744,7 @@ export default {
       })
     },
     playGame2 (x) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       window.open(x, '_blank')
     },
     handleResize () {
@@ -780,10 +779,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     getAllDiscuss () {
@@ -807,10 +802,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     infiniteScroll ($state) {
@@ -835,17 +826,15 @@ export default {
               position: 'top-center',
               duration: 5000
             })
-            if (error.status === 401) {
-              this.$auth.logout()
-              this.$router.push('/login')
-            }
           })
       }, 500)
     },
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.go(-1)
     },
     tab (id, number) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (id === 1) {
         this.selected1 = true
         this.selected2 = false

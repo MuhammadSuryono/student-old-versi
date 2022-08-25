@@ -16,7 +16,7 @@
       </div>
       <div class="content-skillcard">
         <NuxtLink to="/">
-          <div class="btn-back">
+          <div class="btn-back" @click="buttonAudio()">
             <IconBackBtn />
             <div class="text-btn">
               BACK
@@ -65,12 +65,22 @@
                   class="icon-button"
                 >
                 <div class="name-card">
-                  {{ dataSkillcard.name }}
+                  <span v-if="!isLoading_1">
+                    {{ dataSkillcard.name }}
+                  </span>
+                  <Skeleton v-else style="width: 150px; margin-top: 2px" />
                 </div>
               </div>
               <div class="card-title2">
                 <div class="name-card">
-                  {{ dataSkillcard.attribute }}
+                  <span v-if="!isLoading_1">
+                    {{ dataSkillcard.attribute }}
+                  </span>
+                  <span v-else>
+                    <Skeleton
+                      style="width: 220px; margin-top: 10px; margin-left: 10px"
+                    />
+                  </span>
                 </div>
               </div>
             </div>
@@ -95,21 +105,52 @@
               </div>
             </div>
             <div class="content-skill" style="width: 670px; left: -10px">
-              <div
-                v-for="(i, index) in dataSkills"
-                :key="index"
-                class="columns is-gapless list-card"
-                style="height: 25px"
-              >
-                <div class="column title-card">
-                  {{ index + 1 }}. {{ i.skill }}
+              <span v-if="!isLoading_2">
+                <div
+                  v-for="(i, index) in dataSkills"
+                  :key="index"
+                  class="columns is-gapless list-card"
+                  style="height: 25px"
+                >
+                  <div class="column title-card">
+                    {{ index + 1 }}. {{ i.skill }}
+                  </div>
+                  <div class="column" style="transform: skew(-10deg)">
+                    <div class="columns is-gapless" />
+                  </div>
                 </div>
-                <div class="column" style="transform: skew(-10deg)">
-                  <div class="columns is-gapless" />
-                </div>
-              </div>
+              </span>
+              <span v-else>
+                <Skeleton
+                  style="width: 640px; margin-top: 10px; margin-left: 10px"
+                />
+                <Skeleton
+                  style="width: 640px; margin-top: 10px; margin-left: 10px"
+                />
+                <Skeleton
+                  style="width: 640px; margin-top: 10px; margin-left: 10px"
+                />
+                <Skeleton
+                  style="width: 640px; margin-top: 10px; margin-left: 10px"
+                />
+                <Skeleton
+                  style="width: 640px; margin-top: 10px; margin-left: 10px"
+                />
+                <Skeleton
+                  style="width: 640px; margin-top: 10px; margin-left: 10px"
+                />
+                <Skeleton
+                  style="
+                    width: 640px;
+                    margin-top: 10px;
+                    margin-bottom: 20px;
+                    margin-left: 10px;
+                  "
+                />
+              </span>
             </div>
             <div
+              v-if="!isLoading_2"
               class="content-skill"
               style="
                 background: transparent;
@@ -217,6 +258,8 @@ export default {
       avatar_bgcolor: '',
       avatar_icon: '',
       progress: 0,
+      isLoading_1: false,
+      isLoading_2: true,
       isLoading: true
     }
   },
@@ -253,70 +296,65 @@ export default {
     this.getDataAll()
   },
   methods: {
+    buttonAudio () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+    },
     getDataAll () {
       this.getDataDecoration()
       this.getDataPersonalityCluster()
       this.getDataAllSkills()
     },
     getDataAllSkills () {
-      this.isLoading = true
+      this.isLoading_2 = true
       this.$store
         .dispatch('skillcard/fetchAllSkill')
         .then((response) => {
-          this.isLoading = false
+          this.isLoading_2 = false
         })
         .catch((error) => {
-          this.isLoading = false
+          this.isLoading_2 = false
           this.$toast.error(error.response, {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     getDataPersonalityCluster () {
-      this.isLoading = true
+      this.isLoading_1 = true
       this.$store
         .dispatch('skillcard/fetchPersonalityCluster')
         .then((response) => {
+          this.isLoading_1 = false
           this.cluster = response.data.data.personality_cluster
-          this.isLoading = false
         })
         .catch((error) => {
-          this.isLoading = false
+          this.isLoading_1 = false
           this.$toast.error(error.response, {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     getDataDecoration () {
       this.isLoading = true
+      console.log('getDataDecoration : ')
       this.$store
         .dispatch('decoration/fetchCurrentDecoration')
         .then((response) => {
+          console.log('res : ', response)
           this.isLoading = false
         })
         .catch((error) => {
+          console.log('error : ', error)
           this.isLoading = false
           this.$toast.error(error.response.data.message, {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     goDetail (x) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push({ path: '/skillcard/detail?id=' + x.id })
     }
   }

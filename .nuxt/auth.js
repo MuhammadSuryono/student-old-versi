@@ -43,18 +43,19 @@ export default function (ctx, inject) {
   // local
   $auth.registerStrategy('local', new LocalScheme($auth, {
   "token": {
-    "required": false,
-    "type": false
+    "property": "data.access_token",
+    "global": true,
+    "maxAge": 7200
   },
   "endpoints": {
     "login": {
       "url": "/login",
-      "method": "post",
-      "propertyName": "data.data.access_token"
+      "method": "post"
     },
     "logout": false,
     "user": false
   },
+  "autoLogout": false,
   "name": "local"
 }))
 

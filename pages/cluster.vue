@@ -73,6 +73,7 @@ export default {
   },
   methods: {
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push('/')
     },
     getData () {
@@ -105,10 +106,6 @@ export default {
               this.$router.push('/personality')
               clearInterval(self)
             }, 5000)
-          }
-          if (error.response.data.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
           }
         })
     }

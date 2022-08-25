@@ -24,6 +24,7 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     '~/plugins/repository.js',
+    '~/plugins/directives.js',
     '~/plugins/buefy.js',
     '~/plugins/persistedState.client.js',
     '~/plugins/clickOutside.js',
@@ -35,6 +36,7 @@ export default {
     '~/plugins/notifications-ssr.js',
     '~/plugins/notifications-client.js',
     '~/plugins/modal.js'
+    // '~/plugins/auth.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -58,23 +60,31 @@ export default {
   },
 
   auth: {
+    // redirect: {
+    //   login: '/login',
+    //   callback: '/',
+    //   home: '/'
+    // },
     strategies: {
       local: {
         token: {
-          required: false,
-          type: false
+          property: 'data.access_token',
+          global: true,
+          // maxAge: 10
+          maxAge: 7200
         },
         endpoints: {
           login: {
             url: '/login',
-            method: 'post',
-            propertyName: 'data.data.access_token'
+            method: 'post'
           },
           logout: false,
           user: false
-        }
+        },
+        autoLogout: false
       }
-    }
+    },
+    plugins: ['~/plugins/auth.js']
   },
 
   recaptcha: {
@@ -108,7 +118,17 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    publicPath: process.env.basePathBuild ?? '/_nuxt/'
+    publicPath: process.env.basePathBuild ?? '/_nuxt/',
+    extend (config, ctx) {
+      config.module.rules.push({
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]',
+          esModule: false
+        }
+      })
+    }
   },
 
   vue: {

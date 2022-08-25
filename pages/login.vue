@@ -41,19 +41,34 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 export default {
+  auth: false,
   name: 'LoginPage',
   layout: 'login',
 
   data () {
     return {
+      popup: true,
       loading: false,
       state: {
         email: '',
         password: ''
       }
     }
+  },
+  computed: {
+    ...mapState({
+      expired: (state) => {
+        if (state.user.expired) {
+          this.$store.commit('user/SET_POPUP_AUDIO', true)
+        }
+        return state.user.expired
+      }
+    })
+  },
+  mounted () {
+    // console.log(this.$auth.loggedIn)
   },
   methods: {
     ...mapMutations(['SET_IS_AUTH']),
@@ -64,7 +79,11 @@ export default {
       const re = /\S+@\S+\.\S+/
       return re.test(email)
     },
+    closePopup () {
+      this.$store.commit('user/SET_EXPIRED', false)
+    },
     login () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (this.state.email === '' || this.state.password === '') {
         if (this.state.email === '' && this.state.password === '') {
           this.$toast.error('Email & Password can not be empty.', {
@@ -97,11 +116,12 @@ export default {
             password: this.state.password
           })
           .then((response) => {
+            this.$store.commit('user/SET_LOGGEDIN', true)
+            this.$store.commit('user/SET_EXPIRED', false)
             this.loading = false
             if (response.status === 200 || response.status === 201) {
               if (response.data.data.user.role_id === 4) {
                 const data = response.data.data
-                console.log('res:', data)
                 localStorage.setItem('user_id', data.user.id)
                 this.$store.commit('user/SET_USERS', data)
                 if (
@@ -114,7 +134,6 @@ export default {
                     'user/updateImages',
                     data.user.avatar.image
                   )
-
                   this.$store.dispatch(
                     'user/updateImagesName',
                     data.user.avatar.name
@@ -128,11 +147,13 @@ export default {
                 } else {
                   this.$store.commit('user/SET_FULLNAME', data.user.first_name)
                 }
-                this.$auth.strategy.token.set(
-                  'Bearer ' + response.data.data.access_token
-                )
+                // this.$auth.strategy.token.set(
+                //   'Bearer ' + response.data.data.access_token
+                // )
+                localStorage.setItem('localAuth', false)
                 this.$router.push({ path: '/splash' })
               } else {
+                console.log(false)
                 this.$auth.logout()
                 this.$router.push('/login')
                 this.$toast.error('Please login with student account.', {
@@ -149,6 +170,7 @@ export default {
             }
           })
           .catch((error) => {
+            console.log('catch')
             this.loading = false
             this.$toast.error(error)
           })
@@ -158,6 +180,69 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.modal-dialog {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 9999;
+  .overlay-bg {
+    height: 100%;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.5);
+    cursor: pointer;
+  }
+  .outside-card {
+    height: 200px;
+    width: 600px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    // position: absolute;
+    .avatar-light {
+      height: 217px;
+      z-index: 99999;
+      position: absolute;
+      margin-left: -28px;
+      margin-top: -39px;
+    }
+    .card-popup {
+      height: 100%;
+      width: 100%;
+      --g: #000, #0000 1deg 179deg, #000 180deg;
+      --mask: conic-gradient(from -45deg at top 15px right 15px, var(--g)) 100%
+          0 /51% 100% no-repeat,
+        conic-gradient(from -225deg at bottom 15px left 15px, var(--g)) 0 100%/51%
+          100% no-repeat;
+      -webkit-mask: var(--mask);
+      mask: var(--mask);
+      padding: 20px;
+      background-color: white;
+      .bg-popup {
+        background-color: #f2f2f2;
+        height: 100%;
+        width: 100%;
+        --g: #000, #0000 1deg 179deg, #000 180deg;
+        --mask: conic-gradient(from -45deg at top 15px right 15px, var(--g))
+            100% 0 /51% 100% no-repeat,
+          conic-gradient(from -225deg at bottom 15px left 15px, var(--g)) 0 100%/51%
+            100% no-repeat;
+        -webkit-mask: var(--mask);
+        mask: var(--mask);
+        .text-popup {
+          line-height: 160px;
+          text-align: center;
+          align-items: center;
+          font-size: 16px;
+          margin-left: 122px;
+          color: #5b6987;
+        }
+      }
+    }
+  }
+}
 .hero {
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
   background-repeat: no-repeat, repeat;

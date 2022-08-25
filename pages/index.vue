@@ -1,10 +1,9 @@
 <template>
   <div
+    v-if="!isLoading"
     class="bg-img"
     :style="{ backgroundImage: 'url(' + pathDecoration + ')' }"
-  >
-    <!-- {{ pathDecoration }} -->
-  </div>
+  />
 </template>
 
 <script>
@@ -15,7 +14,8 @@ export default {
 
   data () {
     return {
-      isLoading: false
+      isLoading: false,
+      audio: null
     }
   },
 
@@ -34,9 +34,14 @@ export default {
   },
 
   mounted () {
+    // this.$store.commit('user/SET_BG_AUDIO', true)
     this.getDataDecoration()
   },
   methods: {
+    playsound () {
+      this.audio = new Audio(require('@/assets/audio/audio_bg.mp3'))
+      this.audio.play()
+    },
     getDataDecoration () {
       this.isLoading = true
       this.$store
@@ -50,10 +55,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     }
   }

@@ -361,6 +361,7 @@ export default {
   },
   methods: {
     toDetail (data) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push({
         name: 'library-module-detail-index',
         params: { index: data.module_id }
@@ -371,6 +372,7 @@ export default {
       this.window.height = window.innerHeight
     },
     toSearch () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.infiniteId += 1
       if (this.searchData.length > 0) {
         this.searchBtn = true
@@ -399,10 +401,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     infiniteScroll ($state) {
@@ -427,14 +425,11 @@ export default {
               position: 'top-center',
               duration: 5000
             })
-            if (error.status === 401) {
-              this.$auth.logout()
-              this.$router.push('/login')
-            }
           })
       }, 500)
     },
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push('/library')
     }
   }

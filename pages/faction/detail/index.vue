@@ -11,9 +11,9 @@
           FACTION COMPETITION
         </div>
       </div>
-      <div class="btn-back" @click="goBack()">
+      <!-- <div class="btn-back" @click="goBack()">
         <Back />
-      </div>
+      </div> -->
     </div>
     <div class="content-faction">
       <div class="columns is-gapless mb-0 pb-0">
@@ -67,9 +67,13 @@
           </div>
         </div>
       </div>
-      <div v-if="selected1" class="columns is-gapless">
+      <div v-show="selected1" class="columns is-gapless">
+        <!-- <FactionProgressBar /> -->
         <div class="column is-narrow left-side-faction">
-          <div class="columns is-gapless no-select current-progress">
+          <div
+            class="columns is-gapless no-select current-progress"
+            style="margin-bottom: 1.2rem"
+          >
             <div class="column is-narrow left-current">
               <div class="text-current">
                 Current Progress
@@ -97,7 +101,16 @@
                           : 'border5'
                 "
               />
-              <img :src="itemProgress.faction_icon" class="icon-faction">
+              <figure v-lazyload class="image__wrapper icon-faction">
+                <ImageSpinner
+                  class="image__spinner"
+                />
+                <img
+                  class="image__item"
+                  :data-url="itemProgress.faction_icon"
+                  alt="random image"
+                >
+              </figure>
             </div>
             <div
               class="columns is-narrow"
@@ -193,10 +206,49 @@
             </div>
           </div>
         </div>
-      </div>
-      <div v-if="selected2" class="columns is-gapless">
-        <div class="column is-narrow left-side-faction">
+        <div
+          class="column is-narrow right-side-faction"
+          style="margin-top: 35px"
+        >
+          <div class="columns is-gapless grown-card">
+            <div class="column is-narrow">
+              <img src="~/assets/images/faction/Crown.png" class="logo-crown">
+            </div>
+            <div class="column is-narrow" style="margin-left: 15px">
+              <div class="text-lead">
+                Current leading faction
+              </div>
+              <div class="text-growth">
+                {{ dataModuleDominance.lead_faction_name }}
+              </div>
+            </div>
+          </div>
           <div class="columns is-gapless no-select current-progress">
+            <div class="column is-narrow left-current">
+              <div class="text-current">
+                Next Level Reward
+              </div>
+            </div>
+            <div class="column is-narrow right-current" />
+          </div>
+          <div class="next-level-card">
+            <img
+              src="~/assets/images/group_1031.svg"
+              style="margin-top: 10px"
+            >
+            <img
+              src="~/assets/images/Group_(5).svg"
+              style="margin-left: 8px; margin-top: 10px"
+            >
+          </div>
+        </div>
+      </div>
+      <div v-show="selected2" class="columns is-gapless">
+        <div class="column is-narrow left-side-faction">
+          <div
+            class="columns is-gapless no-select current-progress"
+            style="margin-bottom: 1.2rem"
+          >
             <div class="column is-narrow left-current">
               <div class="text-current">
                 Progress this Month
@@ -226,7 +278,18 @@
                           : 'border5'
                 "
               />
-              <img :src="itemProgress.image" class="icon-faction">
+              
+              <figure v-lazyload class="image__wrapper icon-faction">
+                <ImageSpinner
+                  class="image__spinner"
+                />
+                <img
+                  class="image__item"
+                  :data-url="itemProgress.image"
+                  alt="random image"
+                >
+              </figure>
+              <!-- <img :src="itemProgress.image" class="icon-faction"> -->
             </div>
             <div
               class="columns is-narrow"
@@ -345,7 +408,10 @@
             </div>
           </div>
         </div>
-        <div class="column is-narrow right-side-faction">
+        <div
+          class="column is-narrow right-side-faction"
+          style="margin-top: 35px"
+        >
           <div class="columns is-gapless grown-card">
             <div class="column is-narrow">
               <img src="~/assets/images/faction/Crown.png" class="logo-crown">
@@ -368,47 +434,22 @@
             <div class="column is-narrow right-current" />
           </div>
           <div class="next-level-card">
-            <div class="columns is-gapless">
-              <div class="column is-narrow left-img">
-                <img
-                  :src="dataModuleDominance.next_reward_male"
-                  style="
-                    height: 100px;
-                    margin-top: 30px;
-                    object-fit: cover;
-                    margin-left: auto;
-                    margin-right: auto;
-                    display: block;
-                  "
-                >
-              </div>
-              <div class="column is-narrow right-img">
-                <img
-                  :src="dataModuleDominance.next_reward_female"
-                  style="
-                    height: 100px;
-                    margin-top: 30px;
-                    object-fit: cover;
-                    margin-left: auto;
-                    display: block;
-                    margin-right: auto;
-                  "
-                >
-              </div>
-            </div>
-            <div class="card-user">
-              <div class="user-avatar">
-                USER AVATAR
-              </div>
-              <div class="user-strategy">
-                {{ dataModuleDominance.next_reward_name }}
-              </div>
-            </div>
+            <img
+              src="~/assets/images/group_1031.svg"
+              style="margin-top: 10px"
+            >
+            <img
+              src="~/assets/images/Group_(5).svg"
+              style="margin-left: 8px; margin-top: 10px"
+            >
           </div>
         </div>
       </div>
-      <div v-if="selected3" class="columns is-gapless">
-        <div class="column is-narrow left-side-faction">
+      <div v-show="selected3" class="columns is-gapless">
+        <div
+          class="column is-narrow left-side-faction"
+          style="margin-bottom: 1.2rem"
+        >
           <div class="columns is-gapless no-select current-progress">
             <div class="column is-narrow left-current">
               <div class="text-current">
@@ -423,7 +464,7 @@
                 v-for="(itemStar, indexStar) in dataCommentStars.data_reward"
                 :key="indexStar"
                 class="progress-skill columns is-gapless"
-                style="width: 210px; height: 55px; margin-bottom: 18px"
+                style="width: 210px; height: 55px; margin-bottom: 10px"
               >
                 <div class="columns is-narrow">
                   <div
@@ -441,11 +482,23 @@
                               : 'border5'
                     "
                   />
-                  <img
+                  <!-- <img
                     :src="itemStar.image"
                     class="icon-faction"
                     style="margin-top: 14px"
-                  >
+                  > -->
+                  
+              <figure v-lazyload class="image__wrapper icon-faction" 
+                    style="margin-top: 14px">
+                <ImageSpinner
+                  class="image__spinner"
+                />
+                <img
+                  class="image__item"
+                  :data-url="itemStar.image"
+                  alt="random image"
+                >
+              </figure>
                 </div>
                 <div class="column is-narrow" style="margin-left: 15px">
                   <div
@@ -480,12 +533,12 @@
                 </div>
               </div>
             </div>
-            <div class="column is-narrow petra-content">
+            <div class="column is-narrow petra-content" style="height: 334px">
               <div
                 v-for="(review, indexReview) in itemsDiscuss"
                 :key="indexReview"
                 class="columns is-gapless"
-                style="margin-bottom: 10px"
+                style="margin-bottom: 5px"
               >
                 <div
                   class="column is-narrow"
@@ -554,7 +607,10 @@
             </div>
           </div>
         </div>
-        <div class="column is-narrow right-side-faction">
+        <div
+          class="column is-narrow right-side-faction"
+          style="margin-top: 22px"
+        >
           <div class="columns is-gapless grown-card">
             <div class="column is-narrow">
               <img src="~/assets/images/faction/Crown.png" class="logo-crown">
@@ -564,7 +620,7 @@
                 Current leading faction
               </div>
               <div class="text-growth">
-                {{ dataCommentStars.lead_faction_name }}
+                {{ dataModuleDominance.lead_faction_name }}
               </div>
             </div>
           </div>
@@ -578,44 +634,68 @@
           </div>
           <div class="next-level-card">
             <div class="columns is-gapless">
-              <div class="column is-narrow left-img">
-                <img
-                  :src="dataCommentStars.next_reward_male"
-                  style="
-                    height: 100px;
-                    margin-top: 30px;
-                    object-fit: cover;
-                    margin-left: auto;
-                    margin-right: auto;
-                    display: block;
-                  "
-                >
-              </div>
-              <div class="column is-narrow right-img">
-                <img
-                  :src="dataCommentStars.next_reward_female"
-                  style="
-                    height: 100px;
-                    margin-top: 30px;
-                    object-fit: cover;
-                    margin-left: auto;
-                    display: block;
-                    margin-right: auto;
-                  "
-                >
-              </div>
+              <div
+                class="left-img"
+                style="
+                  width: 100%;
+                  margin-left: 0px;
+                  background-color: #80a8da;
+                  border-radius: 10px;
+                  z-index: 1;
+                  margin-top: 10px;
+                "
+              />
             </div>
-            <div class="card-user">
-              <div class="user-avatar">
-                USER AVATAR
-              </div>
-              <div class="user-strategy">
-                {{ dataCommentStars.next_reward_name }}
-              </div>
+            <img
+              src="~/assets/images/confirmation_overlay.svg"
+              style="
+                position: absolute;
+                top: 424px;
+                margin-left: 0px;
+                width: 275px;
+                z-index: 2;
+              "
+            >
+            <div
+              style="
+                position: absolute;
+                top: 437px;
+                font-weight: 700;
+                font-size: 24px;
+                color: rgb(58, 92, 166);
+                margin-left: 52px;
+                z-index: 2;
+              "
+            >
+              COMING SOON
             </div>
+            <div
+              style="
+                position: absolute;
+                background: #fff380;
+                opacity: 0.5;
+                width: 275px;
+                height: 130px;
+                top: 390px;
+                border-radius: 9.16358px;
+                z-index: 0;
+                margin-left: 4px;
+              "
+            />
+            <img
+              src="~/assets/images/Group_(4).svg"
+              style="position: absolute; top: 534px; width: 275px"
+            >
           </div>
         </div>
       </div>
+      
+    <div style="background-color:;height:50px;
+      cursor: pointer;width:100px;right:110px;position:absolute;margin-top:20px;">
+      <div class="btn-back" @click="goBack()">
+        <Back />
+      </div>
+</div>
     </div>
   </div>
 </template>
@@ -696,10 +776,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     getDataModuleDominance () {
@@ -727,10 +803,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     getDataCommentStars () {
@@ -757,10 +829,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
     getDataCommentStarsList () {
@@ -776,10 +844,6 @@ export default {
             position: 'top-center',
             duration: 5000
           })
-          if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
-          }
         })
     },
 
@@ -801,17 +865,15 @@ export default {
               position: 'top-center',
               duration: 5000
             })
-            if (error.status === 401) {
-              this.$auth.logout()
-              this.$router.push('/login')
-            }
           })
       }, 500)
     },
     goBack () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push('/faction')
     },
     tab (id) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
       if (id === 1) {
         this.selected1 = true
         this.selected2 = false
@@ -1146,12 +1208,13 @@ export default {
         .text-growth {
           font-weight: 700;
           line-height: 35px;
-          font-size: 30px;
+          font-size: 25px;
+          text-transform: uppercase;
           color: #bdff83;
         }
       }
       .current-progress {
-        margin-bottom: 12px;
+        margin-bottom: 0px;
         margin-left: 5px;
         .left-current {
           background: #2e5799;
@@ -1179,7 +1242,7 @@ export default {
         background: rgba(255, 255, 255, 0.8);
         height: 267px;
         width: 295px;
-        margin-left: 5px;
+        margin-left: 0px;
         padding: 10px;
 
         .left-img {
@@ -1199,9 +1262,10 @@ export default {
         .card-user {
           text-align: Center;
           width: 100%;
+          z-index: 2;
           height: 57px;
           padding-top: 5px;
-          background: rgba(155, 210, 234, 0.5);
+          background: rgba(155, 210, 234, 1);
           .user-avatar {
             font-weight: 600;
             font-size: 14px;
