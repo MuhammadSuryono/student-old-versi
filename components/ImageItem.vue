@@ -3,8 +3,8 @@
     <img
     
     class="image__item"
-      :data-url="source" 
-      alt="random image"
+      :data-url="source"
+      alt=""
     >
   </figure>
 </template>

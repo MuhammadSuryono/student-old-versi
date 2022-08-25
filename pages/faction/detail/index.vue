@@ -11,9 +11,9 @@
           FACTION COMPETITION
         </div>
       </div>
-      <div class="btn-back" @click="goBack()">
+      <!-- <div class="btn-back" @click="goBack()">
         <Back />
-      </div>
+      </div> -->
     </div>
     <div class="content-faction">
       <div class="columns is-gapless mb-0 pb-0">
@@ -690,7 +690,8 @@
         </div>
       </div>
       
-    <div style="background-color:;height:50px;width:100px;right:110px;position:absolute;margin-top:20px;">
+    <div style="background-color:;height:50px;
+      cursor: pointer;width:100px;right:110px;position:absolute;margin-top:20px;">
       <div class="btn-back" @click="goBack()">
         <Back />
       </div>
