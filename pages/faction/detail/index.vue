@@ -67,7 +67,8 @@
           </div>
         </div>
       </div>
-      <div v-if="selected1" class="columns is-gapless">
+      <div v-show="selected1" class="columns is-gapless">
+        <!-- <FactionProgressBar /> -->
         <div class="column is-narrow left-side-faction">
           <div
             class="columns is-gapless no-select current-progress"
@@ -198,7 +199,7 @@
         </div>
         <div
           class="column is-narrow right-side-faction"
-          style="margin-top: 22px"
+          style="margin-top: 35px"
         >
           <div class="columns is-gapless grown-card">
             <div class="column is-narrow">
@@ -233,7 +234,7 @@
           </div>
         </div>
       </div>
-      <div v-if="selected2" class="columns is-gapless">
+      <!-- <div v-show="selected2" class="columns is-gapless">
         <div class="column is-narrow left-side-faction">
           <div
             class="columns is-gapless no-select current-progress"
@@ -389,7 +390,7 @@
         </div>
         <div
           class="column is-narrow right-side-faction"
-          style="margin-top: 22px"
+          style="margin-top: 35px"
         >
           <div class="columns is-gapless grown-card">
             <div class="column is-narrow">
@@ -424,7 +425,7 @@
           </div>
         </div>
       </div>
-      <div v-if="selected3" class="columns is-gapless">
+      <div v-show="selected3" class="columns is-gapless">
         <div
           class="column is-narrow left-side-faction"
           style="margin-bottom: 1.2rem"
@@ -653,17 +654,9 @@
               src="~/assets/images/Group_(4).svg"
               style="position: absolute; top: 534px; width: 275px"
             >
-            <!-- <div class="card-user">
-              <div class="user-avatar">
-                BACKGROUND REWARD
-              </div>
-              <div class="user-strategy">
-                COMING SOON
-              </div>
-            </div> -->
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
