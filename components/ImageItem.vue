@@ -1,11 +1,6 @@
 <template>
   <figure class="image__wrapper">
-    <img
-    
-    class="image__item"
-      :data-url="source"
-      alt=""
-    >
+    <img class="image__item" :data-url="source" alt="">
   </figure>
 </template>
 <script>

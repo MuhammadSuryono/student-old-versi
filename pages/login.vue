@@ -9,7 +9,7 @@
           <img src="~/assets/images/logo_dashboard.png" class="img-logo">
           <div class="card">
             <div class="has-text-centered title">
-              Login to your Account
+              Login to your Account {{ isLoggedIn }}
             </div>
             <b-field class="mt-14" style="background-color: white">
               <b-input
@@ -37,6 +37,26 @@
         </v-col>
       </v-row>
     </div>
+    <transition name="fade" appear>
+      <div v-if="!isLoggedIn" class="modal-dialog">
+        <div class="overlay-bg" />
+        <div class="outside-card">
+          <div class="top-corner" />
+          <div class="bottom-corner" />
+          <img src="~/assets/images/library/mascot.png" class="avatar-light">
+          <div class="card-popup">
+            <div class="bg-popup">
+              <div class="text-popup">
+                You have been logged out due to inactivity.
+              </div>
+            </div>
+          </div>
+          <div class="btn-logout" @click="logout()">
+            OK
+          </div>
+        </div>
+      </div>
+    </transition>
   </section>
 </template>
 
@@ -49,6 +69,7 @@ export default {
 
   data () {
     return {
+      // isLoggedIn: false,
       popup: true,
       loading: false,
       state: {
@@ -64,6 +85,9 @@ export default {
           this.$store.commit('user/SET_POPUP_AUDIO', true)
         }
         return state.user.expired
+      },
+      isLoggedIn: (state) => {
+        return state.user.isLoggedIn
       }
     })
   },
@@ -72,6 +96,20 @@ export default {
   },
   methods: {
     ...mapMutations(['SET_IS_AUTH']),
+
+    logout () {
+      this.$store.commit('user/SET_LOGGEDIN', true)
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+      this.$store.commit('user/SET_BG_AUDIO', false)
+      if (this.btn_profile) {
+        this.$store.commit('user/SET_BTN_PROFILE')
+      }
+      if (this.btn_decoration) {
+        this.$store.commit('user/SET_BTN_DECORATION')
+      }
+      this.$auth.logout()
+      this.$router.push('/login')
+    },
     toHome () {
       this.$router.push({ path: 'dashboard' })
     },
@@ -150,7 +188,6 @@ export default {
                 // this.$auth.strategy.token.set(
                 //   'Bearer ' + response.data.data.access_token
                 // )
-                localStorage.setItem('localAuth', false)
                 this.$router.push({ path: '/splash' })
               } else {
                 console.log(false)
@@ -185,11 +222,14 @@ export default {
   width: 100%;
   position: absolute;
   z-index: 9999;
+
   .overlay-bg {
-    height: 100%;
+    height: 100vh;
     width: 100%;
     background: rgba(10, 10, 10, 0.5);
     cursor: pointer;
+    position: absolute;
+    z-index: 9999;
   }
   .outside-card {
     height: 200px;
@@ -200,6 +240,63 @@ export default {
     left: 0;
     bottom: 0;
     right: 0;
+    z-index: 9999;
+    .btn-logout {
+      background-color: #0aa7c1;
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      height: 30px;
+      width: 110px;
+      z-index: 999;
+      cursor: pointer;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      text-align: center;
+      color: #f2f2f2;
+      .bg-corner {
+        background: #7289aa;
+        opacity: 0.35;
+        border: 0.657738px solid #ffffff;
+        height: 18px;
+        width: 18px;
+        left: 0px;
+        top: 0px;
+        border-radius: 0px;
+        position: absolute;
+      }
+    }
+    .bottom-corner {
+      background-color: #2e5799;
+      position: absolute;
+      bottom: -3px;
+      left: -3px;
+      height: 100px;
+      width: 100px;
+      --g: #000, #0000 1deg 179deg, #000 180deg;
+      --mask: conic-gradient(from -45deg at top 15px right 15px, var(--g)) 100%
+          0 /51% 100% no-repeat,
+        conic-gradient(from -225deg at bottom 15px left 15px, var(--g)) 0 100%/51%
+          100% no-repeat;
+      -webkit-mask: var(--mask);
+      mask: var(--mask);
+    }
+    .top-corner {
+      background-color: #2e5799;
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      height: 100px;
+      width: 100px;
+      --g: #000, #0000 1deg 179deg, #000 180deg;
+      --mask: conic-gradient(from -45deg at top 15px right 15px, var(--g)) 100%
+          0 /51% 100% no-repeat,
+        conic-gradient(from -225deg at bottom 15px left 15px, var(--g)) 0 100%/51%
+          100% no-repeat;
+      -webkit-mask: var(--mask);
+      mask: var(--mask);
+    }
     // position: absolute;
     .avatar-light {
       height: 217px;
@@ -218,7 +315,7 @@ export default {
           100% no-repeat;
       -webkit-mask: var(--mask);
       mask: var(--mask);
-      padding: 20px;
+      padding: 8px;
       background-color: white;
       .bg-popup {
         background-color: #f2f2f2;
