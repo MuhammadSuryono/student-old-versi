@@ -101,7 +101,16 @@
                           : 'border5'
                 "
               />
-              <img :src="itemProgress.faction_icon" class="icon-faction">
+              <figure v-lazyload class="image__wrapper icon-faction">
+                <ImageSpinner
+                  class="image__spinner"
+                />
+                <img
+                  class="image__item"
+                  :data-url="itemProgress.faction_icon"
+                  alt="random image"
+                >
+              </figure>
             </div>
             <div
               class="columns is-narrow"
@@ -234,7 +243,7 @@
           </div>
         </div>
       </div>
-      <!-- <div v-show="selected2" class="columns is-gapless">
+      <div v-show="selected2" class="columns is-gapless">
         <div class="column is-narrow left-side-faction">
           <div
             class="columns is-gapless no-select current-progress"
@@ -269,7 +278,18 @@
                           : 'border5'
                 "
               />
-              <img :src="itemProgress.image" class="icon-faction">
+              
+              <figure v-lazyload class="image__wrapper icon-faction">
+                <ImageSpinner
+                  class="image__spinner"
+                />
+                <img
+                  class="image__item"
+                  :data-url="itemProgress.image"
+                  alt="random image"
+                >
+              </figure>
+              <!-- <img :src="itemProgress.image" class="icon-faction"> -->
             </div>
             <div
               class="columns is-narrow"
@@ -462,11 +482,23 @@
                               : 'border5'
                     "
                   />
-                  <img
+                  <!-- <img
                     :src="itemStar.image"
                     class="icon-faction"
                     style="margin-top: 14px"
-                  >
+                  > -->
+                  
+              <figure v-lazyload class="image__wrapper icon-faction" 
+                    style="margin-top: 14px">
+                <ImageSpinner
+                  class="image__spinner"
+                />
+                <img
+                  class="image__item"
+                  :data-url="itemStar.image"
+                  alt="random image"
+                >
+              </figure>
                 </div>
                 <div class="column is-narrow" style="margin-left: 15px">
                   <div
@@ -656,7 +688,13 @@
             >
           </div>
         </div>
-      </div> -->
+      </div>
+      
+    <div style="background-color:;height:50px;width:100px;right:110px;position:absolute;margin-top:20px;">
+      <div class="btn-back" @click="goBack()">
+        <Back />
+      </div>
+</div>
     </div>
   </div>
 </template>
@@ -1169,7 +1207,8 @@ export default {
         .text-growth {
           font-weight: 700;
           line-height: 35px;
-          font-size: 30px;
+          font-size: 25px;
+          text-transform: uppercase;
           color: #bdff83;
         }
       }

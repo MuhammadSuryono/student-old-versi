@@ -24,6 +24,7 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     '~/plugins/repository.js',
+    '~/plugins/directives.js',
     '~/plugins/buefy.js',
     '~/plugins/persistedState.client.js',
     '~/plugins/clickOutside.js',

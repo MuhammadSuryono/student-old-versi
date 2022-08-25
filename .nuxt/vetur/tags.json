@@ -5,6 +5,9 @@
   "Decoration": {
     "description": "Auto imported from components/Decoration.vue"
   },
+  "ImageItem": {
+    "description": "Auto imported from components/ImageItem.vue"
+  },
   "Maps": {
     "description": "Auto imported from components/Maps.vue"
   },
@@ -29,8 +32,14 @@
   "PNotification": {
     "description": "Auto imported from components/PNotification.vue"
   },
+  "Popup": {
+    "description": "Auto imported from components/Popup.vue"
+  },
   "PProgress": {
     "description": "Auto imported from components/PProgress.vue"
+  },
+  "Profile": {
+    "description": "Auto imported from components/Profile.vue"
   },
   "PSearch": {
     "description": "Auto imported from components/PSearch.vue"
@@ -41,23 +50,14 @@
   "PTitleV2": {
     "description": "Auto imported from components/PTitleV2.vue"
   },
-  "Popup": {
-    "description": "Auto imported from components/Popup.vue"
-  },
-  "Profile": {
-    "description": "Auto imported from components/Profile.vue"
-  },
   "Skeleton": {
     "description": "Auto imported from components/Skeleton.vue"
   },
-  "SidebarAvatar": {
-    "description": "Auto imported from components/sidebar/Avatar.vue"
+  "FactionProgressBar": {
+    "description": "Auto imported from components/faction/ProgressBar.vue"
   },
-  "SidebarCardName": {
-    "description": "Auto imported from components/sidebar/CardName.vue"
-  },
-  "SidebarMain": {
-    "description": "Auto imported from components/sidebar/Main.vue"
+  "FactionReward": {
+    "description": "Auto imported from components/faction/Reward.vue"
   },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
@@ -101,10 +101,13 @@
   "IconTabSkill2": {
     "description": "Auto imported from components/icon/TabSkill2.vue"
   },
-  "FactionProgressBar": {
-    "description": "Auto imported from components/faction/ProgressBar.vue"
+  "SidebarAvatar": {
+    "description": "Auto imported from components/sidebar/Avatar.vue"
   },
-  "FactionReward": {
-    "description": "Auto imported from components/faction/Reward.vue"
+  "SidebarCardName": {
+    "description": "Auto imported from components/sidebar/CardName.vue"
+  },
+  "SidebarMain": {
+    "description": "Auto imported from components/sidebar/Main.vue"
   }
 }
