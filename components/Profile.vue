@@ -415,7 +415,7 @@ export default {
       activeItem: null,
       page: 1,
       show1: false,
-      show2: true,
+      show2: false,
       show3: false,
       old_password: '',
       new_password: '',
