@@ -1,6 +1,9 @@
 <template>
   <div>
-    <audio src="~/assets/audio/audio_bg.mp3" autoplay loop />
+    <!-- <button @click="toggleAudio()">
+      aas
+    </button>
+    <audio ref="player" src="~/assets/audio/audio_bg.mp3" autoplay loop /> -->
     <div style="height: 100%; width: 100%; z-index: -9999" />
     <PModal style="z-index: 9999" />
     <div class="container-petra">
@@ -217,6 +220,14 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   methods: {
+    toggleAudio () {
+      const audio = this.$refs.player
+      if (audio.paused) {
+        audio.play()
+      } else {
+        audio.pause()
+      }
+    },
     logout () {
       this.$store.commit('user/SET_LOGGEDIN', false)
       this.$store.commit('user/SET_BTN_AUDIO', true)

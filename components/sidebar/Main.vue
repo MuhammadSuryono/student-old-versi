@@ -26,16 +26,7 @@
           />
           <div class="footer-sidebar">
             <div class="btn-audio" @click="audioBtn = !audioBtn">
-              <img
-                v-if="audioBtn"
-                src="~/assets/images/akar-icons_sound-on.svg"
-                class="img-logo"
-              >
-              <img
-                v-else
-                src="~/assets/images/akar-icons_sound-off.svg"
-                class="img-logo"
-              >
+              <AudioPlayer />
             </div>
           </div>
         </div>

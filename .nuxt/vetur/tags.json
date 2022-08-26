@@ -1,4 +1,7 @@
 {
+  "AudioPlayer": {
+    "description": "Auto imported from components/AudioPlayer.vue"
+  },
   "Back": {
     "description": "Auto imported from components/Back.vue"
   },
@@ -62,6 +65,12 @@
   "SidebarMain": {
     "description": "Auto imported from components/sidebar/Main.vue"
   },
+  "FactionProgressBar": {
+    "description": "Auto imported from components/faction/ProgressBar.vue"
+  },
+  "FactionReward": {
+    "description": "Auto imported from components/faction/Reward.vue"
+  },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
   },
@@ -103,11 +112,5 @@
   },
   "IconTabSkill2": {
     "description": "Auto imported from components/icon/TabSkill2.vue"
-  },
-  "FactionProgressBar": {
-    "description": "Auto imported from components/faction/ProgressBar.vue"
-  },
-  "FactionReward": {
-    "description": "Auto imported from components/faction/Reward.vue"
   }
 }
