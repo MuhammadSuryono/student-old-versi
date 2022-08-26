@@ -31,7 +31,7 @@
             </b-field>
             <recaptcha class="captcha columns is-centered" />
             <b-button :loading="loading" class="btn-login" @click="login()">
-              Log In
+              Log In {{ manualLogout }}
             </b-button>
           </div>
         </v-col>
@@ -188,6 +188,7 @@ export default {
                 // this.$auth.strategy.token.set(
                 //   'Bearer ' + response.data.data.access_token
                 // )
+                localStorage.setItem('localAuth', false)
                 this.$router.push({ path: '/splash' })
               } else {
                 console.log(false)

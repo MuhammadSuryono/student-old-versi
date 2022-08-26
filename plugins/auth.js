@@ -6,7 +6,11 @@ export default function ({ store, $auth, $axios, redirect }) {
     }
     if (!$auth.loggedIn) {
       redirect('/login')
-      store.commit('user/SET_LOGGEDIN', false)
+      if (localStorage.getItem('localAuth')) {
+        store.commit('user/SET_LOGGEDIN', true)
+      } else {
+        store.commit('user/SET_LOGGEDIN', false)
+      }
     }
   })
   $axios.onResponseError((err) => {

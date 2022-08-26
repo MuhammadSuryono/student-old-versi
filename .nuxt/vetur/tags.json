@@ -53,11 +53,14 @@
   "Skeleton": {
     "description": "Auto imported from components/Skeleton.vue"
   },
-  "FactionProgressBar": {
-    "description": "Auto imported from components/faction/ProgressBar.vue"
+  "SidebarAvatar": {
+    "description": "Auto imported from components/sidebar/Avatar.vue"
   },
-  "FactionReward": {
-    "description": "Auto imported from components/faction/Reward.vue"
+  "SidebarCardName": {
+    "description": "Auto imported from components/sidebar/CardName.vue"
+  },
+  "SidebarMain": {
+    "description": "Auto imported from components/sidebar/Main.vue"
   },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
@@ -101,13 +104,10 @@
   "IconTabSkill2": {
     "description": "Auto imported from components/icon/TabSkill2.vue"
   },
-  "SidebarAvatar": {
-    "description": "Auto imported from components/sidebar/Avatar.vue"
+  "FactionProgressBar": {
+    "description": "Auto imported from components/faction/ProgressBar.vue"
   },
-  "SidebarCardName": {
-    "description": "Auto imported from components/sidebar/CardName.vue"
-  },
-  "SidebarMain": {
-    "description": "Auto imported from components/sidebar/Main.vue"
+  "FactionReward": {
+    "description": "Auto imported from components/faction/Reward.vue"
   }
 }
