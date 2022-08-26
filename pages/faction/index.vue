@@ -11,9 +11,6 @@
           FACTION COMPETITION
         </div>
       </div>
-      <div class="btn-back" @click="goBack()">
-        <Back />
-      </div>
     </div>
     <div class="content-faction">
       <div class="columns is-gapless progress-faction">
@@ -81,15 +78,16 @@
           LV {{ dataFactionUser.faction.current_level }}/10
         </div>
       </div>
-      <FactionReward
-        :title="dataFactionUser.next_reward.name"
-        :image="dataFactionUser.next_reward.image"
-      />
+      <FactionReward title="COMING SOON" image="" />
       <div class="btn-faction no-select" @click="detailfaction()">
         <div class="border-2">
           See Faction Details
         </div>
       </div>
+    </div>
+
+    <div class="btn-back" @click="goBack()">
+      <img src="~/assets/images/icon_exit.svg">
     </div>
   </div>
 </template>
@@ -221,12 +219,6 @@ export default {
         height: 20px;
       }
     }
-    .btn-back {
-      position: absolute;
-      cursor: pointer;
-      top: 100px;
-      right: 50px;
-    }
   }
   .content-faction {
     margin-left: 135px;
@@ -348,6 +340,12 @@ export default {
         color: #f2f2f2;
       }
     }
+  }
+  .btn-back {
+    position: absolute;
+    cursor: pointer;
+    bottom: 60px;
+    right: 50px;
   }
 }
 </style>

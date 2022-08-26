@@ -3,26 +3,6 @@
     <audio src="~/assets/audio/audio_bg.mp3" autoplay loop />
     <div style="height: 100%; width: 100%; z-index: -9999" />
     <PModal style="z-index: 9999" />
-    <transition name="fade" appear>
-      <div v-if="!isLoggedIn" class="modal-dialog">
-        <div class="overlay-bg" />
-        <div class="outside-card">
-          <div class="top-corner" />
-          <div class="bottom-corner" />
-          <img src="~/assets/images/library/mascot.png" class="avatar-light">
-          <div class="card-popup">
-            <div class="bg-popup">
-              <div class="text-popup">
-                You have been logged out due to inactivity.
-              </div>
-            </div>
-          </div>
-          <div class="btn-logout" @click="logout()">
-            OK
-          </div>
-        </div>
-      </div>
-    </transition>
     <div class="container-petra">
       <transition name="fade" appear>
         <Popup
@@ -240,8 +220,6 @@ export default {
     logout () {
       this.$store.commit('user/SET_LOGGEDIN', false)
       this.$store.commit('user/SET_BTN_AUDIO', true)
-      this.$store.commit('user/SET_EXPIRED', false)
-      localStorage.setItem('localAuth', true)
       this.$store.commit('user/SET_BG_AUDIO', false)
       if (this.btn_profile) {
         this.$store.commit('user/SET_BTN_PROFILE')
