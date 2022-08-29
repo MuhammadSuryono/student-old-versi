@@ -24,6 +24,11 @@
             :courses="totalModule"
             :achievements="totalArchivement"
           />
+          <div class="footer-sidebar">
+            <div class="btn-audio" @click="audioBtn = !audioBtn">
+              <AudioPlayer />
+            </div>
+          </div>
         </div>
       </b-sidebar>
     </section>
@@ -35,6 +40,7 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
+      audioBtn: false,
       totalModule: 0,
       totalArchivement: 0,
       expandOnHover: true,
@@ -161,6 +167,25 @@ export default {
   padding: 20px 15px 0px 18px;
   width: 200px;
   position: absolute;
+  .footer-sidebar {
+    bottom: 32px;
+    position: fixed;
+    .btn-audio {
+      cursor: pointer;
+      background: #1a4786;
+      --g: #000, #0000 1deg 179deg, #000 180deg;
+      --mask: conic-gradient(from -45deg at top 5px right 5px, var(--g)) 100% 0 /51%
+          100% no-repeat,
+        conic-gradient(from -225deg at bottom 5px left 5px, var(--g)) 0 100%/51%
+          100% no-repeat;
+      -webkit-mask: var(--mask);
+      mask: var(--mask);
+      height: 42px;
+      width: 60px;
+      padding-left: 16px;
+      padding-top: 5px;
+    }
+  }
 
   // .img-arrow-open {
   //   background-image: url('~@/assets/images/component/toogle.png');

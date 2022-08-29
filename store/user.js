@@ -41,9 +41,6 @@ export const mutations = {
   SET_LOGGEDIN (state, payload) {
     state.isLoggedIn = payload
   },
-  SET_EXPIRED (state, payload) {
-    state.expired = payload
-  },
   SET_BTN_AUDIO (state, payload) {
     const myAudio = new Audio(btnAudio)
     if (payload) {

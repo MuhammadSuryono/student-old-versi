@@ -1,27 +1,29 @@
 export default function ({ store, $auth, $axios, redirect }) {
   $auth.onRedirect((to, from) => {
     if ($auth.toString().slice(0, 23) === 'ExpiredAuthSessionError') {
+      redirect('/login')
       store.commit('user/SET_LOGGEDIN', false)
-      redirect('/')
     }
     if (!$auth.loggedIn) {
-      if (localStorage.getItem('localAuth') === 'false') {
-        store.commit('user/SET_EXPIRED', true)
+      redirect('/login')
+      if (localStorage.getItem('localAuth')) {
+        store.commit('user/SET_LOGGEDIN', true)
+      } else {
+        store.commit('user/SET_LOGGEDIN', false)
       }
     }
   })
   $axios.onResponseError((err) => {
     if (err.toString().slice(0, 23) === 'ExpiredAuthSessionError') {
+      redirect('/login')
       store.commit('user/SET_LOGGEDIN', false)
-      redirect('/')
     }
   })
   $axios.onError((error) => {
     const code = parseInt(error.response && error.response.status)
     if (code === 401) {
-      console.log('code :', code)
+      redirect('/login')
       store.commit('user/SET_LOGGEDIN', false)
-      redirect('/')
     }
   })
 }

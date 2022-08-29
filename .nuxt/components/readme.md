@@ -6,8 +6,10 @@ You can directly use them in pages and other components without the need to impo
 
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
+- `<AudioPlayer>` | `<audio-player>` (components/AudioPlayer.vue)
 - `<Back>` | `<back>` (components/Back.vue)
 - `<Decoration>` | `<decoration>` (components/Decoration.vue)
+- `<ImageItem>` | `<image-item>` (components/ImageItem.vue)
 - `<Maps>` | `<maps>` (components/Maps.vue)
 - `<ModuleTitle>` | `<module-title>` (components/ModuleTitle.vue)
 - `<Navbar>` | `<navbar>` (components/Navbar.vue)
@@ -23,6 +25,11 @@ You can directly use them in pages and other components without the need to impo
 - `<Popup>` | `<popup>` (components/Popup.vue)
 - `<Profile>` | `<profile>` (components/Profile.vue)
 - `<Skeleton>` | `<skeleton>` (components/Skeleton.vue)
+- `<SidebarAvatar>` | `<sidebar-avatar>` (components/sidebar/Avatar.vue)
+- `<SidebarCardName>` | `<sidebar-card-name>` (components/sidebar/CardName.vue)
+- `<SidebarMain>` | `<sidebar-main>` (components/sidebar/Main.vue)
+- `<FactionProgressBar>` | `<faction-progress-bar>` (components/faction/ProgressBar.vue)
+- `<FactionReward>` | `<faction-reward>` (components/faction/Reward.vue)
 - `<IconArchivements>` | `<icon-archivements>` (components/icon/Archivements.vue)
 - `<IconAvatarBackground>` | `<icon-avatar-background>` (components/icon/AvatarBackground.vue)
 - `<IconBackBtn>` | `<icon-back-btn>` (components/icon/BackBtn.vue)
@@ -37,7 +44,3 @@ You can directly use them in pages and other components without the need to impo
 - `<IconSkillcard>` | `<icon-skillcard>` (components/icon/Skillcard.vue)
 - `<IconTabSkill>` | `<icon-tab-skill>` (components/icon/TabSkill.vue)
 - `<IconTabSkill2>` | `<icon-tab-skill2>` (components/icon/TabSkill2.vue)
-- `<SidebarAvatar>` | `<sidebar-avatar>` (components/sidebar/Avatar.vue)
-- `<SidebarCardName>` | `<sidebar-card-name>` (components/sidebar/CardName.vue)
-- `<SidebarMain>` | `<sidebar-main>` (components/sidebar/Main.vue)
-- `<FactionReward>` | `<faction-reward>` (components/faction/Reward.vue)

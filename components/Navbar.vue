@@ -67,7 +67,7 @@ export default {
       this.$router.push('/')
     },
     keluar () {
-      this.$store.commit('user/SET_LOGGEDIN', false)
+      this.$store.commit('user/SET_LOGGEDIN', true)
       this.$store.commit('user/SET_BTN_AUDIO', true)
       localStorage.setItem('localAuth', true)
       this.$store.commit('user/SET_BG_AUDIO', false)
