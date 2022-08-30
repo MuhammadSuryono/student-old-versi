@@ -5,17 +5,16 @@
       v-if="audioBtn"
       src="~/assets/images/akar-icons_sound-on.svg"
       class="img-logo"
-      @click="toggleAudio()"
+      @click="$emit('toggle-audio')"
     >
     <img
       v-else
       src="~/assets/images/akar-icons_sound-off.svg"
       class="img-logo"
-      @click="toggleAudio()"
+      @click="$emit('toggle-audio')"
     >
   </div>
 </template>
-
 <script>
 export default {
   data () {
@@ -25,14 +24,17 @@ export default {
   },
   methods: {
     toggleAudio () {
+      console.log('tes')
       const audio = this.$refs.player
-      //   audio.muted = !audio.muted
-      //   this.audioBtn = !this.audioBtn
       if (audio.paused) {
-        audio.play()
+        // audio.play()
+        this.$store.commit('user/SET_BTN_MUTE', true)
+        this.$store.commit('user/SET_BTN_MUTE', true)
         this.audioBtn = true
       } else {
-        audio.pause()
+        // audio.pause()
+        this.$store.commit('user/SET_BTN_MUTE', false)
+        this.$store.commit('user/SET_BTN_MUTE', false)
         this.audioBtn = false
       }
     }
