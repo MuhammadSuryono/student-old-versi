@@ -20,8 +20,6 @@ export { default as Skeleton } from '../../components/Skeleton.vue'
 export { default as SidebarAvatar } from '../../components/sidebar/Avatar.vue'
 export { default as SidebarCardName } from '../../components/sidebar/CardName.vue'
 export { default as SidebarMain } from '../../components/sidebar/Main.vue'
-export { default as FactionProgressBar } from '../../components/faction/ProgressBar.vue'
-export { default as FactionReward } from '../../components/faction/Reward.vue'
 export { default as IconArchivements } from '../../components/icon/Archivements.vue'
 export { default as IconAvatarBackground } from '../../components/icon/AvatarBackground.vue'
 export { default as IconBackBtn } from '../../components/icon/BackBtn.vue'
@@ -36,6 +34,8 @@ export { default as IconSearch } from '../../components/icon/Search.vue'
 export { default as IconSkillcard } from '../../components/icon/Skillcard.vue'
 export { default as IconTabSkill } from '../../components/icon/TabSkill.vue'
 export { default as IconTabSkill2 } from '../../components/icon/TabSkill2.vue'
+export { default as FactionProgressBar } from '../../components/faction/ProgressBar.vue'
+export { default as FactionReward } from '../../components/faction/Reward.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

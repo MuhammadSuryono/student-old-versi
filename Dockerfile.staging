@@ -20,8 +20,8 @@ COPY --from=build /build ./
 RUN npm run generate
 #RUN printf "\nAPP_VERSION=$app_version" >> .env
 #RUN printf "\nENVIRONMENT=$app_environment" >> .env
-EXPOSE 5000
+EXPOSE 5002
 ENV NUXT_HOST=0.0.0.0
-ENV NUXT_PORT=5000
+ENV NUXT_PORT=5002
 CMD ["npm", "start"]
 

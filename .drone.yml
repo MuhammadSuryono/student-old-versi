@@ -12,7 +12,7 @@ steps:
     commands:
       - echo "basePath=/student-dev/" > .env
       - echo "basePathBuild=/student-dev/_nuxt/" >> .env
-      - echo "baseUrl=https://dev.petraverse.id/api" >> .env
+      - echo "baseUrl=http://dev.petraverse.id/api" >> .env
       - cat .env
 
   - name: "Build Image Development Student"
@@ -29,7 +29,7 @@ steps:
         from_secret: docker_username
       password:
         from_secret: docker_password
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
 
 trigger:
   branch:
@@ -59,6 +59,7 @@ steps:
       envs:
         - IMAGE_NAME
         - CONTAINER_NAME
+        - PORT_PUBLISH
       script:
         - sudo docker stop $CONTAINER_NAME
         - sudo docker rm $CONTAINER_NAME
@@ -66,8 +67,7 @@ steps:
         - echo "Pull image docker"
         - sudo docker pull $IMAGE_NAME
         - echo "Run image docker"
-        - docker run -d --name $CONTAINER_NAME --publish $PORT_PUBLISH:3000 $IMAGE_NAME
-
+        - docker run -d --name $CONTAINER_NAME --publish 5006:3000 $IMAGE_NAME
 trigger:
   branch:
     - development
@@ -127,6 +127,7 @@ steps:
       envs:
         - IMAGE_NAME
         - CONTAINER_NAME
+        - PORT_PUBLISH
       script:
         - sudo docker stop $CONTAINER_NAME
         - sudo docker rm $CONTAINER_NAME
@@ -137,10 +138,9 @@ steps:
         - docker run -d --name $CONTAINER_NAME --publish $PORT_PUBLISH:3000 $IMAGE_NAME
 
 trigger:
-  branch:
+  target:
     - prod
   event:
-    - push
     - promote
 
 ---
@@ -158,7 +158,7 @@ steps:
     commands:
       - echo "basePath=/student/" > .env
       - echo "basePathBuild=/student/_nuxt/" >> .env
-      - echo "baseUrl=https://staging.petraverse.id/api" >> .env
+      - echo "baseUrl=http://staging.petraverse.id/api" >> .env
       - cat .env
 
   - name: "Build Image Staging Student"
@@ -175,12 +175,12 @@ steps:
         from_secret: docker_username
       password:
         from_secret: docker_password
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.staging
 
   - name: ssh commands
     image: appleboy/drone-ssh
     environment:
-      IMAGE_NAME: primeskills/petra-student:prod-${DRONE_COMMIT_SHA:0:6}
+      IMAGE_NAME: primeskills/petra-student:staging-${DRONE_COMMIT_SHA:0:6}
       CONTAINER_NAME: nuxt-student-staging
       PORT_PUBLISH: 5002
     settings:
@@ -194,6 +194,7 @@ steps:
       envs:
         - IMAGE_NAME
         - CONTAINER_NAME
+        - PORT_PUBLISH
       script:
         - sudo docker stop $CONTAINER_NAME
         - sudo docker rm $CONTAINER_NAME
@@ -202,10 +203,8 @@ steps:
         - sudo docker pull $IMAGE_NAME
         - echo "Run image docker"
         - docker run -d --name $CONTAINER_NAME --publish $PORT_PUBLISH:3000 $IMAGE_NAME
-
 trigger:
-  branch:
+  target:
     - staging
   event:
-    - push
     - promote
