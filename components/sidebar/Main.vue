@@ -49,7 +49,6 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      audioBtn: true,
       totalModule: 0,
       totalArchivement: 0,
       expandOnHover: true,
@@ -82,6 +81,9 @@ export default {
       },
       sidebar: (state) => {
         return state.user.sidebar
+      },
+      audioBtn: (state) => {
+        return state.user.audioBtn
       }
     }),
     styleObj () {
@@ -103,26 +105,12 @@ export default {
       const audio = this.$parent.$refs.player
       if (this.audioBtn) {
         audio.pause()
-        this.$store.commit('user/SET_BTN_MUTE', false)
-        this.audioBtn = false
+        this.$store.commit('user/SET_AUDIO', false)
       } else {
         audio.play()
-        this.$store.commit('user/SET_BTN_MUTE', true)
         this.$store.commit('user/SET_BTN_AUDIO', true)
-        this.audioBtn = true
+        this.$store.commit('user/SET_AUDIO', true)
       }
-      // const audio = this.$parent.$refs.player
-      // if (audio.paused) {
-      //   // audio.play()
-      //   this.$store.commit('user/SET_BTN_MUTE', true)
-      //   // this.$store.commit('user/SET_BTN_MUTE', true)
-      //   this.audioBtn = true
-      // } else {
-      //   audio.pause()
-      //   this.$store.commit('user/SET_BTN_MUTE', false)
-      //   // this.$store.commit('user/SET_BTN_MUTE', false)
-      //   this.audioBtn = false
-      // }
     },
     getCluster () {
       this.$axios

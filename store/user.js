@@ -21,7 +21,8 @@ export const state = () => ({
   playBg: false,
   expired: false,
   isLoggedIn: false,
-  btn_mute: true
+  btn_mute: true,
+  audioBtn: true
 })
 
 export const getters = {
@@ -39,6 +40,9 @@ export const getters = {
 }
 
 export const mutations = {
+  SET_AUDIO (state, payload) {
+    state.audioBtn = payload
+  },
   SET_BTN_MUTE (state, payload) {
     state.btn_mute = payload
   },
@@ -47,13 +51,13 @@ export const mutations = {
   },
   SET_BTN_AUDIO (state, payload) {
     const myAudio = new Audio(btnAudio)
-    if (state.btn_mute) {
+    if (state.audioBtn) {
       myAudio.play()
     }
   },
   SET_POPUP_AUDIO (state, payload) {
     const myAudio = new Audio(popupAudio)
-    if (state.btn_mute) {
+    if (state.audioBtn) {
       myAudio.play()
     }
   },

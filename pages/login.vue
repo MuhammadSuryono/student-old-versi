@@ -92,7 +92,7 @@ export default {
     })
   },
   mounted () {
-    this.$store.commit('user/SET_BTN_MUTE', true)
+    // this.$store.commit('user/SET_BTN_MUTE', true)
     // console.log(this.$auth.loggedIn)
   },
   methods: {
