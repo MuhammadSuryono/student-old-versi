@@ -63,6 +63,9 @@ export default {
   },
   methods: {
     home () {
+      // const audio = this.$parent.$refs.player
+      // audio.volume = 0.1
+      // console.log(audio)
       this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push('/')
     },
