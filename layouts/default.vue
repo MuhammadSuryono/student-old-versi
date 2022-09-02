@@ -1,6 +1,11 @@
 <template>
   <div>
-    <audio ref="player" src="~/assets/audio/audio_bg.mp3" autoplay loop />
+    <audio
+      ref="player"
+      src="~/assets/audio/audio_bg.mp3"
+      :autoplay="audioBtn"
+      loop
+    />
     <div style="height: 100%; width: 100%; z-index: -9999" />
     <PModal style="z-index: 9999" />
     <div class="container-petra">
@@ -139,6 +144,9 @@ export default {
   },
   computed: {
     ...mapState({
+      audioBtn: (state) => {
+        return state.user.audioBtn
+      },
       isLoggedIn: (state) => {
         return state.user.isLoggedIn
       },

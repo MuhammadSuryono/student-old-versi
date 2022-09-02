@@ -67,11 +67,7 @@ $sidebar-width: 200px;
                                   supported by Chrome, Edge, Opera and Firefox */
   }
 
-// .page-enter-active,
-// .page-leave-active {
-//   transition: opacity 0.01s;
-// }
-// .page-enter,
-// .page-leave-active {
-//   opacity: 0;
-// }
+.wh-full {
+    height:100%;
+    width:100%
+}
