@@ -8,6 +8,7 @@ export const state = () => ({
   sidebar: false,
   btn_profile: false,
   btn_decoration: false,
+  btn_setting: false,
   fullname: null,
   images: null,
   images_name: null,
@@ -22,7 +23,10 @@ export const state = () => ({
   expired: false,
   isLoggedIn: false,
   btn_mute: true,
-  audioBtn: true
+  audioBtn: true,
+  audioBGM: 1,
+  audioEffect: 1,
+  autoplayBGM: true
 })
 
 export const getters = {
@@ -36,10 +40,20 @@ export const getters = {
   decoration_name: state => state.decoration_name,
   check_cluster: state => state.check_cluster,
   cluster: state => state.cluster,
-  cluster_attribute: state => state.cluster_attribute
+  cluster_attribute: state => state.cluster_attribute,
+  autoplayBGM: state => state.autoplayBGM,
+  audioEffect: state => state.audioEffect,
+  audioBGM: state => state.audioBGM
 }
 
 export const mutations = {
+  SET_AUDIO_EFFECT (state, payload) {
+    state.audioEffect = payload
+    console.log(state.audioEffect)
+  },
+  SET_AUDIO_BGM (state, payload) {
+    state.audioBGM = payload
+  },
   SET_AUDIO (state, payload) {
     state.audioBtn = payload
   },
@@ -51,15 +65,22 @@ export const mutations = {
   },
   SET_BTN_AUDIO (state, payload) {
     const myAudio = new Audio(btnAudio)
-    if (state.audioBtn) {
-      myAudio.play()
-    }
+    // if (state.audioEffect > 0) {
+    myAudio.play()
+    myAudio.volume = state.audioEffect
+    // } else {
+    //   myAudio.volume = state.audioEffect
+    // }
   },
   SET_POPUP_AUDIO (state, payload) {
     const myAudio = new Audio(popupAudio)
-    if (state.audioBtn) {
-      myAudio.play()
-    }
+    // if (state.audioEffect > 0) {
+    myAudio.play()
+    myAudio.volume = state.audioEffect
+    // } else {
+    //   myAudio.play()
+    //   myAudio.volume = state.audioEffect
+    // }
   },
   SET_BG_AUDIO (state, payload) {
     state.playBg = payload
@@ -89,6 +110,12 @@ export const mutations = {
   SET_BTN_PROFILE (state) {
     state.btn_profile = !state.btn_profile
     state.btn_decoration = false
+    state.btn_setting = false
+  },
+  SET_BTN_SETTING (state) {
+    state.btn_setting = !state.btn_setting
+    state.btn_decoration = false
+    state.btn_profile = false
   },
   SET_SIDEBAR (state) {
     state.sidebar = !state.sidebar
@@ -99,6 +126,7 @@ export const mutations = {
   SET_BTN_DECORATION (state) {
     state.btn_decoration = !state.btn_decoration
     state.btn_profile = false
+    state.btn_setting = false
   },
   SET_FULLNAME (state, data) {
     state.fullname = data

@@ -25,17 +25,8 @@
             :achievements="totalArchivement"
           />
           <div class="footer-sidebar">
-            <div class="btn-audio" @click="toogleAudio()">
-              <img
-                v-if="audioBtn"
-                src="~/assets/images/akar-icons_sound-on.svg"
-                class="img-logo"
-              >
-              <img
-                v-else
-                src="~/assets/images/akar-icons_sound-off.svg"
-                class="img-logo"
-              >
+            <div class="btn-audio" @click="onSetting()">
+              <IconSetting class="img-logo" />
             </div>
           </div>
         </div>
@@ -101,16 +92,9 @@ export default {
     this.getTotal()
   },
   methods: {
-    toogleAudio () {
-      const audio = this.$parent.$refs.player
-      if (this.audioBtn) {
-        audio.pause()
-        this.$store.commit('user/SET_AUDIO', false)
-      } else {
-        audio.play()
-        this.$store.commit('user/SET_BTN_AUDIO', true)
-        this.$store.commit('user/SET_AUDIO', true)
-      }
+    onSetting () {
+      this.$store.commit('user/SET_BTN_SETTING')
+      this.$store.commit('user/SET_BTN_AUDIO', true)
     },
     getCluster () {
       this.$axios
@@ -204,8 +188,15 @@ export default {
       mask: var(--mask);
       height: 42px;
       width: 60px;
-      padding-left: 16px;
-      padding-top: 5px;
+      // padding-left: 16px;
+      // padding-top: 5px;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-audio:hover {
+      background-color: rgba(255, 255, 255, 0.4);
     }
   }
 

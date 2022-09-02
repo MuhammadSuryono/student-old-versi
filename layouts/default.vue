@@ -1,11 +1,6 @@
 <template>
   <div>
-    <audio
-      ref="player"
-      src="~/assets/audio/audio_bg.mp3"
-      :autoplay="audioBtn"
-      loop
-    />
+    <audio ref="player" src="~/assets/audio/audio_bg.mp3" autoplay loop />
     <div style="height: 100%; width: 100%; z-index: -9999" />
     <PModal style="z-index: 9999" />
     <div class="container-petra">
@@ -122,6 +117,12 @@
           :style="widthProfile"
           class="profile-petra"
         />
+        <!-- edit profile -->
+        <Setting
+          v-if="btn_setting"
+          class="profile-petra noselect"
+          :style="widthProfile3"
+        />
       </div>
     </div>
   </div>
@@ -139,7 +140,8 @@ export default {
         height: 0
       },
       coomingSoon: false,
-      audio: null
+      audio: null,
+      bgmAutoplay: false
     }
   },
   computed: {
@@ -165,8 +167,17 @@ export default {
       btn_decoration: (state) => {
         return state.user.btn_decoration
       },
+      btn_setting: (state) => {
+        return state.user.btn_setting
+      },
       playBg: (state) => {
         return state.user.playBg
+      },
+      audioBGM: (state) => {
+        return state.user.audioBGM
+      },
+      autoplayBGM: (state) => {
+        return state.user.autoplayBGM
       }
     }),
     testing () {
@@ -193,6 +204,13 @@ export default {
       }
     },
     widthProfile2 () {
+      if (this.sidebar) {
+        return 'left:200px;'
+      } else {
+        return 'left:80px;'
+      }
+    },
+    widthProfile3 () {
       if (this.sidebar) {
         return 'left:200px;'
       } else {
