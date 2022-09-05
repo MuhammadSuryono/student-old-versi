@@ -173,7 +173,29 @@
               Play
             </a>
           </div>
-          <div v-if="detailActivity.type === 'vr'" class="card-activity">
+          <div
+            v-if="detailActivity.type === 'vr'"
+            class="card-activity"
+            style="position: relative"
+          >
+            <img
+              src="~/assets/images/vr.png"
+              style="height: 100%; width: 100%; opacity: 0.2"
+            >
+            <img
+              src="~/assets/images/confirm2.png"
+              style="
+                position: absolute;
+                z-index: 999;
+                text-align: center;
+                top: 100px;
+                left: 70px;
+              "
+            >
+          </div>
+        </div>
+
+        <!-- <div v-if="detailActivity.type === 'vr'" class="card-activity">
             <img src="~/assets/images/vr.png" class="image-vr">
             <div class="bg-overlay" />
             <div v-if="showVR" class="card-notif">
@@ -211,45 +233,45 @@
                 </template>
               </ButtonPlay>
             </div>
-          </div>
-        </div>
+          </div> -->
       </div>
-      <div v-if="selected2" class="columns is-gapless mb-0 pb-0">
-        <div class="column is-narrow header-left">
-          <div ref="infoBox" class="card-list">
-            <div v-if="!isLoading" class="bg-1" :style="tinggi2" />
-            <div v-if="!isLoading" class="bg-2" :style="tinggi2" />
-            <div class="column is-narrow left-side">
-              <img :src="detailActivity.thumbnail" class="display-pic">
-              <div class="petra-title-card">
-                {{ detailActivity.name }} <br>
-                <span
-                  style="
+    </div>
+    <div v-if="selected2" class="columns is-gapless mb-0 pb-0">
+      <div class="column is-narrow header-left">
+        <div ref="infoBox" class="card-list">
+          <div v-if="!isLoading" class="bg-1" :style="tinggi2" />
+          <div v-if="!isLoading" class="bg-2" :style="tinggi2" />
+          <div class="column is-narrow left-side">
+            <img :src="detailActivity.thumbnail" class="display-pic">
+            <div class="petra-title-card">
+              {{ detailActivity.name }} <br>
+              <span
+                style="
                     font-style: italic;
                     font-weight: normal;
                     font-size: 14px;
                   "
-                >GAME ACTIVITY
-                </span>
-              </div>
-              <div class="petra-description">
-                {{ detailActivity.introduction }}
-              </div>
+              >GAME ACTIVITY
+              </span>
+            </div>
+            <div class="petra-description">
+              {{ detailActivity.introduction }}
+            </div>
 
-              <div class="petra-c1">
-                {{ detailActivity.total_discussions }} discussion replies
-              </div>
+            <div class="petra-c1">
+              {{ detailActivity.total_discussions }} discussion replies
             </div>
           </div>
         </div>
-        <div class="column is-narrow header-right" style="margin-left: 20px">
-          <div class="columns is-gapless reward-card">
-            <div class="column is-narrow comp-reward">
-              <div class="head-reward">
-                Completion Reward
-              </div>
-              <div
-                style="
+      </div>
+      <div class="column is-narrow header-right" style="margin-left: 20px">
+        <div class="columns is-gapless reward-card">
+          <div class="column is-narrow comp-reward">
+            <div class="head-reward">
+              Completion Reward
+            </div>
+            <div
+              style="
                   background: #4c7bc1;
                   height: 34.73019027709961px;
                   width: 168.09616088867188px;
@@ -261,10 +283,10 @@
                   font-size: 14px;
                   margin-top: 170px;
                 "
-              >
-                Coming Soon
-              </div>
-              <!-- <div class="columns is-gapless photo-reward">
+            >
+              Coming Soon
+            </div>
+            <!-- <div class="columns is-gapless photo-reward">
                 <div class="column is-narrow left-reward">
                   <img
                     :src="detailActivity.month_reward.avatar_female"
@@ -341,227 +363,227 @@
               >
                 Reward Acquired!
               </div> -->
-            </div>
-            <div class="column is-narrow list-reward">
-              <div
-                v-for="(x, indexArchivement) in archievements"
-                :key="indexArchivement"
-                class="columns is-gapless card-list-avatar"
-                :style="
-                  x.is_acquired
-                    ? 'background : rgba(212, 234, 255, 1)'
-                    : 'background : rgba(212, 234, 255, 0.3)'
-                "
-              >
-                <div class="column is-narrow left-ava">
-                  <img :src="x.image" class="height:100%;width:100%">
-                </div>
-                <div class="column right-ava">
-                  <div class="head-ava">
-                    {{ x.name }}
-                  </div>
-                  <div class="desc-ava">
-                    {{ x.description }}
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
-      </div>
-      <div v-if="selected3">
-        <div class="columns tab-2-petra">
-          <div class="column is-narrow left-side">
-            <img
-              src="~/assets/images/module/review-bg.png"
-              class="background-card"
-            >
+          <div class="column is-narrow list-reward">
             <div
-              class="p-displaypic"
-              :style="{ backgroundColor: dataUser.faction.avatar_bgcolor }"
+              v-for="(x, indexArchivement) in archievements"
+              :key="indexArchivement"
+              class="columns is-gapless card-list-avatar"
+              :style="
+                x.is_acquired
+                  ? 'background : rgba(212, 234, 255, 1)'
+                  : 'background : rgba(212, 234, 255, 0.3)'
+              "
             >
-              <img :src="dataUser.avatar.image" class="p-img">
-            </div>
-            <div class="p-username">
-              {{ dataUser.username }}
-            </div>
-            <span class="petra-comment">
-              <div class="comment-text">Leave a comment.</div>
-              <img
-                src="~/assets/images/module/comment-border.svg"
-                class="bg-bor"
-              >
-              <img src="~/assets/images/module/comment-bg.svg" class="bg-com">
-              <img
-                src="~/assets/images/module/comment-corner.svg"
-                class="bg-cor"
-              >
-
-              <div class="hexagon">
-                <textarea
-                  v-model="descReview"
-                  type="text"
-                  style="width: 100%; height: 100%"
-                />
+              <div class="column is-narrow left-ava">
+                <img :src="x.image" class="height:100%;width:100%">
               </div>
-            </span>
-            <PButton
-              :disabled="disableBtn"
-              class="petra-button"
-              text="Submit Comment"
-              @click.native="addReview()"
-            />
-          </div>
-          <div class="column right-side">
-            <div class="petra-content">
-              <div style="padding: 20px 20px 10px 20px">
-                <div
-                  v-for="(review, indexReview) in itemsDiscuss"
-                  :key="indexReview"
-                  style="margin-bottom: 15px"
-                >
-                  <div class="columns is-gapless" style="margin-bottom: 10px">
-                    <div
-                      class="column is-narrow"
-                      style="height: 80px"
-                      :style="{
-                        backgroundColor: review.avatar_background
-                      }"
-                    >
-                      <img :src="review.avatar" class="pic-petra">
-                    </div>
-                    <div class="column box-list">
-                      <div class="student-name">
-                        {{ review.username }}
-                      </div>
-                      <div class="petra-review" style="padding-bottom: 40px">
-                        <div class="box-review" style="padding: 10px">
-                          {{ review.comment }}
-                        </div>
-                      </div>
-                      <div
-                        class="no-select reply-btn"
-                        @click="openReply2(indexReview, review.comment_id)"
-                      >
-                        Reply
-                      </div>
-                      <div
-                        v-if="review.sub_comments.data.length > 0"
-                        class="reply-hide"
-                      >
-                        <span
-                          v-if="showReply"
-                          class="no-select"
-                          @click="openReply(false)"
-                        >
-                          <b-icon icon="chevron-up" size="is-small" />Hide
-                          {{ review.sub_comments.data.length }}
-                          replies.
-                        </span>
-                        <span
-                          v-else
-                          class="no-select"
-                          @click="openReply(true, indexReview)"
-                        >
-                          <b-icon icon="chevron-down" size="is-small" />Show
-                          {{ review.sub_comments.data.length }}
-                          replies.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- list sub reply  -->
-                  <div
-                    v-if="showReply && indexReview === indexSub"
-                    class="show-comment"
-                  >
-                    <div
-                      v-for="(sub, indexSub) in review.sub_comments.data"
-                      :key="indexSub"
-                      class="columns is-gapless"
-                      style="margin-bottom: 10px"
-                    >
-                      <div
-                        class="column is-narrow"
-                        style="height: 80px"
-                        :style="{
-                          backgroundColor: sub.avatar_background
-                        }"
-                      >
-                        <img :src="sub.avatar" class="pic-petra">
-                      </div>
-                      <div class="column box-list">
-                        <div class="student-name">
-                          {{ sub.username }}
-                        </div>
-                        <div class="petra-review" style="padding-bottom: 20px">
-                          <div class="box-review" style="padding: 10px">
-                            {{ sub.comment }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--  box comment  -->
-                  <div
-                    v-if="boxReply && indexReview === indexSub2"
-                    class="show-comment"
-                  >
-                    <div class="columns is-gapless" style="margin-bottom: 10px">
-                      <div
-                        class="column is-narrow"
-                        style="height: 80px"
-                        :style="{
-                          backgroundColor: dataUser.faction.avatar_bgcolor
-                        }"
-                      >
-                        <img :src="dataUser.avatar.image" class="pic-petra">
-                      </div>
-                      <div class="column box-list">
-                        <div class="student-name">
-                          {{ dataUser.username }}
-                        </div>
-                        <div class="petra-review" style="padding-bottom: 70px">
-                          <textarea
-                            v-model="subReply"
-                            class="box-review"
-                            style="padding: 10px; overflow-y: scroll"
-                          />
-                        </div>
-                        <PButton
-                          :disabled="disableBtn2"
-                          class="petra-button2"
-                          text="Reply"
-                          @click.native="submitComment()"
-                        />
-                      </div>
-                    </div>
-                  </div>
+              <div class="column right-ava">
+                <div class="head-ava">
+                  {{ x.name }}
                 </div>
-
-                <infinite-loading
-                  v-if="itemsDiscuss.length"
-                  :identifier="infiniteId"
-                  spinner="spinner"
-                  style="margin-bottom: 15px"
-                  @infinite="infiniteScroll"
-                >
-                  <div slot="spinner" style="color: white">
-                    <v-progress-circular indeterminate color="white" />
-                  </div>
-                  <div slot="no-results" style="color: white">
-                    No results
-                  </div>
-                  <div slot="no-more" style="color: white">
-                    No more data
-                  </div>
-                </infinite-loading>
+                <div class="desc-ava">
+                  {{ x.description }}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div v-if="selected3">
+      <div class="columns tab-2-petra">
+        <div class="column is-narrow left-side">
+          <img
+            src="~/assets/images/module/review-bg.png"
+            class="background-card"
+          >
+          <div
+            class="p-displaypic"
+            :style="{ backgroundColor: dataUser.faction.avatar_bgcolor }"
+          >
+            <img :src="dataUser.avatar.image" class="p-img">
+          </div>
+          <div class="p-username">
+            {{ dataUser.username }}
+          </div>
+          <span class="petra-comment">
+            <div class="comment-text">Leave a comment.</div>
+            <img
+              src="~/assets/images/module/comment-border.svg"
+              class="bg-bor"
+            >
+            <img src="~/assets/images/module/comment-bg.svg" class="bg-com">
+            <img
+              src="~/assets/images/module/comment-corner.svg"
+              class="bg-cor"
+            >
+
+            <div class="hexagon">
+              <textarea
+                v-model="descReview"
+                type="text"
+                style="width: 100%; height: 100%"
+              />
+            </div>
+          </span>
+          <PButton
+            :disabled="disableBtn"
+            class="petra-button"
+            text="Submit Comment"
+            @click.native="addReview()"
+          />
+        </div>
+        <div class="column right-side">
+          <div class="petra-content">
+            <div style="padding: 20px 20px 10px 20px">
+              <div
+                v-for="(review, indexReview) in itemsDiscuss"
+                :key="indexReview"
+                style="margin-bottom: 15px"
+              >
+                <div class="columns is-gapless" style="margin-bottom: 10px">
+                  <div
+                    class="column is-narrow"
+                    style="height: 80px"
+                    :style="{
+                      backgroundColor: review.avatar_background
+                    }"
+                  >
+                    <img :src="review.avatar" class="pic-petra">
+                  </div>
+                  <div class="column box-list">
+                    <div class="student-name">
+                      {{ review.username }}
+                    </div>
+                    <div class="petra-review" style="padding-bottom: 40px">
+                      <div class="box-review" style="padding: 10px">
+                        {{ review.comment }}
+                      </div>
+                    </div>
+                    <div
+                      class="no-select reply-btn"
+                      @click="openReply2(indexReview, review.comment_id)"
+                    >
+                      Reply
+                    </div>
+                    <div
+                      v-if="review.sub_comments.data.length > 0"
+                      class="reply-hide"
+                    >
+                      <span
+                        v-if="showReply"
+                        class="no-select"
+                        @click="openReply(false)"
+                      >
+                        <b-icon icon="chevron-up" size="is-small" />Hide
+                        {{ review.sub_comments.data.length }}
+                        replies.
+                      </span>
+                      <span
+                        v-else
+                        class="no-select"
+                        @click="openReply(true, indexReview)"
+                      >
+                        <b-icon icon="chevron-down" size="is-small" />Show
+                        {{ review.sub_comments.data.length }}
+                        replies.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <!-- list sub reply  -->
+                <div
+                  v-if="showReply && indexReview === indexSub"
+                  class="show-comment"
+                >
+                  <div
+                    v-for="(sub, indexSub) in review.sub_comments.data"
+                    :key="indexSub"
+                    class="columns is-gapless"
+                    style="margin-bottom: 10px"
+                  >
+                    <div
+                      class="column is-narrow"
+                      style="height: 80px"
+                      :style="{
+                        backgroundColor: sub.avatar_background
+                      }"
+                    >
+                      <img :src="sub.avatar" class="pic-petra">
+                    </div>
+                    <div class="column box-list">
+                      <div class="student-name">
+                        {{ sub.username }}
+                      </div>
+                      <div class="petra-review" style="padding-bottom: 20px">
+                        <div class="box-review" style="padding: 10px">
+                          {{ sub.comment }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--  box comment  -->
+                <div
+                  v-if="boxReply && indexReview === indexSub2"
+                  class="show-comment"
+                >
+                  <div class="columns is-gapless" style="margin-bottom: 10px">
+                    <div
+                      class="column is-narrow"
+                      style="height: 80px"
+                      :style="{
+                        backgroundColor: dataUser.faction.avatar_bgcolor
+                      }"
+                    >
+                      <img :src="dataUser.avatar.image" class="pic-petra">
+                    </div>
+                    <div class="column box-list">
+                      <div class="student-name">
+                        {{ dataUser.username }}
+                      </div>
+                      <div class="petra-review" style="padding-bottom: 70px">
+                        <textarea
+                          v-model="subReply"
+                          class="box-review"
+                          style="padding: 10px; overflow-y: scroll"
+                        />
+                      </div>
+                      <PButton
+                        :disabled="disableBtn2"
+                        class="petra-button2"
+                        text="Reply"
+                        @click.native="submitComment()"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <infinite-loading
+                v-if="itemsDiscuss.length"
+                :identifier="infiniteId"
+                spinner="spinner"
+                style="margin-bottom: 15px"
+                @infinite="infiniteScroll"
+              >
+                <div slot="spinner" style="color: white">
+                  <v-progress-circular indeterminate color="white" />
+                </div>
+                <div slot="no-results" style="color: white">
+                  No results
+                </div>
+                <div slot="no-more" style="color: white">
+                  No more data
+                </div>
+              </infinite-loading>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 </template>
 <script>
