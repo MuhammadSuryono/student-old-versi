@@ -33,7 +33,7 @@ steps:
 
 trigger:
   branch:
-    - drone-deployment
+    - development
   event:
     - push
 ---
@@ -70,7 +70,7 @@ steps:
         - docker run -d --name $CONTAINER_NAME --publish 5006:5000 $IMAGE_NAME
 trigger:
   branch:
-    - drone-deployment
+    - development
   event:
     - push
 depends_on:
