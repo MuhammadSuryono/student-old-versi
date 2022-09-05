@@ -11,9 +11,6 @@
           FACTION COMPETITION
         </div>
       </div>
-      <!-- <div class="btn-back" @click="goBack()">
-        <Back />
-      </div> -->
     </div>
     <div class="content-faction">
       <div class="columns is-gapless mb-0 pb-0">
@@ -68,7 +65,6 @@
         </div>
       </div>
       <div v-show="selected1" class="columns is-gapless">
-        <!-- <FactionProgressBar /> -->
         <div class="column is-narrow left-side-faction">
           <div
             class="columns is-gapless no-select current-progress"
@@ -102,9 +98,7 @@
                 "
               />
               <figure v-lazyload class="image__wrapper icon-faction">
-                <ImageSpinner
-                  class="image__spinner"
-                />
+                <ImageSpinner class="image__spinner" />
                 <img
                   class="image__item"
                   :data-url="itemProgress.faction_icon"
@@ -278,18 +272,15 @@
                           : 'border5'
                 "
               />
-              
+
               <figure v-lazyload class="image__wrapper icon-faction">
-                <ImageSpinner
-                  class="image__spinner"
-                />
+                <ImageSpinner class="image__spinner" />
                 <img
                   class="image__item"
                   :data-url="itemProgress.image"
                   alt="random image"
                 >
               </figure>
-              <!-- <img :src="itemProgress.image" class="icon-faction"> -->
             </div>
             <div
               class="columns is-narrow"
@@ -482,23 +473,19 @@
                               : 'border5'
                     "
                   />
-                  <!-- <img
-                    :src="itemStar.image"
-                    class="icon-faction"
+
+                  <figure
+                    v-lazyload
+                    class="image__wrapper icon-faction"
                     style="margin-top: 14px"
-                  > -->
-                  
-              <figure v-lazyload class="image__wrapper icon-faction" 
-                    style="margin-top: 14px">
-                <ImageSpinner
-                  class="image__spinner"
-                />
-                <img
-                  class="image__item"
-                  :data-url="itemStar.image"
-                  alt="random image"
-                >
-              </figure>
+                  >
+                    <ImageSpinner class="image__spinner" />
+                    <img
+                      class="image__item"
+                      :data-url="itemStar.image"
+                      alt="random image"
+                    >
+                  </figure>
                 </div>
                 <div class="column is-narrow" style="margin-left: 15px">
                   <div
@@ -647,28 +634,15 @@
               />
             </div>
             <img
-              src="~/assets/images/confirmation_overlay.svg"
+              src="~/assets/images/Group_1013.svg"
               style="
                 position: absolute;
-                top: 424px;
+                top: 402px;
                 margin-left: 0px;
-                width: 275px;
+                width: 297px;
                 z-index: 2;
               "
             >
-            <div
-              style="
-                position: absolute;
-                top: 437px;
-                font-weight: 700;
-                font-size: 24px;
-                color: rgb(58, 92, 166);
-                margin-left: 52px;
-                z-index: 2;
-              "
-            >
-              COMING SOON
-            </div>
             <div
               style="
                 position: absolute;
@@ -689,13 +663,22 @@
           </div>
         </div>
       </div>
-      
-    <div style="background-color:;height:50px;
-      cursor: pointer;width:100px;right:110px;position:absolute;margin-top:20px;">
-      <div class="btn-back" @click="goBack()">
-        <Back />
+
+      <div
+        style="
+          background-color: ;
+          height: 50px;
+          cursor: pointer;
+          width: 100px;
+          right: 110px;
+          position: absolute;
+          margin-top: 20px;
+        "
+      >
+        <div class="btn-back" @click="goBack()">
+          <Back />
+        </div>
       </div>
-</div>
     </div>
   </div>
 </template>
@@ -740,12 +723,6 @@ export default {
       dataProgressBar: (state) => {
         return state.faction.dataProgressBar
       },
-      // dataModuleDominance: (state) => {
-      //   return state.faction.dataModuleDominance
-      // },
-      // dataCommentStars: (state) => {
-      //   return state.faction.dataCommentStars
-      // },
       dataCommentStarsList: (state) => {
         return state.faction.dataCommentStarsList
       },

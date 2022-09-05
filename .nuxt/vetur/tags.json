@@ -56,14 +56,11 @@
   "Skeleton": {
     "description": "Auto imported from components/Skeleton.vue"
   },
-  "SidebarAvatar": {
-    "description": "Auto imported from components/sidebar/Avatar.vue"
+  "Confirmation": {
+    "description": "Auto imported from components/confirmation.vue"
   },
-  "SidebarCardName": {
-    "description": "Auto imported from components/sidebar/CardName.vue"
-  },
-  "SidebarMain": {
-    "description": "Auto imported from components/sidebar/Main.vue"
+  "ButtonPlay": {
+    "description": "Auto imported from components/button/play.vue"
   },
   "FactionProgressBar": {
     "description": "Auto imported from components/faction/ProgressBar.vue"
@@ -112,5 +109,14 @@
   },
   "IconTabSkill2": {
     "description": "Auto imported from components/icon/TabSkill2.vue"
+  },
+  "SidebarAvatar": {
+    "description": "Auto imported from components/sidebar/Avatar.vue"
+  },
+  "SidebarCardName": {
+    "description": "Auto imported from components/sidebar/CardName.vue"
+  },
+  "SidebarMain": {
+    "description": "Auto imported from components/sidebar/Main.vue"
   }
 }

@@ -1,9 +1,11 @@
 <template>
   <div>
-    <!-- <button @click="toggleAudio()">
-      aas
-    </button>
-    <audio ref="player" src="~/assets/audio/audio_bg.mp3" autoplay loop /> -->
+    <audio
+      ref="player"
+      src="~/assets/audio/audio_bg.mp3"
+      :autoplay="audioBtn"
+      loop
+    />
     <div style="height: 100%; width: 100%; z-index: -9999" />
     <PModal style="z-index: 9999" />
     <div class="container-petra">
@@ -142,6 +144,9 @@ export default {
   },
   computed: {
     ...mapState({
+      audioBtn: (state) => {
+        return state.user.audioBtn
+      },
       isLoggedIn: (state) => {
         return state.user.isLoggedIn
       },
@@ -205,8 +210,6 @@ export default {
     }
   },
   created () {
-    // this.$store.commit('user/SET_BG_AUDIO', true)
-    this.audio = new Audio()
     // eslint-disable-next-line nuxt/no-globals-in-created
     window.addEventListener('resize', this.handleResize)
     this.sidebar = true
@@ -215,6 +218,17 @@ export default {
     if (this.maps) {
       this.$store.commit('user/SET_MAPS')
     }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.$refs.player.load()
+    })
+    // const audio = this.$refs.player
+    // console.log('audio : ', audio)
+    // audio.muted = true
+    // // if (audio.paused) {
+    // audio.play()
+    // // }
   },
   destroyed () {
     window.removeEventListener('resize', this.handleResize)

@@ -25,8 +25,17 @@
             :achievements="totalArchivement"
           />
           <div class="footer-sidebar">
-            <div class="btn-audio" @click="audioBtn = !audioBtn">
-              <AudioPlayer />
+            <div class="btn-audio" @click="toogleAudio()">
+              <img
+                v-if="audioBtn"
+                src="~/assets/images/akar-icons_sound-on.svg"
+                class="img-logo"
+              >
+              <img
+                v-else
+                src="~/assets/images/akar-icons_sound-off.svg"
+                class="img-logo"
+              >
             </div>
           </div>
         </div>
@@ -40,7 +49,6 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      audioBtn: false,
       totalModule: 0,
       totalArchivement: 0,
       expandOnHover: true,
@@ -73,6 +81,9 @@ export default {
       },
       sidebar: (state) => {
         return state.user.sidebar
+      },
+      audioBtn: (state) => {
+        return state.user.audioBtn
       }
     }),
     styleObj () {
@@ -90,6 +101,17 @@ export default {
     this.getTotal()
   },
   methods: {
+    toogleAudio () {
+      const audio = this.$parent.$refs.player
+      if (this.audioBtn) {
+        audio.pause()
+        this.$store.commit('user/SET_AUDIO', false)
+      } else {
+        audio.play()
+        this.$store.commit('user/SET_BTN_AUDIO', true)
+        this.$store.commit('user/SET_AUDIO', true)
+      }
+    },
     getCluster () {
       this.$axios
         .get('personality-cluster/getUserPersonalityCluster')
