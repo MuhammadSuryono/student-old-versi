@@ -9,7 +9,7 @@
           <img src="~/assets/images/logo_dashboard.png" class="img-logo">
           <div class="card">
             <div class="has-text-centered title">
-              Login to your Account {{ isLoggedIn }}
+              Login to your Account
             </div>
             <b-field class="mt-14" style="background-color: white">
               <b-input
@@ -31,7 +31,7 @@
             </b-field>
             <recaptcha class="captcha columns is-centered" />
             <b-button :loading="loading" class="btn-login" @click="login()">
-              Log In {{ manualLogout }}
+              Log In
             </b-button>
           </div>
         </v-col>
@@ -118,9 +118,6 @@ export default {
       const re = /\S+@\S+\.\S+/
       return re.test(email)
     },
-    closePopup () {
-      this.$store.commit('user/SET_EXPIRED', false)
-    },
     login () {
       this.$store.commit('user/SET_BTN_AUDIO', true)
       if (this.state.email === '' || this.state.password === '') {
@@ -157,7 +154,6 @@ export default {
           .then((response) => {
             console.log('testing')
             this.$store.commit('user/SET_LOGGEDIN', true)
-            this.$store.commit('user/SET_EXPIRED', false)
             this.loading = false
             if (response.status === 200 || response.status === 201) {
               if (response.data.data.user.role_id === 4) {
