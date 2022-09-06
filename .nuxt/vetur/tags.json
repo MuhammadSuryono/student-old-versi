@@ -68,18 +68,6 @@
   "Confirmation": {
     "description": "Auto imported from components/confirmation.vue"
   },
-  "ButtonPin": {
-    "description": "Auto imported from components/button/pin.vue"
-  },
-  "ButtonPlay": {
-    "description": "Auto imported from components/button/play.vue"
-  },
-  "FactionProgressBar": {
-    "description": "Auto imported from components/faction/ProgressBar.vue"
-  },
-  "FactionReward": {
-    "description": "Auto imported from components/faction/Reward.vue"
-  },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
   },
@@ -127,6 +115,18 @@
   },
   "IconVolume": {
     "description": "Auto imported from components/icon/Volume.vue"
+  },
+  "FactionProgressBar": {
+    "description": "Auto imported from components/faction/ProgressBar.vue"
+  },
+  "FactionReward": {
+    "description": "Auto imported from components/faction/Reward.vue"
+  },
+  "ButtonPin": {
+    "description": "Auto imported from components/button/pin.vue"
+  },
+  "ButtonPlay": {
+    "description": "Auto imported from components/button/play.vue"
   },
   "SidebarAvatar": {
     "description": "Auto imported from components/sidebar/Avatar.vue"

@@ -155,16 +155,47 @@ export const mutations = {
 }
 
 export const actions = {
-  async loginWithoutCaptcha ({ commit }, payload) {
+  async login ({ commit }, payload) {
     try {
-      // const token = await this.$recaptcha.getResponse()
-      // console.log(token)
       const response = await this.$auth.loginWith('local', {
         data: {
           email: payload.email,
           password: payload.password
         }
       })
+      // if (response.status === 200 || response.status === 201) {
+      //   if (response.data.data.user.role_id === 4) {
+      //     const data = response.data.data
+      //     localStorage.setItem('user_id', data.user.id)
+      //     commit('SET_USERS', data)
+      //     if (
+      //       // eslint-disable-next-line valid-typeof
+      //       typeof data.user.avatar !== null ||
+      //       // eslint-disable-next-line valid-typeof
+      //       typeof data.user.avatar !== undefined
+      //     ) {
+      //       commit('SET_IMAGES', data.user.avatar.image)
+      //       commit('SET_IMAGES_NAME', data.user.avatar.name)
+      //     }
+      //     if (data.user.last_name !== null) {
+      //       commit(
+      //         'SET_FULLNAME',
+      //         data.user.first_name + ' ' + data.user.last_name
+      //       )
+      //     } else {
+      //       commit('SET_FULLNAME', data.user.first_name)
+      //     }
+      //     localStorage.setItem('localAuth', false)
+      //     // this.$router.push({ path: '/splash' })
+      //   } else {
+      //     this.$auth.logout()
+      //     this.$router.push('/login')
+      //     this.$toast.error('Please login with student account.', {
+      //       position: 'top-center',
+      //       duration: 5000
+      //     })
+      //   }
+      // }
       return response
     } catch (e) {
       return e.response
@@ -183,12 +214,12 @@ export const actions = {
   updateFullname ({ commit }, payload) {
     commit('SET_FULLNAME', payload)
   },
-  updateImages ({ commit }, payload) {
-    commit('SET_IMAGES', payload)
-  },
-  updateImagesName ({ commit }, payload) {
-    commit('SET_IMAGES_NAME', payload)
-  },
+  // updateImages ({ commit }, payload) {
+  //   commit('SET_IMAGES', payload)
+  // },
+  // updateImagesName ({ commit }, payload) {
+  //   commit('SET_IMAGES_NAME', payload)
+  // },
   updateDecoration ({ commit }, payload) {
     commit('SET_DECORATION', payload)
   },

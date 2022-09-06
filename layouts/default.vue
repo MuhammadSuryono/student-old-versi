@@ -1,6 +1,6 @@
 <template>
   <div>
-    <audio ref="player" src="~/assets/audio/audio_bg.mp3" autoplay loop />
+    <!-- <audio ref="player" src="~/assets/audio/audio_bg.mp3" autoplay loop /> -->
     <div style="height: 100%; width: 100%; z-index: -9999" />
     <PModal style="z-index: 9999" />
     <div class="container-petra">
@@ -180,15 +180,6 @@ export default {
         return state.user.autoplayBGM
       }
     }),
-    testing () {
-      if (this.playBg) {
-        console.log('oke true')
-        return true
-      } else {
-        console.log('iya false')
-        return false
-      }
-    },
     widthSidebar () {
       if (this.sidebar) {
         return 'width:200px;'
@@ -218,48 +209,20 @@ export default {
       }
     }
   },
-  watch: {
-    '$store.state.user' (url) {
-      console.log(url)
-      // this.audio.pause()
-      // this.audio.src = url
-      // this.audio.currentTime = 0
-      // this.audio.play()
-    }
-  },
   created () {
     // eslint-disable-next-line nuxt/no-globals-in-created
     window.addEventListener('resize', this.handleResize)
     this.sidebar = true
-    this.$notify('Hello user!')
     this.handleResize()
     if (this.maps) {
       this.$store.commit('user/SET_MAPS')
     }
   },
-  mounted () {
-    this.$nextTick(() => {
-      this.$refs.player.load()
-    })
-    // const audio = this.$refs.player
-    // console.log('audio : ', audio)
-    // audio.muted = true
-    // // if (audio.paused) {
-    // audio.play()
-    // // }
-  },
   destroyed () {
     window.removeEventListener('resize', this.handleResize)
   },
+  mounted () {},
   methods: {
-    toggleAudio () {
-      const audio = this.$refs.player
-      if (audio.paused) {
-        audio.play()
-      } else {
-        audio.pause()
-      }
-    },
     logout () {
       this.$store.commit('user/SET_LOGGEDIN', false)
       this.$store.commit('user/SET_BTN_AUDIO', true)
