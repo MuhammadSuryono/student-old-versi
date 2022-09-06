@@ -129,14 +129,14 @@ export const mutations = {
 export const actions = {
   async loginWithoutCaptcha ({ commit }, payload) {
     try {
-      // const token = await this.$recaptcha.getResponse()
-      // console.log(token)
+      await this.$recaptcha.getResponse()
       const response = await this.$auth.loginWith('local', {
         data: {
           email: payload.email,
           password: payload.password
         }
       })
+      console.log('res: ', response)
       return response
     } catch (e) {
       return e.response

@@ -155,6 +155,7 @@ export default {
             password: this.state.password
           })
           .then((response) => {
+            console.log('testing')
             this.$store.commit('user/SET_LOGGEDIN', true)
             this.$store.commit('user/SET_EXPIRED', false)
             this.loading = false
@@ -208,10 +209,13 @@ export default {
               })
             }
           })
-          .catch((error) => {
+          .catch(() => {
             console.log('catch')
             this.loading = false
-            this.$toast.error(error)
+            this.$toast.error('Please check the box captcha', {
+              position: 'top-center',
+              duration: 5000
+            })
           })
       }
     }
