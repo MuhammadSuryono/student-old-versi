@@ -62,6 +62,12 @@
   "ButtonPlay": {
     "description": "Auto imported from components/button/play.vue"
   },
+  "FactionProgressBar": {
+    "description": "Auto imported from components/faction/ProgressBar.vue"
+  },
+  "FactionReward": {
+    "description": "Auto imported from components/faction/Reward.vue"
+  },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
   },
@@ -112,11 +118,5 @@
   },
   "SidebarMain": {
     "description": "Auto imported from components/sidebar/Main.vue"
-  },
-  "FactionProgressBar": {
-    "description": "Auto imported from components/faction/ProgressBar.vue"
-  },
-  "FactionReward": {
-    "description": "Auto imported from components/faction/Reward.vue"
   }
 }
