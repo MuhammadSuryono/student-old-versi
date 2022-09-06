@@ -89,7 +89,7 @@ export default {
 
   recaptcha: {
     hideBadge: true,
-    siteKey: process.env.siteKey,
+    siteKey: process.env.siteKey ?? '6LdoQc0hAAAAAGR-9qVX_HhmGCarOmz9f419FesP',
     version: 2
   },
 
