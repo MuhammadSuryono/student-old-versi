@@ -13,6 +13,7 @@ steps:
       - echo "basePath=/student-dev/" > .env
       - echo "basePathBuild=/student-dev/_nuxt/" >> .env
       - echo "baseUrl=http://dev.petraverse.id/api" >> .env
+      - echo "siteKey=6LdoQc0hAAAAAGR-9qVX_HhmGCarOmz9f419FesP" >> .env
       - cat .env
 
   - name: "Build Image Development Student"
@@ -92,6 +93,7 @@ steps:
       - echo "basePath=/" > .env
       - echo "basePathBuild=/_nuxt/" >> .env
       - echo "baseUrl=https://api.petraverse.id/v1" >> .env
+      - echo "siteKey=6LdoQc0hAAAAAGR-9qVX_HhmGCarOmz9f419FesP" >> .env
       - cat .env
 
   - name: "Build Image Production Student"
@@ -159,6 +161,7 @@ steps:
       - echo "basePath=/student/" > .env
       - echo "basePathBuild=/student/_nuxt/" >> .env
       - echo "baseUrl=http://staging.petraverse.id/api" >> .env
+      - echo "siteKey=6LdoQc0hAAAAAGR-9qVX_HhmGCarOmz9f419FesP" >> .env
       - cat .env
 
   - name: "Build Image Staging Student"
