@@ -166,7 +166,7 @@
               </div>
               <v-spacer />
               <v-divider class="mx-4" vertical />
-              <div class="btn-play" @click="toDetail()">Play</div>
+              <div class="btn-play" @click="toDetail(item)">Play</div>
             </v-toolbar>
           </div>
           <infinite-loading

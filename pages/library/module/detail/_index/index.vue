@@ -471,7 +471,7 @@ export default {
           .dispatch('module/addReview', data)
           .then((response) => {
             console.log('success', response)
-            if (response.status !== 200 || response.status !== 201) {
+            if (response.status !== 201) {
               this.$toast.error(response.data.error.message, {
                 position: 'top-center',
                 duration: 5000
