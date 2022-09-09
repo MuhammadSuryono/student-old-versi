@@ -13,6 +13,15 @@
       stroke-linecap="round"
       stroke-linejoin="round"
     />
+    <line
+      x1="2"
+      y1="13.5858"
+      x2="13.5858"
+      y2="2"
+      :stroke="bgColor"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
   </svg>
 </template>
 

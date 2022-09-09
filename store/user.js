@@ -49,7 +49,6 @@ export const getters = {
 export const mutations = {
   SET_AUDIO_EFFECT (state, payload) {
     state.audioEffect = payload
-    console.log(state.audioEffect)
   },
   SET_AUDIO_BGM (state, payload) {
     state.audioBGM = payload
@@ -65,22 +64,13 @@ export const mutations = {
   },
   SET_BTN_AUDIO (state, payload) {
     const myAudio = new Audio(btnAudio)
-    // if (state.audioEffect > 0) {
     myAudio.play()
-    myAudio.volume = state.audioEffect
-    // } else {
-    //   myAudio.volume = state.audioEffect
-    // }
+    // myAudio.volume = state.audioEffect
   },
   SET_POPUP_AUDIO (state, payload) {
     const myAudio = new Audio(popupAudio)
-    // if (state.audioEffect > 0) {
     myAudio.play()
-    myAudio.volume = state.audioEffect
-    // } else {
-    //   myAudio.play()
-    //   myAudio.volume = state.audioEffect
-    // }
+    // myAudio.volume = state.audioEffect
   },
   SET_BG_AUDIO (state, payload) {
     state.playBg = payload
@@ -214,12 +204,12 @@ export const actions = {
   updateFullname ({ commit }, payload) {
     commit('SET_FULLNAME', payload)
   },
-  // updateImages ({ commit }, payload) {
-  //   commit('SET_IMAGES', payload)
-  // },
-  // updateImagesName ({ commit }, payload) {
-  //   commit('SET_IMAGES_NAME', payload)
-  // },
+  updateImages ({ commit }, payload) {
+    commit('SET_IMAGES', payload)
+  },
+  updateImagesName ({ commit }, payload) {
+    commit('SET_IMAGES_NAME', payload)
+  },
   updateDecoration ({ commit }, payload) {
     commit('SET_DECORATION', payload)
   },

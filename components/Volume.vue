@@ -2,14 +2,24 @@
   <div class="vol-container">
     <div class="bg-volume">
       <div class="rules-container">
-        <img src="~/assets/images/ruler.svg" style="margin-top: 15px">
+        <img src="~/assets/images/ruler.svg">
       </div>
     </div>
-    <div class="slider-vol">
-      <IconVolume class="icon-volume" />
-      <b-slider v-model="value" style="z-index: 999" @change="changeVolume()" />
+    <IconVolume v-if="!mute" class="icon-volume" @click.native="onMute(true)" />
+    <IconVolumeMute v-else class="icon-volume" @click.native="onMute(false)" />
+
+    <div class="slidecontainer">
+      <input
+        id="myRange"
+        type="range"
+        min="1"
+        max="100"
+        value="50"
+        class="slider"
+      >
     </div>
     <img src="~/assets/images/vol-corner.svg" class="corner-top">
+    <div class="diagonal-line" />
   </div>
 </template>
 <script>
@@ -17,7 +27,8 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      value: 100
+      value: 100,
+      mute: false
     }
   },
   computed: {
@@ -28,9 +39,6 @@ export default {
     })
   },
   mounted () {
-    const audio = this.$parent.$parent.$refs.player
-    audio.volume = 1
-    // // this.value = this.audioBGM
     // const audio = this.$parent.$parent.$refs.player
     // audio.volume = 1
     this.$store.commit('user/SET_AUDIO_BGM', this.value)
@@ -39,10 +47,12 @@ export default {
     changeVolume () {
       const audio = this.$parent.$parent.$refs.player
       audio.volume = this.value / 100
-      console.log(this.value)
       this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
       this.$store.commit('user/SET_BTN_AUDIO')
       this.$store.commit('user/SET_POPUP_AUDIO')
+    },
+    onMute (x) {
+      this.mute = x
     }
   }
 }
@@ -51,10 +61,9 @@ export default {
 .vol-container {
   position: relative;
   .bg-volume {
-    height: 65px;
-
+    height: 55px;
     border: 1.5px solid #f2f2f2;
-    width: 421px;
+    width: 411px;
     background: #ffffff;
     --g: #000, #0000 1deg 179deg, #000 180deg;
     --mask: conic-gradient(from -45deg at top 5px right 5px, var(--g)) 100% 0 /51%
@@ -71,28 +80,79 @@ export default {
     padding-left: 30px;
     padding-right: 30px;
     .rules-container {
-      width: 100%;
-      height: 20px;
+      position: absolute;
+      top: 30px;
+      left: 27px;
     }
   }
-  .slider-vol {
+  .icon-volume {
     position: absolute;
-    top: 14px;
-    left: 29px;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: center;
-    width: 361px;
-    height: 20px;
-    .icon-volume {
-      margin-right: 15px;
-    }
+    top: 17px;
+    left: 20px;
+    margin-right: 15px;
+    cursor: pointer;
   }
   .corner-top {
     position: absolute;
-    right: 65px;
-    top: 0px;
+    left: 235px;
+    top: -1px;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-app-region: no-drag;
+    z-index: 2;
+  }
+  .diagonal-line {
+    position: absolute;
+    left: 1px;
+    top: 45px;
+    border-bottom: 1px solid #f2f2f2;
+    width: 13px;
+    transform: rotate(45deg);
+    transform-origin: top left;
+  }
+  .slidecontainer {
+    width: 347px;
+    position: absolute;
+    top: 11px;
+    left: 46px;
+    z-index: 4;
+  }
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(46, 87, 153, 0.2);
+    box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.25);
+    outline: none;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+  }
+
+  .slider:hover {
+    opacity: 1;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 18px;
+    background: #f3f6f9;
+    box-shadow: 0px -4px 4px rgba(255, 255, 255, 0.25),
+      0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .slider::-moz-range-thumb {
+    width: 14px;
+    height: 18px;
+    background: #f3f6f9;
+    box-shadow: 0px -4px 4px rgba(255, 255, 255, 0.25),
+      0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
+    cursor: pointer;
   }
 }
 </style>
