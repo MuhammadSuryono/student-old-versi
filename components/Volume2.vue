@@ -57,6 +57,11 @@ export default {
     },
     onMute (x) {
       this.mute = x
+      if (x) {
+        this.value = 0
+        this.$store.commit('user/SET_AUDIO_EFFECT', 0)
+        this.$store.commit('user/SET_AUDIO_BGM', 0)
+      }
     }
   }
 }
