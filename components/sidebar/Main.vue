@@ -24,8 +24,8 @@
             :courses="totalModule"
             :achievements="totalArchivement"
           />
-          <div class="footer-sidebar">
-            <div class="btn-audio" @click="onSetting()">
+          <div v-if="reduce" class="footer-sidebar">
+            <div v-if="!btn_setting" class="btn-audio" @click="onSetting()">
               <IconSetting class="img-logo" />
             </div>
           </div>
@@ -75,6 +75,9 @@ export default {
       },
       audioBtn: (state) => {
         return state.user.audioBtn
+      },
+      btn_setting: (state) => {
+        return state.user.btn_setting
       }
     }),
     styleObj () {
