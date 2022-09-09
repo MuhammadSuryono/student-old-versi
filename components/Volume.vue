@@ -6,15 +6,20 @@
       </div>
     </div>
     <IconVolume v-if="!mute" class="icon-volume" @click.native="onMute(true)" />
-    <IconVolumeMute v-else class="icon-volume" @click.native="onMute(false)" />
+    <IconVolumeMute
+      v-if="mute"
+      class="icon-volume"
+      @click.native="onMute(false)"
+    />
     <div class="slidecontainer">
       <input
         id="myRange"
+        v-model="value"
         type="range"
         min="1"
         max="100"
-        :value="value"
         class="slider"
+        @input="changeVolume()"
       >
     </div>
     <img src="~/assets/images/vol-corner.svg" class="corner-top">
@@ -38,20 +43,23 @@ export default {
     })
   },
   mounted () {
-    // const audio = this.$parent.$parent.$refs.player
-    // audio.volume = 1
-    this.$store.commit('user/SET_AUDIO_BGM', this.value)
+    this.value = this.audioBGM * 100
   },
   methods: {
     changeVolume () {
       const audio = this.$parent.$parent.$refs.player
       audio.volume = this.value / 100
+
       this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
-      this.$store.commit('user/SET_BTN_AUDIO')
-      this.$store.commit('user/SET_POPUP_AUDIO')
     },
     onMute (x) {
       this.mute = x
+      if (x) {
+        this.value = 0
+        const audio = this.$parent.$parent.$refs.player
+        audio.volume = this.value / 100
+        this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
+      }
     }
   }
 }

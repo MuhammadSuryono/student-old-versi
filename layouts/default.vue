@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <audio ref="player" src="~/assets/audio/audio_bg.mp3" autoplay loop /> -->
+    <audio ref="player" src="~/assets/audio/audio_bg.mp3" autoplay loop />
     <div style="height: 100%; width: 100%; z-index: -9999" />
     <PModal style="z-index: 9999" />
     <div class="container-petra">
@@ -221,7 +221,10 @@ export default {
   destroyed () {
     window.removeEventListener('resize', this.handleResize)
   },
-  mounted () {},
+  mounted () {
+    const audio = this.$refs.player
+    audio.volume = this.audioBGM
+  },
   methods: {
     logout () {
       this.$store.commit('user/SET_LOGGEDIN', false)

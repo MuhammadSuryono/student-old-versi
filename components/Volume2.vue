@@ -35,32 +35,21 @@ export default {
     ...mapState({
       audioEffect: (state) => {
         return state.user.audioEffect
-      },
-      audioBGM: (state) => {
-        return state.user.audioBGM
       }
     })
   },
   mounted () {
-    // this.$store.commit('user/SET_AUDIO_EFFECT', this.value / 100)
-    // this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
     this.value = this.audioEffect * 100
-    // console.log(this.value)
-    // const audio = this.$parent.$parent.$refs.player
-    // audio.volume = 1
-    // this.$store.commit('user/SET_AUDIO_BGM', this.value)
   },
   methods: {
     changeVolume () {
       this.$store.commit('user/SET_AUDIO_EFFECT', this.value / 100)
-      this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
     },
     onMute (x) {
       this.mute = x
       if (x) {
         this.value = 0
         this.$store.commit('user/SET_AUDIO_EFFECT', 0)
-        this.$store.commit('user/SET_AUDIO_BGM', 0)
       }
     }
   }
