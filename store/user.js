@@ -25,7 +25,7 @@ export const state = () => ({
   btn_mute: true,
   audioBtn: true,
   audioBGM: 1,
-  audioEffect: 1,
+  audioEffect: 0,
   autoplayBGM: true
 })
 
@@ -65,12 +65,12 @@ export const mutations = {
   SET_BTN_AUDIO (state, payload) {
     const myAudio = new Audio(btnAudio)
     myAudio.play()
-    // myAudio.volume = state.audioEffect
+    myAudio.volume = state.audioEffect
   },
   SET_POPUP_AUDIO (state, payload) {
     const myAudio = new Audio(popupAudio)
     myAudio.play()
-    // myAudio.volume = state.audioEffect
+    myAudio.volume = state.audioEffect
   },
   SET_BG_AUDIO (state, payload) {
     state.playBg = payload

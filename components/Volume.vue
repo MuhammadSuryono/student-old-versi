@@ -7,14 +7,13 @@
     </div>
     <IconVolume v-if="!mute" class="icon-volume" @click.native="onMute(true)" />
     <IconVolumeMute v-else class="icon-volume" @click.native="onMute(false)" />
-
     <div class="slidecontainer">
       <input
         id="myRange"
         type="range"
         min="1"
         max="100"
-        value="50"
+        :value="value"
         class="slider"
       >
     </div>
