@@ -17,20 +17,24 @@
 
       <div v-if="showPin">
         <div class="vr-pin">
-          <img
-            src="~/assets/images/vr-pin.svg"
-            class="bg-vr-pin"
-            @mouseleave="hover1 = false"
-          >
-          <div class="value-pin" @mouseover="hover1 = true">
-            {{ VRpin }}
-          </div>
+          <img src="~/assets/images/vr-pin.svg" class="bg-vr-pin">
           <img
             v-if="hover1"
             class="btn-pin"
             src="~/assets/images/regenerate.svg"
             @click="generatePIN()"
+            @mouseover="hover1 = true"
+            @mouseleave="hover1 = false"
           >
+
+          <div
+            v-else
+            class="value-pin"
+            @mouseover="hover1 = true"
+            @mouseleave="hover1 = false"
+          >
+            {{ VRpin }}
+          </div>
         </div>
         <div class="button-remove" @click="removePIN()">
           <div class="btn-1">
@@ -80,7 +84,21 @@ export default {
           this.showPin = false
         })
     },
-    removePIN () {
+    async removePIN () {
+      await this.$axios
+        .delete('/student/vr-pin/delete')
+        .then((res) => {
+          if (res.status === 200) {
+            this.showPin = false
+          }
+        })
+        .catch((error) => {
+          // this.showPin = false
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+        })
       this.showPin = false
       this.VRpin = 0
     },
