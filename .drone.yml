@@ -33,7 +33,7 @@ steps:
 
 trigger:
   branch:
-    - development
+    - "0.3.0"
   event:
     - push
 ---
@@ -70,7 +70,7 @@ steps:
         - docker run -d --name $CONTAINER_NAME --publish 5006:3000 $IMAGE_NAME
 trigger:
   branch:
-    - development
+    - "0.3.0"
   event:
     - push
 depends_on:
