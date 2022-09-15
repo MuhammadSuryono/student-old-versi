@@ -245,7 +245,7 @@
                           backgroundColor: dataUser.faction.avatar_bgcolor
                         }"
                       >
-                        <img :src="review.avatar" class="pic-petra">
+                        <img :src="dataUser.avatar.image" class="pic-petra">
                       </div>
                       <div class="column box-list">
                         <div class="student-name">
@@ -319,7 +319,15 @@ export default {
       itemsDiscuss: {},
       descReview: '',
       infiniteId: 1,
-      total: 0
+      total: 0,
+      ratingReview: 0,
+      subReply: '',
+      showReply: false,
+      indexSub: null,
+      indexSub2: 0,
+      boxReply: false,
+      dataSubReply: {},
+      archievements: {}
     }
   },
 
@@ -355,6 +363,55 @@ export default {
 
   mounted () {},
   methods: {
+    openReply2 (y, x) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+      console.log(x)
+      this.indexSub2 = y
+      this.boxReply = !this.boxReply
+      this.dataSubReply = x
+    },
+    openReply (x, y) {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+      this.showReply = x
+      if (x === true) {
+        this.indexSub = y
+      }
+    },
+    submitComment () {
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+      const data = {
+        id: this.dataSubReply,
+        review: this.subReply
+      }
+      this.$store
+        .dispatch('module/postSubDiscuss', data)
+        .then((response) => {
+          this.infiniteId += 1
+          this.descReview = ''
+          this.subReply = ''
+          this.page = 1
+          const data = {
+            id: this.$route.params.index,
+            page: this.page
+          }
+          this.$store
+            .dispatch('module/fetchAllDiscuss', data)
+            .then((response) => {
+              this.itemsDiscuss = response.data.data.data
+              console.log('discuss ', this.itemsDiscuss)
+              this.total = response.data.data.total
+              this.boxReply = false
+            })
+        })
+        .catch((error) => {
+          console.log('error:', error)
+          this.isLoading = false
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+        })
+    },
     addReview () {
       this.$store.commit('user/SET_BTN_AUDIO', true)
       const data = {
@@ -387,6 +444,38 @@ export default {
           })
         })
     },
+    // addReview () {
+    //   this.$store.commit('user/SET_BTN_AUDIO', true)
+    //   const data = {
+    //     module_rail_id: this.$route.params.index,
+    //     review: this.descReview
+    //   }
+    //   this.$store
+    //     .dispatch('module/postDiscuss', data)
+    //     .then((response) => {
+    //       this.infiniteId += 1
+    //       this.descReview = ''
+    //       this.page = 1
+    //       const data = {
+    //         id: this.$route.params.index,
+    //         page: this.page
+    //       }
+    //       this.$store
+    //         .dispatch('module/fetchAllDiscuss', data)
+    //         .then((response) => {
+    //           this.itemsDiscuss = response.data.data.data
+    //           this.total = response.data.data.total
+    //         })
+    //     })
+    //     .catch((error) => {
+    //       console.log('error:', error)
+    //       this.isLoading = false
+    //       this.$toast.error(error.response, {
+    //         position: 'top-center',
+    //         duration: 5000
+    //       })
+    //     })
+    // },
     download (x) {
       const url = x
       window.open(url)
@@ -832,7 +921,6 @@ export default {
     }
     .tab-2-petra {
       padding: 15px 0px 0px 0px;
-
       .left-side {
         width: 338px;
         height: 100%;
@@ -982,6 +1070,15 @@ export default {
           width: 100%;
           height: 500px;
           overflow-y: scroll;
+          .pic-petra {
+            width: 80px;
+            height: 67px;
+            object-fit: cover;
+            object-fit: cover;
+            -o-object-position: 53% 0%;
+            object-position: 53% 0%;
+            margin-top: 13px;
+          }
           .box-list {
             position: relative;
             background-color: white;
@@ -989,13 +1086,36 @@ export default {
             height: 100%;
             object-fit: cover;
             --g: #000, #0000 1deg 179deg, #000 180deg;
-
             --mask: conic-gradient(from -45deg at top 18px right 18px, var(--g))
                 100% 0 /51% 100% no-repeat,
               conic-gradient(from -225deg at bottom 18px left 18px, var(--g)) 0
                 100%/51% 100% no-repeat;
             -webkit-mask: var(--mask);
             mask: var(--mask);
+            .petra-button2 {
+              cursor: pointer;
+              right: 24px;
+              position: absolute;
+              bottom: 9px;
+            }
+            .reply-btn {
+              position: absolute;
+              right: 20px;
+              bottom: 10px;
+              cursor: pointer;
+              font-size: 11px;
+              line-height: 15px;
+              float: right;
+              color: #21529b;
+            }
+            .reply-hide {
+              text-align: center;
+              cursor: pointer;
+              font-size: 11px;
+              line-height: 15px;
+              color: #21529b;
+              padding-bottom: 10px;
+            }
             .student-name {
               background-color: #2e5799;
               width: 196.45px;
@@ -1062,6 +1182,19 @@ export default {
                 //   right: 10px;
               }
             }
+          }
+          .show-comment {
+            margin-left: 80px;
+            width: 583px;
+            height: 100%;
+            // object-fit: cover;
+            // --g: #000, #0000 1deg 179deg, #000 180deg;
+            // --mask: conic-gradient(from -45deg at top 18px right 18px, var(--g))
+            //     100% 0 /51% 100% no-repeat,
+            //   conic-gradient(from -225deg at bottom 18px left 18px, var(--g)) 0
+            //     100%/51% 100% no-repeat;
+            // -webkit-mask: var(--mask);
+            // mask: var(--mask);
           }
         }
       }
