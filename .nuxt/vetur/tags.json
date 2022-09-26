@@ -5,6 +5,9 @@
   "Back": {
     "description": "Auto imported from components/Back.vue"
   },
+  "BoxTitle": {
+    "description": "Auto imported from components/BoxTitle.vue"
+  },
   "Decoration": {
     "description": "Auto imported from components/Decoration.vue"
   },
@@ -53,14 +56,20 @@
   "Profile": {
     "description": "Auto imported from components/Profile.vue"
   },
+  "Setting": {
+    "description": "Auto imported from components/Setting.vue"
+  },
   "Skeleton": {
     "description": "Auto imported from components/Skeleton.vue"
   },
+  "Volume": {
+    "description": "Auto imported from components/Volume.vue"
+  },
+  "Volume2": {
+    "description": "Auto imported from components/Volume2.vue"
+  },
   "Confirmation": {
     "description": "Auto imported from components/confirmation.vue"
-  },
-  "ButtonPlay": {
-    "description": "Auto imported from components/button/play.vue"
   },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
@@ -95,6 +104,9 @@
   "IconSearch": {
     "description": "Auto imported from components/icon/Search.vue"
   },
+  "IconSetting": {
+    "description": "Auto imported from components/icon/Setting.vue"
+  },
   "IconSkillcard": {
     "description": "Auto imported from components/icon/Skillcard.vue"
   },
@@ -104,6 +116,24 @@
   "IconTabSkill2": {
     "description": "Auto imported from components/icon/TabSkill2.vue"
   },
+  "IconVolume": {
+    "description": "Auto imported from components/icon/Volume.vue"
+  },
+  "IconVolumeMute": {
+    "description": "Auto imported from components/icon/VolumeMute.vue"
+  },
+  "ButtonPin": {
+    "description": "Auto imported from components/button/pin.vue"
+  },
+  "ButtonPlay": {
+    "description": "Auto imported from components/button/play.vue"
+  },
+  "FactionProgressBar": {
+    "description": "Auto imported from components/faction/ProgressBar.vue"
+  },
+  "FactionReward": {
+    "description": "Auto imported from components/faction/Reward.vue"
+  },
   "SidebarAvatar": {
     "description": "Auto imported from components/sidebar/Avatar.vue"
   },
@@ -112,11 +142,5 @@
   },
   "SidebarMain": {
     "description": "Auto imported from components/sidebar/Main.vue"
-  },
-  "FactionProgressBar": {
-    "description": "Auto imported from components/faction/ProgressBar.vue"
-  },
-  "FactionReward": {
-    "description": "Auto imported from components/faction/Reward.vue"
   }
 }

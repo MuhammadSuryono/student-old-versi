@@ -80,39 +80,16 @@ export default {
   },
   computed: {
     ...mapState({
-      expired: (state) => {
-        if (state.user.expired) {
-          this.$store.commit('user/SET_POPUP_AUDIO', true)
-        }
-        return state.user.expired
-      },
       isLoggedIn: (state) => {
         return state.user.isLoggedIn
       }
     })
   },
-  mounted () {
-    // this.$store.commit('user/SET_BTN_MUTE', true)
-    // console.log(this.$auth.loggedIn)
-  },
   methods: {
     ...mapMutations(['SET_IS_AUTH']),
-
     logout () {
       this.$store.commit('user/SET_LOGGEDIN', true)
       this.$store.commit('user/SET_BTN_AUDIO', true)
-      this.$store.commit('user/SET_BG_AUDIO', false)
-      if (this.btn_profile) {
-        this.$store.commit('user/SET_BTN_PROFILE')
-      }
-      if (this.btn_decoration) {
-        this.$store.commit('user/SET_BTN_DECORATION')
-      }
-      this.$auth.logout()
-      this.$router.push('/login')
-    },
-    toHome () {
-      this.$router.push({ path: 'dashboard' })
     },
     validateEmail (email) {
       const re = /\S+@\S+\.\S+/
@@ -147,12 +124,11 @@ export default {
       } else {
         this.loading = true
         this.$store
-          .dispatch('user/loginWithoutCaptcha', {
+          .dispatch('user/login', {
             email: this.state.email,
             password: this.state.password
           })
           .then((response) => {
-            console.log('testing')
             this.$store.commit('user/SET_LOGGEDIN', true)
             this.loading = false
             if (response.status === 200 || response.status === 201) {
@@ -183,13 +159,9 @@ export default {
                 } else {
                   this.$store.commit('user/SET_FULLNAME', data.user.first_name)
                 }
-                // this.$auth.strategy.token.set(
-                //   'Bearer ' + response.data.data.access_token
-                // )
                 localStorage.setItem('localAuth', false)
                 this.$router.push({ path: '/splash' })
               } else {
-                console.log(false)
                 this.$auth.logout()
                 this.$router.push('/login')
                 this.$toast.error('Please login with student account.', {
@@ -205,13 +177,9 @@ export default {
               })
             }
           })
-          .catch(() => {
-            console.log('catch')
+          .catch((error) => {
             this.loading = false
-            this.$toast.error('Please check the box captcha', {
-              position: 'top-center',
-              duration: 5000
-            })
+            this.$toast.error(error)
           })
       }
     }

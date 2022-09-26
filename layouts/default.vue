@@ -1,11 +1,6 @@
 <template>
   <div>
-    <audio
-      ref="player"
-      src="~/assets/audio/audio_bg.mp3"
-      :autoplay="audioBtn"
-      loop
-    />
+    <audio ref="player" src="~/assets/audio/audio_bg.mp3" autoplay loop />
     <div style="height: 100%; width: 100%; z-index: -9999" />
     <PModal style="z-index: 9999" />
     <div class="container-petra">
@@ -122,6 +117,12 @@
           :style="widthProfile"
           class="profile-petra"
         />
+        <!-- edit profile -->
+        <Setting
+          v-if="btn_setting"
+          class="profile-petra noselect"
+          :style="widthProfile3"
+        />
       </div>
     </div>
   </div>
@@ -139,7 +140,8 @@ export default {
         height: 0
       },
       coomingSoon: false,
-      audio: null
+      audio: null,
+      bgmAutoplay: false
     }
   },
   computed: {
@@ -165,19 +167,19 @@ export default {
       btn_decoration: (state) => {
         return state.user.btn_decoration
       },
+      btn_setting: (state) => {
+        return state.user.btn_setting
+      },
       playBg: (state) => {
         return state.user.playBg
+      },
+      audioBGM: (state) => {
+        return state.user.audioBGM
+      },
+      autoplayBGM: (state) => {
+        return state.user.autoplayBGM
       }
     }),
-    testing () {
-      if (this.playBg) {
-        console.log('oke true')
-        return true
-      } else {
-        console.log('iya false')
-        return false
-      }
-    },
     widthSidebar () {
       if (this.sidebar) {
         return 'width:200px;'
@@ -198,50 +200,32 @@ export default {
       } else {
         return 'left:80px;'
       }
-    }
-  },
-  watch: {
-    '$store.state.user' (url) {
-      console.log(url)
-      // this.audio.pause()
-      // this.audio.src = url
-      // this.audio.currentTime = 0
-      // this.audio.play()
+    },
+    widthProfile3 () {
+      if (this.sidebar) {
+        return 'left:200px;'
+      } else {
+        return 'left:80px;'
+      }
     }
   },
   created () {
     // eslint-disable-next-line nuxt/no-globals-in-created
     window.addEventListener('resize', this.handleResize)
     this.sidebar = true
-    this.$notify('Hello user!')
     this.handleResize()
     if (this.maps) {
       this.$store.commit('user/SET_MAPS')
     }
   },
-  mounted () {
-    this.$nextTick(() => {
-      this.$refs.player.load()
-    })
-    // const audio = this.$refs.player
-    // console.log('audio : ', audio)
-    // audio.muted = true
-    // // if (audio.paused) {
-    // audio.play()
-    // // }
-  },
   destroyed () {
     window.removeEventListener('resize', this.handleResize)
   },
+  mounted () {
+    const audio = this.$refs.player
+    audio.volume = this.audioBGM
+  },
   methods: {
-    toggleAudio () {
-      const audio = this.$refs.player
-      if (audio.paused) {
-        audio.play()
-      } else {
-        audio.pause()
-      }
-    },
     logout () {
       this.$store.commit('user/SET_LOGGEDIN', false)
       this.$store.commit('user/SET_BTN_AUDIO', true)

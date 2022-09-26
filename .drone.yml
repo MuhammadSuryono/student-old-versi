@@ -13,7 +13,7 @@ steps:
       - echo "basePath=/student-dev/" > .env
       - echo "basePathBuild=/student-dev/_nuxt/" >> .env
       - echo "baseUrl=http://dev.petraverse.id/api" >> .env
-      - echo "siteKey=6LdoQc0hAAAAAGR-9qVX_HhmGCarOmz9f419FesP" >> .env
+      - echo "siteKey=6LdCnvghAAAAAMP0pFWnrJBoV0rqwbgByb6bkS5c" >> .env
       - cat .env
 
   - name: "Build Image Development Student"
