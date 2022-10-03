@@ -16,7 +16,7 @@
         id="myRange"
         v-model="value"
         type="range"
-        min="1"
+        min="0"
         max="100"
         class="slider"
         @input="changeVolume()"
@@ -32,7 +32,8 @@ export default {
   data () {
     return {
       value: 100,
-      mute: false
+      mute: false,
+      valueBackup: 0
     }
   },
   computed: {
@@ -47,15 +48,28 @@ export default {
   },
   methods: {
     changeVolume () {
-      const audio = this.$parent.$parent.$refs.player
-      audio.volume = this.value / 100
-
-      this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
+      this.valueBackup = 0
+      if (this.value > 0) {
+        this.mute = false
+        const audio = this.$parent.$parent.$refs.player
+        audio.volume = this.value / 100
+        this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
+      } else {
+        this.mute = true
+        const audio = this.$parent.$parent.$refs.player
+        audio.volume = this.value / 100
+        this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
+      }
     },
     onMute (x) {
       this.mute = x
       if (x) {
-        this.value = 0
+        this.valueBackup = this.value
+        const audio = this.$parent.$parent.$refs.player
+        audio.volume = 0
+        this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
+      } else {
+        this.value = this.valueBackup
         const audio = this.$parent.$parent.$refs.player
         audio.volume = this.value / 100
         this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
@@ -135,11 +149,9 @@ export default {
     -webkit-transition: 0.2s;
     transition: opacity 0.2s;
   }
-
   .slider:hover {
     opacity: 1;
   }
-
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -151,7 +163,6 @@ export default {
     border-radius: 2px;
     cursor: pointer;
   }
-
   .slider::-moz-range-thumb {
     width: 14px;
     height: 18px;

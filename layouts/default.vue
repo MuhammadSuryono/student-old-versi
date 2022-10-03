@@ -401,12 +401,10 @@ export default {
 .fade-leave-active {
   transition: opacity 0.4s linear;
 }
-
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
 }
-
 .slide-fade-enter-active {
   transition: all 0.5s;
 }
@@ -539,7 +537,6 @@ export default {
   z-index: 999;
   max-width: 1280px;
 }
-
 .p-1 {
   padding: 1em;
 }

@@ -47,9 +47,11 @@ export const getters = {
 
 export const mutations = {
   SET_AUDIO_EFFECT (state, payload) {
+    console.log('audio effect: ', payload)
     state.audioEffect = payload
   },
   SET_AUDIO_BGM (state, payload) {
+    console.log('audio bgm: ', payload)
     state.audioBGM = payload
   },
   SET_AUDIO (state, payload) {

@@ -12,7 +12,7 @@
         id="myRange"
         v-model="value"
         type="range"
-        min="1"
+        min="0"
         max="100"
         class="slider"
         @input="changeVolume()"
@@ -28,7 +28,8 @@ export default {
   data () {
     return {
       value: 100,
-      mute: false
+      mute: false,
+      valueBackup:0
     }
   },
   computed: {
@@ -43,13 +44,22 @@ export default {
   },
   methods: {
     changeVolume () {
-      this.$store.commit('user/SET_AUDIO_EFFECT', this.value / 100)
+      if (this.value > 0) {
+        this.mute = false
+        this.$store.commit('user/SET_AUDIO_EFFECT', this.value / 100)
+      } else {
+        this.mute = true
+        this.$store.commit('user/SET_AUDIO_EFFECT', this.value / 100)
+      }
     },
     onMute (x) {
       this.mute = x
       if (x) {
-        this.value = 0
+        this.valueBackup = this.value
         this.$store.commit('user/SET_AUDIO_EFFECT', 0)
+      } else {
+        this.value = this.valueBackup
+        this.$store.commit('user/SET_AUDIO_EFFECT', this.value / 100)
       }
     }
   }
@@ -126,11 +136,9 @@ export default {
     -webkit-transition: 0.2s;
     transition: opacity 0.2s;
   }
-
   .slider:hover {
     opacity: 1;
   }
-
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -142,7 +150,6 @@ export default {
     border-radius: 2px;
     cursor: pointer;
   }
-
   .slider::-moz-range-thumb {
     width: 14px;
     height: 18px;

@@ -4,27 +4,27 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _d4e656b2 = () => interopDefault(import('../pages/archivements.vue' /* webpackChunkName: "pages/archivements" */))
-const _3cef4454 = () => interopDefault(import('../pages/cluster.vue' /* webpackChunkName: "pages/cluster" */))
-const _1636717b = () => interopDefault(import('../pages/faction/index.vue' /* webpackChunkName: "pages/faction/index" */))
-const _75174033 = () => interopDefault(import('../pages/home.vue' /* webpackChunkName: "pages/home" */))
-const _1c0bfd4c = () => interopDefault(import('../pages/library/index.vue' /* webpackChunkName: "pages/library/index" */))
-const _4bb5acc5 = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
-const _256c0b6c = () => interopDefault(import('../pages/personality.vue' /* webpackChunkName: "pages/personality" */))
-const _78ba5900 = () => interopDefault(import('../pages/skillcard/index.vue' /* webpackChunkName: "pages/skillcard/index" */))
-const _4dd95a8a = () => interopDefault(import('../pages/splash.vue' /* webpackChunkName: "pages/splash" */))
-const _a2d54c0a = () => interopDefault(import('../pages/faction/detail/index.vue' /* webpackChunkName: "pages/faction/detail/index" */))
-const _2faa596e = () => interopDefault(import('../pages/library/collection/index.vue' /* webpackChunkName: "pages/library/collection/index" */))
-const _3ee02cd2 = () => interopDefault(import('../pages/library/module/index.vue' /* webpackChunkName: "pages/library/module/index" */))
-const _36e3d693 = () => interopDefault(import('../pages/skillcard/detail.vue' /* webpackChunkName: "pages/skillcard/detail" */))
-const _54091cce = () => interopDefault(import('../pages/library/module/detail/_index/index.vue' /* webpackChunkName: "pages/library/module/detail/_index/index" */))
-const _e063e576 = () => interopDefault(import('../pages/library/module/detail/_index/game/embed.vue' /* webpackChunkName: "pages/library/module/detail/_index/game/embed" */))
-const _1cb083e8 = () => interopDefault(import('../pages/library/module/detail/_index/quiz/embed.vue' /* webpackChunkName: "pages/library/module/detail/_index/quiz/embed" */))
-const _0e780717 = () => interopDefault(import('../pages/library/module/detail/_index/game/_index.vue' /* webpackChunkName: "pages/library/module/detail/_index/game/_index" */))
-const _1de464d4 = () => interopDefault(import('../pages/library/module/detail/_index/quiz/_index.vue' /* webpackChunkName: "pages/library/module/detail/_index/quiz/_index" */))
-const _f695b402 = () => interopDefault(import('../pages/library/module/detail/_index/reading/_index.vue' /* webpackChunkName: "pages/library/module/detail/_index/reading/_index" */))
-const _24e2dcf0 = () => interopDefault(import('../pages/library/module/detail/_index/video/_index.vue' /* webpackChunkName: "pages/library/module/detail/_index/video/_index" */))
-const _fbe3eca4 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _4c678f1a = () => interopDefault(import('../pages/archivements.vue' /* webpackChunkName: "pages/archivements" */))
+const _7449a783 = () => interopDefault(import('../pages/cluster.vue' /* webpackChunkName: "pages/cluster" */))
+const _3ab30568 = () => interopDefault(import('../pages/faction/index.vue' /* webpackChunkName: "pages/faction/index" */))
+const _533dc4b4 = () => interopDefault(import('../pages/home.vue' /* webpackChunkName: "pages/home" */))
+const _16769547 = () => interopDefault(import('../pages/library/index.vue' /* webpackChunkName: "pages/library/index" */))
+const _13a77db2 = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
+const _45c4a577 = () => interopDefault(import('../pages/personality.vue' /* webpackChunkName: "pages/personality" */))
+const _7061a5ad = () => interopDefault(import('../pages/skillcard/index.vue' /* webpackChunkName: "pages/skillcard/index" */))
+const _0f5b9f6e = () => interopDefault(import('../pages/splash.vue' /* webpackChunkName: "pages/splash" */))
+const _3ed3f16e = () => interopDefault(import('../pages/faction/detail/index.vue' /* webpackChunkName: "pages/faction/detail/index" */))
+const _7f9a793c = () => interopDefault(import('../pages/library/collection/index.vue' /* webpackChunkName: "pages/library/collection/index" */))
+const _70ce810a = () => interopDefault(import('../pages/library/module/index.vue' /* webpackChunkName: "pages/library/module/index" */))
+const _34261f86 = () => interopDefault(import('../pages/skillcard/detail.vue' /* webpackChunkName: "pages/skillcard/detail" */))
+const _2a12f868 = () => interopDefault(import('../pages/library/module/detail/_index/index.vue' /* webpackChunkName: "pages/library/module/detail/_index/index" */))
+const _6df562f2 = () => interopDefault(import('../pages/library/module/detail/_index/game/embed.vue' /* webpackChunkName: "pages/library/module/detail/_index/game/embed" */))
+const _0a504cd6 = () => interopDefault(import('../pages/library/module/detail/_index/quiz/embed.vue' /* webpackChunkName: "pages/library/module/detail/_index/quiz/embed" */))
+const _158931ec = () => interopDefault(import('../pages/library/module/detail/_index/game/_index.vue' /* webpackChunkName: "pages/library/module/detail/_index/game/_index" */))
+const _04a7c4c7 = () => interopDefault(import('../pages/library/module/detail/_index/quiz/_index.vue' /* webpackChunkName: "pages/library/module/detail/_index/quiz/_index" */))
+const _a2a045a8 = () => interopDefault(import('../pages/library/module/detail/_index/reading/_index.vue' /* webpackChunkName: "pages/library/module/detail/_index/reading/_index" */))
+const _168b7b5d = () => interopDefault(import('../pages/library/module/detail/_index/video/_index.vue' /* webpackChunkName: "pages/library/module/detail/_index/video/_index" */))
+const _49ffda9b = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -39,87 +39,87 @@ export const routerOptions = {
 
   routes: [{
     path: "/archivements",
-    component: _d4e656b2,
+    component: _4c678f1a,
     name: "archivements"
   }, {
     path: "/cluster",
-    component: _3cef4454,
+    component: _7449a783,
     name: "cluster"
   }, {
     path: "/faction",
-    component: _1636717b,
+    component: _3ab30568,
     name: "faction"
   }, {
     path: "/home",
-    component: _75174033,
+    component: _533dc4b4,
     name: "home"
   }, {
     path: "/library",
-    component: _1c0bfd4c,
+    component: _16769547,
     name: "library"
   }, {
     path: "/login",
-    component: _4bb5acc5,
+    component: _13a77db2,
     name: "login"
   }, {
     path: "/personality",
-    component: _256c0b6c,
+    component: _45c4a577,
     name: "personality"
   }, {
     path: "/skillcard",
-    component: _78ba5900,
+    component: _7061a5ad,
     name: "skillcard"
   }, {
     path: "/splash",
-    component: _4dd95a8a,
+    component: _0f5b9f6e,
     name: "splash"
   }, {
     path: "/faction/detail",
-    component: _a2d54c0a,
+    component: _3ed3f16e,
     name: "faction-detail"
   }, {
     path: "/library/collection",
-    component: _2faa596e,
+    component: _7f9a793c,
     name: "library-collection"
   }, {
     path: "/library/module",
-    component: _3ee02cd2,
+    component: _70ce810a,
     name: "library-module"
   }, {
     path: "/skillcard/detail",
-    component: _36e3d693,
+    component: _34261f86,
     name: "skillcard-detail"
   }, {
     path: "/library/module/detail/:index",
-    component: _54091cce,
+    component: _2a12f868,
     name: "library-module-detail-index"
   }, {
     path: "/library/module/detail/:index/game/embed",
-    component: _e063e576,
+    component: _6df562f2,
     name: "library-module-detail-index-game-embed"
   }, {
     path: "/library/module/detail/:index/quiz/embed",
-    component: _1cb083e8,
+    component: _0a504cd6,
     name: "library-module-detail-index-quiz-embed"
   }, {
     path: "/library/module/detail/:index/game/:index",
-    component: _0e780717,
+    component: _158931ec,
     name: "library-module-detail-index-game"
   }, {
     path: "/library/module/detail/:index/quiz/:index",
-    component: _1de464d4,
+    component: _04a7c4c7,
     name: "library-module-detail-index-quiz"
   }, {
     path: "/library/module/detail/:index/reading/:index",
-    component: _f695b402,
+    component: _a2a045a8,
     name: "library-module-detail-index-reading"
   }, {
     path: "/library/module/detail/:index/video/:index",
-    component: _24e2dcf0,
+    component: _168b7b5d,
     name: "library-module-detail-index-video"
   }, {
     path: "/",
-    component: _fbe3eca4,
+    component: _49ffda9b,
     name: "index"
   }],
 
