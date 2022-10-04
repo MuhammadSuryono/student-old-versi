@@ -268,6 +268,16 @@
                   </div>
                 </v-toolbar>
               </div>
+              <div class="btn-finish" @click="toFinish()">
+                <div class="decoration" />
+                <div class="card-btn">
+                  <img
+                    src="~/assets/images/topi.svg"
+                    style="margin-right:10px;"
+                  >
+                  Finish Module
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -449,6 +459,26 @@ export default {
     console.log(this.dataUser)
   },
   methods: {
+    async toFinish () {
+      const data = new FormData()
+      data.append('module_id', this.$route.params.index)
+      await this.$axios
+        .post('v1/game/skillset/generateSkillCard', data, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((res) => {
+          console.log(res)
+        }).catch((error) => {
+          console.log('error:', error.response.status)
+          this.isLoading = false
+          this.$toast.error(error.response.status, {
+            position: 'top-center',
+            duration: 5000
+          })
+        })
+    },
     getAll () {
       this.getData()
       this.getReview()
@@ -864,6 +894,36 @@ export default {
             border: 2px solid #d4eaff;
             width: 100%;
             height: 100%;
+            .btn-finish {
+              position:relative;
+              margin-left: 255px;
+              .decoration {
+                background: #7289AA;
+                opacity: 0.35;
+                border: 0.6px solid #FFFFFF;
+                height: 18px;
+                width: 18px;
+                top:-4px;
+                left:-4px;
+                z-index:-1;
+                position:absolute;
+              }
+              .card-btn {
+                width:182px;
+                height:38.11px;
+                background: #F2F2F2;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor:pointer;
+                color: #3B69BC;
+                border:2px solid #FFF380;
+              }
+            }
             .contain-list {
               cursor: pointer;
               height: 75px;
