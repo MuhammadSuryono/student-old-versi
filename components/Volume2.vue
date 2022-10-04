@@ -1,5 +1,6 @@
 <template>
   <div class="vol-container">
+    {{ valueBackup }} {{ value }}
     <div class="bg-volume">
       <div class="rules-container">
         <img src="~/assets/images/ruler.svg">
@@ -58,6 +59,7 @@ export default {
     onMute (x) {
       this.$store.commit('user/SET_MUTE_EFFECT', x)
       if (x) {
+        console.log(this.value)
         this.valueBackup = this.value
         this.$store.commit('user/SET_AUDIO_EFFECT', 0)
       } else {
