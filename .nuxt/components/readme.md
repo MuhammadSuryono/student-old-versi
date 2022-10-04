@@ -49,6 +49,7 @@ You can directly use them in pages and other components without the need to impo
 - `<IconSkillcard>` | `<icon-skillcard>` (components/icon/Skillcard.vue)
 - `<IconTabSkill>` | `<icon-tab-skill>` (components/icon/TabSkill.vue)
 - `<IconTabSkill2>` | `<icon-tab-skill2>` (components/icon/TabSkill2.vue)
+- `<IconTopi>` | `<icon-topi>` (components/icon/Topi.vue)
 - `<IconVolume>` | `<icon-volume>` (components/icon/Volume.vue)
 - `<IconVolumeMute>` | `<icon-volume-mute>` (components/icon/VolumeMute.vue)
 - `<SidebarAvatar>` | `<sidebar-avatar>` (components/sidebar/Avatar.vue)
