@@ -268,13 +268,24 @@
                   </div>
                 </v-toolbar>
               </div>
-              <div class="btn-finish" @click="toFinish()">
+              <div
+                class="btn-finish"
+                @click="toFinish()"
+                @mouseover="hover1 = true"
+                @mouseleave="hover1 = false"
+              >
                 <div class="decoration" />
                 <div class="card-btn">
-                  <img
-                    src="~/assets/images/topi.svg"
+                  <IconTopi
+                    v-if="!hover1"
+                    bg-color="#3B69BC"
                     style="margin-right:10px;"
-                  >
+                  />
+                  <IconTopi
+                    v-else
+                    bg-color="white"
+                    style="margin-right:10px;"
+                  />
                   Finish Module
                 </div>
               </div>
@@ -435,7 +446,8 @@ export default {
       isLoading: true,
       itemsReview: {},
       ratingReview: 0,
-      descReview: ''
+      descReview: '',
+      hover1: true
     }
   },
 
@@ -922,6 +934,13 @@ export default {
                 cursor:pointer;
                 color: #3B69BC;
                 border:2px solid #FFF380;
+              }
+            }
+            .btn-finish:hover {
+              .card-btn {
+                border: 0.6px solid #aeeefa;
+                background:#4C7BC1;
+                color:white;
               }
             }
             .contain-list {
