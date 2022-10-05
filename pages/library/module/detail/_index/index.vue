@@ -269,7 +269,7 @@
                 </v-toolbar>
               </div>
               <div
-                v-if="detailModule.activity_rails[detailModule.activity_rails.length - 1].detail.score  > 0"
+                v-if="(detailModule.activity_rails[detailModule.activity_rails.length - 1].detail.score > 0) && detailModule.enrolled"
                 class="btn-finish"
                 @click="toFinish()"
                 @mouseover="hover1 = true"
@@ -448,7 +448,7 @@ export default {
       itemsReview: {},
       ratingReview: 0,
       descReview: '',
-      hover1: true
+      hover1: false
     }
   },
 
@@ -476,13 +476,25 @@ export default {
       const data = new FormData()
       data.append('module_id', this.$route.params.index)
       await this.$axios
-        .post('v1/game/skillset/generateSkillCard', data, {
+        .post('game/skillset/generateSkillCard', data, {
           headers: {
             'Content-Type': 'application/json'
           }
         })
         .then((res) => {
-          console.log(res)
+          console.log(res.data.status === 200)
+          if (res.data.status === 200) {
+            this.$toast.success('Success', {
+              position: 'top-center',
+              duration: 5000
+            })
+            this.getAll()
+          } else {
+            this.$toast.error(res.data.error.message, {
+              position: 'top-center',
+              duration: 5000
+            })
+          }
         }).catch((error) => {
           console.log('error:', error.response.status)
           this.isLoading = false
