@@ -72,7 +72,6 @@ export default {
         audio.volume = 0
         this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
       } else {
-        this.value = this.valueBackup
         const audio = this.$parent.$parent.$refs.player
         audio.volume = this.value / 100
         this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)

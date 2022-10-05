@@ -103,7 +103,7 @@
                   : 'margin-bottom:10px;'
               "
             >
-              by
+              by:
               <span v-if="detailModule.lecturer !== ''">{{
                 detailModule.lecturer
               }}</span>
@@ -269,6 +269,7 @@
                 </v-toolbar>
               </div>
               <div
+                v-if="detailModule.activity_rails[detailModule.activity_rails.length - 1].detail.score  > 0"
                 class="btn-finish"
                 @click="toFinish()"
                 @mouseover="hover1 = true"
