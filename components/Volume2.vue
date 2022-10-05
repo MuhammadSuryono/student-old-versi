@@ -1,6 +1,5 @@
 <template>
   <div class="vol-container">
-    {{ valueBackup }} {{ value }}
     <div class="bg-volume">
       <div class="rules-container">
         <img src="~/assets/images/ruler.svg">
