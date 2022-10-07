@@ -23,8 +23,8 @@ export const state = () => ({
   isLoggedIn: false,
   btn_mute: true,
   audioBtn: true,
-  audioBGM: 1,
-  audioEffect: 0,
+  audioBGM: 0.5,
+  audioEffect: 0.5,
   autoplayBGM: true,
   muteEffect: false,
   muteBGM: false

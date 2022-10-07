@@ -48,6 +48,27 @@ export default {
   },
   mounted () {
     this.value = this.audioBGM * 100
+    if (this.muteBGM) {
+      // const audio = this.$parent.$parent.$refs.player
+      // audio.volume = 0
+      // console.log('audio', audio.volume)
+      //   audio.play()
+
+      const playedPromise = this.$parent.$parent.$refs.player.play()
+      console.log('response : ', playedPromise)
+      if (playedPromise) {
+        playedPromise.catch((e) => {
+          console.log(e)
+          if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+            console.log(e.name)
+          }
+        }).then(() => {
+          console.log('playing sound !!!')
+          this.$parent.$parent.$refs.player.volume = 0
+          this.$parent.$parent.$refs.player.play()
+        })
+      }
+    }
   },
   methods: {
     changeVolume () {
@@ -74,6 +95,7 @@ export default {
       } else {
         const audio = this.$parent.$parent.$refs.player
         audio.volume = this.value / 100
+        audio.play()
         this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
       }
     }
