@@ -5,7 +5,7 @@
         <img src="~/assets/images/ruler.svg">
       </div>
     </div>
-    <IconVolume v-if="!mute" class="icon-volume" @click.native="onMute(true)" />
+    <IconVolume v-if="!muteEffect" class="icon-volume" @click.native="onMute(true)" />
     <IconVolumeMute v-else class="icon-volume" @click.native="onMute(false)" />
     <div class="slidecontainer">
       <input
@@ -29,13 +29,16 @@ export default {
     return {
       value: 100,
       mute: false,
-      valueBackup:0
+      valueBackup: 0
     }
   },
   computed: {
     ...mapState({
       audioEffect: (state) => {
         return state.user.audioEffect
+      },
+      muteEffect: (state) => {
+        return state.user.muteEffect
       }
     })
   },
@@ -45,16 +48,17 @@ export default {
   methods: {
     changeVolume () {
       if (this.value > 0) {
-        this.mute = false
+        this.$store.commit('user/SET_MUTE_EFFECT', false)
         this.$store.commit('user/SET_AUDIO_EFFECT', this.value / 100)
       } else {
-        this.mute = true
+        this.$store.commit('user/SET_MUTE_EFFECT', true)
         this.$store.commit('user/SET_AUDIO_EFFECT', this.value / 100)
       }
     },
     onMute (x) {
-      this.mute = x
+      this.$store.commit('user/SET_MUTE_EFFECT', x)
       if (x) {
+        console.log(this.value)
         this.valueBackup = this.value
         this.$store.commit('user/SET_AUDIO_EFFECT', 0)
       } else {

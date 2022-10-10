@@ -103,7 +103,7 @@
                   : 'margin-bottom:10px;'
               "
             >
-              by
+              by:
               <span v-if="detailModule.lecturer !== ''">{{
                 detailModule.lecturer
               }}</span>
@@ -268,13 +268,25 @@
                   </div>
                 </v-toolbar>
               </div>
-              <div class="btn-finish" @click="toFinish()">
+              <div
+                v-if="(detailModule.activity_rails[detailModule.activity_rails.length - 1].detail.score > 0) && detailModule.enrolled"
+                class="btn-finish"
+                @click="toFinish()"
+                @mouseover="hover1 = true"
+                @mouseleave="hover1 = false"
+              >
                 <div class="decoration" />
                 <div class="card-btn">
-                  <img
-                    src="~/assets/images/topi.svg"
+                  <IconTopi
+                    v-if="!hover1"
+                    bg-color="#3B69BC"
                     style="margin-right:10px;"
-                  >
+                  />
+                  <IconTopi
+                    v-else
+                    bg-color="white"
+                    style="margin-right:10px;"
+                  />
                   Finish Module
                 </div>
               </div>
@@ -435,7 +447,8 @@ export default {
       isLoading: true,
       itemsReview: {},
       ratingReview: 0,
-      descReview: ''
+      descReview: '',
+      hover1: false
     }
   },
 
@@ -463,13 +476,25 @@ export default {
       const data = new FormData()
       data.append('module_id', this.$route.params.index)
       await this.$axios
-        .post('v1/game/skillset/generateSkillCard', data, {
+        .post('game/skillset/generateSkillCard', data, {
           headers: {
             'Content-Type': 'application/json'
           }
         })
         .then((res) => {
-          console.log(res)
+          console.log(res.data.status === 200)
+          if (res.data.status === 200) {
+            this.$toast.success('Success', {
+              position: 'top-center',
+              duration: 5000
+            })
+            this.getAll()
+          } else {
+            this.$toast.error(res.data.error.message, {
+              position: 'top-center',
+              duration: 5000
+            })
+          }
         }).catch((error) => {
           console.log('error:', error.response.status)
           this.isLoading = false
@@ -922,6 +947,13 @@ export default {
                 cursor:pointer;
                 color: #3B69BC;
                 border:2px solid #FFF380;
+              }
+            }
+            .btn-finish:hover {
+              .card-btn {
+                border: 0.6px solid #aeeefa;
+                background:#4C7BC1;
+                color:white;
               }
             }
             .contain-list {

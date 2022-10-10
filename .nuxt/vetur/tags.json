@@ -83,6 +83,15 @@
   "FactionReward": {
     "description": "Auto imported from components/faction/Reward.vue"
   },
+  "SidebarAvatar": {
+    "description": "Auto imported from components/sidebar/Avatar.vue"
+  },
+  "SidebarCardName": {
+    "description": "Auto imported from components/sidebar/CardName.vue"
+  },
+  "SidebarMain": {
+    "description": "Auto imported from components/sidebar/Main.vue"
+  },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
   },
@@ -128,19 +137,16 @@
   "IconTabSkill2": {
     "description": "Auto imported from components/icon/TabSkill2.vue"
   },
+  "IconTopi": {
+    "description": "Auto imported from components/icon/Topi.vue"
+  },
   "IconVolume": {
     "description": "Auto imported from components/icon/Volume.vue"
   },
   "IconVolumeMute": {
     "description": "Auto imported from components/icon/VolumeMute.vue"
   },
-  "SidebarAvatar": {
-    "description": "Auto imported from components/sidebar/Avatar.vue"
-  },
-  "SidebarCardName": {
-    "description": "Auto imported from components/sidebar/CardName.vue"
-  },
-  "SidebarMain": {
-    "description": "Auto imported from components/sidebar/Main.vue"
+  "IconRefresh": {
+    "description": "Auto imported from components/icon/refresh.vue"
   }
 }

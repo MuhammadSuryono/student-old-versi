@@ -23,9 +23,11 @@ export const state = () => ({
   isLoggedIn: false,
   btn_mute: true,
   audioBtn: true,
-  audioBGM: 1,
-  audioEffect: 0,
-  autoplayBGM: true
+  audioBGM: 0.5,
+  audioEffect: 0.5,
+  autoplayBGM: true,
+  muteEffect: false,
+  muteBGM: false
 })
 
 export const getters = {
@@ -46,12 +48,17 @@ export const getters = {
 }
 
 export const mutations = {
+  SET_MUTE_EFFECT (state, payload) {
+    state.muteEffect = payload
+  },
+  SET_MUTE_BGM (state, payload) {
+    state.muteBGM = payload
+  },
   SET_AUDIO_EFFECT (state, payload) {
-    console.log('audio effect: ', payload)
+    console.log('pay : ', payload)
     state.audioEffect = payload
   },
   SET_AUDIO_BGM (state, payload) {
-    console.log('audio bgm: ', payload)
     state.audioBGM = payload
   },
   SET_AUDIO (state, payload) {

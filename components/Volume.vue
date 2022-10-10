@@ -5,9 +5,9 @@
         <img src="~/assets/images/ruler.svg">
       </div>
     </div>
-    <IconVolume v-if="!mute" class="icon-volume" @click.native="onMute(true)" />
+    <IconVolume v-if="!muteBGM" class="icon-volume" @click.native="onMute(true)" />
     <IconVolumeMute
-      v-if="mute"
+      v-if="muteBGM"
       class="icon-volume"
       @click.native="onMute(false)"
     />
@@ -40,38 +40,62 @@ export default {
     ...mapState({
       audioBGM: (state) => {
         return state.user.audioBGM
+      },
+      muteBGM: (state) => {
+        return state.user.muteBGM
       }
     })
   },
   mounted () {
     this.value = this.audioBGM * 100
+    if (this.muteBGM) {
+      // const audio = this.$parent.$parent.$refs.player
+      // audio.volume = 0
+      // console.log('audio', audio.volume)
+      //   audio.play()
+
+      const playedPromise = this.$parent.$parent.$refs.player.play()
+      console.log('response : ', playedPromise)
+      if (playedPromise) {
+        playedPromise.catch((e) => {
+          console.log(e)
+          if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+            console.log(e.name)
+          }
+        }).then(() => {
+          console.log('playing sound !!!')
+          this.$parent.$parent.$refs.player.volume = 0
+          this.$parent.$parent.$refs.player.play()
+        })
+      }
+    }
   },
   methods: {
     changeVolume () {
       this.valueBackup = 0
       if (this.value > 0) {
-        this.mute = false
+        this.$store.commit('user/SET_MUTE_BGM', false)
         const audio = this.$parent.$parent.$refs.player
         audio.volume = this.value / 100
         this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
       } else {
-        this.mute = true
+        this.$store.commit('user/SET_MUTE_BGM', true)
         const audio = this.$parent.$parent.$refs.player
         audio.volume = this.value / 100
         this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
       }
     },
     onMute (x) {
-      this.mute = x
+      this.$store.commit('user/SET_MUTE_BGM', x)
       if (x) {
         this.valueBackup = this.value
         const audio = this.$parent.$parent.$refs.player
         audio.volume = 0
         this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
       } else {
-        this.value = this.valueBackup
         const audio = this.$parent.$parent.$refs.player
         audio.volume = this.value / 100
+        audio.play()
         this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
       }
     }

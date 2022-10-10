@@ -178,6 +178,9 @@ export default {
       },
       autoplayBGM: (state) => {
         return state.user.autoplayBGM
+      },
+      muteBGM: (state) => {
+        return state.user.muteBGM
       }
     }),
     widthSidebar () {
@@ -224,6 +227,27 @@ export default {
   mounted () {
     const audio = this.$refs.player
     audio.volume = this.audioBGM
+    if (this.muteBGM) {
+      // const audio = this.$parent.$parent.$refs.player
+      // audio.volume = 0
+      // console.log('audio', audio.volume)
+      //   audio.play()
+
+      const playedPromise = this.$refs.player.play()
+      console.log('response : ', playedPromise)
+      if (playedPromise) {
+        playedPromise.catch((e) => {
+          console.log(e)
+          if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+            console.log(e.name)
+          }
+        }).then(() => {
+          console.log('playing sound !!!')
+          this.$refs.player.volume = 0
+          this.$refs.player.play()
+        })
+      }
+    }
   },
   methods: {
     logout () {
