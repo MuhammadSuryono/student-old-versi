@@ -228,13 +228,7 @@ export default {
     const audio = this.$refs.player
     audio.volume = this.audioBGM
     if (this.muteBGM) {
-      // const audio = this.$parent.$parent.$refs.player
-      // audio.volume = 0
-      // console.log('audio', audio.volume)
-      //   audio.play()
-
       const playedPromise = this.$refs.player.play()
-      console.log('response : ', playedPromise)
       if (playedPromise) {
         playedPromise.catch((e) => {
           console.log(e)
@@ -244,6 +238,20 @@ export default {
         }).then(() => {
           console.log('playing sound !!!')
           this.$refs.player.volume = 0
+          this.$refs.player.play()
+        })
+      }
+    } else {
+      const playedPromise = this.$refs.player.play()
+      if (playedPromise) {
+        playedPromise.catch((e) => {
+          console.log(e)
+          if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+            console.log(e.name)
+          }
+        }).then(() => {
+          console.log('playing sound !!!')
+          this.$refs.player.volume = 1
           this.$refs.player.play()
         })
       }
