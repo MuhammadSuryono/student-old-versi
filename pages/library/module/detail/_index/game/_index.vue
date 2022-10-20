@@ -184,8 +184,7 @@
                     <div class="pin-text" style="margin-right:57px;">
                       {{ VRpin }}
                     </div>
-                    Note this will expire in 2 hour or once you click Logout in
-                    VR Headset.
+                    Note this will expire in 2 hour
                   </div>
                 </template>
               </Confirmation>
