@@ -11,13 +11,13 @@ import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import VueAudio from 'vue-audio-better'
 
-import VueLazyload from 'vue-lazyload'
+// import VueLazyload from 'vue-lazyload'
 
-Vue.use(VueLazyload, {
-  preLoad: 1.3,
-  attempt: 1,
-  listenEvents: ['scroll']
-})
+// Vue.use(VueLazyload, {
+//   preLoad: 1.3,
+//   attempt: 1,
+//   listenEvents: ['scroll']
+// })
 
 Vue.use(VueAudio)
 Vue.component('Unity', UnityWebgl)

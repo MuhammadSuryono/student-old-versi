@@ -61,9 +61,7 @@
                     src="~/assets/images/module/star-card.svg"
                     class="star-card"
                   >
-                  <!-- <img :src="i.display_picture" class="display-pic"> -->
-
-                  <img v-lazy="i.display_picture" class="display-pic">
+                  <img :src="i.display_picture" class="display-pic">
                   <div class="title-card">
                     {{ i.module_name }} <br>
 
