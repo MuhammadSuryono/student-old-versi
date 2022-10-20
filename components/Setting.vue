@@ -18,39 +18,39 @@
       <div v-if="showPin">
         <div class="vr-pin">
           <img src="~/assets/images/vr-pin.svg" class="bg-vr-pin">
-          <img
-            v-if="hover1"
-            class="btn-pin"
-            src="~/assets/images/regenerate.svg"
-            @click="generatePIN()"
-            @mouseover="hover1 = true"
-            @mouseleave="hover1 = false"
-          >
-
           <div
-            v-else
             class="value-pin"
-            @mouseover="hover1 = true"
-            @mouseleave="hover1 = false"
           >
             {{ VRpin }}
           </div>
+          <div
+            class="btn-refresh"
+            @mouseover="hover1 = true"
+            @mouseleave="hover1 = false"
+            @click="generatePIN()"
+          >
+            <IconRefresh class="icon-refresh" :bg-color="hover1 ? '#47ABEF' : 'white' " />
+          </div>
         </div>
         <div class="button-remove" @click="removePIN()">
+          <div class="corner-top" />
           <div class="btn-1">
             <div class="btn-2 text-btn">
               Remove PIN
             </div>
           </div>
+          <div class="corner-bottom" />
         </div>
       </div>
       <div v-else class="vr-pin">
         <div class="button-generate" @click="generatePIN()">
+          <div class="corner-top" />
           <div class="btn-1">
             <div class="btn-2 text-btn">
               Generate PIN
             </div>
           </div>
+          <div class="corner-bottom" />
         </div>
       </div>
       <div class="btn-close" @click="closeProfile()">
@@ -161,12 +161,28 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+      .btn-refresh {
+        border:2px solid #D4E6EA;
+width: 25.04px;
+height: 25.04px;
+margin-top:34px;
+margin-left:4px;
+background: #47ABEF;
+cursor:pointer;
+.icon-refresh {
+    margin-left: 5px;
+}
+      }
+      .btn-refresh:hover  {
+background: #FFFFFF;
+      }
       .value-pin {
         font-weight: 700;
         font-size: 17px;
         color: #6a7792;
         position: absolute;
         padding-top: 5px;
+        padding-right:14px;
       }
       .bg-vr-pin {
         -webkit-user-select: none;
@@ -174,8 +190,31 @@ export default {
         -webkit-app-region: no-drag;
       }
       .button-generate {
+        position: relative;
         cursor: pointer;
+        .corner-top{
+          z-index:1;
+          background: #7289AA;
+          opacity: 0.35;
+          border: 0.56254px solid #FFFFFF;
+          height: 20px;
+          width: 20px;
+          position: absolute;
+          top:-4px;
+          left:-4px;
+        }
+        .corner-bottom{
+          z-index:3;
+          background: #F2F2F2;
+          height: 5px;
+          width: 5px;
+          position: absolute;
+          bottom:-1px;
+          right:-1px;
+        }
         .btn-1 {
+          z-index:2;
+          position: relative;
           background: linear-gradient(
             64.48deg,
             #a8f5ff 0%,
@@ -196,6 +235,27 @@ export default {
           }
         }
       }
+      .button-generate:hover {
+        position: relative;
+        cursor: pointer;
+        .btn-1 {
+          z-index:2;
+          position: relative;
+          background: linear-gradient(64.48deg, #A8F5FF 0%, #C3F4F9 52%, #DFF2F2 100%);
+          height: 46px;
+          width: 202px;
+          padding: 2px;
+          .btn-2 {
+            height: 100%;
+            background: #FFFFFF;
+            font-weight: 700;
+            font-size: 17px;
+            text-align: center;
+            color: #4C7BC1;
+            padding-top: 10px;
+          }
+        }
+      }
       .btn-pin {
         position: absolute;
         cursor: pointer;
@@ -203,14 +263,38 @@ export default {
       }
     }
     .button-remove {
+      position: relative;
+      cursor:pointer;
+      width: 150px;
       margin-left: auto;
       margin-right: auto;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-top: 16px;
-      cursor: pointer;
+        .corner-top{
+          z-index:1;
+          background: #7289AA;
+          opacity: 0.35;
+          border: 0.56254px solid #FFFFFF;
+          height: 14px;
+          width: 14px;
+          position: absolute;
+          top:-3px;
+          left:-2px;
+        }
+        .corner-bottom{
+          z-index:3;
+          background: #F2F2F2;
+          height: 5px;
+          width: 5px;
+          position: absolute;
+          bottom:-1px;
+          right:-1px;
+        }
       .btn-1 {
+          z-index:2;
+          position: relative;
         background: linear-gradient(
           64.48deg,
           #a8f5ff 0%,
@@ -228,6 +312,38 @@ export default {
           font-size: 12px;
           text-align: center;
           color: #f2f2f2;
+        }
+      }
+    }
+    .button-remove:hover {
+      position: relative;
+      cursor:pointer;
+      width: 150px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 16px;
+      .btn-1 {
+          z-index:2;
+          position: relative;
+        background: linear-gradient(
+          64.48deg,
+          #a8f5ff 0%,
+          #c3f4f9 52%,
+          #dff2f2 100%
+        );
+        height: 32px;
+        width: 148px;
+        padding: 2px;
+        .btn-2 {
+          height: 100%;background: #FFFFFF;
+          padding-top: 5px;
+          font-weight: 700;
+          font-size: 12px;
+          text-align: center;
+color: #4C7BC1;
         }
       }
     }

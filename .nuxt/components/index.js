@@ -22,6 +22,8 @@ export { default as Skeleton } from '../../components/Skeleton.vue'
 export { default as Volume } from '../../components/Volume.vue'
 export { default as Volume2 } from '../../components/Volume2.vue'
 export { default as Confirmation } from '../../components/confirmation.vue'
+export { default as ButtonPin } from '../../components/button/pin.vue'
+export { default as ButtonPlay } from '../../components/button/play.vue'
 export { default as FactionProgressBar } from '../../components/faction/ProgressBar.vue'
 export { default as FactionReward } from '../../components/faction/Reward.vue'
 export { default as SidebarAvatar } from '../../components/sidebar/Avatar.vue'
@@ -45,8 +47,7 @@ export { default as IconTabSkill2 } from '../../components/icon/TabSkill2.vue'
 export { default as IconTopi } from '../../components/icon/Topi.vue'
 export { default as IconVolume } from '../../components/icon/Volume.vue'
 export { default as IconVolumeMute } from '../../components/icon/VolumeMute.vue'
-export { default as ButtonPin } from '../../components/button/pin.vue'
-export { default as ButtonPlay } from '../../components/button/play.vue'
+export { default as IconRefresh } from '../../components/icon/refresh.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

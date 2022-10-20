@@ -71,6 +71,12 @@
   "Confirmation": {
     "description": "Auto imported from components/confirmation.vue"
   },
+  "ButtonPin": {
+    "description": "Auto imported from components/button/pin.vue"
+  },
+  "ButtonPlay": {
+    "description": "Auto imported from components/button/play.vue"
+  },
   "FactionProgressBar": {
     "description": "Auto imported from components/faction/ProgressBar.vue"
   },
@@ -140,10 +146,7 @@
   "IconVolumeMute": {
     "description": "Auto imported from components/icon/VolumeMute.vue"
   },
-  "ButtonPin": {
-    "description": "Auto imported from components/button/pin.vue"
-  },
-  "ButtonPlay": {
-    "description": "Auto imported from components/button/play.vue"
+  "IconRefresh": {
+    "description": "Auto imported from components/icon/refresh.vue"
   }
 }
