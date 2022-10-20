@@ -180,12 +180,11 @@
               <Confirmation>
                 <template slot="body">
                   <div class="alert-text-2" style="font-size:13px;">
-                    Use this PIN in your VR Headset to login and play [Game
-                    Name].. <br>
+                    Use this PIN in your VR Headset to login and play <br>
                     <div class="pin-text" style="margin-right:57px;">
                       {{ VRpin }}
                     </div>
-                    Note this will expire in 1 hour or once you click Logout in
+                    Note this will expire in 2 hour or once you click Logout in
                     VR Headset.
                   </div>
                 </template>
