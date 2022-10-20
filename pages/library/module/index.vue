@@ -50,17 +50,6 @@
             >
             <div class="text-petra">See Modules</div>
           </div>
-          <!-- <div v-if="selected2" class="tab-petra">
-            <img src="~/assets/images/tab/tab-active.svg" class="icon-button">
-            <div class="text-petra">Latest Modules</div>
-          </div>
-          <div v-else class="tab-petra" @click="tab(2, true)">
-            <img
-              src="~/assets/images/tab/tab-nonactive.svg"
-              class="icon-button"
-            >
-            <div class="text-petra">Latest Modules</div>
-          </div> -->
         </div>
         <div class="card-list">
           <div v-if="!isLoading">
@@ -72,7 +61,9 @@
                     src="~/assets/images/module/star-card.svg"
                     class="star-card"
                   >
-                  <img :src="i.display_picture" class="display-pic">
+                  <!-- <img :src="i.display_picture" class="display-pic"> -->
+
+                  <img v-lazy="i.display_picture" class="display-pic">
                   <div class="title-card">
                     {{ i.module_name }} <br>
 
