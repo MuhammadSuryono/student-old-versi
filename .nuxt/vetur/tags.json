@@ -83,15 +83,6 @@
   "FactionReward": {
     "description": "Auto imported from components/faction/Reward.vue"
   },
-  "SidebarAvatar": {
-    "description": "Auto imported from components/sidebar/Avatar.vue"
-  },
-  "SidebarCardName": {
-    "description": "Auto imported from components/sidebar/CardName.vue"
-  },
-  "SidebarMain": {
-    "description": "Auto imported from components/sidebar/Main.vue"
-  },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
   },
@@ -148,5 +139,14 @@
   },
   "IconRefresh": {
     "description": "Auto imported from components/icon/refresh.vue"
+  },
+  "SidebarAvatar": {
+    "description": "Auto imported from components/sidebar/Avatar.vue"
+  },
+  "SidebarCardName": {
+    "description": "Auto imported from components/sidebar/CardName.vue"
+  },
+  "SidebarMain": {
+    "description": "Auto imported from components/sidebar/Main.vue"
   }
 }
