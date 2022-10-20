@@ -498,7 +498,7 @@ export default {
         }).catch((error) => {
           console.log('error:', error.response.status)
           this.isLoading = false
-          this.$toast.error(error.response.status, {
+          this.$toast.error('CPL are not set. Can not finish module.', {
             position: 'top-center',
             duration: 5000
           })
