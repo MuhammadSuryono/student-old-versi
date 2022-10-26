@@ -597,7 +597,7 @@ export default {
       dataSubReply: {},
       archievements: {},
       showVR: false,
-      VRpin: {}
+      VRpin: null
     }
   },
 
@@ -732,9 +732,12 @@ export default {
       })
     },
     playGame2 (x) {
-      console.log(x)
       this.$store.commit('user/SET_BTN_AUDIO', true)
-      window.open(x, '_blank')
+      if (this.VRpin !== null) {
+        window.open(x + '?pinVR=' + this.VRpin, '_blank')
+      } else {
+        window.open(x, '_blank')
+      }
     },
     handleResize () {
       this.window.width = window.innerWidth
@@ -798,10 +801,10 @@ export default {
         .then((res) => {
           this.showVR = true
           this.VRpin = res.data.pin
-          console.log('res', res)
         })
         .catch(() => {
           this.showVR = false
+          this.VRpin = null
         })
     },
     async generatePIN () {

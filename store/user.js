@@ -155,6 +155,7 @@ export const mutations = {
 export const actions = {
   async login ({ commit }, payload) {
     try {
+      await this.$recaptcha.getResponse()
       const response = await this.$auth.loginWith('local', {
         data: {
           email: payload.email,

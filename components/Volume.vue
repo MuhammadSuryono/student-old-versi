@@ -49,13 +49,7 @@ export default {
   mounted () {
     this.value = this.audioBGM * 100
     if (this.muteBGM) {
-      // const audio = this.$parent.$parent.$refs.player
-      // audio.volume = 0
-      // console.log('audio', audio.volume)
-      //   audio.play()
-
       const playedPromise = this.$parent.$parent.$refs.player.play()
-      console.log('response : ', playedPromise)
       if (playedPromise) {
         playedPromise.catch((e) => {
           console.log(e)
