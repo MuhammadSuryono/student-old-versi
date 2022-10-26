@@ -17,6 +17,6 @@ export default $axios => ({
     )
   },
   getAllAchievement (payload) {
-    return $axios.get(`${resource2}/completed/all?per_page=6&page=${payload}`)
+    return $axios.get(`${resource2}/completed/all?skillId=${payload.id}&per_page=6&page=${payload.page}`)
   }
 })

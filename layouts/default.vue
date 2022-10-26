@@ -144,6 +144,27 @@ export default {
       bgmAutoplay: false
     }
   },
+
+  watch: {
+    $route (to, from) {
+      const path = [
+        'library-module-detail-index',
+        'library-module-detail-index-game',
+        'library-module-detail-index-game-embed',
+        'library-module-detail-index-quiz',
+        'library-module-detail-index-quiz-embed',
+        'library-module-detail-index-reading',
+        'library-module-detail-index-video'
+      ]
+      if (path.includes(to.name)) {
+        this.$refs.player.volume = 0
+        this.$refs.player.play()
+      } else {
+        this.$refs.player.volume = this.audioBGM
+        this.$refs.player.play()
+      }
+    }
+  },
   computed: {
     ...mapState({
       audioBtn: (state) => {

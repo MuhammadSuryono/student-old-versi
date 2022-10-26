@@ -32,6 +32,7 @@ You can directly use them in pages and other components without the need to impo
 - `<Confirmation>` | `<confirmation>` (components/confirmation.vue)
 - `<ButtonPin>` | `<button-pin>` (components/button/pin.vue)
 - `<ButtonPlay>` | `<button-play>` (components/button/play.vue)
+- `<CardCollection>` | `<card-collection>` (components/card/Collection.vue)
 - `<FactionProgressBar>` | `<faction-progress-bar>` (components/faction/ProgressBar.vue)
 - `<FactionReward>` | `<faction-reward>` (components/faction/Reward.vue)
 - `<IconArchivements>` | `<icon-archivements>` (components/icon/Archivements.vue)

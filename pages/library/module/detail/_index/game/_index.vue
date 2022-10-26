@@ -144,7 +144,7 @@
               class="wh-full"
               style="background-color: rgba(32, 59, 99, 0.75)"
             />
-            <img src="~/assets/images/195.svg" class="wh-full">
+            <!-- <img src="~/assets/images/195.svg" class="wh-full"> -->
             <img
               src="~/assets/images/confirm.png"
               style="
@@ -732,6 +732,7 @@ export default {
       })
     },
     playGame2 (x) {
+      console.log(x)
       this.$store.commit('user/SET_BTN_AUDIO', true)
       window.open(x, '_blank')
     },

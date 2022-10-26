@@ -466,12 +466,25 @@ export default {
     }
   },
   created () {
+    // this.muteAudio()
     this.getAll()
   },
-  mounted () {
-    console.log(this.dataUser)
-  },
   methods: {
+    muteAudio () {
+      const playedPromise = this.$parent.$parent.$refs.player.play()
+      if (playedPromise) {
+        playedPromise.catch((e) => {
+          console.log(e)
+          if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+            console.log(e.name)
+          }
+        }).then(() => {
+          console.log('playing sound !!!')
+          this.$parent.$parent.$refs.player.volume = 0
+          this.$parent.$parent.$refs.player.play()
+        })
+      }
+    },
     async toFinish () {
       const data = new FormData()
       data.append('module_id', this.$route.params.index)
