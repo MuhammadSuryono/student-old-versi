@@ -74,17 +74,26 @@
   "CardCollection": {
     "description": "Auto imported from components/card/Collection.vue"
   },
-  "FactionProgressBar": {
-    "description": "Auto imported from components/faction/ProgressBar.vue"
+  "SidebarAvatar": {
+    "description": "Auto imported from components/sidebar/Avatar.vue"
   },
-  "FactionReward": {
-    "description": "Auto imported from components/faction/Reward.vue"
+  "SidebarCardName": {
+    "description": "Auto imported from components/sidebar/CardName.vue"
+  },
+  "SidebarMain": {
+    "description": "Auto imported from components/sidebar/Main.vue"
   },
   "ButtonPin": {
     "description": "Auto imported from components/button/pin.vue"
   },
   "ButtonPlay": {
     "description": "Auto imported from components/button/play.vue"
+  },
+  "FactionProgressBar": {
+    "description": "Auto imported from components/faction/ProgressBar.vue"
+  },
+  "FactionReward": {
+    "description": "Auto imported from components/faction/Reward.vue"
   },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
@@ -142,14 +151,5 @@
   },
   "IconRefresh": {
     "description": "Auto imported from components/icon/refresh.vue"
-  },
-  "SidebarAvatar": {
-    "description": "Auto imported from components/sidebar/Avatar.vue"
-  },
-  "SidebarCardName": {
-    "description": "Auto imported from components/sidebar/CardName.vue"
-  },
-  "SidebarMain": {
-    "description": "Auto imported from components/sidebar/Main.vue"
   }
 }

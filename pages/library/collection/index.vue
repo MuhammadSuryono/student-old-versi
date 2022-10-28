@@ -340,7 +340,7 @@ export default {
           .dispatch('module/fetchAllMyCollection', data)
           .then((resp) => {
             if (resp.data.data.data.length > 1) {
-              resp.data.data.data.forEach(item => this.items.data.push(item))
+              resp.data.data.data.forEach(item => this.items.push(item))
               $state.loaded()
             } else {
               $state.complete()
