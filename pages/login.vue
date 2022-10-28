@@ -177,9 +177,13 @@ export default {
               })
             }
           })
-          .catch((error) => {
+          .catch(() => {
             this.loading = false
-            this.$toast.error(error)
+            this.$toast.error('Please select captcha to login',
+            {
+                position: 'top-center',
+                duration: 5000
+              })
           })
       }
     }
