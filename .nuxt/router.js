@@ -13,6 +13,7 @@ const _13a77db2 = () => interopDefault(import('../pages/login.vue' /* webpackChu
 const _45c4a577 = () => interopDefault(import('../pages/personality.vue' /* webpackChunkName: "pages/personality" */))
 const _7061a5ad = () => interopDefault(import('../pages/skillcard/index.vue' /* webpackChunkName: "pages/skillcard/index" */))
 const _0f5b9f6e = () => interopDefault(import('../pages/splash.vue' /* webpackChunkName: "pages/splash" */))
+const _7d505d6f = () => interopDefault(import('../pages/supanusa.vue' /* webpackChunkName: "pages/supanusa" */))
 const _3ed3f16e = () => interopDefault(import('../pages/faction/detail/index.vue' /* webpackChunkName: "pages/faction/detail/index" */))
 const _7f9a793c = () => interopDefault(import('../pages/library/collection/index.vue' /* webpackChunkName: "pages/library/collection/index" */))
 const _70ce810a = () => interopDefault(import('../pages/library/module/index.vue' /* webpackChunkName: "pages/library/module/index" */))
@@ -73,6 +74,10 @@ export const routerOptions = {
     path: "/splash",
     component: _0f5b9f6e,
     name: "splash"
+  }, {
+    path: "/supanusa",
+    component: _7d505d6f,
+    name: "supanusa"
   }, {
     path: "/faction/detail",
     component: _3ed3f16e,

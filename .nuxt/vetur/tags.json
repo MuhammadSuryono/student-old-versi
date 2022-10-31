@@ -71,23 +71,14 @@
   "Confirmation": {
     "description": "Auto imported from components/confirmation.vue"
   },
-  "CardCollection": {
-    "description": "Auto imported from components/card/Collection.vue"
-  },
-  "SidebarAvatar": {
-    "description": "Auto imported from components/sidebar/Avatar.vue"
-  },
-  "SidebarCardName": {
-    "description": "Auto imported from components/sidebar/CardName.vue"
-  },
-  "SidebarMain": {
-    "description": "Auto imported from components/sidebar/Main.vue"
-  },
   "ButtonPin": {
     "description": "Auto imported from components/button/pin.vue"
   },
   "ButtonPlay": {
     "description": "Auto imported from components/button/play.vue"
+  },
+  "CardCollection": {
+    "description": "Auto imported from components/card/Collection.vue"
   },
   "FactionProgressBar": {
     "description": "Auto imported from components/faction/ProgressBar.vue"
@@ -151,5 +142,14 @@
   },
   "IconRefresh": {
     "description": "Auto imported from components/icon/refresh.vue"
+  },
+  "SidebarAvatar": {
+    "description": "Auto imported from components/sidebar/Avatar.vue"
+  },
+  "SidebarCardName": {
+    "description": "Auto imported from components/sidebar/CardName.vue"
+  },
+  "SidebarMain": {
+    "description": "Auto imported from components/sidebar/Main.vue"
   }
 }

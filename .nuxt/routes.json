@@ -63,6 +63,13 @@
     "_name": "_0f5b9f6e"
   },
   {
+    "name": "supanusa",
+    "path": "/supanusa",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/github/petra-student-frontend/pages/supanusa.vue",
+    "chunkName": "pages/supanusa",
+    "_name": "_7d505d6f"
+  },
+  {
     "name": "faction-detail",
     "path": "/faction/detail",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/github/petra-student-frontend/pages/faction/detail/index.vue",
