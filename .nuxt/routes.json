@@ -56,18 +56,18 @@
     "_name": "_7061a5ad"
   },
   {
+    "name": "sopanusa",
+    "path": "/sopanusa",
+    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/github/petra-student-frontend/pages/sopanusa.vue",
+    "chunkName": "pages/sopanusa",
+    "_name": "_0017a62e"
+  },
+  {
     "name": "splash",
     "path": "/splash",
     "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/github/petra-student-frontend/pages/splash.vue",
     "chunkName": "pages/splash",
     "_name": "_0f5b9f6e"
-  },
-  {
-    "name": "supanusa",
-    "path": "/supanusa",
-    "component": "/Volumes/Mac HDD/HDD Documents/Primeskills/github/petra-student-frontend/pages/supanusa.vue",
-    "chunkName": "pages/supanusa",
-    "_name": "_7d505d6f"
   },
   {
     "name": "faction-detail",
