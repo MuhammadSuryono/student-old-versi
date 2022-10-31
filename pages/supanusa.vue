@@ -11,7 +11,7 @@
     </div>
     <div class="value-blend">
       <div class="score-value">
-        70
+        {{ score }}
       </div>
       <img src="~/assets/images/element_score.svg" class="img-blend">
     </div>
@@ -26,9 +26,11 @@ export default {
 
   data () {
     return {
+      score: 0
     }
   },
-  computed: {
+  mounted () {
+    this.score = this.$router.currentRoute.query.score
   },
   methods: {
   }
@@ -52,10 +54,10 @@ export default {
     color: #FFFFFF;
   }
   .hr-blend {
-    border: 5px solid #FFCF24;
+    border: 4px solid #FFCF24;
     width: 873.5px;
     height: 0px;
-    margin-top:9px;
+    margin-top:28px;
     margin-bottom:28px;
   }
   .score-blend {
@@ -72,13 +74,12 @@ export default {
     position: absolute;
     font-style: normal;
     font-weight: 600;
-    font-size: 96px;
+    font-size: 82px;
     line-height: 115px;
     text-align: center;
     color: #FFFFFF;
     top: 109px;
-    left: 74px;
-    width: 160px;
+    width: 100%;
     }
     .img-blend {
         // position: absolute;
