@@ -37,6 +37,7 @@ trigger:
     - 0.3.0
   event:
     - push
+
 ---
 kind: pipeline
 type: docker
