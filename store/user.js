@@ -27,7 +27,8 @@ export const state = () => ({
   audioEffect: 0.5,
   autoplayBGM: true,
   muteEffect: false,
-  muteBGM: false
+  muteBGM: false,
+  btn_setting: false
 })
 
 export const getters = {
@@ -112,6 +113,7 @@ export const mutations = {
   },
   SET_BTN_SETTING (state) {
     state.btn_setting = !state.btn_setting
+    console.log(state.btn_setting )
     state.btn_decoration = false
     state.btn_profile = false
   },
