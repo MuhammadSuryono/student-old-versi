@@ -37,6 +37,7 @@ trigger:
     - 0.3.0
   event:
     - push
+
 ---
 kind: pipeline
 type: docker
@@ -68,6 +69,7 @@ steps:
         - echo "Pull image docker"
         - sudo docker pull $IMAGE_NAME
         - echo "Run image docker"
+        - echo "RUNN"
         - docker run -d --name $CONTAINER_NAME --publish 5006:5000 $IMAGE_NAME
 trigger:
   branch:
