@@ -2,7 +2,7 @@
   <div class="container-blend">
     <div class="title-blend">
       Selamat anda telah menyelesaikan
-      Modul Keselamatan dan Kesehatan Kerja<br>
+      Modul Keselamatan dan Kesehatan Kerja
       Sopanusa - FireDrill
     </div>
     <div class="hr-blend" />
@@ -38,8 +38,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container-blend {
-  width: 697px;
-  height: 369px;
+  width: 1154px;
+  height: 615px;
   background-image: url('~@/assets/images/supanusa.svg');
   display: flex;
   align-items: center;
@@ -48,40 +48,43 @@ export default {
   .title-blend {
     font-style: normal;
     font-weight: 700;
-    font-size: 16px;
-    // line-height: 14px;
+    font-size: 36px;
+    line-height: 34px;
     text-align: center;
     color: #FFFFFF;
   }
   .hr-blend {
-    border: 2px solid #FFCF24;
-    width: 80%;
+    border: 4px solid #FFCF24;
+    width: 873.5px;
     height: 0px;
-    margin-top:18px;
-    margin-bottom:18px;
+    margin-top:28px;
+    margin-bottom:28px;
   }
   .score-blend {
     font-style: normal;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 36px;
+    line-height: 34px;
     text-align: center;
     color: #FFFFFF;
   }
   .value-blend {
-    position: relative;
-    margin-top:10px;
+        position: relative;
     .score-value {
-      position: absolute;
-      font-style: normal;
-      font-weight: 600;
-      font-size: 40px;
-      text-align: center;
-      color: #FFFFFF;
-      top: 46px;
-      width: 100%;
+    position: absolute;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 82px;
+    line-height: 115px;
+    text-align: center;
+    color: #FFFFFF;
+    top: 109px;
+    width: 100%;
     }
     .img-blend {
-      width: 155px;
+        // position: absolute;
+        width: 310.13px;
+        height: 324.99px;
     }
   }
 }

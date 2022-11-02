@@ -13,6 +13,7 @@ const _13a77db2 = () => interopDefault(import('../pages/login.vue' /* webpackChu
 const _45c4a577 = () => interopDefault(import('../pages/personality.vue' /* webpackChunkName: "pages/personality" */))
 const _7061a5ad = () => interopDefault(import('../pages/skillcard/index.vue' /* webpackChunkName: "pages/skillcard/index" */))
 const _0017a62e = () => interopDefault(import('../pages/sopanusa.vue' /* webpackChunkName: "pages/sopanusa" */))
+const _4a8d35a4 = () => interopDefault(import('../pages/sopanusav1.vue' /* webpackChunkName: "pages/sopanusav1" */))
 const _0f5b9f6e = () => interopDefault(import('../pages/splash.vue' /* webpackChunkName: "pages/splash" */))
 const _3ed3f16e = () => interopDefault(import('../pages/faction/detail/index.vue' /* webpackChunkName: "pages/faction/detail/index" */))
 const _7f9a793c = () => interopDefault(import('../pages/library/collection/index.vue' /* webpackChunkName: "pages/library/collection/index" */))
@@ -74,6 +75,10 @@ export const routerOptions = {
     path: "/sopanusa",
     component: _0017a62e,
     name: "sopanusa"
+  }, {
+    path: "/sopanusav1",
+    component: _4a8d35a4,
+    name: "sopanusav1"
   }, {
     path: "/splash",
     component: _0f5b9f6e,
