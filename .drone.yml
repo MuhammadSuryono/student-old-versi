@@ -15,7 +15,6 @@ steps:
       - echo "baseUrl=https://dev.petraverse.id/api" >> .env
       - echo "siteKey=6LdCnvghAAAAAMP0pFWnrJBoV0rqwbgByb6bkS5c" >> .env
       - cat .env
-      - echo "Waw"
 
   - name: "Build Image Development Student"
     image: plugins/docker
