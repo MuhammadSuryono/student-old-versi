@@ -158,9 +158,11 @@ export default {
       ]
       if (path.includes(to.name)) {
         this.$refs.player.volume = 0
+        this.$store.commit('user/SET_MUTE_BGM', true)
         this.$refs.player.play()
       } else {
         this.$refs.player.volume = this.audioBGM
+        this.$store.commit('user/SET_MUTE_BGM', false)
         this.$refs.player.play()
       }
     }

@@ -596,13 +596,16 @@ export default {
       boxReply: false,
       dataSubReply: {},
       archievements: {},
-      showVR: false,
-      VRpin: null
+      showVR: false
+      // VRpin: null
     }
   },
 
   computed: {
     ...mapState({
+      VRpin: (state) => {
+        return state.user.VRpin
+      },
       detailActivity: (state) => {
         return state.module.dataDetailActivity
       },
@@ -733,10 +736,13 @@ export default {
     },
     playGame2 (x) {
       this.$store.commit('user/SET_BTN_AUDIO', true)
-      if (this.VRpin !== null) {
+      if (this.VRpin !== 0) {
         window.open(x + '?pinVR=' + this.VRpin, '_blank')
       } else {
-        window.open(x, '_blank')
+        this.$toast.error('Please generate PIN from settings menu before starting the module', {
+          position: 'top-center',
+          duration: 5000
+        })
       }
     },
     handleResize () {
@@ -750,7 +756,7 @@ export default {
     getAll () {
       this.getData()
       this.getAllDiscuss()
-      this.checkPin()
+      // this.checkPin()
     },
     getData () {
       this.isLoading = true
@@ -795,24 +801,12 @@ export default {
           })
         })
     },
-    async checkPin () {
-      await this.$axios
-        .get('/student/vr-pin/last-pin')
-        .then((res) => {
-          this.showVR = true
-          this.VRpin = res.data.pin
-        })
-        .catch(() => {
-          this.showVR = false
-          this.VRpin = null
-        })
-    },
     async generatePIN () {
       await this.$axios
         .post('/student/vr-pin/generate')
         .then((res) => {
           this.showVR = true
-          this.VRpin = res.data.pin
+          this.$store.commit('user/SET_PIN', res.data.pin)
         })
         .catch((error) => {
           this.showVR = false

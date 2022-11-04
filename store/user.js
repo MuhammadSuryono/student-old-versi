@@ -28,7 +28,8 @@ export const state = () => ({
   autoplayBGM: true,
   muteEffect: false,
   muteBGM: false,
-  btn_setting: false
+  btn_setting: false,
+  VRpin: 0
 })
 
 export const getters = {
@@ -49,6 +50,9 @@ export const getters = {
 }
 
 export const mutations = {
+  SET_PIN (state, payload) {
+    state.VRpin = payload
+  },
   SET_MUTE_EFFECT (state, payload) {
     state.muteEffect = payload
   },

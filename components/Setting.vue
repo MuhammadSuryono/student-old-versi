@@ -60,13 +60,20 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
       showPin: false,
-      VRpin: 0,
       hover1: false
     }
+  },
+  computed: {
+    ...mapState({
+      VRpin: (state) => {
+        return state.user.VRpin
+      }
+    })
   },
   mounted () {
     this.checkPin()
@@ -77,7 +84,7 @@ export default {
         .get('/student/vr-pin/last-pin')
         .then((res) => {
           this.showPin = true
-          this.VRpin = res.data.pin
+          this.$store.commit('user/SET_PIN', res.data.pin)
           console.log('res', res)
         })
         .catch(() => {
@@ -100,7 +107,7 @@ export default {
           })
         })
       this.showPin = false
-      this.VRpin = 0
+      this.$store.commit('user/SET_PIN', 0)
     },
     closeProfile () {
       this.$store.commit('user/SET_BTN_SETTING')
@@ -111,7 +118,7 @@ export default {
         .post('/student/vr-pin/generate')
         .then((res) => {
           this.showPin = true
-          this.VRpin = res.data.pin
+          this.$store.commit('user/SET_PIN', res.data.pin)
         })
         .catch((error) => {
           this.showPin = false
