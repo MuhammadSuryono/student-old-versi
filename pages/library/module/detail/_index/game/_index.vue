@@ -739,7 +739,7 @@ export default {
       if (this.VRpin !== 0) {
         window.open(x + '?pinVR=' + this.VRpin, '_blank')
       } else {
-        this.$toast.error('VR PIN is null. Please generate PIN from setting menu', {
+        this.$toast.error('Please generate PIN from settings menu before starting the module', {
           position: 'top-center',
           duration: 5000
         })
