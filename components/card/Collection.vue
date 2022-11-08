@@ -4,7 +4,7 @@
     <div class="bg-yellow" />
     <div class="img-collection">
       <img
-        src="https://petralms.s3.ap-southeast-1.amazonaws.com/images/modules/thumbnail/collection/VRTechno_FIN.png"
+        :src="display"
         class="image-card"
       >
       <div class="bg-blue" />
@@ -52,6 +52,10 @@ export default {
     activity: {
       type: String,
       default: '0'
+    },
+    display: {
+      type: String,
+      default: ''
     }
   }
 }

@@ -59,6 +59,7 @@
                 :studio="item.studio_name"
                 :activity="item.total_activities"
                 :discussion="item.total_discussion"
+                :display="item.display_picture"
                 @click.native="toDetail(item)"
               />
             </div>
