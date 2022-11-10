@@ -3,7 +3,9 @@ pipeline {
     stages {
         stage('log_try') {
             steps {
-                sh 'mvn --version'
+                sh """
+                    echo 'Downloading ci-cd templates...'
+                    """
             }
         }
     }
