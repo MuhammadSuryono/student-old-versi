@@ -1,6 +1,9 @@
 node {
-  stage ('Prepare') {
-    sh """
-        echo 'Downloading ci-cd templates...'
-        """
+  stage ('Checkout') {
+    svn 'https://svn.mycorp/trunk/'
+    stage 'Build'
+    sh 'make all'
+    stage 'Test'
+    sh 'make test'
+  }
 }
