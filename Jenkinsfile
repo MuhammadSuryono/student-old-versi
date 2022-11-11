@@ -18,13 +18,17 @@ pipeline {
     }
 
     stage('Setup Environment') {
-      sh """
+      steps {
+        script {
+          sh """
       echo "basePath=/student-dev/" > .env
       echo "basePathBuild=/student-dev/_nuxt/" >> .env
       echo "baseUrl=https://dev.petraverse.id/api" >> .env
       echo "siteKey=6LdCnvghAAAAAMP0pFWnrJBoV0rqwbgByb6bkS5c" >> .env
       cat .env
       """
+        }
+      }
     }
 
     stage('Build image') {
