@@ -36,10 +36,15 @@ pipeline {
       }
     }
 
-    stage('Deploying App to Kubernetes') {
+    stage('Deploying App to Server') {
       steps {
         script {
-          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernestes")
+          sshagent(credentials: ['petra_ssh_server']) {
+            sh """ 
+              echo 'Hello world'
+              mkdir 'folder_make'
+            """
+          }
         }
       }
     }
