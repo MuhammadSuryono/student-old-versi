@@ -41,11 +41,12 @@ pipeline {
     stage('Deploying App to Server') {
       steps {
         script {
+          
+          def dockerRunCommand = "whoami && docker stop ${containerName} && docker rm ${containerName} && docker system prune -a -f && docker run -d --name ${containerName} --publish ${port}:5000 ${dockerimagename}"
+
           sshagent(credentials: ['petra_ssh_server']) {
             sh """ 
-              cd /home/ubuntu
-              ls -la
-              
+              ssh -o StrictHostKeyChecking=no ubuntu@18.142.248.178 '${dockerRunCommand}'
             """
           }
         }
