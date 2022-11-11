@@ -3,6 +3,8 @@ pipeline {
   environment {
     dockerimagename = "primeskills/petra-student"
     dockerImage = ""
+    containerName = "nuxt-app-student-dev"
+    port = "5006"
   }
 
   agent any
@@ -41,8 +43,10 @@ pipeline {
         script {
           sshagent(credentials: ['petra_ssh_server']) {
             sh """ 
-              echo 'Hello world'
-              mkdir 'folder_make'
+              sudo docker stop ${containerName}
+              sudo docker rm ${containerName}
+              sudo docker system prune -a -f
+              docker run -d --name ${containerName} --publish ${port}:5000 ${dockerimagename}
             """
           }
         }
