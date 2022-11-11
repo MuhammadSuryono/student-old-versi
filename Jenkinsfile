@@ -43,10 +43,9 @@ pipeline {
         script {
           sshagent(credentials: ['petra_ssh_server']) {
             sh """ 
-              sudo docker stop ${containerName}
-              sudo docker rm ${containerName}
-              sudo docker system prune -a -f
-              docker run -d --name ${containerName} --publish ${port}:5000 ${dockerimagename}
+              cd /home/ubuntu
+              ls -la
+              
             """
           }
         }
