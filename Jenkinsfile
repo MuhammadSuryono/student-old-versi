@@ -5,6 +5,7 @@ pipeline {
     dockerImage = ""
     containerName = "nuxt-app-student-dev"
     port = "5006"
+    
   }
 
   agent any
