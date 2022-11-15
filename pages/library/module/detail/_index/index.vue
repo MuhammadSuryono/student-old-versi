@@ -116,7 +116,7 @@
             >
               Add to My Collection
               <br>
-              FREE
+              FREE  {{ hover1 }}
             </div>
           </div>
           <div class="column right-side">
@@ -133,7 +133,8 @@
               <div
                 v-for="(rail, indexRail) in detailModule.activity_rails"
                 :key="indexRail"
-                style="padding: 0px 20px 0px 20px"
+                style="padding: 0px 20px 0px 20px;margin-bottom:25px;"
+                :style="indexRail === 0 ? 'margin-bottom:15px;' : ''"
               >
                 <v-toolbar
                   v-if="detailModule.enrolled === false"
@@ -267,6 +268,17 @@
                     </div>
                   </div>
                 </v-toolbar>
+                <div
+                  v-if="indexRail === 0"
+                  class="btn-finish"
+                  style="margin-top:15px;"
+                  @click="dialogPopup = true"
+                >
+                  <div class="decoration" />
+                  <div class="card-btn">
+                    I am interested
+                  </div>
+                </div>
               </div>
               <div
                 v-if="(detailModule.activity_rails[detailModule.activity_rails.length - 1].detail.score > 0) && detailModule.enrolled"
@@ -430,6 +442,28 @@
         </div>
       </div>
     </div>
+
+    <LightBox @wheel.prevent @touchmove.prevent @scroll.prevent>
+      <div
+        v-if="dialogPopup"
+        class="dialog-filter"
+        :style="{
+          height: window.height - 68 + 'px'
+        }"
+      >
+        <div class="center-dialog">
+          <div class="container-dialog">
+            <v-btn
+              icon
+              style="position: absolute; top: 10px; right: 20px"
+              @click="dialogPopup = false"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </div>
+        </div>
+      </div>
+    </LightBox>
   </div>
 </template>
 <script>
@@ -448,7 +482,12 @@ export default {
       itemsReview: {},
       ratingReview: 0,
       descReview: '',
-      hover1: false
+      hover1: false,
+      dialogPopup: false,
+      window: {
+        width: 0,
+        height: 0
+      }
     }
   },
 
@@ -466,10 +505,16 @@ export default {
     }
   },
   created () {
-    // this.muteAudio()
+    // eslint-disable-next-line nuxt/no-globals-in-created
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
     this.getAll()
   },
   methods: {
+    handleResize () {
+      this.window.width = window.innerWidth
+      this.window.height = window.innerHeight
+    },
     muteAudio () {
       const playedPromise = this.$parent.$parent.$refs.player.play()
       if (playedPromise) {
@@ -976,7 +1021,7 @@ export default {
 
               background-color: white;
               // background-color: rgba(255, 255, 255, 0.3);
-              margin-bottom: 25px;
+              margin-bottom: 0px;
               .finish-previous {
                 border: solid 1px white;
                 background-color: #fff380;
@@ -1288,6 +1333,113 @@ export default {
             }
           }
         }
+      }
+    }
+  }
+}
+
+.dialog-filter {
+  z-index: 9;
+  position: absolute;
+  overflow: hidden;
+  top: 68px;
+  left: 80px;
+  width: 1200px;
+  background: rgba(10, 10, 10, 0.5);
+  .center-dialog {
+    width: 781.56px;
+    height: 607px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    bottom: 0;
+    right: 0;
+    .container-dialog {
+      height: 100%;
+      width: 100%;
+      background-color: #e2e5e8;
+      padding: 20px;
+      .tag-card {
+        margin-top: 40px;
+        .tag-contain {
+          margin-bottom: 5px;
+          border-bottom: solid 2px #ffffff;
+          margin-right: 10px;
+          margin-left: 10px;
+          .tag-btn {
+            height: 27px;
+            width: 140.8px;
+            background-color: white;
+            border-radius: 0px;
+            text-align: center;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            padding-top: 1px;
+            cursor: pointer;
+            color: #7289aa;
+          }
+          .reset-filter {
+            float: right;
+            height: 27px;
+            cursor: pointer;
+            width: 142px;
+            background-color: transparent;
+            border-radius: 0px;
+            text-align: center;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            padding-top: 1px;
+            border: 1px solid #7289aa;
+            color: #7289aa;
+            position: absolute;
+            top: 56px;
+            right: 30px;
+          }
+        }
+      }
+      .sort-card {
+        margin-top: 30px;
+        .sort-contain {
+          margin-bottom: 5px;
+          border-bottom: solid 2px #ffffff;
+          margin-right: 10px;
+          margin-left: 10px;
+          .tag-btn {
+            height: 27px;
+            width: 140.8px;
+            background-color: white;
+            border-radius: 0px;
+            text-align: center;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            padding-top: 1px;
+            cursor: pointer;
+            color: #7289aa;
+          }
+        }
+      }
+      .apply-filter {
+        background-color: #4c7bc1;
+        color: white;
+        text-transform: capitalize;
+        width: 228.23px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 40px;
+      }
+      .box-filter {
+        text-align: center;
+        padding-top: 5px;
+        font-size: 13px;
+        border: 1.07473px solid #ffffff;
       }
     }
   }

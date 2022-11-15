@@ -190,7 +190,10 @@
       </span>
     </div>
     <LightBox @wheel.prevent @touchmove.prevent @scroll.prevent>
-      <div v-if="dialog" class="dialog-filter" style="height: 90vh">
+      <div v-if="dialog" class="dialog-filter"
+              :style="{
+                height: window.height - 68 + 'px'
+              }">
         <div class="center-dialog">
           <div class="container-dialog">
             <v-btn
