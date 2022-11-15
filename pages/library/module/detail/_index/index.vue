@@ -109,7 +109,7 @@
               }}</span>
               <span v-else>-</span>
             </div>
-            <div
+            <!-- <div
               v-if="detailModule.enrolled === false"
               class="petra-button-collection"
               @click="buyModule()"
@@ -117,7 +117,7 @@
               Add to My Collection
               <br>
               FREE  {{ hover1 }}
-            </div>
+            </div> -->
           </div>
           <div class="column right-side">
             <div class="petra-title">
