@@ -26,7 +26,6 @@ export { default as FactionProgressBar } from '../../components/faction/Progress
 export { default as FactionReward } from '../../components/faction/Reward.vue'
 export { default as ButtonPin } from '../../components/button/pin.vue'
 export { default as ButtonPlay } from '../../components/button/play.vue'
-export { default as CardCollection } from '../../components/card/Collection.vue'
 export { default as IconArchivements } from '../../components/icon/Archivements.vue'
 export { default as IconAvatarBackground } from '../../components/icon/AvatarBackground.vue'
 export { default as IconBackBtn } from '../../components/icon/BackBtn.vue'
@@ -49,6 +48,7 @@ export { default as IconRefresh } from '../../components/icon/refresh.vue'
 export { default as SidebarAvatar } from '../../components/sidebar/Avatar.vue'
 export { default as SidebarCardName } from '../../components/sidebar/CardName.vue'
 export { default as SidebarMain } from '../../components/sidebar/Main.vue'
+export { default as CardCollection } from '../../components/card/Collection.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

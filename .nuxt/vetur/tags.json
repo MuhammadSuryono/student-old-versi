@@ -83,9 +83,6 @@
   "ButtonPlay": {
     "description": "Auto imported from components/button/play.vue"
   },
-  "CardCollection": {
-    "description": "Auto imported from components/card/Collection.vue"
-  },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
   },
@@ -151,5 +148,8 @@
   },
   "SidebarMain": {
     "description": "Auto imported from components/sidebar/Main.vue"
+  },
+  "CardCollection": {
+    "description": "Auto imported from components/card/Collection.vue"
   }
 }
