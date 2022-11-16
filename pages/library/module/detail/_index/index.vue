@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-img">
+  <div v-if="!isLoading" class="bg-img">
     <div class="header-module">
       <div class="card-title">
         <img
@@ -22,7 +22,6 @@
     </div>
 
     <div class="content-module">
-      <!-- tab -->
       <div class="columns is-gapless mb-0 pb-0">
         <div v-if="selected1" class="tab-petra">
           <img src="~/assets/images/tab/tab-active.svg" class="icon-button">
@@ -269,13 +268,26 @@
                   </div>
                 </v-toolbar>
                 <div
-                  v-if="indexRail === 0"
+                  v-if="indexRail === 0 && detailModule.trial_mode"
                   class="btn-finish"
                   style="margin-top:15px;"
                   @click="dialogPopup = true"
+                  @mouseover="hover2 = true"
+                  @mouseleave="hover2 = false"
                 >
                   <div class="decoration" />
+                  <div class="square-right" />
                   <div class="card-btn">
+                    <IconJempol
+                      v-if="!hover2"
+                      bg-color="#3B69BC"
+                      style="margin-right:10px;"
+                    />
+                    <IconJempol
+                      v-else
+                      bg-color="white"
+                      style="margin-right:10px;"
+                    />
                     I am interested
                   </div>
                 </div>
@@ -453,13 +465,49 @@
       >
         <div class="center-dialog">
           <div class="container-dialog">
-            <v-btn
-              icon
-              style="position: absolute; top: 10px; right: 20px"
+            <img src="~/assets/images/tellmewhy.svg" class="title-btn">
+            <img
+              src="~/assets/images/dialog_back.svg"
+              class="back-btn"
               @click="dialogPopup = false"
             >
-              <v-icon>mdi-close</v-icon>
-            </v-btn>
+            <div class="form-container">
+              <FormInput>
+                <template v-slot:label>
+                  Name
+                </template>
+              </FormInput>
+              <FormInput style="margin-top:50px;">
+                <template v-slot:label>
+                  Module
+                </template>
+              </FormInput>
+              <FormInput style="margin-top:50px;">
+                <template v-slot:label>
+                  Email
+                </template>
+              </FormInput>
+              <FormInput style="margin-top:50px;">
+                <template v-slot:label>
+                  Phone Number
+                </template>
+              </FormInput>
+              <FormArea style="margin-top:50px;">
+                <template v-slot:label>
+                  Reason
+                </template>
+              </FormArea>
+              <div class="footer-btn">
+                <div class="btn-wa">
+                  <img src="~/assets/images/dialog_wa.svg">
+                </div>
+                <div class="btn-submit">
+                  <div class="text-btn">
+                    Submit
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -483,19 +531,21 @@ export default {
       ratingReview: 0,
       descReview: '',
       hover1: false,
+      hover2: false,
       dialogPopup: false,
       window: {
         width: 0,
         height: 0
-      }
+      },
+      detailModule: {}
     }
   },
 
   computed: {
     ...mapState({
-      detailModule: (state) => {
-        return state.module.dataDetailModule
-      },
+      // detailModule: (state) => {
+      //   return state.module.dataDetailModule
+      // },
       dataUser: (state) => {
         return state.user.users
       }
@@ -640,12 +690,12 @@ export default {
     },
     getData () {
       this.isLoading = true
-      this.$store
-        .dispatch('module/fetchDetailModule', this.$route.params.index)
+      this.$axios
+        .get('https://5da9c651-b516-4e50-a3bf-c0479fdcd2e8.mock.pstmn.io/student/module/' + this.$route.params.index + '/collection')
         .then((response) => {
+          this.detailModule = response.data.data
           this.tinggi = this.$refs.infoBox.clientHeight + 'px;'
           this.isLoading = false
-          console.log(response.data.data)
         })
         .catch((error) => {
           this.isLoading = false
@@ -654,6 +704,20 @@ export default {
             duration: 5000
           })
         })
+      // this.$store
+      //   .dispatch('module/fetchDetailModule', this.$route.params.index)
+      //   .then((response) => {
+      //     this.tinggi = this.$refs.infoBox.clientHeight + 'px;'
+      //     this.isLoading = false
+      //     console.log(response.data.data)
+      //   })
+      //   .catch((error) => {
+      //     this.isLoading = false
+      //     this.$toast.error(error.response, {
+      //       position: 'top-center',
+      //       duration: 5000
+      //     })
+      //   })
     },
     getReview () {
       console.log('getReview')
@@ -978,18 +1042,27 @@ export default {
             width: 100%;
             height: 100%;
             .btn-finish {
+              width: 182px;
               position:relative;
               margin-left: 255px;
               .decoration {
                 background: #7289AA;
-                opacity: 0.35;
-                border: 0.6px solid #FFFFFF;
+                border: 1.6px solid #FFFFFF;
                 height: 18px;
                 width: 18px;
-                top:-4px;
-                left:-4px;
+                top: -5px;
+                left: -6px;
                 z-index:-1;
                 position:absolute;
+              }
+              .square-right {
+                background: white;
+                height: 5px;
+                width: 5px;
+                bottom: -3px;
+                left: 181px;
+                z-index: 2;
+                position: absolute;
               }
               .card-btn {
                 width:182px;
@@ -1012,6 +1085,17 @@ export default {
                 border: 0.6px solid #aeeefa;
                 background:#4C7BC1;
                 color:white;
+                transition: border-color 0.5s, background-color 0.5s, color 0.5s;
+                -webkit-transition: border-color 0.5s, background-color 0.5s, color 0.5s;
+                transform: scale(0.9);
+                -webkit-transform: scale(0.9);
+              }
+              .square-right {
+                left: 172px;
+              }
+              .decoration {
+                top: -5px;
+                left: 0px;
               }
             }
             .contain-list {
@@ -1347,8 +1431,8 @@ export default {
   width: 1200px;
   background: rgba(10, 10, 10, 0.5);
   .center-dialog {
-    width: 781.56px;
-    height: 607px;
+    width: 589.55px;
+    height: 533.32px;
     margin: auto;
     position: absolute;
     top: 0;
@@ -1359,87 +1443,56 @@ export default {
     .container-dialog {
       height: 100%;
       width: 100%;
-      background-color: #e2e5e8;
+      background-image: url('~@/assets/images/container.svg');
       padding: 20px;
-      .tag-card {
-        margin-top: 40px;
-        .tag-contain {
-          margin-bottom: 5px;
-          border-bottom: solid 2px #ffffff;
-          margin-right: 10px;
-          margin-left: 10px;
-          .tag-btn {
-            height: 27px;
-            width: 140.8px;
-            background-color: white;
-            border-radius: 0px;
-            text-align: center;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 24px;
-            padding-top: 1px;
-            cursor: pointer;
-            color: #7289aa;
-          }
-          .reset-filter {
-            float: right;
-            height: 27px;
-            cursor: pointer;
-            width: 142px;
-            background-color: transparent;
-            border-radius: 0px;
-            text-align: center;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 24px;
-            padding-top: 1px;
-            border: 1px solid #7289aa;
-            color: #7289aa;
-            position: absolute;
-            top: 56px;
-            right: 30px;
-          }
-        }
+      .title-btn {
+        position: absolute;
+        top: -11px;
+        left: 56px;
       }
-      .sort-card {
-        margin-top: 30px;
-        .sort-contain {
-          margin-bottom: 5px;
-          border-bottom: solid 2px #ffffff;
-          margin-right: 10px;
-          margin-left: 10px;
-          .tag-btn {
+      .back-btn {
+        position: absolute;
+        top: -45px;
+        right: -10px;
+        cursor:pointer;
+      }
+      .form-container {
+        padding-left: 72px;
+        padding-right: 72px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        .footer-btn {
+          margin-top:95px;
+          display: flex;
+          justify-content: space-between;
+          .btn-wa {
+            cursor:pointer;
+          }
+          .btn-submit {
             height: 27px;
-            width: 140.8px;
-            background-color: white;
-            border-radius: 0px;
+            width: 131px;
+            background: #2E5799;
+            border: 2.29917px solid #9EC1DE;
             text-align: center;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 24px;
-            padding-top: 1px;
-            cursor: pointer;
-            color: #7289aa;
+            vertical-align: middle;
+            line-height: 22px;
+            transform: skew(-10deg);
+            cursor:pointer;
+            .text-btn {
+              font-style: normal;
+              font-weight: 500;
+              font-size: 16px;
+              color: #FFFFFF;
+              transform: skew(10deg);
+            }
+          }
+          .btn-submit:hover {
+            background: white;
+            .text-btn {
+              color:#2E5799;
+            }
           }
         }
-      }
-      .apply-filter {
-        background-color: #4c7bc1;
-        color: white;
-        text-transform: capitalize;
-        width: 228.23px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 40px;
-      }
-      .box-filter {
-        text-align: center;
-        padding-top: 5px;
-        font-size: 13px;
-        border: 1.07473px solid #ffffff;
       }
     }
   }
