@@ -52,7 +52,7 @@ export default {
       width:100%;
       height:20px;
       padding-right:20px;
-      padding-top:12px;
+      margin-top: 5px;
       padding-left: 20px;
       z-index:3;
 
