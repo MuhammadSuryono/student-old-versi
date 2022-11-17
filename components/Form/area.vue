@@ -59,7 +59,7 @@ export default {
       width:100%;
       height:62px;
       padding-right:20px;
-      padding-top:12px;
+      margin-top: 7px;
       padding-left: 20px;
       z-index:3;
       overflow:hidden;
