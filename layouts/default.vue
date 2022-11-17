@@ -144,6 +144,31 @@ export default {
       bgmAutoplay: false
     }
   },
+
+  watch: {
+    $route (to, from) {
+      const path = [
+        'library-module-detail-index',
+        'library-module-detail-index-game',
+        'library-module-detail-index-game-embed',
+        'library-module-detail-index-quiz',
+        'library-module-detail-index-quiz-embed',
+        'library-module-detail-index-reading',
+        'library-module-detail-index-video'
+      ]
+      if (path.includes(to.name)) {
+        this.$refs.player.volume = 0
+        // this.$store.commit('user/SET_MUTE_BGM', true)
+        this.$refs.player.play()
+      } else {
+        if (!this.muteBGM) {
+          this.$refs.player.volume = this.audioBGM
+          this.$store.commit('user/SET_MUTE_BGM', false)
+          this.$refs.player.play()
+        }
+      }
+    }
+  },
   computed: {
     ...mapState({
       audioBtn: (state) => {
@@ -178,6 +203,9 @@ export default {
       },
       autoplayBGM: (state) => {
         return state.user.autoplayBGM
+      },
+      muteBGM: (state) => {
+        return state.user.muteBGM
       }
     }),
     widthSidebar () {
@@ -224,6 +252,35 @@ export default {
   mounted () {
     const audio = this.$refs.player
     audio.volume = this.audioBGM
+    if (this.muteBGM) {
+      const playedPromise = this.$refs.player.play()
+      if (playedPromise) {
+        playedPromise.catch((e) => {
+          console.log(e)
+          if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+            console.log(e.name)
+          }
+        }).then(() => {
+          console.log('playing sound !!!')
+          this.$refs.player.volume = 0
+          this.$refs.player.play()
+        })
+      }
+    } else {
+      const playedPromise = this.$refs.player.play()
+      if (playedPromise) {
+        playedPromise.catch((e) => {
+          console.log(e)
+          if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+            console.log(e.name)
+          }
+        }).then(() => {
+          console.log('playing sound !!!')
+          this.$refs.player.volume = 1
+          this.$refs.player.play()
+        })
+      }
+    }
   },
   methods: {
     logout () {
@@ -401,12 +458,10 @@ export default {
 .fade-leave-active {
   transition: opacity 0.4s linear;
 }
-
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
 }
-
 .slide-fade-enter-active {
   transition: all 0.5s;
 }
@@ -539,7 +594,6 @@ export default {
   z-index: 999;
   max-width: 1280px;
 }
-
 .p-1 {
   padding: 1em;
 }

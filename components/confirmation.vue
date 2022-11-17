@@ -93,6 +93,7 @@
     .icon-alert {
       width: 62px;
       height: 62px;
+      margin-right: 32px;
     }
   }
 }

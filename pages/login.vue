@@ -132,7 +132,7 @@ export default {
             this.$store.commit('user/SET_LOGGEDIN', true)
             this.loading = false
             if (response.status === 200 || response.status === 201) {
-              if (response.data.data.user.role_id === 4) {
+              if (response.data.data.user.role_id === 4 || response.data.data.user.role_id === '4') {
                 const data = response.data.data
                 localStorage.setItem('user_id', data.user.id)
                 this.$store.commit('user/SET_USERS', data)
@@ -177,9 +177,13 @@ export default {
               })
             }
           })
-          .catch((error) => {
+          .catch(() => {
             this.loading = false
-            this.$toast.error(error)
+            this.$toast.error('Please select captcha to login',
+            {
+                position: 'top-center',
+                duration: 5000
+              })
           })
       }
     }

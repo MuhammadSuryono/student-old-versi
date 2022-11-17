@@ -23,9 +23,13 @@ export const state = () => ({
   isLoggedIn: false,
   btn_mute: true,
   audioBtn: true,
-  audioBGM: 1,
-  audioEffect: 0,
-  autoplayBGM: true
+  audioBGM: 0.5,
+  audioEffect: 0.5,
+  autoplayBGM: true,
+  muteEffect: false,
+  muteBGM: false,
+  btn_setting: false,
+  VRpin: 0
 })
 
 export const getters = {
@@ -46,7 +50,17 @@ export const getters = {
 }
 
 export const mutations = {
+  SET_PIN (state, payload) {
+    state.VRpin = payload
+  },
+  SET_MUTE_EFFECT (state, payload) {
+    state.muteEffect = payload
+  },
+  SET_MUTE_BGM (state, payload) {
+    state.muteBGM = payload
+  },
   SET_AUDIO_EFFECT (state, payload) {
+    console.log('pay : ', payload)
     state.audioEffect = payload
   },
   SET_AUDIO_BGM (state, payload) {
@@ -103,6 +117,7 @@ export const mutations = {
   },
   SET_BTN_SETTING (state) {
     state.btn_setting = !state.btn_setting
+    console.log(state.btn_setting )
     state.btn_decoration = false
     state.btn_profile = false
   },
@@ -146,6 +161,7 @@ export const mutations = {
 export const actions = {
   async login ({ commit }, payload) {
     try {
+      await this.$recaptcha.getResponse()
       const response = await this.$auth.loginWith('local', {
         data: {
           email: payload.email,

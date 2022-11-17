@@ -469,7 +469,12 @@ export default {
     },
     getDataArchivements () {
       this.$store
-        .dispatch('skillcard/fetchAllArchivement', this.currentPage2)
+        .dispatch('skillcard/fetchAllArchivement',
+          {
+            id: this.id,
+            page: this.currentPage2
+          }
+        )
         .then((response) => {
           console.log(response.data.data)
         })

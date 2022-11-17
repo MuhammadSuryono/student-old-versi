@@ -5,9 +5,9 @@
         <img src="~/assets/images/ruler.svg">
       </div>
     </div>
-    <IconVolume v-if="!mute" class="icon-volume" @click.native="onMute(true)" />
+    <IconVolume v-if="!muteBGM" class="icon-volume" @click.native="onMute(true)" />
     <IconVolumeMute
-      v-if="mute"
+      v-if="muteBGM"
       class="icon-volume"
       @click.native="onMute(false)"
     />
@@ -16,7 +16,7 @@
         id="myRange"
         v-model="value"
         type="range"
-        min="1"
+        min="0"
         max="100"
         class="slider"
         @input="changeVolume()"
@@ -32,32 +32,64 @@ export default {
   data () {
     return {
       value: 100,
-      mute: false
+      mute: false,
+      valueBackup: 0
     }
   },
   computed: {
     ...mapState({
       audioBGM: (state) => {
         return state.user.audioBGM
+      },
+      muteBGM: (state) => {
+        return state.user.muteBGM
       }
     })
   },
   mounted () {
     this.value = this.audioBGM * 100
+    if (this.muteBGM) {
+      const playedPromise = this.$parent.$parent.$refs.player.play()
+      if (playedPromise) {
+        playedPromise.catch((e) => {
+          console.log(e)
+          if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+            console.log(e.name)
+          }
+        }).then(() => {
+          console.log('playing sound !!!')
+          this.$parent.$parent.$refs.player.volume = 0
+          this.$parent.$parent.$refs.player.play()
+        })
+      }
+    }
   },
   methods: {
     changeVolume () {
-      const audio = this.$parent.$parent.$refs.player
-      audio.volume = this.value / 100
-
-      this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
-    },
-    onMute (x) {
-      this.mute = x
-      if (x) {
-        this.value = 0
+      this.valueBackup = 0
+      if (this.value > 0) {
+        this.$store.commit('user/SET_MUTE_BGM', false)
         const audio = this.$parent.$parent.$refs.player
         audio.volume = this.value / 100
+        this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
+      } else {
+        this.$store.commit('user/SET_MUTE_BGM', true)
+        const audio = this.$parent.$parent.$refs.player
+        audio.volume = this.value / 100
+        this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
+      }
+    },
+    onMute (x) {
+      this.$store.commit('user/SET_MUTE_BGM', x)
+      if (x) {
+        this.valueBackup = this.value
+        const audio = this.$parent.$parent.$refs.player
+        audio.volume = 0
+        this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
+      } else {
+        const audio = this.$parent.$parent.$refs.player
+        audio.volume = this.value / 100
+        audio.play()
         this.$store.commit('user/SET_AUDIO_BGM', this.value / 100)
       }
     }
@@ -135,11 +167,9 @@ export default {
     -webkit-transition: 0.2s;
     transition: opacity 0.2s;
   }
-
   .slider:hover {
     opacity: 1;
   }
-
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -151,7 +181,6 @@ export default {
     border-radius: 2px;
     cursor: pointer;
   }
-
   .slider::-moz-range-thumb {
     width: 14px;
     height: 18px;

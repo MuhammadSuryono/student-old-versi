@@ -42,7 +42,6 @@
             font-weight: 600;
             font-size: 21px;
             line-height: 27px;
-
             color: #1c4091;
           "
         >
@@ -53,88 +52,16 @@
             <div
               v-for="(item, index) in items"
               :key="index"
-              style="padding: 10px"
             >
-              <v-toolbar color="white" class="contain-list">
-                <img
-                  :src="item.display_picture"
-                  style="height: 79px; width: 122px"
-                >
-                <v-divider class="mx-4" vertical />
-                <div style="width: 300px">
-                  <div
-                    style="
-                      font-style: normal;
-                      font-weight: 600;
-                      font-size: 16.8687px;
-                      line-height: 22px;
-
-                      color: #3b69bc;
-                    "
-                  >
-                    {{ item.module_name }}
-                  </div>
-                  <div
-                    style="
-                      font-style: normal;
-                      font-weight: 500;
-                      font-size: 12.6515px;
-                      line-height: 16px;
-
-                      color: #859bb5;
-                    "
-                  >
-                    By {{ item.studio_name }}
-                  </div>
-                </div>
-                <v-spacer />
-                <v-divider class="mx-4" vertical />
-                <div>
-                  <div
-                    style="
-                      font-style: normal;
-                      font-weight: 400;
-                      font-size: 16.8687px;
-                      line-height: 22px;
-                      color: #3e4d68;
-                    "
-                  >
-                    Module Details
-                  </div>
-                  <div
-                    style="
-                      font-style: normal;
-                      font-weight: 500;
-                      font-size: 12.6515px;
-                      line-height: 14px;
-
-                      color: #859bb5;
-                    "
-                  >
-                    {{ item.total_discussion }} Discussions
-                  </div>
-                </div>
-                <v-spacer />
-                <v-divider class="mx-4" vertical />
-                <div
-                  style="
-                    background-color: #0aa7c1;
-                    width: 158.61px;
-                    height: 38.76px;
-                    text-align: center;
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 19.2785px;
-                    line-height: 25px;
-                    padding-top: 6px;
-                    cursor: pointer;
-                    color: #ffffff;
-                  "
-                  @click="toDetail(item)"
-                >
-                  Play
-                </div>
-              </v-toolbar>
+              <CardCollection
+                :modules="item.module_name"
+                :academic="item.academic_field"
+                :studio="item.studio_name"
+                :activity="item.total_activities"
+                :discussion="item.total_discussion"
+                :display="item.display_picture"
+                @click.native="toDetail(item)"
+              />
             </div>
             <infinite-loading
               v-if="items.length"
@@ -414,7 +341,7 @@ export default {
           .dispatch('module/fetchAllMyCollection', data)
           .then((resp) => {
             if (resp.data.data.data.length > 1) {
-              resp.data.data.data.forEach(item => this.items.data.push(item))
+              resp.data.data.data.forEach(item => this.items.push(item))
               $state.loaded()
             } else {
               $state.complete()
@@ -544,104 +471,12 @@ export default {
         color: #7289aa;
       }
     }
-    .tab-petra {
-      cursor: pointer;
-      position: relative;
-      padding-bottom: 0px;
-      height: 30px;
-      .icon-button {
-        height: 30px;
-      }
-      .text-petra {
-        position: absolute;
-        top: 3px;
-        color: white;
-        position: absolute;
-        margin-left: auto;
-        margin-right: auto;
-        left: 0;
-        right: 0;
-        font-weight: 500;
-        font-size: 15px;
-        text-align: center;
-      }
-    }
     .card-list {
       height: 100%;
       width: 100%;
       background: rgba(44, 110, 194, 0.85);
       border: 2px solid #d4eaff;
-      .box-card {
-        position: relative;
-        height: 240px;
-        .bg-card {
-          width: 100%;
-          position: absolute;
-          top: 0px;
-          z-index: 5;
-          padding-right: 10px;
-          padding-left: 10px;
-        }
-        .display-pic {
-          z-index: 6;
-          padding-right: 10px;
-          padding-left: 10px;
-          width: 100%;
-          position: absolute;
-          top: 0px;
-          height: 120px;
-          object-fit: cover;
-        }
-        .star-card {
-          padding-left: 10px;
-          z-index: 7;
-          top: 103px;
-          width: 170px;
-          left: -2px;
-          position: absolute;
-        }
-        .title-card {
-          padding-right: 10px;
-          padding-left: 10px;
-          z-index: 6;
-          top: 135px;
-          left: 10px;
-          position: absolute;
-          font-style: normal;
-          font-weight: 600;
-          font-size: 15px;
-          line-height: 18px;
-          color: #5b6987;
-        }
-        .price-card {
-          z-index: 6;
-          padding-right: 10px;
-          padding-left: 10px;
-          bottom: 30px;
-          right: 20px;
-          position: absolute;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 18px;
-          line-height: 23px;
-          text-align: right;
-
-          color: #a6a6a6;
-        }
-        .rating-card {
-          padding-right: 10px;
-          padding-left: 10px;
-          position: absolute;
-          top: 117px;
-          left: 20px;
-          z-index: 8;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 15.6103px;
-
-          color: #ffffff;
-        }
-      }
+      padding:28px;
     }
   }
 }

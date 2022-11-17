@@ -133,45 +133,18 @@
           </div>
         </div>
         <div class="column is-narrow header-right" style="margin-left: 20px">
-          <div
-            v-if="detailActivity.type === 'embed'"
-            class="card-activity"
-            style="position: relative"
-          >
-            <img
-              src="~/assets/images/195.svg"
-              style="height: 100%; width: 100%"
-            >
-            <div
-              style="
-                position: absolute;
-                z-index: 999;
-                width: 229.53px;
-                color: #f2f2f2;
-                text-align: center;
-                top: 230px;
-                left: 240px;
-                padding: 5px;
-                cursor: pointer;
-                background-color: #4c7bc1;
-              "
-              @click="playGame(detailActivity.link)"
-            >
+          <div v-if="detailActivity.type === 'embed'" class="card-activity">
+            <img src="~/assets/images/195.svg" class="wh-full">
+            <div class="btn-play" @click="playGame(detailActivity.link)">
               Play
             </div>
           </div>
-          <div
-            v-if="detailActivity.type === 'eksternal'"
-            class="card-activity"
-            style="position: relative"
-          >
+          <div v-if="detailActivity.type === 'eksternal'" class="card-activity">
             <div
-              style="
-                width: 100%;
-                height: 100%;
-                background-color: rgba(32, 59, 99, 0.75);
-              "
+              class="wh-full"
+              style="background-color: rgba(32, 59, 99, 0.75)"
             />
+            <!-- <img src="~/assets/images/195.svg" class="wh-full"> -->
             <img
               src="~/assets/images/confirm.png"
               style="
@@ -200,25 +173,42 @@
               Play
             </a>
           </div>
-          <div
-            v-if="detailActivity.type === 'vr'"
-            class="card-activity"
-            style="position: relative"
-          >
-            <img
-              src="~/assets/images/vr.png"
-              style="height: 100%; width: 100%; opacity: 0.2"
-            >
-            <img
-              src="~/assets/images/confirm2.png"
-              style="
-                position: absolute;
-                z-index: 999;
-                text-align: center;
-                top: 100px;
-                left: 70px;
-              "
-            >
+          <div v-if="detailActivity.type === 'vr'" class="card-activity">
+            <img src="~/assets/images/vr.png" class="image-vr">
+            <div class="bg-overlay" />
+            <div v-if="showVR" class="card-notif">
+              <Confirmation>
+                <template slot="body">
+                  <div class="alert-text-2" style="font-size:13px;">
+                    Use this PIN in your VR Headset to login and play <br>
+                    <div class="pin-text" style="margin-right:6px;">
+                      {{ VRpin }}
+                    </div>
+                    Note this will expire in 2 hours
+                  </div>
+                </template>
+              </Confirmation>
+              <ButtonPlay style="margin-lefT: 34px;" class="btn-alert" @click.native="generatePIN()">
+                <template slot="body">
+                  Regenerate PIN
+                </template>
+              </ButtonPlay>
+            </div>
+            <div v-else class="card-notif">
+              <Confirmation>
+                <template slot="body">
+                  <div class="alert-text">
+                    Notice: You can acess the game in your VR Headset.<br>
+                    Click Play to generate your 6 PIN code
+                  </div>
+                </template>
+              </Confirmation>
+              <ButtonPlay class="btn-alert" @click.native="generatePIN()">
+                <template slot="body">
+                  Play
+                </template>
+              </ButtonPlay>
+            </div>
           </div>
         </div>
       </div>
@@ -605,12 +595,17 @@ export default {
       indexSub2: 0,
       boxReply: false,
       dataSubReply: {},
-      archievements: {}
+      archievements: {},
+      showVR: false
+      // VRpin: null
     }
   },
 
   computed: {
     ...mapState({
+      VRpin: (state) => {
+        return state.user.VRpin
+      },
       detailActivity: (state) => {
         return state.module.dataDetailActivity
       },
@@ -647,10 +642,6 @@ export default {
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
     this.getAll()
-  },
-
-  mounted () {
-    console.log('user : ', this.dataUser)
   },
   methods: {
     openReply2 (y, x) {
@@ -745,7 +736,14 @@ export default {
     },
     playGame2 (x) {
       this.$store.commit('user/SET_BTN_AUDIO', true)
-      window.open(x, '_blank')
+      if (this.VRpin !== 0) {
+        window.open(x + '?pinVR=' + this.VRpin, '_blank')
+      } else {
+        this.$toast.error('Please generate PIN from settings menu before starting the module', {
+          position: 'top-center',
+          duration: 5000
+        })
+      }
     },
     handleResize () {
       this.window.width = window.innerWidth
@@ -758,6 +756,7 @@ export default {
     getAll () {
       this.getData()
       this.getAllDiscuss()
+      // this.checkPin()
     },
     getData () {
       this.isLoading = true
@@ -768,9 +767,7 @@ export default {
       this.$store
         .dispatch('module/fetchDetailActivity', data)
         .then((response) => {
-          console.log(response.data.data)
           this.archievements = response.data.data.achievements
-          console.log('archivement : ', response.data.data.achievements)
           this.isLoading = false
         })
         .catch((error) => {
@@ -798,6 +795,21 @@ export default {
         })
         .catch((error) => {
           this.isLoading = false
+          this.$toast.error(error.response, {
+            position: 'top-center',
+            duration: 5000
+          })
+        })
+    },
+    async generatePIN () {
+      await this.$axios
+        .post('/student/vr-pin/generate')
+        .then((res) => {
+          this.showVR = true
+          this.$store.commit('user/SET_PIN', res.data.pin)
+        })
+        .catch((error) => {
+          this.showVR = false
           this.$toast.error(error.response, {
             position: 'top-center',
             duration: 5000
@@ -1147,6 +1159,7 @@ export default {
       height: 100%;
       width: 730px;
       padding: 20px 10px 10px 10px;
+      position: relative;
       .bg-act {
         background: #f5fbff;
         padding: 10px;
@@ -1195,6 +1208,72 @@ export default {
           color: #5b6987;
           margin-top: 10px;
           margin-bottom: 20px;
+        }
+      }
+      .btn-play {
+        position: absolute;
+        z-index: 999;
+        width: 229.53px;
+        color: #f2f2f2;
+        text-align: center;
+        top: 230px;
+        left: 240px;
+        padding: 5px;
+        cursor: pointer;
+        background-color: #4c7bc1;
+      }
+      .image-vr {
+        position: absolute;
+        z-index: 0;
+      }
+      .bg-overlay {
+        background: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+      .card-notif {
+        width: 600px;
+        height: 300px;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 3;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        .alert-text {
+          margin-left: 15px;
+          text-align: center;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 22px;
+          color: #5b6987;
+        }
+        .alert-text-2 {
+          margin-left: 4px;
+          text-align: center;
+          font-weight: 600;
+          font-size: 14px;
+          color: #5b6987;
+          .pin-text {
+            font-weight: 600;
+            font-size: 26px;
+            line-height: 40px;
+            text-align: center;
+            color: #ff0000;
+          }
+        }
+        .btn-alert {
+          margin-top: 30px;
         }
       }
     }
