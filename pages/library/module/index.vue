@@ -72,7 +72,7 @@
                     IN COLLECTION
                   </div>
                   <div v-else class="price-card">
-                    <span v-if="i.price === 0"> FREE </span>
+                    <span v-if="i.price === 0 || i.price === '0'"> FREE </span>
                     <span v-else>
                       {{ i.price }}
                     </span>

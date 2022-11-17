@@ -4,7 +4,7 @@
       <slot name="label" />
     </div>
     <div class="data-form">
-      <input v-model="data" class="input-card" placeholder="" @keyup.enter="sendData">
+      <input v-model="inputVal" class="input-card" placeholder="">
       <div class="layer-1" />
       <div class="layer-2" />
       <div class="box-layer" />
@@ -14,18 +14,23 @@
 
 <script>
 export default {
-  data () {
-    return {
-      data: ''
+  props: {
+    value: {
+      type: String,
+      default: 'white'
+    }
+  },
+  computed: {
+    inputVal: {
+      get () {
+        return this.value
+      },
+      set (val) {
+        this.$emit('input', val)
+      }
     }
   },
   methods: {
-    sendData () {
-      if (this.data !== '') {
-        this.$emit('changeText', this.data)
-        this.data = ''
-      }
-    }
   }
 }
 </script>

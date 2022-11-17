@@ -472,36 +472,36 @@
               @click="dialogPopup = false"
             >
             <div class="form-container">
-              <FormInput>
+              <FormInput :value="data.name" @input="data.name = $event">
                 <template v-slot:label>
                   Name
                 </template>
               </FormInput>
-              <FormInput style="margin-top:50px;">
+              <FormInput :value="data.module" style="margin-top:50px;" @input="data.module = $event">
                 <template v-slot:label>
                   Module
                 </template>
               </FormInput>
-              <FormInput style="margin-top:50px;">
+              <FormInput :value="data.email" style="margin-top:50px;" @input="data.email = $event">
                 <template v-slot:label>
                   Email
                 </template>
               </FormInput>
-              <FormInput style="margin-top:50px;">
+              <FormInput :value="data.phone_number" style="margin-top:50px;" @input="data.phone_number = $event">
                 <template v-slot:label>
                   Phone Number
                 </template>
               </FormInput>
-              <FormArea style="margin-top:50px;">
+              <FormArea :value="data.reason" style="margin-top:50px;" @input="data.reason = $event">
                 <template v-slot:label>
                   Reason
                 </template>
               </FormArea>
               <div class="footer-btn">
-                <div class="btn-wa">
+                <div class="btn-wa" @click="openWA()">
                   <img src="~/assets/images/dialog_wa.svg">
                 </div>
-                <div class="btn-submit">
+                <div class="btn-submit" @click="submitForm()">
                   <div class="text-btn">
                     Submit
                   </div>
@@ -537,7 +537,14 @@ export default {
         width: 0,
         height: 0
       },
-      detailModule: {}
+      detailModule: {},
+      data: {
+        name: '',
+        module: '',
+        email: '',
+        phone_number: '',
+        reason: ''
+      }
     }
   },
 
@@ -561,6 +568,46 @@ export default {
     this.getAll()
   },
   methods: {
+    openWA () {
+      window.open('https://wa.me/6285925091511', '_blank').focus()
+    },
+    async submitForm () {
+      const data = new FormData()
+      data.append('name', this.data.name)
+      data.append('module', this.data.module)
+      data.append('email', this.data.email)
+      data.append('phone_number', this.data.phone_number)
+      data.append('reason', this.data.reason)
+      await this.$axios
+        .post('student/trial-mode/interested', data, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((res) => {
+          this.dialogPopup = false
+          this.$toast.success('Success', {
+            position: 'top-center',
+            duration: 5000
+          })
+        }).catch((error) => {
+          const keys = Object.keys(
+            error.response.data.errors
+          )
+          const arr = []
+          keys.forEach((key, index) => {
+            arr.push(
+              error.response.data.errors[
+                key
+              ]
+            )
+          })
+          this.$toast.error(arr.join(), {
+            position: 'top-center',
+            duration: 5000
+          })
+        })
+    },
     handleResize () {
       this.window.width = window.innerWidth
       this.window.height = window.innerHeight

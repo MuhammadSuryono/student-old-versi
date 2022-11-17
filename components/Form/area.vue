@@ -5,13 +5,12 @@
     </div>
     <div class="data-form">
       <textarea
-        v-model="data"
+        v-model="inputVal"
         rows="4"
         cols="50"
         class="input-card"
         placeholder=""
         maxlength="150"
-        @keyup.enter="sendData"
       />
       <div class="layer-1" />
       <div class="layer-2" />
@@ -22,18 +21,23 @@
 
 <script>
 export default {
-  data () {
-    return {
-      data: ''
+  props: {
+    value: {
+      type: String,
+      default: 'white'
+    }
+  },
+  computed: {
+    inputVal: {
+      get () {
+        return this.value
+      },
+      set (val) {
+        this.$emit('input', val)
+      }
     }
   },
   methods: {
-    sendData () {
-      if (this.data !== '') {
-        this.$emit('changeText', this.data)
-        this.data = ''
-      }
-    }
   }
 }
 </script>
