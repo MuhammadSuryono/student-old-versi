@@ -13,7 +13,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git url: 'https://muhammadsuryono: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@github.com/Primeskills-Web-Team/petra-student-frontend.git', branch: '0.3.0', credentialsId: 'github_yono_app'
+        git url: 'https://muhammadsuryono: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@github.com/Primeskills-Web-Team/petra-student-frontend.git', branch: 'development', credentialsId: 'github_yono_app'
       }
     }
 
@@ -55,11 +55,11 @@ pipeline {
     stage('Deploying App to Server') {
       steps {
         script {
-          
+
           def dockerRunCommand = "whoami && docker stop ${containerName} && docker rm ${containerName} && docker system prune -a -f && docker run -d --name ${containerName} --publish ${port}:5000 ${dockerimagename}"
 
           sshagent(credentials: ['petra_ssh_server']) {
-            sh """ 
+            sh """
               ssh -o StrictHostKeyChecking=no ubuntu@18.142.248.178 '${dockerRunCommand}'
             """
           }
