@@ -135,11 +135,13 @@
                 style="padding: 0px 20px 0px 20px;margin-bottom:25px;"
                 :style="indexRail === 0 ? 'margin-bottom:15px;' : ''"
               >
-                <v-toolbar
+              <v-toolbar
                   v-if="detailModule.enrolled === false"
                   color="white"
                   class="contain-list"
-                  style="opacity: 0.6"
+                  @click="indexRail == 0 ? detailActivity(rail) : null"
+               
+                  :style="indexRail == 0 ? 'opacity:1' : 'opacity: 0.6;'"
                 >
                   <img src="~/assets/images/module/lock.svg" class="img-lock">
                   <img :src="rail.thumbnail" class="img-title">
@@ -268,13 +270,14 @@
                   </div>
                 </v-toolbar>
                 <div
-                  v-if="indexRail === 0 && detailModule.trial_mode"
+                  v-if="!detailModule.enrolled && indexRail === 0 && detailModule.trial_mode"
                   class="btn-finish"
                   style="margin-top:15px;"
                   @click="dialogPopup = true"
                   @mouseover="hover2 = true"
                   @mouseleave="hover2 = false"
                 >
+
                   <div class="decoration" />
                   <div class="square-right" />
                   <div class="card-btn">
@@ -537,7 +540,6 @@ export default {
         width: 0,
         height: 0
       },
-      detailModule: {},
       data: {
         name: '',
         module: '',
@@ -550,9 +552,9 @@ export default {
 
   computed: {
     ...mapState({
-      // detailModule: (state) => {
-      //   return state.module.dataDetailModule
-      // },
+      detailModule: (state) => {
+        return state.module.dataDetailModule
+      },
       dataUser: (state) => {
         return state.user.users
       }
@@ -737,10 +739,9 @@ export default {
     },
     getData () {
       this.isLoading = true
-      this.$axios
-        .get('https://5da9c651-b516-4e50-a3bf-c0479fdcd2e8.mock.pstmn.io/student/module/' + this.$route.params.index + '/collection')
+      this.$store
+        .dispatch('module/fetchDetailModule', this.$route.params.index)
         .then((response) => {
-          this.detailModule = response.data.data
           this.tinggi = this.$refs.infoBox.clientHeight + 'px;'
           this.isLoading = false
         })
@@ -751,20 +752,7 @@ export default {
             duration: 5000
           })
         })
-      // this.$store
-      //   .dispatch('module/fetchDetailModule', this.$route.params.index)
-      //   .then((response) => {
-      //     this.tinggi = this.$refs.infoBox.clientHeight + 'px;'
-      //     this.isLoading = false
-      //     console.log(response.data.data)
-      //   })
-      //   .catch((error) => {
-      //     this.isLoading = false
-      //     this.$toast.error(error.response, {
-      //       position: 'top-center',
-      //       duration: 5000
-      //     })
-      //   })
+
     },
     getReview () {
       console.log('getReview')
