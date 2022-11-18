@@ -22,7 +22,14 @@ export const state = () => ({
   expired: false,
   isLoggedIn: false,
   btn_mute: true,
-  audioBtn: true
+  audioBtn: true,
+  audioBGM: 0.5,
+  audioEffect: 0.5,
+  autoplayBGM: true,
+  muteEffect: false,
+  muteBGM: false,
+  btn_setting: false,
+  VRpin: 0
 })
 
 export const getters = {
@@ -36,10 +43,29 @@ export const getters = {
   decoration_name: state => state.decoration_name,
   check_cluster: state => state.check_cluster,
   cluster: state => state.cluster,
-  cluster_attribute: state => state.cluster_attribute
+  cluster_attribute: state => state.cluster_attribute,
+  autoplayBGM: state => state.autoplayBGM,
+  audioEffect: state => state.audioEffect,
+  audioBGM: state => state.audioBGM
 }
 
 export const mutations = {
+  SET_PIN (state, payload) {
+    state.VRpin = payload
+  },
+  SET_MUTE_EFFECT (state, payload) {
+    state.muteEffect = payload
+  },
+  SET_MUTE_BGM (state, payload) {
+    state.muteBGM = payload
+  },
+  SET_AUDIO_EFFECT (state, payload) {
+    console.log('pay : ', payload)
+    state.audioEffect = payload
+  },
+  SET_AUDIO_BGM (state, payload) {
+    state.audioBGM = payload
+  },
   SET_AUDIO (state, payload) {
     state.audioBtn = payload
   },
@@ -51,15 +77,13 @@ export const mutations = {
   },
   SET_BTN_AUDIO (state, payload) {
     const myAudio = new Audio(btnAudio)
-    if (state.audioBtn) {
-      myAudio.play()
-    }
+    myAudio.play()
+    myAudio.volume = state.audioEffect
   },
   SET_POPUP_AUDIO (state, payload) {
     const myAudio = new Audio(popupAudio)
-    if (state.audioBtn) {
-      myAudio.play()
-    }
+    myAudio.play()
+    myAudio.volume = state.audioEffect
   },
   SET_BG_AUDIO (state, payload) {
     state.playBg = payload
@@ -89,6 +113,13 @@ export const mutations = {
   SET_BTN_PROFILE (state) {
     state.btn_profile = !state.btn_profile
     state.btn_decoration = false
+    state.btn_setting = false
+  },
+  SET_BTN_SETTING (state) {
+    state.btn_setting = !state.btn_setting
+    console.log(state.btn_setting )
+    state.btn_decoration = false
+    state.btn_profile = false
   },
   SET_SIDEBAR (state) {
     state.sidebar = !state.sidebar
@@ -99,6 +130,7 @@ export const mutations = {
   SET_BTN_DECORATION (state) {
     state.btn_decoration = !state.btn_decoration
     state.btn_profile = false
+    state.btn_setting = false
   },
   SET_FULLNAME (state, data) {
     state.fullname = data
@@ -127,16 +159,48 @@ export const mutations = {
 }
 
 export const actions = {
-  async loginWithoutCaptcha ({ commit }, payload) {
+  async login ({ commit }, payload) {
     try {
-      // const token = await this.$recaptcha.getResponse()
-      // console.log(token)
+      await this.$recaptcha.getResponse()
       const response = await this.$auth.loginWith('local', {
         data: {
           email: payload.email,
           password: payload.password
         }
       })
+      // if (response.status === 200 || response.status === 201) {
+      //   if (response.data.data.user.role_id === 4) {
+      //     const data = response.data.data
+      //     localStorage.setItem('user_id', data.user.id)
+      //     commit('SET_USERS', data)
+      //     if (
+      //       // eslint-disable-next-line valid-typeof
+      //       typeof data.user.avatar !== null ||
+      //       // eslint-disable-next-line valid-typeof
+      //       typeof data.user.avatar !== undefined
+      //     ) {
+      //       commit('SET_IMAGES', data.user.avatar.image)
+      //       commit('SET_IMAGES_NAME', data.user.avatar.name)
+      //     }
+      //     if (data.user.last_name !== null) {
+      //       commit(
+      //         'SET_FULLNAME',
+      //         data.user.first_name + ' ' + data.user.last_name
+      //       )
+      //     } else {
+      //       commit('SET_FULLNAME', data.user.first_name)
+      //     }
+      //     localStorage.setItem('localAuth', false)
+      //     // this.$router.push({ path: '/splash' })
+      //   } else {
+      //     this.$auth.logout()
+      //     this.$router.push('/login')
+      //     this.$toast.error('Please login with student account.', {
+      //       position: 'top-center',
+      //       duration: 5000
+      //     })
+      //   }
+      // }
       return response
     } catch (e) {
       return e.response

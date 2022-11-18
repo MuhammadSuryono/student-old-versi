@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-img">
+  <div v-if="!isLoading" class="bg-img">
     <div class="header-module">
       <div class="card-title">
         <img
@@ -22,7 +22,6 @@
     </div>
 
     <div class="content-module">
-      <!-- tab -->
       <div class="columns is-gapless mb-0 pb-0">
         <div v-if="selected1" class="tab-petra">
           <img src="~/assets/images/tab/tab-active.svg" class="icon-button">
@@ -103,21 +102,21 @@
                   : 'margin-bottom:10px;'
               "
             >
-              by
+              by:
               <span v-if="detailModule.lecturer !== ''">{{
                 detailModule.lecturer
               }}</span>
               <span v-else>-</span>
             </div>
-            <div
+            <!-- <div
               v-if="detailModule.enrolled === false"
               class="petra-button-collection"
               @click="buyModule()"
             >
               Add to My Collection
               <br>
-              FREE
-            </div>
+              FREE  {{ hover1 }}
+            </div> -->
           </div>
           <div class="column right-side">
             <div class="petra-title">
@@ -133,13 +132,16 @@
               <div
                 v-for="(rail, indexRail) in detailModule.activity_rails"
                 :key="indexRail"
-                style="padding: 0px 20px 0px 20px"
+                style="padding: 0px 20px 0px 20px;margin-bottom:25px;"
+                :style="indexRail === 0 ? 'margin-bottom:15px;' : ''"
               >
-                <v-toolbar
+              <v-toolbar
                   v-if="detailModule.enrolled === false"
                   color="white"
                   class="contain-list"
-                  style="opacity: 0.6"
+                  @click="indexRail == 0 ? detailActivity(rail) : null"
+               
+                  :style="indexRail == 0 ? 'opacity:1' : 'opacity: 0.6;'"
                 >
                   <img src="~/assets/images/module/lock.svg" class="img-lock">
                   <img :src="rail.thumbnail" class="img-title">
@@ -267,6 +269,53 @@
                     </div>
                   </div>
                 </v-toolbar>
+                <div
+                  v-if="!detailModule.enrolled && indexRail === 0 && detailModule.trial_mode"
+                  class="btn-finish"
+                  style="margin-top:15px;"
+                  @click="dialogPopup = true"
+                  @mouseover="hover2 = true"
+                  @mouseleave="hover2 = false"
+                >
+
+                  <div class="decoration" />
+                  <div class="square-right" />
+                  <div class="card-btn">
+                    <IconJempol
+                      v-if="!hover2"
+                      bg-color="#3B69BC"
+                      style="margin-right:10px;"
+                    />
+                    <IconJempol
+                      v-else
+                      bg-color="white"
+                      style="margin-right:10px;"
+                    />
+                    I am interested
+                  </div>
+                </div>
+              </div>
+              <div
+                v-if="(detailModule.activity_rails[detailModule.activity_rails.length - 1].detail.score > 0) && detailModule.enrolled"
+                class="btn-finish"
+                @click="toFinish()"
+                @mouseover="hover1 = true"
+                @mouseleave="hover1 = false"
+              >
+                <div class="decoration" />
+                <div class="card-btn">
+                  <IconTopi
+                    v-if="!hover1"
+                    bg-color="#3B69BC"
+                    style="margin-right:10px;"
+                  />
+                  <IconTopi
+                    v-else
+                    bg-color="white"
+                    style="margin-right:10px;"
+                  />
+                  Finish Module
+                </div>
               </div>
             </div>
           </div>
@@ -408,6 +457,64 @@
         </div>
       </div>
     </div>
+
+    <LightBox @wheel.prevent @touchmove.prevent @scroll.prevent>
+      <div
+        v-if="dialogPopup"
+        class="dialog-filter"
+        :style="{
+          height: window.height - 68 + 'px'
+        }"
+      >
+        <div class="center-dialog">
+          <div class="container-dialog">
+            <img src="~/assets/images/tellmewhy.svg" class="title-btn">
+            <img
+              src="~/assets/images/dialog_back.svg"
+              class="back-btn"
+              @click="dialogPopup = false"
+            >
+            <div class="form-container">
+              <FormInput :value="data.name" @input="data.name = $event">
+                <template v-slot:label>
+                  Name
+                </template>
+              </FormInput>
+              <FormInput :value="data.module" style="margin-top:50px;" @input="data.module = $event">
+                <template v-slot:label>
+                  Module
+                </template>
+              </FormInput>
+              <FormInput :value="data.email" style="margin-top:50px;" @input="data.email = $event">
+                <template v-slot:label>
+                  Email
+                </template>
+              </FormInput>
+              <FormInput :value="data.phone_number" style="margin-top:50px;" @input="data.phone_number = $event">
+                <template v-slot:label>
+                  Phone Number
+                </template>
+              </FormInput>
+              <FormArea :value="data.reason" style="margin-top:50px;" @input="data.reason = $event">
+                <template v-slot:label>
+                  Reason
+                </template>
+              </FormArea>
+              <div class="footer-btn">
+                <div class="btn-wa" @click="openWA()">
+                  <img src="~/assets/images/dialog_wa.svg">
+                </div>
+                <div class="btn-submit" @click="submitForm()">
+                  <div class="text-btn">
+                    Submit
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </LightBox>
   </div>
 </template>
 <script>
@@ -425,7 +532,21 @@ export default {
       isLoading: true,
       itemsReview: {},
       ratingReview: 0,
-      descReview: ''
+      descReview: '',
+      hover1: false,
+      hover2: false,
+      dialogPopup: false,
+      window: {
+        width: 0,
+        height: 0
+      },
+      data: {
+        name: '',
+        module: '',
+        email: '',
+        phone_number: '',
+        reason: ''
+      }
     }
   },
 
@@ -443,12 +564,103 @@ export default {
     }
   },
   created () {
+    // eslint-disable-next-line nuxt/no-globals-in-created
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
     this.getAll()
   },
-  mounted () {
-    console.log(this.dataUser)
-  },
   methods: {
+    openWA () {
+      window.open('https://wa.me/6285925091511', '_blank').focus()
+    },
+    async submitForm () {
+      const data = new FormData()
+      data.append('name', this.data.name)
+      data.append('module', this.data.module)
+      data.append('email', this.data.email)
+      data.append('phone_number', this.data.phone_number)
+      data.append('reason', this.data.reason)
+      await this.$axios
+        .post('student/trial-mode/interested', data, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((res) => {
+          this.dialogPopup = false
+          this.$toast.success('Success', {
+            position: 'top-center',
+            duration: 5000
+          })
+        }).catch((error) => {
+          const keys = Object.keys(
+            error.response.data.errors
+          )
+          const arr = []
+          keys.forEach((key, index) => {
+            arr.push(
+              error.response.data.errors[
+                key
+              ]
+            )
+          })
+          this.$toast.error(arr.join(), {
+            position: 'top-center',
+            duration: 5000
+          })
+        })
+    },
+    handleResize () {
+      this.window.width = window.innerWidth
+      this.window.height = window.innerHeight
+    },
+    muteAudio () {
+      const playedPromise = this.$parent.$parent.$refs.player.play()
+      if (playedPromise) {
+        playedPromise.catch((e) => {
+          console.log(e)
+          if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+            console.log(e.name)
+          }
+        }).then(() => {
+          console.log('playing sound !!!')
+          this.$parent.$parent.$refs.player.volume = 0
+          this.$parent.$parent.$refs.player.play()
+        })
+      }
+    },
+    async toFinish () {
+      const data = new FormData()
+      data.append('module_id', this.$route.params.index)
+      await this.$axios
+        .post('game/skillset/generateSkillCard', data, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((res) => {
+          console.log(res.data.status === 200)
+          if (res.data.status === 200) {
+            this.$toast.success('Success', {
+              position: 'top-center',
+              duration: 5000
+            })
+            this.getAll()
+          } else {
+            this.$toast.error(res.data.error.message, {
+              position: 'top-center',
+              duration: 5000
+            })
+          }
+        }).catch((error) => {
+          console.log('error:', error.response.status)
+          this.isLoading = false
+          this.$toast.error('CPL are not set. Can not finish module.', {
+            position: 'top-center',
+            duration: 5000
+          })
+        })
+    },
     getAll () {
       this.getData()
       this.getReview()
@@ -471,7 +683,7 @@ export default {
           .dispatch('module/addReview', data)
           .then((response) => {
             console.log('success', response)
-            if (response.status !== 200 || response.status !== 201) {
+            if (response.status !== 201) {
               this.$toast.error(response.data.error.message, {
                 position: 'top-center',
                 duration: 5000
@@ -532,7 +744,6 @@ export default {
         .then((response) => {
           this.tinggi = this.$refs.infoBox.clientHeight + 'px;'
           this.isLoading = false
-          console.log(response.data.data)
         })
         .catch((error) => {
           this.isLoading = false
@@ -541,6 +752,7 @@ export default {
             duration: 5000
           })
         })
+
     },
     getReview () {
       console.log('getReview')
@@ -864,6 +1076,63 @@ export default {
             border: 2px solid #d4eaff;
             width: 100%;
             height: 100%;
+            .btn-finish {
+              width: 182px;
+              position:relative;
+              margin-left: 255px;
+              .decoration {
+                background: #7289AA;
+                border: 1.6px solid #FFFFFF;
+                height: 18px;
+                width: 18px;
+                top: -5px;
+                left: -6px;
+                z-index:-1;
+                position:absolute;
+              }
+              .square-right {
+                background: white;
+                height: 5px;
+                width: 5px;
+                bottom: -3px;
+                left: 181px;
+                z-index: 2;
+                position: absolute;
+              }
+              .card-btn {
+                width:182px;
+                height:38.11px;
+                background: #F2F2F2;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor:pointer;
+                color: #3B69BC;
+                border:2px solid #FFF380;
+              }
+            }
+            .btn-finish:hover {
+              .card-btn {
+                border: 0.6px solid #aeeefa;
+                background:#4C7BC1;
+                color:white;
+                transition: border-color 0.5s, background-color 0.5s, color 0.5s;
+                -webkit-transition: border-color 0.5s, background-color 0.5s, color 0.5s;
+                transform: scale(0.9);
+                -webkit-transform: scale(0.9);
+              }
+              .square-right {
+                left: 172px;
+              }
+              .decoration {
+                top: -5px;
+                left: 0px;
+              }
+            }
             .contain-list {
               cursor: pointer;
               height: 75px;
@@ -871,7 +1140,7 @@ export default {
 
               background-color: white;
               // background-color: rgba(255, 255, 255, 0.3);
-              margin-bottom: 25px;
+              margin-bottom: 0px;
               .finish-previous {
                 border: solid 1px white;
                 background-color: #fff380;
@@ -1180,6 +1449,82 @@ export default {
                   //   right: 10px;
                 }
               }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.dialog-filter {
+  z-index: 9;
+  position: absolute;
+  overflow: hidden;
+  top: 68px;
+  left: 80px;
+  width: 1200px;
+  background: rgba(10, 10, 10, 0.5);
+  .center-dialog {
+    width: 589.55px;
+    height: 533.32px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    bottom: 0;
+    right: 0;
+    .container-dialog {
+      height: 100%;
+      width: 100%;
+      background-image: url('~@/assets/images/container.svg');
+      padding: 20px;
+      .title-btn {
+        position: absolute;
+        top: -11px;
+        left: 56px;
+      }
+      .back-btn {
+        position: absolute;
+        top: -45px;
+        right: -10px;
+        cursor:pointer;
+      }
+      .form-container {
+        padding-left: 72px;
+        padding-right: 72px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        .footer-btn {
+          margin-top:95px;
+          display: flex;
+          justify-content: space-between;
+          .btn-wa {
+            cursor:pointer;
+          }
+          .btn-submit {
+            height: 27px;
+            width: 131px;
+            background: #2E5799;
+            border: 2.29917px solid #9EC1DE;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 22px;
+            transform: skew(-10deg);
+            cursor:pointer;
+            .text-btn {
+              font-style: normal;
+              font-weight: 500;
+              font-size: 16px;
+              color: #FFFFFF;
+              transform: skew(10deg);
+            }
+          }
+          .btn-submit:hover {
+            background: white;
+            .text-btn {
+              color:#2E5799;
             }
           }
         }

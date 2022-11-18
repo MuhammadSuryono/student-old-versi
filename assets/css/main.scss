@@ -13,6 +13,11 @@
     src: local("RedRose"),
      url(~assets/font/RedRose.ttf) format("truetype");
 }
+@font-face {
+    font-family: "Nunito";
+    src: local("Nunito"),
+     url(~assets/font/Nunito.ttf) format("truetype");
+}
 
 $skeleton-background: 'red';
 $navbar-height: 4.25rem;

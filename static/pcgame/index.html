@@ -85,10 +85,32 @@
       };
 
       function sendToken(token) {
-	    console.log("Token received");
-		unityBox.SendMessage('LMSConnector', 'TokenReceive', token);
-	  }
+	      console.log("Token received", token);
+		    unityBox.SendMessage('LMSConnector', 'TokenReceive', token);
+	    }
       document.body.appendChild(script);
+
+
+      function displayMessage(evt) {
+        var message;
+        console.log('evt : ', evt)
+        var origins = "http://localhost:3000"
+        if (!origins.includes(evt.origin)) {
+          message = "check origin domain";
+        } else {
+          message = evt.data;
+        }
+        console.log("message new : ", message);
+
+        init();
+      }
+
+      if (window.addEventListener) {
+        // For standards-compliant web browsers
+        window.addEventListener("message", displayMessage, false);
+      } else {
+        window.attachEvent("onmessage", displayMessage);
+      }
     </script>
   </body>
 </html>

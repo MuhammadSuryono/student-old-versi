@@ -607,7 +607,7 @@
                 Current leading faction
               </div>
               <div class="text-growth">
-                {{ dataModuleDominance.lead_faction_name }}
+                {{ dataCommentStars.lead_faction_name }}
               </div>
             </div>
           </div>
@@ -783,10 +783,14 @@ export default {
         })
     },
     getDataCommentStars () {
+      console.log(' getDataCommentStars')
       this.$store
         .dispatch('faction/fetchCommentStars')
         .then((response) => {
+          console.log('res getDataCommentStars')
           const data = response.data.data
+          console.log(data)
+          this.dataCommentStars.lead_faction_name = data.lead_faction.name
           if (data.data_reward.length !== 0) {
             this.dataCommentStars.data_reward = data.data_reward
           }
@@ -797,9 +801,9 @@ export default {
             this.dataCommentStars.next_reward_female =
               data.next_reward.image_female
           }
-          if (data.lead_faction !== null || data.lead_faction !== '') {
-            this.dataCommentStars.lead_faction_name = data.lead_faction.name
-          }
+          // if (data.lead_faction !== null || data.lead_faction !== '') {
+          //   console.log(data.lead_faction.name)
+          // }
         })
         .catch((error) => {
           this.$toast.error(error.response, {

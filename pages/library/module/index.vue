@@ -50,17 +50,6 @@
             >
             <div class="text-petra">See Modules</div>
           </div>
-          <!-- <div v-if="selected2" class="tab-petra">
-            <img src="~/assets/images/tab/tab-active.svg" class="icon-button">
-            <div class="text-petra">Latest Modules</div>
-          </div>
-          <div v-else class="tab-petra" @click="tab(2, true)">
-            <img
-              src="~/assets/images/tab/tab-nonactive.svg"
-              class="icon-button"
-            >
-            <div class="text-petra">Latest Modules</div>
-          </div> -->
         </div>
         <div class="card-list">
           <div v-if="!isLoading">
@@ -83,7 +72,7 @@
                     IN COLLECTION
                   </div>
                   <div v-else class="price-card">
-                    <span v-if="i.price === 0"> FREE </span>
+                    <span v-if="i.price === 0 || i.price === '0'"> FREE </span>
                     <span v-else>
                       {{ i.price }}
                     </span>
@@ -166,7 +155,7 @@
               </div>
               <v-spacer />
               <v-divider class="mx-4" vertical />
-              <div class="btn-play" @click="toDetail()">Play</div>
+              <div class="btn-play" @click="toDetail(item)">Play</div>
             </v-toolbar>
           </div>
           <infinite-loading
@@ -201,7 +190,13 @@
       </span>
     </div>
     <LightBox @wheel.prevent @touchmove.prevent @scroll.prevent>
-      <div v-if="dialog" class="dialog-filter" style="height: 90vh">
+      <div
+        v-if="dialog"
+        class="dialog-filter"
+        :style="{
+          height: window.height - 68 + 'px'
+        }"
+      >
         <div class="center-dialog">
           <div class="container-dialog">
             <v-btn

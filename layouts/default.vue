@@ -1,11 +1,6 @@
 <template>
   <div>
-    <audio
-      ref="player"
-      src="~/assets/audio/audio_bg.mp3"
-      :autoplay="audioBtn"
-      loop
-    />
+    <audio ref="player" src="~/assets/audio/audio_bg.mp3" autoplay loop />
     <div style="height: 100%; width: 100%; z-index: -9999" />
     <PModal style="z-index: 9999" />
     <div class="container-petra">
@@ -122,6 +117,12 @@
           :style="widthProfile"
           class="profile-petra"
         />
+        <!-- edit profile -->
+        <Setting
+          v-if="btn_setting"
+          class="profile-petra noselect"
+          :style="widthProfile3"
+        />
       </div>
     </div>
   </div>
@@ -139,7 +140,33 @@ export default {
         height: 0
       },
       coomingSoon: false,
-      audio: null
+      audio: null,
+      bgmAutoplay: false
+    }
+  },
+
+  watch: {
+    $route (to, from) {
+      const path = [
+        'library-module-detail-index',
+        'library-module-detail-index-game',
+        'library-module-detail-index-game-embed',
+        'library-module-detail-index-quiz',
+        'library-module-detail-index-quiz-embed',
+        'library-module-detail-index-reading',
+        'library-module-detail-index-video'
+      ]
+      if (path.includes(to.name)) {
+        this.$refs.player.volume = 0
+        // this.$store.commit('user/SET_MUTE_BGM', true)
+        this.$refs.player.play()
+      } else {
+        if (!this.muteBGM) {
+          this.$refs.player.volume = this.audioBGM
+          this.$store.commit('user/SET_MUTE_BGM', false)
+          this.$refs.player.play()
+        }
+      }
     }
   },
   computed: {
@@ -165,19 +192,22 @@ export default {
       btn_decoration: (state) => {
         return state.user.btn_decoration
       },
+      btn_setting: (state) => {
+        return state.user.btn_setting
+      },
       playBg: (state) => {
         return state.user.playBg
+      },
+      audioBGM: (state) => {
+        return state.user.audioBGM
+      },
+      autoplayBGM: (state) => {
+        return state.user.autoplayBGM
+      },
+      muteBGM: (state) => {
+        return state.user.muteBGM
       }
     }),
-    testing () {
-      if (this.playBg) {
-        console.log('oke true')
-        return true
-      } else {
-        console.log('iya false')
-        return false
-      }
-    },
     widthSidebar () {
       if (this.sidebar) {
         return 'width:200px;'
@@ -198,50 +228,61 @@ export default {
       } else {
         return 'left:80px;'
       }
-    }
-  },
-  watch: {
-    '$store.state.user' (url) {
-      console.log(url)
-      // this.audio.pause()
-      // this.audio.src = url
-      // this.audio.currentTime = 0
-      // this.audio.play()
+    },
+    widthProfile3 () {
+      if (this.sidebar) {
+        return 'left:200px;'
+      } else {
+        return 'left:80px;'
+      }
     }
   },
   created () {
     // eslint-disable-next-line nuxt/no-globals-in-created
     window.addEventListener('resize', this.handleResize)
     this.sidebar = true
-    this.$notify('Hello user!')
     this.handleResize()
     if (this.maps) {
       this.$store.commit('user/SET_MAPS')
     }
   },
-  mounted () {
-    this.$nextTick(() => {
-      this.$refs.player.load()
-    })
-    // const audio = this.$refs.player
-    // console.log('audio : ', audio)
-    // audio.muted = true
-    // // if (audio.paused) {
-    // audio.play()
-    // // }
-  },
   destroyed () {
     window.removeEventListener('resize', this.handleResize)
   },
-  methods: {
-    toggleAudio () {
-      const audio = this.$refs.player
-      if (audio.paused) {
-        audio.play()
-      } else {
-        audio.pause()
+  mounted () {
+    const audio = this.$refs.player
+    audio.volume = this.audioBGM
+    if (this.muteBGM) {
+      const playedPromise = this.$refs.player.play()
+      if (playedPromise) {
+        playedPromise.catch((e) => {
+          console.log(e)
+          if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+            console.log(e.name)
+          }
+        }).then(() => {
+          console.log('playing sound !!!')
+          this.$refs.player.volume = 0
+          this.$refs.player.play()
+        })
       }
-    },
+    } else {
+      const playedPromise = this.$refs.player.play()
+      if (playedPromise) {
+        playedPromise.catch((e) => {
+          console.log(e)
+          if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
+            console.log(e.name)
+          }
+        }).then(() => {
+          console.log('playing sound !!!')
+          this.$refs.player.volume = 1
+          this.$refs.player.play()
+        })
+      }
+    }
+  },
+  methods: {
     logout () {
       this.$store.commit('user/SET_LOGGEDIN', false)
       this.$store.commit('user/SET_BTN_AUDIO', true)
@@ -417,12 +458,10 @@ export default {
 .fade-leave-active {
   transition: opacity 0.4s linear;
 }
-
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
 }
-
 .slide-fade-enter-active {
   transition: all 0.5s;
 }
@@ -555,7 +594,6 @@ export default {
   z-index: 999;
   max-width: 1280px;
 }
-
 .p-1 {
   padding: 1em;
 }

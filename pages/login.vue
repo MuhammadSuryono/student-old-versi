@@ -9,7 +9,7 @@
           <img src="~/assets/images/logo_dashboard.png" class="img-logo">
           <div class="card">
             <div class="has-text-centered title">
-              Login to your Account {{ isLoggedIn }}
+              Login to your Account
             </div>
             <b-field class="mt-14" style="background-color: white">
               <b-input
@@ -31,7 +31,7 @@
             </b-field>
             <recaptcha class="captcha columns is-centered" />
             <b-button :loading="loading" class="btn-login" @click="login()">
-              Log In {{ manualLogout }}
+              Log In
             </b-button>
           </div>
         </v-col>
@@ -80,46 +80,20 @@ export default {
   },
   computed: {
     ...mapState({
-      expired: (state) => {
-        if (state.user.expired) {
-          this.$store.commit('user/SET_POPUP_AUDIO', true)
-        }
-        return state.user.expired
-      },
       isLoggedIn: (state) => {
         return state.user.isLoggedIn
       }
     })
   },
-  mounted () {
-    // this.$store.commit('user/SET_BTN_MUTE', true)
-    // console.log(this.$auth.loggedIn)
-  },
   methods: {
     ...mapMutations(['SET_IS_AUTH']),
-
     logout () {
       this.$store.commit('user/SET_LOGGEDIN', true)
       this.$store.commit('user/SET_BTN_AUDIO', true)
-      this.$store.commit('user/SET_BG_AUDIO', false)
-      if (this.btn_profile) {
-        this.$store.commit('user/SET_BTN_PROFILE')
-      }
-      if (this.btn_decoration) {
-        this.$store.commit('user/SET_BTN_DECORATION')
-      }
-      this.$auth.logout()
-      this.$router.push('/login')
-    },
-    toHome () {
-      this.$router.push({ path: 'dashboard' })
     },
     validateEmail (email) {
       const re = /\S+@\S+\.\S+/
       return re.test(email)
-    },
-    closePopup () {
-      this.$store.commit('user/SET_EXPIRED', false)
     },
     login () {
       this.$store.commit('user/SET_BTN_AUDIO', true)
@@ -150,16 +124,15 @@ export default {
       } else {
         this.loading = true
         this.$store
-          .dispatch('user/loginWithoutCaptcha', {
+          .dispatch('user/login', {
             email: this.state.email,
             password: this.state.password
           })
           .then((response) => {
             this.$store.commit('user/SET_LOGGEDIN', true)
-            this.$store.commit('user/SET_EXPIRED', false)
             this.loading = false
             if (response.status === 200 || response.status === 201) {
-              if (response.data.data.user.role_id === 4) {
+              if (response.data.data.user.role_id === 4 || response.data.data.user.role_id === '4') {
                 const data = response.data.data
                 localStorage.setItem('user_id', data.user.id)
                 this.$store.commit('user/SET_USERS', data)
@@ -186,13 +159,9 @@ export default {
                 } else {
                   this.$store.commit('user/SET_FULLNAME', data.user.first_name)
                 }
-                // this.$auth.strategy.token.set(
-                //   'Bearer ' + response.data.data.access_token
-                // )
                 localStorage.setItem('localAuth', false)
                 this.$router.push({ path: '/splash' })
               } else {
-                console.log(false)
                 this.$auth.logout()
                 this.$router.push('/login')
                 this.$toast.error('Please login with student account.', {
@@ -208,10 +177,13 @@ export default {
               })
             }
           })
-          .catch((error) => {
-            console.log('catch')
+          .catch(() => {
             this.loading = false
-            this.$toast.error(error)
+            this.$toast.error('Please select captcha to login',
+            {
+                position: 'top-center',
+                duration: 5000
+              })
           })
       }
     }

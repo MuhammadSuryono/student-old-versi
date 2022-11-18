@@ -5,6 +5,9 @@
   "Back": {
     "description": "Auto imported from components/Back.vue"
   },
+  "BoxTitle": {
+    "description": "Auto imported from components/BoxTitle.vue"
+  },
   "Decoration": {
     "description": "Auto imported from components/Decoration.vue"
   },
@@ -53,14 +56,41 @@
   "Profile": {
     "description": "Auto imported from components/Profile.vue"
   },
+  "Setting": {
+    "description": "Auto imported from components/Setting.vue"
+  },
   "Skeleton": {
     "description": "Auto imported from components/Skeleton.vue"
+  },
+  "Volume": {
+    "description": "Auto imported from components/Volume.vue"
+  },
+  "Volume2": {
+    "description": "Auto imported from components/Volume2.vue"
   },
   "Confirmation": {
     "description": "Auto imported from components/confirmation.vue"
   },
+  "FormArea": {
+    "description": "Auto imported from components/Form/area.vue"
+  },
+  "FormInput": {
+    "description": "Auto imported from components/Form/input.vue"
+  },
+  "ButtonPin": {
+    "description": "Auto imported from components/button/pin.vue"
+  },
   "ButtonPlay": {
     "description": "Auto imported from components/button/play.vue"
+  },
+  "CardCollection": {
+    "description": "Auto imported from components/card/Collection.vue"
+  },
+  "FactionProgressBar": {
+    "description": "Auto imported from components/faction/ProgressBar.vue"
+  },
+  "FactionReward": {
+    "description": "Auto imported from components/faction/Reward.vue"
   },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
@@ -89,11 +119,17 @@
   "IconHome": {
     "description": "Auto imported from components/icon/Home.vue"
   },
+  "IconJempol": {
+    "description": "Auto imported from components/icon/Jempol.vue"
+  },
   "IconLocation": {
     "description": "Auto imported from components/icon/Location.vue"
   },
   "IconSearch": {
     "description": "Auto imported from components/icon/Search.vue"
+  },
+  "IconSetting": {
+    "description": "Auto imported from components/icon/Setting.vue"
   },
   "IconSkillcard": {
     "description": "Auto imported from components/icon/Skillcard.vue"
@@ -104,6 +140,18 @@
   "IconTabSkill2": {
     "description": "Auto imported from components/icon/TabSkill2.vue"
   },
+  "IconTopi": {
+    "description": "Auto imported from components/icon/Topi.vue"
+  },
+  "IconVolume": {
+    "description": "Auto imported from components/icon/Volume.vue"
+  },
+  "IconVolumeMute": {
+    "description": "Auto imported from components/icon/VolumeMute.vue"
+  },
+  "IconRefresh": {
+    "description": "Auto imported from components/icon/refresh.vue"
+  },
   "SidebarAvatar": {
     "description": "Auto imported from components/sidebar/Avatar.vue"
   },
@@ -112,11 +160,5 @@
   },
   "SidebarMain": {
     "description": "Auto imported from components/sidebar/Main.vue"
-  },
-  "FactionProgressBar": {
-    "description": "Auto imported from components/faction/ProgressBar.vue"
-  },
-  "FactionReward": {
-    "description": "Auto imported from components/faction/Reward.vue"
   }
 }

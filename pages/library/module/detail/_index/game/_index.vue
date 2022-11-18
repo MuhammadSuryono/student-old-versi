@@ -144,7 +144,7 @@
               class="wh-full"
               style="background-color: rgba(32, 59, 99, 0.75)"
             />
-            <img src="~/assets/images/195.svg" class="wh-full">
+            <!-- <img src="~/assets/images/195.svg" class="wh-full"> -->
             <img
               src="~/assets/images/confirm.png"
               style="
@@ -179,18 +179,16 @@
             <div v-if="showVR" class="card-notif">
               <Confirmation>
                 <template slot="body">
-                  <div class="alert-text-2">
-                    Use this PIN in your VR Headset to login and play [Game
-                    Name].. <br>
-                    <div class="pin-text">
+                  <div class="alert-text-2" style="font-size:13px;">
+                    Use this PIN in your VR Headset to login and play <br>
+                    <div class="pin-text" style="margin-right:6px;">
                       {{ VRpin }}
                     </div>
-                    Note this will expire in 1 hour or once you click Logout in
-                    VR Headset.
+                    Note this will expire in 2 hours
                   </div>
                 </template>
               </Confirmation>
-              <ButtonPlay class="btn-alert" @click.native="generatePIN()">
+              <ButtonPlay style="margin-lefT: 34px;" class="btn-alert" @click.native="generatePIN()">
                 <template slot="body">
                   Regenerate PIN
                 </template>
@@ -598,13 +596,16 @@ export default {
       boxReply: false,
       dataSubReply: {},
       archievements: {},
-      showVR: false,
-      VRpin: {}
+      showVR: false
+      // VRpin: null
     }
   },
 
   computed: {
     ...mapState({
+      VRpin: (state) => {
+        return state.user.VRpin
+      },
       detailActivity: (state) => {
         return state.module.dataDetailActivity
       },
@@ -735,7 +736,14 @@ export default {
     },
     playGame2 (x) {
       this.$store.commit('user/SET_BTN_AUDIO', true)
-      window.open(x, '_blank')
+      if (this.VRpin !== 0) {
+        window.open(x + '?pinVR=' + this.VRpin, '_blank')
+      } else {
+        this.$toast.error('Please generate PIN from settings menu before starting the module', {
+          position: 'top-center',
+          duration: 5000
+        })
+      }
     },
     handleResize () {
       this.window.width = window.innerWidth
@@ -748,7 +756,7 @@ export default {
     getAll () {
       this.getData()
       this.getAllDiscuss()
-      this.checkPin()
+      // this.checkPin()
     },
     getData () {
       this.isLoading = true
@@ -793,24 +801,12 @@ export default {
           })
         })
     },
-    async checkPin () {
-      await this.$axios
-        .get('/student/vr-pin/last-pin')
-        .then((res) => {
-          this.showVR = true
-          this.VRpin = res.data.pin
-          console.log('res', res)
-        })
-        .catch(() => {
-          this.showVR = false
-        })
-    },
     async generatePIN () {
       await this.$axios
         .post('/student/vr-pin/generate')
         .then((res) => {
           this.showVR = true
-          this.VRpin = res.data.pin
+          this.$store.commit('user/SET_PIN', res.data.pin)
         })
         .catch((error) => {
           this.showVR = false

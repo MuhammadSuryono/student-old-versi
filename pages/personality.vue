@@ -3,17 +3,18 @@
     <div style="margin-left: 170px; width: 1100px; height: 700px">
       <iframe
         ref="iframe"
+        id="petra"
         src="/pcgame/index.html"
         style="width: 100%; height: 100%"
       />
     </div>
-    <!-- <div class="btn-edit" @click="goHome()">
+    <!-- <div class="btn-edit" @click="tes()">
       <img
         src="~/assets/images/btn-petra.png"
         style="width: 224.22px; height: 36px"
       >
       <div class="text-edit">
-        Lanjut
+        MUTE
       </div>
     </div> -->
   </div>
@@ -32,7 +33,8 @@ export default {
       window: {
         width: 0,
         height: 0
-      }
+      },
+      audioMute: false
     }
   },
 
@@ -68,6 +70,13 @@ export default {
     getToken () {
       const token = this.$auth.strategy.token.get()
       this.$refs.iframe.contentWindow.sendToken(token)
+    },
+    tes () {
+      this.audioMute = !this.audioMute
+      const iframeWin = document.getElementById('petra').contentWindow
+      const iframeWin2 = document.getElementById('petra')
+      console.log('speaker : ' , iframeWin2)
+      iframeWin.postMessage(this.audioMute, '*')
     },
     sendToken () {
       this.$refs.iframe.contentWindow.sendToken(this.token)

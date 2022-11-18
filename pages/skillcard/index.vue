@@ -476,16 +476,17 @@ export default {
             z-index: 1;
             .skillcard-title {
               position: absolute;
-              top: 18px;
+              top: 3px;
               z-index: 2;
               font-weight: 500;
-              font-size: 32px;
-              line-height: 14px;
-              /* or 44% */
-              width: 273px;
+              font-size: 31px;
+              width: 234px;
               text-align: center;
-
               color: #ffffff;
+              margin-left: 21px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
             .skillcard-type {
               position: absolute;
