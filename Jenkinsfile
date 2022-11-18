@@ -13,7 +13,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git url: 'https://muhammadsuryono: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@github.com/Primeskills-Web-Team/petra-student-frontend.git', branch: 'development', credentialsId: 'github_yono_app'
+        git url: 'https://muhammadsuryono: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@github.com/Primeskills-Web-Team/petra-student-frontend.git', branch: 'trial-mode', credentialsId: 'github_yono_app'
       }
     }
 
