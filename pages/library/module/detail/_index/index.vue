@@ -139,11 +139,19 @@
                   v-if="detailModule.enrolled === false"
                   color="white"
                   class="contain-list"
-                  @click="indexRail == 0 ? detailActivity(rail) : null"
+                  @click="indexRail == 0 && detailModule.trial_mode ? detailActivity(rail) : null"
                
-                  :style="indexRail == 0 ? 'opacity:1' : 'opacity: 0.6;'"
+                  :style="indexRail == 0 && detailModule.trial_mode ? 'opacity:1' : 'opacity: 0.6;'"
                 >
+                <template v-if="detailModule.trial_mode">
+                  <img v-if="indexRail != 0" src="~/assets/images/module/lock.svg" class="img-lock">
+
+                </template>
+                <template v-else>
                   <img src="~/assets/images/module/lock.svg" class="img-lock">
+
+                </template>
+                
                   <img :src="rail.thumbnail" class="img-title">
                   <v-divider class="mx-4" vertical />
                   <div class="data-desc">
