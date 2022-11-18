@@ -46,7 +46,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
+            dockerImage.push("staging")
           }
         }
       }
@@ -56,7 +56,7 @@ pipeline {
       steps {
         script {
 
-          def dockerRunCommand = "whoami && docker stop ${containerName} && docker rm ${containerName} && docker system prune -a -f && docker run -d --name ${containerName} --publish ${port}:5000 ${dockerimagename}"
+          def dockerRunCommand = "whoami && docker stop ${containerName} && docker rm ${containerName} && docker system prune -a -f && docker run -d --name ${containerName} --publish ${port}:5000 ${dockerimagename}:staging"
 
           sshagent(credentials: ['petra_ssh_server']) {
             sh """
