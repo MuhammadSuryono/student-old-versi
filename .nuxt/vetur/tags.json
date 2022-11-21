@@ -77,6 +77,9 @@
   "FormInput": {
     "description": "Auto imported from components/Form/input.vue"
   },
+  "ButtonInterested": {
+    "description": "Auto imported from components/button/interested.vue"
+  },
   "ButtonPin": {
     "description": "Auto imported from components/button/pin.vue"
   },
