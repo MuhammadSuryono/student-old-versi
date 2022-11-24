@@ -14,10 +14,8 @@
             <img
               src="~/assets/images/module/detail-rail.svg"
               class="display-rail"
-            >
-            <div class="text-title">
-              Activity Details
-            </div>
+            />
+            <div class="text-title">Activity Details</div>
           </div>
         </div>
         <div class="column is-narrow header-right" style="margin-left: 20px">
@@ -25,9 +23,7 @@
             <div v-if="selected1" class="tab-petra">
               <div class="columns is-gapless">
                 <div class="column is-narrow icon-button no-select">
-                  <div class="text-btn">
-                    Activity Content
-                  </div>
+                  <div class="text-btn">Activity Content</div>
                 </div>
                 <div class="column is-narrow icon-button2" />
               </div>
@@ -51,9 +47,7 @@
             <div v-if="selected2" class="tab-petra">
               <div class="columns is-gapless">
                 <div class="column is-narrow icon-button no-select">
-                  <div class="text-btn">
-                    Rewards & Achievements
-                  </div>
+                  <div class="text-btn">Rewards & Achievements</div>
                 </div>
                 <div class="column is-narrow icon-button2" />
               </div>
@@ -77,9 +71,7 @@
             <div v-if="selected3" class="tab-petra">
               <div class="columns is-gapless">
                 <div class="column is-narrow icon-button no-select">
-                  <div class="text-btn">
-                    See All Discussions
-                  </div>
+                  <div class="text-btn">See All Discussions</div>
                 </div>
                 <div class="column is-narrow icon-button2" />
               </div>
@@ -110,16 +102,16 @@
             <div v-if="!isLoading" class="bg-1" :style="tinggi2" />
             <div v-if="!isLoading" class="bg-2" :style="tinggi2" />
             <div class="column is-narrow left-side">
-              <img :src="detailActivity.thumbnail" class="display-pic">
+              <img :src="detailActivity.thumbnail" class="display-pic" />
               <div class="petra-title-card">
-                {{ detailActivity.name }} <br>
+                {{ detailActivity.name }} <br />
                 <span
                   style="
                     font-style: italic;
                     font-weight: normal;
                     font-size: 14px;
                   "
-                >GAME ACTIVITY
+                  >GAME ACTIVITY
                 </span>
               </div>
               <div class="petra-description">
@@ -134,7 +126,7 @@
         </div>
         <div class="column is-narrow header-right" style="margin-left: 20px">
           <div v-if="detailActivity.type === 'embed'" class="card-activity">
-            <img src="~/assets/images/195.svg" class="wh-full">
+            <img src="~/assets/images/195.svg" class="wh-full" />
             <div class="btn-play" @click="playGame(detailActivity.link)">
               Play
             </div>
@@ -154,7 +146,7 @@
                 top: 100px;
                 left: 70px;
               "
-            >
+            />
             <a
               style="
                 position: absolute;
@@ -174,39 +166,39 @@
             </a>
           </div>
           <div v-if="detailActivity.type === 'vr'" class="card-activity">
-            <img src="~/assets/images/vr.png" class="image-vr">
+            <img src="~/assets/images/vr.png" class="image-vr" />
             <div class="bg-overlay" />
             <div v-if="showVR" class="card-notif">
               <Confirmation>
                 <template slot="body">
-                  <div class="alert-text-2" style="font-size:13px;">
-                    Use this PIN in your VR Headset to login and play <br>
-                    <div class="pin-text" style="margin-right:6px;">
+                  <div class="alert-text-2" style="font-size: 13px">
+                    Use this PIN in your VR Headset to login and play <br />
+                    <div class="pin-text" style="margin-right: 6px">
                       {{ VRpin }}
                     </div>
                     Note this will expire in 2 hours
                   </div>
                 </template>
               </Confirmation>
-              <ButtonPlay style="margin-lefT: 34px;" class="btn-alert" @click.native="generatePIN()">
-                <template slot="body">
-                  Regenerate PIN
-                </template>
+              <ButtonPlay
+                style="margin-left: 34px"
+                class="btn-alert"
+                @click.native="generatePIN()"
+              >
+                <template slot="body"> Regenerate PIN </template>
               </ButtonPlay>
             </div>
             <div v-else class="card-notif">
               <Confirmation>
                 <template slot="body">
                   <div class="alert-text">
-                    Notice: You can acess the game in your VR Headset.<br>
+                    Notice: You can acess the game in your VR Headset.<br />
                     Click Play to generate your 6 PIN code
                   </div>
                 </template>
               </Confirmation>
               <ButtonPlay class="btn-alert" @click.native="generatePIN()">
-                <template slot="body">
-                  Play
-                </template>
+                <template slot="body"> Play </template>
               </ButtonPlay>
             </div>
           </div>
@@ -218,16 +210,16 @@
             <div v-if="!isLoading" class="bg-1" :style="tinggi2" />
             <div v-if="!isLoading" class="bg-2" :style="tinggi2" />
             <div class="column is-narrow left-side">
-              <img :src="detailActivity.thumbnail" class="display-pic">
+              <img :src="detailActivity.thumbnail" class="display-pic" />
               <div class="petra-title-card">
-                {{ detailActivity.name }} <br>
+                {{ detailActivity.name }} <br />
                 <span
                   style="
                     font-style: italic;
                     font-weight: normal;
                     font-size: 14px;
                   "
-                >GAME ACTIVITY
+                  >GAME ACTIVITY
                 </span>
               </div>
               <div class="petra-description">
@@ -243,9 +235,7 @@
         <div class="column is-narrow header-right" style="margin-left: 20px">
           <div class="columns is-gapless reward-card">
             <div class="column is-narrow comp-reward">
-              <div class="head-reward">
-                Completion Reward
-              </div>
+              <div class="head-reward">Completion Reward</div>
               <div
                 style="
                   background: #4c7bc1;
@@ -352,7 +342,7 @@
                 "
               >
                 <div class="column is-narrow left-ava">
-                  <img :src="x.image" class="height:100%;width:100%">
+                  <img :src="x.image" class="height:100%;width:100%" />
                 </div>
                 <div class="column right-ava">
                   <div class="head-ava">
@@ -373,12 +363,12 @@
             <img
               src="~/assets/images/module/review-bg.png"
               class="background-card"
-            >
+            />
             <div
               class="p-displaypic"
               :style="{ backgroundColor: dataUser.faction.avatar_bgcolor }"
             >
-              <img :src="dataUser.avatar.image" class="p-img">
+              <img :src="dataUser.avatar.image" class="p-img" />
             </div>
             <div class="p-username">
               {{ dataUser.username }}
@@ -388,12 +378,12 @@
               <img
                 src="~/assets/images/module/comment-border.svg"
                 class="bg-bor"
-              >
-              <img src="~/assets/images/module/comment-bg.svg" class="bg-com">
+              />
+              <img src="~/assets/images/module/comment-bg.svg" class="bg-com" />
               <img
                 src="~/assets/images/module/comment-corner.svg"
                 class="bg-cor"
-              >
+              />
 
               <div class="hexagon">
                 <textarea
@@ -423,10 +413,10 @@
                       class="column is-narrow"
                       style="height: 80px"
                       :style="{
-                        backgroundColor: review.avatar_background
+                        backgroundColor: review.avatar_background,
                       }"
                     >
-                      <img :src="review.avatar" class="pic-petra">
+                      <img :src="review.avatar" class="pic-petra" />
                     </div>
                     <div class="column box-list">
                       <div class="student-name">
@@ -483,10 +473,10 @@
                         class="column is-narrow"
                         style="height: 80px"
                         :style="{
-                          backgroundColor: sub.avatar_background
+                          backgroundColor: sub.avatar_background,
                         }"
                       >
-                        <img :src="sub.avatar" class="pic-petra">
+                        <img :src="sub.avatar" class="pic-petra" />
                       </div>
                       <div class="column box-list">
                         <div class="student-name">
@@ -510,10 +500,10 @@
                         class="column is-narrow"
                         style="height: 80px"
                         :style="{
-                          backgroundColor: dataUser.faction.avatar_bgcolor
+                          backgroundColor: dataUser.faction.avatar_bgcolor,
                         }"
                       >
-                        <img :src="dataUser.avatar.image" class="pic-petra">
+                        <img :src="dataUser.avatar.image" class="pic-petra" />
                       </div>
                       <div class="column box-list">
                         <div class="student-name">
@@ -547,12 +537,8 @@
                   <div slot="spinner" style="color: white">
                     <v-progress-circular indeterminate color="white" />
                   </div>
-                  <div slot="no-results" style="color: white">
-                    No results
-                  </div>
-                  <div slot="no-more" style="color: white">
-                    No more data
-                  </div>
+                  <div slot="no-results" style="color: white">No results</div>
+                  <div slot="no-more" style="color: white">No more data</div>
                 </infinite-loading>
               </div>
             </div>
@@ -563,12 +549,12 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 export default {
-  name: 'ModuleActivityReading',
-  layout: 'default',
+  name: "ModuleActivityReading",
+  layout: "default",
 
-  data () {
+  data() {
     return {
       isLoading: false,
       selected1: true,
@@ -580,13 +566,13 @@ export default {
       dialog: false,
       window: {
         width: 0,
-        height: 0
+        height: 0,
       },
       dataAttachment: {},
-      linkVideo: '',
+      linkVideo: "",
       ratingReview: 0,
-      descReview: '',
-      subReply: '',
+      descReview: "",
+      subReply: "",
       itemsDiscuss: {},
       infiniteId: 1,
       total: 0,
@@ -596,275 +582,296 @@ export default {
       boxReply: false,
       dataSubReply: {},
       archievements: {},
-      showVR: false
+      showVR: false,
       // VRpin: null
-    }
+    };
   },
 
   computed: {
     ...mapState({
       VRpin: (state) => {
-        return state.user.VRpin
+        return state.user.VRpin;
       },
       detailActivity: (state) => {
-        return state.module.dataDetailActivity
+        return state.module.dataDetailActivity;
       },
       idModule: (state) => {
-        return state.module.idModule
+        return state.module.idModule;
       },
       dataAllDiscuss: (state) => {
-        return state.module.dataAllDiscuss
+        return state.module.dataAllDiscuss;
       },
       dataUser: (state) => {
-        return state.user.users
-      }
+        return state.user.users;
+      },
     }),
-    tinggi2 () {
-      return 'height:' + this.tinggi
+    tinggi2() {
+      return "height:" + this.tinggi;
     },
-    disableBtn () {
-      if (this.descReview === '') {
-        return true
+    disableBtn() {
+      if (this.descReview === "") {
+        return true;
       } else {
-        return false
+        return false;
       }
     },
-    disableBtn2 () {
-      if (this.subReply === '') {
-        return true
+    disableBtn2() {
+      if (this.subReply === "") {
+        return true;
       } else {
-        return false
+        return false;
       }
-    }
+    },
   },
-  created () {
+  created() {
     // eslint-disable-next-line nuxt/no-globals-in-created
-    window.addEventListener('resize', this.handleResize)
-    this.handleResize()
-    this.getAll()
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+    this.getAll();
+    this.addActivityStatistic()
   },
   methods: {
-    openReply2 (y, x) {
-      this.$store.commit('user/SET_BTN_AUDIO', true)
-      console.log(x)
-      this.indexSub2 = y
-      this.boxReply = !this.boxReply
-      this.dataSubReply = x
+    addActivityStatistic() {
+      const data = {
+        activity_id: this.$route.params.index,
+        activity_type_id: 2,
+        activity_name: this.detailActivity.name,
+      };
+      this.$store
+        .dispatch("statistic/addActivityStatistic", data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {})
+        .catch((error) => {});
     },
-    openReply (x, y) {
-      this.$store.commit('user/SET_BTN_AUDIO', true)
-      this.showReply = x
+    openReply2(y, x) {
+      this.$store.commit("user/SET_BTN_AUDIO", true);
+      console.log(x);
+      this.indexSub2 = y;
+      this.boxReply = !this.boxReply;
+      this.dataSubReply = x;
+    },
+    openReply(x, y) {
+      this.$store.commit("user/SET_BTN_AUDIO", true);
+      this.showReply = x;
       if (x === true) {
-        this.indexSub = y
+        this.indexSub = y;
       }
     },
-    submitComment () {
-      this.$store.commit('user/SET_BTN_AUDIO', true)
+    submitComment() {
+      this.$store.commit("user/SET_BTN_AUDIO", true);
       const data = {
         id: this.dataSubReply,
-        review: this.subReply
-      }
+        review: this.subReply,
+      };
       this.$store
-        .dispatch('module/postSubDiscuss', data)
+        .dispatch("module/postSubDiscuss", data)
         .then((response) => {
-          this.infiniteId += 1
-          this.descReview = ''
-          this.subReply = ''
-          this.page = 1
+          this.infiniteId += 1;
+          this.descReview = "";
+          this.subReply = "";
+          this.page = 1;
           const data = {
             id: this.$route.params.index,
-            page: this.page
-          }
+            page: this.page,
+          };
           this.$store
-            .dispatch('module/fetchAllDiscuss', data)
+            .dispatch("module/fetchAllDiscuss", data)
             .then((response) => {
-              this.itemsDiscuss = response.data.data.data
-              console.log('discuss ', this.itemsDiscuss)
-              this.total = response.data.data.total
-              this.boxReply = false
-            })
+              this.itemsDiscuss = response.data.data.data;
+              console.log("discuss ", this.itemsDiscuss);
+              this.total = response.data.data.total;
+              this.boxReply = false;
+            });
         })
         .catch((error) => {
-          console.log('error:', error)
-          this.isLoading = false
+          console.log("error:", error);
+          this.isLoading = false;
           this.$toast.error(error.response, {
-            position: 'top-center',
-            duration: 5000
-          })
-        })
+            position: "top-center",
+            duration: 5000,
+          });
+        });
     },
-    addReview () {
-      this.$store.commit('user/SET_BTN_AUDIO', true)
+    addReview() {
+      this.$store.commit("user/SET_BTN_AUDIO", true);
       const data = {
         module_rail_id: this.$route.params.index,
-        review: this.descReview
-      }
+        review: this.descReview,
+      };
       this.$store
-        .dispatch('module/postDiscuss', data)
+        .dispatch("module/postDiscuss", data)
         .then((response) => {
-          this.infiniteId += 1
-          this.descReview = ''
-          this.page = 1
+          this.infiniteId += 1;
+          this.descReview = "";
+          this.page = 1;
           const data = {
             id: this.$route.params.index,
-            page: this.page
-          }
+            page: this.page,
+          };
           this.$store
-            .dispatch('module/fetchAllDiscuss', data)
+            .dispatch("module/fetchAllDiscuss", data)
             .then((response) => {
-              this.itemsDiscuss = response.data.data.data
-              this.total = response.data.data.total
-            })
+              this.itemsDiscuss = response.data.data.data;
+              this.total = response.data.data.total;
+            });
         })
         .catch((error) => {
-          console.log('error:', error)
-          this.isLoading = false
+          console.log("error:", error);
+          this.isLoading = false;
           this.$toast.error(error.response, {
-            position: 'top-center',
-            duration: 5000
-          })
-        })
+            position: "top-center",
+            duration: 5000,
+          });
+        });
     },
-    playGame (x) {
-      this.$store.commit('user/SET_BTN_AUDIO', true)
+    playGame(x) {
+      this.$store.commit("user/SET_BTN_AUDIO", true);
       this.$router.push({
-        name: 'library-module-detail-index-game-embed',
+        name: "library-module-detail-index-game-embed",
         params: {
-          link: x
-        }
-      })
+          link: x,
+        },
+      });
     },
-    playGame2 (x) {
-      this.$store.commit('user/SET_BTN_AUDIO', true)
+    playGame2(x) {
+      this.$store.commit("user/SET_BTN_AUDIO", true);
       if (this.VRpin !== 0) {
-        window.open(x + '?pinVR=' + this.VRpin, '_blank')
+        window.open(x + "?pinVR=" + this.VRpin, "_blank");
       } else {
-        this.$toast.error('Please generate PIN from settings menu before starting the module', {
-          position: 'top-center',
-          duration: 5000
-        })
+        this.$toast.error(
+          "Please generate PIN from settings menu before starting the module",
+          {
+            position: "top-center",
+            duration: 5000,
+          }
+        );
       }
     },
-    handleResize () {
-      this.window.width = window.innerWidth
-      this.window.height = window.innerHeight
+    handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
     },
-    dialogDownload (data) {
-      this.dataAttachment = data
-      this.dialog = true
+    dialogDownload(data) {
+      this.dataAttachment = data;
+      this.dialog = true;
     },
-    getAll () {
-      this.getData()
-      this.getAllDiscuss()
+    getAll() {
+      this.getData();
+      this.getAllDiscuss();
       // this.checkPin()
     },
-    getData () {
-      this.isLoading = true
+    getData() {
+      this.isLoading = true;
       const data = {
         module: this.idModule,
-        activity: this.$route.params.index
-      }
+        activity: this.$route.params.index,
+      };
       this.$store
-        .dispatch('module/fetchDetailActivity', data)
+        .dispatch("module/fetchDetailActivity", data)
         .then((response) => {
-          this.archievements = response.data.data.achievements
-          this.isLoading = false
+          this.archievements = response.data.data.achievements;
+          this.isLoading = false;
         })
         .catch((error) => {
-          this.isLoading = false
+          this.isLoading = false;
           this.$toast.error(error.response, {
-            position: 'top-center',
-            duration: 5000
-          })
-        })
+            position: "top-center",
+            duration: 5000,
+          });
+        });
     },
-    getAllDiscuss () {
-      this.isLoading = true
-      this.page = 1
+    getAllDiscuss() {
+      this.isLoading = true;
+      this.page = 1;
       const data = {
         id: this.$route.params.index,
-        page: this.page
-      }
+        page: this.page,
+      };
       this.$store
-        .dispatch('module/fetchAllDiscuss', data)
+        .dispatch("module/fetchAllDiscuss", data)
         .then((response) => {
-          this.itemsDiscuss = response.data.data.data
-          this.total = response.data.data.total
-          console.log('discuss : ', response.data.data)
-          this.isLoading = false
+          this.itemsDiscuss = response.data.data.data;
+          this.total = response.data.data.total;
+          console.log("discuss : ", response.data.data);
+          this.isLoading = false;
         })
         .catch((error) => {
-          this.isLoading = false
+          this.isLoading = false;
           this.$toast.error(error.response, {
-            position: 'top-center',
-            duration: 5000
-          })
-        })
+            position: "top-center",
+            duration: 5000,
+          });
+        });
     },
-    async generatePIN () {
+    async generatePIN() {
       await this.$axios
-        .post('/student/vr-pin/generate')
+        .post("/student/vr-pin/generate")
         .then((res) => {
-          this.showVR = true
-          this.$store.commit('user/SET_PIN', res.data.pin)
+          this.showVR = true;
+          this.$store.commit("user/SET_PIN", res.data.pin);
         })
         .catch((error) => {
-          this.showVR = false
+          this.showVR = false;
           this.$toast.error(error.response, {
-            position: 'top-center',
-            duration: 5000
-          })
-        })
+            position: "top-center",
+            duration: 5000,
+          });
+        });
     },
-    infiniteScroll ($state) {
+    infiniteScroll($state) {
       setTimeout(() => {
-        this.page++
+        this.page++;
         const data = {
           page: this.page,
-          id: this.$route.params.index
-        }
+          id: this.$route.params.index,
+        };
         this.$store
-          .dispatch('module/fetchAllDiscuss', data)
+          .dispatch("module/fetchAllDiscuss", data)
           .then((resp) => {
             if (resp.data.data.data.length > 1) {
-              resp.data.data.data.forEach(item => this.itemsDiscuss.push(item))
-              $state.loaded()
+              resp.data.data.data.forEach((item) =>
+                this.itemsDiscuss.push(item)
+              );
+              $state.loaded();
             } else {
-              $state.complete()
+              $state.complete();
             }
           })
           .catch((error) => {
             this.$toast.error(error.response, {
-              position: 'top-center',
-              duration: 5000
-            })
-          })
-      }, 500)
+              position: "top-center",
+              duration: 5000,
+            });
+          });
+      }, 500);
     },
-    goBack () {
-      this.$store.commit('user/SET_BTN_AUDIO', true)
-      this.$router.go(-1)
+    goBack() {
+      this.$store.commit("user/SET_BTN_AUDIO", true);
+      this.$router.go(-1);
     },
-    tab (id, number) {
-      this.$store.commit('user/SET_BTN_AUDIO', true)
+    tab(id, number) {
+      this.$store.commit("user/SET_BTN_AUDIO", true);
       if (id === 1) {
-        this.selected1 = true
-        this.selected2 = false
-        this.selected3 = false
+        this.selected1 = true;
+        this.selected2 = false;
+        this.selected3 = false;
       }
       if (id === 2) {
-        this.selected1 = false
-        this.selected2 = true
-        this.selected3 = false
+        this.selected1 = false;
+        this.selected2 = true;
+        this.selected3 = false;
       }
       if (id === 3) {
-        this.selected1 = false
-        this.selected2 = false
-        this.selected3 = true
+        this.selected1 = false;
+        this.selected2 = false;
+        this.selected3 = true;
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 .contain-list >>> .v-toolbar__content,
@@ -872,7 +879,7 @@ export default {
   padding-left: 0px;
 }
 .bg-img {
-  background-image: url('~@/assets/images/module/bg.png');
+  background-image: url("~@/assets/images/module/bg.png");
   height: 100%;
   width: 100%;
   z-index: 2;

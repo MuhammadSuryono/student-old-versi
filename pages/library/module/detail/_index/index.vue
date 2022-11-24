@@ -135,23 +135,21 @@
                 style="padding: 0px 20px 0px 20px;margin-bottom:25px;"
                 :style="indexRail === 0 ? 'margin-bottom:15px;' : ''"
               >
-              <v-toolbar
+                <v-toolbar
                   v-if="detailModule.enrolled === false"
                   color="white"
                   class="contain-list"
-                  @click="indexRail == 0 && detailModule.trial_mode ? detailActivity(rail) : null"
-               
                   :style="indexRail == 0 && detailModule.trial_mode ? 'opacity:1' : 'opacity: 0.6;'"
+
+                  @click="indexRail == 0 && detailModule.trial_mode ? detailActivity(rail) : null"
                 >
-                <template v-if="detailModule.trial_mode">
-                  <img v-if="indexRail != 0" src="~/assets/images/module/lock.svg" class="img-lock">
+                  <template v-if="detailModule.trial_mode">
+                    <img v-if="indexRail != 0" src="~/assets/images/module/lock.svg" class="img-lock">
+                  </template>
+                  <template v-else>
+                    <img src="~/assets/images/module/lock.svg" class="img-lock">
+                  </template>
 
-                </template>
-                <template v-else>
-                  <img src="~/assets/images/module/lock.svg" class="img-lock">
-
-                </template>
-                
                   <img :src="rail.thumbnail" class="img-title">
                   <v-divider class="mx-4" vertical />
                   <div class="data-desc">
@@ -277,31 +275,11 @@
                     </div>
                   </div>
                 </v-toolbar>
-                <div
+                <ButtonInterested
                   v-if="!detailModule.enrolled && indexRail === 0 && detailModule.trial_mode"
-                  class="btn-finish"
-                  style="margin-top:15px;"
-                  @click="dialogPopup = true"
-                  @mouseover="hover2 = true"
-                  @mouseleave="hover2 = false"
-                >
-
-                  <div class="decoration" />
-                  <div class="square-right" />
-                  <div class="card-btn">
-                    <IconJempol
-                      v-if="!hover2"
-                      bg-color="#3B69BC"
-                      style="margin-right:10px;"
-                    />
-                    <IconJempol
-                      v-else
-                      bg-color="white"
-                      style="margin-right:10px;"
-                    />
-                    I am interested
-                  </div>
-                </div>
+                  style="margin-left:auto;margin-right:auto;"
+                  @click.native="dialogPopup = true"
+                />
               </div>
               <div
                 v-if="(detailModule.activity_rails[detailModule.activity_rails.length - 1].detail.score > 0) && detailModule.enrolled"
@@ -498,7 +476,7 @@
                   Email
                 </template>
               </FormInput>
-              <FormInput :value="data.phone_number" style="margin-top:50px;" @input="data.phone_number = $event">
+              <FormInput placeholder="(Optional)" :value="data.phone_number" style="margin-top:50px;" @input="data.phone_number = $event">
                 <template v-slot:label>
                   Phone Number
                 </template>
@@ -554,7 +532,8 @@ export default {
         email: '',
         phone_number: '',
         reason: ''
-      }
+      },
+      user_id: 0
     }
   },
 
@@ -576,10 +555,25 @@ export default {
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
     this.getAll()
+    this.addModuleStatistic()
   },
   methods: {
+    addModuleStatistic(){
+      const data = {
+          module_id: this.$route.params.index,
+        }
+      this.$store
+        .dispatch('statistic/addModuleStatistic', data, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((response) => {})
+        .catch((error) => {
+        })
+    },
     openWA () {
-      window.open('https://wa.me/6285925091511', '_blank').focus()
+      window.open('https://wa.me/6285925091508?text=Hi%20My%20Name%20is%20' + this.data.name + '%20(user%20id:%20' + this.user_id + ')', '_blank').focus()
     },
     async submitForm () {
       const data = new FormData()
@@ -672,6 +666,26 @@ export default {
     getAll () {
       this.getData()
       this.getReview()
+      this.getUser()
+    },
+    getUser () {
+      this.$store
+        .dispatch('user/get')
+        .then((response) => {
+          const data = response.data.data.user
+          console.log('user : ', data)
+          this.data.name = data.full_name
+          this.data.email = data.email
+          this.data.module = this.detailModule.module_name
+          this.user_id = data.id
+          this.data.reason = 'Hi My Name is ' + data.full_name + ' and I am interested in Module ' + this.detailModule.module_name + ' because...'
+        })
+        .catch((error) => {
+          if (error.status === 401) {
+            this.$auth.logout()
+            this.$router.push('/login')
+          }
+        })
     },
     addReview () {
       this.$store.commit('user/SET_BTN_AUDIO', true)
@@ -760,7 +774,6 @@ export default {
             duration: 5000
           })
         })
-
     },
     getReview () {
       console.log('getReview')

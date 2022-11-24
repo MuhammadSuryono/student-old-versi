@@ -32,6 +32,7 @@ You can directly use them in pages and other components without the need to impo
 - `<Confirmation>` | `<confirmation>` (components/confirmation.vue)
 - `<FormArea>` | `<form-area>` (components/Form/area.vue)
 - `<FormInput>` | `<form-input>` (components/Form/input.vue)
+- `<ButtonInterested>` | `<button-interested>` (components/button/interested.vue)
 - `<ButtonPin>` | `<button-pin>` (components/button/pin.vue)
 - `<ButtonPlay>` | `<button-play>` (components/button/play.vue)
 - `<CardCollection>` | `<card-collection>` (components/card/Collection.vue)

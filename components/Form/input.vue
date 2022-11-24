@@ -4,7 +4,7 @@
       <slot name="label" />
     </div>
     <div class="data-form">
-      <input v-model="inputVal" class="input-card" placeholder="">
+      <input v-model="inputVal" class="input-card" :placeholder="placeholder">
       <div class="layer-1" />
       <div class="layer-2" />
       <div class="box-layer" />
@@ -18,6 +18,10 @@ export default {
     value: {
       type: String,
       default: 'white'
+    },
+    placeholder: {
+      type: String,
+      default: ''
     }
   },
   computed: {
