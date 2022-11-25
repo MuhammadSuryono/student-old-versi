@@ -585,11 +585,6 @@ export default {
          
         });
     },
-    addModuleStatistic() {
-      const data = {
-        module_id: this.$route.params.index,
-      };
-    },
     addModuleStatistic () {
       const data = {
         module_id: this.$route.params.index
