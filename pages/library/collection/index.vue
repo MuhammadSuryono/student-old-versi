@@ -56,7 +56,7 @@
               <CardCollection
                 :modules="item.module_name"
                 :academic="item.academic_field"
-                :studio="item.studio_name"
+                :studio="item.lecturer.length > 0 ? item.lecturer[0].name : '-'"
                 :activity="item.total_activities"
                 :discussion="item.total_discussion"
                 :display="item.display_picture"

@@ -5,13 +5,13 @@
         <img
           src="~/assets/images/module/box-title.svg"
           class="background-button"
-        >
+        />
         <div class="name-card">
           {{ detailModule.module_name }}
         </div>
       </div>
       <div class="card-title">
-        <img src="~/assets/images/module/detail-box.svg" class="detail-box">
+        <img src="~/assets/images/module/detail-box.svg" class="detail-box" />
         <div class="name-card2">
           Introduction to {{ detailModule.module_name }}
         </div>
@@ -24,34 +24,26 @@
     <div class="content-module">
       <div class="columns is-gapless mb-0 pb-0">
         <div v-if="selected1" class="tab-petra">
-          <img src="~/assets/images/tab/tab-active.svg" class="icon-button">
-          <div class="text-petra">
-            Module Details
-          </div>
+          <img src="~/assets/images/tab/tab-active.svg" class="icon-button" />
+          <div class="text-petra">Module Details</div>
         </div>
         <div v-else class="tab-petra" @click="tab(1, true)">
           <img
             src="~/assets/images/tab/tab-nonactive.svg"
             class="icon-button"
-          >
-          <div class="text-petra">
-            Module Details
-          </div>
+          />
+          <div class="text-petra">Module Details</div>
         </div>
         <div v-if="selected2" class="tab-petra">
-          <img src="~/assets/images/tab/tab-active.svg" class="icon-button">
-          <div class="text-petra">
-            Reviews
-          </div>
+          <img src="~/assets/images/tab/tab-active.svg" class="icon-button" />
+          <div class="text-petra">Reviews</div>
         </div>
         <div v-else class="tab-petra" @click="tab(2, true)">
           <img
             src="~/assets/images/tab/tab-nonactive.svg"
             class="icon-button"
-          >
-          <div class="text-petra">
-            Reviews
-          </div>
+          />
+          <div class="text-petra">Reviews</div>
         </div>
       </div>
       <div class="card-list">
@@ -62,7 +54,7 @@
             <img
               src="~/assets/images/module/detail-star.svg"
               class="rating-bg"
-            >
+            />
             <div class="rating-card columns">
               {{ detailModule.module_rating.toFixed(1) }}/5
               <b-rate
@@ -83,7 +75,7 @@
             </div>
           </span>
           <div ref="infoBox" class="column is-narrow left-side">
-            <img :src="detailModule.display_picture" class="display-pic">
+            <img :src="detailModule.display_picture" class="display-pic" />
             <div class="petra-description">
               {{ detailModule.module_description }}
             </div>
@@ -92,7 +84,7 @@
               :key="index"
               class="petra-c1"
             >
-              {{ soft.name }} ({{ soft.symbol }}),<br>
+              {{ soft.name }} ({{ soft.symbol }}),<br />
             </div>
             <div
               class="petra-owner"
@@ -103,8 +95,8 @@
               "
             >
               by:
-              <span v-if="detailModule.lecturer !== ''">{{
-                detailModule.lecturer
+              <span v-if="detailModule.lecturer.length > 0">{{
+                detailModule.lecturer[0].name
               }}</span>
               <span v-else>-</span>
             </div>
@@ -123,34 +115,46 @@
               <img
                 src="~/assets/images/module/detail-rail.svg"
                 class="display-rail"
-              >
-              <div class="text-title">
-                Activity Rail
-              </div>
+              />
+              <div class="text-title">Activity Rail</div>
             </div>
             <div class="petra-content" style="padding-top: 20px">
               <div
                 v-for="(rail, indexRail) in detailModule.activity_rails"
                 :key="indexRail"
-                style="padding: 0px 20px 0px 20px;margin-bottom:25px;"
+                style="padding: 0px 20px 0px 20px; margin-bottom: 25px"
                 :style="indexRail === 0 ? 'margin-bottom:15px;' : ''"
               >
                 <v-toolbar
                   v-if="detailModule.enrolled === false"
                   color="white"
                   class="contain-list"
-                  :style="indexRail == 0 && detailModule.trial_mode ? 'opacity:1' : 'opacity: 0.6;'"
-
-                  @click="indexRail == 0 && detailModule.trial_mode ? detailActivity(rail) : null"
+                  :style="
+                    indexRail == 0 && detailModule.trial_mode
+                      ? 'opacity:1'
+                      : 'opacity: 0.6;'
+                  "
+                  @click="
+                    indexRail == 0 && detailModule.trial_mode
+                      ? detailActivity(rail)
+                      : null
+                  "
                 >
                   <template v-if="detailModule.trial_mode">
-                    <img v-if="indexRail != 0" src="~/assets/images/module/lock.svg" class="img-lock">
+                    <img
+                      v-if="indexRail != 0"
+                      src="~/assets/images/module/lock.svg"
+                      class="img-lock"
+                    />
                   </template>
                   <template v-else>
-                    <img src="~/assets/images/module/lock.svg" class="img-lock">
+                    <img
+                      src="~/assets/images/module/lock.svg"
+                      class="img-lock"
+                    />
                   </template>
 
-                  <img :src="rail.thumbnail" class="img-title">
+                  <img :src="rail.thumbnail" class="img-title" />
                   <v-divider class="mx-4" vertical />
                   <div class="data-desc">
                     <div class="module-name">
@@ -178,28 +182,28 @@
                       v-if="rail.type_activity === 'reading'"
                       class="studio-name"
                     >
-                      {{ rail.detail.total_pages }} Pages <br>
+                      {{ rail.detail.total_pages }} Pages <br />
                       {{ rail.detail.count_discussion }} Discussions
                     </div>
                     <div
                       v-if="rail.type_activity === 'game'"
                       class="studio-name"
                     >
-                      Score : {{ rail.detail.score }} <br>
+                      Score : {{ rail.detail.score }} <br />
                       {{ rail.detail.count_discussion }} Discussions
                     </div>
                     <div
                       v-if="rail.type_activity === 'quiz'"
                       class="studio-name"
                     >
-                      High Score : {{ rail.detail.high_score }} <br>
+                      High Score : {{ rail.detail.high_score }} <br />
                       {{ rail.detail.count_discussion }} Discussions
                     </div>
                     <div
                       v-if="rail.type_activity === 'video'"
                       class="studio-name"
                     >
-                      Duration : {{ rail.detail.duration }} <br>
+                      Duration : {{ rail.detail.duration }} <br />
                       {{ rail.detail.count_discussion }} Discussions
                     </div>
                   </div>
@@ -220,8 +224,8 @@
                     v-if="rail.detail.is_locked"
                     src="~/assets/images/module/lock.svg"
                     class="img-lock"
-                  >
-                  <img :src="rail.thumbnail" class="img-title">
+                  />
+                  <img :src="rail.thumbnail" class="img-title" />
                   <v-divider class="mx-4" vertical />
                   <div class="data-desc">
                     <div class="module-name">
@@ -249,40 +253,48 @@
                       v-if="rail.type_activity === 'reading'"
                       class="studio-name"
                     >
-                      {{ rail.detail.total_pages }} Pages <br>
+                      {{ rail.detail.total_pages }} Pages <br />
                       {{ rail.detail.count_discussion }} Discussions
                     </div>
                     <div
                       v-if="rail.type_activity === 'game'"
                       class="studio-name"
                     >
-                      Score : {{ rail.detail.score }} <br>
+                      Score : {{ rail.detail.score }} <br />
                       {{ rail.detail.count_discussion }} Discussions
                     </div>
                     <div
                       v-if="rail.type_activity === 'quiz'"
                       class="studio-name"
                     >
-                      High Score : {{ rail.detail.high_score }} <br>
+                      High Score : {{ rail.detail.high_score }} <br />
                       {{ rail.detail.count_discussion }} Discussions
                     </div>
                     <div
                       v-if="rail.type_activity === 'video'"
                       class="studio-name"
                     >
-                      Duration : {{ rail.detail.duration }} <br>
+                      Duration : {{ rail.detail.duration }} <br />
                       {{ rail.detail.count_discussion }} Discussions
                     </div>
                   </div>
                 </v-toolbar>
                 <ButtonInterested
-                  v-if="!detailModule.enrolled && indexRail === 0 && detailModule.trial_mode"
-                  style="margin-left:auto;margin-right:auto;"
-                  @click.native="dialogPopup = true"
+                  v-if="
+                    !detailModule.enrolled &&
+                    indexRail === 0 &&
+                    detailModule.trial_mode
+                  "
+                  style="margin-left: auto; margin-right: auto"
+                  @click.native="(dialogPopup = true), addInterestStatistic()"
                 />
               </div>
               <div
-                v-if="(detailModule.activity_rails[detailModule.activity_rails.length - 1].detail.score > 0) && detailModule.enrolled"
+                v-if="
+                  detailModule.activity_rails[
+                    detailModule.activity_rails.length - 1
+                  ].detail.score > 0 && detailModule.enrolled
+                "
                 class="btn-finish"
                 @click="toFinish()"
                 @mouseover="hover1 = true"
@@ -293,12 +305,12 @@
                   <IconTopi
                     v-if="!hover1"
                     bg-color="#3B69BC"
-                    style="margin-right:10px;"
+                    style="margin-right: 10px"
                   />
                   <IconTopi
                     v-else
                     bg-color="white"
-                    style="margin-right:10px;"
+                    style="margin-right: 10px"
                   />
                   Finish Module
                 </div>
@@ -311,25 +323,23 @@
             <img
               src="~/assets/images/module/review-bg.png"
               class="background-card"
-            >
+            />
 
             <div
               class="p-displaypic"
               :style="{ backgroundColor: dataUser.faction.avatar_bgcolor }"
             >
-              <img :src="dataUser.avatar.image" class="p-img">
+              <img :src="dataUser.avatar.image" class="p-img" />
             </div>
             <div class="p-username">
               {{ dataUser.username }}
             </div>
-            <div class="rate-text">
-              Please rate module here.
-            </div>
+            <div class="rate-text">Please rate module here.</div>
             <span class="petra-rating">
               <img
                 src="~/assets/images/module/detail-star.svg"
                 class="rating-bg"
-              >
+              />
               <div class="rating-card columns">
                 {{ ratingReview }}/5
                 <b-rate
@@ -348,12 +358,12 @@
               <img
                 src="~/assets/images/module/comment-border.svg"
                 class="bg-bor"
-              >
-              <img src="~/assets/images/module/comment-bg.svg" class="bg-com">
+              />
+              <img src="~/assets/images/module/comment-bg.svg" class="bg-com" />
               <img
                 src="~/assets/images/module/comment-corner.svg"
                 class="bg-cor"
-              >
+              />
 
               <div class="hexagon">
                 <textarea
@@ -375,10 +385,8 @@
               <img
                 src="~/assets/images/module/detail-rail.svg"
                 class="display-rail"
-              >
-              <div class="text-title">
-                Show all reviews
-              </div>
+              />
+              <div class="text-title">Show all reviews</div>
             </div>
             <div class="petra-content">
               <div style="padding: 20px 20px 10px 20px">
@@ -404,7 +412,7 @@
                         object-position: 53% 0%;
                         margin-top: 13px;
                       "
-                    >
+                    />
                   </div>
                   <div class="column box-list">
                     <div class="student-name">
@@ -415,7 +423,7 @@
                       <img
                         src="~/assets/images/module/detail-star.svg"
                         class="rating-bg"
-                      >
+                      />
                       <div class="rating-card columns">
                         {{ review.rating.toFixed(1) }} /5
                         <b-rate
@@ -449,51 +457,56 @@
         v-if="dialogPopup"
         class="dialog-filter"
         :style="{
-          height: window.height - 68 + 'px'
+          height: window.height - 68 + 'px',
         }"
       >
         <div class="center-dialog">
           <div class="container-dialog">
-            <img src="~/assets/images/tellmewhy.svg" class="title-btn">
+            <img src="~/assets/images/tellmewhy.svg" class="title-btn" />
             <img
               src="~/assets/images/dialog_back.svg"
               class="back-btn"
               @click="dialogPopup = false"
-            >
+            />
             <div class="form-container">
               <FormInput :value="data.name" @input="data.name = $event">
-                <template v-slot:label>
-                  Name
-                </template>
+                <template v-slot:label> Name </template>
               </FormInput>
-              <FormInput :value="data.module" style="margin-top:50px;" @input="data.module = $event">
-                <template v-slot:label>
-                  Module
-                </template>
+              <FormInput
+                :value="data.module"
+                style="margin-top: 50px"
+                @input="data.module = $event"
+              >
+                <template v-slot:label> Module </template>
               </FormInput>
-              <FormInput :value="data.email" style="margin-top:50px;" @input="data.email = $event">
-                <template v-slot:label>
-                  Email
-                </template>
+              <FormInput
+                :value="data.email"
+                style="margin-top: 50px"
+                @input="data.email = $event"
+              >
+                <template v-slot:label> Email </template>
               </FormInput>
-              <FormInput placeholder="(Optional)" :value="data.phone_number" style="margin-top:50px;" @input="data.phone_number = $event">
-                <template v-slot:label>
-                  Phone Number
-                </template>
+              <FormInput
+                placeholder="(Optional)"
+                :value="data.phone_number"
+                style="margin-top: 50px"
+                @input="data.phone_number = $event"
+              >
+                <template v-slot:label> Phone Number </template>
               </FormInput>
-              <FormArea :value="data.reason" style="margin-top:50px;" @input="data.reason = $event">
-                <template v-slot:label>
-                  Reason
-                </template>
+              <FormArea
+                :value="data.reason"
+                style="margin-top: 50px"
+                @input="data.reason = $event"
+              >
+                <template v-slot:label> Reason </template>
               </FormArea>
               <div class="footer-btn">
                 <div class="btn-wa" @click="openWA()">
-                  <img src="~/assets/images/dialog_wa.svg">
+                  <img src="~/assets/images/dialog_wa.svg" />
                 </div>
                 <div class="btn-submit" @click="submitForm()">
-                  <div class="text-btn">
-                    Submit
-                  </div>
+                  <div class="text-btn">Submit</div>
                 </div>
               </div>
             </div>
@@ -504,336 +517,361 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 export default {
-  name: 'ModuleDetailPage',
-  layout: 'default',
+  name: "ModuleDetailPage",
+  layout: "default",
 
-  data () {
+  data() {
     return {
       selected1: true,
       selected2: false,
-      id: '',
+      id: "",
       tinggi: 0,
       isLoading: true,
       itemsReview: {},
       ratingReview: 0,
-      descReview: '',
+      descReview: "",
       hover1: false,
       hover2: false,
       dialogPopup: false,
       window: {
         width: 0,
-        height: 0
+        height: 0,
       },
       data: {
-        name: '',
-        module: '',
-        email: '',
-        phone_number: '',
-        reason: ''
+        name: "",
+        module: "",
+        email: "",
+        phone_number: "",
+        reason: "",
       },
-      user_id: 0
-    }
+      user_id: 0,
+    };
   },
 
   computed: {
     ...mapState({
       detailModule: (state) => {
-        return state.module.dataDetailModule
+        return state.module.dataDetailModule;
       },
       dataUser: (state) => {
-        return state.user.users
-      }
+        return state.user.users;
+      },
     }),
-    tinggi2 () {
-      return 'height:' + this.tinggi
-    }
+    tinggi2() {
+      return "height:" + this.tinggi;
+    },
   },
-  created () {
+  created() {
     // eslint-disable-next-line nuxt/no-globals-in-created
-    window.addEventListener('resize', this.handleResize)
-    this.handleResize()
-    this.getAll()
-    this.addModuleStatistic()
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+    this.getAll();
+    this.addModuleStatistic();
   },
   methods: {
-    addModuleStatistic(){
+    async addInterestStatistic() {
       const data = {
-          module_id: this.$route.params.index,
-        }
-      this.$store
-        .dispatch('statistic/addModuleStatistic', data, {
+        module_id: this.$route.params.index,
+      };
+      await this.$axios
+        .post("statistics/interest", data, {
           headers: {
-            'Content-Type': 'application/json'
-          }
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+         
+        });
+    },
+    addModuleStatistic() {
+      const data = {
+        module_id: this.$route.params.index,
+      };
+
+    addModuleStatistic () {
+      const data = {
+        module_id: this.$route.params.index
+      }
+      this.$store
+        .dispatch("statistic/addModuleStatistic", data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
         })
         .then((response) => {})
-        .catch((error) => {
-        })
+        .catch((error) => {});
     },
+
     openWA () {
-      window.open('https://wa.me/6285925091508?text=Hi%20My%20Name%20is%20' + this.data.name + '%20(user%20id:%20' + this.user_id + ')', '_blank').focus()
+      window.open('https://wa.me/+6281359809348?text=Hi%20My%20Name%20is%20' + this.data.name + '%20and%20I%20am%20interested%20in%20' + this.detailModule.module_name + '%20because...', '_blank').focus()
     },
-    async submitForm () {
-      const data = new FormData()
-      data.append('name', this.data.name)
-      data.append('module', this.data.module)
-      data.append('email', this.data.email)
-      data.append('phone_number', this.data.phone_number)
-      data.append('reason', this.data.reason)
+    async submitForm() {
+      const data = new FormData();
+      data.append("name", this.data.name);
+      data.append("module", this.data.module);
+      data.append("email", this.data.email);
+      data.append("phone_number", this.data.phone_number);
+      data.append("reason", this.data.reason);
       await this.$axios
-        .post('student/trial-mode/interested', data, {
+        .post("student/trial-mode/interested", data, {
           headers: {
-            'Content-Type': 'application/json'
-          }
+            "Content-Type": "application/json",
+          },
         })
         .then((res) => {
-          this.dialogPopup = false
-          this.$toast.success('Success', {
-            position: 'top-center',
-            duration: 5000
-          })
-        }).catch((error) => {
-          const keys = Object.keys(
-            error.response.data.errors
-          )
-          const arr = []
+          this.dialogPopup = false;
+          this.$toast.success("Success", {
+            position: "top-center",
+            duration: 5000,
+          });
+        })
+        .catch((error) => {
+          const keys = Object.keys(error.response.data.errors);
+          const arr = [];
           keys.forEach((key, index) => {
-            arr.push(
-              error.response.data.errors[
-                key
-              ]
-            )
-          })
+            arr.push(error.response.data.errors[key]);
+          });
           this.$toast.error(arr.join(), {
-            position: 'top-center',
-            duration: 5000
-          })
-        })
+            position: "top-center",
+            duration: 5000,
+          });
+        });
     },
-    handleResize () {
-      this.window.width = window.innerWidth
-      this.window.height = window.innerHeight
+    handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
     },
-    muteAudio () {
-      const playedPromise = this.$parent.$parent.$refs.player.play()
+    muteAudio() {
+      const playedPromise = this.$parent.$parent.$refs.player.play();
       if (playedPromise) {
-        playedPromise.catch((e) => {
-          console.log(e)
-          if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
-            console.log(e.name)
-          }
-        }).then(() => {
-          console.log('playing sound !!!')
-          this.$parent.$parent.$refs.player.volume = 0
-          this.$parent.$parent.$refs.player.play()
-        })
+        playedPromise
+          .catch((e) => {
+            console.log(e);
+            if (
+              e.name === "NotAllowedError" ||
+              e.name === "NotSupportedError"
+            ) {
+              console.log(e.name);
+            }
+          })
+          .then(() => {
+            console.log("playing sound !!!");
+            this.$parent.$parent.$refs.player.volume = 0;
+            this.$parent.$parent.$refs.player.play();
+          });
       }
     },
-    async toFinish () {
-      const data = new FormData()
-      data.append('module_id', this.$route.params.index)
+    async toFinish() {
+      const data = new FormData();
+      data.append("module_id", this.$route.params.index);
       await this.$axios
-        .post('game/skillset/generateSkillCard', data, {
+        .post("game/skillset/generateSkillCard", data, {
           headers: {
-            'Content-Type': 'application/json'
-          }
+            "Content-Type": "application/json",
+          },
         })
         .then((res) => {
-          console.log(res.data.status === 200)
+          console.log(res.data.status === 200);
           if (res.data.status === 200) {
-            this.$toast.success('Success', {
-              position: 'top-center',
-              duration: 5000
-            })
-            this.getAll()
+            this.$toast.success("Success", {
+              position: "top-center",
+              duration: 5000,
+            });
+            this.getAll();
           } else {
             this.$toast.error(res.data.error.message, {
-              position: 'top-center',
-              duration: 5000
-            })
+              position: "top-center",
+              duration: 5000,
+            });
           }
-        }).catch((error) => {
-          console.log('error:', error.response.status)
-          this.isLoading = false
-          this.$toast.error('CPL are not set. Can not finish module.', {
-            position: 'top-center',
-            duration: 5000
-          })
         })
+        .catch((error) => {
+          console.log("error:", error.response.status);
+          this.isLoading = false;
+          this.$toast.error("CPL are not set. Can not finish module.", {
+            position: "top-center",
+            duration: 5000,
+          });
+        });
     },
-    getAll () {
-      this.getData()
-      this.getReview()
-      this.getUser()
+    getAll() {
+      this.getData();
+      this.getReview();
+      this.getUser();
     },
-    getUser () {
+    getUser() {
       this.$store
-        .dispatch('user/get')
+        .dispatch("user/get")
         .then((response) => {
-          const data = response.data.data.user
-          console.log('user : ', data)
-          this.data.name = data.full_name
-          this.data.email = data.email
-          this.data.module = this.detailModule.module_name
-          this.user_id = data.id
-          this.data.reason = 'Hi My Name is ' + data.full_name + ' and I am interested in Module ' + this.detailModule.module_name + ' because...'
+          const data = response.data.data.user;
+          console.log("user : ", data);
+          this.data.name = data.full_name;
+          this.data.email = data.email;
+          this.data.module = this.detailModule.module_name;
+          this.user_id = data.id;
+          this.data.reason =
+            "Hi My Name is " +
+            data.full_name +
+            " and I am interested in Module " +
+            this.detailModule.module_name +
+            " because...";
         })
         .catch((error) => {
           if (error.status === 401) {
-            this.$auth.logout()
-            this.$router.push('/login')
+            this.$auth.logout();
+            this.$router.push("/login");
           }
-        })
+        });
     },
-    addReview () {
-      this.$store.commit('user/SET_BTN_AUDIO', true)
-      if (this.descReview === '' || this.ratingReview === 0) {
-        this.$toast.error('Review and rate module is required', {
-          position: 'top-center',
-          duration: 5000
-        })
+    addReview() {
+      this.$store.commit("user/SET_BTN_AUDIO", true);
+      if (this.descReview === "" || this.ratingReview === 0) {
+        this.$toast.error("Review and rate module is required", {
+          position: "top-center",
+          duration: 5000,
+        });
       } else {
-        this.isLoading = true
+        this.isLoading = true;
         const data = {
           id: this.$route.params.index,
           review: this.descReview,
-          rating: this.ratingReview
-        }
+          rating: this.ratingReview,
+        };
         this.$store
-          .dispatch('module/addReview', data)
+          .dispatch("module/addReview", data)
           .then((response) => {
-            console.log('success', response)
+            console.log("success", response);
             if (response.status !== 201) {
               this.$toast.error(response.data.error.message, {
-                position: 'top-center',
-                duration: 5000
-              })
+                position: "top-center",
+                duration: 5000,
+              });
             }
-            this.getReview()
-            this.getData()
+            this.getReview();
+            this.getData();
           })
           .catch((error) => {
-            console.log('error:', error)
-            this.isLoading = false
+            console.log("error:", error);
+            this.isLoading = false;
             this.$toast.error(error.response, {
-              position: 'top-center',
-              duration: 5000
-            })
-          })
+              position: "top-center",
+              duration: 5000,
+            });
+          });
       }
     },
-    openDialog () {
+    openDialog() {
       this.$dialog.open({
-        message: 'Are you sure you want to do this?',
+        message: "Are you sure you want to do this?",
         resolver: async (result) => {
           try {
-            const res = await result
+            const res = await result;
             /* eslint-disable no-console */
-            console.log(res)
+            console.log(res);
           } catch (error) {
-            console.warn(error)
+            console.warn(error);
           }
-        }
-      })
+        },
+      });
     },
-    buyModule () {
-      this.$store.commit('user/SET_BTN_AUDIO', true)
-      this.isLoading = true
+    buyModule() {
+      this.$store.commit("user/SET_BTN_AUDIO", true);
+      this.isLoading = true;
       const data = {
-        user_id: localStorage.getItem('user_id'),
-        module_id: this.$route.params.index
-      }
-      console.log(data)
+        user_id: localStorage.getItem("user_id"),
+        module_id: this.$route.params.index,
+      };
+      console.log(data);
       this.$store
-        .dispatch('module/addModule', data)
+        .dispatch("module/addModule", data)
         .then((response) => {
-          this.getAll()
+          this.getAll();
         })
         .catch((error) => {
-          this.isLoading = false
+          this.isLoading = false;
           this.$toast.error(error.response, {
-            position: 'top-center',
-            duration: 5000
-          })
-        })
+            position: "top-center",
+            duration: 5000,
+          });
+        });
     },
-    getData () {
-      this.isLoading = true
+    getData() {
+      this.isLoading = true;
       this.$store
-        .dispatch('module/fetchDetailModule', this.$route.params.index)
+        .dispatch("module/fetchDetailModule", this.$route.params.index)
         .then((response) => {
-          this.tinggi = this.$refs.infoBox.clientHeight + 'px;'
-          this.isLoading = false
+          this.tinggi = this.$refs.infoBox.clientHeight + "px;";
+          this.isLoading = false;
         })
         .catch((error) => {
-          this.isLoading = false
+          this.isLoading = false;
           this.$toast.error(error.response, {
-            position: 'top-center',
-            duration: 5000
-          })
-        })
+            position: "top-center",
+            duration: 5000,
+          });
+        });
     },
-    getReview () {
-      console.log('getReview')
+    getReview() {
+      console.log("getReview");
       this.$store
-        .dispatch('module/getReview', this.$route.params.index)
+        .dispatch("module/getReview", this.$route.params.index)
         .then((response) => {
-          this.itemsReview = response.data.data
-          console.log('reviews : ', this.itemsReview)
+          this.itemsReview = response.data.data;
+          console.log("reviews : ", this.itemsReview);
         })
         .catch((error) => {
-          this.isLoading = false
+          this.isLoading = false;
           this.$toast.error(error.response, {
-            position: 'top-center',
-            duration: 5000
-          })
-        })
+            position: "top-center",
+            duration: 5000,
+          });
+        });
     },
-    goBack () {
-      this.$store.commit('user/SET_BTN_AUDIO', true)
-      this.$router.push('/library/module')
+    goBack() {
+      this.$store.commit("user/SET_BTN_AUDIO", true);
+      this.$router.push("/library/module");
     },
-    tab (id, number) {
-      this.$store.commit('user/SET_BTN_AUDIO', true)
+    tab(id, number) {
+      this.$store.commit("user/SET_BTN_AUDIO", true);
       if (id === 1) {
-        this.selected1 = true
-        this.selected2 = false
+        this.selected1 = true;
+        this.selected2 = false;
       }
       if (id === 2) {
-        this.selected1 = false
-        this.selected2 = true
+        this.selected1 = false;
+        this.selected2 = true;
       }
     },
-    detailActivity (rail) {
-      this.$store.commit('user/SET_BTN_AUDIO', true)
+    detailActivity(rail) {
+      this.$store.commit("user/SET_BTN_AUDIO", true);
       if (!rail.detail.is_locked) {
-        this.$store.dispatch('module/idModule', this.$route.params.index)
-        if (rail.type_activity === 'game') {
+        this.$store.dispatch("module/idModule", this.$route.params.index);
+        if (rail.type_activity === "game") {
           this.$router.push({
-            path: `/library/module/detail/${this.$route.params.index}/game/${rail.id}`
-          })
+            path: `/library/module/detail/${this.$route.params.index}/game/${rail.id}`,
+          });
         }
-        if (rail.type_activity === 'video') {
+        if (rail.type_activity === "video") {
           this.$router.push({
-            path: `/library/module/detail/${this.$route.params.index}/video/${rail.id}`
-          })
+            path: `/library/module/detail/${this.$route.params.index}/video/${rail.id}`,
+          });
         }
-        if (rail.type_activity === 'reading') {
+        if (rail.type_activity === "reading") {
           this.$router.push({
-            path: `/library/module/detail/${this.$route.params.index}/reading/${rail.id}`
-          })
+            path: `/library/module/detail/${this.$route.params.index}/reading/${rail.id}`,
+          });
         }
-        if (rail.type_activity === 'quiz') {
+        if (rail.type_activity === "quiz") {
           this.$router.push({
-            path: `/library/module/detail/${this.$route.params.index}/quiz/${rail.id}`
-          })
+            path: `/library/module/detail/${this.$route.params.index}/quiz/${rail.id}`,
+          });
         }
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 .contain-list >>> .v-toolbar__content,
@@ -841,7 +879,7 @@ export default {
   padding-left: 0px;
 }
 .bg-img {
-  background-image: url('~@/assets/images/module/bg.png');
+  background-image: url("~@/assets/images/module/bg.png");
   height: 100%;
   width: 100%;
   z-index: 2;
@@ -1099,17 +1137,17 @@ export default {
             height: 100%;
             .btn-finish {
               width: 182px;
-              position:relative;
+              position: relative;
               margin-left: 255px;
               .decoration {
-                background: #7289AA;
-                border: 1.6px solid #FFFFFF;
+                background: #7289aa;
+                border: 1.6px solid #ffffff;
                 height: 18px;
                 width: 18px;
                 top: -5px;
                 left: -6px;
-                z-index:-1;
-                position:absolute;
+                z-index: -1;
+                position: absolute;
               }
               .square-right {
                 background: white;
@@ -1121,9 +1159,9 @@ export default {
                 position: absolute;
               }
               .card-btn {
-                width:182px;
-                height:38.11px;
-                background: #F2F2F2;
+                width: 182px;
+                height: 38.11px;
+                background: #f2f2f2;
                 font-style: normal;
                 font-weight: 600;
                 font-size: 16px;
@@ -1131,18 +1169,19 @@ export default {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                cursor:pointer;
-                color: #3B69BC;
-                border:2px solid #FFF380;
+                cursor: pointer;
+                color: #3b69bc;
+                border: 2px solid #fff380;
               }
             }
             .btn-finish:hover {
               .card-btn {
                 border: 0.6px solid #aeeefa;
-                background:#4C7BC1;
-                color:white;
+                background: #4c7bc1;
+                color: white;
                 transition: border-color 0.5s, background-color 0.5s, color 0.5s;
-                -webkit-transition: border-color 0.5s, background-color 0.5s, color 0.5s;
+                -webkit-transition: border-color 0.5s, background-color 0.5s,
+                  color 0.5s;
                 transform: scale(0.9);
                 -webkit-transform: scale(0.9);
               }
@@ -1499,7 +1538,7 @@ export default {
     .container-dialog {
       height: 100%;
       width: 100%;
-      background-image: url('~@/assets/images/container.svg');
+      background-image: url("~@/assets/images/container.svg");
       padding: 20px;
       .title-btn {
         position: absolute;
@@ -1510,7 +1549,7 @@ export default {
         position: absolute;
         top: -45px;
         right: -10px;
-        cursor:pointer;
+        cursor: pointer;
       }
       .form-container {
         padding-left: 72px;
@@ -1518,34 +1557,34 @@ export default {
         padding-top: 20px;
         padding-bottom: 20px;
         .footer-btn {
-          margin-top:95px;
+          margin-top: 95px;
           display: flex;
           justify-content: space-between;
           .btn-wa {
-            cursor:pointer;
+            cursor: pointer;
           }
           .btn-submit {
             height: 27px;
             width: 131px;
-            background: #2E5799;
-            border: 2.29917px solid #9EC1DE;
+            background: #2e5799;
+            border: 2.29917px solid #9ec1de;
             text-align: center;
             vertical-align: middle;
             line-height: 22px;
             transform: skew(-10deg);
-            cursor:pointer;
+            cursor: pointer;
             .text-btn {
               font-style: normal;
               font-weight: 500;
               font-size: 16px;
-              color: #FFFFFF;
+              color: #ffffff;
               transform: skew(10deg);
             }
           }
           .btn-submit:hover {
             background: white;
             .text-btn {
-              color:#2E5799;
+              color: #2e5799;
             }
           }
         }

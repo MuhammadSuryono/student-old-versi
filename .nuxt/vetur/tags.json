@@ -71,11 +71,11 @@
   "Confirmation": {
     "description": "Auto imported from components/confirmation.vue"
   },
-  "FormArea": {
-    "description": "Auto imported from components/Form/area.vue"
+  "FactionProgressBar": {
+    "description": "Auto imported from components/faction/ProgressBar.vue"
   },
-  "FormInput": {
-    "description": "Auto imported from components/Form/input.vue"
+  "FactionReward": {
+    "description": "Auto imported from components/faction/Reward.vue"
   },
   "ButtonInterested": {
     "description": "Auto imported from components/button/interested.vue"
@@ -85,15 +85,6 @@
   },
   "ButtonPlay": {
     "description": "Auto imported from components/button/play.vue"
-  },
-  "CardCollection": {
-    "description": "Auto imported from components/card/Collection.vue"
-  },
-  "FactionProgressBar": {
-    "description": "Auto imported from components/faction/ProgressBar.vue"
-  },
-  "FactionReward": {
-    "description": "Auto imported from components/faction/Reward.vue"
   },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
@@ -118,6 +109,9 @@
   },
   "IconFilter": {
     "description": "Auto imported from components/icon/Filter.vue"
+  },
+  "IconHelpdesk": {
+    "description": "Auto imported from components/icon/Helpdesk.vue"
   },
   "IconHome": {
     "description": "Auto imported from components/icon/Home.vue"
@@ -163,5 +157,14 @@
   },
   "SidebarMain": {
     "description": "Auto imported from components/sidebar/Main.vue"
+  },
+  "FormArea": {
+    "description": "Auto imported from components/Form/area.vue"
+  },
+  "FormInput": {
+    "description": "Auto imported from components/Form/input.vue"
+  },
+  "CardCollection": {
+    "description": "Auto imported from components/card/Collection.vue"
   }
 }

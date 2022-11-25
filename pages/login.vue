@@ -57,6 +57,24 @@
         </div>
       </div>
     </transition>
+    <div
+      class="btn-helpdesk"
+      @click="openWA()"
+    >
+      <div
+        class="btn-finish no-select"
+      >
+        <div class="decoration" />
+        <div class="square-right" />
+        <div class="card-btn">
+          <img
+            src="~/assets/images/help_desk.svg"
+            style="margin-right:9px"
+          >
+          Need Help?
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -75,7 +93,8 @@ export default {
       state: {
         email: '',
         password: ''
-      }
+      },
+      hover1: false
     }
   },
   computed: {
@@ -86,6 +105,9 @@ export default {
     })
   },
   methods: {
+    openWA () {
+      window.open('https://wa.me/+6281359809348?text=Hi%20,%20I%20need%20help%20in%20...', '_blank').focus()
+    },
     ...mapMutations(['SET_IS_AUTH']),
     logout () {
       this.$store.commit('user/SET_LOGGEDIN', true)
@@ -180,7 +202,7 @@ export default {
           .catch(() => {
             this.loading = false
             this.$toast.error('Please select captcha to login',
-            {
+              {
                 position: 'top-center',
                 duration: 5000
               })
@@ -367,57 +389,66 @@ export default {
     margin-top: 10px;
   }
 }
-// .card {
-//   background: #a1adbf;
-//   border-radius: 40px;
-//   height: 100%;
-//   width: 500px;
-//   margin-left: auto;
-//   margin-right: auto;
-//   .headers {
-//     background-color: #0d47a1;
-//     height: 54px;
-//     width: 100%;
-//     border-radius: 40px 40px 0px 0px;
-//     margin: 0px;
-//     .title {
-//       width: 100%;
-//       color: white;
-//       font-size: 15px;
-//       font-weight: 500;
-//     }
-//   }
-//   .content {
-//     margin: 0px;
-//     height: 370px;
-//     width: 100%;
-//     padding-right: 40px;
-//     padding-left: 40px;
-//     .form {
-//       widows: 100%;
-//       .label {
-//         font-size: 14px;
-//         color: #000000;
-//         width: 80px;
-//       }
-//       .input-form {
-//         width: 100%;
-//       }
-//       .captcha {
-//         margin-left: auto;
-//         margin-right: auto;
-//         margin-top: 40px;
-//       }
-//       .btn-login {
-//         color: #ffffff;
-//         background: #002171;
-//         border-radius: 5px;
-//         border: 0px;
-//         font-size: 14px;
-//         width: 80px;
-//         margin-top: 10px;
-//       }
-//     }
-//   }
-// }
+.btn-helpdesk {
+  position: fixed;
+  bottom: 32px;
+  right: 30px;
+
+            .btn-finish {
+              .decoration {
+                background: #7289AA;
+                border: 1.6px solid #FFFFFF;
+                height: 13px;
+                width: 13px;
+          top: -4px;
+          left: -4px;
+                z-index:-1;
+                position:absolute;
+              }
+              .square-right {
+                background: #F2F2F2;
+                height: 5px;
+                width: 5px;
+                bottom: -3px;
+                right: -3px;
+                z-index: 2;
+                position: absolute;
+              }
+              .card-btn {
+                width:110px;
+                height:30px;
+                background: #F2F2F2;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 11px;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor:pointer;
+                color: #2961B5;
+                border:2px solid #FFF380;
+              }
+            }
+            .btn-finish:hover {
+              .card-btn {
+                border: 0.6px solid #aeeefa;
+                background:#4C7BC1;
+                color:white;
+                transition: border-color 0.5s, background-color 0.5s, color 0.5s;
+                -webkit-transition: border-color 0.5s, background-color 0.5s, color 0.5s;
+                transform: scale(0.9);
+                -webkit-transform: scale(0.9);
+              }
+              .square-right {
+                right: 2px;
+                bottom: -2px;
+              }
+              .decoration {
+                top: -3px;
+                left: 1px;
+              }
+            }
+}
+
 </style>

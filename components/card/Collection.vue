@@ -14,7 +14,14 @@
         {{ modules }}
       </div>
       <div class="sub-title">
-        By <span v-if="studio !== ''">{{ studio }}</span> <span v-else>-</span> <br>
+        By
+        <span v-if="studio">
+          {{ studio }}
+        </span>
+        <span v-else>
+          -
+        </span>
+        <br>
         {{ academic }}
       </div>
     </div>

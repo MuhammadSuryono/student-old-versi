@@ -12,6 +12,18 @@
         <div id="triangle-bottomleft" />
       </template>
       <template #end>
+        <div
+          class="btn-helpdesk"
+          @mouseover="hover = true"
+          @mouseleave="hover = false"
+          @click="openWA()"
+        >
+          <IconHelpdesk
+            class="cursor-pointer"
+            :bg-color="hover ? '#E4EFFF' : '#2961B5'"
+            :text-color="hover ? '#2C6BCA' : 'white'"
+          />
+        </div>
         <div id="triangle-bottomright2" />
         <div id="triangle-bottomright" />
         <b-navbar-item tag="div" class="right-side">
@@ -37,7 +49,8 @@ import bgAudio from '../assets/audio/audio_bg.mp3'
 export default {
   data () {
     return {
-      showSetting: false
+      showSetting: false,
+      hover: false
     }
   },
 
@@ -51,6 +64,12 @@ export default {
       },
       btn_decoration: (state) => {
         return state.user.btn_decoration
+      },
+      fullname: (state) => {
+        return state.user.fullname
+      },
+      users: (state) => {
+        return state.user.users
       }
     }),
     styleObj () {
@@ -62,6 +81,9 @@ export default {
     }
   },
   methods: {
+    openWA () {
+      window.open('https://wa.me/+6281359809348?text=Hi%20I%20am%20' + this.fullname + '%20(user%20ID:%20' + this.users.id + ').%20I%20need%20help%20in%20...', '_blank').focus()
+    },
     home () {
       // const audio = this.$parent.$refs.player
       // audio.volume = 0.1
@@ -127,6 +149,13 @@ export default {
   }
   .right-side {
     background-color: #2c6bca;
+  }
+  .btn-helpdesk {
+    top: 15px;
+    right: -40px;
+    position: relative;
+    cursor: pointer;
+
   }
   #triangle-bottomright {
     width: 0;
