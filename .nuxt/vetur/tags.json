@@ -77,6 +77,9 @@
   "FormInput": {
     "description": "Auto imported from components/Form/input.vue"
   },
+  "CardCollection": {
+    "description": "Auto imported from components/card/Collection.vue"
+  },
   "ButtonInterested": {
     "description": "Auto imported from components/button/interested.vue"
   },
@@ -85,9 +88,6 @@
   },
   "ButtonPlay": {
     "description": "Auto imported from components/button/play.vue"
-  },
-  "CardCollection": {
-    "description": "Auto imported from components/card/Collection.vue"
   },
   "FactionProgressBar": {
     "description": "Auto imported from components/faction/ProgressBar.vue"
@@ -118,6 +118,9 @@
   },
   "IconFilter": {
     "description": "Auto imported from components/icon/Filter.vue"
+  },
+  "IconHelpdesk": {
+    "description": "Auto imported from components/icon/Helpdesk.vue"
   },
   "IconHome": {
     "description": "Auto imported from components/icon/Home.vue"
