@@ -95,8 +95,8 @@
               "
             >
               by:
-              <span v-if="detailModule.lecturer !== ''">{{
-                detailModule.lecturer
+              <span v-if="detailModule.lecturer.length > 0">{{
+                detailModule.lecturer[0].name
               }}</span>
               <span v-else>-</span>
             </div>
@@ -589,6 +589,11 @@ export default {
       const data = {
         module_id: this.$route.params.index,
       };
+
+    addModuleStatistic () {
+      const data = {
+        module_id: this.$route.params.index
+      }
       this.$store
         .dispatch("statistic/addModuleStatistic", data, {
           headers: {
@@ -598,17 +603,9 @@ export default {
         .then((response) => {})
         .catch((error) => {});
     },
-    openWA() {
-      window
-        .open(
-          "https://wa.me/6285925091508?text=Hi%20My%20Name%20is%20" +
-            this.data.name +
-            "%20(user%20id:%20" +
-            this.user_id +
-            ")",
-          "_blank"
-        )
-        .focus();
+
+    openWA () {
+      window.open('https://wa.me/+6281359809348?text=Hi%20My%20Name%20is%20' + this.data.name + '%20and%20I%20am%20interested%20in%20' + this.detailModule.module_name + '%20because...', '_blank').focus()
     },
     async submitForm() {
       const data = new FormData();
