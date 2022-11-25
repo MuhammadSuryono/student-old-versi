@@ -103,8 +103,8 @@
               "
             >
               by:
-              <span v-if="detailModule.lecturer !== ''">{{
-                detailModule.lecturer
+              <span v-if="detailModule.lecturer.length > 0">{{
+                detailModule.lecturer[0].name
               }}</span>
               <span v-else>-</span>
             </div>
