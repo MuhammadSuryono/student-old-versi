@@ -555,8 +555,23 @@ export default {
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
     this.getAll()
+    this.addModuleStatistic()
   },
   methods: {
+    addModuleStatistic(){
+      const data = {
+          module_id: this.$route.params.index,
+        }
+      this.$store
+        .dispatch('statistic/addModuleStatistic', data, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((response) => {})
+        .catch((error) => {
+        })
+    },
     openWA () {
       window.open('https://wa.me/6285925091508?text=Hi%20My%20Name%20is%20' + this.data.name + '%20(user%20id:%20' + this.user_id + ')', '_blank').focus()
     },

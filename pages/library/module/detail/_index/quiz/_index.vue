@@ -385,10 +385,26 @@ export default {
   created () {
     // this.handleResize()
     this.getAll()
+    this.addActivityStatistic()
   },
 
   mounted () {},
   methods: {
+    addActivityStatistic() {
+      const data = {
+        activity_id: this.$route.params.index,
+        activity_type_id: 1,
+        activity_name: this.detailActivity.name,
+      };
+      this.$store
+        .dispatch("statistic/addActivityStatistic", data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {})
+        .catch((error) => {});
+    },
     playGame (x) {
       this.$store.commit('user/SET_BTN_AUDIO', true)
       // console.log(x);

@@ -3,8 +3,8 @@ pipeline {
   environment {
     dockerimagename = "primeskills/petra-student"
     dockerImage = ""
-    containerName = "nuxt-app-student-dev"
-    port = "5006"
+    containerName = "nuxt-student-staging"
+    port = "5002"
   }
 
   agent any
@@ -13,7 +13,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git url: 'https://muhammadsuryono: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@github.com/Primeskills-Web-Team/petra-student-frontend.git', branch: 'development', credentialsId: 'github_yono_app'
+        git url: 'https://muhammadsuryono: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@github.com/Primeskills-Web-Team/petra-student-frontend.git', branch: 'trial-mode', credentialsId: 'github_yono_app'
       }
     }
 
@@ -21,10 +21,10 @@ pipeline {
       steps {
         script {
           sh """
-      echo "basePath=/student-dev/" > .env
-      echo "basePathBuild=/student-dev/_nuxt/" >> .env
-      echo "baseUrl=https://dev.petraverse.id/api" >> .env
-      echo "siteKey=6LdCnvghAAAAAMP0pFWnrJBoV0rqwbgByb6bkS5c" >> .env
+      echo "basePath=/student/" > .env
+      echo "basePathBuild=/student/_nuxt/" >> .env
+      echo "baseUrl=https://staging.petraverse.id/api" >> .env
+      echo "siteKey=6LdoQc0hAAAAAGR-9qVX_HhmGCarOmz9f419FesP" >> .env
       cat .env
       """
         }
@@ -46,7 +46,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
+            dockerImage.push("staging")
           }
         }
       }
@@ -56,7 +56,7 @@ pipeline {
       steps {
         script {
 
-          def dockerRunCommand = "whoami && docker stop ${containerName} && docker rm ${containerName} && docker system prune -a -f && docker run -d --name ${containerName} --publish ${port}:5000 ${dockerimagename}"
+          def dockerRunCommand = "whoami && docker stop ${containerName} && docker rm ${containerName} && docker system prune -a -f && docker run -d --name ${containerName} --publish ${port}:5000 ${dockerimagename}:staging"
 
           sshagent(credentials: ['petra_ssh_server']) {
             sh """
