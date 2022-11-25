@@ -600,7 +600,7 @@ export default {
     },
 
     openWA () {
-      window.open('https://wa.me/+6281359809348?text=Hi%20My%20Name%20is%20' + this.data.name + '%20and%20I%20am%20interested%20in%20' + this.detailModule.module_name + '%20because...', '_blank').focus()
+      window.open('https://wa.me/+6281359809348?text=Hi%20My%20Name%20is%20' + this.data.name + '%20(user%20id:%20' + this.user_id + ')%20and%20I%20am%20interested%20in%20' + this.detailModule.module_name + '%20because...', '_blank').focus()
     },
     async submitForm() {
       const data = new FormData();
