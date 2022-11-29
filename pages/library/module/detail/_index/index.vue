@@ -96,7 +96,7 @@
             >
               by:
               <span v-if="detailModule.lecturer.length > 0">{{
-                detailModule.lecturer[0].name
+                detailModule.lecturer.name
               }}</span>
               <span v-else>-</span>
             </div>
