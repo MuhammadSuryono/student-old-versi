@@ -95,10 +95,8 @@
               "
             >
               by:
-              <span v-if="detailModule.lecturer.length > 0">{{
-                detailModule.lecturer.name
-              }}</span>
-              <span v-else>-</span>
+              <span>{{detailModule.lecturer}}</span>
+              <!-- <span v-else>-</span> -->
             </div>
             <!-- <div
               v-if="detailModule.enrolled === false"
@@ -233,8 +231,7 @@
                     </div>
                     <div
                       class="studio-name"
-                      style="
-                        white-space: nowrap;
+                      style="white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
                       "
