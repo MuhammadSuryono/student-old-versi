@@ -98,15 +98,15 @@
               <span>{{detailModule.lecturer}}</span>
               <!-- <span v-else>-</span> -->
             </div>
-            <!-- <div
-              v-if="detailModule.enrolled === false"
+            <div
+              v-if="(detailModule.enrolled === false & isPetraStudent)"
               class="petra-button-collection"
               @click="buyModule()"
             >
               Add to My Collection
               <br>
-              FREE  {{ hover1 }}
-            </div> -->
+              FREE
+            </div>
           </div>
           <div class="column right-side">
             <div class="petra-title">
@@ -232,7 +232,7 @@
                     <div
                       class="studio-name"
                       style="white-space: nowrap;
-                        overflow: hidden;
+                      overflow: hidden;
                         text-overflow: ellipsis;
                       "
                     >
@@ -555,6 +555,9 @@ export default {
       dataUser: (state) => {
         return state.user.users;
       },
+      isPetraStudent(state){
+        return state.user.users.institute.id == 1
+      }
     }),
     tinggi2() {
       return "height:" + this.tinggi;
