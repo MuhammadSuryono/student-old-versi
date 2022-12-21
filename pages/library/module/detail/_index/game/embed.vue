@@ -126,10 +126,12 @@ export default {
   },
   methods: {
     getToken () {
+      console.log('========get token executed===========');
       const token = this.$auth.strategy.token.get()
       this.$refs.iframe.contentWindow.sendToken(token)
     },
     goHome () {
+      console.log('========go home executed===========');
       this.$store.commit('user/SET_BTN_AUDIO', true)
       this.$router.push({ path: '/' })
     },

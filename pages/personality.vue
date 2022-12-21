@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     goHome () {
+      console.log('========go home executed===========');
       this.$router.push({ path: '/' })
     },
     handleResize () {
@@ -68,6 +69,7 @@ export default {
       this.window.height = window.innerHeight
     },
     getToken () {
+      console.log('========get token executed===========');
       const token = this.$auth.strategy.token.get()
       this.$refs.iframe.contentWindow.sendToken(token)
     },
@@ -81,7 +83,7 @@ export default {
     sendToken () {
       this.$refs.iframe.contentWindow.sendToken(this.token)
     },
-    activityDoneEvent () {
+    activityDone () {
       this.finish = true
     },
     checkUser () {
