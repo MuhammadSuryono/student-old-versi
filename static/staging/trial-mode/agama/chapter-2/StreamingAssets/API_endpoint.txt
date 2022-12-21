@@ -1,1 +1,1 @@
-https://staging.petraverse.id/v1/
+https://staging.petraverse.id/api
