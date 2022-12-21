@@ -161,7 +161,7 @@ steps:
     commands:
       - echo "basePath=/student/" > .env
       - echo "basePathBuild=/student/_nuxt/" >> .env
-      - echo "baseUrl=https://staging.petraverse.id/api" >> .env
+      - echo "baseUrl=https://staging.petraverse.id/api/" >> .env
       - echo "siteKey=6LdoQc0hAAAAAGR-9qVX_HhmGCarOmz9f419FesP" >> .env
       - cat .env
 
