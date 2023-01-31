@@ -13,7 +13,7 @@
       <div class="card-title">
         <img src="~/assets/images/module/detail-box.svg" class="detail-box" />
         <div class="name-card2">
-          Introduction to {{ detailModule.module_name }}
+          {{ detailModule.sub_title }}
         </div>
       </div>
       <div class="btn-back" @click="goBack()">
@@ -94,7 +94,7 @@
                   : 'margin-bottom:10px;'
               "
             >
-              by:
+              bY:
               <span>{{detailModule.lecturer}}</span>
               <!-- <span v-else>-</span> -->
             </div>

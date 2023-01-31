@@ -13,7 +13,7 @@
       <div class="card-title">
         <div class="detail-box" />
         <div class="name-card2">
-          {{ detailActivity.name }} | Game Activity
+          {{ detailActivity.sub_name }}
         </div>
       </div>
       <div class="btn-back" @click="goBack()">

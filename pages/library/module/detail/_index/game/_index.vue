@@ -2,7 +2,7 @@
   <div v-if="!isLoading" class="bg-img">
     <ModuleTitle
       :title="detailActivity.name"
-      :subtitle="detailActivity.name"
+      :subtitle="detailActivity.sub_name"
       type="Game"
     />
 

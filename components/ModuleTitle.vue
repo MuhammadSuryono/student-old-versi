@@ -12,7 +12,7 @@
     <div class="card-title">
       <div class="detail-box">
         <div class="name-card2">
-          {{ subtitle }} | {{ type }} Activity
+          {{ subtitle }}
         </div>
       </div>
     </div>
