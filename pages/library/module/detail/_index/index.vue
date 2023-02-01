@@ -94,7 +94,7 @@
                   : 'margin-bottom:10px;'
               "
             >
-              bY:
+              by:
               <span>{{detailModule.lecturer}}</span>
               <!-- <span v-else>-</span> -->
             </div>
