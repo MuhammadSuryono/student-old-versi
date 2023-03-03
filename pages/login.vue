@@ -291,9 +291,9 @@ export default {
 
   data () {
     return {
-      showLogin: false,
+      showLogin: true,
       showForgot: false,
-      showRegister: true,
+      showRegister: false,
       popup: true,
       loading: false,
       state: {
