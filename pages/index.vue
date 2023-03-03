@@ -61,6 +61,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.cursor-pointer {
+  cursor: pointer;
+}
 .bg-img {
   background-image: url('~@/assets/images/home/bg_home.png');
   height: 100%;
@@ -69,5 +72,6 @@ export default {
   // width: auto;
   background-size: cover;
   background-position: center;
+  
 }
 </style>

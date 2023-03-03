@@ -36,10 +36,19 @@
             "
           />
         </span>
+        <div class="card-decoration">
+          <div class="item-menu">
+            <img src="~/assets/images/decoration/camera.svg" class="sub-item">
+            <ButtonDecoration number="1" class="sub-item-2 cursor-pointer" />
+            <ButtonDecoration number="2" class="sub-item-2" />
+            <ButtonDecoration number="3" class="sub-item-2" />
+            <ButtonDecoration number="4"/>
+          </div>
+        </div>
         <!-- maps and light -->
         <span v-if="$route.path === '/'">
           <img
-            src="~/assets/images/component/map/img-1.png"
+            src="~/assets/images/component/map/maps.svg"
             class="maps-petra"
             @click="showMaps()"
           >
@@ -332,6 +341,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card-decoration {
+  position: absolute;
+  top:108px;
+  right:30px;
+  width: 209.53px;
+  height: 40px;
+  background: rgb(242, 242, 242, 0.7);
+  transform: skew(-13deg);
+  display: flex;           /* establish flex container */
+  flex-direction: column;  /* make main axis vertical */
+  justify-content: center; /* center items vertically, in this case */
+  .item-menu {
+    transform: skew(13deg);
+    display: flex;           /* establish flex container */
+    flex-direction: row;  /* make main axis vertical */
+    align-items: center;
+    padding-left:12px;
+    .sub-item {
+      margin-right:8px;
+    }
+    .sub-item-2 {
+      margin-right:4px;
+    }
+  }
+}
 .modal-dialog {
   margin: auto;
   padding: 0px;
