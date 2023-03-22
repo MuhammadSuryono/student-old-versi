@@ -109,7 +109,7 @@ export default {
   created () {
     // console.log(this.$route.params.id));
     this.gameSource = this.$route.params.link
-    this.quizEnvironment = this.$route.params.environment
+    this.quizEnvironment = this.$route.params.quizEnvironment
     // eslint-disable-next-line nuxt/no-globals-in-created
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
