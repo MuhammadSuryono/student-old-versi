@@ -25,7 +25,7 @@
       <!-- <img src="~/assets/images/Video.svg" style="height: 100%; width: 100%"> -->
       <iframe
         ref="iframe"
-        :src="quizEnvironment == 1 ? '/quiz-app/index.html' : '/quiz-app-staging/index.html'"
+        :src="quizEnvironment + 'index.html'"
         :style="{ height: window.height - 200 + 'px', width: '100%' }"
       />
     </div>
