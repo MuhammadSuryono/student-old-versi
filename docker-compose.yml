@@ -18,8 +18,8 @@ services:
   nuxtjs: 
     build: 
       context: ./ 
-    volumes: 
-      - applications 
+#    volumes: 
+#      - applications 
     ports: 
       - 5000:5000 
     container_name: nuxt-student 
