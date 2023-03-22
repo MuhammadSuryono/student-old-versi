@@ -363,13 +363,13 @@ export default {
         return state.user.users
       }
     }),
-    quizId () {
+    quiz () {
       // find activity id by params index
       const activity = this.detailModule.activity_rails.find(
         activity => activity.id == parseInt(this.$route.params.index)
       )
       // return this.$route.params.index
-      return parseInt(activity.activity_id)
+      return activity
     },
     tinggi2 () {
       return 'height:' + this.tinggi
@@ -395,7 +395,9 @@ export default {
       this.$router.push({
         name: 'library-module-detail-index-quiz-embed',
         params: {
-          link: this.quizId
+          link: parseInt(this.quiz.activity_id),
+          quizEnvironment: this.quiz.environment
+
         }
 
         // path: `/library/module/detail/${this.idModule}/game/embed`
