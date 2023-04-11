@@ -25,7 +25,7 @@
       <!-- <img src="~/assets/images/Video.svg" style="height: 100%; width: 100%"> -->
       <iframe
         ref="iframe"
-        :src="quizEnvironment == 1 ? '/quiz-app/index.html' : '/quiz-app-staging/index.html'"
+        :src="quizEnvironment + 'index.html'"
         :style="{ height: window.height - 200 + 'px', width: '100%' }"
       />
     </div>
@@ -109,7 +109,7 @@ export default {
   created () {
     // console.log(this.$route.params.id));
     this.gameSource = this.$route.params.link
-    this.quizEnvironment = this.$route.params.environment
+    this.quizEnvironment = this.$route.params.quizEnvironment
     // eslint-disable-next-line nuxt/no-globals-in-created
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
