@@ -137,10 +137,12 @@
                 typeof detail.description !== 'undefined'
             "
             class="column skillcard2"
+            style="overflow:auto;"
           >
             {{ detail.description }}
           </div>
-          <div v-else class="column skillcard2">
+          <div v-else class="column skillcard2"
+          style="overflow:auto;">
             {{ detail.description }}
           </div>
         </div>
@@ -489,6 +491,29 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 18px;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  background-color: #E2E2E2;
+  -webkit-border-radius: 7px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
 .main-detail {
   z-index: 2;
   min-height: 1000px;
