@@ -6,33 +6,237 @@
     <div class="hero-body">
       <v-row align="center" justify="center">
         <v-col align="center" justify="center">
-          <img src="~/assets/images/logo_dashboard.png" class="img-logo">
-          <div class="card">
-            <div class="has-text-centered title">
-              Login to your Account
+          <img v-if="!showRegister" src="~/assets/images/login/logo.png" class="img-logo">
+          <div v-show="showLogin" class="container-login">
+            <div class="square-right-corner" />
+            <div class="square-left-corner" />
+            <div class="bg-login">
+              <div class="card-login">
+                <div class="title">
+                  Login to your Account
+                </div>
+                <input
+                  v-model="state.email"
+                  class="inputs"
+                  type="text"
+                  placeholder="username@email.id"
+                  @keyup.native.enter="login()"
+                >
+                <input
+                  v-model="state.password"
+                  class="inputs"
+                  type="password"
+                  placeholder="password"
+                  @keyup.native.enter="login()"
+                >
+                <div v-show="validation" class="validation">
+                  {{ message }}
+                </div>
+                <div class="forgot-password" @click="forgotPassword()">
+                  Forgot your password?
+                </div>
+                <recaptcha
+                  class="captcha"
+                  style="transform:scale(0.77);
+                  -webkit-transform:scale(0.77);
+                  transform-origin:0 0;
+                  -webkit-transform-origin:0 0;margin-left:32px;margin-top:7px;"
+                />
+                <div class="container-button" @click="login()">
+                  <div class="btn-login">
+                    <div class="bg-login">
+                      Login
+                    </div>
+                  </div>
+                  <div class="square-right" />
+                  <div class="square-left" />
+                </div>
+                <div class="login-account-register">
+                  Don’t have account yet? <span id="btn-reg" style="color:#1C4091;cursor:pointer;" @click="toRegister()">Register.</span>
+                </div>
+                <div class="square-top-left" />
+                <div class="square-top-right" />
+                <div class="square-bottom-left" />
+                <div class="square-bottom-right" />
+                <div class="triangle-top-left" />
+                <div class="border-top" />
+                <div class="border-side" />
+              </div>
             </div>
-            <b-field class="mt-14" style="background-color: white">
-              <b-input
-                v-model="state.email"
-                placeholder="Email"
-                class="inputs"
-                @keyup.native.enter="login()"
-              />
-            </b-field>
-            <b-field class="mt-14" style="background-color: white">
-              <b-input
-                v-model="state.password"
-                type="password"
-                placeholder="Password"
-                password-reveal
-                class="inputs"
-                @keyup.native.enter="login()"
-              />
-            </b-field>
-            <recaptcha class="captcha columns is-centered" />
-            <b-button :loading="loading" class="btn-login" @click="login()">
-              Log In
-            </b-button>
+          </div>
+          <div v-show="showForgot" class="container-login">
+            <div class="square-right-corner" />
+            <div class="square-left-corner" />
+            <div class="bg-login">
+              <div class="card-login">
+                <div class="title">
+                  Password recovery
+                </div>
+                <div class="desc">
+                  We will be sending you an email with a new
+                  code attached. Please use it to log in into your
+                  account and reset your password.
+                </div>
+                <input
+                  v-model="state.email"
+                  class="inputs"
+                  type="text"
+                  placeholder="your email here"
+                >
+                <div v-show="validation" class="validation">
+                  {{ message }}
+                </div>
+                <div class="container-button" style="margin-top:104px;" @click="backToLogin()">
+                  <div class="btn-login">
+                    <div class="bg-login">
+                      Next
+                    </div>
+                  </div>
+                  <div class="square-right" />
+                  <div class="square-left" />
+                </div>
+                <div class="square-top-left" />
+                <div class="square-top-right" />
+                <div class="square-bottom-left" />
+                <div class="square-bottom-right" />
+                <div class="triangle-top-left" />
+                <div class="border-top" />
+                <div class="border-side" />
+              </div>
+            </div>
+          </div>
+          <div v-show="showRegister" class="container-login" style="width:800px;height:580px;">
+            <div class="square-right-corner" />
+            <div class="square-left-corner" />
+            <div class="bg-login">
+              <div
+                class="card-login"
+                style="padding:20px;
+              display: flex;
+              flex-direction: row;"
+              >
+                <div class="title-register">
+                  Create an account
+                </div>
+                <div class="create-account" style="display:block">
+                  <div class="fill-these" style="display:block">
+                    Please fill these information below.
+                  </div>
+                  <div class="form-register">
+                    <div style="margin-right:10px;">
+                      <input
+                        class="inputs"
+                        type="text"
+                        placeholder="First Name"
+                        style="width:158px;margin-bottom:0px;"
+                      >
+                      <div class="validation-form">
+                        *) Please use alphabet only.
+                      </div>
+                    </div>
+                    <div>
+                      <input
+                        class="inputs"
+                        type="text"
+                        placeholder="Last Name"
+                        style="width:158px;margin-bottom:0px;"
+                      >
+                      <div class="validation-form">
+                        *) Please use alphabet only.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-register" style="display:grid">
+                    <input
+                      class="inputs"
+                      type="text"
+                      placeholder="E-Mail Address"
+                      style="width:326px;margin-bottom:0px;"
+                    >
+                    <div class="validation-form" style="display:block">
+                      *) This E-mail already been taken.
+                    </div>
+                  </div>
+                  <div class="form-register" style="display:grid">
+                    <input
+                      class="inputs"
+                      type="text"
+                      placeholder="Username"
+                      style="width:326px;margin-bottom:0px;"
+                    >
+                    <div class="validation-form" style="display:block">
+                      *) Please do not use special character. ie. ?!#$%
+                    </div>
+                  </div>
+
+                  <div class="form-register" style="align-items:center">
+                    <div class="fill-these">
+                      Are you a ...?
+                    </div>
+
+                    <select v-model="role" class="select-text">
+                      <option value="" disabled selected hidden>
+                        Choose
+                      </option>
+                      <option value="volvo">
+                        Petra Student
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-register" style="margin-top:120px;">
+                    <input
+                      class="inputs"
+                      type="password"
+                      placeholder="Password"
+                      style="width:158px;margin-right:10px;"
+                    >
+                    <input
+                      class="inputs"
+                      type="password"
+                      placeholder="Confirm Password"
+                      style="width:158px;"
+                    >
+                  </div>
+                  <div class="container-button" style="width:258.4px;height:30px;" @click="backToLogin()">
+                    <div class="btn-login">
+                      <div class="bg-login">
+                        + Create Account
+                      </div>
+                    </div>
+                    <div class="square-right" />
+                    <div class="square-left" />
+                  </div>
+                  <div class="already">
+                    Already have account? <span id="btn-reg" style="color:#1C4091;cursor:pointer;" @click="backToLogin()">Login</span>
+                  </div>
+                </div>
+                <div class="card-carousel">
+                  <img src="~/assets/images/login/carousel.svg">
+                  <div class="box-carousel">
+                    <img src="~/assets/images/login/bg_carousel.svg">
+                    <div class="text-box">
+                      Fill this part in with tips or advertisement materials
+                    </div>
+                  </div>
+                  <div>
+                    <span
+                      v-for="(item, i ) in items"
+                      :key="i"
+                      class="dot"
+                      :style="i === activeItem ? 'background: #3B69BC;' : 'background: #C7D8E2;'"
+                      @click="selectItem(i)"
+                    />
+                  </div>
+                  <div class="square-top-left" />
+                  <div class="square-top-right" />
+                  <div class="square-bottom-left" />
+                  <div class="square-bottom-right" />
+                  <div class="triangle-top-left" />
+                  <div class="border-top" style="width:775px;" />
+                  <div class="border-side" style="height:95%;" />
+                </div>
+              </div>
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -87,14 +291,21 @@ export default {
 
   data () {
     return {
-      // isLoggedIn: false,
+      showLogin: true,
+      showForgot: false,
+      showRegister: false,
       popup: true,
       loading: false,
       state: {
         email: '',
         password: ''
       },
-      hover1: false
+      hover1: false,
+      validation: true,
+      message: '*) Email invalid. Please try again.',
+      role: '',
+      items: 5,
+      activeItem: 0
     }
   },
   computed: {
@@ -105,6 +316,24 @@ export default {
     })
   },
   methods: {
+    selectItem (i) {
+      this.activeItem = i
+    },
+    toRegister () {
+      this.showLogin = false
+      this.showForgot = false
+      this.showRegister = true
+    },
+    forgotPassword () {
+      this.showLogin = false
+      this.showForgot = true
+      this.showRegister = false
+    },
+    backToLogin () {
+      this.showLogin = true
+      this.showForgot = false
+      this.showRegister = false
+    },
     openWA () {
       window.open('https://wa.me/+6281359809348?text=Hi%20,%20I%20need%20help%20in%20...', '_blank').focus()
     },
@@ -213,6 +442,53 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
+select:invalid { color: gray; }
+select {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  color: #949DA8;
+  padding-left:11px;
+  background: #FFFFFF;
+  border: 1px solid #1C4091;
+  width:200px;
+  height:31px;
+  margin-left:62px;
+}
+select:focus{
+  outline: none;
+  border: 1px solid #1C4091;
+}
+.inputs {
+  width: 250px;
+  font-family: 'Nunito';
+  font-weight: 500;
+  font-size: 12px;
+  color: #7D96AA;
+  background: #FFFFFF;
+  border: 1.5px solid #ECECEC;
+  margin-bottom:10px;
+}
+input{
+  line-height: 30px;
+  padding-left:8px;
+  padding-right:8px;
+}
+input:focus{
+  outline: none;
+  border: 1.5px solid #1C4091;
+}
+input:not(:placeholder-shown) {
+  border: 1.5px solid #1C4091;
+}
+
+input:placeholder-shown {
+  border: 1.5px solid #ECECEC;
+}
+
 .modal-dialog {
   height: 100%;
   width: 100%;
@@ -337,56 +613,295 @@ export default {
   }
 }
 .hero {
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
   background-repeat: no-repeat, repeat;
   background-size: cover;
   background-position: center;
-  background-image: url('../assets/images/placeholderbg.png');
+  background-image: url('../assets/images/login/bg_login.jpg');
 }
-.img-logo {
-  height: 80px;
-}
-.card {
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  height: 400px;
-  z-index: 1;
-  background-color: rgba(255, 255, 255, 0.83);
-  padding: 30px 25px 10px 25px;
-  .title {
-    width: 100%;
-    font-size: 23px;
-    font-weight: bold;
-    margin-bottom: 50px;
-    color: black;
+.container-login {
+  height:338px;
+  width:306px;
+  position: relative;
+  .square-right-corner {
+    position: absolute;
+    height:30px;
+    width:30px;
+    top: -12px;
+    right: -10px;
+    background: #7289AA;
+    opacity: 0.35;
+    border: 0.69px solid #FFFFFF;
   }
-  .inputs {
-    width: 100%;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25 rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  .square-left-corner {
+    position: absolute;
+    height:30px;
+    width:30px;
+    bottom: -12px;
+    left: -10px;
+    background: #7289AA;
+    opacity: 0.35;
+    border: 0.69px solid #FFFFFF;
   }
-  .captcha {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
-  }
-  .btn-login {
-    color: #ffffff;
-    background: #002171;
-    border-radius: 5px;
-    border: 0px;
-    font-size: 14px;
+  .bg-login {
+    background: linear-gradient(22.88deg, rgb(168, 245, 255, 0.35) 0%, rgb(195, 244, 249, 0.35) 52%, rgb(223, 242, 242, 0.35) 100%);
+    padding:2px;
+    height: 100%;
     width: 100%;
-    margin-top: 10px;
+    .card-login {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background: rgb(255, 255, 255, 0.85);
+      border: 2px solid rgb(212, 234, 255);
+      position:relative;
+      z-index:1;
+      .title-register {
+        position: absolute;
+        top:20px;
+        left:0px;
+        width:277px;
+        height:23px;
+        background: #2E5799;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .create-account {
+        background: #F2F2F2;
+        width:400px;
+        height:534px;
+        padding-left:30px;
+        padding-top:50px;
+        margin: 0;
+        .fill-these {
+          font-family: 'Nunito';
+          font-style: normal;
+          font-size: 11.4917px;
+          color: #5B6987;
+          text-align: left;
+          margin-bottom:5px;
+        }
+        .form-register {
+          display: flex;
+          margin-bottom:10px;
+          .validation-form {
+            font-family: 'Nunito';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 8px;
+            line-height: 13px;
+            color: #5B6987;
+            text-align:left;
+          }
+
+        }
+      }
+      .card-carousel {
+        width:350px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .box-carousel {
+          margin-top:36px;
+          position: relative;
+          .text-box {
+            position: absolute;
+            font-family: 'Nunito';
+            font-style: normal;
+            font-size: 12.7px;
+            line-height: 17px;
+            text-align: center;
+            top:14px;
+          }
+
+        }
+        .dot {
+          height: 8px;
+          width: 8px;
+          background: #C7D8E2;
+          border-radius: 50%;
+          display: inline-block;
+          margin-right:3.8px;
+          cursor:pointer;
+          margin-top:24px;
+        }
+      }
+      .login-account-register {
+        font-family: 'Nunito';
+        font-style: normal;
+        font-size: 12px;
+        color: #5B6987;
+        margin-top:10px;
+        #btn-reg:hover {
+          text-decoration: underline;
+        }
+      }
+      .forgot-password {
+        font-family: 'Nunito';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 8px;
+        line-height: 11px;
+        text-align: right;
+        color: #5B6987;
+        margin-top:12px;
+        margin-right:28px;
+        cursor: pointer;
+      }
+      .forgot-password:hover {
+        text-decoration: underline;
+      }
+      .already {
+        font-family: 'Nunito';
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 16px;
+        color: #5B6987;
+        margin-top:14px;
+
+        #btn-reg:hover {
+          text-decoration: underline;
+        }
+      }
+      .container-button {
+        height: 26px;
+        width: 168px;
+        position: relative;
+        cursor: pointer;
+        .square-right {
+          position: absolute;
+          top:-2px;
+          left:-2px;
+          z-index:-1;
+          height: 11px;
+          width: 16px;
+          background: #7289AA;
+          opacity: 0.35;
+          border: 0.657738px solid #FFFFFF;
+        }
+        .square-left {
+          position: absolute;
+          bottom:-2px;
+          right:-2px;
+          z-index:-1;
+          height: 4px;
+          width: 4px;
+          background: #F2F2F2;
+        }
+        .btn-login {
+          height: 100%;
+          width: 100%;
+          background: linear-gradient(22.88deg, rgb(168, 245, 255, 0.35) 0%, rgb(195, 244, 249, 0.35) 52%, rgb(223, 242, 242, 0.35) 100%);
+          padding:2px;
+          .bg-login {
+            background: #4C7BC1;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Nunito';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 16px;
+            text-align: center;
+            color: #FFFFFF;
+          }
+        }
+      }
+      .validation {
+        font-family: 'Nunito';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 8px;
+        color: #5B6987;
+        text-align:left;
+        padding-left:24px;
+      }
+      .square-top-left {
+        background: #F5FBFF;
+        height: 4px;
+        width: 4px;
+        top:-7px;
+        left:-7px;
+        position:absolute;
+      }
+      .square-top-right {
+        background: #F5FBFF;
+        height: 4px;
+        width: 4px;
+        top:-7px;
+        right:-7px;
+        position:absolute;
+      }
+      .square-bottom-left {
+        background: #F5FBFF;
+        height: 4px;
+        width: 4px;
+        bottom:-7px;
+        left:-7px;
+        position:absolute;
+      }
+      .square-bottom-right {
+        background: #F5FBFF;
+        height: 4px;
+        width: 4px;
+        bottom:-7px;
+        right:-7px;
+        position:absolute;
+      }
+      .triangle-top-left {
+        top:3px;
+        left:3px;
+        position:absolute;
+        width: 0;
+        height: 0;
+        border-top: 6px solid rgb(93, 147, 206, 0.75);
+        border-right: 6px solid transparent;
+      }
+      .border-top {
+        background: rgb(93, 147, 206, 0.75);
+        height:0.5px;
+        width:270px;
+        top:3px;
+        left:14px;
+        position:absolute;
+      }
+      .border-side {
+        border-left: 0.5px solid rgb(93, 147, 206, 0.75);
+        height:93%;
+        left:3px;
+        top:13px;
+        position:absolute;
+      }
+      .title {
+        width: 100%;
+        font-family: 'Nunito';
+        font-weight: 700;
+        font-size: 18px;
+        text-align: center;
+        color: #0071BC;
+        margin-top:15px;
+      }
+      .desc {
+        margin-top:36px;
+        font-family: 'Nunito';
+        font-style: normal;
+        font-size: 12px;
+        line-height: 16px;
+        color: #5B6987;
+        margin-bottom:9px;
+        text-align: left;
+        margin-left:22px;
+      }
+      .captcha {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 40px;
+      }
+    }
   }
 }
 .btn-helpdesk {
