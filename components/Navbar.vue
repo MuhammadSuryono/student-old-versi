@@ -2,16 +2,35 @@
   <div>
     <b-navbar class="navbar" :mobile-burger="false">
       <template #brand>
-        <div class="logo" :style="styleObj">
+        <div
+          class="logo cursor-pointer no-select"
+          :style="styleObj"
+          @click="home()"
+        >
           <img
             src="~/assets/images/new_logo.png"
             class="img-logo"
-            @click="home()"
           >
         </div>
         <div id="triangle-bottomleft" />
       </template>
       <template #end>
+        <div class="coin-card">
+          <div class="value-card">
+            1000
+          </div>
+          <img
+            src="~/assets/images/navbar/coin.svg"
+          >
+        </div>
+        <div class="coin-card" style="top:18px;">
+          <div class="value-card" style="left: 29px;top: 5px;">
+            1000
+          </div>
+          <img
+            src="~/assets/images/navbar/diamond.svg"
+          >
+        </div>
         <div
           class="btn-helpdesk"
           @mouseover="hover = true"
@@ -35,11 +54,6 @@
         </b-navbar-item>
       </template>
     </b-navbar>
-    <!-- <div v-show="showSetting" class="modal-right">
-      <b-button class="btn-setting">
-        Setting
-      </b-button>
-    </div> -->
   </div>
 </template>
 
@@ -76,7 +90,7 @@ export default {
       if (this.sidebar) {
         return 'width:200px;'
       } else {
-        return 'width:80px;'
+        return 'width:86px;'
       }
     }
   },
@@ -109,6 +123,25 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.coin-card {
+  top: 15px;
+  position: relative;
+  cursor: pointer;
+  .value-card {
+    position: absolute;
+    left: 37px;
+    top: 8px;
+    width: 62px;
+    line-height: 24px;
+    background-color: #F5FBFF;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 14px;
+    text-align: center;
+    color: #0071BC;
+  }
+}
 .navbar {
   padding-right: 0px;
   // background-color: red;

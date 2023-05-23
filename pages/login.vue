@@ -20,14 +20,14 @@
                   class="inputs"
                   type="text"
                   placeholder="username@email.id"
-                  @keyup.native.enter="login()"
+                  @keyup.enter="login()"
                 >
                 <input
                   v-model="state.password"
                   class="inputs"
                   type="password"
                   placeholder="password"
-                  @keyup.native.enter="login()"
+                  @keyup.enter="login()"
                 >
                 <div v-show="validation" class="validation">
                   {{ message }}
@@ -302,7 +302,7 @@ export default {
       },
       hover1: false,
       validation: true,
-      message: '*) Email invalid. Please try again.',
+      message: '',
       role: '',
       items: 5,
       activeItem: 0
@@ -347,31 +347,20 @@ export default {
       return re.test(email)
     },
     login () {
+      this.message = ''
       this.$store.commit('user/SET_BTN_AUDIO', true)
       if (this.state.email === '' || this.state.password === '') {
         if (this.state.email === '' && this.state.password === '') {
-          this.$toast.error('Email & Password can not be empty.', {
-            position: 'top-center',
-            duration: 5000
-          })
+          this.message = '*) Email & Password can not be empty.'
         }
         if (this.state.email === '' && this.state.password !== '') {
-          this.$toast.error('Email can not be empty.', {
-            position: 'top-center',
-            duration: 5000
-          })
+          this.message = '*) Email can not be empty.'
         }
         if (this.state.email !== '' && this.state.password === '') {
-          this.$toast.error('Password can not be empty.', {
-            position: 'top-center',
-            duration: 5000
-          })
+          this.message = '*) Password can not be empty.'
         }
       } else if (!this.validateEmail(this.state.email)) {
-        this.$toast.error('Email must be valid', {
-          position: 'top-center',
-          duration: 5000
-        })
+        this.message = '*) Email must be valid.'
       } else {
         this.loading = true
         this.$store
@@ -415,26 +404,16 @@ export default {
               } else {
                 this.$auth.logout()
                 this.$router.push('/login')
-                this.$toast.error('Please login with student account.', {
-                  position: 'top-center',
-                  duration: 5000
-                })
+                this.message = '*) Please login with student account.'
               }
             } else {
               this.loading = false
-              this.$toast.error(response.data.error.message, {
-                position: 'top-center',
-                duration: 5000
-              })
+              this.message = '*) ' + response.data.error.message
             }
           })
           .catch(() => {
             this.loading = false
-            this.$toast.error('Please select captcha to login',
-              {
-                position: 'top-center',
-                duration: 5000
-              })
+            this.message = '*) Please select captcha to login.'
           })
       }
     }

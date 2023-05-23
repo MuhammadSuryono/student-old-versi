@@ -13,6 +13,9 @@
       </transition>
       <Navbar class="navbars" />
       <div class="columns is-gapless main-menu">
+        <div class="filter-shop">
+          <ButtonFilter />
+        </div>
         <!-- sidebar -->
         <SidebarMain
           class="column is-narrow sidebar-menu"
@@ -39,10 +42,9 @@
         <div class="card-decoration">
           <div class="item-menu">
             <img src="~/assets/images/decoration/camera.svg" class="sub-item">
-            <ButtonDecoration number="1" class="sub-item-2 cursor-pointer" />
-            <ButtonDecoration number="2" class="sub-item-2" />
-            <ButtonDecoration number="3" class="sub-item-2" />
-            <ButtonDecoration number="4"/>
+            <span v-for="(item, index) in subBackground" :key="index">
+              <ButtonDecoration :number="index + 1" class="sub-item-2 cursor-pointer" :type="item.path === 'disabled' ? 'disabled' : 'enable'" @click.native="item.path === 'disabled' ? '' : changeBackground(item.path)" />
+            </span>
           </div>
         </div>
         <!-- maps and light -->
@@ -114,23 +116,30 @@
             </div>
           </transition>
         </span>
-        <!-- edit profile -->
         <Profile
           v-if="btn_profile"
           class="profile-petra noselect"
           :style="widthProfile2"
         />
-        <!-- decoration -->
         <Decoration
           v-if="btn_decoration"
           :style="widthProfile"
           class="profile-petra"
         />
-        <!-- edit profile -->
         <Setting
           v-if="btn_setting"
           class="profile-petra noselect"
           :style="widthProfile3"
+        />
+        <Quest
+          v-if="btn_quest"
+          :style="widthProfile"
+          class="profile-petra"
+        />
+        <Shop
+          v-if="btn_shop"
+          :style="widthProfile"
+          class="profile-petra"
         />
       </div>
     </div>
@@ -169,12 +178,10 @@ export default {
         this.$refs.player.volume = 0
         // this.$store.commit('user/SET_MUTE_BGM', true)
         this.$refs.player.play()
-      } else {
-        if (!this.muteBGM) {
-          this.$refs.player.volume = this.audioBGM
-          this.$store.commit('user/SET_MUTE_BGM', false)
-          this.$refs.player.play()
-        }
+      } else if (!this.muteBGM) {
+        this.$refs.player.volume = this.audioBGM
+        this.$store.commit('user/SET_MUTE_BGM', false)
+        this.$refs.player.play()
       }
     }
   },
@@ -201,6 +208,12 @@ export default {
       btn_decoration: (state) => {
         return state.user.btn_decoration
       },
+      btn_quest: (state) => {
+        return state.user.btn_quest
+      },
+      btn_shop: (state) => {
+        return state.user.btn_shop
+      },
       btn_setting: (state) => {
         return state.user.btn_setting
       },
@@ -215,6 +228,9 @@ export default {
       },
       muteBGM: (state) => {
         return state.user.muteBGM
+      },
+      subBackground: (state) => {
+        return state.decoration.subBackground
       }
     }),
     widthSidebar () {
@@ -259,18 +275,16 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   mounted () {
+    this.getDataDecoration()
     const audio = this.$refs.player
     audio.volume = this.audioBGM
     if (this.muteBGM) {
       const playedPromise = this.$refs.player.play()
       if (playedPromise) {
         playedPromise.catch((e) => {
-          console.log(e)
           if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
-            console.log(e.name)
           }
         }).then(() => {
-          console.log('playing sound !!!')
           this.$refs.player.volume = 0
           this.$refs.player.play()
         })
@@ -279,12 +293,9 @@ export default {
       const playedPromise = this.$refs.player.play()
       if (playedPromise) {
         playedPromise.catch((e) => {
-          console.log(e)
           if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
-            console.log(e.name)
           }
         }).then(() => {
-          console.log('playing sound !!!')
           this.$refs.player.volume = 1
           this.$refs.player.play()
         })
@@ -292,6 +303,26 @@ export default {
     }
   },
   methods: {
+    changeBackground (item) {
+      this.$store.dispatch(
+        'decoration/updateImages', item
+      )
+    },
+    getDataDecoration () {
+      this.isLoading = true
+      this.$store
+        .dispatch('decoration/fetchCurrentDecoration')
+        .then((response) => {
+          this.isLoading = false
+        })
+        .catch((error) => {
+          this.isLoading = false
+          this.$toast.error(error.response.data.message, {
+            position: 'top-center',
+            duration: 5000
+          })
+        })
+    },
     logout () {
       this.$store.commit('user/SET_LOGGEDIN', false)
       this.$store.commit('user/SET_BTN_AUDIO', true)
@@ -341,6 +372,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.filter-shop {
+  position:absolute;
+  z-index: 99;
+  top:250px;
+  left:720px;
+  height:100px;
+  width:100px;
+}
 .card-decoration {
   position: absolute;
   top:108px;

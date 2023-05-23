@@ -59,8 +59,14 @@
   "PTitleV2": {
     "description": "Auto imported from components/PTitleV2.vue"
   },
+  "Quest": {
+    "description": "Auto imported from components/Quest.vue"
+  },
   "Setting": {
     "description": "Auto imported from components/Setting.vue"
+  },
+  "Shop": {
+    "description": "Auto imported from components/Shop.vue"
   },
   "Skeleton": {
     "description": "Auto imported from components/Skeleton.vue"
@@ -77,8 +83,17 @@
   "CardLogin": {
     "description": "Auto imported from components/card/Login.vue"
   },
+  "CardShop": {
+    "description": "Auto imported from components/card/Shop.vue"
+  },
+  "CardShopV2": {
+    "description": "Auto imported from components/card/ShopV2.vue"
+  },
   "ButtonDecoration": {
     "description": "Auto imported from components/button/decoration.vue"
+  },
+  "ButtonFilter": {
+    "description": "Auto imported from components/button/filter.vue"
   },
   "ButtonInterested": {
     "description": "Auto imported from components/button/interested.vue"
@@ -88,6 +103,9 @@
   },
   "ButtonPlay": {
     "description": "Auto imported from components/button/play.vue"
+  },
+  "ButtonV2": {
+    "description": "Auto imported from components/button/v2.vue"
   },
   "FactionProgressBar": {
     "description": "Auto imported from components/faction/ProgressBar.vue"
@@ -100,6 +118,9 @@
   },
   "FormInput": {
     "description": "Auto imported from components/Form/input.vue"
+  },
+  "FormTextArea": {
+    "description": "Auto imported from components/Form/TextArea.vue"
   },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
@@ -115,6 +136,9 @@
   },
   "IconBgBack": {
     "description": "Auto imported from components/icon/BgBack.vue"
+  },
+  "IconBgPersonality": {
+    "description": "Auto imported from components/icon/bgPersonality.vue"
   },
   "IconCluster": {
     "description": "Auto imported from components/icon/Cluster.vue"
@@ -166,6 +190,9 @@
   },
   "SidebarAvatar": {
     "description": "Auto imported from components/sidebar/Avatar.vue"
+  },
+  "SidebarButtonMenu": {
+    "description": "Auto imported from components/sidebar/ButtonMenu.vue"
   },
   "SidebarCardName": {
     "description": "Auto imported from components/sidebar/CardName.vue"

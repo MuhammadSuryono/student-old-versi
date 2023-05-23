@@ -1,0 +1,255 @@
+<template>
+  <div class="quest-card">
+    <PTitle name="Daily Quest" type="quest" />
+    <div class="main-card">
+      <div class="quest-box">
+        <div class="title-quest">
+          Finish 2 assessments
+        </div>
+        <div class="coin-reward">
+          <div class="title-coin">
+            Rewards
+          </div>
+          <div v-if="status" @click="changeStatus()" class="value-coin">
+            <img src="~/assets/images/coin.svg" class="mr-1">
+            200
+          </div>
+          <div v-else class="value-coin">
+            <img src="~/assets/images/check_coin.svg">
+          </div>
+        </div>
+      </div>
+      <div class="quest-box">
+        <div class="title-quest">
+          Finish 2 assessments
+        </div>
+        <div class="coin-reward">
+          <div class="title-coin">
+            Rewards
+          </div>
+          <div v-if="status" @click="changeStatus()" class="value-coin">
+            <img src="~/assets/images/coin.svg" class="mr-1">
+            200
+          </div>
+          <div v-else class="value-coin">
+            <img src="~/assets/images/check_coin.svg">
+          </div>
+        </div>
+      </div>
+      <div class="quest-box">
+        <div class="title-quest">
+          Finish 2 assessments
+        </div>
+        <div class="coin-reward">
+          <div class="title-coin">
+            Rewards
+          </div>
+          <div v-if="status" @click="changeStatus()" class="value-coin">
+            <img src="~/assets/images/coin.svg" class="mr-1">
+            200
+          </div>
+          <div v-else class="value-coin">
+            <img src="~/assets/images/check_coin.svg">
+          </div>
+        </div>
+      </div>
+      <div class="quest-box">
+        <div class="title-quest">
+          Finish 2 assessments
+        </div>
+        <div class="coin-reward">
+          <div class="title-coin">
+            Rewards
+          </div>
+          <div v-if="status" @click="changeStatus()" class="value-coin">
+            <img src="~/assets/images/coin.svg" class="mr-1">
+            200
+          </div>
+          <div v-else class="value-coin">
+            <img src="~/assets/images/check_coin.svg">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-progress">
+      <div class="progress-quest">
+        <div class="bg1">
+          <div class="bg2">
+            <div class="bg3">
+              <div id="mainProgress" class="discreteProgress" :style="'background-size: ' + width + '%;'" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="width !== 100" class="box-value" />
+    </div>
+  </div>
+</template>
+<script>
+// import { mapState } from 'vuex'
+export default {
+  data () {
+    return {
+      width: 70,
+      status: true
+    }
+  },
+  mounted () {},
+  methods: {
+    changeStatus () {
+      this.width = 100
+      this.status = !this.status
+    }
+
+  }
+}
+</script>
+<style lang="scss" scoped>
+.discreteProgress {
+  margin-top:12px;
+  margin-left:14px;
+  width:335px;
+  height:10px;
+  -webkit-mask:linear-gradient(90deg,#000 94%,#0000 0) 0/34%;
+  background:
+   linear-gradient(#C7D6FD 0 0) 0/0% no-repeat
+   black;
+  animation:p4 2s infinite steps(6);
+  background-size:50%;
+}
+.quest-card {
+    width: 540.46px;
+    height: 100%;
+    background: rgb(239, 253, 253, 0.9);
+    border: 0.7px solid #ffffff;
+    z-index: 10;
+    padding: 80px 10px 0px 20px;
+    .main-card {
+      margin-top:120px;
+      .quest-box {
+        position: relative;
+        background-image: url('~@/assets/images/bar_quest.svg');
+        height: 80px;
+        width: 100%;
+        padding: 25px 0px 0px 24px;
+        margin-bottom:10px;
+        .title-quest {
+          font-family: Nunito;
+          font-size: 16px;
+          line-height: 33px;
+          letter-spacing: 0em;
+          text-align: left;
+          border-bottom: 5px solid #437AC3;
+          width: 334px;
+        }
+        .coin-reward {
+          background-image: url('~@/assets/images/reward.svg');
+          height: 78px;
+          position: absolute;
+          top: 9px;
+          width: 88px;
+          right: 46px;
+          .title-coin {
+            margin-top:5px;
+            font-family: 'Nunito';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 16px;
+            text-align: center;
+            color: #437AC3;
+          }
+          .value-coin {
+            margin-top:6px;
+            margin-left: auto;
+            margin-right:auto;
+            height: 32px;
+            width: 64px;
+            background: #437AC3;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Nunito';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            color: #FFFFFF;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .card-progress {
+      position: relative;
+      .progress-quest {
+        position: absolute;
+        z-index:1;
+        margin-top: 50px;
+        margin-left: 10px;
+        clip-path: polygon(0 0,100% 0,100% 100%,8px 100%,0 calc(100% - 8px));
+        height: 50px;
+        width: 424px;
+        background: #31a8ff;
+        padding:2px;
+        .bg1 {
+          clip-path: polygon(0 0,100% 0,100% 100%,8px 100%,0 calc(100% - 8px));
+          height: 100%;
+          width: 100%;
+          background: #173665;
+          padding:2px;
+          .bg2 {
+            clip-path: polygon(0 0,100% 0,100% 100%,8px 100%,0 calc(100% - 8px));
+            height: 100%;
+            width: 100%;
+            background: #1357a3;
+            padding:2px;
+            .bg3 {
+              position: relative;
+              clip-path: polygon(0 0,100% 0,100% 100%,8px 100%,0 calc(100% - 8px));
+              height: 100%;
+              width: 100%;
+              background: #173665;
+              padding:2px;
+            }
+          }
+        }
+      }
+      .box-value {
+        position: absolute;
+        z-index:2;
+        width: 66px;
+        height: 62px;
+        top: 43px;
+        right: 52px;
+        background-image: url('~@/assets/images/Variant3.svg');
+        cursor: pointer;
+      }
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 9px;
+    height: 18px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    height: 6px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    background-color: #e2e2e2;
+    -webkit-border-radius: 7px;
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+
+  </style>

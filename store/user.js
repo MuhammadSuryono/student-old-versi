@@ -8,6 +8,8 @@ export const state = () => ({
   sidebar: false,
   btn_profile: false,
   btn_decoration: false,
+  btn_quest: false,
+  btn_shop: false,
   fullname: null,
   images: null,
   images_name: null,
@@ -60,7 +62,6 @@ export const mutations = {
     state.muteBGM = payload
   },
   SET_AUDIO_EFFECT (state, payload) {
-    console.log('pay : ', payload)
     state.audioEffect = payload
   },
   SET_AUDIO_BGM (state, payload) {
@@ -114,12 +115,15 @@ export const mutations = {
     state.btn_profile = !state.btn_profile
     state.btn_decoration = false
     state.btn_setting = false
+    state.btn_quest = false
+    state.btn_shop = false
   },
   SET_BTN_SETTING (state) {
     state.btn_setting = !state.btn_setting
-    console.log(state.btn_setting )
     state.btn_decoration = false
     state.btn_profile = false
+    state.btn_quest = false
+    state.btn_shop = false
   },
   SET_SIDEBAR (state) {
     state.sidebar = !state.sidebar
@@ -131,6 +135,22 @@ export const mutations = {
     state.btn_decoration = !state.btn_decoration
     state.btn_profile = false
     state.btn_setting = false
+    state.btn_quest = false
+    state.btn_shop = false
+  },
+  SET_BTN_QUEST (state) {
+    state.btn_quest = !state.btn_quest
+    state.btn_profile = false
+    state.btn_setting = false
+    state.btn_decoration = false
+    state.btn_shop = false
+  },
+  SET_BTN_SHOP (state) {
+    state.btn_shop = !state.btn_shop
+    state.btn_profile = false
+    state.btn_setting = false
+    state.btn_decoration = false
+    state.btn_quest = false
   },
   SET_FULLNAME (state, data) {
     state.fullname = data
@@ -168,39 +188,6 @@ export const actions = {
           password: payload.password
         }
       })
-      // if (response.status === 200 || response.status === 201) {
-      //   if (response.data.data.user.role_id === 4) {
-      //     const data = response.data.data
-      //     localStorage.setItem('user_id', data.user.id)
-      //     commit('SET_USERS', data)
-      //     if (
-      //       // eslint-disable-next-line valid-typeof
-      //       typeof data.user.avatar !== null ||
-      //       // eslint-disable-next-line valid-typeof
-      //       typeof data.user.avatar !== undefined
-      //     ) {
-      //       commit('SET_IMAGES', data.user.avatar.image)
-      //       commit('SET_IMAGES_NAME', data.user.avatar.name)
-      //     }
-      //     if (data.user.last_name !== null) {
-      //       commit(
-      //         'SET_FULLNAME',
-      //         data.user.first_name + ' ' + data.user.last_name
-      //       )
-      //     } else {
-      //       commit('SET_FULLNAME', data.user.first_name)
-      //     }
-      //     localStorage.setItem('localAuth', false)
-      //     // this.$router.push({ path: '/splash' })
-      //   } else {
-      //     this.$auth.logout()
-      //     this.$router.push('/login')
-      //     this.$toast.error('Please login with student account.', {
-      //       position: 'top-center',
-      //       duration: 5000
-      //     })
-      //   }
-      // }
       return response
     } catch (e) {
       return e.response

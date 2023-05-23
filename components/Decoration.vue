@@ -1,52 +1,28 @@
 <template>
   <div class="profile-card">
-    <PTitle name="Manage Decorations" />
+    <PTitle name="Manage Decorations" type="decoration" />
     <div v-if="tab === 1">
       <span v-if="!isLoading">
         <div class="main-profile" style="margin-top: 80px">
-          <!-- foto -->
-          <v-row justify="center" align="center" no-gutters>
-            <img
-              :src="pathDecoration"
-              style="
-                width: 329.6px;
-                height: 180px;
-                margin-left: auto;
-                margin-right: auto;
-              "
-            >
-            <div
-              class="avatar-container"
-              style="margin-left: auto; margin-right: auto; margin-top: 10px"
-            >
-              <div class="btn-edit" @click="getDecoration()">
-                <img
-                  src="~/assets/images/btn-petra.png"
-                  style="width: 224.22px; height: 36px"
-                >
-                <div class="text-edit" style="top: 7px">Change Background</div>
-              </div>
+          <div class="avatar-display">
+            <div class="avatar-img">
+              <img :src="pathDecoration" class="img-logo">
             </div>
-          </v-row>
-        </div>
-        <div class="columns pr-4 mt-4">
-          <div class="column is-narrow avatar-container">
-            <div class="btn-edit" @click="closeProfile()">
-              <img
-                src="~/assets/images/back-btn.png"
-                style="width: 98.15px;height: 36.49px;x"
-              >
+            <div class="avatar-name">
+              <div class="box3">“{{ nameDecoration }}”</div>
+              <div class="box2" />
+              <div class="box4" />
+              <div class="box5" />
             </div>
           </div>
-          <div class="column avatar-container">
-            <!-- <div class="btn-edit">
-              <img
-                src="~/assets/images/btn-petra.png"
-                style="width: 224.22px; height: 36px"
-              >
-              <div class="text-edit" style="top: 7px">Save Changes</div>
-            </div> -->
-          </div>
+          <ButtonV2
+            value="Change Background"
+            width="173"
+            height="29"
+            style="margin-left:auto;margin-right:auto;margin-top:45px;left:-21px;"
+            @click.native="getDecoration()"
+          />
+          <Back class="cursor-pointer mt-6" @click.native="closeProfile()" />
         </div>
       </span>
       <v-skeleton-loader
@@ -58,175 +34,72 @@
     <div v-if="tab === 2">
       <div class="column profile-container">
         <div class="btn-profile">
-          <img
-            src="~/assets/images/bg-profile.png"
-            style="width: 257.32px; height: 30px"
-          >
           <div class="text-profile">
-            Choose Background
+            Change Background
           </div>
         </div>
       </div>
       <span v-if="!isLoading2">
         <div class="main-profile" style="margin-top: 40px; margin-bottom: 60px">
           <!-- foto -->
-          <div class="columns is-mobile" style="margin-top: 0px">
-            <img
-              v-if="!activeSelected"
-              :src="pathDecoration"
-              style="
-                width: 329.6px;
-                height: 180px;
-                margin-left: auto;
-                margin-right: auto;
-              "
-            ><img
-              v-else
-              :src="selected.background"
-              style="
-                width: 329.6px;
-                height: 180px;
-                margin-left: auto;
-                margin-right: auto;
-              "
-            >
-          </div>
-          <div class="name-card">
-            <img src="~/assets/images/name.png" class="img-card">
-            <div v-if="!activeSelected" class="text-card">
-              {{ nameDecoration }}
+          <div class="avatar-display">
+            <div class="avatar-img">
+              <img v-if="!activeSelected" :src="pathDecoration" class="img-logo">
+              <img v-else :src="selected.background" class="img-logo">
             </div>
-            <div v-else class="text-card">
-              {{ selected.name }}
+            <div class="avatar-name">
+              <div class="box3">
+                <span v-if="!activeSelected">
+                  “{{ nameDecoration }}”
+                </span>
+                <span v-else>
+                  "{{ selected.name }}""
+                </span>
+              </div>
+              <div class="box2" />
+              <div class="box4" />
+              <div class="box5" />
             </div>
           </div>
-          <!-- box -->
-          <div class="box-carousel pr-4">
-            <div class="title-carousel">
-              <img src="~/assets/images/carousel_1.png" class="bg-logo">
-              <div class="text-logo">All Backgrounds</div>
+          <div class="list-avatar">
+            <div class="title-card">
+              <span style="transform: skew(29deg)"> Choose Background </span>
             </div>
-            <div class="content-carousel">
-              <v-row dense align="center" justify="center">
-                <v-col
-                  v-for="(item, index) in dataDecorationItem"
-                  :key="index"
-                  align="center"
-                  justify="center"
-                  cols="12"
-                  sm="6"
-                  class="item-carousel"
-                  @click="selectedItem(index, item)"
-                >
-                  <span v-if="item.background !== 'null'">
-                    <img
-                      v-if="index === activeItem"
-                      src="~/assets/images/border-selected.png"
-                      style="
-                        position: absolute;
-                        top: 4px;
-                        z-index: 8;
-                        left: 24px;
-                      "
-                    >
-                    <span
-                      v-if="index === activeItem && item.selected === true"
-                      style="z-index: 8"
-                    >
-                      <img
-                        src="~/assets/images/border-selected.png"
-                        style="
-                          position: absolute;
-                          top: 4px;
-                          z-index: 8;
-                          left: 24px;
-                        "
-                      >
-                      <img
-                        src="~/assets/images/triangle-active.png"
-                        style="
-                          position: absolute;
-                          top: 4px;
-                          z-index: 8;
-                          right: 20px;
-                        "
-                      >
-                    </span>
-                    <span v-if="item.selected === true" style="z-index: 8">
-                      <img
-                        src="~/assets/images/triangle-active.png"
-                        style="
-                          position: absolute;
-                          top: 4px;
-                          z-index: 8;
-                          right: 20px;
-                        "
-                      >
-                    </span>
 
-                    <img
-                      src="~/assets/images/border-blue.png"
-                      style="
-                        position: absolute;
-                        top: 4px;
-                        z-index: 7;
-                        left: 24px;
-                      "
-                    >
-                    <div class="blackBg" />
-                    <div class="Image">
-                      <img :src="item.background" class="carousel-logo-item">
-                    </div>
+            <div class="card-list">
+              <div
+                v-for="(item, index) in dataDecorationItem"
+                :key="index"
+                class="avatar-image cursor-pointer"
+                :style="item.background !== 'null' ? '' : 'background-color: #76a1c8;display: flex;align-items: center;justify-content: center;'"
+                @click="selectedItem(index, item)"
+              >
+                <span v-if="item.background !== 'null'">
+                  <span v-if="activeItem === null">
+                    <div v-if="item.selected" class="current-image">current</div>
                   </span>
                   <span v-else>
-                    <img
-                      src="~/assets/images/decor_disabled.png"
-                      class="carousel-logo-bg"
-                    >
+                    <div v-if="index === activeItem" class="current-image">current</div>
                   </span>
-                </v-col>
-              </v-row>
-              <!-- <b-pagination
-                total="70"
-                per-page="4"
-                :order="order"
-                class="my-4"
-              /> -->
-              <!-- <v-pagination v-model="page" class="my-4" :length="4" /> -->
-
-              <v-pagination
-                v-if="dataDecoration.data.data.total > 8"
-                v-model="page"
-                :length="Math.ceil(dataDecoration.data.data.total / 4)"
-                class="my-5"
-                @input="getDecoration()"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="columns pr-4 mt-40">
-          <div class="column is-narrow avatar-container">
-            <div class="btn-edit" @click="backTab(1)">
-              <img
-                src="~/assets/images/back-btn.png"
-                style="width: 98.15px;height: 36.49px;x"
-              >
-            </div>
-          </div>
-          <div class="column avatar-container">
-            <div class="btn-edit">
-              <img
-                src="~/assets/images/btn-petra.png"
-                style="width: 224.22px; height: 36px"
-              >
-              <div
-                class="text-edit"
-                style="top: 7px"
-                @click="updateDecoration()"
-              >
-                Save Changes
+                  <div class="img-data">
+                    <img :src="item.background" class="images-avatar">
+                  </div>
+                  <div class="name-avatar">{{ item.name }}</div>
+                </span>
+                <img v-if="item.background === 'null'" src="~/assets/images/edit_profile/lock.svg">
               </div>
             </div>
+          </div>
+
+          <div class="btn-action">
+            <Back class="cursor-pointer" @click.native="backTab(1)" />
+            <ButtonV2
+              value="Save Changes"
+              width="220"
+              height="38"
+              style="margin-right: 26px"
+              @click.native="updateDecoration()"
+            />
           </div>
         </div>
       </span>
@@ -328,8 +201,6 @@ export default {
     },
     updateDecoration () {
       this.$store.commit('user/SET_BTN_AUDIO', true)
-      // this.activeSelected = false
-      console.log(this.selected)
       this.isLoading2 = true
       this.$store
         .dispatch('decoration/changeDecoration', {
@@ -344,6 +215,7 @@ export default {
             'decoration/updateImagesName',
             this.selected.name
           )
+          this.$store.dispatch('decoration/fetchCurrentDecoration')
           this.isLoading2 = false
         })
         .catch((error) => {
@@ -429,6 +301,29 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+::-webkit-scrollbar {
+  width: 9px;
+  height: 18px;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  background-color: #e2e2e2;
+  -webkit-border-radius: 7px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
 .Image {
   position: absolute;
   height: 70px;
@@ -491,31 +386,234 @@ export default {
 .profile-card {
   width: 540.46px;
   height: 100%;
-  background: #effdfd;
+  background: rgb(239, 253, 253, 0.9);
+  border: 0.7px solid #ffffff;
   z-index: 10;
   padding: 80px 10px 0px 20px;
   .profile-container {
     z-index: 1;
     position: relative;
     .btn-profile {
-      top: 43px;
-      left: 30px;
+      top: 35px;
+      left: 32px;
       position: relative;
+      background: rgba(62, 111, 176, 0.9);
+      height: 20px;
+      width: 351px;
+      transform: skew(-29deg);
       .text-profile {
+        transform: skew(29deg);
         position: absolute;
-        top: 2.4px;
-        left: 40px;
-        font-weight: 400;
-        font-size: 16px;
-        display: flex;
-        align-items: center;
-        color: #000000;
-        text-align: center;
+        font-family: 'Nunito';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        color: #ffffff;
+        left: 30px;
+        top: 1px;
       }
     }
   }
+
   .main-profile {
     margin: 65px 0px 0px 23px;
+
+    .btn-action {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+    .avatar-display {
+      margin-top: 40px;
+      width: 418px;
+      height: 240px;
+      display: flex;
+      justify-content: space-evenly;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+      .avatar-img {
+        width: 398px;
+        height: 195px;
+        position: relative;
+        left: -5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid white;
+        .img-logo {
+          margin-top: 1.8px;
+          -o-object-fit: cover;
+          object-fit: cover;
+          width: 398px;
+          height: 192px;
+          position: absolute;
+          top:-2px;
+        }
+      }
+      .avatar-name {
+        margin-top: 4px;
+        position: relative;
+        .box5 {
+          height: 6px;
+          width: 6px;
+          background: white;
+          position: absolute;
+          top: -2px;
+          left: -2px;
+          z-index: -1;
+        }
+        .box4 {
+          height: 6px;
+          width: 6px;
+          background: white;
+          position: absolute;
+          bottom: -2px;
+          right: -2px;
+          z-index: -1;
+        }
+        .box3 {
+          position: absolute;
+          top: 2px;
+          left: 1px;
+          height: 19px;
+          width: 269px;
+          --mask: linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0) 2px,
+            #000 0 calc(100% - 2px),
+            rgba(0, 0, 0, 0) 0
+          );
+          -webkit-mask: var(--mask);
+          mask: var(--mask);
+          background: rgb(46, 87, 153, 0.6);
+          display: flex; /* establish flex container */
+          flex-direction: column; /* make main axis vertical */
+          justify-content: center; /* center items vertically, in this case */
+          align-items: center; /* center items horizontally, in this case */
+          font-family: 'Nunito';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 12px;
+          line-height: 16px;
+          text-align: center;
+          color: #ffffff;
+        }
+        .box2 {
+          position: relative;
+          height: 23px;
+          width: 271px;
+        }
+        .box2:before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: rgb(28, 64, 145, 0.8);
+          clip-path: polygon(
+            0 0,
+            calc(100% - 5px) 0,
+            100% 5px,
+            100% 100%,
+            5px 100%,
+            0 calc(100% - 5px),
+            0 0,
+            2px 2px,
+            2px calc(100% - 5px - 0.83px),
+            calc(5px + 0.83px) calc(100% - 2px),
+            calc(100% - 2px) calc(100% - 2px),
+            calc(100% - 2px) calc(5px + 0.83px),
+            calc(100% - 5px - 0.83px) 2px,
+            2px 2px
+          );
+        }
+      }
+    }
+
+    .list-avatar {
+      margin-top: 17px;
+      .title-card {
+        margin-left: 5px;
+        height: 20px;
+        width: 136px;
+        background: white;
+        transform: skew(-29deg);
+        font-family: 'Nunito';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 16px;
+        color: #3573aa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .card-list {
+        height: 100%;
+        width: 400px;
+        background: rgb(44, 110, 194, 0.75);
+        border: 1px solid #d4eaff;
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 8px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        .avatar-image {
+          margin: 5px;
+          height: 89px;
+          width: 180px;
+          border: 2px solid white;
+          background: #2593d0;
+          position: relative;
+          .current-image {
+            z-index:1;
+            position: absolute;
+            top: 0.2px;
+            right: -1.6px;
+            height: 7px;
+            width: 43px;
+            background: #fff380;
+            --mask: linear-gradient(107deg, rgba(0, 0, 0, 0) 2.81px, #000 0);
+            -webkit-mask: var(--mask);
+            mask: var(--mask);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Nunito';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 7px;
+            line-height: 10px;
+            text-align: center;
+            color: #333333;
+          }
+          .img-data {
+            height: 70px;
+            width: 100%;
+            .images-avatar {
+              height: 100%;
+              width: 100%;
+              position: absolute;
+              bottom: 0px;
+              object-fit: cover;
+            }
+          }
+          .name-avatar {
+            height: 11px;
+            width: 100%;
+            background: rgb(255, 255, 255, 0.9);
+            font-family: 'Nunito';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 7px;
+            line-height: 10px;
+            text-align: center;
+            color: #5b6987;
+            position: absolute;
+            bottom: 0px;
+          }
+        }
+      }
+    }
     .box-carousel {
       margin-top: 20px;
       width: 100%;
