@@ -79,3 +79,36 @@ $sidebar-width: 200px;
 .cursor-pointer {
     cursor: pointer;
 }
+.table thead {
+  background-color: #2E5799;
+}
+.b-table .table th .th-wrap {
+  color:white;
+}
+.pagination-previous, .pagination-next, .pagination-link {
+  background: rgba(255, 255, 255, 0.9);
+  border: 0.805714px solid #2E5799;
+  border-radius: 3.22286px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  color: #2E5799;
+}
+.pagination-ellipsis {
+  background: rgba(255, 255, 255, 0.9);
+  border: 0.805714px solid #2E5799;
+  border-radius: 3.22286px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  color: #2E5799;
+}
+.pagination-link.is-current {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+.pagination-previous[disabled], .pagination-next[disabled], .pagination-link[disabled] {
+  background: white;
+}

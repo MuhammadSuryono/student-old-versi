@@ -45,11 +45,13 @@
         </div>
         <div id="triangle-bottomright2" />
         <div id="triangle-bottomright" />
-        <b-navbar-item tag="div" class="right-side">
-          <div class="buttons">
-            <b-button class="btn-logout" @click="keluar()">
-              Sign Out
-            </b-button>
+        <b-navbar-item tag="div" class="right-side"  @click="keluar()">
+          <div class="btn-logout">
+            <img
+              src="~/assets/images/logout-40.svg"
+              class="icon-logo"
+            >
+            Sign Out
           </div>
         </b-navbar-item>
       </template>
@@ -123,6 +125,21 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.btn-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  color: #CFDDFF;
+  width:150px;
+  cursor:pointer;
+  .icon-logo {
+    margin-right:5px;
+  }
+}
 .coin-card {
   top: 15px;
   position: relative;
@@ -171,15 +188,6 @@ export default {
     padding-left: 30px;
     padding-right: 30px;
   }
-  .btn-logout {
-    background: #000000;
-    border-radius: 5px;
-    color: white;
-    width: 130px;
-    margin-left: 15px;
-    font-size: 14px;
-    border: 0px;
-  }
   .right-side {
     background-color: #2c6bca;
   }
@@ -194,17 +202,17 @@ export default {
     width: 0;
     height: 0;
     border-bottom: 4.25rem solid #2c6bca;
-    border-left: 30px solid transparent;
+    border-left: 26px solid transparent;
   }
   #triangle-bottomright2 {
     width: 55px;
     height: 0;
     top: 0px;
-    right: -40px;
+    right: -50px;
     z-index: -10;
     position: relative;
-    border-bottom: 58px solid #ebcc24;
-    border-left: 30px solid transparent;
+    border-bottom: 64px solid #ebcc24;
+    border-left: 25px solid transparent
   }
   #triangle-bottomleft {
     width: 0;

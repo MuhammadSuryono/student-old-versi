@@ -1,14 +1,14 @@
 <template>
-  <div class="main-card">
+  <div class="main-card no-select">
     <div class="bg-2" />
     <div class="name-card">
-      <div class="font-name">
+      <div class="font-name no-select">
         {{ name }}
       </div>
     </div>
     <div class="point-card">
       <img src="~/assets/images/coin.svg" class="icon-img">
-      <div class="value-coin">
+      <div class="value-coin no-select">
         {{ coin }}
       </div>
     </div>

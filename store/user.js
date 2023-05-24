@@ -10,6 +10,7 @@ export const state = () => ({
   btn_decoration: false,
   btn_quest: false,
   btn_shop: false,
+  btn_purchase: true,
   fullname: null,
   images: null,
   images_name: null,
@@ -31,7 +32,8 @@ export const state = () => ({
   muteEffect: false,
   muteBGM: false,
   btn_setting: false,
-  VRpin: 0
+  VRpin: 0,
+  filterShop: false
 })
 
 export const getters = {
@@ -48,12 +50,17 @@ export const getters = {
   cluster_attribute: state => state.cluster_attribute,
   autoplayBGM: state => state.autoplayBGM,
   audioEffect: state => state.audioEffect,
-  audioBGM: state => state.audioBGM
+  audioBGM: state => state.audioBGM,
+  filterShop: state => state.filterShop,
+  btn_purchase: state => state.btn_purchase
 }
 
 export const mutations = {
   SET_PIN (state, payload) {
     state.VRpin = payload
+  },
+  SET_FILTER_SHOP (state, payload) {
+    state.filterShop = !state.filterShop
   },
   SET_MUTE_EFFECT (state, payload) {
     state.muteEffect = payload
@@ -130,6 +137,9 @@ export const mutations = {
   },
   SET_MAPS (state) {
     state.btn_maps = !state.btn_maps
+  },
+  SET_PURCHASE (state) {
+    state.btn_purchase = !state.btn_purchase
   },
   SET_BTN_DECORATION (state) {
     state.btn_decoration = !state.btn_decoration

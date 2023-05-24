@@ -1,41 +1,40 @@
 <template>
-    <div class="main-card">
-      <div class="bg-2" />
-      <div class="name-card">
-        <div class="font-name">
-          {{ name }}
-        </div>
+  <div class="main-card no-select">
+    <div class="bg-2" />
+    <div class="name-card no-select">
+      <div class="font-name no-select">
+        {{ name }}
       </div>
-      <div class="point-card">
-        <img src="~/assets/images/coin.svg" class="icon-img">
-        <div class="value-coin">
-          {{ coin }}
-        </div>
-      </div>
-      <div class="bg-1" />
     </div>
-  </template>
-  
-  <script>
-  export default {
-    props: {
-      name: {
-        type: String,
-        default: ''
-      },
-      coin: {
-        type: String,
-        default: ''
-      }
+    <div class="point-card">
+      <img src="~/assets/images/coin.svg" class="icon-img">
+      <div class="value-coin no-select">
+        {{ coin }}
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    name: {
+      type: String,
+      default: ''
+    },
+    coin: {
+      type: String,
+      default: ''
     }
   }
-  </script>
-  
+}
+</script>
+
   <style lang="scss" scoped>
   .main-card {
     position: relative;
-    height: 120px;
-    width: 86px;
+    height: 72px;
+    width: 166px;
     .point-card {
       position: absolute;
       z-index:5;
@@ -55,7 +54,7 @@
         margin-right:4px;
       }
       .value-coin {
-        
+
         font-family: 'Nunito';
         font-style: normal;
         font-weight: 600;
@@ -68,7 +67,7 @@
     }
     .name-card {
       height: 21px;
-      width: 86px;
+      width: 100%;
       background: #2961B5;
       position: absolute;
       bottom:0px;
@@ -88,25 +87,14 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    .bg-1 {
-      position: absolute;
-      top:4px;
-      right:-4px;
-      height: 120px;
-      width: 86px;
-      background: yellow;
-      z-index:2;
-      
-    }
     .bg-2 {
       position: absolute;
       top:0px;
       z-index:3;
       background-image: url('https://getuikit.com/v2/docs/images/placeholder_600x400.svg');
-      height: 120px;
-      width: 86px;
+      height: 100%;
+      width: 100%;
     }
   }
-  
+
   </style>
-  

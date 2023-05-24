@@ -77,18 +77,6 @@
   "Volume2": {
     "description": "Auto imported from components/Volume2.vue"
   },
-  "CardCollection": {
-    "description": "Auto imported from components/card/Collection.vue"
-  },
-  "CardLogin": {
-    "description": "Auto imported from components/card/Login.vue"
-  },
-  "CardShop": {
-    "description": "Auto imported from components/card/Shop.vue"
-  },
-  "CardShopV2": {
-    "description": "Auto imported from components/card/ShopV2.vue"
-  },
   "ButtonDecoration": {
     "description": "Auto imported from components/button/decoration.vue"
   },
@@ -106,6 +94,18 @@
   },
   "ButtonV2": {
     "description": "Auto imported from components/button/v2.vue"
+  },
+  "CardCollection": {
+    "description": "Auto imported from components/card/Collection.vue"
+  },
+  "CardLogin": {
+    "description": "Auto imported from components/card/Login.vue"
+  },
+  "CardShop": {
+    "description": "Auto imported from components/card/Shop.vue"
+  },
+  "CardShopV2": {
+    "description": "Auto imported from components/card/ShopV2.vue"
   },
   "FactionProgressBar": {
     "description": "Auto imported from components/faction/ProgressBar.vue"

@@ -8,9 +8,6 @@
         </div>
       </div>
     </div>
-    <div class="btn-filter">
-      asdsa
-    </div>
     <div class="main-body">
       <select style="margin-bottom: 20px;">
         <option>All</option>
@@ -18,14 +15,19 @@
         <option>Option 2</option>
         <option>Option 3</option>
       </select>
-      <div class="columns is-vcentered list-card">
+      <div v-if="filterShop" class="columns is-vcentered list-card">
         <div v-for="i in 40" :key="i" class="column is-one-third">
-          <CardShop name="Lorem Ipsum..." coin="120" class="data-list" />
+          <CardShop name="Lorem Ipsummmmm" coin="120" class="data-list" />
+        </div>
+      </div>
+      <div v-else class="columns is-vcentered list-card">
+        <div v-for="i in 40" :key="i" class="column">
+          <CardShopV2 name="Lorem Ipsumasdsadsa" coin="120" class="data-list" />
         </div>
       </div>
       <div class="btn-action">
         <Back class="cursor-pointer" @click.native="closeProfile()" />
-        <div class="btn-purchase">
+        <div class="btn-purchase no-select" @click="toPurchase()">
           <img src="~/assets/images/purchase.svg">
           <div class="text-style">
             Purchase History
@@ -36,15 +38,27 @@
   </div>
 </template>
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
       menu: 'Avatar'
     }
   },
+  computed: {
+    ...mapState({
+      filterShop: (state) => {
+        return state.user.filterShop
+      }
+    })
+  },
   mounted () {},
   methods: {
+    toPurchase () {
+      this.$store.commit('user/SET_PURCHASE')
+      console.log('aa')
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+    },
     closeProfile () {
       this.$store.commit('user/SET_BTN_SHOP')
       this.$store.commit('user/SET_BTN_AUDIO', true)
@@ -98,7 +112,7 @@ export default {
       width: 100%;
       flex-wrap: wrap;
       height:400px;
-      height: 477px;
+      height: 400px;
       overflow-y: scroll;
       .data-list {
         margin-left: auto;
