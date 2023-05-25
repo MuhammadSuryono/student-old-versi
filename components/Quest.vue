@@ -10,7 +10,7 @@
           <div class="title-coin">
             Rewards
           </div>
-          <div v-if="status" @click="changeStatus()" class="value-coin">
+          <div v-if="status" class="value-coin" @click="changeStatus()">
             <img src="~/assets/images/coin.svg" class="mr-1">
             200
           </div>
@@ -27,7 +27,7 @@
           <div class="title-coin">
             Rewards
           </div>
-          <div v-if="status" @click="changeStatus()" class="value-coin">
+          <div v-if="status" class="value-coin" @click="changeStatus()">
             <img src="~/assets/images/coin.svg" class="mr-1">
             200
           </div>
@@ -44,7 +44,7 @@
           <div class="title-coin">
             Rewards
           </div>
-          <div v-if="status" @click="changeStatus()" class="value-coin">
+          <div v-if="status" class="value-coin" @click="changeStatus()">
             <img src="~/assets/images/coin.svg" class="mr-1">
             200
           </div>
@@ -61,11 +61,11 @@
           <div class="title-coin">
             Rewards
           </div>
-          <div v-if="status" @click="changeStatus()" class="value-coin">
+          <div v-if="status" class="value-coin" @click="changeStatus()">
             <img src="~/assets/images/coin.svg" class="mr-1">
             200
           </div>
-          <div v-else class="value-coin">
+          <div v-else class="value-coin" @click="changeStatus()">
             <img src="~/assets/images/check_coin.svg">
           </div>
         </div>
@@ -81,7 +81,16 @@
           </div>
         </div>
       </div>
-      <div v-if="width !== 100" class="box-value" />
+      <span v-if="status"  class="cursor-pointer">
+        <div class="box-complete2" />
+        <div class="box-bg" />
+        <img src="~/assets/images/chest_2.svg" class="chest-bg2">
+      </span>
+      <span v-else class="cursor-pointer">
+        <div class="box-complete" />
+        <div class="box-bg" />
+        <img src="~/assets/images/chest.svg" class="chest-bg">
+      </span>
     </div>
   </div>
 </template>
@@ -97,8 +106,9 @@ export default {
   mounted () {},
   methods: {
     changeStatus () {
-      this.width = 100
+      // this.width = 100
       this.status = !this.status
+      console.log('status : ', this.status)
     }
 
   }
@@ -225,6 +235,73 @@ export default {
         right: 52px;
         background-image: url('~@/assets/images/Variant3.svg');
         cursor: pointer;
+      }
+      .box-bg {
+        z-index: 2;
+        position: absolute;
+        height: 56px;
+        width: 60px;
+        top: 46px;
+        right: 57px;
+        background: white;
+        clip-path: polygon(0 0,calc(100% - 7.36px) 0,calc(100% - 4px) 4px,100% 7.36px,100% 100%,0 100%);
+
+      }
+      .box-complete {
+        position: relative;
+        height: 62px;
+        width: 66px;
+        right: -379px;
+        top: 43px;
+        z-index: 2;
+      }
+      .box-complete:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 60px) calc(100% - 60px) no-repeat,
+        linear-gradient(184deg, #fff380 0%, transparent 100%) 68% 56%/141% 174%,
+        #437ac3;
+        box-sizing: border-box;
+        clip-path: polygon(0 0,calc(100% - 7.36px) 0,calc(100% - 4px) 4px,100% 7.36px,100% 100%,0 100%,0 0,4px  4px ,4px calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) calc(7.36px + 1.87px),calc(100% - 4px - 2.84px) calc(4px + 2.84px),calc(100% - 7.36px - 1.87px) 4px,4px 4px);
+      }
+      .box-complete2 {
+        position: relative;
+        height: 62px;
+        width: 66px;
+        right: -379px;
+        top: 43px;
+        z-index: 2;
+      }
+      .box-complete2:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 16px) calc(100% - 16px) no-repeat,
+        linear-gradient(176deg, #ffffff 0%, #819cdb 100%);
+        box-sizing: border-box;
+        clip-path: polygon(0 0,calc(100% - 7.36px) 0,calc(100% - 4px) 4px,100% 7.36px,100% 100%,0 100%,0 0,4px  4px ,4px calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) calc(7.36px + 1.87px),calc(100% - 4px - 2.84px) calc(4px + 2.84px),calc(100% - 7.36px - 1.87px) 4px,4px 4px);
+      }
+      .chest-bg {
+        z-index: 3;
+        width: 49px;
+        position: absolute;
+        top: 51px;
+        right: 62px;
+        animation: tilt-shaking 0.85s infinite;
+      }
+      .chest-bg2 {
+        z-index: 3;
+        position: absolute;
+        top: 53px;
+        right: 61px;
+      }
+      @keyframes tilt-shaking {
+        0% { transform: rotate(0deg); }
+        25% { transform: rotate(15deg); }
+        50% { transform: rotate(0eg); }
+        75% { transform: rotate(-15deg); }
+        100% { transform: rotate(0deg); }
       }
     }
   }
