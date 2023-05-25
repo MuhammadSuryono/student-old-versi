@@ -10,7 +10,8 @@ export const state = () => ({
   btn_decoration: false,
   btn_quest: false,
   btn_shop: false,
-  btn_purchase: true,
+  btn_purchase: false,
+  btn_success_quest: false,
   fullname: null,
   images: null,
   images_name: null,
@@ -82,6 +83,10 @@ export const mutations = {
   },
   SET_LOGGEDIN (state, payload) {
     state.isLoggedIn = payload
+  },
+  SET_SUCCESS_QUEST (state, payload) {
+    state.btn_success_quest = !state.btn_success_quest
+    console.log(state.btn_success_quest)
   },
   SET_BTN_AUDIO (state, payload) {
     const myAudio = new Audio(btnAudio)

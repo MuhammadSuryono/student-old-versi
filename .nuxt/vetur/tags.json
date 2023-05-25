@@ -77,6 +77,33 @@
   "Volume2": {
     "description": "Auto imported from components/Volume2.vue"
   },
+  "FormArea": {
+    "description": "Auto imported from components/Form/area.vue"
+  },
+  "FormInput": {
+    "description": "Auto imported from components/Form/input.vue"
+  },
+  "FormTextArea": {
+    "description": "Auto imported from components/Form/TextArea.vue"
+  },
+  "CardCollection": {
+    "description": "Auto imported from components/card/Collection.vue"
+  },
+  "CardDialogQuest": {
+    "description": "Auto imported from components/card/DialogQuest.vue"
+  },
+  "CardLogin": {
+    "description": "Auto imported from components/card/Login.vue"
+  },
+  "CardPurchaseQuest": {
+    "description": "Auto imported from components/card/PurchaseQuest.vue"
+  },
+  "CardShop": {
+    "description": "Auto imported from components/card/Shop.vue"
+  },
+  "CardShopV2": {
+    "description": "Auto imported from components/card/ShopV2.vue"
+  },
   "ButtonDecoration": {
     "description": "Auto imported from components/button/decoration.vue"
   },
@@ -95,32 +122,11 @@
   "ButtonV2": {
     "description": "Auto imported from components/button/v2.vue"
   },
-  "CardCollection": {
-    "description": "Auto imported from components/card/Collection.vue"
-  },
-  "CardLogin": {
-    "description": "Auto imported from components/card/Login.vue"
-  },
-  "CardShop": {
-    "description": "Auto imported from components/card/Shop.vue"
-  },
-  "CardShopV2": {
-    "description": "Auto imported from components/card/ShopV2.vue"
-  },
   "FactionProgressBar": {
     "description": "Auto imported from components/faction/ProgressBar.vue"
   },
   "FactionReward": {
     "description": "Auto imported from components/faction/Reward.vue"
-  },
-  "FormArea": {
-    "description": "Auto imported from components/Form/area.vue"
-  },
-  "FormInput": {
-    "description": "Auto imported from components/Form/input.vue"
-  },
-  "FormTextArea": {
-    "description": "Auto imported from components/Form/TextArea.vue"
   },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"

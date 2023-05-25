@@ -56,13 +56,12 @@ export default {
   methods: {
     toPurchase () {
       this.$store.commit('user/SET_PURCHASE')
-      console.log('aa')
       this.$store.commit('user/SET_BTN_AUDIO', true)
     },
     closeProfile () {
       this.$store.commit('user/SET_BTN_SHOP')
       this.$store.commit('user/SET_BTN_AUDIO', true)
-    },
+    }
   }
 }
 

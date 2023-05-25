@@ -10,11 +10,11 @@
           <div class="title-coin">
             Rewards
           </div>
-          <div v-if="status" class="value-coin" @click="changeStatus()">
+          <div v-if="status" class="value-coin no-select" @click="changeStatus()">
             <img src="~/assets/images/coin.svg" class="mr-1">
             200
           </div>
-          <div v-else class="value-coin">
+          <div v-else class="value-coin no-select">
             <img src="~/assets/images/check_coin.svg">
           </div>
         </div>
@@ -27,11 +27,11 @@
           <div class="title-coin">
             Rewards
           </div>
-          <div v-if="status" class="value-coin" @click="changeStatus()">
+          <div v-if="status" class="value-coin no-select" @click="changeStatus()">
             <img src="~/assets/images/coin.svg" class="mr-1">
             200
           </div>
-          <div v-else class="value-coin">
+          <div v-else class="value-coin no-select">
             <img src="~/assets/images/check_coin.svg">
           </div>
         </div>
@@ -44,11 +44,11 @@
           <div class="title-coin">
             Rewards
           </div>
-          <div v-if="status" class="value-coin" @click="changeStatus()">
+          <div v-if="status" class="value-coin no-select" @click="changeStatus()">
             <img src="~/assets/images/coin.svg" class="mr-1">
             200
           </div>
-          <div v-else class="value-coin">
+          <div v-else class="value-coin no-select">
             <img src="~/assets/images/check_coin.svg">
           </div>
         </div>
@@ -61,11 +61,11 @@
           <div class="title-coin">
             Rewards
           </div>
-          <div v-if="status" class="value-coin" @click="changeStatus()">
+          <div v-if="status" class="value-coin no-select" @click="changeStatus()">
             <img src="~/assets/images/coin.svg" class="mr-1">
             200
           </div>
-          <div v-else class="value-coin" @click="changeStatus()">
+          <div v-else class="value-coin no-select" @click="changeStatus()">
             <img src="~/assets/images/check_coin.svg">
           </div>
         </div>
@@ -81,15 +81,15 @@
           </div>
         </div>
       </div>
-      <span v-if="status"  class="cursor-pointer">
+      <span v-if="status" class="cursor-pointer">
         <div class="box-complete2" />
         <div class="box-bg" />
         <img src="~/assets/images/chest_2.svg" class="chest-bg2">
       </span>
-      <span v-else class="cursor-pointer">
+      <span v-else class="cursor-pointer" @click="toPopup()">
         <div class="box-complete" />
         <div class="box-bg" />
-        <img src="~/assets/images/chest.svg" class="chest-bg">
+        <img src="~/assets/images/chest_3.svg" class="chest-bg">
       </span>
     </div>
   </div>
@@ -106,11 +106,14 @@ export default {
   mounted () {},
   methods: {
     changeStatus () {
-      // this.width = 100
+      this.width = 100
       this.status = !this.status
-      console.log('status : ', this.status)
+    },
+    toPopup () {
+      console.log('to')
+      this.$store.commit('user/SET_SUCCESS_QUEST')
+      this.$store.commit('user/SET_BTN_AUDIO', true)
     }
-
   }
 }
 </script>
@@ -256,6 +259,7 @@ export default {
         z-index: 2;
       }
       .box-complete:before {
+        animation: tilt-shaking2 1.2s infinite;
         content: "";
         position: absolute;
         inset: 0;
@@ -286,9 +290,9 @@ export default {
         z-index: 3;
         width: 49px;
         position: absolute;
-        top: 51px;
+        top: 53px;
         right: 62px;
-        animation: tilt-shaking 0.85s infinite;
+        animation: tilt-shaking 1.2s infinite;
       }
       .chest-bg2 {
         z-index: 3;
@@ -297,11 +301,25 @@ export default {
         right: 61px;
       }
       @keyframes tilt-shaking {
-        0% { transform: rotate(0deg); }
-        25% { transform: rotate(15deg); }
-        50% { transform: rotate(0eg); }
-        75% { transform: rotate(-15deg); }
+        0% { transform: rotate(0deg);}
+        25% { transform: rotate(15deg);}
+        50% { transform: rotate(0deg); }
+        75% { transform: rotate(-15deg);}
         100% { transform: rotate(0deg); }
+      }
+      @keyframes tilt-shaking2 {
+        0% {
+         }
+        25% {
+        background: linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 60px) calc(100% - 60px) no-repeat,
+        linear-gradient(184deg, #fff380 0%, transparent 100%) 68% 56%/141% 174%,
+        #437ac3;}
+        50% { }
+        75% {
+        background: linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 60px) calc(100% - 60px) no-repeat,
+        linear-gradient(184deg, #437ac3 0%, transparent 100%) 68% 56%/141% 174%,
+        #fff380;}
+        100% { }
       }
     }
   }
