@@ -17,7 +17,9 @@
         >
           <div class="peti" style="">
             <img src="~/assets/images/peti.gif" class="assets-1">
-            <img src="~/assets/images/star_2.svg" class="assets-2">
+            <div class="assets-test">
+              <img src="~/assets/images/star_2.svg" class="assets-2">
+            </div>
           </div>
           <div class="text-card">
             <div class="bg-1">
@@ -135,6 +137,17 @@ export default {
           margin-left: auto;
           margin-right: auto;
         }
+        .assets-test {
+          animation: cssAnimation 5s infinite;
+          visibility: hidden;
+        }
+        @keyframes cssAnimation {
+          0%   { visibility: hidden; }
+          30%   { visibility: hidden; }
+          50%   { visibility: visible; }
+          70%   { visibility: visible; }
+          100%   { visibility: visible; }
+        }
         .assets-2 {
           height: 370px;
           position: absolute;
@@ -144,6 +157,16 @@ export default {
           right: 0px;
           margin-left: auto;
           margin-right: auto;
+          animation-delay: 2s;
+          animation: rotation 2s infinite linear;
+        }
+        @keyframes rotation {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(359deg);
+          }
         }
       }
       .text-card {

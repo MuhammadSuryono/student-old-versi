@@ -91,7 +91,10 @@ export default {
       position: absolute;
       top:0px;
       z-index:3;
-      background-image: url('https://getuikit.com/v2/docs/images/placeholder_600x400.svg');
+      background-image: url('~/assets/images/image_shop.png');
+      background-position: center; /* Center the image */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      background-size: cover; /* Resize the background image to cover the entire container */
       height: 100%;
       width: 100%;
     }
