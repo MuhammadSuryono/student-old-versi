@@ -34,18 +34,6 @@ $input-background-color: white;
 .navbar-burger.burger.is-active{
     color:white;
 }
-.pagination {
-    .pagination-list {
-        margin-top:0px;
-        li {
-            margin-top:0px;
-        }
-    }
-}
-.v-pagination__item--active {
-  background-color: #154CA0 !important;
-}
-
 @import "~bulma/sass/utilities/_all";
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
@@ -111,4 +99,27 @@ $sidebar-width: 200px;
 }
 .pagination-previous[disabled], .pagination-next[disabled], .pagination-link[disabled] {
   background: white;
+}
+.pagination {
+    .pagination-list {
+        margin-top:0px;
+        li {
+            margin-top:0px;
+        }
+    }
+}
+.theme--light.v-pagination .v-pagination__item {
+  background: rgb(255, 255, 255, 0.4) !important;
+  transform: skew(-10deg);
+  color: #333333 !important;
+  font-weight: 600 !important;
+}
+.theme--light.v-pagination .v-pagination__item--active {
+  background: rgb(255, 255, 255, 0.8) !important; 
+  color: #333333 !important;
+  font-weight: 600 !important;
+}
+.v-pagination__item {
+  border-radius: 0px !important;
+  font-size:14px !important;
 }

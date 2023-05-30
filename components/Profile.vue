@@ -276,6 +276,13 @@
                 </span>
                 <img v-if="item.avatar === 'null'" src="~/assets/images/edit_profile/lock.svg">
               </div>
+              <v-pagination
+                v-if="dataAvatar.data.data.total > 8"
+                v-model="page"
+                :length="Math.ceil(dataAvatar.data.data.total / 8)"
+                class="my-2"
+                @input="getAvatar()"
+              />
             </div>
           </div>
           <div class="btn-action">

@@ -88,6 +88,13 @@
                 </span>
                 <img v-if="item.background === 'null'" src="~/assets/images/edit_profile/lock.svg">
               </div>
+              <v-pagination
+                v-if="dataDecoration.data.data.total > 8"
+                v-model="page"
+                :length="Math.ceil(dataDecoration.data.data.total / 4)"
+                class="my-5"
+                @input="getDecoration()"
+              />
             </div>
           </div>
 
