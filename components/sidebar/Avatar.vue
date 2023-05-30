@@ -51,7 +51,7 @@
       <div class="cursor-pointer shield" style="margin-top:40px;" @click="onQuest()">
         <div class="circle">
           <div class="inner-circle">
-            1
+            {{ quest.completion_task.total_un_complete }}
           </div>
         </div>
         <img
@@ -134,6 +134,9 @@ export default {
       },
       users: (state) => {
         return state.user.users
+      },
+      quest: (state) => {
+        return state.quest.data
       }
     }),
     btnStyles1 () {

@@ -8,9 +8,6 @@
   "BoxTitle": {
     "description": "Auto imported from components/BoxTitle.vue"
   },
-  "Confirmation": {
-    "description": "Auto imported from components/confirmation.vue"
-  },
   "Decoration": {
     "description": "Auto imported from components/Decoration.vue"
   },
@@ -41,14 +38,8 @@
   "PNotification": {
     "description": "Auto imported from components/PNotification.vue"
   },
-  "Popup": {
-    "description": "Auto imported from components/Popup.vue"
-  },
   "PProgress": {
     "description": "Auto imported from components/PProgress.vue"
-  },
-  "Profile": {
-    "description": "Auto imported from components/Profile.vue"
   },
   "PSearch": {
     "description": "Auto imported from components/PSearch.vue"
@@ -58,6 +49,12 @@
   },
   "PTitleV2": {
     "description": "Auto imported from components/PTitleV2.vue"
+  },
+  "Popup": {
+    "description": "Auto imported from components/Popup.vue"
+  },
+  "Profile": {
+    "description": "Auto imported from components/Profile.vue"
   },
   "Quest": {
     "description": "Auto imported from components/Quest.vue"
@@ -76,6 +73,18 @@
   },
   "Volume2": {
     "description": "Auto imported from components/Volume2.vue"
+  },
+  "Confirmation": {
+    "description": "Auto imported from components/confirmation.vue"
+  },
+  "FormTextArea": {
+    "description": "Auto imported from components/Form/TextArea.vue"
+  },
+  "FormArea": {
+    "description": "Auto imported from components/Form/area.vue"
+  },
+  "FormInput": {
+    "description": "Auto imported from components/Form/input.vue"
   },
   "ButtonDecoration": {
     "description": "Auto imported from components/button/decoration.vue"
@@ -116,21 +125,6 @@
   "CardShopV2": {
     "description": "Auto imported from components/card/ShopV2.vue"
   },
-  "FactionProgressBar": {
-    "description": "Auto imported from components/faction/ProgressBar.vue"
-  },
-  "FactionReward": {
-    "description": "Auto imported from components/faction/Reward.vue"
-  },
-  "FormArea": {
-    "description": "Auto imported from components/Form/area.vue"
-  },
-  "FormInput": {
-    "description": "Auto imported from components/Form/input.vue"
-  },
-  "FormTextArea": {
-    "description": "Auto imported from components/Form/TextArea.vue"
-  },
   "SidebarAvatar": {
     "description": "Auto imported from components/sidebar/Avatar.vue"
   },
@@ -142,15 +136,6 @@
   },
   "SidebarMain": {
     "description": "Auto imported from components/sidebar/Main.vue"
-  },
-  "FormArea": {
-    "description": "Auto imported from components/Form/area.vue"
-  },
-  "FormInput": {
-    "description": "Auto imported from components/Form/input.vue"
-  },
-  "FormTextArea": {
-    "description": "Auto imported from components/Form/TextArea.vue"
   },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
@@ -166,9 +151,6 @@
   },
   "IconBgBack": {
     "description": "Auto imported from components/icon/BgBack.vue"
-  },
-  "IconBgPersonality": {
-    "description": "Auto imported from components/icon/bgPersonality.vue"
   },
   "IconCluster": {
     "description": "Auto imported from components/icon/Cluster.vue"
@@ -190,9 +172,6 @@
   },
   "IconLocation": {
     "description": "Auto imported from components/icon/Location.vue"
-  },
-  "IconRefresh": {
-    "description": "Auto imported from components/icon/refresh.vue"
   },
   "IconSearch": {
     "description": "Auto imported from components/icon/Search.vue"
@@ -217,5 +196,17 @@
   },
   "IconVolumeMute": {
     "description": "Auto imported from components/icon/VolumeMute.vue"
+  },
+  "IconBgPersonality": {
+    "description": "Auto imported from components/icon/bgPersonality.vue"
+  },
+  "IconRefresh": {
+    "description": "Auto imported from components/icon/refresh.vue"
+  },
+  "FactionProgressBar": {
+    "description": "Auto imported from components/faction/ProgressBar.vue"
+  },
+  "FactionReward": {
+    "description": "Auto imported from components/faction/Reward.vue"
   }
 }

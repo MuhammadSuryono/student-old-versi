@@ -43,17 +43,17 @@
     {
       "hid": "shortcut-icon",
       "rel": "shortcut icon",
-      "href": "/student-dev/student-dev/_nuxt/icons/icon_64x64.9a7eb7.png"
+      "href": "/student/_nuxt/icons/icon_64x64.9a7eb7.png"
     },
     {
       "hid": "apple-touch-icon",
       "rel": "apple-touch-icon",
-      "href": "/student-dev/student-dev/_nuxt/icons/icon_512x512.9a7eb7.png",
+      "href": "/student/_nuxt/icons/icon_512x512.9a7eb7.png",
       "sizes": "512x512"
     },
     {
       "rel": "manifest",
-      "href": "/student-dev/student-dev/_nuxt/manifest.806e0f0b.json",
+      "href": "/student/_nuxt/manifest.ed9ba13b.json",
       "hid": "manifest"
     }
   ],
