@@ -79,7 +79,7 @@
           </span>
           <span class="petra-students">
             <div class="bg-student">
-              {{ detailModule.total_enrolled }} Students
+              <!-- {{ detailModule.total_enrolled }} Students -->
             </div>
           </span>
           <div ref="infoBox" class="column is-narrow left-side">
