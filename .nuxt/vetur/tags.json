@@ -119,27 +119,6 @@
   "FactionReward": {
     "description": "Auto imported from components/faction/Reward.vue"
   },
-  "FormArea": {
-    "description": "Auto imported from components/Form/area.vue"
-  },
-  "FormInput": {
-    "description": "Auto imported from components/Form/input.vue"
-  },
-  "FormTextArea": {
-    "description": "Auto imported from components/Form/TextArea.vue"
-  },
-  "SidebarAvatar": {
-    "description": "Auto imported from components/sidebar/Avatar.vue"
-  },
-  "SidebarButtonMenu": {
-    "description": "Auto imported from components/sidebar/ButtonMenu.vue"
-  },
-  "SidebarCardName": {
-    "description": "Auto imported from components/sidebar/CardName.vue"
-  },
-  "SidebarMain": {
-    "description": "Auto imported from components/sidebar/Main.vue"
-  },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
   },
@@ -205,5 +184,26 @@
   },
   "IconVolumeMute": {
     "description": "Auto imported from components/icon/VolumeMute.vue"
+  },
+  "FormArea": {
+    "description": "Auto imported from components/Form/area.vue"
+  },
+  "FormInput": {
+    "description": "Auto imported from components/Form/input.vue"
+  },
+  "FormTextArea": {
+    "description": "Auto imported from components/Form/TextArea.vue"
+  },
+  "SidebarAvatar": {
+    "description": "Auto imported from components/sidebar/Avatar.vue"
+  },
+  "SidebarButtonMenu": {
+    "description": "Auto imported from components/sidebar/ButtonMenu.vue"
+  },
+  "SidebarCardName": {
+    "description": "Auto imported from components/sidebar/CardName.vue"
+  },
+  "SidebarMain": {
+    "description": "Auto imported from components/sidebar/Main.vue"
   }
 }

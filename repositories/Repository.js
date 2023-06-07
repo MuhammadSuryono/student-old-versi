@@ -5,6 +5,7 @@ import SkillcardRepository from '~/repositories/SkillcardRepository'
 import ModuledRepository from '~/repositories/moduleRepository'
 import FactionRepository from '~/repositories/factionRepository'
 import StatisticRepository from '~/repositories/statisticRepository'
+import QuestRepository from '~/repositories/questRepository'
 
 export default $axios => ({
   user: UserRepository($axios),
@@ -13,5 +14,6 @@ export default $axios => ({
   skillcard: SkillcardRepository($axios),
   module: ModuledRepository($axios),
   faction: FactionRepository($axios),
-  statistic: StatisticRepository($axios)
+  statistic: StatisticRepository($axios),
+  quest: QuestRepository($axios)
 })

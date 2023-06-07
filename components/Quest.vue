@@ -2,70 +2,19 @@
   <div class="quest-card">
     <PTitle name="Daily Quest" type="quest" />
     <div class="main-card">
-      <div class="quest-box">
+      <div v-for="(items, index) in data.tasks" :key="index" class="quest-box">
         <div class="title-quest">
-          Finish 2 assessments
+          {{ items.task_name }}
         </div>
         <div class="coin-reward">
           <div class="title-coin">
             Rewards
           </div>
-          <div v-if="status" class="value-coin no-select" @click="changeStatus()">
+          <div v-if="!items.already_take" class="value-coin no-select" @click="changeStatus()">
             <img src="~/assets/images/coin.svg" class="mr-1">
-            200
+            {{ items.task_detail.total_coin }}
           </div>
           <div v-else class="value-coin no-select">
-            <img src="~/assets/images/check_coin.svg">
-          </div>
-        </div>
-      </div>
-      <div class="quest-box">
-        <div class="title-quest">
-          Finish 2 assessments
-        </div>
-        <div class="coin-reward">
-          <div class="title-coin">
-            Rewards
-          </div>
-          <div v-if="status" class="value-coin no-select" @click="changeStatus()">
-            <img src="~/assets/images/coin.svg" class="mr-1">
-            200
-          </div>
-          <div v-else class="value-coin no-select">
-            <img src="~/assets/images/check_coin.svg">
-          </div>
-        </div>
-      </div>
-      <div class="quest-box">
-        <div class="title-quest">
-          Finish 2 assessments
-        </div>
-        <div class="coin-reward">
-          <div class="title-coin">
-            Rewards
-          </div>
-          <div v-if="status" class="value-coin no-select" @click="changeStatus()">
-            <img src="~/assets/images/coin.svg" class="mr-1">
-            200
-          </div>
-          <div v-else class="value-coin no-select">
-            <img src="~/assets/images/check_coin.svg">
-          </div>
-        </div>
-      </div>
-      <div class="quest-box">
-        <div class="title-quest">
-          Finish 2 assessments
-        </div>
-        <div class="coin-reward">
-          <div class="title-coin">
-            Rewards
-          </div>
-          <div v-if="status" class="value-coin no-select" @click="changeStatus()">
-            <img src="~/assets/images/coin.svg" class="mr-1">
-            200
-          </div>
-          <div v-else class="value-coin no-select" @click="changeStatus()">
             <img src="~/assets/images/check_coin.svg">
           </div>
         </div>
@@ -76,12 +25,12 @@
         <div class="bg1">
           <div class="bg2">
             <div class="bg3">
-              <div id="mainProgress" class="discreteProgress" :style="'background-size: ' + width + '%;'" />
+              <div id="mainProgress" class="discreteProgress" :style="'background-size: ' + data.completion_task.percentage_complete + '%;'" />
             </div>
           </div>
         </div>
       </div>
-      <span v-if="status" class="cursor-pointer">
+      <span v-if="data.completion_task.percentage_complete < 100" class="cursor-pointer">
         <div class="box-complete2" />
         <div class="box-bg" />
         <img src="~/assets/images/chest_2.svg" class="chest-bg2">
@@ -95,7 +44,7 @@
   </div>
 </template>
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -103,8 +52,25 @@ export default {
       status: true
     }
   },
-  mounted () {},
+  computed: {
+    ...mapState({
+      data: (state) => {
+        return state.quest.data
+      }
+    })
+  },
+  mounted () {
+    this.getData()
+  },
   methods: {
+    getData () {
+      this.$store
+        .dispatch('quest/getTaskToday')
+        // .then((response) => {
+        // })
+        // .catch((error) => {
+        // })
+    },
     changeStatus () {
       this.width = 100
       this.status = !this.status
