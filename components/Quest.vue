@@ -10,12 +10,16 @@
           <div class="title-coin">
             Rewards
           </div>
-          <div v-if="!items.already_take" class="value-coin no-select" @click="changeStatus()">
+          <!-- <div v-if="!items.already_take" class="value-coin no-select" @click="changeStatus()">
             <img src="~/assets/images/coin.svg" class="mr-1">
             {{ items.task_detail.total_coin }}
-          </div>
-          <div v-else class="value-coin no-select">
+          </div> -->
+          <div v-if="items.is_claim && items.already_take" class="value-coin no-select" style="cursor:auto;">
             <img src="~/assets/images/check_coin.svg">
+          </div>
+          <div v-else class="value-coin no-select" @click="changeStatus(items)">
+            <img src="~/assets/images/coin.svg" class="mr-1">
+            {{ items.task_detail.total_coin }}
           </div>
         </div>
       </div>
@@ -25,12 +29,12 @@
         <div class="bg1">
           <div class="bg2">
             <div class="bg3">
-              <div id="mainProgress" class="discreteProgress" :style="'background-size: ' + data.completion_task.percentage_complete + '%;'" />
+              <div id="mainProgress" class="discreteProgress" :style="'background-size: ' + percentage_complete + '%;'" />
             </div>
           </div>
         </div>
       </div>
-      <span v-if="data.completion_task.percentage_complete < 100" class="cursor-pointer">
+      <span v-if="percentage_complete < 100" class="cursor-pointer">
         <div class="box-complete2" />
         <div class="box-bg" />
         <img src="~/assets/images/chest_2.svg" class="chest-bg2">
@@ -49,13 +53,20 @@ export default {
   data () {
     return {
       width: 70,
-      status: true
+      status: true,
+      percentage_complete: 0
     }
   },
   computed: {
     ...mapState({
       data: (state) => {
         return state.quest.data
+      },
+      dataAvatar: (state) => {
+        return state.quest.dataAvatar
+      },
+      dataBackground: (state) => {
+        return state.quest.dataBackground
       }
     })
   },
@@ -66,17 +77,42 @@ export default {
     getData () {
       this.$store
         .dispatch('quest/getTaskToday')
-        // .then((response) => {
-        // })
-        // .catch((error) => {
-        // })
+        .then((res) => {
+          this.percentage_complete = res.data.data.completion_task.percentage_complete
+        })
+        .catch(() => {
+        })
     },
-    changeStatus () {
-      this.width = 100
-      this.status = !this.status
+    changeStatus (data) {
+      const payload = {
+        task_id: this.data.id,
+        collection_id: this.data.collection_id,
+        collection_task_code: data.task_code
+      }
+      this.$store
+        .dispatch('quest/claimTask', payload)
+        .then(() => {
+          this.getData()
+        })
+        .catch(() => {
+        })
     },
+    // changeStatus2 () {
+    //   const payload = {
+    //     task_id: this.data.id,
+    //     collection_id: this.data.collection_id,
+    //     collection_task_code: this.data.tasks[0].task_code
+    //   }
+    //   this.$store
+    //     .dispatch('quest/claimTask', payload)
+    //     .then(() => {
+    //       this.getData()
+    //     })
+    //     .catch(() => {
+    //     })
+    // },
     toPopup () {
-      console.log('to')
+      this.changeStatus2()
       this.$store.commit('user/SET_SUCCESS_QUEST')
       this.$store.commit('user/SET_BTN_AUDIO', true)
     }

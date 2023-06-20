@@ -123,6 +123,7 @@
 
     <CardPurchaseQuest v-if="btn_purchase" />
     <CardDialogQuest v-if="btn_success_quest" />
+    <CardDialogShop v-if="btn_success_shop" />
   </div>
 </template>
 
@@ -259,6 +260,9 @@ export default {
       },
       btn_success_quest: (state) => {
         return state.user.btn_success_quest
+      },
+      btn_success_shop: (state) => {
+        return state.user.btn_success_shop
       }
     }),
     widthSidebar () {

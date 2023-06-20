@@ -1,13 +1,26 @@
 <template>
   <div class="main-card no-select">
-    <div class="bg-2" />
+    <div
+      v-if="hover"
+      class="hover-btn"
+      @mouseleave="hover = false"
+      @click="clickToBuy()"
+    >
+      CLICK TO BUY
+    </div>
+    <div
+      class="bg-2"
+      :style="'background-image:url(' + avatar + ')'"
+      @mouseover="hover = true"
+    />
     <div class="name-card">
       <div class="font-name no-select">
         {{ name }}
       </div>
     </div>
     <div class="point-card">
-      <img src="~/assets/images/coin.svg" class="icon-img">
+      <img v-if="type === 1" src="~/assets/images/coin.svg" class="icon-img">
+      <img v-if="type === 2" src="~/assets/images/diamond.svg" class="icon-img">
       <div class="value-coin no-select">
         {{ coin }}
       </div>
@@ -19,6 +32,10 @@
 <script>
 export default {
   props: {
+    dataAvatar: {
+      type: Object,
+      default: null
+    },
     name: {
       type: String,
       default: ''
@@ -26,6 +43,32 @@ export default {
     coin: {
       type: String,
       default: ''
+    },
+    type: {
+      type: Number,
+      default: 1
+    },
+    avatar: {
+      type: String,
+      default: ''
+    },
+    id: {
+      type: String,
+      default: ''
+    }
+  },
+  data () {
+    return {
+      hover: false,
+      dateNow: null
+    }
+  },
+  methods: {
+    clickToBuy () {
+      this.$store.commit('quest/SET_DATA_DETAIL_AVATAR', this.dataAvatar)
+      this.$store.commit('quest/SET_DATA_IMAGE_AVATAR', this.avatar)
+      this.$store.commit('user/SET_SUCCESS_SHOP')
+      this.$store.commit('user/SET_BTN_AUDIO', true)
     }
   }
 }
@@ -55,7 +98,7 @@ export default {
       margin-right:4px;
     }
     .value-coin {
-      
+
       font-family: 'Nunito';
       font-style: normal;
       font-weight: 600;
@@ -96,7 +139,7 @@ export default {
     width: 86px;
     background: yellow;
     z-index:2;
-    
+
   }
   .bg-2 {
     position: absolute;
@@ -108,6 +151,21 @@ export default {
     background-size: cover; /* Resize the background image to cover the entire container */
     height: 120px;
     width: 86px;
+  }
+  .hover-btn {
+    position: absolute;
+    top:0px;
+    z-index:4;
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 90%;
+    color:white;
+    text-align: center;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
   }
 }
 

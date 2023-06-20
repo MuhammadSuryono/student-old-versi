@@ -101,6 +101,9 @@
   "CardDialogQuest": {
     "description": "Auto imported from components/card/DialogQuest.vue"
   },
+  "CardDialogShop": {
+    "description": "Auto imported from components/card/DialogShop.vue"
+  },
   "CardLogin": {
     "description": "Auto imported from components/card/Login.vue"
   },
@@ -112,6 +115,15 @@
   },
   "CardShopV2": {
     "description": "Auto imported from components/card/ShopV2.vue"
+  },
+  "FormArea": {
+    "description": "Auto imported from components/Form/area.vue"
+  },
+  "FormInput": {
+    "description": "Auto imported from components/Form/input.vue"
+  },
+  "FormTextArea": {
+    "description": "Auto imported from components/Form/TextArea.vue"
   },
   "FactionProgressBar": {
     "description": "Auto imported from components/faction/ProgressBar.vue"
@@ -184,15 +196,6 @@
   },
   "IconVolumeMute": {
     "description": "Auto imported from components/icon/VolumeMute.vue"
-  },
-  "FormArea": {
-    "description": "Auto imported from components/Form/area.vue"
-  },
-  "FormInput": {
-    "description": "Auto imported from components/Form/input.vue"
-  },
-  "FormTextArea": {
-    "description": "Auto imported from components/Form/TextArea.vue"
   },
   "SidebarAvatar": {
     "description": "Auto imported from components/sidebar/Avatar.vue"

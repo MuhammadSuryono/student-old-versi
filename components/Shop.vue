@@ -9,21 +9,85 @@
       </div>
     </div>
     <div class="main-body">
-      <select style="margin-bottom: 20px;">
-        <option>All</option>
-        <option>Option 1</option>
-        <option>Option 2</option>
-        <option>Option 3</option>
+      <select
+        v-model="filterType"
+        style="margin-bottom: 20px;"
+        @change="getAll()"
+      >
+        <option value="">
+          All
+        </option>
+        <option value="1">
+          Regular
+        </option>
+        <option value="2">
+          Premium
+        </option>
       </select>
-      <div v-if="filterShop" class="columns is-vcentered list-card">
-        <div v-for="i in 40" :key="i" class="column is-one-third">
-          <CardShop name="Lorem Ipsummmmm" coin="120" class="data-list" />
+      <div v-if="filterShop">
+        <div class="columns list-card">
+          <div v-for="(item, index) in dataAvatar" :key="index" class="column is-one-third">
+            <CardShop
+              :id="item.id"
+              :data-avatar="item"
+              :avatar="gender === 'Female' ? item.thumbnail_male.close_body : item.thumbnail_female.close_body"
+              :name="item.item_name"
+              :coin="item.price.nominal"
+              class="data-list"
+              :type="item.item_type_id.id"
+            />
+          </div>
         </div>
+
+        <infinite-loading
+          v-if="totalAvatar"
+          :identifier="infiniteId"
+          spinner="spinner"
+          style="margin-bottom: 15px"
+          @infinite="infiniteScroll"
+        >
+          <div slot="spinner" style="color: black">
+            <v-progress-circular indeterminate color="black" />
+          </div>
+          <div slot="no-results" style="color: black">
+            No results
+          </div>
+          <div slot="no-more" style="color: black">
+            No more data
+          </div>
+        </infinite-loading>
       </div>
-      <div v-else class="columns is-vcentered list-card">
-        <div v-for="i in 40" :key="i" class="column">
-          <CardShopV2 name="Lorem Ipsumasdsadsa" coin="120" class="data-list" />
+      <div v-else>
+        <div class="columns list-card">
+          <div v-for="(item, index) in dataBackground" :key="index" class="column is-half">
+            <CardShopV2
+              :data-avatar="item"
+              :avatar="item.thumbnail_background.home"
+              :type="item.item_type_id.id"
+              :name="item.item_name"
+              :coin="item.price.nominal"
+              class="data-list"
+            />
+          </div>
         </div>
+
+        <infinite-loading
+          v-if="totalBackground"
+          :identifier="infiniteId2"
+          spinner="spinner"
+          style="margin-bottom: 15px"
+          @infinite="infiniteScroll2"
+        >
+          <div slot="spinner" style="color: black">
+            <v-progress-circular indeterminate color="black" />
+          </div>
+          <div slot="no-results" style="color: black">
+            No results
+          </div>
+          <div slot="no-more" style="color: black">
+            No more data
+          </div>
+        </infinite-loading>
       </div>
       <div class="btn-action">
         <Back class="cursor-pointer" @click.native="closeProfile()" />
@@ -42,18 +106,114 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      menu: 'Avatar'
+      menu: 'Avatar',
+      filterType: '',
+      infiniteId: 1,
+      infiniteId2: 1,
+      page: 1,
+      page2: 1,
+      dataAvatar: {},
+      dataBackground: {},
+      totalBackground: 0
     }
   },
   computed: {
     ...mapState({
+      gender: (state) => {
+        return state.user.gender
+      },
       filterShop: (state) => {
         return state.user.filterShop
+      },
+      totalAvatar: (state) => {
+        return state.quest.totalAvatar
       }
     })
   },
-  mounted () {},
+  mounted () {
+    this.getAll()
+  },
   methods: {
+    infiniteScroll ($state) {
+      setTimeout(() => {
+        this.page++
+        const payload = {
+          type: this.filterType,
+          page: this.page,
+          size: 9
+        }
+        this.$store
+          .dispatch('quest/getAvatar', payload)
+          .then((resp) => {
+            if (resp.data.data.length > 1) {
+              resp.data.data.forEach(item => this.dataAvatar.push(item))
+              $state.loaded()
+            } else {
+              $state.complete()
+            }
+          })
+          .catch(() => {
+          })
+      }, 500)
+    },
+    infiniteScroll2 ($state) {
+      setTimeout(() => {
+        this.page2++
+        const payload = {
+          type: this.filterType,
+          page: this.page2,
+          size: 10
+        }
+        this.$store
+          .dispatch('quest/getBackground', payload)
+          .then((resp) => {
+            if (resp.data.data.length > 1) {
+              resp.data.data.forEach(item => this.dataBackground.push(item))
+              $state.loaded()
+            } else {
+              $state.complete()
+            }
+          })
+          .catch(() => {
+          })
+      }, 500)
+    },
+    getAll () {
+      this.page = 1
+      this.page2 = 1
+      this.getDataAvatar()
+      this.getDataBackground()
+    },
+    getDataAvatar () {
+      const payload = {
+        type: this.filterType,
+        page: this.page,
+        size: 9
+      }
+      this.$store
+        .dispatch('quest/getAvatar', payload)
+        .then((response) => {
+          this.dataAvatar = response.data.data
+        })
+        .catch(() => {
+        })
+    },
+    getDataBackground () {
+      const payload = {
+        type: this.filterType,
+        page: this.page2,
+        size: 10
+      }
+      this.$store
+        .dispatch('quest/getBackground', payload)
+        .then((response) => {
+          this.dataBackground = response.data.data
+          this.totalBackground = response.data.total
+          console.log('total : ', this.totalBackground)
+        })
+        .catch(() => {
+        })
+    },
     toPurchase () {
       this.$store.commit('user/SET_PURCHASE')
       this.$store.commit('user/SET_BTN_AUDIO', true)
@@ -110,9 +270,8 @@ export default {
     .list-card {
       width: 100%;
       flex-wrap: wrap;
-      height:400px;
-      height: 400px;
       overflow-y: scroll;
+      max-height: 470px;
       .data-list {
         margin-left: auto;
         margin-right: auto;

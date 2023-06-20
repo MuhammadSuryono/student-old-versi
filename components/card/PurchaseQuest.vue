@@ -25,6 +25,7 @@
               style="width:220px;"
             />
             <b-input
+              v-model="search"
               placeholder="Search..."
               type="search"
               icon="magnify"
@@ -32,36 +33,42 @@
               size="is-small"
               style="width:254px;"
               @icon-click="null"
+              @input="getData()"
             />
           </div>
           <b-table
             class="mt-4 mb-4"
             size="is-small"
-            :data="data"
+            :data="dataPurchaseHistory"
           >
-            <b-table-column :td-attrs="columnTdAttrs" field="price" label="Purchase Date">
-              02-02-2023
+            <b-table-column v-slot="props" field="price" label="Purchase Date">
+              {{ props.row.purchase_date }}
             </b-table-column>
-            <b-table-column :td-attrs="columnTdAttrs" field="price" label="Item Name">
-              Lorem Ipsum dolor sit amet
+            <b-table-column v-slot="props" field="price" label="Item Name">
+              {{ props.row.item_name }}
             </b-table-column>
-            <b-table-column v-slot="props" :td-attrs="columnTdAttrs" field="tyoe" label="Type">
-              {{ props.row.type }}
+            <b-table-column v-slot="props" field="tyoe" label="Type">
+              <div style="text-transform: capitalize;">
+                {{ props.row.item_type }}
+              </div>
             </b-table-column>
-            <b-table-column v-slot="props" :td-attrs="columnTdAttrs" field="variant" label="Variant">
-              {{ props.row.variant }}
+            <b-table-column v-slot="props" field="variant" label="Variant">
+              <div style="text-transform: capitalize;">
+                {{ props.row.category_item }}
+              </div>
             </b-table-column>
-            <b-table-column :td-attrs="columnTdAttrs" field="variant" label="Price" width="140">
+            <b-table-column v-slot="props" field="variant" label="Price" width="140">
               <div class="value-coin">
-                <img src="~/assets/images/coin.svg" class="mr-1">
-                200
+                <img v-if="props.row.payment_of_type.id === 1" src="~/assets/images/coin.svg" class="mr-1">
+                <img v-if="props.row.payment_of_type.id === 2" src="~/assets/images/diamond.svg" class="mr-1">
+                {{ props.row.price.nominal }}
               </div>
             </b-table-column>
           </b-table>
 
           <b-pagination
             v-model="current"
-            :total="total"
+            :total="totalPurchaseHistory"
             order="is-centered"
             :size="size"
             :per-page="perPage"
@@ -73,6 +80,7 @@
             aria-previous-label="Previous page"
             aria-page-label="Page"
             aria-current-label="Current page"
+            @change="getData()"
           />
         </div>
         <Back class="cursor-pointer" style="position:absolute;bottom:20px;right:20px;" @click.native="closePurchase()" />
@@ -82,6 +90,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -105,7 +114,19 @@ export default {
       perPage: 10,
       prevIcon: 'chevron-left',
       nextIcon: 'chevron-right',
+      search: '',
+      page: 1
     }
+  },
+  computed: {
+    ...mapState({
+      dataPurchaseHistory: (state) => {
+        return state.quest.dataPurchaseHistory
+      },
+      totalPurchaseHistory: (state) => {
+        return state.quest.totalPurchaseHistory
+      }
+    })
   },
   created () {
     // eslint-disable-next-line nuxt/no-globals-in-created
@@ -116,8 +137,22 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   mounted () {
+    this.getData()
   },
   methods: {
+    getData () {
+      const payload = {
+        page: this.current,
+        size: 10,
+        itemName: this.search
+      }
+      this.$store
+        .dispatch('quest/getPurchaseHistory', payload)
+        .then(() => {
+        })
+        .catch(() => {
+        })
+    },
     handleResize () {
       this.window.width = window.innerWidth
       this.window.height = window.innerHeight

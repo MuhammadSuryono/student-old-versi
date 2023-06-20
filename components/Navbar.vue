@@ -17,7 +17,7 @@
       <template #end>
         <div class="coin-card">
           <div class="value-card">
-            1000
+            {{ total_coin }}
           </div>
           <img
             src="~/assets/images/navbar/coin.svg"
@@ -25,7 +25,7 @@
         </div>
         <div class="coin-card" style="top:18px;">
           <div class="value-card" style="left: 29px;top: 5px;">
-            1000
+            {{ total_diamond }}
           </div>
           <img
             src="~/assets/images/navbar/diamond.svg"
@@ -86,6 +86,15 @@ export default {
       },
       users: (state) => {
         return state.user.users
+      },
+      dataReward: (state) => {
+        return state.quest.dataReward
+      },
+      total_coin: (state) => {
+        return state.quest.total_coin
+      },
+      total_diamond: (state) => {
+        return state.quest.total_diamond
       }
     }),
     styleObj () {
@@ -96,7 +105,14 @@ export default {
       }
     }
   },
+  mounted() {
+    this.getDataReward()
+  },
   methods: {
+    getDataReward () {
+      this.$store
+        .dispatch('quest/getReward')
+    },
     openWA () {
       window.open('https://wa.me/+6281359809348?text=Hi%20I%20am%20' + this.fullname + '%20(user%20ID:%20' + this.users.id + ').%20I%20need%20help%20in%20...', '_blank').focus()
     },

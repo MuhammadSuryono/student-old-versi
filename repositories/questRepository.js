@@ -1,7 +1,23 @@
-const resource = 'https://310c1b91-9220-46ab-a592-b3bd4addf834.mock.pstmn.io/quest/'
+const baseUrl = 'https://dev.petraverse.id/daily/quest/api'
+const resource = '/quest'
 
 export default $axios => ({
   getTaskToday () {
-    return $axios.get(resource + 'collection/task/today')
+    return $axios.get(baseUrl + resource + '/collection/task/today')
+  },
+  claimTask (payload) {
+    return $axios.post(baseUrl + resource + '/collection/task/today/claim', payload)
+  },
+  getReward (payload) {
+    return $axios.get(baseUrl + resource + '/collection/reward')
+  },
+  getAvatar (payload) {
+    return $axios.get(baseUrl + resource + '/shop/item/avatar?type=' + payload.type + '&page=' + payload.page + '&size=' + payload.size)
+  },
+  getBackground (payload) {
+    return $axios.get(baseUrl + resource + '/shop/item/background?type=' + payload.type + '&page=' + payload.page + '&size=' + payload.size)
+  },
+  getPurchaseHistory (payload) {
+    return $axios.get(baseUrl + resource + '/shop/item/purchase/history?page=' + payload.page + '&size=' + payload.size + '&itemName=' + payload.itemName)
   }
 })

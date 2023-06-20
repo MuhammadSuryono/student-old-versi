@@ -12,6 +12,7 @@ export const state = () => ({
   btn_shop: false,
   btn_purchase: false,
   btn_success_quest: false,
+  btn_success_shop: false,
   fullname: null,
   images: null,
   images_name: null,
@@ -34,7 +35,8 @@ export const state = () => ({
   muteBGM: false,
   btn_setting: false,
   VRpin: 0,
-  filterShop: false
+  filterShop: false,
+  gender: ''
 })
 
 export const getters = {
@@ -86,7 +88,9 @@ export const mutations = {
   },
   SET_SUCCESS_QUEST (state, payload) {
     state.btn_success_quest = !state.btn_success_quest
-    console.log(state.btn_success_quest)
+  },
+  SET_SUCCESS_SHOP (state, payload) {
+    state.btn_success_shop = !state.btn_success_shop
   },
   SET_BTN_AUDIO (state, payload) {
     const myAudio = new Audio(btnAudio)
@@ -119,6 +123,7 @@ export const mutations = {
   },
   SET_USERS (state, users) {
     state.users = users.user
+    state.gender = users.gender
   },
   SET_PROFILES (state, profiles) {
     state.profiles = profiles
