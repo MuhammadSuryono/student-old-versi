@@ -8,8 +8,11 @@
     >
       CLICK TO BUY
     </div>
-    <div class="bg-2" :style="'background-image:url(' + avatar + ')'" 
-    @mouseover="hover = true" />
+    <div
+      class="bg-2"
+      :style="'background-image:url(' + avatar + ')'"
+      @mouseover="hover = true"
+    />
     <div class="name-card no-select">
       <div class="font-name no-select">
         {{ name }}

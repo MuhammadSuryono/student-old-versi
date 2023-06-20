@@ -55,6 +55,10 @@
             <div class="bg-shop">
               <div class="img-shop">
                 <img src="~/assets/images/shop_success.svg">
+                <img
+                  :src="dataDetailImageAvatar"
+                  class="data-avatar"
+                >
               </div>
               <div class="title-name">
                 Lorem ipsum dolor sit amet consectetur
@@ -267,7 +271,7 @@ export default {
           background: white;
           clip-path: polygon(0 0,calc(100% - 40.00px) 0,100% 40.00px,100% 100%,0 100%);
           .img-data {
-            width:100px;
+            width:122px;
             height:100%;
             background-size: cover;
           }
@@ -372,8 +376,17 @@ export default {
           justify-content: center;
           flex-direction: column;
           .img-shop {
-            position: absolute;
-            top:-5px;
+            position: relative;
+            top: -35px;
+            .data-avatar {
+              position: absolute;
+              left: 61px;
+              top: 88px;
+              height: 70px;
+              width: 120px;
+              object-fit: cover;
+              border-radius: 10px;
+            }
           }
           .title-name {
             position: absolute;
