@@ -263,6 +263,9 @@ export default {
       },
       btn_success_shop: (state) => {
         return state.user.btn_success_shop
+      },
+      questDashboard: (state) => {
+        return state.quest.data
       }
     }),
     widthSidebar () {
@@ -372,6 +375,7 @@ export default {
       this.$router.push('/login')
     },
     onLight () {
+     this.questLight()
       this.light = !this.light
       if (this.light) {
         this.buttonAudio()
@@ -405,6 +409,27 @@ export default {
     },
     buttonAudio () {
       this.$store.commit('user/SET_BTN_AUDIO', true)
+    },
+    questLight(){
+      this.$axios
+            .post('https://dev.petraverse.id/daily/quest/api/quest/collection/task/today/complete', {
+         
+              task_id: this.questDashboard.id,
+              collection_id: this.questDashboard.collection_id,
+              collection_task_code: 'talk_to_light'
+            })
+            .then((res) => {
+              console.log('res : ', res)
+              this.$store
+        .dispatch('quest/getReward')
+           
+            })
+            .catch((error) => {
+              this.$toast.error(error.response.data.message, {
+                position: 'top-center',
+                duration: 5000
+              })
+            })
     }
   }
 }

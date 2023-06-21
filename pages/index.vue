@@ -29,6 +29,9 @@ export default {
       },
       nameDecoration: (state) => {
         return state.decoration.nameDecoration
+      },
+    questDashboard: (state) => {
+        return state.quest.data
       }
     })
   },
@@ -36,6 +39,8 @@ export default {
   mounted () {
     // this.$store.commit('user/SET_BG_AUDIO', true)
     this.getDataDecoration()
+    this.getData()
+    this.questLogin()
   },
   methods: {
     playsound () {
@@ -56,6 +61,36 @@ export default {
             duration: 5000
           })
         })
+    },
+    getData () {
+      this.$store
+        .dispatch('quest/getTaskToday')
+        .then((res) => {
+          
+        })
+        .catch(() => {
+        })
+    },
+    questLogin(){
+      this.$axios
+            .post('https://dev.petraverse.id/daily/quest/api/quest/collection/task/today/complete', {
+         
+              task_id: this.questDashboard.id,
+              collection_id: this.questDashboard.collection_id,
+              collection_task_code: 'login_today'
+            })
+            .then((res) => {
+              console.log('res : ', res)
+              this.$store
+        .dispatch('quest/getReward')
+           
+            })
+            .catch((error) => {
+              this.$toast.error(error.response.data.message, {
+                position: 'top-center',
+                duration: 5000
+              })
+            })
     }
   }
 }

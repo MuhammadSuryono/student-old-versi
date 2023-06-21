@@ -51,7 +51,7 @@
       <div class="cursor-pointer shield" style="margin-top:40px;" @click="onQuest()">
         <div class="circle">
           <div class="inner-circle">
-            {{ quest.completion_task.total_un_complete }}
+            {{ quest.completion_task == undefined ? 0 : quest.completion_task.total_un_complete}}
           </div>
         </div>
         <img

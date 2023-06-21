@@ -84,18 +84,29 @@ export default {
         })
     },
     changeStatus (data) {
-      const payload = {
-        task_id: this.data.id,
-        collection_id: this.data.collection_id,
-        collection_task_code: data.task_code
+      if (!data.is_claim && !data.already_take) {
+        this.$toast.error("Quest not completed", {
+              position: "top-center",
+              duration:2000,
+            });
+      }else{
+
+        const payload = {
+          task_id: this.data.id,
+          collection_id: this.data.collection_id,
+          collection_task_code: data.task_code
+        }
+        this.$store
+          .dispatch('quest/claimTask', payload)
+          .then(() => {
+            this.getData()
+            this.$store
+        .dispatch('quest/getReward')
+            
+          })
+          .catch(() => {
+          })
       }
-      this.$store
-        .dispatch('quest/claimTask', payload)
-        .then(() => {
-          this.getData()
-        })
-        .catch(() => {
-        })
     },
     // changeStatus2 () {
     //   const payload = {
@@ -112,7 +123,7 @@ export default {
     //     })
     // },
     toPopup () {
-      this.changeStatus2()
+      // this.changeStatus2()
       this.$store.commit('user/SET_SUCCESS_QUEST')
       this.$store.commit('user/SET_BTN_AUDIO', true)
     }
