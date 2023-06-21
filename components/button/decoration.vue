@@ -1,7 +1,7 @@
 <template>
   <div class="select-decoration">
     <div class="bg-1">
-      <div class="card-item">
+      <div class="card-item" :style="type === 'enable' ? '#2E5799' : 'background:#A1AAB7;pointer-events:none'">
         <div class="title">
           {{ number }}
         </div>
@@ -14,8 +14,12 @@
 export default {
   props: {
     number: {
+      type: Number,
+      default: 0
+    },
+    type: {
       type: String,
-      default: ''
+      default: 'enable'
     }
   }
 }

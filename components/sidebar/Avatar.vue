@@ -5,32 +5,30 @@
       <div class="avatar-container">
         <!-- personality -->
         <div class="petra-personality">
-          <img src="~/assets/images/component/Rectangle.png" class="btn-top">
+          <IconBgPersonality class="btn-top" />
           <img v-if="cluster != null" :src="cluster.icon" class="btn-top2">
         </div>
         <!-- faction -->
-        <IconFaction bg-color="white" class="petra-faction" />
-        <img :src="faction" class="btn-center2">
+        <img src="~/assets/images/ava_faction.svg" class="petra-faction">
+        <img v-if="faction != ''" :src="faction" class="btn-center2">
         <div class="petra-level">
           <img
-            src="~/assets/images/component/Rectangle.png"
+            src="~/assets/images/ava_faction.svg"
             class="btn-bottom"
           >
           <div class="text-level">
             {{ level }}
           </div>
-          <img src="~/assets/images/component/level.png" class="btn-bottom2">
         </div>
-        <div class="square-top" :style="btnStyles1" />
-        <div class="trapesium-1" :style="btnStyles2" />
-        <div class="square-center" :style="btnStyles1" />
-        <div class="trapesium-2" :style="btnStyles3" />
-        <div class="square-bottom" :style="btnStyles1" />
         <img :src="images" class="img-logo">
+        <div class="bg-avatar">
+          <div class="bg-1" />
+          <div class="border-top" />
+          <div class="bg-2" :style="'background-color:' + bgColor" />
+        </div>
         <!-- edit profile -->
         <div class="btn-edit noselect" @click="onEditProfile()">
-          <img src="~/assets/images/btn-petra.png">
-          <div class="text-edit">Edit Profile</div>
+          <img src="~/assets/images/edit_profile.svg">
         </div>
       </div>
       <!-- name card -->
@@ -40,92 +38,39 @@
         :courses2="courses"
         :achievements2="achievements"
       />
-      <!-- manage decorations -->
-      <div class="menu-b">
-        <div
-          class="setting"
-          style="width: 100%; top: 10px; left: 0px"
-          @click="onManageDecoration()"
-        >
-          <img
-            src="~/assets/images/component/bg-decors.png"
-            class="btn-d"
-            style="height: 40.8px; width: 180px; left: 0px"
-          >
-          <img
-            src="~/assets/images/decor.svg"
-            class="icon-s"
-            style="top: 7px; height: 28px; left: 12px"
-          >
-          <div
-            style="
-              position: absolute;
-              left: 62px;
-              top: 6px;
-              text-align: center;
-              font-size: 14px;
-              line-height: 14px;
-            "
-          >
-            Manage<br>
-            Decorations
-          </div>
-        </div>
-      </div>
-      <!-- library -->
-      <div class="menu-b">
-        <div
-          class="setting"
-          style="width: 100%; top: -38px; left: 0px"
-          @click="onLibrary()"
-        >
-          <img
-            src="~/assets/images/component/bg-decors.png"
-            class="btn-d"
-            style="height: 40.8px; width: 180px; left: 0px"
-          >
-          <img
-            src="~/assets/images/clarity_library-line.png"
-            class="icon-s"
-            style="top: 7px; height: 28px; left: 12px"
-          >
-          <div
-            style="
-              position: absolute;
-              left: 74px;
-              top: 13px;
-              text-align: center;
-              font-size: 14px;
-              line-height: 14px;
-            "
-          >
-            Library
-          </div>
-        </div>
-      </div>
+      <SidebarButtonMenu type="quest" @click.native="onQuest()" />
+      <SidebarButtonMenu type="decorations" style="margin-top:10px;" @click.native="onManageDecoration()" />
+      <SidebarButtonMenu type="library" style="margin-top:10px;" @click.native="onLibrary()" />
+      <SidebarButtonMenu type="shop" style="margin-top:10px;" @click.native="onShop()" />
     </span>
     <span v-else class="avatar-container2">
       <IconAvatarBackground
         :bg-color="bgColor"
-        style="width: 70px; height: 70px; margin-left: -5px"
+        :images="images"
       />
-      <img :src="images" class="img-logo2">
-      <div class="menu-p" @click="onManageDecoration()">
-        <div class="cornered" />
-        <div class="square" />
+      <div class="cursor-pointer shield" style="margin-top:40px;" @click="onQuest()">
+        <div class="circle">
+          <div class="inner-circle">
+            {{ quest.completion_task.total_un_complete }}
+          </div>
+        </div>
         <img
-          src="~/assets/images/decor.svg"
-          class="icon-s"
-          style="left: 16px; top: 5px; height: 28px"
+          src="~/assets/images/shield.svg"
         >
       </div>
-      <div class="menu-p" @click="onLibrary()">
-        <div class="cornered" />
-        <div class="square" />
+      <div class="new-menu cursor-pointer" style="margin-top:8px;" @click="onManageDecoration()">
         <img
-          src="~/assets/images/clarity_library-line.png"
-          class="icon-s"
-          style="left: 16px; top: 5px; height: 28px"
+          src="~/assets/images/decor.svg"
+        >
+      </div>
+      <div class="new-menu cursor-pointer" style="margin-top:8px;" @click="onLibrary()">
+        <img
+          src="~/assets/images/clarity_library-line.svg"
+        >
+      </div>
+      <div class="new-menu cursor-pointer" style="margin-top:8px;" @click="onShop()">
+        <img
+          src="~/assets/images/shop_big.svg"
         >
       </div>
     </span>
@@ -189,6 +134,9 @@ export default {
       },
       users: (state) => {
         return state.user.users
+      },
+      quest: (state) => {
+        return state.quest.data
       }
     }),
     btnStyles1 () {
@@ -220,11 +168,46 @@ export default {
     onLibrary () {
       this.$router.push('/library')
       this.$store.commit('user/SET_BTN_AUDIO', true)
+    },
+    onQuest () {
+      this.$store.commit('user/SET_BTN_QUEST')
+      this.$store.commit('user/SET_BTN_AUDIO', true)
+    },
+    onShop () {
+      this.$store.commit('user/SET_BTN_SHOP')
+      this.$store.commit('user/SET_BTN_AUDIO', true)
     }
   }
 }
 </script>
 <style lang="scss" scoped>
+.shield {
+  position: relative;
+  .circle {
+    position: absolute;
+    top:-14px;
+    right:-8px;
+    height: 35px;
+    width: 35px;
+    background: #1C3252;
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+    padding:6px;
+    .inner-circle {
+      height: 20px;
+      width: 20px;
+      background: #FF0000;
+      border-radius: 50%;
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 20px;
+      text-align: center;
+      color: #FFFFFF;
+    }
+  }
+}
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -232,6 +215,71 @@ export default {
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none;
+}
+
+.container-button {
+  top: 200px;
+  height: 32px;
+  width: 168px;
+  position: relative;
+  cursor: pointer;
+  .square-right {
+    position: absolute;
+    top:-2px;
+    left:-2px;
+    z-index:0;
+    height: 11px;
+    width: 16px;
+    background: #B3B3B3;
+    opacity: 0.35;
+    border: 0.83px solid #FFFFFF;
+  }
+  .square-left {
+    position: absolute;
+    bottom:-2px;
+    right:-2px;
+    z-index:0;
+    height: 4px;
+    width: 4px;
+    background: #F2F2F2;
+  }
+  .btn-login {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(22.88deg, rgb(168, 245, 255, 0.35) 0%, rgb(195, 244, 249, 0.35) 52%, rgb(223, 242, 242, 0.35) 100%);
+    padding:2px;
+    .bg-login {
+      background: #2E5799;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      color: #FFFFFF;
+      border:1px solid white;
+      .img-menu {
+        height: 19px;
+        margin-right: 10px;
+      }
+      .text-menu {
+        font-family: Nunito;
+        text-align: center;
+        font-size: 10px;
+        line-height: 10px;
+      }
+    }
+    .bg-login:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+  }
 }
 .menu-b {
   display: flex;
@@ -259,49 +307,30 @@ export default {
   position: relative;
   .btn-edit {
     position: absolute;
-    top: 220px;
-    right: 5px;
-    z-index: 10;
+    top: 151px;
+    right: -33px;
+    z-index: 19;
     cursor: pointer;
-    .text-edit {
-      position: absolute;
-      top: 3.6px;
-      font-family: 'Roboto';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 14px;
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
-      left: 0;
-      right: 0;
-    }
   }
   .petra-personality {
-    top: -10px;
-    left: 135px;
+    top: -13px;
+    left: 137px;
     position: absolute;
-    width: 47.68px;
     z-index: 9;
     cursor: pointer;
-    .btn-top {
-      z-index: 1;
-      object-fit: cover;
-      position: relative;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .btn-top2 {
-      top: 2px;
-      left: 0px;
       position: absolute;
-      padding: 2px;
       z-index: 2;
+      padding:3px;
     }
   }
   .petra-faction {
-    top: 41px;
-    left: 152.9px;
+    top: 42px;
+    left: 147.9px;
     position: absolute;
-    width: 28.4px;
     z-index: 9;
     cursor: pointer;
     .btn-center {
@@ -313,7 +342,7 @@ export default {
   }
   .btn-center2 {
     top: 42px;
-    left: 151px;
+    left: 153px;
     position: absolute;
     padding: 2px;
     width: 31px;
@@ -321,28 +350,24 @@ export default {
     z-index: 10;
   }
   .petra-level {
-    top: 77px;
+    top: 82px;
     cursor: pointer;
-    left: 153px;
-    position: absolute;
+    left: 148px;
+    position: relative;
     z-index: 1;
-    width: 27px;
-    z-index: 9;
     .btn-bottom {
       top: 0px;
       position: relative;
-      width: 100%;
-      height: 26px;
     }
     .btn-bottom2 {
       bottom: 1px;
-      right: -5px;
+      left: 0px;
       position: absolute;
     }
     .text-level {
       color: white;
-      top: 12.4px;
-      left: 50%;
+      top: 16.4px;
+      left: 20px;
       transform: translate(-50%, -50%);
       position: absolute;
       font-family: 'Barlow';
@@ -356,46 +381,6 @@ export default {
       text-overflow: ellipsis;
     }
   }
-  .square-top {
-    z-index: 1;
-    height: 70px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    width: 172px;
-    background-color: rgba(152, 18, 18, 0.75);
-  }
-  .square-center {
-    z-index: 1;
-    height: 70px;
-    width: 152px;
-    margin-right: 10px;
-    margin-left: 10px;
-    background-color: rgba(152, 18, 18, 0.75);
-  }
-  .square-bottom {
-    z-index: 1;
-    height: 70px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    width: 172px;
-    background-color: rgba(152, 18, 18, 0.75);
-  }
-  .trapesium-1 {
-    z-index: 1;
-    height: 0px;
-    width: 172px;
-    border-top: 20px solid rgba(152, 18, 18, 0.75);
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-  }
-  .trapesium-2 {
-    z-index: 1;
-    height: 0px;
-    width: 172px;
-    border-bottom: 20px solid rgba(152, 18, 18, 0.75);
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-  }
   .img-logo {
     position: absolute;
     top: 0px;
@@ -407,59 +392,57 @@ export default {
     margin-left: -3px;
     margin-right: auto;
   }
+  .bg-avatar {
+    .bg-1 {
+      position: absolute;
+      top:0px;
+      --mask: linear-gradient(45deg,#0000 6px,#000 0);
+      -webkit-mask: var(--mask);
+      mask: var(--mask);
+      height: 244px;
+      width: 175px;
+      background: linear-gradient(22.58deg, #22C1F2 4.57%, #3DC8F2 20.02%, #81DAF2 53.63%, #DFF2F2 95.43%);
+    }
+    .bg-2 {
+      position: absolute;
+      top: 0px;
+      left: 3px;
+      --mask: linear-gradient(45deg,rgba(0,0,0,0) 6px,#000 0);
+      -webkit-mask: var(--mask);
+      mask: var(--mask);
+      height: 241px;
+      width: 172px;
+    }
+    .border-top {
+      border-top:1px solid white;
+      width:140px;
+      position: absolute;
+      top: -6px;
+      left:20px;
+    }
+  }
 }
 .name-card {
   position: relative;
   z-index: 3;
 }
 .avatar-container2 {
-  .menu-p {
-    position: relative;
+  .new-menu {
+    margin-top:30px;
+    margin-left:4px;
+    height: 42px;
     width: 60px;
-    margin-top: 7px;
-    .icon-s {
-      position: absolute;
-      top: 7px;
-      left: 16px;
-    }
-    cursor: pointer;
-    .cornered {
-      width: 55px;
-      height: 0px;
-      border-bottom: 13px solid #1d4483;
-      border-left: 12px solid transparent;
-      border-top-right-radius: 5px;
-    }
-    .square {
-      background-color: #1d4483;
-      height: 25px;
-      width: 55px;
-      border-end-end-radius: 5px;
-      border-end-start-radius: 5px;
-    }
+    --mask: linear-gradient(-45deg,#0000 6px,#000 0 calc(100% - 6px),#0000 0);
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+    background: #1A4786;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor:pointer;
   }
-  .menu-p:hover {
-    .cornered {
-      border-bottom-color: rgba(255, 255, 255, 0.4);
-    }
-    .square {
-      background-color: rgba(255, 255, 255, 0.4);
-    }
-  }
-  .img-logo2 {
-    top: 49px;
-    left: 29px;
-    position: absolute;
-    z-index: 2;
-    height: 20px;
-    width: 22px;
-    margin-right: auto;
-    z-index: 1;
-    -o-object-fit: cover;
-    object-fit: cover;
-    -o-object-position: 40% 0%;
-    object-position: 40% 0%;
-    transform: scale(3);
+  .new-menu:hover {
+    background-color: rgba(255, 255, 255, 0.4);
   }
   .square-top {
     height: 15px;

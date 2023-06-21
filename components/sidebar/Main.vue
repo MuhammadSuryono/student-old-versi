@@ -82,7 +82,7 @@ export default {
     }),
     styleObj () {
       if (this.reduce) {
-        return 'padding: 20px 10px 0px 10px;width:80px;'
+        return 'padding: 20px 10px 0px 10px;width:86px;'
       } else {
         return 'padding: 20px 15px 0px 12px;width:200px;'
       }

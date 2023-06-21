@@ -34,18 +34,6 @@ $input-background-color: white;
 .navbar-burger.burger.is-active{
     color:white;
 }
-.pagination {
-    .pagination-list {
-        margin-top:0px;
-        li {
-            margin-top:0px;
-        }
-    }
-}
-.v-pagination__item--active {
-  background-color: #154CA0 !important;
-}
-
 @import "~bulma/sass/utilities/_all";
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
@@ -75,4 +63,63 @@ $sidebar-width: 200px;
 .wh-full {
     height:100%;
     width:100%
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.table thead {
+  background-color: #2E5799;
+}
+.b-table .table th .th-wrap {
+  color:white;
+}
+.pagination-previous, .pagination-next, .pagination-link {
+  background: rgba(255, 255, 255, 0.9);
+  border: 0.805714px solid #2E5799;
+  border-radius: 3.22286px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  color: #2E5799;
+}
+.pagination-ellipsis {
+  background: rgba(255, 255, 255, 0.9);
+  border: 0.805714px solid #2E5799;
+  border-radius: 3.22286px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  color: #2E5799;
+}
+.pagination-link.is-current {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+.pagination-previous[disabled], .pagination-next[disabled], .pagination-link[disabled] {
+  background: white;
+}
+.pagination {
+    .pagination-list {
+        margin-top:0px;
+        li {
+            margin-top:0px;
+        }
+    }
+}
+.theme--light.v-pagination .v-pagination__item {
+  background: rgb(255, 255, 255, 0.4) !important;
+  transform: skew(-10deg);
+  color: #333333 !important;
+  font-weight: 600 !important;
+}
+.theme--light.v-pagination .v-pagination__item--active {
+  background: rgb(255, 255, 255, 0.8) !important; 
+  color: #333333 !important;
+  font-weight: 600 !important;
+}
+.v-pagination__item {
+  border-radius: 0px !important;
+  font-size:14px !important;
 }
