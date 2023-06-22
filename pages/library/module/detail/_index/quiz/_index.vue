@@ -412,7 +412,8 @@ export default {
         name: 'library-module-detail-index-quiz-embed',
         params: {
           link: parseInt(this.quiz.activity_id),
-          quizEnvironment: this.quiz.environment
+
+          quizEnvironment: this.detailActivity.environment
 
         }
 

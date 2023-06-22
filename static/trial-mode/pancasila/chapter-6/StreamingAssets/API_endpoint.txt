@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 https://api.petraverse.id/v1/
-=======
-https://api.petraverse.id/v1/
->>>>>>> a445b37 (add another game build folder)

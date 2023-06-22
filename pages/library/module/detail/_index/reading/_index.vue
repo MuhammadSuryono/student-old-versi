@@ -96,7 +96,7 @@
             <div class="bg-act">
               <div class="columns is-gapless" style="margin-bottom: 0px">
                 <div class="column is-narrow title-chapter">
-                  Chapter {{ page }} -
+                  Page {{ page }} -
                   {{ contentActivity[page - 1].title }}
                 </div>
                 <div class="column">

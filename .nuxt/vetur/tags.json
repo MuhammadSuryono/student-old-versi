@@ -8,6 +8,9 @@
   "BoxTitle": {
     "description": "Auto imported from components/BoxTitle.vue"
   },
+  "Confirmation": {
+    "description": "Auto imported from components/confirmation.vue"
+  },
   "Decoration": {
     "description": "Auto imported from components/Decoration.vue"
   },
@@ -38,8 +41,14 @@
   "PNotification": {
     "description": "Auto imported from components/PNotification.vue"
   },
+  "Popup": {
+    "description": "Auto imported from components/Popup.vue"
+  },
   "PProgress": {
     "description": "Auto imported from components/PProgress.vue"
+  },
+  "Profile": {
+    "description": "Auto imported from components/Profile.vue"
   },
   "PSearch": {
     "description": "Auto imported from components/PSearch.vue"
@@ -136,6 +145,20 @@
   },
   "SidebarMain": {
     "description": "Auto imported from components/sidebar/Main.vue"
+  "CardCollection": {
+    "description": "Auto imported from components/card/Collection.vue"
+  },
+  "FactionProgressBar": {
+    "description": "Auto imported from components/faction/ProgressBar.vue"
+  },
+  "FactionReward": {
+    "description": "Auto imported from components/faction/Reward.vue"
+  },
+  "FormArea": {
+    "description": "Auto imported from components/Form/area.vue"
+  },
+  "FormInput": {
+    "description": "Auto imported from components/Form/input.vue"
   },
   "IconArchivements": {
     "description": "Auto imported from components/icon/Archivements.vue"
@@ -173,6 +196,9 @@
   "IconLocation": {
     "description": "Auto imported from components/icon/Location.vue"
   },
+  "IconRefresh": {
+    "description": "Auto imported from components/icon/refresh.vue"
+  },
   "IconSearch": {
     "description": "Auto imported from components/icon/Search.vue"
   },
@@ -208,5 +234,13 @@
   },
   "FactionReward": {
     "description": "Auto imported from components/faction/Reward.vue"
+  "SidebarAvatar": {
+    "description": "Auto imported from components/sidebar/Avatar.vue"
+  },
+  "SidebarCardName": {
+    "description": "Auto imported from components/sidebar/CardName.vue"
+  },
+  "SidebarMain": {
+    "description": "Auto imported from components/sidebar/Main.vue"
   }
 }
