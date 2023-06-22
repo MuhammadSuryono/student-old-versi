@@ -871,7 +871,7 @@ export default {
     },
     questModule(){
       this.$axios
-            .post(`https://dev.petraverse.id/daily/quest/api/quest/collection/task/today/complete`, {
+            .post(`https://staging.petraverse.id/daily/quest/api/quest/collection/task/today/complete`, {
          
               task_id: this.questDashboard.id,
               collection_id: this.questDashboard.collection_id,

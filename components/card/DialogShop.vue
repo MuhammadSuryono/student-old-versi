@@ -140,14 +140,14 @@ export default {
     async buyShop () {
       this.dateNow = Date.now()
       await this.$axios
-        .get(`https://dev.petraverse.id/daily/quest/api/quest/shop/item/purchase/token`, {
+        .get(`https://staging.petraverse.id/daily/quest/api/quest/shop/item/purchase/token`, {
           headers: {
             'X-TIMESTAMP': this.dateNow
           }
         })
         .then(async (res) => {
           await this.$axios
-            .post(`https://dev.petraverse.id/daily/quest/api/quest/shop/item/purchase/create`, {
+            .post(`https://staging.petraverse.id/daily/quest/api/quest/shop/item/purchase/create`, {
               item_id: this.dataDetailAvatar.id
             }, {
               headers: {
