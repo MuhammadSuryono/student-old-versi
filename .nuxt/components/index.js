@@ -55,6 +55,7 @@ export { default as SidebarAvatar } from '../..\\components\\sidebar\\Avatar.vue
 export { default as SidebarCardName } from '../..\\components\\sidebar\\CardName.vue'
 export { default as SidebarMain } from '../..\\components\\sidebar\\Main.vue'
 
+
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {
   if (!options || !options.functional) {

@@ -86,6 +86,9 @@ export default {
       },
       dataUser: (state) => {
         return state.user.users
+      },
+      questDashboard: (state) => {
+        return state.quest.data
       }
     }),
     tinggi2 () {
@@ -109,11 +112,13 @@ export default {
   created () {
     // console.log(this.$route.params.id));
     this.gameSource = this.$route.params.link
+
     this.quizEnvironment = this.$route.params.quizEnvironment
     // eslint-disable-next-line nuxt/no-globals-in-created
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
     this.getAll()
+    this.questActivity()
   },
 
   mounted () {
@@ -307,6 +312,27 @@ export default {
         this.selected1 = false
         this.selected2 = true
       }
+    },
+    questActivity(){
+      this.$axios
+            .post(`https://staging.petraverse.id/daily/quest/api/quest/collection/task/today/complete`, {
+         
+              task_id: this.questDashboard.id,
+              collection_id: this.questDashboard.collection_id,
+              collection_task_code: 'open_x_activity'
+            })
+            .then((res) => {
+              console.log('res : ', res)
+              this.$store
+        .dispatch('quest/getReward')
+           
+            })
+            .catch((error) => {
+              this.$toast.error(error.response.data.message, {
+                position: 'top-center',
+                duration: 5000
+              })
+            })
     }
   }
 }

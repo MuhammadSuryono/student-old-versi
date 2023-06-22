@@ -557,6 +557,9 @@ export default {
       },
       isPetraStudent(state){
         return state.user.users.institute.id == 1
+      },
+      questDashboard: (state) => {
+        return state.quest.data
       }
     }),
     tinggi2() {
@@ -569,6 +572,7 @@ export default {
     this.handleResize();
     this.getAll();
     this.addModuleStatistic();
+    this.questModule()
   },
   methods: {
     async addInterestStatistic() {
@@ -865,6 +869,27 @@ export default {
         }
       }
     },
+    questModule(){
+      this.$axios
+            .post(`https://staging.petraverse.id/daily/quest/api/quest/collection/task/today/complete`, {
+         
+              task_id: this.questDashboard.id,
+              collection_id: this.questDashboard.collection_id,
+              collection_task_code: 'open_x_module'
+            })
+            .then((res) => {
+              console.log('res : ', res)
+              this.$store
+        .dispatch('quest/getReward')
+           
+            })
+            .catch((error) => {
+              this.$toast.error(error.response.data.message, {
+                position: 'top-center',
+                duration: 5000
+              })
+            })
+    }
   },
 };
 </script>

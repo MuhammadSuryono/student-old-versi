@@ -4,6 +4,7 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+
 const _2805c152 = () => interopDefault(import('..\\pages\\archivements.vue' /* webpackChunkName: "pages/archivements" */))
 const _16602526 = () => interopDefault(import('..\\pages\\cluster.vue' /* webpackChunkName: "pages/cluster" */))
 const _6ea3b18c = () => interopDefault(import('..\\pages\\faction\\index.vue' /* webpackChunkName: "pages/faction/index" */))
@@ -28,6 +29,7 @@ const _68301110 = () => interopDefault(import('..\\pages\\library\\module\\detai
 const _3c2b09b2 = () => interopDefault(import('..\\pages\\library\\module\\detail\\_index\\video\\_index.vue' /* webpackChunkName: "pages/library/module/detail/_index/video/_index" */))
 const _bc613604 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
+
 const emptyFn = () => {}
 
 Vue.use(Router)
@@ -35,6 +37,7 @@ Vue.use(Router)
 export const routerOptions = {
   mode: 'history',
   base: '/student-dev/',
+
   linkActiveClass: 'nuxt-link-active',
   linkExactActiveClass: 'nuxt-link-exact-active',
   scrollBehavior,

@@ -16,7 +16,19 @@
 export default {
   name: 'HomePage',
   layout: 'login',
+  created() {
+    this.getData()
+  },
   methods: {
+    getData () {
+      this.$store
+        .dispatch('quest/getTaskToday')
+        .then((res) => {
+          
+        })
+        .catch(() => {
+        })
+    },
     checkUser () {
       this.$axios
         .get('/personality-cluster/check')

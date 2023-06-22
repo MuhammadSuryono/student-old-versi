@@ -1,19 +1,11 @@
 <template>
-  <svg
-    width="75"
-    height="75"
-    viewBox="0 0 75 75"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M73.3956 23.035L73.8379 22.7378V22.2049V7.36609C73.8379 4.05238 71.1516 1.36609 67.8379 1.36609H7.83789C4.52418 1.36609 1.83789 4.05237 1.83789 7.36608V22.2049V22.694L2.22388 22.9942L6.0653 25.9826V47.8136L2.17718 51.2359L1.83789 51.5345V51.9865V67.3661C1.83789 70.6798 4.52418 73.3661 7.83789 73.3661H67.8379C71.1516 73.3661 73.8379 70.6798 73.8379 67.3661V51.9865V51.4768L73.4255 51.1774L68.7138 47.7559V26.1808L73.3956 23.035Z"
-      :fill="bgColor"
-      fill-opacity="0.75"
-      :stroke="bgColor"
-      stroke-width="2"
-    />
-  </svg>
+  <div class="container-square">
+    <div class="square">
+      <div class="main-square" :style="'background:linear-gradient(28deg, rgb(221 221 221) 0%, rgb(30 30 62) 0%, rgb(0, 212, 255) 100%);'" />
+      <img :src="images" class="img-avatar">
+    </div>
+    <div class="square-2" />
+  </div>
 </template>
 <script>
 export default {
@@ -21,7 +13,63 @@ export default {
     bgColor: {
       type: String,
       default: 'white'
+    },
+    images: {
+      type: String,
+      default: ''
     }
   }
 }
 </script>
+<style lang="scss" scoped>
+.container-square {
+  margin-left: -5px;
+  position: relative;
+  .square {
+    position: inherit;
+    z-index:2;
+    --mask: linear-gradient(45deg,#0000 6px,#000 0 calc(100% - 6px),#0000 0);	
+    -webkit-mask: var(--mask);
+            mask: var(--mask);
+    height:73px;
+    width:71px;
+    background-color:#A5DAF8;
+    .main-square {
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      z-index:1;
+      --mask: linear-gradient(45deg,#0000 6px,#000 0 calc(100% - 6px),#0000 0);	
+      -webkit-mask: var(--mask);
+              mask: var(--mask);
+      height: 69px;
+      width: 67px;
+    }
+    .img-avatar {
+      position: absolute;
+      z-index: 2;
+      left: 25px;
+      bottom: 22px;
+      height: 20px;
+      width: 22px;
+      -o-object-fit: cover;
+      object-fit: cover;
+      -o-object-position: 40% 0%;
+      object-position: 40% 0%;
+      transform: scale(3);
+    }
+  }
+  .square-2 {
+    position: absolute;
+    right:-2px;
+    top: -2px;
+    z-index:1;
+    --mask: linear-gradient(45deg,#0000 6px,#000 0 calc(100% - 6px),#0000 0);	
+    -webkit-mask: var(--mask);
+            mask: var(--mask);
+    height:67px;
+    width:65px;
+    background-color:#FFFFFF;
+  }
+}
+</style>

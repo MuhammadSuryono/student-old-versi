@@ -1,4 +1,4 @@
-export default function ({ store, $auth, $axios, redirect }) {
+export default function ({ store, $auth, $axios, redirect, route }) {
   $auth.onRedirect((to, from) => {
     if ($auth.toString().slice(0, 23) === 'ExpiredAuthSessionError') {
       redirect('/login')
@@ -19,11 +19,13 @@ export default function ({ store, $auth, $axios, redirect }) {
       store.commit('user/SET_LOGGEDIN', false)
     }
   })
-  $axios.onError((error) => {
-    const code = parseInt(error.response && error.response.status)
-    if (code === 401) {
-      redirect('/login')
-      store.commit('user/SET_LOGGEDIN', false)
-    }
-  })
+  if (route.path !== '/login') {
+    $axios.onError((error) => {
+      const code = parseInt(error.response && error.response.status)
+      if (code === 401) {
+        redirect('/login')
+        store.commit('user/SET_LOGGEDIN', false)
+      }
+    })
+  }
 }

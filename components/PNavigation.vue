@@ -21,77 +21,87 @@
       <div class="triangle-right" />
       <ul class="child-menu">
         <li>
-          <NuxtLink v-if="$route.path === '/'" class="sidebar-item" to="/">
+          <NuxtLink class="sidebar-item" to="/">
             <div
-              class="card-menu"
-              style="margin-left: 14px; background-color: white"
+              class="select-decoration"
               @mouseover="hover1 = true"
               @mouseleave="hover1 = false"
-              @click="buttonAudio()"
+              @click="popupAudio()"
             >
-              <div class="triangle-left2" />
-              <div class="triangle-right2" />
-              <IconHome class="icon-menu1" bg-color="black" />
-            </div>
-          </NuxtLink>
-          <NuxtLink v-else class="sidebar-item" to="/">
-            <div
-              class="card-menu"
-              style="margin-left: 14px"
-              @mouseover="hover1 = true"
-              @mouseleave="hover1 = false"
-              @click="buttonAudio()"
-            >
-              <div class="triangle-left" />
-              <div class="triangle-right" />
-              <IconHome v-if="hover1" class="icon-menu1" bg-color="black" />
-              <IconHome v-else class="icon-menu1" bg-color="white" />
+              <!-- <div class="tooltip-card">
+                Tooltip
+                <img src="~/assets/images/component/navigation/tooltip.svg" class="">
+              </div> -->
+              <div class="bg-1">
+                <div class="card-item" :style="hover1 ? 'background-color:white' : 'background-color:#2E5799'">
+                  <IconHome class="icon-content" :bg-color="hover1 ? '#2E5799' : 'white'" />
+                </div>
+              </div>
+              <div class="bg-2" />
             </div>
           </NuxtLink>
         </li>
         <li>
           <NuxtLink
-            v-if="$route.path === '/skillcard'"
             class="sidebar-item"
             to="/skillcard"
           >
             <div
-              class="card-menu"
-              style="background-color: white"
+              class="select-decoration-2"
+              @click="popupAudio()"
               @mouseover="hover2 = true"
               @mouseleave="hover2 = false"
-              @click="buttonAudio()"
             >
-              <div class="triangle-left2" />
-              <div class="triangle-right2" />
-              <IconSkillcard
-                class="icon-menu2"
-                bg-color="black"
-                style="left: 10px"
-              />
-            </div>
-          </NuxtLink>
-
-          <NuxtLink v-else class="sidebar-item" to="/skillcard">
-            <div
-              class="card-menu"
-              @mouseover="hover2 = true"
-              @mouseleave="hover2 = false"
-              @click="buttonAudio()"
-            >
-              <div class="triangle-left" />
-              <div class="triangle-right" />
-              <IconSkillcard
-                v-if="hover2"
-                class="icon-menu2"
-                bg-color="black"
-                style="left: 10px"
-              />
-              <IconSkillcard v-else class="icon-menu2" bg-color="white" />
+              <div class="bg-1">
+                <div class="card-item" :style="hover2 ? 'background-color:white' : 'background-color:#2E5799'">
+                  <IconSkillcard class="icon-content" :bg-color="hover2 ? '#2E5799' : 'white'" />
+                </div>
+              </div>
+              <div class="bg-2" />
             </div>
           </NuxtLink>
         </li>
         <li>
+          <NuxtLink
+            class="sidebar-item"
+            to="/cluster"
+          >
+            <div
+              class="select-decoration-2"
+              @click="popupAudio()"
+              @mouseover="hover3 = true"
+              @mouseleave="hover3 = false"
+            >
+              <div class="bg-1">
+                <div class="card-item" :style="hover3 ? 'background-color:white' : 'background-color:#2E5799'">
+                  <IconCluster class="icon-content" :bg-color="hover3 ? '#2E5799' : 'white'" />
+                </div>
+              </div>
+              <div class="bg-2" />
+            </div>
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink
+            class="sidebar-item"
+            to="/archivements"
+          >
+            <div
+              class="select-decoration-2"
+              @click="popupAudio()"
+              @mouseover="hover4 = true"
+              @mouseleave="hover4 = false"
+            >
+              <div class="bg-1">
+                <div class="card-item" :style="hover4 ? 'background-color:white' : 'background-color:#2E5799'">
+                  <IconArchivements class="icon-content" :bg-color="hover4 ? '#2E5799' : 'white'" />
+                </div>
+              </div>
+              <div class="bg-2" />
+            </div>
+          </NuxtLink>
+        </li>
+        <!-- <li>
           <NuxtLink
             v-if="$route.path === '/cluster'"
             class="sidebar-item"
@@ -154,12 +164,12 @@
               <IconArchivements v-else class="icon-menu4" bg-color="white" />
             </div>
           </div>
-        </li>
+        </li> -->
       </ul>
     </div>
     <div class="title">
       <div class="triangle" />
-      <img src="~/assets/images/component/navigation/img-4.png" class="img4">
+      <img src="~/assets/images/component/navigation/box-line.svg" class="img4">
       <div class="text-title">
         My Petraverse Dorm
       </div>
@@ -197,7 +207,7 @@ export default {
     showPopup () {
       this.$store.commit('user/SET_POPUP')
     },
-    popupAudio() {
+    popupAudio () {
       this.$store.commit('user/SET_POPUP_AUDIO', true)
     },
     buttonAudio () {
@@ -271,10 +281,9 @@ export default {
   }
   .menu {
     z-index: -1;
-    background: rgba(43, 91, 163, 0.5);
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    background: rgb(242, 242, 242, 0.7);
     height: 40px;
-    width: 248px;
+    width: 228px;
     left: 210px;
     bottom: 95px;
     position: absolute;
@@ -292,106 +301,88 @@ export default {
       }
 
       li {
-        .card-menu {
+        .select-decoration {
+          margin-left:7px;
           cursor: pointer;
-          display: block;
-          color: white;
-          background: rgba(43, 91, 163, 0.75);
-          // background: white;
-          width: 44px;
-          height: 32.98px;
-          margin-right: 4px;
-          margin-top: 2px;
-          margin-left: 10px;
           position: relative;
-
-          .triangle-left {
-            width: 0;
-            height: 0;
-            left: -10px;
+          .tooltip-card {
             position: absolute;
-            border-width: 0 0px 32.98px 10px;
-            bottom: 0px;
-            border-color: transparent transparent rgba(43, 91, 163, 0.75)
-              transparent;
-            border-style: solid;
+            top:-40px;
+            .triangle-bottom {
+              height:20px;
+              width:20px;
+              position: absolute;
+              top:-100px;
+            }
           }
-          .triangle-left2 {
-            width: 0;
-            height: 0;
-            left: -10px;
-            position: absolute;
-            border-width: 0 0px 32.98px 10px;
-            bottom: 0px;
-            border-color: transparent transparent white transparent;
-            border-style: solid;
+          .bg-1 {
+            cursor: pointer;
+            height: 36px;
+            width: 45px;
+            background: linear-gradient(180deg, #DFF2F2 0%, #C3F4F9 48%, #A8F5FF 100%);
+            transform: skew(-18deg);
+            padding:0.8px;
+            .card-item {
+              height: 100%;
+              width: 100%;
+              background: #2E5799;
+              border: 0.54px solid #F2F2F2;
+              text-align: center;display: flex;
+              align-items: center;
+              justify-content: center;
+              .icon-content {
+                transform: skew(18deg);
+              }
+            }
           }
-          .triangle-right {
-            width: 0;
-            height: 0;
-            left: 100%;
+          .bg-2 {
+            z-index: -1;
             position: absolute;
-            border-width: 33px 10px 0 0;
-            border-color: rgba(43, 91, 163, 0.75) transparent transparent
-              transparent;
-            border-style: solid;
-          }
-          .triangle-right2 {
-            width: 0;
-            height: 0;
-            left: 100%;
-            position: absolute;
-            border-width: 33px 10px 0 0;
-            border-color: white transparent transparent transparent;
-            border-style: solid;
-          }
-          .icon-menu1 {
-            height: 30px;
-            left: -2px;
-            top: 4.5px;
-            position: absolute;
-          }
-          .icon-menu2 {
-            height: 38px;
-            left: 10px;
-            top: 1px;
-            position: absolute;
-          }
-          .icon-menu3 {
-            height: 38px;
-            left: 14px;
-            bottom: 0px;
-            top: 1px;
-            position: absolute;
-          }
-          .icon-menu4 {
-            height: 38px;
-            left: 9px;
-            top: -1px;
-            position: absolute;
+            top:2px;
+            right:-1px;
+            height: 36px;
+            width: 45px;
+            transform: skew(-18deg);
+            background: #FFF380;
+            mix-blend-mode: multiply;
+            opacity: 0.7;
           }
         }
-        .card-menu:hover {
-          background: white;
-
-          .triangle-left {
-            width: 0;
-            height: 0;
-            left: -10px;
-            position: absolute;
-            border-width: 0 0px 32.98px 10px;
-            bottom: 0px;
-            border-color: transparent transparent white transparent;
-            border-style: solid;
+        .select-decoration-2 {
+          cursor: pointer;
+          position: relative;
+          margin-left:5px;
+          .bg-1 {
+            cursor: pointer;
+            height: 31px;
+            width: 46px;
+            background: linear-gradient(180deg, #DFF2F2 0%, #C3F4F9 48%, #A8F5FF 100%);
+            transform: skew(-18deg);
+            padding:0.8px;
+            .card-item {
+              height: 100%;
+              width: 100%;
+              background: #2E5799;
+              border: 0.54px solid #F2F2F2;
+              text-align: center;display: flex;
+              align-items: center;
+              justify-content: center;
+              .icon-content {
+                transform: skew(18deg);
+              }
+            }
           }
-          .triangle-right {
-            width: 0;
-            height: 0;
-            left: 100%;
+          .bg-2 {
+            z-index: -1;
             position: absolute;
-            border-width: 33px 10px 0 0;
-            border-color: white transparent transparent transparent;
-            border-style: solid;
+            top:2px;
+            right:-1px;
+            height: 31px;
+            width: 46px;
+            transform: skew(-18deg);
+            background: #FFF380;
+            mix-blend-mode: multiply;
+            opacity: 0.7;
           }
         }
       }
@@ -402,16 +393,16 @@ export default {
       left: -20px;
       position: absolute;
       border-width: 0 0px 40px 20px;
-      border-color: transparent transparent rgba(43, 91, 163, 0.5) transparent;
+      border-color: transparent transparent rgb(242, 242, 242, 0.7) transparent;
       border-style: solid;
     }
     .triangle-right {
       width: 0;
       height: 0;
-      left: 248px;
+      left: 228px;
       position: absolute;
       border-width: 40px 20px 0 0;
-      border-color: rgba(43, 91, 163, 0.5) transparent transparent transparent;
+      border-color: rgb(242, 242, 242, 0.7) transparent transparent transparent;
       border-style: solid;
     }
   }
@@ -439,20 +430,21 @@ export default {
       position: absolute;
     }
     .text-title {
-      color: #000000;
-      font-family: 'Barlow';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 28px;
       left: 40px;
-      top: 5px;
+      top: 10px;
       position: absolute;
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 22px;
+      align-items: center;
+      color: #0071BC;
+      text-shadow: 0px 1px 1px #CFF0FF;
     }
   }
   .desc {
     z-index: -1;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.55));
-    background-color: black;
+    background: rgba(62, 111, 176, 0.8);
     height: 23px;
     width: 292px;
     left: 160px;
@@ -465,18 +457,18 @@ export default {
       left: 292px;
       position: absolute;
       border-width: 23px 20px 0 0;
-      border-color: black transparent transparent transparent;
+      border-color: rgba(62, 111, 176, 0.8) transparent transparent transparent;
       border-style: solid;
     }
     .text-desc {
-      color: #ffffff;
-      font-family: 'Barlow';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 16px;
       left: 30px;
-      top: -1px;
+      top: 0px;
       position: absolute;
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      color: #FFFFFF;
     }
   }
   .img-logo {

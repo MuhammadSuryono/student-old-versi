@@ -1,15 +1,8 @@
 <template>
   <div class="name-avatar">
-    <div class="square-top-name" />
-    <div class="trapesium-1-name" />
-    <div class="square-center" />
-    <div class="trapesium-2-name" />
-    <div class="square-bottom-name" />
-    <div class="img-logo">
-      <img src="~/assets/images/component/card-name.png">
-      <div class="name-card">
-        {{ myTasks }}
-      </div>
+    <img src="~/assets/images/bg_cardname.svg" style="pointer-events: none;">
+    <div class="title-name">
+      {{ myTasks }}
     </div>
     <div class="modules">
       <div class="courses">
@@ -52,14 +45,30 @@ export default {
 .name-avatar {
   font-family: 'Barlow';
   position: relative;
-  .modules {
-    background-color: #1b4a87;
-    height: 45px;
-    width: 130px;
+  top: 169px;
+  left: 2px;
+  .title-name {
     position: absolute;
-    top: 50px;
-    left: 20px;
-    border-radius: 4px;
+    top: 6px;
+    left: 22px;
+    width: 124px;
+    height: 27px;
+    background: #2E5799;
+    font-family: "Nunito";
+    font-style: normal;
+    font-size: 16px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  .modules {
+    padding-top: 4px;
+    background-color: #2B2B56;
+    height: 54px;
+    width: 138px;
+    position: absolute;
+    top: 38px;
+    left: 12px;
     font-size: 14px;
     text-align: center;
     .courses {
@@ -77,107 +86,6 @@ export default {
       font-weight: 500;
       font-size: 12px;
     }
-  }
-  .img-logo {
-    width: 140px;
-    position: absolute;
-    top: 8px;
-    left: 15px;
-    z-index: 1;
-    height: 120px;
-    .name-card {
-      position: absolute;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      top: 4px;
-      left: 14px;
-      font-size: 16px;
-      width: 80%;
-      text-align: center;
-    }
-  }
-  .square-top-name {
-    height: 20px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-top-color: white;
-    border-top-style: solid;
-    border-top-width: 2px;
-    border-left-color: white;
-    border-left-style: solid;
-    border-left-width: 2px;
-    border-right-color: white;
-    border-right-style: solid;
-    border-right-width: 2px;
-    width: 170px;
-    background-color: #2c6bca;
-  }
-  .trapesium-1-name {
-    width: 162.5px;
-    height: 10px;
-    margin-left: 4.4px;
-    margin-top: -1px;
-    background: #2c6bca;
-    transform: perspective(50px) rotateX(-25deg);
-    border-left-color: white;
-    border-left-style: solid;
-    border-left-width: 2px;
-    border-right-color: white;
-    border-right-style: solid;
-    border-right-width: 2px;
-  }
-  .square-center {
-    height: 50px;
-    width: 155px;
-    margin-right: 10px;
-    margin-left: 8px;
-    margin-top: -1px;
-    background-color: #2c6bca;
-    border-left-color: white;
-    border-left-style: solid;
-    border-left-width: 2.5px;
-    border-right-color: white;
-    border-right-style: solid;
-    border-right-width: 2.5px;
-  }
-  .trapesium-2-name {
-    // width: 163.2px;
-    // height: 11px;
-    // margin-left: 4.4px;
-    // margin-top: -1px;
-    // background: #2c6bca;
-
-    width: 162.5px;
-    height: 10px;
-    margin-left: 4.4px;
-    margin-top: -1px;
-    background: #2c6bca;
-    transform: perspective(50px) rotateX(24deg);
-
-    border-left-color: white;
-    border-left-style: solid;
-    border-left-width: 2.5px;
-    border-right-color: white;
-    border-right-style: solid;
-    border-right-width: 2.5px;
-  }
-  .square-bottom-name {
-    height: 20px;
-    margin-top: -1px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-color: white;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-left-color: white;
-    border-left-style: solid;
-    border-left-width: 2px;
-    border-right-color: white;
-    border-right-style: solid;
-    border-right-width: 2px;
-    width: 170px;
-    background-color: #2c6bca;
   }
 }
 </style>

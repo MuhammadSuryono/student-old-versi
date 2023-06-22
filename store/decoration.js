@@ -4,7 +4,8 @@ export const state = () => ({
   item: [],
   currentDecoration: {},
   pathDecoration: {},
-  nameDecoration: {}
+  nameDecoration: {},
+  subBackground: {}
 })
 
 export const getters = {
@@ -13,7 +14,8 @@ export const getters = {
   item: state => state.item,
   currentDecoration: state => state.currentDecoration,
   pathDecoration: state => state.pathDecoration,
-  nameDecoration: state => state.nameDecoration
+  nameDecoration: state => state.nameDecoration,
+  subBackground: state => state.subBackground
 }
 
 export const mutations = {
@@ -30,8 +32,30 @@ export const mutations = {
     state.currentDecoration = item
   },
   SET_CURRENT_DATA_DETAIL (state, item) {
+    console.log('item : ', item)
     state.pathDecoration = item.path
     state.nameDecoration = item.title
+    const total = 4
+    let sisa = 0
+    let data = []
+    data = item.sub_backgrounds
+    if (data.length > 0) {
+      if (data.length < total) {
+        sisa = total - data.length
+        for (let i = 0; i < sisa; i++) {
+          data.push({
+            background_id: null,
+            created_at: null,
+            description: null,
+            id: null,
+            path: 'disabled',
+            title: null,
+            updated_at: null
+          })
+        }
+        state.subBackground = data
+      }
+    }
   },
   SET_IMAGES (state, item) {
     state.pathDecoration = item
@@ -50,7 +74,6 @@ export const actions = {
   },
   async fetchCurrentDecoration ({ commit }) {
     try {
-      console.log('tes fetchCurrentDecoration')
       const response = await this.$repositories.decoration.getOne()
       commit('SET_CURRENT_DATA', response)
       commit('SET_CURRENT_DATA_DETAIL', response.data.data.background)
@@ -64,7 +87,6 @@ export const actions = {
       const response = await this.$repositories.decoration.get(payload)
       let newItem = []
       newItem = response.data.data.data
-      console.log('new item : ', newItem)
       if (newItem.length > 0) {
         if (newItem.length % 8 !== 0) {
           for (let i = 0; i < newItem.length % 4; i++) {
@@ -79,7 +101,6 @@ export const actions = {
       }
       commit('SET_DATA', response)
       commit('SET_ITEM', newItem)
-      console.log('tes')
       return response
     } catch (e) {
       return e.response
