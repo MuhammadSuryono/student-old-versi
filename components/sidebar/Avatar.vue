@@ -51,7 +51,7 @@
       <div class="cursor-pointer shield" style="margin-top:40px;" @click="onQuest()">
         <div class="circle">
           <div class="inner-circle">
-            {{ quest.completion_task == undefined ? 0 : quest.completion_task.total_un_complete}}
+          {{ totalUnComplete }}
           </div>
         </div>
         <img
@@ -137,6 +137,16 @@ export default {
       },
       quest: (state) => {
         return state.quest.data
+      },
+      totalUnComplete(){
+        let data = null;
+        // let data = typeof this.quest.completion_task.total_un_complete == 'undefined' ? 0 : this.quest.completion_task.total_un_complete
+       if(typeof this.quest == 'undefined' ){
+        data = 0
+       }else{
+        data = 1
+       }
+        return data
       }
     }),
     btnStyles1 () {
