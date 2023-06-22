@@ -1,4 +1,5 @@
-const baseUrl =  window.location.hostname + 'daily/quest/api'
+const baseUrl = 'https://dev.petraverse.id/daily/quest/api'
+// const baseUrl = 'https://staging.petraverse.id/daily/quest/api'
 const resource = '/quest'
 
 export default $axios => ({
