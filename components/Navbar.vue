@@ -2,16 +2,35 @@
   <div>
     <b-navbar class="navbar" :mobile-burger="false">
       <template #brand>
-        <div class="logo" :style="styleObj">
+        <div
+          class="logo cursor-pointer no-select"
+          :style="styleObj"
+          @click="home()"
+        >
           <img
             src="~/assets/images/new_logo.png"
             class="img-logo"
-            @click="home()"
           >
         </div>
         <div id="triangle-bottomleft" />
       </template>
       <template #end>
+        <div class="coin-card">
+          <div class="value-card">
+            {{ total_coin }}
+          </div>
+          <img
+            src="~/assets/images/navbar/coin.svg"
+          >
+        </div>
+        <div class="coin-card" style="top:18px;">
+          <div class="value-card" style="left: 29px;top: 5px;">
+            {{ total_diamond }}
+          </div>
+          <img
+            src="~/assets/images/navbar/diamond.svg"
+          >
+        </div>
         <div
           class="btn-helpdesk"
           @mouseover="hover = true"
@@ -26,20 +45,17 @@
         </div>
         <div id="triangle-bottomright2" />
         <div id="triangle-bottomright" />
-        <b-navbar-item tag="div" class="right-side">
-          <div class="buttons">
-            <b-button class="btn-logout" @click="keluar()">
-              Sign Out
-            </b-button>
+        <b-navbar-item tag="div" class="right-side"  @click="keluar()">
+          <div class="btn-logout">
+            <img
+              src="~/assets/images/logout-40.svg"
+              class="icon-logo"
+            >
+            Sign Out
           </div>
         </b-navbar-item>
       </template>
     </b-navbar>
-    <!-- <div v-show="showSetting" class="modal-right">
-      <b-button class="btn-setting">
-        Setting
-      </b-button>
-    </div> -->
   </div>
 </template>
 
@@ -70,17 +86,33 @@ export default {
       },
       users: (state) => {
         return state.user.users
+      },
+      dataReward: (state) => {
+        return state.quest.dataReward
+      },
+      total_coin: (state) => {
+        return state.quest.total_coin
+      },
+      total_diamond: (state) => {
+        return state.quest.total_diamond
       }
     }),
     styleObj () {
       if (this.sidebar) {
         return 'width:200px;'
       } else {
-        return 'width:80px;'
+        return 'width:86px;'
       }
     }
   },
+  mounted() {
+    this.getDataReward()
+  },
   methods: {
+    getDataReward () {
+      this.$store
+        .dispatch('quest/getReward')
+    },
     openWA () {
       window.open('https://wa.me/+6281359809348?text=Hi%20I%20am%20' + this.fullname + '%20(user%20ID:%20' + this.users.id + ').%20I%20need%20help%20in%20...', '_blank').focus()
     },
@@ -109,6 +141,40 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.btn-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  color: #CFDDFF;
+  width:150px;
+  cursor:pointer;
+  .icon-logo {
+    margin-right:5px;
+  }
+}
+.coin-card {
+  top: 15px;
+  position: relative;
+  cursor: pointer;
+  .value-card {
+    position: absolute;
+    left: 37px;
+    top: 8px;
+    width: 62px;
+    line-height: 24px;
+    background-color: #F5FBFF;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 14px;
+    text-align: center;
+    color: #0071BC;
+  }
+}
 .navbar {
   padding-right: 0px;
   // background-color: red;
@@ -138,15 +204,6 @@ export default {
     padding-left: 30px;
     padding-right: 30px;
   }
-  .btn-logout {
-    background: #000000;
-    border-radius: 5px;
-    color: white;
-    width: 130px;
-    margin-left: 15px;
-    font-size: 14px;
-    border: 0px;
-  }
   .right-side {
     background-color: #2c6bca;
   }
@@ -161,17 +218,17 @@ export default {
     width: 0;
     height: 0;
     border-bottom: 4.25rem solid #2c6bca;
-    border-left: 30px solid transparent;
+    border-left: 26px solid transparent;
   }
   #triangle-bottomright2 {
     width: 55px;
     height: 0;
     top: 0px;
-    right: -40px;
+    right: -50px;
     z-index: -10;
     position: relative;
-    border-bottom: 58px solid #ebcc24;
-    border-left: 30px solid transparent;
+    border-bottom: 64px solid #ebcc24;
+    border-left: 25px solid transparent
   }
   #triangle-bottomleft {
     width: 0;

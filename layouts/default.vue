@@ -13,6 +13,10 @@
       </transition>
       <Navbar class="navbars" />
       <div class="columns is-gapless main-menu">
+        <div v-if="btn_shop" class="filter-shop" :style="sidebar ? 'left:727px' : 'left:605px'">
+          <ButtonFilter :active="filterShop" action="profile" @click.native="changeFilter('profile')" />
+          <ButtonFilter class="mt-2" :active="!filterShop" action="decor" @click.native="changeFilter('decor')" />
+        </div>
         <!-- sidebar -->
         <SidebarMain
           class="column is-narrow sidebar-menu"
@@ -36,10 +40,18 @@
             "
           />
         </span>
+        <div class="card-decoration">
+          <div class="item-menu">
+            <img src="~/assets/images/decoration/camera.svg" class="sub-item">
+            <span v-for="(item, index) in subBackground" :key="index">
+              <ButtonDecoration :number="index + 1" class="sub-item-2 cursor-pointer" :type="item.path === 'disabled' ? 'disabled' : 'enable'" @click.native="item.path === 'disabled' ? '' : changeBackground(item.path)" />
+            </span>
+          </div>
+        </div>
         <!-- maps and light -->
         <span v-if="$route.path === '/'">
           <img
-            src="~/assets/images/component/map/img-1.png"
+            src="~/assets/images/component/map/maps.svg"
             class="maps-petra"
             @click="showMaps()"
           >
@@ -50,36 +62,12 @@
               :style="{
                 height: window.height - 68 + 'px'
               }"
-              style="
-                position: absolute;
-                z-index: 3;
-                top: 68px;
-                left: 80px;
-                width: 1200px;
-              "
             >
               <div
-                style="
-                  background: rgba(10, 10, 10, 0.5);
-                  width: 100%;
-                  height: 100%;
-                  cursor: pointer;
-                "
+                class="close-map"
                 @click="closeMaps()"
               />
-              <div
-                style="
-                  width: 1085px;
-                  height: 607px;
-                  margin: auto;
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  z-index: 4;
-                  bottom: 0;
-                  right: 0;
-                "
-              >
+              <div class="inside-map">
                 <Maps />
               </div>
             </div>
@@ -105,26 +93,37 @@
             </div>
           </transition>
         </span>
-        <!-- edit profile -->
         <Profile
           v-if="btn_profile"
           class="profile-petra noselect"
           :style="widthProfile2"
         />
-        <!-- decoration -->
         <Decoration
           v-if="btn_decoration"
           :style="widthProfile"
           class="profile-petra"
         />
-        <!-- edit profile -->
         <Setting
           v-if="btn_setting"
           class="profile-petra noselect"
           :style="widthProfile3"
         />
+        <Quest
+          v-if="btn_quest"
+          :style="widthProfile"
+          class="profile-petra"
+        />
+        <Shop
+          v-if="btn_shop"
+          :style="widthProfile"
+          class="profile-petra"
+        />
       </div>
     </div>
+
+    <CardPurchaseQuest v-if="btn_purchase" />
+    <CardDialogQuest v-if="btn_success_quest" />
+    <CardDialogShop v-if="btn_success_shop" />
   </div>
 </template>
 
@@ -141,7 +140,46 @@ export default {
       },
       coomingSoon: false,
       audio: null,
-      bgmAutoplay: false
+      dates: [],
+      bgmAutoplay: false,
+      data: [
+        { type: 'Regular', last_name: 'Simmons', date: '2016-10-15 13:43:27', variant: 'Avatar', price: '2000' },
+        { type: 'Regular', last_name: 'Simmons', date: '2016-10-15 13:43:27', variant: 'Avatar', price: '2000' },
+        { type: 'Regular', last_name: 'Simmons', date: '2016-10-15 13:43:27', variant: 'Avatar', price: '2000' },
+        { type: 'Regular', last_name: 'Simmons', date: '2016-10-15 13:43:27', variant: 'Avatar', price: '2000' },
+        { type: 'Regular', last_name: 'Simmons', date: '2016-10-15 13:43:27', variant: 'Avatar', price: '2000' },
+        { type: 'Regular', last_name: 'Simmons', date: '2016-10-15 13:43:27', variant: 'Avatar', price: '2000' },
+        { type: 'Regular', last_name: 'Simmons', date: '2016-10-15 13:43:27', variant: 'Avatar', price: '2000' },
+        { type: 'Regular', last_name: 'Simmons', date: '2016-10-15 13:43:27', variant: 'Avatar', price: '2000' }
+      ],
+      columns: [
+        {
+          field: 'date',
+          label: 'Purchase Date'
+        },
+        {
+          field: 'last_name',
+          label: 'Item Name'
+        },
+        {
+          field: 'type',
+          label: 'Type',
+          centered: true
+        },
+        {
+          field: 'variant',
+          label: 'Variant'
+        },
+        {
+          field: 'price',
+          label: 'Price'
+        }
+      ],
+      total: 100,
+      current: 1,
+      perPage: 10,
+      prevIcon: 'chevron-left',
+      nextIcon: 'chevron-right',
     }
   },
 
@@ -160,12 +198,10 @@ export default {
         this.$refs.player.volume = 0
         // this.$store.commit('user/SET_MUTE_BGM', true)
         this.$refs.player.play()
-      } else {
-        if (!this.muteBGM) {
-          this.$refs.player.volume = this.audioBGM
-          this.$store.commit('user/SET_MUTE_BGM', false)
-          this.$refs.player.play()
-        }
+      } else if (!this.muteBGM) {
+        this.$refs.player.volume = this.audioBGM
+        this.$store.commit('user/SET_MUTE_BGM', false)
+        this.$refs.player.play()
       }
     }
   },
@@ -192,6 +228,12 @@ export default {
       btn_decoration: (state) => {
         return state.user.btn_decoration
       },
+      btn_quest: (state) => {
+        return state.user.btn_quest
+      },
+      btn_shop: (state) => {
+        return state.user.btn_shop
+      },
       btn_setting: (state) => {
         return state.user.btn_setting
       },
@@ -206,6 +248,24 @@ export default {
       },
       muteBGM: (state) => {
         return state.user.muteBGM
+      },
+      subBackground: (state) => {
+        return state.decoration.subBackground
+      },
+      filterShop: (state) => {
+        return state.user.filterShop
+      },
+      btn_purchase: (state) => {
+        return state.user.btn_purchase
+      },
+      btn_success_quest: (state) => {
+        return state.user.btn_success_quest
+      },
+      btn_success_shop: (state) => {
+        return state.user.btn_success_shop
+      },
+      questDashboard: (state) => {
+        return state.quest.data
       }
     }),
     widthSidebar () {
@@ -250,18 +310,16 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   mounted () {
+    this.getDataDecoration()
     const audio = this.$refs.player
     audio.volume = this.audioBGM
     if (this.muteBGM) {
       const playedPromise = this.$refs.player.play()
       if (playedPromise) {
         playedPromise.catch((e) => {
-          console.log(e)
           if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
-            console.log(e.name)
           }
         }).then(() => {
-          console.log('playing sound !!!')
           this.$refs.player.volume = 0
           this.$refs.player.play()
         })
@@ -270,12 +328,9 @@ export default {
       const playedPromise = this.$refs.player.play()
       if (playedPromise) {
         playedPromise.catch((e) => {
-          console.log(e)
           if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
-            console.log(e.name)
           }
         }).then(() => {
-          console.log('playing sound !!!')
           this.$refs.player.volume = 1
           this.$refs.player.play()
         })
@@ -283,6 +338,29 @@ export default {
     }
   },
   methods: {
+    changeFilter (x) {
+      this.$store.commit('user/SET_FILTER_SHOP')
+    },
+    changeBackground (item) {
+      this.$store.dispatch(
+        'decoration/updateImages', item
+      )
+    },
+    getDataDecoration () {
+      this.isLoading = true
+      this.$store
+        .dispatch('decoration/fetchCurrentDecoration')
+        .then((response) => {
+          this.isLoading = false
+        })
+        .catch((error) => {
+          this.isLoading = false
+          this.$toast.error(error.response.data.message, {
+            position: 'top-center',
+            duration: 5000
+          })
+        })
+    },
     logout () {
       this.$store.commit('user/SET_LOGGEDIN', false)
       this.$store.commit('user/SET_BTN_AUDIO', true)
@@ -297,6 +375,7 @@ export default {
       this.$router.push('/login')
     },
     onLight () {
+     this.questLight()
       this.light = !this.light
       if (this.light) {
         this.buttonAudio()
@@ -310,6 +389,10 @@ export default {
     },
     closeMaps () {
       this.$store.commit('user/SET_MAPS')
+      this.buttonAudio()
+    },
+    closePurchase () {
+      this.$store.commit('user/SET_PURCHASE')
       this.buttonAudio()
     },
     close () {
@@ -326,12 +409,90 @@ export default {
     },
     buttonAudio () {
       this.$store.commit('user/SET_BTN_AUDIO', true)
+    },
+    questLight(){
+      this.$axios
+            .post(`https://dev.petraverse.id/daily/quest/api/quest/collection/task/today/complete`, {
+         
+              task_id: this.questDashboard.id,
+              collection_id: this.questDashboard.collection_id,
+              collection_task_code: 'talk_to_light'
+            })
+            .then((res) => {
+              console.log('res : ', res)
+              this.$store
+        .dispatch('quest/getReward')
+           
+            })
+            .catch((error) => {
+              this.$toast.error(error.response.data.message, {
+                position: 'top-center',
+                duration: 5000
+              })
+            })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.detail-maps {
+  position: absolute;
+  z-index: 3;
+  top: 68px;
+  left: 80px;
+  width: 1200px;
+  .close-map {
+    background: rgba(10, 10, 10, 0.5);
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  .inside-map {
+    width: 1085px;
+    height: 607px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    bottom: 0;
+    right: 0;
+  }
+}
+.filter-shop {
+  position:absolute;
+  z-index: 99;
+  top:250px;
+  left:605px;
+  height:100px;
+  width:100px;
+}
+.card-decoration {
+  position: absolute;
+  top:108px;
+  right:30px;
+  width: 209.53px;
+  height: 40px;
+  background: rgb(242, 242, 242, 0.7);
+  transform: skew(-13deg);
+  display: flex;           /* establish flex container */
+  flex-direction: column;  /* make main axis vertical */
+  justify-content: center; /* center items vertically, in this case */
+  .item-menu {
+    transform: skew(13deg);
+    display: flex;           /* establish flex container */
+    flex-direction: row;  /* make main axis vertical */
+    align-items: center;
+    padding-left:12px;
+    .sub-item {
+      margin-right:8px;
+    }
+    .sub-item-2 {
+      margin-right:4px;
+    }
+  }
+}
 .modal-dialog {
   margin: auto;
   padding: 0px;

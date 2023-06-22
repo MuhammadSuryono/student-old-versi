@@ -26,10 +26,13 @@ You can directly use them in pages and other components without the need to impo
 - `<PSearch>` | `<p-search>` (components/PSearch.vue)
 - `<PTitle>` | `<p-title>` (components/PTitle.vue)
 - `<PTitleV2>` | `<p-title-v2>` (components/PTitleV2.vue)
+
 - `<Setting>` | `<setting>` (components/Setting.vue)
+- `<Shop>` | `<shop>` (components/Shop.vue)
 - `<Skeleton>` | `<skeleton>` (components/Skeleton.vue)
 - `<Volume>` | `<volume>` (components/Volume.vue)
 - `<Volume2>` | `<volume2>` (components/Volume2.vue)
+
 - `<ButtonInterested>` | `<button-interested>` (components/button/interested.vue)
 - `<ButtonPin>` | `<button-pin>` (components/button/pin.vue)
 - `<ButtonPlay>` | `<button-play>` (components/button/play.vue)
@@ -38,6 +41,7 @@ You can directly use them in pages and other components without the need to impo
 - `<FactionReward>` | `<faction-reward>` (components/faction/Reward.vue)
 - `<FormArea>` | `<form-area>` (components/Form/area.vue)
 - `<FormInput>` | `<form-input>` (components/Form/input.vue)
+
 - `<IconArchivements>` | `<icon-archivements>` (components/icon/Archivements.vue)
 - `<IconAvatarBackground>` | `<icon-avatar-background>` (components/icon/AvatarBackground.vue)
 - `<IconBackBtn>` | `<icon-back-btn>` (components/icon/BackBtn.vue)
@@ -59,6 +63,8 @@ You can directly use them in pages and other components without the need to impo
 - `<IconTopi>` | `<icon-topi>` (components/icon/Topi.vue)
 - `<IconVolume>` | `<icon-volume>` (components/icon/Volume.vue)
 - `<IconVolumeMute>` | `<icon-volume-mute>` (components/icon/VolumeMute.vue)
+
 - `<SidebarAvatar>` | `<sidebar-avatar>` (components/sidebar/Avatar.vue)
 - `<SidebarCardName>` | `<sidebar-card-name>` (components/sidebar/CardName.vue)
 - `<SidebarMain>` | `<sidebar-main>` (components/sidebar/Main.vue)
+

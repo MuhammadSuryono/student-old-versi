@@ -59,8 +59,20 @@
   "PTitleV2": {
     "description": "Auto imported from components/PTitleV2.vue"
   },
+  "Popup": {
+    "description": "Auto imported from components/Popup.vue"
+  },
+  "Profile": {
+    "description": "Auto imported from components/Profile.vue"
+  },
+  "Quest": {
+    "description": "Auto imported from components/Quest.vue"
+  },
   "Setting": {
     "description": "Auto imported from components/Setting.vue"
+  },
+  "Shop": {
+    "description": "Auto imported from components/Shop.vue"
   },
   "Skeleton": {
     "description": "Auto imported from components/Skeleton.vue"
@@ -71,6 +83,24 @@
   "Volume2": {
     "description": "Auto imported from components/Volume2.vue"
   },
+  "Confirmation": {
+    "description": "Auto imported from components/confirmation.vue"
+  },
+  "FormTextArea": {
+    "description": "Auto imported from components/Form/TextArea.vue"
+  },
+  "FormArea": {
+    "description": "Auto imported from components/Form/area.vue"
+  },
+  "FormInput": {
+    "description": "Auto imported from components/Form/input.vue"
+  },
+  "ButtonDecoration": {
+    "description": "Auto imported from components/button/decoration.vue"
+  },
+  "ButtonFilter": {
+    "description": "Auto imported from components/button/filter.vue"
+  },
   "ButtonInterested": {
     "description": "Auto imported from components/button/interested.vue"
   },
@@ -80,6 +110,41 @@
   "ButtonPlay": {
     "description": "Auto imported from components/button/play.vue"
   },
+  "ButtonV2": {
+    "description": "Auto imported from components/button/v2.vue"
+  },
+  "CardCollection": {
+    "description": "Auto imported from components/card/Collection.vue"
+  },
+  "CardDialogQuest": {
+    "description": "Auto imported from components/card/DialogQuest.vue"
+  },
+  "CardDialogShop": {
+    "description": "Auto imported from components/card/DialogShop.vue"
+  },
+  "CardLogin": {
+    "description": "Auto imported from components/card/Login.vue"
+  },
+  "CardPurchaseQuest": {
+    "description": "Auto imported from components/card/PurchaseQuest.vue"
+  },
+  "CardShop": {
+    "description": "Auto imported from components/card/Shop.vue"
+  },
+  "CardShopV2": {
+    "description": "Auto imported from components/card/ShopV2.vue"
+  },
+  "SidebarAvatar": {
+    "description": "Auto imported from components/sidebar/Avatar.vue"
+  },
+  "SidebarButtonMenu": {
+    "description": "Auto imported from components/sidebar/ButtonMenu.vue"
+  },
+  "SidebarCardName": {
+    "description": "Auto imported from components/sidebar/CardName.vue"
+  },
+  "SidebarMain": {
+    "description": "Auto imported from components/sidebar/Main.vue"
   "CardCollection": {
     "description": "Auto imported from components/card/Collection.vue"
   },
@@ -158,6 +223,17 @@
   "IconVolumeMute": {
     "description": "Auto imported from components/icon/VolumeMute.vue"
   },
+  "IconBgPersonality": {
+    "description": "Auto imported from components/icon/bgPersonality.vue"
+  },
+  "IconRefresh": {
+    "description": "Auto imported from components/icon/refresh.vue"
+  },
+  "FactionProgressBar": {
+    "description": "Auto imported from components/faction/ProgressBar.vue"
+  },
+  "FactionReward": {
+    "description": "Auto imported from components/faction/Reward.vue"
   "SidebarAvatar": {
     "description": "Auto imported from components/sidebar/Avatar.vue"
   },
