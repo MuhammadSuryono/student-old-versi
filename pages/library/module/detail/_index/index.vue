@@ -104,7 +104,7 @@
             >
               by:
               <span v-if="detailModule.lecturer !== ''">{{
-                detailModule.lecturer
+                setLecturerModule(detailModule.lecturer)
               }}</span>
               <span v-else>-</span>
             </div>
@@ -140,7 +140,7 @@
                   color="white"
                   class="contain-list"
                   @click="indexRail == 0 ? detailActivity(rail) : null"
-               
+
                   :style="indexRail == 0 ? 'opacity:1' : 'opacity: 0.6;'"
                 >
                   <img src="~/assets/images/module/lock.svg" class="img-lock">
@@ -810,6 +810,19 @@ export default {
           })
         }
       }
+    },
+    setLecturerModule (lecturer) {
+      if (typeof lecturer === 'object') {
+        let lecturerText = ''
+        lecturer.forEach((a, i) => {
+          if (i > 0) {
+            lecturerText += ' & '
+          }
+          lecturerText += a
+        })
+        return lecturerText
+      }
+      return lecturer
     }
   }
 }
