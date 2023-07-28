@@ -1,27 +1,18 @@
-FROM node:12.13.0-alpine AS base
-WORKDIR /base
-COPY package*.json ./
-RUN npm install
+FROM node:12
+WORKDIR /nuxt-student-staging
 COPY . .
-
-FROM base AS build
-ENV NODE_ENV=production
-WORKDIR /build
-COPY --from=base /base ./
+RUN echo basePath="/student/" >> .env
+RUN echo basePathBuild="/student/_nuxt/" >> .env
+RUN echo baseUrl="https://staging.petraverse.id/api" >> .env
+RUN echo siteKey="6LdoQc0hAAAAAGR-9qVX_HhmGCarOmz9f419FesP" >> .env
+# COPY .env .
+#COPY .env-dev .env
+RUN cat .env
+RUN npm install
 RUN npm run build
-
-FROM node:12.13.0-alpine AS production
-ENV NODE_ENV=production
-#ARG app_version
-#ARG app_environment
-WORKDIR /app
-COPY --from=build /build ./
-#COPY .env-example .env
 RUN npm run generate
-#RUN printf "\nAPP_VERSION=$app_version" >> .env
-#RUN printf "\nENVIRONMENT=$app_environment" >> .env
-EXPOSE 5002
-ENV NUXT_HOST=0.0.0.0
-ENV NUXT_PORT=5002
-CMD ["npm", "start"]
 
+EXPOSE 5000
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=5000
+CMD ["npm", "start"]

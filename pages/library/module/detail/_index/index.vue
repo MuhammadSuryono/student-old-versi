@@ -95,8 +95,10 @@
               "
             >
               by:
-              <span>{{detailModule.lecturer}}</span>
-              <!-- <span v-else>-</span> -->
+              <span v-if="detailModule.lecturer !== ''">{{
+                setLecturerModule(detailModule.lecturer)
+              }}</span>
+              <span v-else>-</span>
             </div>
             <div
               v-if="(detailModule.enrolled === false & isPetraStudent)"
@@ -127,6 +129,7 @@
                   v-if="detailModule.enrolled === false"
                   color="white"
                   class="contain-list"
+<<<<<<< HEAD
                   :style="
                     indexRail == 0 && detailModule.trial_mode
                       ? 'opacity:1'
@@ -137,6 +140,11 @@
                       ? detailActivity(rail)
                       : null
                   "
+=======
+                  @click="indexRail == 0 ? detailActivity(rail) : null"
+
+                  :style="indexRail == 0 ? 'opacity:1' : 'opacity: 0.6;'"
+>>>>>>> 13477dabe62c840558229ecf58b6fd0dd345c6bd
                 >
                   <template v-if="detailModule.trial_mode">
                     <img
@@ -869,26 +877,19 @@ export default {
         }
       }
     },
-    questModule(){
-      this.$axios
-            .post(`https://staging.petraverse.id/daily/quest/api/quest/collection/task/today/complete`, {
          
-              task_id: this.questDashboard.id,
-              collection_id: this.questDashboard.collection_id,
-              collection_task_code: 'open_x_module'
-            })
-            .then((res) => {
-              console.log('res : ', res)
-              this.$store
-        .dispatch('quest/getReward')
-           
-            })
-            .catch((error) => {
-              this.$toast.error(error.response.data.message, {
-                position: 'top-center',
-                duration: 5000
-              })
-            })
+    setLecturerModule (lecturer) {
+      if (typeof lecturer === 'object') {
+        let lecturerText = ''
+        lecturer.forEach((a, i) => {
+          if (i > 0) {
+            lecturerText += ' & '
+          }
+          lecturerText += a
+        })
+        return lecturerText
+      }
+      return lecturer
     }
   },
 };
